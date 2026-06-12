@@ -70,16 +70,16 @@ def shape(geom, color, spec="0.2 0.2 0.2", shin="0.3"):
             f'specularColor="{spec}" shininess="{shin}"/></Appearance>{geom}</Shape>')
 
 def sphere(center, r, color):
-    return (f'<Transform translation="{f3(center)}">'
-            f'{shape(f"<Sphere radius=\"{r:.4f}\"/>", color)}</Transform>')
+    geom = "<Sphere radius='%.4f'/>" % r
+    return f'<Transform translation="{f3(center)}">{shape(geom, color)}</Transform>'
 
 def bone(a, b, r, color=BONE):
     d = sub(b, a)
     if norm(d) < 1e-6:
         return ""
+    geom = "<Cylinder height='%.4f' radius='%.4f'/>" % (norm(d), r)
     return (f'<Transform translation="{f3(mid(a,b))}" rotation="{axis_angle_from_y(d)}">'
-            f'{shape(f"<Cylinder height=\"{norm(d):.4f}\" radius=\"{r:.4f}\"/>", color)}'
-            f'</Transform>')
+            f'{shape(geom, color)}</Transform>')
 
 # ---------------------------------------------------------------------------
 # per-joint sizing heuristics
@@ -137,24 +137,38 @@ GAIT = {  # joint -> (axis, angles at the 5 keys)
     "vt6":          ("0 1 0", [0.10, 0.0, -0.10, 0.0, 0.10]),
 }
 
-# static pose: light finger curl (hands only -- metacarpophalangeal and
-# carpal interphalangeal chains; thumb gets a lighter curl)
+# Finger joints (everything distal to the wrist). Kept in the skeleton for
+# LOA-4 standards conformance, but rendered as a single loose fist rather than
+# splayed phalanges -- the right read for a running hand at speed.
+_FINGER_KEYS = ("metacarp", "phalang", "midcarpal", "carpometacarpal")
+def is_finger(n):
+    return any(k in n for k in _FINGER_KEYS) or ("carpal_" in n and "interphalangeal" in n)
+
+# static pose offsets applied to specific joints
 def static_rotation(n):
-    if "metacarpophalangeal" in n or "carpal" in n and "interphalangeal" in n:
-        if n.endswith("_1"):
-            return "1 0 0 -0.25"
-        return "1 0 0 -0.45"
+    if n == "vl5":
+        return "1 0 0 0.12"   # subtle forward torso lean (running posture)
     return None
 
 # ---------------------------------------------------------------------------
 # 2. segment geometry (absolute coords) per joint
 # ---------------------------------------------------------------------------
 def segment_geometry(name):
+    if is_finger(name):
+        return ""                       # folded into the fist drawn at the wrist
     c = J[name]
     color = EYE if "eyeball" in name else (SKIN if "eye" in name or "brow" in name else JOINTC)
     g = [sphere(c, joint_radius(name), color)]
     for ch in CHILDREN[name]:
+        if is_finger(ch):               # don't draw bones out into the fingers
+            continue
         g.append(bone(c, J[ch], bone_radius(name)))
+    if name in ("l_radiocarpal", "r_radiocarpal"):   # loose fist
+        side = "l" if name.startswith("l_") else "r"
+        knuckle = J.get(f"{side}_metacarpophalangeal_3")
+        if knuckle:
+            g.append(bone(c, knuckle, 0.022, SKIN))   # palm
+            g.append(sphere(knuckle, 0.052, SKIN))    # fist
     if name == "skullbase":
         g.append(sphere((c[0], c[1]+0.065, c[2]+0.01), 0.092, SKIN))
     if name == "temporomandibular":  # jaw hint
