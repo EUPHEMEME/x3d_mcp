@@ -342,3 +342,43 @@ with open("running_human.x3d", "w") as fh:
 
 print(f"wrote running_human.x3d  ({len(doc)} bytes, {len(ORDER)} joints, "
       f"course {COURSE_LEN:.1f} m @ {SPEED:.2f} m/s -> lap {LAP:.1f} s)")
+
+
+# ---------------------------------------------------------------------------
+# X3DOM-friendly twin: X3DOM 1.8.2 does not render geometry nested in
+# HAnimJoint/HAnimSegment under the skeleton field, so map HAnim nodes onto
+# core nodes (HAnimJoint is a Transform subclass; HAnimSegment is a group).
+# ROUTEs to set_rotation/set_translation keep working on the resulting
+# Transforms. The authoritative running_human.x3d keeps real HAnim nodes.
+# ---------------------------------------------------------------------------
+def flatten_hanim(xml_text):
+    from lxml import etree
+    parser = etree.XMLParser(remove_comments=True)
+    root = etree.fromstring(xml_text.encode(), parser)
+    TAGMAP = {"HAnimHumanoid": "Transform", "HAnimJoint": "Transform",
+              "HAnimSite": "Transform", "HAnimSegment": "Group"}
+    # drop the flat joints/segments USE lists (would duplicate the skeleton)
+    for el in list(root.iter()):
+        if el.get("USE") and el.get("containerField") in ("joints", "segments"):
+            el.getparent().remove(el)
+    KEEP = {"DEF", "USE", "center", "rotation", "translation", "scale"}
+    for el in root.iter():
+        if el.tag in TAGMAP:
+            el.tag = TAGMAP[el.tag]
+            for a in list(el.attrib):
+                if a not in KEEP:
+                    del el.attrib[a]
+    return etree.tostring(root, encoding="unicode")
+
+try:
+    import sys
+    sys.path.insert(0, "src")
+    from tools.render import _x3dom_page
+    html = _x3dom_page(flatten_hanim(doc),
+                       title="HAnim LOA-4 Runner — Slalom Course",
+                       width="100%", height="100vh")
+    with open("running_human.html", "w") as fh:
+        fh.write(html)
+    print("wrote running_human.html (X3DOM-flattened twin via MCP renderer)")
+except Exception as e:
+    print(f"skipped running_human.html: {e}")
