@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN" "https://www.web3d.org/specifications/x3d-4.0.dtd">
+<X3D profile="Immersive" version="4.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="https://www.web3d.org/specifications/x3d-4.0.xsd">
+  <head>
+    <component name="HAnim" level="1"/>
+    <meta name="title" content="running_human.x3d"/>
+    <meta name="description" content="HAnim 2.0 LOA-1 humanoid running through a slalom course with turns and obstacles. Joint centers from Web3D DiamondManLOA1 template."/>
+    <meta name="generator" content="generate_runner.py (x3d_mcp)"/>
+  </head>
+  <Scene>
+    <WorldInfo title="HAnim LOA-1 Running Figure"/>
+    <Background skyColor="0.5 0.65 0.85 0.15 0.22 0.35" groundColor="0.12 0.16 0.12"
+                skyAngle="1.2"/>
+    <NavigationInfo type='"EXAMINE" "WALK" "ANY"' speed="3"/>
+
+    <!-- viewpoints -->
+    <Viewpoint DEF="Overview" position="9 7 -6" orientation="0.2 0.95 0.2 2.5"
+               description="Course overview"/>
+    <Viewpoint DEF="StartLine" position="3.5 1.5 -3" orientation="0 1 0 0.7"
+               description="Start line"/>
+
+    <DirectionalLight direction="-0.4 -1 -0.5" intensity="0.9" ambientIntensity="0.4"/>
+    <DirectionalLight direction="0.6 -0.4 0.6" intensity="0.4"/>
+
+    <!-- ===================== COURSE / LEVEL ===================== -->
+  <Transform translation="0 -0.01 13"><Shape><Appearance><Material diffuseColor="0.20 0.34 0.22" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="14 0.02 34"/></Shape></Transform>
+  <Transform translation="0 0.001 13"><Shape><Appearance><Material diffuseColor="0.85 0.82 0.5" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.18 0.02 32"/></Shape></Transform>
+  <Transform translation="0 0.2 9.0"><Shape><Appearance><Material diffuseColor="0.95 0.45 0.1" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cone bottomRadius="0.18" height="0.4"/></Shape></Transform>
+  <Transform translation="0 0.2 13.0"><Shape><Appearance><Material diffuseColor="0.95 0.45 0.1" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cone bottomRadius="0.18" height="0.4"/></Shape></Transform>
+  <Transform translation="0 0.2 17.0"><Shape><Appearance><Material diffuseColor="0.95 0.45 0.1" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cone bottomRadius="0.18" height="0.4"/></Shape></Transform>
+  <Transform translation="-1.6 0.6 0"><Shape><Appearance><Material diffuseColor="0.8 0.8 0.85" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.12 1.2 0.12"/></Shape></Transform>
+  <Transform translation="1.6 0.6 0"><Shape><Appearance><Material diffuseColor="0.8 0.8 0.85" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.12 1.2 0.12"/></Shape></Transform>
+  <Transform translation="0 1.9 28"><Shape><Appearance><Material diffuseColor="0.85 0.15 0.15" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="3.4 0.45 0.08"/></Shape></Transform>
+  <Transform translation="-1.6 0.9 28"><Shape><Appearance><Material diffuseColor="0.8 0.8 0.85" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.12 1.8 0.12"/></Shape></Transform>
+  <Transform translation="1.6 0.9 28"><Shape><Appearance><Material diffuseColor="0.8 0.8 0.85" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.12 1.8 0.12"/></Shape></Transform>
+
+    <!-- ===================== TRAVELLER (path + heading) ===================== -->
+    <Transform DEF="Traveler">
+      <!-- chase camera rides with the runner -->
+      <Viewpoint DEF="ChaseCam" position="0 1.7 -3.2" orientation="0 1 0 3.14159"
+                 description="Chase cam (runner)"/>
+
+      <HAnimHumanoid DEF="Human" name="humanoid" version="2.0" loa="1">
+        <!-- skeleton (rendered hierarchy) -->
+      <HAnimJoint DEF="humanoid_root" containerField="skeleton" name="humanoid_root" center="0.0000 0.8240 0.0277">
+        <HAnimSegment DEF="seg_sacrum" name="sacrum" containerField="children">
+          <Transform translation="0.0000 0.8240 0.0277"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform><Transform translation="0.0000 0.8695 0.0146" rotation="-1.0000 0.0000 0.0000 0.2796"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.0946" radius="0.0300"/></Shape></Transform>
+        </HAnimSegment>
+        <HAnimJoint DEF="sacroiliac" name="sacroiliac" center="0.0000 0.9149 0.0016">
+          <HAnimSegment DEF="seg_pelvis" name="pelvis" containerField="children">
+            <Transform translation="0.0000 0.9149 0.0016"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform><Transform translation="0.0481 0.9137 0.0008" rotation="-0.0177 0.0000 -0.9998 1.5968"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.0961" radius="0.0300"/></Shape></Transform><Transform translation="-0.0475 0.9160 0.0022" rotation="0.0137 -0.0000 0.9999 1.5476"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.0950" radius="0.0300"/></Shape></Transform><Transform translation="0.0014 0.9859 -0.0380" rotation="-0.9994 0.0000 -0.0353 0.5093"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.1625" radius="0.0300"/></Shape></Transform>
+          </HAnimSegment>
+          <HAnimJoint DEF="l_hip" name="l_hip" center="0.0961 0.9124 -0.0001">
+            <HAnimSegment DEF="seg_l_thigh" name="l_thigh" containerField="children">
+              <Transform translation="0.0961 0.9124 -0.0001"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0450"/></Shape></Transform><Transform translation="0.1001 0.6996 0.0154" rotation="0.9688 0.0000 -0.2477 3.0668"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.4269" radius="0.0450"/></Shape></Transform>
+            </HAnimSegment>
+            <HAnimJoint DEF="l_knee" name="l_knee" center="0.1040 0.4867 0.0308">
+              <HAnimSegment DEF="seg_l_calf" name="l_calf" containerField="children">
+                <Transform translation="0.1040 0.4867 0.0308"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0400"/></Shape></Transform><Transform translation="0.1071 0.2762 -0.0214" rotation="-0.9983 0.0000 -0.0583 2.8982"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.4339" radius="0.0380"/></Shape></Transform>
+              </HAnimSegment>
+              <HAnimJoint DEF="l_talocrural" name="l_talocrural" center="0.1101 0.0656 -0.0736">
+                <HAnimSegment DEF="seg_l_hindfoot" name="l_hindfoot" containerField="children">
+                  <Transform translation="0.1101 0.0656 -0.0736"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0350"/></Shape></Transform><Transform translation="0.1094 0.0329 -0.0184" rotation="0.9999 -0.0000 0.0136 2.1062"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.1284" radius="0.0220"/></Shape></Transform><Transform translation="0.1101 0.0250 0.0264" rotation="0 0 1 0"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.085 0.05 0.22"/></Shape></Transform>
+                </HAnimSegment>
+                <HAnimJoint DEF="l_metatarsophalangeal_2" name="l_metatarsophalangeal_2" center="0.1086 0.0001 0.0368">
+                  <HAnimSegment DEF="seg_l_forefoot" name="l_forefoot" containerField="children">
+                    <Transform translation="0.1086 0.0001 0.0368"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform>
+                  </HAnimSegment>
+                </HAnimJoint>
+              </HAnimJoint>
+            </HAnimJoint>
+          </HAnimJoint>
+          <HAnimJoint DEF="r_hip" name="r_hip" center="-0.0950 0.9171 0.0029">
+            <HAnimSegment DEF="seg_r_thigh" name="r_thigh" containerField="children">
+              <Transform translation="-0.0950 0.9171 0.0029"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0450"/></Shape></Transform><Transform translation="-0.0909 0.7042 0.0174" rotation="0.9611 0.0000 -0.2760 3.0711"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.4269" radius="0.0450"/></Shape></Transform>
+            </HAnimSegment>
+            <HAnimJoint DEF="r_knee" name="r_knee" center="-0.0867 0.4913 0.0318">
+              <HAnimSegment DEF="seg_r_calf" name="r_calf" containerField="children">
+                <Transform translation="-0.0867 0.4913 0.0318"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0400"/></Shape></Transform><Transform translation="-0.0834 0.2812 -0.0224" rotation="-0.9982 0.0000 -0.0608 2.8886"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.4339" radius="0.0380"/></Shape></Transform>
+              </HAnimSegment>
+              <HAnimJoint DEF="r_talocrural" name="r_talocrural" center="-0.0801 0.0712 -0.0766">
+                <HAnimSegment DEF="seg_r_hindfoot" name="r_hindfoot" containerField="children">
+                  <Transform translation="-0.0801 0.0712 -0.0766"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0350"/></Shape></Transform><Transform translation="-0.0801 0.0356 -0.0199" rotation="1.0000 0.0000 -0.0000 2.1315"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.1339" radius="0.0220"/></Shape></Transform><Transform translation="-0.0801 0.0250 0.0234" rotation="0 0 1 0"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Box size="0.085 0.05 0.22"/></Shape></Transform>
+                </HAnimSegment>
+                <HAnimJoint DEF="r_metatarsophalangeal_2" name="r_metatarsophalangeal_2" center="-0.0801 0.0000 0.0368">
+                  <HAnimSegment DEF="seg_r_forefoot" name="r_forefoot" containerField="children">
+                    <Transform translation="-0.0801 0.0000 0.0368"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform>
+                  </HAnimSegment>
+                </HAnimJoint>
+              </HAnimJoint>
+            </HAnimJoint>
+          </HAnimJoint>
+          <HAnimJoint DEF="vl5" name="vl5" center="0.0028 1.0568 -0.0776">
+            <HAnimSegment DEF="seg_l5" name="l5" containerField="children">
+              <Transform translation="0.0028 1.0568 -0.0776"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform><Transform translation="-0.0006 1.0634 -0.0525" rotation="0.9909 -0.0000 0.1345 1.3154"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.0523" radius="0.0450"/></Shape></Transform>
+            </HAnimSegment>
+            <HAnimJoint DEF="vl1" name="vl1" center="-0.0040 1.0700 -0.0275">
+              <HAnimSegment DEF="seg_l1" name="l1" containerField="children">
+                <Transform translation="-0.0040 1.0700 -0.0275"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform><Transform translation="-0.0020 1.2500 -0.0367" rotation="-0.9769 0.0000 -0.2135 0.0520"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.3605" radius="0.0450"/></Shape></Transform>
+              </HAnimSegment>
+              <HAnimJoint DEF="vc4" name="vc4" center="0.0000 1.4300 -0.0458">
+                <HAnimSegment DEF="seg_c4" name="c4" containerField="children">
+                  <Transform translation="0.0000 1.4300 -0.0458"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform><Transform translation="0.0022 1.5254 -0.0111" rotation="0.9980 0.0000 -0.0633 0.3493"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.2032" radius="0.0280"/></Shape></Transform><Transform translation="0.1014 1.4338 -0.0422" rotation="0.0350 0.0000 -0.9994 1.5334"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.2032" radius="0.0280"/></Shape></Transform><Transform translation="-0.0954 1.4354 -0.0392" rotation="0.0696 -0.0000 0.9976 1.5149"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.1915" radius="0.0280"/></Shape></Transform>
+                </HAnimSegment>
+                <HAnimJoint DEF="skullbase" name="skullbase" center="0.0044 1.6209 0.0236">
+                  <HAnimSegment DEF="seg_skull" name="skull" containerField="children">
+                    <Transform translation="0.0044 1.6209 0.0236"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0280"/></Shape></Transform><Transform translation="0.0074 1.6909 0.0386"><Shape><Appearance><Material diffuseColor="0.86 0.66 0.52" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.1050"/></Shape></Transform>
+                  </HAnimSegment>
+                </HAnimJoint>
+                <HAnimJoint DEF="l_shoulder" name="l_shoulder" center="0.2029 1.4376 -0.0387">
+                  <HAnimSegment DEF="seg_l_upperarm" name="l_upperarm" containerField="children">
+                    <Transform translation="0.2029 1.4376 -0.0387"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0380"/></Shape></Transform><Transform translation="0.2021 1.2866 -0.0534" rotation="-0.9987 0.0000 0.0508 3.0441"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.3033" radius="0.0300"/></Shape></Transform>
+                  </HAnimSegment>
+                  <HAnimJoint DEF="l_elbow" name="l_elbow" center="0.2014 1.1357 -0.0682">
+                    <HAnimSegment DEF="seg_l_forearm" name="l_forearm" containerField="children">
+                      <Transform translation="0.2014 1.1357 -0.0682"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0320"/></Shape></Transform><Transform translation="0.1999 1.0010 -0.0633" rotation="0.9570 -0.0000 0.2900 3.1032"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.2696" radius="0.0260"/></Shape></Transform>
+                    </HAnimSegment>
+                    <HAnimJoint DEF="l_radiocarpal" name="l_radiocarpal" center="0.1984 0.8663 -0.0583">
+                      <HAnimSegment DEF="seg_l_hand" name="l_hand" containerField="children">
+                        <Transform translation="0.1984 0.8663 -0.0583"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0260"/></Shape></Transform><Transform translation="0.1984 0.8163 -0.0583"><Shape><Appearance><Material diffuseColor="0.86 0.66 0.52" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0350"/></Shape></Transform>
+                      </HAnimSegment>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                </HAnimJoint>
+                <HAnimJoint DEF="r_shoulder" name="r_shoulder" center="-0.1907 1.4407 -0.0325">
+                  <HAnimSegment DEF="seg_r_upperarm" name="r_upperarm" containerField="children">
+                    <Transform translation="-0.1907 1.4407 -0.0325"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0380"/></Shape></Transform><Transform translation="-0.1928 1.2898 -0.0473" rotation="-0.9900 0.0000 0.1410 3.0432"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.3034" radius="0.0300"/></Shape></Transform>
+                  </HAnimSegment>
+                  <HAnimJoint DEF="r_elbow" name="r_elbow" center="-0.1949 1.1388 -0.0620">
+                    <HAnimSegment DEF="seg_r_forearm" name="r_forearm" containerField="children">
+                      <Transform translation="-0.1949 1.1388 -0.0620"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0320"/></Shape></Transform><Transform translation="-0.1954 1.0041 -0.0571" rotation="0.9949 -0.0000 0.1005 3.1047"><Shape><Appearance><Material diffuseColor="0.95 0.91 0.82" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Cylinder height="0.2696" radius="0.0260"/></Shape></Transform>
+                    </HAnimSegment>
+                    <HAnimJoint DEF="r_radiocarpal" name="r_radiocarpal" center="-0.1959 0.8694 -0.0521">
+                      <HAnimSegment DEF="seg_r_hand" name="r_hand" containerField="children">
+                        <Transform translation="-0.1959 0.8694 -0.0521"><Shape><Appearance><Material diffuseColor="0.93 0.78 0.30" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0260"/></Shape></Transform><Transform translation="-0.1959 0.8194 -0.0521"><Shape><Appearance><Material diffuseColor="0.86 0.66 0.52" specularColor="0.2 0.2 0.2" shininess="0.3"/></Appearance><Sphere radius="0.0350"/></Shape></Transform>
+                      </HAnimSegment>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                </HAnimJoint>
+              </HAnimJoint>
+            </HAnimJoint>
+          </HAnimJoint>
+        </HAnimJoint>
+      </HAnimJoint>
+        <!-- flat conformance lists -->
+      <HAnimJoint USE="humanoid_root" containerField="joints"/>
+      <HAnimJoint USE="sacroiliac" containerField="joints"/>
+      <HAnimJoint USE="l_hip" containerField="joints"/>
+      <HAnimJoint USE="l_knee" containerField="joints"/>
+      <HAnimJoint USE="l_talocrural" containerField="joints"/>
+      <HAnimJoint USE="l_metatarsophalangeal_2" containerField="joints"/>
+      <HAnimJoint USE="r_hip" containerField="joints"/>
+      <HAnimJoint USE="r_knee" containerField="joints"/>
+      <HAnimJoint USE="r_talocrural" containerField="joints"/>
+      <HAnimJoint USE="r_metatarsophalangeal_2" containerField="joints"/>
+      <HAnimJoint USE="vl5" containerField="joints"/>
+      <HAnimJoint USE="vl1" containerField="joints"/>
+      <HAnimJoint USE="vc4" containerField="joints"/>
+      <HAnimJoint USE="skullbase" containerField="joints"/>
+      <HAnimJoint USE="l_shoulder" containerField="joints"/>
+      <HAnimJoint USE="l_elbow" containerField="joints"/>
+      <HAnimJoint USE="l_radiocarpal" containerField="joints"/>
+      <HAnimJoint USE="r_shoulder" containerField="joints"/>
+      <HAnimJoint USE="r_elbow" containerField="joints"/>
+      <HAnimJoint USE="r_radiocarpal" containerField="joints"/>
+      <HAnimSegment USE="seg_sacrum" containerField="segments"/>
+      <HAnimSegment USE="seg_pelvis" containerField="segments"/>
+      <HAnimSegment USE="seg_l_thigh" containerField="segments"/>
+      <HAnimSegment USE="seg_l_calf" containerField="segments"/>
+      <HAnimSegment USE="seg_l_hindfoot" containerField="segments"/>
+      <HAnimSegment USE="seg_l_forefoot" containerField="segments"/>
+      <HAnimSegment USE="seg_r_thigh" containerField="segments"/>
+      <HAnimSegment USE="seg_r_calf" containerField="segments"/>
+      <HAnimSegment USE="seg_r_hindfoot" containerField="segments"/>
+      <HAnimSegment USE="seg_r_forefoot" containerField="segments"/>
+      <HAnimSegment USE="seg_l5" containerField="segments"/>
+      <HAnimSegment USE="seg_l1" containerField="segments"/>
+      <HAnimSegment USE="seg_c4" containerField="segments"/>
+      <HAnimSegment USE="seg_skull" containerField="segments"/>
+      <HAnimSegment USE="seg_l_upperarm" containerField="segments"/>
+      <HAnimSegment USE="seg_l_forearm" containerField="segments"/>
+      <HAnimSegment USE="seg_l_hand" containerField="segments"/>
+      <HAnimSegment USE="seg_r_upperarm" containerField="segments"/>
+      <HAnimSegment USE="seg_r_forearm" containerField="segments"/>
+      <HAnimSegment USE="seg_r_hand" containerField="segments"/>
+      </HAnimHumanoid>
+    </Transform>
+
+    <!-- ===================== ANIMATION ENGINE ===================== -->
+    <TimeSensor DEF="GaitClock" cycleInterval="0.7" loop="true"/>
+    <TimeSensor DEF="CourseClock" cycleInterval="22" loop="true"/>
+
+  <OrientationInterpolator DEF="l_hip_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 -0.55  1 0 0 0.15  1 0 0 0.48  1 0 0 -0.1  1 0 0 -0.55"/>
+  <OrientationInterpolator DEF="r_hip_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 0.48  1 0 0 -0.1  1 0 0 -0.55  1 0 0 0.15  1 0 0 0.48"/>
+  <OrientationInterpolator DEF="l_knee_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 0.1  1 0 0 0.85  1 0 0 1.5  1 0 0 0.3  1 0 0 0.1"/>
+  <OrientationInterpolator DEF="r_knee_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 1.5  1 0 0 0.3  1 0 0 0.1  1 0 0 0.85  1 0 0 1.5"/>
+  <OrientationInterpolator DEF="l_talocrural_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 -0.2  1 0 0 0.1  1 0 0 0.4  1 0 0 -0.15  1 0 0 -0.2"/>
+  <OrientationInterpolator DEF="r_talocrural_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 0.4  1 0 0 -0.15  1 0 0 -0.2  1 0 0 0.1  1 0 0 0.4"/>
+  <OrientationInterpolator DEF="l_shoulder_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 0.4  1 0 0 -0.1  1 0 0 -0.35  1 0 0 0.1  1 0 0 0.4"/>
+  <OrientationInterpolator DEF="r_shoulder_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 -0.35  1 0 0 0.1  1 0 0 0.4  1 0 0 -0.1  1 0 0 -0.35"/>
+  <OrientationInterpolator DEF="l_elbow_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 -0.85  1 0 0 -1.1  1 0 0 -0.85  1 0 0 -0.65  1 0 0 -0.85"/>
+  <OrientationInterpolator DEF="r_elbow_int" key="0 0.25 0.5 0.75 1" keyValue="1 0 0 -0.85  1 0 0 -0.65  1 0 0 -0.85  1 0 0 -1.1  1 0 0 -0.85"/>
+  <PositionInterpolator DEF="bounce_int" key="0 0.25 0.5 0.75 1" keyValue="0 0 0  0 0.045 0  0 0 0  0 0.045 0  0 0 0"/>
+  <PositionInterpolator DEF="path_int" key="0.0000 0.1442 0.2819 0.4712 0.6604 0.7981 1.0000" keyValue="0.000 0 0.000  0.000 0 5.000  2.600 0 9.000  -2.600 0 13.000  2.600 0 17.000  0.000 0 21.000  0.000 0 28.000"/>
+  <OrientationInterpolator DEF="heading_int" key="0.0000 0.1442 0.2819 0.4712 0.6604 0.7981 1.0000" keyValue="0 1 0 0.0000  0 1 0 0.5764  0 1 0 -0.9151  0 1 0 0.9151  0 1 0 -0.5764  0 1 0 0.0000  0 1 0 0.0000"/>
+
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="l_hip_int" toField="set_fraction"/>
+  <ROUTE fromNode="l_hip_int" fromField="value_changed" toNode="l_hip" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="r_hip_int" toField="set_fraction"/>
+  <ROUTE fromNode="r_hip_int" fromField="value_changed" toNode="r_hip" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="l_knee_int" toField="set_fraction"/>
+  <ROUTE fromNode="l_knee_int" fromField="value_changed" toNode="l_knee" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="r_knee_int" toField="set_fraction"/>
+  <ROUTE fromNode="r_knee_int" fromField="value_changed" toNode="r_knee" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="l_talocrural_int" toField="set_fraction"/>
+  <ROUTE fromNode="l_talocrural_int" fromField="value_changed" toNode="l_talocrural" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="r_talocrural_int" toField="set_fraction"/>
+  <ROUTE fromNode="r_talocrural_int" fromField="value_changed" toNode="r_talocrural" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="l_shoulder_int" toField="set_fraction"/>
+  <ROUTE fromNode="l_shoulder_int" fromField="value_changed" toNode="l_shoulder" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="r_shoulder_int" toField="set_fraction"/>
+  <ROUTE fromNode="r_shoulder_int" fromField="value_changed" toNode="r_shoulder" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="l_elbow_int" toField="set_fraction"/>
+  <ROUTE fromNode="l_elbow_int" fromField="value_changed" toNode="l_elbow" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="r_elbow_int" toField="set_fraction"/>
+  <ROUTE fromNode="r_elbow_int" fromField="value_changed" toNode="r_elbow" toField="set_rotation"/>
+  <ROUTE fromNode="GaitClock" fromField="fraction_changed" toNode="bounce_int" toField="set_fraction"/>
+  <ROUTE fromNode="bounce_int" fromField="value_changed" toNode="humanoid_root" toField="set_translation"/>
+  <ROUTE fromNode="CourseClock" fromField="fraction_changed" toNode="path_int" toField="set_fraction"/>
+  <ROUTE fromNode="CourseClock" fromField="fraction_changed" toNode="heading_int" toField="set_fraction"/>
+  <ROUTE fromNode="path_int" fromField="value_changed" toNode="Traveler" toField="set_translation"/>
+  <ROUTE fromNode="heading_int" fromField="value_changed" toNode="Traveler" toField="set_rotation"/>
+  </Scene>
+</X3D>

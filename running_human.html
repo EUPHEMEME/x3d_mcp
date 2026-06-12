@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HAnim LOA-1 Runner — Slalom Course</title>
+    <link rel="stylesheet" href="https://www.x3dom.org/download/1.8.2/x3dom.css">
+    <script src="https://www.x3dom.org/download/1.8.2/x3dom.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #e0e0e0;
+            margin-bottom: 16px;
+        }
+        x3d {
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>HAnim LOA-1 Runner — Slalom Course</h1>
+    <x3d width="100%" height="100vh">
+        <scene>
+            <worldinfo title="HAnim LOA-1 Running Figure"></worldinfo>
+            <background skycolor="0.5 0.65 0.85 0.15 0.22 0.35" groundcolor="0.12 0.16 0.12" skyangle="1.2"></background>
+            <navigationinfo type="&quot;EXAMINE&quot; &quot;WALK&quot; &quot;ANY&quot;" speed="3"></navigationinfo>
+            <viewpoint def="Overview" position="9 7 -6" orientation="0.2 0.95 0.2 2.5" description="Course overview"></viewpoint>
+            <viewpoint def="StartLine" position="3.5 1.5 -3" orientation="0 1 0 0.7" description="Start line"></viewpoint>
+            <directionallight direction="-0.4 -1 -0.5" intensity="0.9" ambientintensity="0.4"></directionallight>
+            <directionallight direction="0.6 -0.4 0.6" intensity="0.4"></directionallight>
+            <transform translation="0 -0.01 13">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.20 0.34 0.22" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="14 0.02 34"></box>
+                </shape>
+            </transform>
+            <transform translation="0 0.001 13">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.85 0.82 0.5" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="0.18 0.02 32"></box>
+                </shape>
+            </transform>
+            <transform translation="0 0.2 9.0">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.95 0.45 0.1" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <cone bottomradius="0.18" height="0.4"></cone>
+                </shape>
+            </transform>
+            <transform translation="0 0.2 13.0">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.95 0.45 0.1" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <cone bottomradius="0.18" height="0.4"></cone>
+                </shape>
+            </transform>
+            <transform translation="0 0.2 17.0">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.95 0.45 0.1" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <cone bottomradius="0.18" height="0.4"></cone>
+                </shape>
+            </transform>
+            <transform translation="-1.6 0.6 0">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.8 0.8 0.85" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="0.12 1.2 0.12"></box>
+                </shape>
+            </transform>
+            <transform translation="1.6 0.6 0">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.8 0.8 0.85" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="0.12 1.2 0.12"></box>
+                </shape>
+            </transform>
+            <transform translation="0 1.9 28">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.85 0.15 0.15" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="3.4 0.45 0.08"></box>
+                </shape>
+            </transform>
+            <transform translation="-1.6 0.9 28">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.8 0.8 0.85" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="0.12 1.8 0.12"></box>
+                </shape>
+            </transform>
+            <transform translation="1.6 0.9 28">
+                <shape>
+                    <appearance>
+                        <material diffusecolor="0.8 0.8 0.85" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                    </appearance>
+                    <box size="0.12 1.8 0.12"></box>
+                </shape>
+            </transform>
+            <transform def="Traveler">
+                <viewpoint def="ChaseCam" position="0 1.7 -3.2" orientation="0 1 0 3.14159" description="Chase cam (runner)"></viewpoint>
+                <hanimhumanoid def="Human" name="humanoid" version="2.0" loa="1">
+                    <hanimjoint def="humanoid_root" containerfield="skeleton" name="humanoid_root" center="0.0000 0.8240 0.0277">
+                        <hanimsegment def="seg_sacrum" name="sacrum" containerfield="children">
+                            <transform translation="0.0000 0.8240 0.0277">
+                                <shape>
+                                    <appearance>
+                                        <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                    </appearance>
+                                    <sphere radius="0.0280"></sphere>
+                                </shape>
+                            </transform>
+                            <transform translation="0.0000 0.8695 0.0146" rotation="-1.0000 0.0000 0.0000 0.2796">
+                                <shape>
+                                    <appearance>
+                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                    </appearance>
+                                    <cylinder height="0.0946" radius="0.0300"></cylinder>
+                                </shape>
+                            </transform>
+                        </hanimsegment>
+                        <hanimjoint def="sacroiliac" name="sacroiliac" center="0.0000 0.9149 0.0016">
+                            <hanimsegment def="seg_pelvis" name="pelvis" containerfield="children">
+                                <transform translation="0.0000 0.9149 0.0016">
+                                    <shape>
+                                        <appearance>
+                                            <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                        </appearance>
+                                        <sphere radius="0.0280"></sphere>
+                                    </shape>
+                                </transform>
+                                <transform translation="0.0481 0.9137 0.0008" rotation="-0.0177 0.0000 -0.9998 1.5968">
+                                    <shape>
+                                        <appearance>
+                                            <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                        </appearance>
+                                        <cylinder height="0.0961" radius="0.0300"></cylinder>
+                                    </shape>
+                                </transform>
+                                <transform translation="-0.0475 0.9160 0.0022" rotation="0.0137 -0.0000 0.9999 1.5476">
+                                    <shape>
+                                        <appearance>
+                                            <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                        </appearance>
+                                        <cylinder height="0.0950" radius="0.0300"></cylinder>
+                                    </shape>
+                                </transform>
+                                <transform translation="0.0014 0.9859 -0.0380" rotation="-0.9994 0.0000 -0.0353 0.5093">
+                                    <shape>
+                                        <appearance>
+                                            <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                        </appearance>
+                                        <cylinder height="0.1625" radius="0.0300"></cylinder>
+                                    </shape>
+                                </transform>
+                            </hanimsegment>
+                            <hanimjoint def="l_hip" name="l_hip" center="0.0961 0.9124 -0.0001">
+                                <hanimsegment def="seg_l_thigh" name="l_thigh" containerfield="children">
+                                    <transform translation="0.0961 0.9124 -0.0001">
+                                        <shape>
+                                            <appearance>
+                                                <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                            </appearance>
+                                            <sphere radius="0.0450"></sphere>
+                                        </shape>
+                                    </transform>
+                                    <transform translation="0.1001 0.6996 0.0154" rotation="0.9688 0.0000 -0.2477 3.0668">
+                                        <shape>
+                                            <appearance>
+                                                <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                            </appearance>
+                                            <cylinder height="0.4269" radius="0.0450"></cylinder>
+                                        </shape>
+                                    </transform>
+                                </hanimsegment>
+                                <hanimjoint def="l_knee" name="l_knee" center="0.1040 0.4867 0.0308">
+                                    <hanimsegment def="seg_l_calf" name="l_calf" containerfield="children">
+                                        <transform translation="0.1040 0.4867 0.0308">
+                                            <shape>
+                                                <appearance>
+                                                    <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                </appearance>
+                                                <sphere radius="0.0400"></sphere>
+                                            </shape>
+                                        </transform>
+                                        <transform translation="0.1071 0.2762 -0.0214" rotation="-0.9983 0.0000 -0.0583 2.8982">
+                                            <shape>
+                                                <appearance>
+                                                    <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                </appearance>
+                                                <cylinder height="0.4339" radius="0.0380"></cylinder>
+                                            </shape>
+                                        </transform>
+                                    </hanimsegment>
+                                    <hanimjoint def="l_talocrural" name="l_talocrural" center="0.1101 0.0656 -0.0736">
+                                        <hanimsegment def="seg_l_hindfoot" name="l_hindfoot" containerfield="children">
+                                            <transform translation="0.1101 0.0656 -0.0736">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <sphere radius="0.0350"></sphere>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="0.1094 0.0329 -0.0184" rotation="0.9999 -0.0000 0.0136 2.1062">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <cylinder height="0.1284" radius="0.0220"></cylinder>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="0.1101 0.0250 0.0264" rotation="0 0 1 0">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <box size="0.085 0.05 0.22"></box>
+                                                </shape>
+                                            </transform>
+                                        </hanimsegment>
+                                        <hanimjoint def="l_metatarsophalangeal_2" name="l_metatarsophalangeal_2" center="0.1086 0.0001 0.0368">
+                                            <hanimsegment def="seg_l_forefoot" name="l_forefoot" containerfield="children">
+                                                <transform translation="0.1086 0.0001 0.0368">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <sphere radius="0.0280"></sphere>
+                                                    </shape>
+                                                </transform>
+                                            </hanimsegment>
+                                        </hanimjoint>
+                                    </hanimjoint>
+                                </hanimjoint>
+                            </hanimjoint>
+                            <hanimjoint def="r_hip" name="r_hip" center="-0.0950 0.9171 0.0029">
+                                <hanimsegment def="seg_r_thigh" name="r_thigh" containerfield="children">
+                                    <transform translation="-0.0950 0.9171 0.0029">
+                                        <shape>
+                                            <appearance>
+                                                <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                            </appearance>
+                                            <sphere radius="0.0450"></sphere>
+                                        </shape>
+                                    </transform>
+                                    <transform translation="-0.0909 0.7042 0.0174" rotation="0.9611 0.0000 -0.2760 3.0711">
+                                        <shape>
+                                            <appearance>
+                                                <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                            </appearance>
+                                            <cylinder height="0.4269" radius="0.0450"></cylinder>
+                                        </shape>
+                                    </transform>
+                                </hanimsegment>
+                                <hanimjoint def="r_knee" name="r_knee" center="-0.0867 0.4913 0.0318">
+                                    <hanimsegment def="seg_r_calf" name="r_calf" containerfield="children">
+                                        <transform translation="-0.0867 0.4913 0.0318">
+                                            <shape>
+                                                <appearance>
+                                                    <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                </appearance>
+                                                <sphere radius="0.0400"></sphere>
+                                            </shape>
+                                        </transform>
+                                        <transform translation="-0.0834 0.2812 -0.0224" rotation="-0.9982 0.0000 -0.0608 2.8886">
+                                            <shape>
+                                                <appearance>
+                                                    <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                </appearance>
+                                                <cylinder height="0.4339" radius="0.0380"></cylinder>
+                                            </shape>
+                                        </transform>
+                                    </hanimsegment>
+                                    <hanimjoint def="r_talocrural" name="r_talocrural" center="-0.0801 0.0712 -0.0766">
+                                        <hanimsegment def="seg_r_hindfoot" name="r_hindfoot" containerfield="children">
+                                            <transform translation="-0.0801 0.0712 -0.0766">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <sphere radius="0.0350"></sphere>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="-0.0801 0.0356 -0.0199" rotation="1.0000 0.0000 -0.0000 2.1315">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <cylinder height="0.1339" radius="0.0220"></cylinder>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="-0.0801 0.0250 0.0234" rotation="0 0 1 0">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <box size="0.085 0.05 0.22"></box>
+                                                </shape>
+                                            </transform>
+                                        </hanimsegment>
+                                        <hanimjoint def="r_metatarsophalangeal_2" name="r_metatarsophalangeal_2" center="-0.0801 0.0000 0.0368">
+                                            <hanimsegment def="seg_r_forefoot" name="r_forefoot" containerfield="children">
+                                                <transform translation="-0.0801 0.0000 0.0368">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <sphere radius="0.0280"></sphere>
+                                                    </shape>
+                                                </transform>
+                                            </hanimsegment>
+                                        </hanimjoint>
+                                    </hanimjoint>
+                                </hanimjoint>
+                            </hanimjoint>
+                            <hanimjoint def="vl5" name="vl5" center="0.0028 1.0568 -0.0776">
+                                <hanimsegment def="seg_l5" name="l5" containerfield="children">
+                                    <transform translation="0.0028 1.0568 -0.0776">
+                                        <shape>
+                                            <appearance>
+                                                <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                            </appearance>
+                                            <sphere radius="0.0280"></sphere>
+                                        </shape>
+                                    </transform>
+                                    <transform translation="-0.0006 1.0634 -0.0525" rotation="0.9909 -0.0000 0.1345 1.3154">
+                                        <shape>
+                                            <appearance>
+                                                <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                            </appearance>
+                                            <cylinder height="0.0523" radius="0.0450"></cylinder>
+                                        </shape>
+                                    </transform>
+                                </hanimsegment>
+                                <hanimjoint def="vl1" name="vl1" center="-0.0040 1.0700 -0.0275">
+                                    <hanimsegment def="seg_l1" name="l1" containerfield="children">
+                                        <transform translation="-0.0040 1.0700 -0.0275">
+                                            <shape>
+                                                <appearance>
+                                                    <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                </appearance>
+                                                <sphere radius="0.0280"></sphere>
+                                            </shape>
+                                        </transform>
+                                        <transform translation="-0.0020 1.2500 -0.0367" rotation="-0.9769 0.0000 -0.2135 0.0520">
+                                            <shape>
+                                                <appearance>
+                                                    <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                </appearance>
+                                                <cylinder height="0.3605" radius="0.0450"></cylinder>
+                                            </shape>
+                                        </transform>
+                                    </hanimsegment>
+                                    <hanimjoint def="vc4" name="vc4" center="0.0000 1.4300 -0.0458">
+                                        <hanimsegment def="seg_c4" name="c4" containerfield="children">
+                                            <transform translation="0.0000 1.4300 -0.0458">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <sphere radius="0.0280"></sphere>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="0.0022 1.5254 -0.0111" rotation="0.9980 0.0000 -0.0633 0.3493">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <cylinder height="0.2032" radius="0.0280"></cylinder>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="0.1014 1.4338 -0.0422" rotation="0.0350 0.0000 -0.9994 1.5334">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <cylinder height="0.2032" radius="0.0280"></cylinder>
+                                                </shape>
+                                            </transform>
+                                            <transform translation="-0.0954 1.4354 -0.0392" rotation="0.0696 -0.0000 0.9976 1.5149">
+                                                <shape>
+                                                    <appearance>
+                                                        <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                    </appearance>
+                                                    <cylinder height="0.1915" radius="0.0280"></cylinder>
+                                                </shape>
+                                            </transform>
+                                        </hanimsegment>
+                                        <hanimjoint def="skullbase" name="skullbase" center="0.0044 1.6209 0.0236">
+                                            <hanimsegment def="seg_skull" name="skull" containerfield="children">
+                                                <transform translation="0.0044 1.6209 0.0236">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <sphere radius="0.0280"></sphere>
+                                                    </shape>
+                                                </transform>
+                                                <transform translation="0.0074 1.6909 0.0386">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.86 0.66 0.52" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <sphere radius="0.1050"></sphere>
+                                                    </shape>
+                                                </transform>
+                                            </hanimsegment>
+                                        </hanimjoint>
+                                        <hanimjoint def="l_shoulder" name="l_shoulder" center="0.2029 1.4376 -0.0387">
+                                            <hanimsegment def="seg_l_upperarm" name="l_upperarm" containerfield="children">
+                                                <transform translation="0.2029 1.4376 -0.0387">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <sphere radius="0.0380"></sphere>
+                                                    </shape>
+                                                </transform>
+                                                <transform translation="0.2021 1.2866 -0.0534" rotation="-0.9987 0.0000 0.0508 3.0441">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <cylinder height="0.3033" radius="0.0300"></cylinder>
+                                                    </shape>
+                                                </transform>
+                                            </hanimsegment>
+                                            <hanimjoint def="l_elbow" name="l_elbow" center="0.2014 1.1357 -0.0682">
+                                                <hanimsegment def="seg_l_forearm" name="l_forearm" containerfield="children">
+                                                    <transform translation="0.2014 1.1357 -0.0682">
+                                                        <shape>
+                                                            <appearance>
+                                                                <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                            </appearance>
+                                                            <sphere radius="0.0320"></sphere>
+                                                        </shape>
+                                                    </transform>
+                                                    <transform translation="0.1999 1.0010 -0.0633" rotation="0.9570 -0.0000 0.2900 3.1032">
+                                                        <shape>
+                                                            <appearance>
+                                                                <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                            </appearance>
+                                                            <cylinder height="0.2696" radius="0.0260"></cylinder>
+                                                        </shape>
+                                                    </transform>
+                                                </hanimsegment>
+                                                <hanimjoint def="l_radiocarpal" name="l_radiocarpal" center="0.1984 0.8663 -0.0583">
+                                                    <hanimsegment def="seg_l_hand" name="l_hand" containerfield="children">
+                                                        <transform translation="0.1984 0.8663 -0.0583">
+                                                            <shape>
+                                                                <appearance>
+                                                                    <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                                </appearance>
+                                                                <sphere radius="0.0260"></sphere>
+                                                            </shape>
+                                                        </transform>
+                                                        <transform translation="0.1984 0.8163 -0.0583">
+                                                            <shape>
+                                                                <appearance>
+                                                                    <material diffusecolor="0.86 0.66 0.52" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                                </appearance>
+                                                                <sphere radius="0.0350"></sphere>
+                                                            </shape>
+                                                        </transform>
+                                                    </hanimsegment>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                        </hanimjoint>
+                                        <hanimjoint def="r_shoulder" name="r_shoulder" center="-0.1907 1.4407 -0.0325">
+                                            <hanimsegment def="seg_r_upperarm" name="r_upperarm" containerfield="children">
+                                                <transform translation="-0.1907 1.4407 -0.0325">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <sphere radius="0.0380"></sphere>
+                                                    </shape>
+                                                </transform>
+                                                <transform translation="-0.1928 1.2898 -0.0473" rotation="-0.9900 0.0000 0.1410 3.0432">
+                                                    <shape>
+                                                        <appearance>
+                                                            <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                        </appearance>
+                                                        <cylinder height="0.3034" radius="0.0300"></cylinder>
+                                                    </shape>
+                                                </transform>
+                                            </hanimsegment>
+                                            <hanimjoint def="r_elbow" name="r_elbow" center="-0.1949 1.1388 -0.0620">
+                                                <hanimsegment def="seg_r_forearm" name="r_forearm" containerfield="children">
+                                                    <transform translation="-0.1949 1.1388 -0.0620">
+                                                        <shape>
+                                                            <appearance>
+                                                                <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                            </appearance>
+                                                            <sphere radius="0.0320"></sphere>
+                                                        </shape>
+                                                    </transform>
+                                                    <transform translation="-0.1954 1.0041 -0.0571" rotation="0.9949 -0.0000 0.1005 3.1047">
+                                                        <shape>
+                                                            <appearance>
+                                                                <material diffusecolor="0.95 0.91 0.82" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                            </appearance>
+                                                            <cylinder height="0.2696" radius="0.0260"></cylinder>
+                                                        </shape>
+                                                    </transform>
+                                                </hanimsegment>
+                                                <hanimjoint def="r_radiocarpal" name="r_radiocarpal" center="-0.1959 0.8694 -0.0521">
+                                                    <hanimsegment def="seg_r_hand" name="r_hand" containerfield="children">
+                                                        <transform translation="-0.1959 0.8694 -0.0521">
+                                                            <shape>
+                                                                <appearance>
+                                                                    <material diffusecolor="0.93 0.78 0.30" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                                </appearance>
+                                                                <sphere radius="0.0260"></sphere>
+                                                            </shape>
+                                                        </transform>
+                                                        <transform translation="-0.1959 0.8194 -0.0521">
+                                                            <shape>
+                                                                <appearance>
+                                                                    <material diffusecolor="0.86 0.66 0.52" specularcolor="0.2 0.2 0.2" shininess="0.3"></material>
+                                                                </appearance>
+                                                                <sphere radius="0.0350"></sphere>
+                                                            </shape>
+                                                        </transform>
+                                                    </hanimsegment>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                        </hanimjoint>
+                                    </hanimjoint>
+                                </hanimjoint>
+                            </hanimjoint>
+                        </hanimjoint>
+                    </hanimjoint>
+                    <hanimjoint use="humanoid_root" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="sacroiliac" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_hip" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_knee" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_talocrural" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_metatarsophalangeal_2" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_hip" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_knee" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_talocrural" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_metatarsophalangeal_2" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="vl5" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="vl1" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="vc4" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="skullbase" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_shoulder" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_elbow" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="l_radiocarpal" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_shoulder" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_elbow" containerfield="joints"></hanimjoint>
+                    <hanimjoint use="r_radiocarpal" containerfield="joints"></hanimjoint>
+                    <hanimsegment use="seg_sacrum" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_pelvis" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_thigh" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_calf" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_hindfoot" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_forefoot" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_thigh" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_calf" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_hindfoot" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_forefoot" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l5" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l1" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_c4" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_skull" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_upperarm" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_forearm" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_l_hand" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_upperarm" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_forearm" containerfield="segments"></hanimsegment>
+                    <hanimsegment use="seg_r_hand" containerfield="segments"></hanimsegment>
+                </hanimhumanoid>
+            </transform>
+            <timesensor def="GaitClock" cycleinterval="0.7" loop="true"></timesensor>
+            <timesensor def="CourseClock" cycleinterval="22" loop="true"></timesensor>
+            <orientationinterpolator def="l_hip_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 -0.55  1 0 0 0.15  1 0 0 0.48  1 0 0 -0.1  1 0 0 -0.55"></orientationinterpolator>
+            <orientationinterpolator def="r_hip_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 0.48  1 0 0 -0.1  1 0 0 -0.55  1 0 0 0.15  1 0 0 0.48"></orientationinterpolator>
+            <orientationinterpolator def="l_knee_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 0.1  1 0 0 0.85  1 0 0 1.5  1 0 0 0.3  1 0 0 0.1"></orientationinterpolator>
+            <orientationinterpolator def="r_knee_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 1.5  1 0 0 0.3  1 0 0 0.1  1 0 0 0.85  1 0 0 1.5"></orientationinterpolator>
+            <orientationinterpolator def="l_talocrural_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 -0.2  1 0 0 0.1  1 0 0 0.4  1 0 0 -0.15  1 0 0 -0.2"></orientationinterpolator>
+            <orientationinterpolator def="r_talocrural_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 0.4  1 0 0 -0.15  1 0 0 -0.2  1 0 0 0.1  1 0 0 0.4"></orientationinterpolator>
+            <orientationinterpolator def="l_shoulder_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 0.4  1 0 0 -0.1  1 0 0 -0.35  1 0 0 0.1  1 0 0 0.4"></orientationinterpolator>
+            <orientationinterpolator def="r_shoulder_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 -0.35  1 0 0 0.1  1 0 0 0.4  1 0 0 -0.1  1 0 0 -0.35"></orientationinterpolator>
+            <orientationinterpolator def="l_elbow_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 -0.85  1 0 0 -1.1  1 0 0 -0.85  1 0 0 -0.65  1 0 0 -0.85"></orientationinterpolator>
+            <orientationinterpolator def="r_elbow_int" key="0 0.25 0.5 0.75 1" keyvalue="1 0 0 -0.85  1 0 0 -0.65  1 0 0 -0.85  1 0 0 -1.1  1 0 0 -0.85"></orientationinterpolator>
+            <positioninterpolator def="bounce_int" key="0 0.25 0.5 0.75 1" keyvalue="0 0 0  0 0.045 0  0 0 0  0 0.045 0  0 0 0"></positioninterpolator>
+            <positioninterpolator def="path_int" key="0.0000 0.1442 0.2819 0.4712 0.6604 0.7981 1.0000" keyvalue="0.000 0 0.000  0.000 0 5.000  2.600 0 9.000  -2.600 0 13.000  2.600 0 17.000  0.000 0 21.000  0.000 0 28.000"></positioninterpolator>
+            <orientationinterpolator def="heading_int" key="0.0000 0.1442 0.2819 0.4712 0.6604 0.7981 1.0000" keyvalue="0 1 0 0.0000  0 1 0 0.5764  0 1 0 -0.9151  0 1 0 0.9151  0 1 0 -0.5764  0 1 0 0.0000  0 1 0 0.0000"></orientationinterpolator>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="l_hip_int" tofield="set_fraction"></route>
+            <route fromnode="l_hip_int" fromfield="value_changed" tonode="l_hip" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="r_hip_int" tofield="set_fraction"></route>
+            <route fromnode="r_hip_int" fromfield="value_changed" tonode="r_hip" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="l_knee_int" tofield="set_fraction"></route>
+            <route fromnode="l_knee_int" fromfield="value_changed" tonode="l_knee" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="r_knee_int" tofield="set_fraction"></route>
+            <route fromnode="r_knee_int" fromfield="value_changed" tonode="r_knee" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="l_talocrural_int" tofield="set_fraction"></route>
+            <route fromnode="l_talocrural_int" fromfield="value_changed" tonode="l_talocrural" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="r_talocrural_int" tofield="set_fraction"></route>
+            <route fromnode="r_talocrural_int" fromfield="value_changed" tonode="r_talocrural" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="l_shoulder_int" tofield="set_fraction"></route>
+            <route fromnode="l_shoulder_int" fromfield="value_changed" tonode="l_shoulder" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="r_shoulder_int" tofield="set_fraction"></route>
+            <route fromnode="r_shoulder_int" fromfield="value_changed" tonode="r_shoulder" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="l_elbow_int" tofield="set_fraction"></route>
+            <route fromnode="l_elbow_int" fromfield="value_changed" tonode="l_elbow" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="r_elbow_int" tofield="set_fraction"></route>
+            <route fromnode="r_elbow_int" fromfield="value_changed" tonode="r_elbow" tofield="set_rotation"></route>
+            <route fromnode="GaitClock" fromfield="fraction_changed" tonode="bounce_int" tofield="set_fraction"></route>
+            <route fromnode="bounce_int" fromfield="value_changed" tonode="humanoid_root" tofield="set_translation"></route>
+            <route fromnode="CourseClock" fromfield="fraction_changed" tonode="path_int" tofield="set_fraction"></route>
+            <route fromnode="CourseClock" fromfield="fraction_changed" tonode="heading_int" tofield="set_fraction"></route>
+            <route fromnode="path_int" fromfield="value_changed" tonode="Traveler" tofield="set_translation"></route>
+            <route fromnode="heading_int" fromfield="value_changed" tonode="Traveler" tofield="set_rotation"></route>
+        </scene>
+    </x3d>
+</body>
+</html>
