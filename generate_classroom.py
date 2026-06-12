@@ -34,17 +34,22 @@ TEXTURES = {              # logical name -> (file, fallback diffuse color)
     "poster_anatomy": ("poster_anatomy.png", "0.75 0.80 0.85"),
 }
 
-def tex_appearance(name, spec="0.05 0.05 0.05"):
+def tex_appearance(name, roughness="0.85"):
+    """Display surfaces (board/posters) use UnlitMaterial so they read clearly
+    and are unaffected by lighting. (Castle's global EnvironmentLight/IBL
+    suppresses textured PhysicalMaterial surfaces, so unlit is also required
+    for the texture to show -- and is the right look for a chalkboard anyway.)"""
     fn, fallback = TEXTURES[name]
     path = os.path.join(TEXTURE_DIR, fn)
     if os.path.exists(path):
-        return (f'<Appearance><ImageTexture url=\'"{path}"\'/>'
-                f'<Material diffuseColor="1 1 1" specularColor="{spec}"/></Appearance>')
-    return f'<Appearance><Material diffuseColor="{fallback}" specularColor="{spec}"/></Appearance>'
+        return ('<Appearance><UnlitMaterial emissiveColor="1 1 1">'
+                f'<ImageTexture url=\'"{path}"\' containerField="emissiveTexture"/>'
+                '</UnlitMaterial></Appearance>')
+    return f'<Appearance><UnlitMaterial emissiveColor="{fallback}"/></Appearance>'
 
-def mat(color, spec="0.15 0.15 0.15", shin="0.25"):
-    return (f'<Appearance><Material diffuseColor="{color}" '
-            f'specularColor="{spec}" shininess="{shin}"/></Appearance>')
+def mat(color, metallic="0", roughness="0.6"):
+    return (f'<Appearance><PhysicalMaterial baseColor="{color}" '
+            f'metallic="{metallic}" roughness="{roughness}"/></Appearance>')
 
 def box(x, y, z, sx, sy, sz, appearance, rot=""):
     r = f' rotation="{rot}"' if rot else ""
@@ -56,11 +61,11 @@ def cyl(x, y, z, h, r, appearance, rot=""):
     return (f'<Transform translation="{x} {y} {z}"{rr}>'
             f'<Shape>{appearance}<Cylinder height="{h}" radius="{r}"/></Shape></Transform>')
 
-WOOD = mat("0.55 0.38 0.22")
-WOOD_DARK = mat("0.40 0.27 0.15")
-WALL = mat("0.82 0.84 0.78", spec="0.02 0.02 0.02")
-METAL = mat("0.55 0.57 0.60", spec="0.5 0.5 0.55", shin="0.6")
-SEAT = mat("0.20 0.35 0.55")
+WOOD = mat("0.55 0.38 0.22", roughness="0.55")
+WOOD_DARK = mat("0.40 0.27 0.15", roughness="0.6")
+WALL = mat("0.82 0.84 0.78", roughness="0.95")
+METAL = mat("0.62 0.64 0.67", metallic="0.9", roughness="0.28")
+SEAT = mat("0.20 0.35 0.55", roughness="0.5")
 
 # ---------------------------------------------------------------- skeleton
 def skeleton():
@@ -128,9 +133,14 @@ doc = f'''<?xml version="1.0" encoding="UTF-8"?>
     <Viewpoint DEF="SkullStudy" position="-0.9 1.65 -0.9" orientation="0 1 0 -0.35"
                description="Skull close-up"/>
 
-    <DirectionalLight direction="-0.3 -1 -0.4" intensity="0.85" ambientIntensity="0.45"/>
-    <DirectionalLight direction="0.5 -0.6 0.5" intensity="0.35"/>
-    <PointLight location="0 2.9 0" intensity="0.5" radius="8"/>
+    <!-- image-based ambient (PBR): warm-tinted global environment light -->
+    <EnvironmentLight global="true" color="0.95 0.96 1.0" intensity="0.55"
+                      ambientIntensity="0.35"
+                      diffuseCoefficients="0.9 0.92 1.0  0.05 0.05 0.06  0 0 0  0 0 0
+                                           0 0 0  0 0 0  0 0 0  0 0 0  0 0 0"/>
+    <DirectionalLight direction="-0.3 -1 -0.4" intensity="0.8" ambientIntensity="0.15"/>
+    <DirectionalLight direction="0.5 -0.6 0.5" intensity="0.3"/>
+    <PointLight location="0 2.9 0" intensity="0.4" radius="8"/>
 
     {classroom()}
 {skeleton()}
