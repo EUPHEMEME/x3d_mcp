@@ -23,7 +23,7 @@ BONES = [
     "BonesRightFemur", "BonesRightTibiaFibula", "BonesRightFoot",
 ]
 
-SCALE = 0.02874          # 60.89 native units -> 1.75 m
+SCALE = 1.0              # each bone file already self-scales by 0.029 -> ~1.77 m
 HANG = 0.12              # feet clearance above floor (m)
 SKEL_X, SKEL_Z = -1.2, -1.6   # stand position (front-left, near blackboard)
 
