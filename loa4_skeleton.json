@@ -1,0 +1,882 @@
+{
+"order": [
+"humanoid_root",
+"sacroiliac",
+"l_hip",
+"l_knee",
+"l_talocrural",
+"l_talocalcaneonavicular",
+"l_cuneonavicular_1",
+"l_tarsometatarsal_1",
+"l_metatarsophalangeal_1",
+"l_tarsal_interphalangeal_1",
+"l_cuneonavicular_2",
+"l_tarsometatarsal_2",
+"l_metatarsophalangeal_2",
+"l_tarsal_proximal_interphalangeal_2",
+"l_tarsal_distal_interphalangeal_2",
+"l_cuneonavicular_3",
+"l_tarsometatarsal_3",
+"l_metatarsophalangeal_3",
+"l_tarsal_proximal_interphalangeal_3",
+"l_tarsal_distal_interphalangeal_3",
+"l_calcaneocuboid",
+"l_transversetarsal",
+"l_tarsometatarsal_4",
+"l_metatarsophalangeal_4",
+"l_tarsal_proximal_interphalangeal_4",
+"l_tarsal_distal_interphalangeal_4",
+"l_tarsometatarsal_5",
+"l_metatarsophalangeal_5",
+"l_tarsal_proximal_interphalangeal_5",
+"l_tarsal_distal_interphalangeal_5",
+"r_hip",
+"r_knee",
+"r_talocrural",
+"r_talocalcaneonavicular",
+"r_cuneonavicular_1",
+"r_tarsometatarsal_1",
+"r_metatarsophalangeal_1",
+"r_tarsal_interphalangeal_1",
+"r_cuneonavicular_2",
+"r_tarsometatarsal_2",
+"r_metatarsophalangeal_2",
+"r_tarsal_proximal_interphalangeal_2",
+"r_tarsal_distal_interphalangeal_2",
+"r_cuneonavicular_3",
+"r_tarsometatarsal_3",
+"r_metatarsophalangeal_3",
+"r_tarsal_proximal_interphalangeal_3",
+"r_tarsal_distal_interphalangeal_3",
+"r_calcaneocuboid",
+"r_transversetarsal",
+"r_tarsometatarsal_4",
+"r_metatarsophalangeal_4",
+"r_tarsal_proximal_interphalangeal_4",
+"r_tarsal_distal_interphalangeal_4",
+"r_tarsometatarsal_5",
+"r_metatarsophalangeal_5",
+"r_tarsal_proximal_interphalangeal_5",
+"r_tarsal_distal_interphalangeal_5",
+"vl5",
+"vl4",
+"vl3",
+"vl2",
+"vl1",
+"vt12",
+"vt11",
+"vt10",
+"vt9",
+"vt8",
+"vt7",
+"vt6",
+"vt5",
+"vt4",
+"vt3",
+"vt2",
+"vt1",
+"vc7",
+"vc6",
+"vc5",
+"vc4",
+"vc3",
+"vc2",
+"vc1",
+"skullbase",
+"l_eyelid_joint",
+"r_eyelid_joint",
+"l_eyeball_joint",
+"r_eyeball_joint",
+"l_eyebrow_joint",
+"r_eyebrow_joint",
+"temporomandibular",
+"l_sternoclavicular",
+"l_acromioclavicular",
+"l_shoulder",
+"l_elbow",
+"l_radiocarpal",
+"l_midcarpal_1",
+"l_carpometacarpal_1",
+"l_metacarpophalangeal_1",
+"l_carpal_interphalangeal_1",
+"l_midcarpal_2",
+"l_carpometacarpal_2",
+"l_metacarpophalangeal_2",
+"l_carpal_proximal_interphalangeal_2",
+"l_carpal_distal_interphalangeal_2",
+"l_midcarpal_3",
+"l_carpometacarpal_3",
+"l_metacarpophalangeal_3",
+"l_carpal_proximal_interphalangeal_3",
+"l_carpal_distal_interphalangeal_3",
+"l_midcarpal_4_5",
+"l_carpometacarpal_4",
+"l_metacarpophalangeal_4",
+"l_carpal_proximal_interphalangeal_4",
+"l_carpal_distal_interphalangeal_4",
+"l_carpometacarpal_5",
+"l_metacarpophalangeal_5",
+"l_carpal_proximal_interphalangeal_5",
+"l_carpal_distal_interphalangeal_5",
+"r_sternoclavicular",
+"r_acromioclavicular",
+"r_shoulder",
+"r_elbow",
+"r_radiocarpal",
+"r_midcarpal_1",
+"r_carpometacarpal_1",
+"r_metacarpophalangeal_1",
+"r_carpal_interphalangeal_1",
+"r_midcarpal_2",
+"r_carpometacarpal_2",
+"r_metacarpophalangeal_2",
+"r_carpal_proximal_interphalangeal_2",
+"r_carpal_distal_interphalangeal_2",
+"r_midcarpal_3",
+"r_carpometacarpal_3",
+"r_metacarpophalangeal_3",
+"r_carpal_proximal_interphalangeal_3",
+"r_carpal_distal_interphalangeal_3",
+"r_midcarpal_4_5",
+"r_carpometacarpal_4",
+"r_metacarpophalangeal_4",
+"r_carpal_proximal_interphalangeal_4",
+"r_carpal_distal_interphalangeal_4",
+"r_carpometacarpal_5",
+"r_metacarpophalangeal_5",
+"r_carpal_proximal_interphalangeal_5",
+"r_carpal_distal_interphalangeal_5"
+],
+"data": {
+"humanoid_root": {
+"center": "0 0.826 -0.016",
+"parent": null,
+"segment": "sacrum"
+},
+"sacroiliac": {
+"center": "0 0.707 -0.016",
+"parent": "humanoid_root",
+"segment": "pelvis"
+},
+"l_hip": {
+"center": "0.095 0.8266 -0.0183",
+"parent": "sacroiliac",
+"segment": "l_thigh"
+},
+"l_knee": {
+"center": "0.0926 0.4088 -0.0194",
+"parent": "l_hip",
+"segment": "l_calf"
+},
+"l_talocrural": {
+"center": "0.0888 0.0954 -0.0105",
+"parent": "l_knee",
+"segment": "l_talus"
+},
+"l_talocalcaneonavicular": {
+"center": "0.0783 0.0369 0.0049",
+"parent": "l_talocrural",
+"segment": "l_navicular"
+},
+"l_cuneonavicular_1": {
+"center": "0.0674 0.0321 0.0184",
+"parent": "l_talocalcaneonavicular",
+"segment": "l_cuneiform_1"
+},
+"l_tarsometatarsal_1": {
+"center": "0.0646 0.0232 0.0442",
+"parent": "l_cuneonavicular_1",
+"segment": "l_metatarsal_1"
+},
+"l_metatarsophalangeal_1": {
+"center": "0.0621 0.0144 0.0936",
+"parent": "l_tarsometatarsal_1",
+"segment": "l_tarsal_proximal_phalanx_1"
+},
+"l_tarsal_interphalangeal_1": {
+"center": "0.062 0.012 0.115",
+"parent": "l_metatarsophalangeal_1",
+"segment": "l_tarsal_distal_phalanx_1"
+},
+"l_cuneonavicular_2": {
+"center": "0.0814 0.0335 0.0214",
+"parent": "l_talocalcaneonavicular",
+"segment": "l_cuneiform_2"
+},
+"l_tarsometatarsal_2": {
+"center": "0.0802 0.0261 0.0411",
+"parent": "l_cuneonavicular_2",
+"segment": "l_metatarsal_2"
+},
+"l_metatarsophalangeal_2": {
+"center": "0.0825 0.015 0.0978",
+"parent": "l_tarsometatarsal_2",
+"segment": "l_tarsal_proximal_phalanx_2"
+},
+"l_tarsal_proximal_interphalangeal_2": {
+"center": "0.0843 0.0126 0.114",
+"parent": "l_metatarsophalangeal_2",
+"segment": "l_tarsal_middle_phalanx_2"
+},
+"l_tarsal_distal_interphalangeal_2": {
+"center": "0.0843 0.0098 0.1234",
+"parent": "l_tarsal_proximal_interphalangeal_2",
+"segment": "l_tarsal_distal_phalanx_2"
+},
+"l_cuneonavicular_3": {
+"center": "0.093 0.0334 0.0198",
+"parent": "l_talocalcaneonavicular",
+"segment": "l_cuneiform_3"
+},
+"l_tarsometatarsal_3": {
+"center": "0.0946 0.0261 0.0394",
+"parent": "l_cuneonavicular_3",
+"segment": "l_metatarsal_3"
+},
+"l_metatarsophalangeal_3": {
+"center": "0.0965 0.0151 0.0954",
+"parent": "l_tarsometatarsal_3",
+"segment": "l_tarsal_proximal_phalanx_3"
+},
+"l_tarsal_proximal_interphalangeal_3": {
+"center": "0.0989 0.0119 0.1105",
+"parent": "l_metatarsophalangeal_3",
+"segment": "l_tarsal_middle_phalanx_3"
+},
+"l_tarsal_distal_interphalangeal_3": {
+"center": "0.1004 0.0098 0.1197",
+"parent": "l_tarsal_proximal_interphalangeal_3",
+"segment": "l_tarsal_distal_phalanx_3"
+},
+"l_calcaneocuboid": {
+"center": "0.0891 0.058 -0.026",
+"parent": "l_talocrural",
+"segment": "l_calcaneus"
+},
+"l_transversetarsal": {
+"center": "0.1106 0.0353 0.0021",
+"parent": "l_calcaneocuboid",
+"segment": "l_cuboid"
+},
+"l_tarsometatarsal_4": {
+"center": "0.1065 0.0245 0.0384",
+"parent": "l_transversetarsal",
+"segment": "l_metatarsal_4"
+},
+"l_metatarsophalangeal_4": {
+"center": "0.1099 0.0144 0.0912",
+"parent": "l_tarsometatarsal_4",
+"segment": "l_tarsal_proximal_phalanx_4"
+},
+"l_tarsal_proximal_interphalangeal_4": {
+"center": "0.1142 0.0122 0.1063",
+"parent": "l_metatarsophalangeal_4",
+"segment": "l_tarsal_middle_phalanx_4"
+},
+"l_tarsal_distal_interphalangeal_4": {
+"center": "0.1157 0.0094 0.1137",
+"parent": "l_tarsal_proximal_interphalangeal_4",
+"segment": "l_tarsal_distal_phalanx_4"
+},
+"l_tarsometatarsal_5": {
+"center": "0.1208 0.0209 0.0347",
+"parent": "l_transversetarsal",
+"segment": "l_metatarsal_5"
+},
+"l_metatarsophalangeal_5": {
+"center": "0.1241 0.0137 0.0866",
+"parent": "l_tarsometatarsal_5",
+"segment": "l_tarsal_proximal_phalanx_5"
+},
+"l_tarsal_proximal_interphalangeal_5": {
+"center": "0.1264 0.0109 0.0941",
+"parent": "l_metatarsophalangeal_5",
+"segment": "l_tarsal_middle_phalanx_5"
+},
+"l_tarsal_distal_interphalangeal_5": {
+"center": "0.1273 0.0086 0.1019",
+"parent": "l_tarsal_proximal_interphalangeal_5",
+"segment": "l_tarsal_distal_phalanx_5"
+},
+"r_hip": {
+"center": "-0.0947 0.8267 -0.0183",
+"parent": "sacroiliac",
+"segment": "r_thigh"
+},
+"r_knee": {
+"center": "-0.0926 0.4088 -0.0194",
+"parent": "r_hip",
+"segment": "r_calf"
+},
+"r_talocrural": {
+"center": "-0.0884 0.0954 -0.0105",
+"parent": "r_knee",
+"segment": "r_talus"
+},
+"r_talocalcaneonavicular": {
+"center": "-0.0779 0.0369 0.0049",
+"parent": "r_talocrural",
+"segment": "r_navicular"
+},
+"r_cuneonavicular_1": {
+"center": "-0.067 0.0321 0.0184",
+"parent": "r_talocalcaneonavicular",
+"segment": "r_cuneiform_1"
+},
+"r_tarsometatarsal_1": {
+"center": "-0.0643 0.0232 0.0442",
+"parent": "r_cuneonavicular_1",
+"segment": "r_metatarsal_1"
+},
+"r_metatarsophalangeal_1": {
+"center": "-0.0618 0.0144 0.0936",
+"parent": "r_tarsometatarsal_1",
+"segment": "r_tarsal_proximal_phalanx_1"
+},
+"r_tarsal_interphalangeal_1": {
+"center": "-0.0617 0.0121 0.1153",
+"parent": "r_metatarsophalangeal_1",
+"segment": "r_tarsal_distal_phalanx_1"
+},
+"r_cuneonavicular_2": {
+"center": "-0.081 0.0335 0.0214",
+"parent": "r_talocalcaneonavicular",
+"segment": "r_cuneiform_2"
+},
+"r_tarsometatarsal_2": {
+"center": "-0.0798 0.0261 0.0411",
+"parent": "r_cuneonavicular_2",
+"segment": "r_metatarsal_2"
+},
+"r_metatarsophalangeal_2": {
+"center": "-0.0821 0.015 0.0978",
+"parent": "r_tarsometatarsal_2",
+"segment": "r_tarsal_proximal_phalanx_2"
+},
+"r_tarsal_proximal_interphalangeal_2": {
+"center": "-0.0839 0.0126 0.114",
+"parent": "r_metatarsophalangeal_2",
+"segment": "r_tarsal_middle_phalanx_2"
+},
+"r_tarsal_distal_interphalangeal_2": {
+"center": "-0.0839 0.0098 0.1234",
+"parent": "r_tarsal_proximal_interphalangeal_2",
+"segment": "r_tarsal_distal_phalanx_2"
+},
+"r_cuneonavicular_3": {
+"center": "-0.0926 0.0334 0.0198",
+"parent": "r_talocalcaneonavicular",
+"segment": "r_cuneiform_3"
+},
+"r_tarsometatarsal_3": {
+"center": "-0.0942 0.0261 0.0394",
+"parent": "r_cuneonavicular_3",
+"segment": "r_metatarsal_3"
+},
+"r_metatarsophalangeal_3": {
+"center": "-0.0961 0.0151 0.0954",
+"parent": "r_tarsometatarsal_3",
+"segment": "r_tarsal_proximal_phalanx_3"
+},
+"r_tarsal_proximal_interphalangeal_3": {
+"center": "-0.0985 0.0119 0.1105",
+"parent": "r_metatarsophalangeal_3",
+"segment": "r_tarsal_middle_phalanx_3"
+},
+"r_tarsal_distal_interphalangeal_3": {
+"center": "-0.1 0.0098 0.1197",
+"parent": "r_tarsal_proximal_interphalangeal_3",
+"segment": "r_tarsal_distal_phalanx_3"
+},
+"r_calcaneocuboid": {
+"center": "-0.0887 0.058 -0.026",
+"parent": "r_talocrural",
+"segment": "r_calcaneus"
+},
+"r_transversetarsal": {
+"center": "-0.1103 0.0353 0.0021",
+"parent": "r_calcaneocuboid",
+"segment": "r_cuboid"
+},
+"r_tarsometatarsal_4": {
+"center": "-0.1061 0.0245 0.0384",
+"parent": "r_transversetarsal",
+"segment": "r_metatarsal_4"
+},
+"r_metatarsophalangeal_4": {
+"center": "-0.1095 0.0144 0.0912",
+"parent": "r_tarsometatarsal_4",
+"segment": "r_tarsal_proximal_phalanx_4"
+},
+"r_tarsal_proximal_interphalangeal_4": {
+"center": "-0.1138 0.0122 0.1063",
+"parent": "r_metatarsophalangeal_4",
+"segment": "r_tarsal_middle_phalanx_4"
+},
+"r_tarsal_distal_interphalangeal_4": {
+"center": "-0.1153 0.0094 0.1137",
+"parent": "r_tarsal_proximal_interphalangeal_4",
+"segment": "r_tarsal_distal_phalanx_4"
+},
+"r_tarsometatarsal_5": {
+"center": "-0.1204 0.0209 0.0347",
+"parent": "r_transversetarsal",
+"segment": "r_metatarsal_5"
+},
+"r_metatarsophalangeal_5": {
+"center": "-0.1237 0.0137 0.0866",
+"parent": "r_tarsometatarsal_5",
+"segment": "r_tarsal_proximal_phalanx_5"
+},
+"r_tarsal_proximal_interphalangeal_5": {
+"center": "-0.126 0.0109 0.0941",
+"parent": "r_metatarsophalangeal_5",
+"segment": "r_tarsal_middle_phalanx_5"
+},
+"r_tarsal_distal_interphalangeal_5": {
+"center": "-0.1269 0.0086 0.1019",
+"parent": "r_tarsal_proximal_interphalangeal_5",
+"segment": "r_tarsal_distal_phalanx_5"
+},
+"vl5": {
+"center": "0 0.9254 -0.0138",
+"parent": "sacroiliac",
+"segment": "l5"
+},
+"vl4": {
+"center": "0 0.9497 -0.0138",
+"parent": "vl5",
+"segment": "l4"
+},
+"vl3": {
+"center": "0 0.9659 -0.0138",
+"parent": "vl4",
+"segment": "l3"
+},
+"vl2": {
+"center": "0 0.9824 -0.0138",
+"parent": "vl3",
+"segment": "l2"
+},
+"vl1": {
+"center": "0 0.9997 -0.0138",
+"parent": "vl2",
+"segment": "l1"
+},
+"vt12": {
+"center": "0 1.0231 -0.0138",
+"parent": "vl1",
+"segment": "t12"
+},
+"vt11": {
+"center": "0 1.0467 -0.0138",
+"parent": "vt12",
+"segment": "t11"
+},
+"vt10": {
+"center": "0 1.0638 -0.0138",
+"parent": "vt11",
+"segment": "t10"
+},
+"vt9": {
+"center": "0 1.0784 -0.0138",
+"parent": "vt10",
+"segment": "t9"
+},
+"vt8": {
+"center": "0 1.0931 -0.0138",
+"parent": "vt9",
+"segment": "t8"
+},
+"vt7": {
+"center": "0 1.1088 -0.0138",
+"parent": "vt8",
+"segment": "t7"
+},
+"vt6": {
+"center": "0 1.1216 -0.0138",
+"parent": "vt7",
+"segment": "t6"
+},
+"vt5": {
+"center": "0 1.1372 -0.0138",
+"parent": "vt6",
+"segment": "t5"
+},
+"vt4": {
+"center": "0 1.1525 -0.0138",
+"parent": "vt5",
+"segment": "t4"
+},
+"vt3": {
+"center": "0 1.1709 -0.0138",
+"parent": "vt4",
+"segment": "t3"
+},
+"vt2": {
+"center": "0 1.1957 -0.0138",
+"parent": "vt3",
+"segment": "t2"
+},
+"vt1": {
+"center": "0 1.22 -0.0138",
+"parent": "vt2",
+"segment": "t1"
+},
+"vc7": {
+"center": "0 1.2454 -0.0151",
+"parent": "vt1",
+"segment": "c7"
+},
+"vc6": {
+"center": "0 1.2575 -0.0151",
+"parent": "vc7",
+"segment": "c6"
+},
+"vc5": {
+"center": "0 1.2699 -0.0151",
+"parent": "vc6",
+"segment": "c5"
+},
+"vc4": {
+"center": "0 1.2823 -0.0151",
+"parent": "vc5",
+"segment": "c4"
+},
+"vc3": {
+"center": "0 1.2951 -0.0151",
+"parent": "vc4",
+"segment": "c3"
+},
+"vc2": {
+"center": "0 1.307 -0.015",
+"parent": "vc3",
+"segment": "c2"
+},
+"vc1": {
+"center": "0 1.3185 -0.0151",
+"parent": "vc2",
+"segment": "c1"
+},
+"skullbase": {
+"center": "0 1.3127 -0.0154",
+"parent": "vc1",
+"segment": "skull"
+},
+"l_eyelid_joint": {
+"center": "0.0505 1.4243 0.0329",
+"parent": "skullbase",
+"segment": "l_eyelid"
+},
+"r_eyelid_joint": {
+"center": "-0.0505 1.4243 0.0329",
+"parent": "skullbase",
+"segment": "r_eyelid"
+},
+"l_eyeball_joint": {
+"center": "0.0481 1.4049 0.083",
+"parent": "skullbase",
+"segment": "l_eyeball"
+},
+"r_eyeball_joint": {
+"center": "-0.0481 1.4049 0.083",
+"parent": "skullbase",
+"segment": "r_eyeball"
+},
+"l_eyebrow_joint": {
+"center": "0.0217 1.4139 0.1069",
+"parent": "skullbase",
+"segment": "l_eyebrow"
+},
+"r_eyebrow_joint": {
+"center": "-0.0217 1.4139 0.1069",
+"parent": "skullbase",
+"segment": "r_eyebrow"
+},
+"temporomandibular": {
+"center": "0 1.3129 0.0154",
+"parent": "skullbase",
+"segment": "jaw"
+},
+"l_sternoclavicular": {
+"center": "0.0385 1.2087 -0.0138",
+"parent": "vt1",
+"segment": "l_clavicle"
+},
+"l_acromioclavicular": {
+"center": "0.1229 1.1918 -0.0129",
+"parent": "l_sternoclavicular",
+"segment": "l_scapula"
+},
+"l_shoulder": {
+"center": "0.1651 1.1786 -0.0033",
+"parent": "l_acromioclavicular",
+"segment": "l_upperarm"
+},
+"l_elbow": {
+"center": "0.1821 0.9288 -0.0056",
+"parent": "l_shoulder",
+"segment": "l_forearm"
+},
+"l_radiocarpal": {
+"center": "0.1819 0.7243 -0.005",
+"parent": "l_elbow",
+"segment": "l_carpal"
+},
+"l_midcarpal_1": {
+"center": "0.1813 0.7061 0.0193",
+"parent": "l_radiocarpal",
+"segment": "l_trapezium"
+},
+"l_carpometacarpal_1": {
+"center": "0.1805 0.6926 0.026",
+"parent": "l_midcarpal_1",
+"segment": "l_metacarpal_1"
+},
+"l_metacarpophalangeal_1": {
+"center": "0.181 0.6728 0.0358",
+"parent": "l_carpometacarpal_1",
+"segment": "l_carpal_proximal_phalanx_1"
+},
+"l_carpal_interphalangeal_1": {
+"center": "0.1827 0.6541 0.0497",
+"parent": "l_metacarpophalangeal_1",
+"segment": "l_carpal_distal_phalanx_1"
+},
+"l_midcarpal_2": {
+"center": "0.1813 0.707 0.0084",
+"parent": "l_radiocarpal",
+"segment": "l_trapezoid"
+},
+"l_carpometacarpal_2": {
+"center": "0.1813 0.6876 0.0097",
+"parent": "l_midcarpal_2",
+"segment": "l_metacarpal_2"
+},
+"l_metacarpophalangeal_2": {
+"center": "0.1837 0.6372 0.0151",
+"parent": "l_carpometacarpal_2",
+"segment": "l_carpal_proximal_phalanx_2"
+},
+"l_carpal_proximal_interphalangeal_2": {
+"center": "0.1817 0.6068 0.0142",
+"parent": "l_metacarpophalangeal_2",
+"segment": "l_carpal_middle_phalanx_2"
+},
+"l_carpal_distal_interphalangeal_2": {
+"center": "0.1807 0.5816 0.0134",
+"parent": "l_carpal_proximal_interphalangeal_2",
+"segment": "l_carpal_distal_phalanx_2"
+},
+"l_midcarpal_3": {
+"center": "0.1811 0.7085 -0.0048",
+"parent": "l_radiocarpal",
+"segment": "l_capitate"
+},
+"l_carpometacarpal_3": {
+"center": "0.1811 0.6858 -0.0063",
+"parent": "l_midcarpal_3",
+"segment": "l_metacarpal_3"
+},
+"l_metacarpophalangeal_3": {
+"center": "0.1837 0.635 -0.0039",
+"parent": "l_carpometacarpal_3",
+"segment": "l_carpal_proximal_phalanx_3"
+},
+"l_carpal_proximal_interphalangeal_3": {
+"center": "0.1817 0.6032 -0.0035",
+"parent": "l_metacarpophalangeal_3",
+"segment": "l_carpal_middle_phalanx_3"
+},
+"l_carpal_distal_interphalangeal_3": {
+"center": "0.1807 0.5753 -0.0038",
+"parent": "l_carpal_proximal_interphalangeal_3",
+"segment": "l_carpal_distal_phalanx_3"
+},
+"l_midcarpal_4_5": {
+"center": "0.1811 0.7058 -0.0257",
+"parent": "l_radiocarpal",
+"segment": "l_hamate"
+},
+"l_carpometacarpal_4": {
+"center": "0.1811 0.6863 -0.0199",
+"parent": "l_midcarpal_4_5",
+"segment": "l_metacarpal_4"
+},
+"l_metacarpophalangeal_4": {
+"center": "0.1837 0.6341 -0.0214",
+"parent": "l_carpometacarpal_4",
+"segment": "l_carpal_proximal_phalanx_4"
+},
+"l_carpal_proximal_interphalangeal_4": {
+"center": "0.1817 0.6066 -0.0206",
+"parent": "l_metacarpophalangeal_4",
+"segment": "l_carpal_middle_phalanx_4"
+},
+"l_carpal_distal_interphalangeal_4": {
+"center": "0.1807 0.5807 -0.0198",
+"parent": "l_carpal_proximal_interphalangeal_4",
+"segment": "l_carpal_distal_phalanx_4"
+},
+"l_carpometacarpal_5": {
+"center": "0.1816 0.6883 -0.0328",
+"parent": "l_midcarpal_4_5",
+"segment": "l_metacarpal_5"
+},
+"l_metacarpophalangeal_5": {
+"center": "0.1833 0.6381 -0.0371",
+"parent": "l_carpometacarpal_5",
+"segment": "l_carpal_proximal_phalanx_5"
+},
+"l_carpal_proximal_interphalangeal_5": {
+"center": "0.1817 0.621 -0.0371",
+"parent": "l_metacarpophalangeal_5",
+"segment": "l_carpal_middle_phalanx_5"
+},
+"l_carpal_distal_interphalangeal_5": {
+"center": "0.1808 0.6023 -0.037",
+"parent": "l_carpal_proximal_interphalangeal_5",
+"segment": "l_carpal_distal_phalanx_5"
+},
+"r_sternoclavicular": {
+"center": "-0.0385 1.2087 -0.0138",
+"parent": "vt1",
+"segment": "r_clavicle"
+},
+"r_acromioclavicular": {
+"center": "-0.1229 1.1918 -0.0129",
+"parent": "r_sternoclavicular",
+"segment": "r_scapula"
+},
+"r_shoulder": {
+"center": "-0.1647 1.1786 -0.0033",
+"parent": "r_acromioclavicular",
+"segment": "r_upperarm"
+},
+"r_elbow": {
+"center": "-0.1817 0.9288 -0.0056",
+"parent": "r_shoulder",
+"segment": "r_forearm"
+},
+"r_radiocarpal": {
+"center": "-0.1816 0.7243 -0.005",
+"parent": "r_elbow",
+"segment": "r_carpal"
+},
+"r_midcarpal_1": {
+"center": "-0.181 0.7061 0.0193",
+"parent": "r_radiocarpal",
+"segment": "r_trapezium"
+},
+"r_carpometacarpal_1": {
+"center": "-0.1801 0.6926 0.026",
+"parent": "r_midcarpal_1",
+"segment": "r_metacarpal_1"
+},
+"r_metacarpophalangeal_1": {
+"center": "-0.1807 0.6728 0.0358",
+"parent": "r_carpometacarpal_1",
+"segment": "r_carpal_proximal_phalanx_1"
+},
+"r_carpal_interphalangeal_1": {
+"center": "-0.1823 0.6541 0.0497",
+"parent": "r_metacarpophalangeal_1",
+"segment": "r_carpal_distal_phalanx_1"
+},
+"r_midcarpal_2": {
+"center": "-0.181 0.707 0.0084",
+"parent": "r_radiocarpal",
+"segment": "r_trapezoid"
+},
+"r_carpometacarpal_2": {
+"center": "-0.1809 0.6876 0.0097",
+"parent": "r_midcarpal_2",
+"segment": "r_metacarpal_2"
+},
+"r_metacarpophalangeal_2": {
+"center": "-0.1834 0.6372 0.0151",
+"parent": "r_carpometacarpal_2",
+"segment": "r_carpal_proximal_phalanx_2"
+},
+"r_carpal_proximal_interphalangeal_2": {
+"center": "-0.1813 0.6068 0.0142",
+"parent": "r_metacarpophalangeal_2",
+"segment": "r_carpal_middle_phalanx_2"
+},
+"r_carpal_distal_interphalangeal_2": {
+"center": "-0.1803 0.5816 0.0134",
+"parent": "r_carpal_proximal_interphalangeal_2",
+"segment": "r_carpal_distal_phalanx_2"
+},
+"r_midcarpal_3": {
+"center": "-0.1807 0.7085 -0.0048",
+"parent": "r_radiocarpal",
+"segment": "r_capitate"
+},
+"r_carpometacarpal_3": {
+"center": "-0.1807 0.6858 -0.0063",
+"parent": "r_midcarpal_3",
+"segment": "r_metacarpal_3"
+},
+"r_metacarpophalangeal_3": {
+"center": "-0.1833 0.635 -0.0039",
+"parent": "r_carpometacarpal_3",
+"segment": "r_carpal_proximal_phalanx_3"
+},
+"r_carpal_proximal_interphalangeal_3": {
+"center": "-0.1813 0.6032 -0.0035",
+"parent": "r_metacarpophalangeal_3",
+"segment": "r_carpal_middle_phalanx_3"
+},
+"r_carpal_distal_interphalangeal_3": {
+"center": "-0.1803 0.5753 -0.0038",
+"parent": "r_carpal_proximal_interphalangeal_3",
+"segment": "r_carpal_distal_phalanx_3"
+},
+"r_midcarpal_4_5": {
+"center": "-0.1807 0.7058 -0.0257",
+"parent": "r_radiocarpal",
+"segment": "r_hamate"
+},
+"r_carpometacarpal_4": {
+"center": "-0.1807 0.6863 -0.0199",
+"parent": "r_midcarpal_4_5",
+"segment": "r_metacarpal_4"
+},
+"r_metacarpophalangeal_4": {
+"center": "-0.1833 0.6341 -0.0214",
+"parent": "r_carpometacarpal_4",
+"segment": "r_carpal_proximal_phalanx_4"
+},
+"r_carpal_proximal_interphalangeal_4": {
+"center": "-0.1813 0.6066 -0.0206",
+"parent": "r_metacarpophalangeal_4",
+"segment": "r_carpal_middle_phalanx_4"
+},
+"r_carpal_distal_interphalangeal_4": {
+"center": "-0.1803 0.5807 -0.0198",
+"parent": "r_carpal_proximal_interphalangeal_4",
+"segment": "r_carpal_distal_phalanx_4"
+},
+"r_carpometacarpal_5": {
+"center": "-0.1813 0.6883 -0.0328",
+"parent": "r_midcarpal_4_5",
+"segment": "r_metacarpal_5"
+},
+"r_metacarpophalangeal_5": {
+"center": "-0.183 0.6381 -0.0371",
+"parent": "r_carpometacarpal_5",
+"segment": "r_carpal_proximal_phalanx_5"
+},
+"r_carpal_proximal_interphalangeal_5": {
+"center": "-0.1813 0.621 -0.0371",
+"parent": "r_metacarpophalangeal_5",
+"segment": "r_carpal_middle_phalanx_5"
+},
+"r_carpal_distal_interphalangeal_5": {
+"center": "-0.1805 0.6023 -0.037",
+"parent": "r_carpal_proximal_interphalangeal_5",
+"segment": "r_carpal_distal_phalanx_5"
+}
+}
+}
