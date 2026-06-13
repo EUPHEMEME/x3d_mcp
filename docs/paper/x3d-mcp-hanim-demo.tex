@@ -102,6 +102,80 @@ call. The X3D MCP server used here exposes scene construction, validation
 page rendering. The agent calls these tools the way a human would click an
 editor's menus, but programmatically and at speed.
 
+\section{Setup: Tools, Installs, and Links}\label{sec:setup}
+
+Everything below is free and open. Commands assume macOS with Homebrew
+(\href{https://brew.sh}{brew.sh}); the equivalents on Linux/Windows are
+noted where they differ. This is the complete list---nothing else is required.
+
+\paragraph{Core authoring and rendering.}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item \textbf{Java (OpenJDK)} --- runtime for Saxon and NetBeans.
+  \texttt{brew install openjdk}. \href{https://openjdk.org}{openjdk.org}.
+\item \textbf{Apache NetBeans} + \textbf{X3D-Edit} --- the standards X3D authoring
+  tool (tree editor, schema/DTD validation, conversions). Install NetBeans
+  (\texttt{brew install --cask netbeans}; \href{https://netbeans.apache.org}{netbeans.apache.org}),
+  then inside it: \emph{Tools $\to$ Plugins $\to$ Available Plugins $\to$ search
+  ``X3D-Edit'' $\to$ Install}
+  (\href{https://savage.nps.edu/X3D-Edit/}{savage.nps.edu/X3D-Edit}). On JDK~24+
+  add \texttt{-J-Djdk.xml.entityExpansionLimit=5000} to \texttt{netbeans.conf}
+  so X3D's large DOCTYPE does not trip the XML parser.
+\item \textbf{Castle Model Viewer} --- GPU X3D viewer with command-line
+  screenshots (\texttt{-{}-screenshot}).
+  \href{https://castle-engine.io/castle-model-viewer}{castle-engine.io/castle-model-viewer}
+  (download the build for your OS; on macOS run \texttt{xattr -cr} on the app to
+  clear the quarantine flag).
+\end{itemize}
+
+\paragraph{Generation and conversion (the canonical pipeline).}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item \textbf{x3d.py} --- the official Web3D Python package.
+  \texttt{pip install x3d}. \href{https://www.web3d.org/x3d/stylesheets/python/python.html}{web3d.org \dots/python}.
+\item \textbf{Saxon-HE} --- an XSLT~2.0 processor (the standard X3D stylesheets
+  are XSLT~2.0, which the common \texttt{xsltproc}/libxslt cannot run). Fetch the
+  self-contained jar:
+\begin{lstlisting}
+curl -L -o saxon9he.jar \
+  https://repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/9.9.1-8/Saxon-HE-9.9.1-8.jar
+\end{lstlisting}
+\item \textbf{X3dToX3dom.xslt} --- the official stylesheet that wraps an X3D scene
+  into a web page for a chosen player.
+  \href{https://www.web3d.org/x3d/stylesheets/X3dToX3dom.xslt}{web3d.org \dots/X3dToX3dom.xslt}.
+\end{itemize}
+
+\paragraph{Web players (no install; loaded from a CDN by the page).}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item \textbf{X\_ITE} --- a WebGL X3D player with full HAnim support.
+  \href{https://create3000.github.io/x_ite/}{create3000.github.io/x\_ite} (script
+  via \href{https://www.jsdelivr.com}{jsDelivr}).
+\item \textbf{X3DOM} --- the other major WebGL X3D player.
+  \href{https://www.x3dom.org}{x3dom.org}. (HAnim limitation noted in
+  Section~\ref{sec:findings}.)
+\end{itemize}
+
+\paragraph{The HAnim LOA5 assets (from the Web3D example archive).}
+The skeleton and motion live at
+\href{https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/}{web3d.org \dots/HumanoidAnimation/Bones/}:
+\texttt{AllBonesLOA5Skeletons.x3d} (the figure),
+\texttt{AllBonesLOA5SkeletonsInlineAnimation.x3d} (Walk/Run/Jump cycles), and the
+individual bone meshes the segments inline. The draft standard itself is at
+\href{https://www.web3d.org/specifications/X3Dv4Draft/ISO-IEC19774/}{web3d.org/specifications/X3Dv4Draft/ISO-IEC19774}.
+
+\paragraph{Optional: texture generation and paper build.}
+\begin{itemize}[leftmargin=1.4em, itemsep=2pt]
+\item \textbf{mflux} (textures) --- \texttt{pip install mflux} on Apple Silicon;
+  weights download from \href{https://huggingface.co}{Hugging Face} on first run.
+  Non-Apple equivalent: FLUX.1 or Stable Diffusion via \texttt{diffusers} or
+  ComfyUI, or any hosted image API (Section~\ref{sec:arch}).
+\item \textbf{tectonic} (this paper) --- a self-contained \LaTeX{} engine that
+  fetches packages on demand. \texttt{brew install tectonic};
+  \href{https://tectonic-typesetting.github.io}{tectonic-typesetting.github.io}.
+  Any \TeX{} distribution works too.
+\item \textbf{poppler} (\texttt{pdftoppm}, to preview the PDF as images) and a
+  Chromium-based browser (for headless WebGL screenshots) are conveniences for
+  the verify-by-render loop, not requirements.
+\end{itemize}
+
 \section{Architecture and Toolchain}\label{sec:arch}
 
 The pipeline separates \emph{generation}, \emph{authoring artifact}, and
@@ -122,12 +196,22 @@ The pipeline separates \emph{generation}, \emph{authoring artifact}, and
   HAnim skeleton (see Section~\ref{sec:findings}).
 \end{enumerate}
 
-Two supporting tools proved decisive. \textbf{Castle Model Viewer} renders X3D on
-the GPU and---critically---can take a screenshot from the command line, which is
-how the agent ``sees'' its work (Section~\ref{sec:practices}). And \textbf{mflux}
-(FLUX.1 on Apple's MLX) generates textures locally: the classroom's chalkboard
-and anatomy posters were produced from text prompts and applied as
-\texttt{ImageTexture}s, closing a generate-image~$\rightarrow$~place-in-3D loop.
+Two supporting tools proved decisive. \textbf{Castle Model Viewer} (a free,
+cross-platform X3D/VRML/glTF viewer from the Castle Game Engine project) renders
+X3D on the GPU and---critically---can take a screenshot from the command line,
+which is how the agent ``sees'' its work (Section~\ref{sec:practices}).
+
+For textures we used \textbf{mflux}. To unpack the acronyms: \textbf{FLUX.1} is
+an open-weights text-to-image diffusion model (from Black Forest Labs);
+\textbf{MLX} is Apple's array/machine-learning framework optimized for Apple
+Silicon GPUs; and \textbf{mflux} is a Python package that runs FLUX.1 on MLX.
+Together they generate an image from a text prompt entirely on a local Mac, with
+no cloud service. We used it to produce the classroom's chalkboard and anatomy
+posters, applied as \texttt{ImageTexture}s---closing a
+generate-image~$\rightarrow$~place-in-3D loop. None of this is Apple-specific in
+principle: any text-to-image generator (e.g.\ FLUX.1 or Stable Diffusion via
+\texttt{diffusers}/ComfyUI on an NVIDIA GPU, or a hosted image API) substitutes
+directly; only the local runner changes.
 
 \fig{fig_flux_blackboard.png}{0.6}{A classroom chalkboard texture generated
 locally with mflux (FLUX.1-schnell) from a text prompt, then applied as an
@@ -156,14 +240,21 @@ geometry, running the slalom course. The gait cadence is synchronized to ground
 speed so the feet do not skate.}
 
 \subsection{Adopting the canonical pipeline}
-When asked whether the export used the official \texttt{x3d.py} package or the
-Web3D stylesheets, the honest answer was ``neither yet.'' The next step rebuilt
-generation on \texttt{x3d.py} and delivery on \texttt{X3dToX3dom.xslt}:
+A single pointed question redirected the whole approach:
+\begin{prompt}
+Did you use the x3d.py export or the stylesheets to get to this?
+\end{prompt}
+The honest answer was ``neither yet''---generation had been ad-hoc string
+templating and the web page a hand-rolled converter. \emph{Lesson: a domain
+expert's question is a steering signal; the right response is to name the gap
+plainly, not paper over it.} The instruction followed:
 \begin{prompt}
 Rebuild it on the canonical pipeline.
 \end{prompt}
-This surfaced real serialization quirks (Section~\ref{sec:findings}) but produced
-schema-valid, standards-aligned output.
+Generation moved to \texttt{x3d.py} and delivery to \texttt{X3dToX3dom.xslt} run
+through Saxon. This surfaced real serialization quirks
+(Section~\ref{sec:findings}) but produced schema-valid, standards-aligned output
+that composes with the rest of the ecosystem.
 
 \subsection{Upgrading to LOA5 and the real bones}
 The collaborator located the draft LOA5 model and its standardized animation:
@@ -205,6 +296,20 @@ Each cycle (Walk, Run, Jump) was extracted from the standardized animation as a
 \texttt{TimeSensor} plus 147 interpolators and routes; an ECMAScript
 \texttt{Script} node enables exactly one at a time, triggered by
 \texttt{TouchSensor} button panels on the board.
+
+The final shape came from short, corrective prompts---the texture of real
+iteration:
+\begin{prompt}
+Make the skeleton stop waving like that.
+\end{prompt}
+\begin{prompt}
+The buttons should be styled to blend in with the chalkboard.
+\end{prompt}
+\emph{Lesson: late-stage feedback is mostly aesthetic and behavioral, and it
+arrives in small increments. A fast verify-by-render loop
+(Section~\ref{sec:practices}) is what lets each one-line note resolve in a single
+pass.} These produced the rest pose (arm down) and the chalk-drawn buttons of
+Figure~\ref{fig:fig_classroom_buttons.png}.
 
 \fig{fig_classroom_buttons.png}{0.85}{The classroom: the canonical LOA5 skeleton
 on a display stand with PBR bones, FLUX-generated chalkboard and posters, and
