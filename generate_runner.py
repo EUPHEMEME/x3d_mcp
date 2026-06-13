@@ -26,7 +26,7 @@ from x3d import x3d as X
 # ---------------------------------------------------------------------------
 # 1. LOA-4 skeleton data
 # ---------------------------------------------------------------------------
-_sk = json.load(open("loa4_skeleton.json"))
+_sk = json.load(open("loa5_skeleton.json"))
 ORDER = _sk["order"]
 DATA = _sk["data"]
 
@@ -259,7 +259,7 @@ course_int, course_routes, LAP, COURSE_LEN = course_nodes()
 _root = build_joint("humanoid_root")
 _root.containerField = "skeleton"   # x3d.py omits it otherwise; Castle needs it
 humanoid = X.HAnimHumanoid(
-    DEF="Human", name="humanoid", version="2.0", loa=4,
+    DEF="Human", name="humanoid", version="2.0", loa=5,
     skeleton=[_root])
 
 traveler = X.Transform(DEF="Traveler", children=[
@@ -291,9 +291,10 @@ doc = X.X3D(profile="Immersive", version="4.0",
                 X.component(name="HAnim", level=1),
                 X.meta(name="title", content="running_human.x3d"),
                 X.meta(name="description",
-                       content=("HAnim 2.0 LOA-4 humanoid (146 joints, centers from "
-                                "Web3D JinLOA4) running a slalom course; gait cadence "
-                                "synchronized to ground speed. Built with x3d.py.")),
+                       content=("HAnim 2.0 LOA-5 humanoid (150 joints, centers from the "
+                                "Web3D AllBonesLOA5Skeletons draft) running a slalom "
+                                "course; gait cadence synchronized to ground speed. "
+                                "Built with x3d.py.")),
                 X.meta(name="generator", content="generate_runner.py (x3d.py canonical pipeline)"),
             ]),
             Scene=scene)
@@ -306,6 +307,9 @@ xml = xml.replace("<HAnimHumanoid DEF='Human'",
                   "<HAnimHumanoid DEF='Human' version='2.0'", 1)
 xml = xml.replace("<HAnimJoint DEF='humanoid_root'",
                   "<HAnimJoint DEF='humanoid_root' containerField='skeleton'", 1)
+# Drop the DOCTYPE: the external DTD reference makes web players (X_ITE) stall
+# fetching it on load. The file stays valid X3D 4.0 via the XSD schemaLocation.
+xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
 with open("running_human.x3d", "w") as fh:
     fh.write(xml)
 print(f"wrote running_human.x3d via x3d.py ({len(xml)} bytes, {len(ORDER)} joints, "
@@ -336,41 +340,45 @@ def flatten_hanim(xml_text):
                     del el.attrib[a]
     return etree.tostring(root, encoding="unicode")
 
-def write_html():
-    if not (os.path.exists(SAXON) and os.path.exists(XSLT)):
-        print("skipped running_human.html: Saxon/stylesheet not found in tools_x3d/")
-        return
-    with open("_runner_flat.x3d", "w") as fh:
-        fh.write(flatten_hanim(xml))
-    # plain x3dom.js renders reliably; x3dom-full.js currently fails to init
-    r = subprocess.run(
-        ["java", "-cp", SAXON, "net.sf.saxon.Transform",
-         "-s:_runner_flat.x3d", f"-xsl:{XSLT}", "-o:running_human.html",
-         f"urlX3DOM={STABLE_X3DOM}"],
-        capture_output=True, text=True)
-    os.remove("_runner_flat.x3d")
-    if r.returncode != 0:
-        print("X3dToX3dom failed:", r.stderr[:300]); return
-    # use the lean x3dom.js build (the -full build trips an X3DOM init bug)
-    html = open("running_human.html").read().replace("x3dom-full.js", "x3dom.js")
-    open("running_human.html", "w").write(html)
-    print("wrote running_human.html via X3dToX3dom.xslt (canonical; flattened twin, x3dom 1.8.3)")
+XITE_JS = "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.js"
 
-def write_html_fallback():
-    """Verified-rendering browser page via the project's MCP renderer + x3dom
-    1.8.2. The canonical X3dToX3dom page above trips an X3DOM MutationObserver
-    init bug on this scene; this companion page is confirmed to render/animate."""
+def write_xite_page():
+    """Primary browser page: X_ITE renders the real-HAnim .x3d directly (X_ITE
+    has full HAnim support, unlike X3DOM -- no flattening needed)."""
+    page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>HAnim LOA-5 Runner — Slalom Course</title>
+  <script src="{XITE_JS}"></script>
+  <style>
+    html,body {{ margin:0; height:100%; background:#10131a; }}
+    x3d-canvas {{ width:100vw; height:100vh; display:block; }}
+  </style>
+</head>
+<body>
+  <x3d-canvas src="running_human.x3d"></x3d-canvas>
+</body>
+</html>
+"""
+    with open("running_human.html", "w") as fh:
+        fh.write(page)
+    print("wrote running_human.html (X_ITE, renders real HAnim LOA-5)")
+
+def write_x3dom_fallback():
+    """X3DOM fallback via the MCP renderer on a flattened twin (X3DOM can't
+    render HAnim). Kept until the X3DOM HAnim gap is addressed upstream."""
     try:
         import sys
         sys.path.insert(0, "src")
         from tools.render import _x3dom_page
         page = _x3dom_page(flatten_hanim(xml),
-                           title="HAnim LOA-4 Runner — Slalom Course",
+                           title="HAnim LOA-5 Runner — Slalom Course",
                            width="100%", height="100vh")
         open("running_human_x3dom.html", "w").write(page)
-        print("wrote running_human_x3dom.html (MCP renderer, verified-rendering fallback)")
+        print("wrote running_human_x3dom.html (X3DOM fallback, flattened twin)")
     except Exception as e:
-        print(f"skipped fallback page: {e}")
+        print(f"skipped X3DOM fallback: {e}")
 
-write_html()
-write_html_fallback()
+write_xite_page()
+write_x3dom_fallback()
