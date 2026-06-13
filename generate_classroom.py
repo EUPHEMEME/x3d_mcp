@@ -36,10 +36,13 @@ SKEL_X, SKEL_Z = -1.2, -1.6
 
 TEXTURE_DIR = "assets/textures"
 TEXTURES = {
-    "blackboard": ("blackboard.png", [0.10, 0.16, 0.12]),
+    "blackboard": ("chalkboard_clean.png", [0.10, 0.16, 0.12]),  # clean board; text via Text nodes
     "poster_skeleton": ("poster_skeleton.png", [0.85, 0.80, 0.70]),
     "poster_anatomy": ("poster_anatomy.png", [0.75, 0.80, 0.85]),
 }
+# room-surface textures, rendered as lit PBR (baseTexture); tiled
+ROOM_TEX = {"floor_wood.png", "wall_plaster.png", "ceiling_tile.png"}
+CHALK = [0.92, 0.94, 0.86]   # chalk white
 
 # ------------------------------------------------------------------ materials
 # (color, metallic, roughness)
@@ -86,6 +89,34 @@ def textured_panel(t, size, name, rot=None):
         tr.rotation = rot
     return tr
 
+def tex_pbr(fn, tile=1.0):
+    """Tiled textured surface for floor/walls/ceiling. Castle only applies
+    textures via UnlitMaterial.emissiveTexture (not classic Material.texture nor
+    PhysicalMaterial.baseTexture), so use that. Unlit (flat) but the texture
+    shows reliably in both Castle and X_ITE. Dimmed so it reads as a surface."""
+    path = os.path.join(TEXTURE_DIR, fn)
+    if not os.path.exists(path):
+        return X.Appearance(material=X.UnlitMaterial(emissiveColor=[0.7,0.7,0.7]))
+    app = X.Appearance(material=X.UnlitMaterial(
+        emissiveColor=[0.78,0.78,0.78], emissiveTexture=X.ImageTexture(url=[path])))
+    if tile != 1.0:
+        app.textureTransform = X.TextureTransform(scale=[tile, tile])
+    return app
+
+def box_tex(t, size, fn, tile=1.0, rot=None):
+    tr = X.Transform(translation=t, children=[
+        X.Shape(appearance=tex_pbr(fn, tile), geometry=X.Box(size=size))])
+    if rot:
+        tr.rotation = rot
+    return tr
+
+def chalk_text(s, t, size=0.22):
+    """Crisp chalk-white text via a real font (X3D Text), unlit."""
+    return X.Transform(translation=t, children=[X.Shape(
+        appearance=X.Appearance(material=X.UnlitMaterial(emissiveColor=CHALK)),
+        geometry=X.Text(string=[s], fontStyle=X.FontStyle(
+            justify=["MIDDLE","MIDDLE"], size=size, family=["SANS"])))])
+
 # ------------------------------------------------------------------ skeleton
 # The hanging figure is the canonical AllBonesLOA5 bone-mesh humanoid, embedded
 # (not Inlined) so its hanim_<joint> DEFs are in scope for the wave/head/jaw
@@ -109,7 +140,7 @@ def buttons_and_script():
     FILL = "0.08 0.13 0.10"       # chalkboard green (blends in)
     hw, hh = 0.31, 0.15
     out = []
-    x0, y, z = -0.55, 2.0, -3.40   # row along the top of the blackboard
+    x0, y, z = -0.55, 2.55, -3.40   # row on the wall ABOVE the blackboard
     for i, label in enumerate(btns):
         bx = x0 + i * 0.7
         out.append(f"""    <Transform translation='{bx} {y} {z}'>
@@ -165,13 +196,17 @@ def skeleton():
 
 # ------------------------------------------------------------------ classroom
 def classroom():
-    s = [box([0,-0.05,0], [8,0.1,7], WOOD_DARK),
-         box([0,3.05,0], [8,0.1,7], WALL),
-         box([0,1.5,-3.5], [8,3,0.1], WALL),
-         box([-4.0,1.5,0], [0.1,3,7], WALL),
-         box([4.0,1.5,0], [0.1,3,7], WALL),
+    # textured shell. In X3D, solid geometry already collides with the avatar in
+    # WALK mode by default, so the viewer can't pass through these walls/floor.
+    s = [box_tex([0,-0.05,0], [8,0.1,7], "floor_wood.png", tile=4),
+         box_tex([0,3.05,0], [8,0.1,7], "ceiling_tile.png", tile=4),
+         box_tex([0,1.5,-3.5], [8,3,0.1], "wall_plaster.png", tile=3),
+         box_tex([-4.0,1.5,0], [0.1,3,7], "wall_plaster.png", tile=3),
+         box_tex([4.0,1.5,0], [0.1,3,7], "wall_plaster.png", tile=3),
          textured_panel([0.8,1.5,-3.44], [3.6,1.3,0.04], "blackboard"),
-         box([0.8,0.82,-3.41], [3.6,0.05,0.10], WOOD),
+         box([0.8,0.82,-3.41], [3.6,0.05,0.10], WOOD),               # chalk tray
+         chalk_text("The Human Skeleton", [0.8,1.78,-3.41], 0.26),
+         chalk_text("206 Bones", [0.8,1.40,-3.41], 0.30),
          textured_panel([-3.94,1.7,-1.0], [0.9,1.2,0.02], "poster_skeleton", rot=[0,1,0,1.5708]),
          textured_panel([3.94,1.7,-0.5], [0.9,1.2,0.02], "poster_anatomy", rot=[0,1,0,-1.5708]),
          box([1.3,0.38,-2.2], [1.6,0.76,0.7], WOOD)]
@@ -214,13 +249,13 @@ scene = X.Scene(children=[
                 description="Meet the skeleton"),
     X.Viewpoint(DEF="SkullStudy", position=[-0.9,1.65,-0.9], orientation=[0,1,0,-0.35],
                 description="Skull close-up"),
-    X.EnvironmentLight(global_=True, color=[0.95,0.96,1.0], intensity=0.55,
-                       ambientIntensity=0.35,
-                       diffuseCoefficients=[0.9,0.92,1.0, 0.05,0.05,0.06, 0,0,0, 0,0,0,
-                                            0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]),
-    X.DirectionalLight(direction=[-0.3,-1,-0.4], intensity=0.8, ambientIntensity=0.15),
-    X.DirectionalLight(direction=[0.5,-0.6,0.5], intensity=0.3),
-    X.PointLight(location=[0,2.9,0], intensity=0.4, radius=8),
+    # Direct lighting only: EnvironmentLight (image-based) leaves classic textured
+    # Material surfaces black in Castle. Keep ambient low so the pale wood/plaster
+    # textures don't wash out; directional shading reveals their detail.
+    X.DirectionalLight(direction=[-0.3,-1,-0.4], intensity=0.85, ambientIntensity=0.18),
+    X.DirectionalLight(direction=[0.5,-0.5,0.6], intensity=0.5, ambientIntensity=0.10),
+    X.DirectionalLight(direction=[0.2,-0.4,-0.8], intensity=0.35, ambientIntensity=0.05),
+    X.PointLight(location=[0,2.9,0], intensity=0.45, radius=10),
     *classroom(),
     skeleton(),
     # walk animation injected post-serialize (raw fragment, see below)
@@ -240,20 +275,24 @@ doc = X.X3D(profile="Immersive", version="4.0",
 
 xml = doc.XML()
 # x3d.py drops two containerFields on output: EnvironmentLight's global, and
-# the emissiveTexture container on textures inside UnlitMaterial (without it
-# the texture binds to the default 'texture' slot and is ignored -> white).
-# Every ImageTexture in this scene is a display panel's emissive texture.
-xml = xml.replace("<EnvironmentLight ", "<EnvironmentLight global='true' ", 1)
+# x3d.py drops the texture containerField; assign per file: room surfaces are
+# lit PBR (baseTexture), display panels (board/posters) are unlit (emissiveTexture).
+# every texture in the scene is now an emissiveTexture (room + display panels);
+# x3d.py drops the containerField, so restore it on all of them.
 xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTexture' ")
 # splice the canonical bone-mesh humanoid into the stand placeholder
 xml = re.sub(r"<Group DEF='HumanoidSlot'\s*/>|<Group DEF='HumanoidSlot'>\s*</Group>",
              HUMANOID_FRAGMENT, xml, count=1)
-# default the walk cycle to play on load (so the articulation is visible
-# immediately); Run/Jump stay off until their button is clicked.
+# default the walk cycle to play on load (articulation visible immediately);
+# Run/Jump stay off until their button is clicked.
 walk_on = WALK_FRAGMENT.replace("DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='false'",
                                 "DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='true'")
-# inject the three locomotion cycles + chalkboard buttons + mode-switch Script
-_anim = "\n      ".join([walk_on, RUN_FRAGMENT, JUMP_FRAGMENT])
+# Anchor the figure on its stand: drop the root TRANSLATION routes from every
+# cycle so the skeleton articulates in place and never translates through the
+# floor or ceiling (X3D collision governs the camera, not keyframed animation).
+def _anchor(frag):
+    return re.sub(r"\s*<ROUTE\b[^>]*toNode='hanim_humanoid_root'[^>]*toField='set_translation'[^>]*/>", "", frag)
+_anim = "\n      ".join(_anchor(f) for f in (walk_on, RUN_FRAGMENT, JUMP_FRAGMENT))
 xml = xml.replace("</Scene>", f"  {_anim}\n{buttons_and_script()}\n  </Scene>", 1)
 # drop DOCTYPE so web players (X_ITE) and Saxon don't fetch the external DTD
 xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))

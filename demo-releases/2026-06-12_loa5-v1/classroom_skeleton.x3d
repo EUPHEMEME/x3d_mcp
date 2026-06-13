@@ -13,14 +13,17 @@
     <Viewpoint DEF='Entry' description='Classroom entry' position='0 1.6 3.2'/>
     <Viewpoint DEF='SkeletonView' description='Meet the skeleton' orientation='0 1 0 -0.45' position='0.2 1.5 0.2'/>
     <Viewpoint DEF='SkullStudy' description='Skull close-up' orientation='0 1 0 -0.35' position='-0.9 1.65 -0.9'/>
-    <EnvironmentLight global='true' ambientIntensity='0.35' color='0.95 0.96 1.0' diffuseCoefficients='0.9 0.92 1.0 0.05 0.05 0.06 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0' intensity='0.55'/>
-    <DirectionalLight ambientIntensity='0.15' direction='-0.3 -1 -0.4' intensity='0.8'/>
-    <DirectionalLight direction='0.5 -0.6 0.5' intensity='0.3'/>
-    <PointLight intensity='0.4' location='0 2.9 0' radius='8'/>
+    <DirectionalLight ambientIntensity='0.18' direction='-0.3 -1 -0.4' intensity='0.85'/>
+    <DirectionalLight ambientIntensity='0.1' direction='0.5 -0.5 0.6' intensity='0.5'/>
+    <DirectionalLight ambientIntensity='0.05' direction='0.2 -0.4 -0.8' intensity='0.35'/>
+    <PointLight intensity='0.45' location='0 2.9 0' radius='10'/>
     <Transform translation='0 -0.05 0'>
       <Shape>
         <Appearance>
-          <PhysicalMaterial baseColor='0.4 0.27 0.15' metallic='0' roughness='0.6'/>
+          <UnlitMaterial emissiveColor='0.78 0.78 0.78'>
+            <ImageTexture containerField='emissiveTexture' url='"assets/textures/floor_wood.png"'/>
+          </UnlitMaterial>
+          <TextureTransform scale='4 4'/>
         </Appearance>
         <Box size='8 0.1 7'/>
       </Shape>
@@ -28,7 +31,10 @@
     <Transform translation='0 3.05 0'>
       <Shape>
         <Appearance>
-          <PhysicalMaterial baseColor='0.82 0.84 0.78' metallic='0' roughness='0.95'/>
+          <UnlitMaterial emissiveColor='0.78 0.78 0.78'>
+            <ImageTexture containerField='emissiveTexture' url='"assets/textures/ceiling_tile.png"'/>
+          </UnlitMaterial>
+          <TextureTransform scale='4 4'/>
         </Appearance>
         <Box size='8 0.1 7'/>
       </Shape>
@@ -36,7 +42,10 @@
     <Transform translation='0 1.5 -3.5'>
       <Shape>
         <Appearance>
-          <PhysicalMaterial baseColor='0.82 0.84 0.78' metallic='0' roughness='0.95'/>
+          <UnlitMaterial emissiveColor='0.78 0.78 0.78'>
+            <ImageTexture containerField='emissiveTexture' url='"assets/textures/wall_plaster.png"'/>
+          </UnlitMaterial>
+          <TextureTransform scale='3 3'/>
         </Appearance>
         <Box size='8 3 0.1'/>
       </Shape>
@@ -44,7 +53,10 @@
     <Transform translation='-4.0 1.5 0'>
       <Shape>
         <Appearance>
-          <PhysicalMaterial baseColor='0.82 0.84 0.78' metallic='0' roughness='0.95'/>
+          <UnlitMaterial emissiveColor='0.78 0.78 0.78'>
+            <ImageTexture containerField='emissiveTexture' url='"assets/textures/wall_plaster.png"'/>
+          </UnlitMaterial>
+          <TextureTransform scale='3 3'/>
         </Appearance>
         <Box size='0.1 3 7'/>
       </Shape>
@@ -52,7 +64,10 @@
     <Transform translation='4.0 1.5 0'>
       <Shape>
         <Appearance>
-          <PhysicalMaterial baseColor='0.82 0.84 0.78' metallic='0' roughness='0.95'/>
+          <UnlitMaterial emissiveColor='0.78 0.78 0.78'>
+            <ImageTexture containerField='emissiveTexture' url='"assets/textures/wall_plaster.png"'/>
+          </UnlitMaterial>
+          <TextureTransform scale='3 3'/>
         </Appearance>
         <Box size='0.1 3 7'/>
       </Shape>
@@ -61,7 +76,7 @@
       <Shape>
         <Appearance>
           <UnlitMaterial emissiveColor='1 1 1'>
-            <ImageTexture containerField='emissiveTexture' url='"assets/textures/blackboard.png"'/>
+            <ImageTexture containerField='emissiveTexture' url='"assets/textures/chalkboard_clean.png"'/>
           </UnlitMaterial>
         </Appearance>
         <Box size='3.6 1.3 0.04'/>
@@ -73,6 +88,26 @@
           <PhysicalMaterial baseColor='0.55 0.38 0.22' metallic='0' roughness='0.55'/>
         </Appearance>
         <Box size='3.6 0.05 0.1'/>
+      </Shape>
+    </Transform>
+    <Transform translation='0.8 1.78 -3.41'>
+      <Shape>
+        <Appearance>
+          <UnlitMaterial emissiveColor='0.92 0.94 0.86'/>
+        </Appearance>
+        <Text string='"The Human Skeleton"'>
+          <FontStyle family='"SANS"' justify='"MIDDLE" "MIDDLE"' size='0.26'/>
+        </Text>
+      </Shape>
+    </Transform>
+    <Transform translation='0.8 1.4 -3.41'>
+      <Shape>
+        <Appearance>
+          <UnlitMaterial emissiveColor='0.92 0.94 0.86'/>
+        </Appearance>
+        <Text string='"206 Bones"'>
+          <FontStyle family='"SANS"' justify='"MIDDLE" "MIDDLE"' size='0.3'/>
+        </Text>
       </Shape>
     </Transform>
     <Transform rotation='0 1 0 1.5708' translation='-3.94 1.7 -1.0'>
@@ -3179,7 +3214,7 @@
       <ROUTE fromField='value_changed' fromNode='Jump_r_metacarpophalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metacarpophalangeal_5'/>
       <ROUTE fromField='value_changed' fromNode='Jump_r_carpal_proximal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_proximal_interphalangeal_5'/>
       <ROUTE fromField='value_changed' fromNode='Jump_r_carpal_distal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_distal_interphalangeal_5'/>
-    <Transform translation='-0.55 2.0 -3.4'>
+    <Transform translation='-0.55 2.55 -3.4'>
       <TouchSensor DEF='BtnWalk'/>
       <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
         <Box size='0.62 0.3 0.012'/></Shape>
@@ -3192,7 +3227,7 @@
         <Text string='"Walk"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
-    <Transform translation='0.1499999999999999 2.0 -3.4'>
+    <Transform translation='0.1499999999999999 2.55 -3.4'>
       <TouchSensor DEF='BtnRun'/>
       <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
         <Box size='0.62 0.3 0.012'/></Shape>
@@ -3205,7 +3240,7 @@
         <Text string='"Run"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
-    <Transform translation='0.8499999999999999 2.0 -3.4'>
+    <Transform translation='0.8499999999999999 2.55 -3.4'>
       <TouchSensor DEF='BtnJump'/>
       <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
         <Box size='0.62 0.3 0.012'/></Shape>
@@ -3218,7 +3253,7 @@
         <Text string='"Jump"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
-    <Transform translation='1.5499999999999996 2.0 -3.4'>
+    <Transform translation='1.5499999999999996 2.55 -3.4'>
       <TouchSensor DEF='BtnStand'/>
       <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
         <Box size='0.62 0.3 0.012'/></Shape>

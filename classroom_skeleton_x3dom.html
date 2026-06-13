@@ -35,14 +35,17 @@
             <viewpoint def="Entry" description="Classroom entry" position="0 1.6 3.2"></viewpoint>
             <viewpoint def="SkeletonView" description="Meet the skeleton" orientation="0 1 0 -0.45" position="0.2 1.5 0.2"></viewpoint>
             <viewpoint def="SkullStudy" description="Skull close-up" orientation="0 1 0 -0.35" position="-0.9 1.65 -0.9"></viewpoint>
-            <environmentlight global="true" ambientintensity="0.35" color="0.95 0.96 1.0" diffusecoefficients="0.9 0.92 1.0 0.05 0.05 0.06 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" intensity="0.55"></environmentlight>
-            <directionallight ambientintensity="0.15" direction="-0.3 -1 -0.4" intensity="0.8"></directionallight>
-            <directionallight direction="0.5 -0.6 0.5" intensity="0.3"></directionallight>
-            <pointlight intensity="0.4" location="0 2.9 0" radius="8"></pointlight>
+            <directionallight ambientintensity="0.18" direction="-0.3 -1 -0.4" intensity="0.85"></directionallight>
+            <directionallight ambientintensity="0.1" direction="0.5 -0.5 0.6" intensity="0.5"></directionallight>
+            <directionallight ambientintensity="0.05" direction="0.2 -0.4 -0.8" intensity="0.35"></directionallight>
+            <pointlight intensity="0.45" location="0 2.9 0" radius="10"></pointlight>
             <transform translation="0 -0.05 0">
                 <shape>
                     <appearance>
-                        <physicalmaterial basecolor="0.4 0.27 0.15" metallic="0" roughness="0.6"></physicalmaterial>
+                        <unlitmaterial emissivecolor="0.78 0.78 0.78">
+                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/floor_wood.png&quot;"></imagetexture>
+                        </unlitmaterial>
+                        <texturetransform scale="4 4"></texturetransform>
                     </appearance>
                     <box size="8 0.1 7"></box>
                 </shape>
@@ -50,7 +53,10 @@
             <transform translation="0 3.05 0">
                 <shape>
                     <appearance>
-                        <physicalmaterial basecolor="0.82 0.84 0.78" metallic="0" roughness="0.95"></physicalmaterial>
+                        <unlitmaterial emissivecolor="0.78 0.78 0.78">
+                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/ceiling_tile.png&quot;"></imagetexture>
+                        </unlitmaterial>
+                        <texturetransform scale="4 4"></texturetransform>
                     </appearance>
                     <box size="8 0.1 7"></box>
                 </shape>
@@ -58,7 +64,10 @@
             <transform translation="0 1.5 -3.5">
                 <shape>
                     <appearance>
-                        <physicalmaterial basecolor="0.82 0.84 0.78" metallic="0" roughness="0.95"></physicalmaterial>
+                        <unlitmaterial emissivecolor="0.78 0.78 0.78">
+                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/wall_plaster.png&quot;"></imagetexture>
+                        </unlitmaterial>
+                        <texturetransform scale="3 3"></texturetransform>
                     </appearance>
                     <box size="8 3 0.1"></box>
                 </shape>
@@ -66,7 +75,10 @@
             <transform translation="-4.0 1.5 0">
                 <shape>
                     <appearance>
-                        <physicalmaterial basecolor="0.82 0.84 0.78" metallic="0" roughness="0.95"></physicalmaterial>
+                        <unlitmaterial emissivecolor="0.78 0.78 0.78">
+                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/wall_plaster.png&quot;"></imagetexture>
+                        </unlitmaterial>
+                        <texturetransform scale="3 3"></texturetransform>
                     </appearance>
                     <box size="0.1 3 7"></box>
                 </shape>
@@ -74,7 +86,10 @@
             <transform translation="4.0 1.5 0">
                 <shape>
                     <appearance>
-                        <physicalmaterial basecolor="0.82 0.84 0.78" metallic="0" roughness="0.95"></physicalmaterial>
+                        <unlitmaterial emissivecolor="0.78 0.78 0.78">
+                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/wall_plaster.png&quot;"></imagetexture>
+                        </unlitmaterial>
+                        <texturetransform scale="3 3"></texturetransform>
                     </appearance>
                     <box size="0.1 3 7"></box>
                 </shape>
@@ -83,7 +98,7 @@
                 <shape>
                     <appearance>
                         <unlitmaterial emissivecolor="1 1 1">
-                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/blackboard.png&quot;"></imagetexture>
+                            <imagetexture containerfield="emissiveTexture" url="&quot;assets/textures/chalkboard_clean.png&quot;"></imagetexture>
                         </unlitmaterial>
                     </appearance>
                     <box size="3.6 1.3 0.04"></box>
@@ -95,6 +110,26 @@
                         <physicalmaterial basecolor="0.55 0.38 0.22" metallic="0" roughness="0.55"></physicalmaterial>
                     </appearance>
                     <box size="3.6 0.05 0.1"></box>
+                </shape>
+            </transform>
+            <transform translation="0.8 1.78 -3.41">
+                <shape>
+                    <appearance>
+                        <unlitmaterial emissivecolor="0.92 0.94 0.86"></unlitmaterial>
+                    </appearance>
+                    <text string="&quot;The Human Skeleton&quot;">
+                        <fontstyle family="&quot;SANS&quot;" justify="&quot;MIDDLE&quot; &quot;MIDDLE&quot;" size="0.26"></fontstyle>
+                    </text>
+                </shape>
+            </transform>
+            <transform translation="0.8 1.4 -3.41">
+                <shape>
+                    <appearance>
+                        <unlitmaterial emissivecolor="0.92 0.94 0.86"></unlitmaterial>
+                    </appearance>
+                    <text string="&quot;206 Bones&quot;">
+                        <fontstyle family="&quot;SANS&quot;" justify="&quot;MIDDLE&quot; &quot;MIDDLE&quot;" size="0.3"></fontstyle>
+                    </text>
                 </shape>
             </transform>
             <transform rotation="0 1 0 1.5708" translation="-3.94 1.7 -1.0">
@@ -2791,7 +2826,7 @@
             <route fromfield="value_changed" fromnode="Jump_r_metacarpophalangeal_5_RotationInterpolator" tofield="set_rotation" tonode="hanim_r_metacarpophalangeal_5"></route>
             <route fromfield="value_changed" fromnode="Jump_r_carpal_proximal_interphalangeal_5_RotationInterpolator" tofield="set_rotation" tonode="hanim_r_carpal_proximal_interphalangeal_5"></route>
             <route fromfield="value_changed" fromnode="Jump_r_carpal_distal_interphalangeal_5_RotationInterpolator" tofield="set_rotation" tonode="hanim_r_carpal_distal_interphalangeal_5"></route>
-            <transform translation="-0.55 2.0 -3.4">
+            <transform translation="-0.55 2.55 -3.4">
                 <touchsensor def="BtnWalk"></touchsensor>
                 <shape>
                     <appearance>
@@ -2819,7 +2854,7 @@
                     </shape>
                 </transform>
             </transform>
-            <transform translation="0.1499999999999999 2.0 -3.4">
+            <transform translation="0.1499999999999999 2.55 -3.4">
                 <touchsensor def="BtnRun"></touchsensor>
                 <shape>
                     <appearance>
@@ -2847,7 +2882,7 @@
                     </shape>
                 </transform>
             </transform>
-            <transform translation="0.8499999999999999 2.0 -3.4">
+            <transform translation="0.8499999999999999 2.55 -3.4">
                 <touchsensor def="BtnJump"></touchsensor>
                 <shape>
                     <appearance>
@@ -2875,7 +2910,7 @@
                     </shape>
                 </transform>
             </transform>
-            <transform translation="1.5499999999999996 2.0 -3.4">
+            <transform translation="1.5499999999999996 2.55 -3.4">
                 <touchsensor def="BtnStand"></touchsensor>
                 <shape>
                     <appearance>
