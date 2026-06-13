@@ -209,6 +209,8 @@ xml = doc.XML()
 # Every ImageTexture in this scene is a display panel's emissive texture.
 xml = xml.replace("<EnvironmentLight ", "<EnvironmentLight global='true' ", 1)
 xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTexture' ")
+# drop DOCTYPE so web players (X_ITE) and Saxon don't fetch the external DTD
+xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
 with open("classroom_skeleton.x3d", "w") as fh:
     fh.write(xml)
 textured = [n for n,(f,_) in TEXTURES.items() if os.path.exists(os.path.join(TEXTURE_DIR,f))]
@@ -216,32 +218,36 @@ print(f"wrote classroom_skeleton.x3d via x3d.py ({len(xml)} bytes, {len(BONES)} 
       f"textures: {textured or 'none'})")
 
 # ------------------------------------------------------------------ web pages
-SAXON, XSLT = "tools_x3d/saxon9he.jar", "tools_x3d/X3dToX3dom.xslt"
-STABLE_X3DOM = "https://x3dom.org/download/1.8.3"
+XITE_JS = "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.js"
 
-def write_html():
-    if not (os.path.exists(SAXON) and os.path.exists(XSLT)):
-        print("skipped classroom_skeleton.html: Saxon/stylesheet missing"); return
-    # strip DOCTYPE so Saxon doesn't fetch the DTD (hits JAXP entity limit)
-    nodtd = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
-    open("_classroom_nodtd.x3d", "w").write(nodtd)
-    r = subprocess.run(["java", "-cp", SAXON, "net.sf.saxon.Transform",
-                        "-s:_classroom_nodtd.x3d", f"-xsl:{XSLT}",
-                        "-o:classroom_skeleton.html", f"urlX3DOM={STABLE_X3DOM}"],
-                       capture_output=True, text=True)
-    os.remove("_classroom_nodtd.x3d")
-    if r.returncode != 0:
-        print("X3dToX3dom failed:", r.stderr[:300]); return
-    html = open("classroom_skeleton.html").read().replace("x3dom-full.js", "x3dom.js")
-    open("classroom_skeleton.html", "w").write(html)
-    print("wrote classroom_skeleton.html via X3dToX3dom.xslt (canonical)")
+def write_xite_page():
+    """Primary page: X_ITE loads the real .x3d (renders PBR + the bone Inlines)."""
+    page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Science Classroom — Living Skeleton</title>
+  <script src="{XITE_JS}"></script>
+  <style>
+    html,body {{ margin:0; height:100%; background:#1a1a2e; }}
+    x3d-canvas {{ width:100vw; height:100vh; display:block; }}
+  </style>
+</head>
+<body>
+  <x3d-canvas src="classroom_skeleton.x3d"></x3d-canvas>
+</body>
+</html>
+"""
+    with open("classroom_skeleton.html", "w") as fh:
+        fh.write(page)
+    print("wrote classroom_skeleton.html (X_ITE)")
     try:
         import sys; sys.path.insert(0, "src")
         from tools.render import _x3dom_page
         open("classroom_skeleton_x3dom.html", "w").write(_x3dom_page(
             xml, title="Science Classroom — Living Skeleton", width="100%", height="100vh"))
-        print("wrote classroom_skeleton_x3dom.html (MCP renderer fallback)")
+        print("wrote classroom_skeleton_x3dom.html (X3DOM fallback)")
     except Exception as e:
-        print(f"skipped fallback: {e}")
+        print(f"skipped X3DOM fallback: {e}")
 
-write_html()
+write_xite_page()

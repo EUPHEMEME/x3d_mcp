@@ -49,6 +49,8 @@ def process(path):
                       '"ISO//Web3D//DTD X3D 4.0//EN" "https://www.web3d.org/specifications/x3d-4.0.dtd"')
     src = src.replace("profile='Interchange' version='3.3'", "profile='Immersive' version='4.0'")
     src = src.replace("x3d-3.3.xsd", "x3d-4.0.xsd")
+    # drop DOCTYPE so web players (X_ITE) don't stall fetching the external DTD
+    src = "\n".join(l for l in src.splitlines() if not l.startswith("<!DOCTYPE"))
     n = len(re.findall(r"<Material\b[^>]*/>", src))
     src = re.sub(r"<Material\b[^>]*/>", to_physical, src)
     if src != orig:
