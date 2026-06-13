@@ -1852,20 +1852,12 @@
       </HAnimHumanoid>
       </Transform>
     </Transform>
-    <TimeSensor DEF='ArmClock' cycleInterval='2.6' loop='true'/>
-    <TimeSensor DEF='WaveClock' cycleInterval='0.55' loop='true'/>
     <TimeSensor DEF='JawClock' cycleInterval='0.42' loop='true'/>
     <TimeSensor DEF='HeadClock' cycleInterval='7.0' loop='true'/>
-    <OrientationInterpolator DEF='ArmSway' key='0 0.5 1' keyValue='0 0 1 -1.78 0 0 1 -2.02 0 0 1 -1.78'/>
-    <OrientationInterpolator DEF='ForearmWave' key='0 0.25 0.5 0.75 1' keyValue='0 0 1 0.38 0 0 1 -0.38 0 0 1 0.38 0 0 1 -0.38 0 0 1 0.38'/>
     <OrientationInterpolator DEF='JawTalk' key='0 0.5 1' keyValue='1 0 0 0 1 0 0 0.32 1 0 0 0'/>
-    <OrientationInterpolator DEF='HeadTurn' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 0.38 0 1 0 0 0 1 0 -0.38 0 1 0 0'/>
-    <ROUTE fromField='fraction_changed' fromNode='ArmClock' toField='set_fraction' toNode='ArmSway'/>
-    <ROUTE fromField='fraction_changed' fromNode='WaveClock' toField='set_fraction' toNode='ForearmWave'/>
+    <OrientationInterpolator DEF='HeadTurn' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 0.3 0 1 0 0 0 1 0 -0.3 0 1 0 0'/>
     <ROUTE fromField='fraction_changed' fromNode='JawClock' toField='set_fraction' toNode='JawTalk'/>
     <ROUTE fromField='fraction_changed' fromNode='HeadClock' toField='set_fraction' toNode='HeadTurn'/>
-    <ROUTE fromField='value_changed' fromNode='ArmSway' toField='set_rotation' toNode='hanim_r_shoulder'/>
-    <ROUTE fromField='value_changed' fromNode='ForearmWave' toField='set_rotation' toNode='hanim_r_elbow'/>
     <ROUTE fromField='value_changed' fromNode='JawTalk' toField='set_rotation' toNode='hanim_temporomandibular'/>
     <ROUTE fromField='value_changed' fromNode='HeadTurn' toField='set_rotation' toNode='hanim_skullbase'/>
   </Scene>

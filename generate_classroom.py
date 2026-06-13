@@ -127,28 +127,20 @@ def classroom():
 
 # ------------------------------------------------------------------ animation
 def animation():
+    # Arm stays at natural rest (no waving). Subtle life: slow head turn + a
+    # gently talking jaw. (Walk/run/jump cycles to be added next.)
     nodes = [
-        X.TimeSensor(DEF="ArmClock", cycleInterval=2.6, loop=True),
-        X.TimeSensor(DEF="WaveClock", cycleInterval=0.55, loop=True),
         X.TimeSensor(DEF="JawClock", cycleInterval=0.42, loop=True),
         X.TimeSensor(DEF="HeadClock", cycleInterval=7.0, loop=True),
-        X.OrientationInterpolator(DEF="ArmSway", key=[0,0.5,1],
-            keyValue=[[0,0,1,-1.78],[0,0,1,-2.02],[0,0,1,-1.78]]),
-        X.OrientationInterpolator(DEF="ForearmWave", key=[0,0.25,0.5,0.75,1],
-            keyValue=[[0,0,1,0.38],[0,0,1,-0.38],[0,0,1,0.38],[0,0,1,-0.38],[0,0,1,0.38]]),
         X.OrientationInterpolator(DEF="JawTalk", key=[0,0.5,1],
             keyValue=[[1,0,0,0],[1,0,0,0.32],[1,0,0,0]]),
         X.OrientationInterpolator(DEF="HeadTurn", key=[0,0.25,0.5,0.75,1],
-            keyValue=[[0,1,0,0],[0,1,0,0.38],[0,1,0,0],[0,1,0,-0.38],[0,1,0,0]]),
+            keyValue=[[0,1,0,0],[0,1,0,0.30],[0,1,0,0],[0,1,0,-0.30],[0,1,0,0]]),
     ]
     R = X.ROUTE
     routes = [
-        R(fromNode="ArmClock", fromField="fraction_changed", toNode="ArmSway", toField="set_fraction"),
-        R(fromNode="WaveClock", fromField="fraction_changed", toNode="ForearmWave", toField="set_fraction"),
         R(fromNode="JawClock", fromField="fraction_changed", toNode="JawTalk", toField="set_fraction"),
         R(fromNode="HeadClock", fromField="fraction_changed", toNode="HeadTurn", toField="set_fraction"),
-        R(fromNode="ArmSway", fromField="value_changed", toNode="hanim_r_shoulder", toField="set_rotation"),
-        R(fromNode="ForearmWave", fromField="value_changed", toNode="hanim_r_elbow", toField="set_rotation"),
         R(fromNode="JawTalk", fromField="value_changed", toNode="hanim_temporomandibular", toField="set_rotation"),
         R(fromNode="HeadTurn", fromField="value_changed", toNode="hanim_skullbase", toField="set_rotation"),
     ]
