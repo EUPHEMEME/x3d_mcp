@@ -1,19 +1,27 @@
 #!/usr/bin/env python3
 """
-Generate a science-classroom scene with a real anatomical skeleton hanging
-from a classic rolling display stand, assembled from the 19 regional bone
-models in the Web3D HumanoidAnimation/Medical archive (NIST Visible Human
-derived). The bone files share one coordinate frame (feet y=0, centered,
-height 60.89 units), so plain Inlines assemble the skeleton; one Transform
-scales it to 1.75 m.
+Science-classroom scene with a real anatomical skeleton (19 NIST Visible Human
+bone models from the Web3D HumanoidAnimation/Medical archive) on a rolling
+display stand -- alive: a raised waving arm, a turning head, and a talking jaw.
 
-Optional FLUX-generated textures (assets/textures/*.png) are applied to the
-blackboard and wall posters when present; otherwise plain materials are used.
+Canonical Web3D pipeline:
+  * generation : the official x3d.py package (PhysicalMaterial PBR surfaces,
+                 EnvironmentLight image-based ambient, UnlitMaterial textured
+                 displays, animated pivot groups regrouping the rigid bone
+                 Inlines around measured joint centers)
+  * authoring  : classroom_skeleton.x3d  (X3D 4.0 XML)
+  * web        : classroom_skeleton.html via the official X3dToX3dom.xslt
+                 (Saxon); MCP-renderer fallback classroom_skeleton_x3dom.html
 
-Output: classroom_skeleton.x3d
+Textures (assets/textures/*.png) are FLUX-generated; the generator falls back
+to plain colors when absent.
 """
 import os
+import subprocess
 
+from x3d import x3d as X
+
+# ------------------------------------------------------------------ assets
 BONES = [
     "BonesHead", "BonesMandible", "BonesTeethTop", "BonesTeethBottom",
     "BonesSpine", "BonesChest", "BonesGirdle",
@@ -22,195 +30,218 @@ BONES = [
     "BonesLeftFemur", "BonesLeftTibiaFibula", "BonesLeftFoot",
     "BonesRightFemur", "BonesRightTibiaFibula", "BonesRightFoot",
 ]
-
-SCALE = 1.0              # each bone file already self-scales by 0.029 -> ~1.77 m
-HANG = 0.12              # feet clearance above floor (m)
-SKEL_X, SKEL_Z = -1.2, -1.6   # stand position (front-left, near blackboard)
+HANG = 0.12
+SKEL_X, SKEL_Z = -1.2, -1.6
 
 TEXTURE_DIR = "assets/textures"
-TEXTURES = {              # logical name -> (file, fallback diffuse color)
-    "blackboard": ("blackboard.png", "0.10 0.16 0.12"),
-    "poster_skeleton": ("poster_skeleton.png", "0.85 0.80 0.70"),
-    "poster_anatomy": ("poster_anatomy.png", "0.75 0.80 0.85"),
+TEXTURES = {
+    "blackboard": ("blackboard.png", [0.10, 0.16, 0.12]),
+    "poster_skeleton": ("poster_skeleton.png", [0.85, 0.80, 0.70]),
+    "poster_anatomy": ("poster_anatomy.png", [0.75, 0.80, 0.85]),
 }
 
-def tex_appearance(name, roughness="0.85"):
-    """Display surfaces (board/posters) use UnlitMaterial so they read clearly
-    and are unaffected by lighting. (Castle's global EnvironmentLight/IBL
-    suppresses textured PhysicalMaterial surfaces, so unlit is also required
-    for the texture to show -- and is the right look for a chalkboard anyway.)"""
+# ------------------------------------------------------------------ materials
+# (color, metallic, roughness)
+WOOD = ([0.55, 0.38, 0.22], 0, 0.55)
+WOOD_DARK = ([0.40, 0.27, 0.15], 0, 0.6)
+WALL = ([0.82, 0.84, 0.78], 0, 0.95)
+METAL = ([0.62, 0.64, 0.67], 0.9, 0.28)
+SEAT = ([0.20, 0.35, 0.55], 0, 0.5)
+
+def pbr(spec):
+    color, metallic, roughness = spec
+    return X.Appearance(material=X.PhysicalMaterial(
+        baseColor=color, metallic=metallic, roughness=roughness))
+
+def tex_appearance(name):
+    """Display surfaces use UnlitMaterial: legible from any angle and immune to
+    the X3DOM IBL-vs-textured-PBR quirk; the right look for a chalkboard."""
     fn, fallback = TEXTURES[name]
     path = os.path.join(TEXTURE_DIR, fn)
     if os.path.exists(path):
-        return ('<Appearance><UnlitMaterial emissiveColor="1 1 1">'
-                f'<ImageTexture url=\'"{path}"\' containerField="emissiveTexture"/>'
-                '</UnlitMaterial></Appearance>')
-    return f'<Appearance><UnlitMaterial emissiveColor="{fallback}"/></Appearance>'
+        return X.Appearance(material=X.UnlitMaterial(
+            emissiveColor=[1, 1, 1],
+            emissiveTexture=X.ImageTexture(url=[path])))
+    return X.Appearance(material=X.UnlitMaterial(emissiveColor=fallback))
 
-def mat(color, metallic="0", roughness="0.6"):
-    return (f'<Appearance><PhysicalMaterial baseColor="{color}" '
-            f'metallic="{metallic}" roughness="{roughness}"/></Appearance>')
+def box(t, size, spec, rot=None):
+    tr = X.Transform(translation=t, children=[
+        X.Shape(appearance=pbr(spec), geometry=X.Box(size=size))])
+    if rot:
+        tr.rotation = rot
+    return tr
 
-def box(x, y, z, sx, sy, sz, appearance, rot=""):
-    r = f' rotation="{rot}"' if rot else ""
-    return (f'<Transform translation="{x} {y} {z}"{r}>'
-            f'<Shape>{appearance}<Box size="{sx} {sy} {sz}"/></Shape></Transform>')
+def cyl(t, h, r, spec, rot=None):
+    tr = X.Transform(translation=t, children=[
+        X.Shape(appearance=pbr(spec), geometry=X.Cylinder(height=h, radius=r))])
+    if rot:
+        tr.rotation = rot
+    return tr
 
-def cyl(x, y, z, h, r, appearance, rot=""):
-    rr = f' rotation="{rot}"' if rot else ""
-    return (f'<Transform translation="{x} {y} {z}"{rr}>'
-            f'<Shape>{appearance}<Cylinder height="{h}" radius="{r}"/></Shape></Transform>')
+def textured_panel(t, size, name, rot=None):
+    tr = X.Transform(translation=t, children=[
+        X.Shape(appearance=tex_appearance(name), geometry=X.Box(size=size))])
+    if rot:
+        tr.rotation = rot
+    return tr
 
-WOOD = mat("0.55 0.38 0.22", roughness="0.55")
-WOOD_DARK = mat("0.40 0.27 0.15", roughness="0.6")
-WALL = mat("0.82 0.84 0.78", roughness="0.95")
-METAL = mat("0.62 0.64 0.67", metallic="0.9", roughness="0.28")
-SEAT = mat("0.20 0.35 0.55", roughness="0.5")
-
-# ---------------------------------------------------------------- skeleton
-# joint pivots in the assembled (metre) frame, measured from the bone models
-R_SHOULDER = "-0.203 1.446 -0.031"
-R_ELBOW    = "-0.217 1.092 0.011"
-NECK       = "0 1.55 -0.03"
-JAW_HINGE  = "0 1.62 -0.04"
-
-# bones that move; everything else is static
+# ------------------------------------------------------------------ skeleton
+R_SHOULDER = [-0.203, 1.446, -0.031]
+R_ELBOW    = [-0.217, 1.092, 0.011]
+NECK       = [0.0, 1.55, -0.03]
+JAW_HINGE  = [0.0, 1.62, -0.04]
 _ANIM = {"BonesRightHumerus", "BonesRightRadiusUlna", "BonesRightHand",
          "BonesHead", "BonesTeethTop", "BonesMandible", "BonesTeethBottom"}
 
-def _inline(b):
-    return f'<Inline DEF="{b}" url=\'"assets/medical/{b}.x3d"\'/>'
+def inline(b):
+    return X.Inline(DEF=b, url=[f"assets/medical/{b}.x3d"])
 
 def skeleton():
-    static = "\n        ".join(_inline(b) for b in BONES if b not in _ANIM)
-    return f'''
-    <!-- assembled anatomical skeleton (19 regional NIST bone models),
-         right arm / head / jaw wrapped in animated pivot groups -->
-    <Transform DEF="SkeletonStand" translation="{SKEL_X} 0 {SKEL_Z}">
-      <!-- rolling base -->
-      {cyl(0, 0.03, 0, 0.06, 0.34, METAL)}
-      {"".join(f'<Transform translation="{0.28*dx} 0.025 {0.28*dz}"><Shape>{METAL}<Sphere radius="0.035"/></Shape></Transform>' for dx, dz in ((1,0),(-1,0),(0,1),(0,-1),(0.7,0.7)))}
-      <!-- pole behind skeleton, overhead arm, hook -->
-      {cyl(0, 1.05, -0.30, 2.00, 0.022, METAL)}
-      {cyl(0, 2.04, -0.15, 0.32, 0.015, METAL, rot="1 0 0 1.5708")}
-      {cyl(0, 1.965, 0.0, 0.12, 0.008, METAL)}
-      <!-- bones share a frame (feet y=0); each Inline self-scales to metres -->
-      <Transform translation="0 {HANG} 0">
-        {static}
-        <!-- right arm: shoulder pivot (raised, waving) -->
-        <Transform DEF="RArm" center="{R_SHOULDER}" rotation="0 0 1 -1.9">
-          {_inline("BonesRightHumerus")}
-          <Transform DEF="RForearm" center="{R_ELBOW}" rotation="0 0 1 0">
-            {_inline("BonesRightRadiusUlna")}
-            {_inline("BonesRightHand")}
-          </Transform>
-        </Transform>
-        <!-- head turns; jaw chatters -->
-        <Transform DEF="HeadGrp" center="{NECK}" rotation="0 1 0 0">
-          {_inline("BonesHead")}
-          {_inline("BonesTeethTop")}
-          <Transform DEF="JawGrp" center="{JAW_HINGE}" rotation="1 0 0 0">
-            {_inline("BonesMandible")}
-            {_inline("BonesTeethBottom")}
-          </Transform>
-        </Transform>
-      </Transform>
-    </Transform>'''
+    base = [cyl([0, 0.03, 0], 0.06, 0.34, METAL)]
+    for dx, dz in ((1,0),(-1,0),(0,1),(0,-1),(0.7,0.7)):
+        base.append(X.Transform(translation=[0.28*dx, 0.025, 0.28*dz], children=[
+            X.Shape(appearance=pbr(METAL), geometry=X.Sphere(radius=0.035))]))
+    pole = [cyl([0, 1.05, -0.30], 2.00, 0.022, METAL),
+            cyl([0, 2.04, -0.15], 0.32, 0.015, METAL, rot=[1,0,0,1.5708]),
+            cyl([0, 1.965, 0.0], 0.12, 0.008, METAL)]
 
-def animation():
-    """Bring the skeleton to life: sway/wave the raised right arm, chatter the
-    jaw, and slowly turn the head -- friendly 'hello class' loop."""
-    return '''
-    <!-- ===================== LIFE (skeleton animation) ===================== -->
-    <TimeSensor DEF="ArmClock"  cycleInterval="2.6" loop="true"/>
-    <TimeSensor DEF="WaveClock" cycleInterval="0.55" loop="true"/>
-    <TimeSensor DEF="JawClock"  cycleInterval="0.42" loop="true"/>
-    <TimeSensor DEF="HeadClock" cycleInterval="7.0" loop="true"/>
+    static = [inline(b) for b in BONES if b not in _ANIM]
+    r_arm = X.Transform(DEF="RArm", center=R_SHOULDER, rotation=[0,0,1,-1.9], children=[
+        inline("BonesRightHumerus"),
+        X.Transform(DEF="RForearm", center=R_ELBOW, rotation=[0,0,1,0], children=[
+            inline("BonesRightRadiusUlna"), inline("BonesRightHand")])])
+    head = X.Transform(DEF="HeadGrp", center=NECK, rotation=[0,1,0,0], children=[
+        inline("BonesHead"), inline("BonesTeethTop"),
+        X.Transform(DEF="JawGrp", center=JAW_HINGE, rotation=[1,0,0,0], children=[
+            inline("BonesMandible"), inline("BonesTeethBottom")])])
 
-    <OrientationInterpolator DEF="ArmSway" key="0 0.5 1"
-        keyValue="0 0 1 -1.78  0 0 1 -2.02  0 0 1 -1.78"/>
-    <OrientationInterpolator DEF="ForearmWave" key="0 0.25 0.5 0.75 1"
-        keyValue="0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38"/>
-    <OrientationInterpolator DEF="JawTalk" key="0 0.5 1"
-        keyValue="1 0 0 0  1 0 0 0.32  1 0 0 0"/>
-    <OrientationInterpolator DEF="HeadTurn" key="0 0.25 0.5 0.75 1"
-        keyValue="0 1 0 0  0 1 0 0.38  0 1 0 0  0 1 0 -0.38  0 1 0 0"/>
+    bones_group = X.Transform(translation=[0, HANG, 0],
+                              children=static + [r_arm, head])
+    return X.Transform(DEF="SkeletonStand", translation=[SKEL_X, 0, SKEL_Z],
+                       children=base + pole + [bones_group])
 
-    <ROUTE fromNode="ArmClock"  fromField="fraction_changed" toNode="ArmSway"     toField="set_fraction"/>
-    <ROUTE fromNode="WaveClock" fromField="fraction_changed" toNode="ForearmWave" toField="set_fraction"/>
-    <ROUTE fromNode="JawClock"  fromField="fraction_changed" toNode="JawTalk"     toField="set_fraction"/>
-    <ROUTE fromNode="HeadClock" fromField="fraction_changed" toNode="HeadTurn"    toField="set_fraction"/>
-    <ROUTE fromNode="ArmSway"     fromField="value_changed" toNode="RArm"     toField="set_rotation"/>
-    <ROUTE fromNode="ForearmWave" fromField="value_changed" toNode="RForearm" toField="set_rotation"/>
-    <ROUTE fromNode="JawTalk"     fromField="value_changed" toNode="JawGrp"   toField="set_rotation"/>
-    <ROUTE fromNode="HeadTurn"    fromField="value_changed" toNode="HeadGrp"  toField="set_rotation"/>'''
-
-# ---------------------------------------------------------------- classroom
+# ------------------------------------------------------------------ classroom
 def classroom():
-    s = []
-    s.append(box(0, -0.05, 0, 8, 0.1, 7, WOOD_DARK))            # floor
-    s.append(box(0, 3.05, 0, 8, 0.1, 7, WALL))                  # ceiling
-    s.append(box(0, 1.5, -3.5, 8, 3, 0.1, WALL))                # back wall
-    s.append(box(-4.0, 1.5, 0, 0.1, 3, 7, WALL))                # left wall
-    s.append(box(4.0, 1.5, 0, 0.1, 3, 7, WALL))                 # right wall
-    # blackboard + chalk tray on back wall
-    s.append(f'<Transform translation="0.8 1.5 -3.44"><Shape>{tex_appearance("blackboard")}<Box size="3.6 1.3 0.04"/></Shape></Transform>')
-    s.append(box(0.8, 0.82, -3.41, 3.6, 0.05, 0.10, WOOD))
-    # posters on side walls
-    s.append(f'<Transform translation="-3.94 1.7 -1.0" rotation="0 1 0 1.5708"><Shape>{tex_appearance("poster_skeleton")}<Box size="0.9 1.2 0.02"/></Shape></Transform>')
-    s.append(f'<Transform translation="3.94 1.7 -0.5" rotation="0 1 0 -1.5708"><Shape>{tex_appearance("poster_anatomy")}<Box size="0.9 1.2 0.02"/></Shape></Transform>')
-    # teacher desk
-    s.append(box(1.3, 0.38, -2.2, 1.6, 0.76, 0.7, WOOD))
-    # student desks: 2 rows x 3
+    s = [box([0,-0.05,0], [8,0.1,7], WOOD_DARK),
+         box([0,3.05,0], [8,0.1,7], WALL),
+         box([0,1.5,-3.5], [8,3,0.1], WALL),
+         box([-4.0,1.5,0], [0.1,3,7], WALL),
+         box([4.0,1.5,0], [0.1,3,7], WALL),
+         textured_panel([0.8,1.5,-3.44], [3.6,1.3,0.04], "blackboard"),
+         box([0.8,0.82,-3.41], [3.6,0.05,0.10], WOOD),
+         textured_panel([-3.94,1.7,-1.0], [0.9,1.2,0.02], "poster_skeleton", rot=[0,1,0,1.5708]),
+         textured_panel([3.94,1.7,-0.5], [0.9,1.2,0.02], "poster_anatomy", rot=[0,1,0,-1.5708]),
+         box([1.3,0.38,-2.2], [1.6,0.76,0.7], WOOD)]
     for rz in (0.6, 2.0):
         for cx in (-2.2, 0.0, 2.2):
-            s.append(box(cx, 0.36, rz, 0.6, 0.04, 0.45, WOOD))            # desktop
-            s.append(box(cx, 0.18, rz, 0.05, 0.36, 0.05, METAL))          # leg
-            s.append(box(cx, 0.23, rz + 0.45, 0.4, 0.04, 0.38, SEAT))     # seat
-            s.append(box(cx, 0.45, rz + 0.62, 0.4, 0.45, 0.04, SEAT))     # backrest
-    return "\n    ".join(s)
+            s += [box([cx,0.36,rz], [0.6,0.04,0.45], WOOD),
+                  box([cx,0.18,rz], [0.05,0.36,0.05], METAL),
+                  box([cx,0.23,rz+0.45], [0.4,0.04,0.38], SEAT),
+                  box([cx,0.45,rz+0.62], [0.4,0.45,0.04], SEAT)]
+    return s
 
-doc = f'''<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN" "https://www.web3d.org/specifications/x3d-4.0.dtd">
-<X3D profile="Immersive" version="4.0"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
-     xsd:noNamespaceSchemaLocation="https://www.web3d.org/specifications/x3d-4.0.xsd">
-  <head>
-    <meta name="title" content="classroom_skeleton.x3d"/>
-    <meta name="description" content="Science classroom with a real anatomical skeleton (19 NIST Visible Human bone models from the Web3D HumanoidAnimation/Medical archive) hanging on a rolling display stand."/>
-    <meta name="generator" content="generate_classroom.py (x3d_mcp)"/>
-  </head>
-  <Scene>
-    <WorldInfo title="Science Classroom Skeleton"/>
-    <Background skyColor="0.85 0.88 0.92"/>
-    <NavigationInfo type='"WALK" "EXAMINE" "ANY"' speed="1.5" avatarSize="0.25 1.6 0.75"/>
+# ------------------------------------------------------------------ animation
+def animation():
+    nodes = [
+        X.TimeSensor(DEF="ArmClock", cycleInterval=2.6, loop=True),
+        X.TimeSensor(DEF="WaveClock", cycleInterval=0.55, loop=True),
+        X.TimeSensor(DEF="JawClock", cycleInterval=0.42, loop=True),
+        X.TimeSensor(DEF="HeadClock", cycleInterval=7.0, loop=True),
+        X.OrientationInterpolator(DEF="ArmSway", key=[0,0.5,1],
+            keyValue=[[0,0,1,-1.78],[0,0,1,-2.02],[0,0,1,-1.78]]),
+        X.OrientationInterpolator(DEF="ForearmWave", key=[0,0.25,0.5,0.75,1],
+            keyValue=[[0,0,1,0.38],[0,0,1,-0.38],[0,0,1,0.38],[0,0,1,-0.38],[0,0,1,0.38]]),
+        X.OrientationInterpolator(DEF="JawTalk", key=[0,0.5,1],
+            keyValue=[[1,0,0,0],[1,0,0,0.32],[1,0,0,0]]),
+        X.OrientationInterpolator(DEF="HeadTurn", key=[0,0.25,0.5,0.75,1],
+            keyValue=[[0,1,0,0],[0,1,0,0.38],[0,1,0,0],[0,1,0,-0.38],[0,1,0,0]]),
+    ]
+    R = X.ROUTE
+    routes = [
+        R(fromNode="ArmClock", fromField="fraction_changed", toNode="ArmSway", toField="set_fraction"),
+        R(fromNode="WaveClock", fromField="fraction_changed", toNode="ForearmWave", toField="set_fraction"),
+        R(fromNode="JawClock", fromField="fraction_changed", toNode="JawTalk", toField="set_fraction"),
+        R(fromNode="HeadClock", fromField="fraction_changed", toNode="HeadTurn", toField="set_fraction"),
+        R(fromNode="ArmSway", fromField="value_changed", toNode="RArm", toField="set_rotation"),
+        R(fromNode="ForearmWave", fromField="value_changed", toNode="RForearm", toField="set_rotation"),
+        R(fromNode="JawTalk", fromField="value_changed", toNode="JawGrp", toField="set_rotation"),
+        R(fromNode="HeadTurn", fromField="value_changed", toNode="HeadGrp", toField="set_rotation"),
+    ]
+    return nodes + routes
 
-    <Viewpoint DEF="Entry" position="0 1.6 3.2" description="Classroom entry"/>
-    <Viewpoint DEF="SkeletonView" position="0.2 1.5 0.2" orientation="0 1 0 -0.45"
-               description="Meet the skeleton"/>
-    <Viewpoint DEF="SkullStudy" position="-0.9 1.65 -0.9" orientation="0 1 0 -0.35"
-               description="Skull close-up"/>
+# ------------------------------------------------------------------ assemble
+scene = X.Scene(children=[
+    X.WorldInfo(title="Science Classroom Skeleton"),
+    X.Background(skyColor=[[0.85, 0.88, 0.92]]),
+    X.NavigationInfo(type=["WALK","EXAMINE","ANY"], speed=1.5, avatarSize=[0.25,1.6,0.75]),
+    X.Viewpoint(DEF="Entry", position=[0,1.6,3.2], description="Classroom entry"),
+    X.Viewpoint(DEF="SkeletonView", position=[0.2,1.5,0.2], orientation=[0,1,0,-0.45],
+                description="Meet the skeleton"),
+    X.Viewpoint(DEF="SkullStudy", position=[-0.9,1.65,-0.9], orientation=[0,1,0,-0.35],
+                description="Skull close-up"),
+    X.EnvironmentLight(global_=True, color=[0.95,0.96,1.0], intensity=0.55,
+                       ambientIntensity=0.35,
+                       diffuseCoefficients=[0.9,0.92,1.0, 0.05,0.05,0.06, 0,0,0, 0,0,0,
+                                            0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]),
+    X.DirectionalLight(direction=[-0.3,-1,-0.4], intensity=0.8, ambientIntensity=0.15),
+    X.DirectionalLight(direction=[0.5,-0.6,0.5], intensity=0.3),
+    X.PointLight(location=[0,2.9,0], intensity=0.4, radius=8),
+    *classroom(),
+    skeleton(),
+    *animation(),
+])
 
-    <!-- image-based ambient (PBR): warm-tinted global environment light -->
-    <EnvironmentLight global="true" color="0.95 0.96 1.0" intensity="0.55"
-                      ambientIntensity="0.35"
-                      diffuseCoefficients="0.9 0.92 1.0  0.05 0.05 0.06  0 0 0  0 0 0
-                                           0 0 0  0 0 0  0 0 0  0 0 0  0 0 0"/>
-    <DirectionalLight direction="-0.3 -1 -0.4" intensity="0.8" ambientIntensity="0.15"/>
-    <DirectionalLight direction="0.5 -0.6 0.5" intensity="0.3"/>
-    <PointLight location="0 2.9 0" intensity="0.4" radius="8"/>
+doc = X.X3D(profile="Immersive", version="4.0",
+            head=X.head(children=[
+                X.meta(name="title", content="classroom_skeleton.x3d"),
+                X.meta(name="description",
+                       content=("Science classroom with a real anatomical skeleton "
+                                "(19 NIST bone models) on a rolling stand -- waving, "
+                                "head-turning, talking. PBR + EnvironmentLight. Built with x3d.py.")),
+                X.meta(name="generator", content="generate_classroom.py (x3d.py canonical pipeline)"),
+            ]),
+            Scene=scene)
 
-    {classroom()}
-{skeleton()}
-{animation()}
-  </Scene>
-</X3D>
-'''
-
+xml = doc.XML()
+# x3d.py drops two containerFields on output: EnvironmentLight's global, and
+# the emissiveTexture container on textures inside UnlitMaterial (without it
+# the texture binds to the default 'texture' slot and is ignored -> white).
+# Every ImageTexture in this scene is a display panel's emissive texture.
+xml = xml.replace("<EnvironmentLight ", "<EnvironmentLight global='true' ", 1)
+xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTexture' ")
 with open("classroom_skeleton.x3d", "w") as fh:
-    fh.write(doc)
+    fh.write(xml)
+textured = [n for n,(f,_) in TEXTURES.items() if os.path.exists(os.path.join(TEXTURE_DIR,f))]
+print(f"wrote classroom_skeleton.x3d via x3d.py ({len(xml)} bytes, {len(BONES)} bones, "
+      f"textures: {textured or 'none'})")
 
-textured = [n for n, (f, _) in TEXTURES.items()
-            if os.path.exists(os.path.join(TEXTURE_DIR, f))]
-print(f"wrote classroom_skeleton.x3d ({len(doc)} bytes, {len(BONES)} bone inlines, "
-      f"textures: {textured or 'none (plain materials)'})")
+# ------------------------------------------------------------------ web pages
+SAXON, XSLT = "tools_x3d/saxon9he.jar", "tools_x3d/X3dToX3dom.xslt"
+STABLE_X3DOM = "https://x3dom.org/download/1.8.3"
+
+def write_html():
+    if not (os.path.exists(SAXON) and os.path.exists(XSLT)):
+        print("skipped classroom_skeleton.html: Saxon/stylesheet missing"); return
+    # strip DOCTYPE so Saxon doesn't fetch the DTD (hits JAXP entity limit)
+    nodtd = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
+    open("_classroom_nodtd.x3d", "w").write(nodtd)
+    r = subprocess.run(["java", "-cp", SAXON, "net.sf.saxon.Transform",
+                        "-s:_classroom_nodtd.x3d", f"-xsl:{XSLT}",
+                        "-o:classroom_skeleton.html", f"urlX3DOM={STABLE_X3DOM}"],
+                       capture_output=True, text=True)
+    os.remove("_classroom_nodtd.x3d")
+    if r.returncode != 0:
+        print("X3dToX3dom failed:", r.stderr[:300]); return
+    html = open("classroom_skeleton.html").read().replace("x3dom-full.js", "x3dom.js")
+    open("classroom_skeleton.html", "w").write(html)
+    print("wrote classroom_skeleton.html via X3dToX3dom.xslt (canonical)")
+    try:
+        import sys; sys.path.insert(0, "src")
+        from tools.render import _x3dom_page
+        open("classroom_skeleton_x3dom.html", "w").write(_x3dom_page(
+            xml, title="Science Classroom — Living Skeleton", width="100%", height="100vh"))
+        print("wrote classroom_skeleton_x3dom.html (MCP renderer fallback)")
+    except Exception as e:
+        print(f"skipped fallback: {e}")
+
+write_html()
