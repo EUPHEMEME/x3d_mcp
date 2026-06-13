@@ -100,21 +100,29 @@ RUN_FRAGMENT  = open("assets/loa5/run_animation.x3dfrag").read()
 JUMP_FRAGMENT = open("assets/loa5/jump_animation.x3dfrag").read()
 
 def buttons_and_script():
-    """Clickable chalkboard buttons (TouchSensor panels) + a Script that enables
-    exactly one locomotion TimeSensor at a time (Stand disables all)."""
-    btns = [("Walk", "0.15 0.5 0.2"), ("Run", "0.7 0.35 0.1"),
-            ("Jump", "0.15 0.3 0.6"), ("Stand", "0.3 0.3 0.33")]
+    """Chalk-styled chalkboard buttons (blend into the board: dark-green fill +
+    chalk-white drawn outline + chalk label) wired to a Script that enables
+    exactly one locomotion TimeSensor at a time (Stand disables all). Each button
+    is a TouchSensor with a solid fill panel as a generous click target."""
+    btns = ["Walk", "Run", "Jump", "Stand"]
+    CHALK = "0.92 0.94 0.86"      # chalk white, matches the board's writing
+    FILL = "0.08 0.13 0.10"       # chalkboard green (blends in)
+    hw, hh = 0.31, 0.15
     out = []
     x0, y, z = -0.55, 2.0, -3.40   # row along the top of the blackboard
-    for i, (label, color) in enumerate(btns):
+    for i, label in enumerate(btns):
         bx = x0 + i * 0.7
         out.append(f"""    <Transform translation='{bx} {y} {z}'>
       <TouchSensor DEF='Btn{label}'/>
-      <Shape><Appearance><Material diffuseColor='{color}' emissiveColor='{color}'/></Appearance>
-        <Box size='0.62 0.30 0.03'/></Shape>
-      <Transform translation='0 0 0.04'><Shape>
-        <Appearance><Material diffuseColor='0 0 0' emissiveColor='0 0 0'/></Appearance>
-        <Text string='"{label}"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.17'/></Text>
+      <Shape><Appearance><Material diffuseColor='{FILL}' emissiveColor='{FILL}'/></Appearance>
+        <Box size='{2*hw} {2*hh} 0.012'/></Shape>
+      <Shape><Appearance><Material emissiveColor='{CHALK}'/><LineProperties linewidthScaleFactor='2'/></Appearance>
+        <IndexedLineSet coordIndex='0 1 2 3 0 -1'>
+          <Coordinate point='{-hw} {-hh} 0.01  {hw} {-hh} 0.01  {hw} {hh} 0.01  {-hw} {hh} 0.01'/>
+        </IndexedLineSet></Shape>
+      <Transform translation='0 0 0.02'><Shape>
+        <Appearance><Material diffuseColor='{CHALK}' emissiveColor='{CHALK}'/></Appearance>
+        <Text string='"{label}"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>""")
     script = """    <Script DEF='ModeSwitch'>

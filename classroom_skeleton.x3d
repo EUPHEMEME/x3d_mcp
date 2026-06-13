@@ -3180,38 +3180,54 @@
       <ROUTE fromField='value_changed' fromNode='Jump_r_carpal_distal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_distal_interphalangeal_5'/>
     <Transform translation='-0.55 2.0 -3.4'>
       <TouchSensor DEF='BtnWalk'/>
-      <Shape><Appearance><Material diffuseColor='0.15 0.5 0.2' emissiveColor='0.15 0.5 0.2'/></Appearance>
-        <Box size='0.62 0.30 0.03'/></Shape>
-      <Transform translation='0 0 0.04'><Shape>
-        <Appearance><Material diffuseColor='0 0 0' emissiveColor='0 0 0'/></Appearance>
-        <Text string='"Walk"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.17'/></Text>
+      <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
+        <Box size='0.62 0.3 0.012'/></Shape>
+      <Shape><Appearance><Material emissiveColor='0.92 0.94 0.86'/><LineProperties linewidthScaleFactor='2'/></Appearance>
+        <IndexedLineSet coordIndex='0 1 2 3 0 -1'>
+          <Coordinate point='-0.31 -0.15 0.01  0.31 -0.15 0.01  0.31 0.15 0.01  -0.31 0.15 0.01'/>
+        </IndexedLineSet></Shape>
+      <Transform translation='0 0 0.02'><Shape>
+        <Appearance><Material diffuseColor='0.92 0.94 0.86' emissiveColor='0.92 0.94 0.86'/></Appearance>
+        <Text string='"Walk"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
     <Transform translation='0.1499999999999999 2.0 -3.4'>
       <TouchSensor DEF='BtnRun'/>
-      <Shape><Appearance><Material diffuseColor='0.7 0.35 0.1' emissiveColor='0.7 0.35 0.1'/></Appearance>
-        <Box size='0.62 0.30 0.03'/></Shape>
-      <Transform translation='0 0 0.04'><Shape>
-        <Appearance><Material diffuseColor='0 0 0' emissiveColor='0 0 0'/></Appearance>
-        <Text string='"Run"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.17'/></Text>
+      <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
+        <Box size='0.62 0.3 0.012'/></Shape>
+      <Shape><Appearance><Material emissiveColor='0.92 0.94 0.86'/><LineProperties linewidthScaleFactor='2'/></Appearance>
+        <IndexedLineSet coordIndex='0 1 2 3 0 -1'>
+          <Coordinate point='-0.31 -0.15 0.01  0.31 -0.15 0.01  0.31 0.15 0.01  -0.31 0.15 0.01'/>
+        </IndexedLineSet></Shape>
+      <Transform translation='0 0 0.02'><Shape>
+        <Appearance><Material diffuseColor='0.92 0.94 0.86' emissiveColor='0.92 0.94 0.86'/></Appearance>
+        <Text string='"Run"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
     <Transform translation='0.8499999999999999 2.0 -3.4'>
       <TouchSensor DEF='BtnJump'/>
-      <Shape><Appearance><Material diffuseColor='0.15 0.3 0.6' emissiveColor='0.15 0.3 0.6'/></Appearance>
-        <Box size='0.62 0.30 0.03'/></Shape>
-      <Transform translation='0 0 0.04'><Shape>
-        <Appearance><Material diffuseColor='0 0 0' emissiveColor='0 0 0'/></Appearance>
-        <Text string='"Jump"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.17'/></Text>
+      <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
+        <Box size='0.62 0.3 0.012'/></Shape>
+      <Shape><Appearance><Material emissiveColor='0.92 0.94 0.86'/><LineProperties linewidthScaleFactor='2'/></Appearance>
+        <IndexedLineSet coordIndex='0 1 2 3 0 -1'>
+          <Coordinate point='-0.31 -0.15 0.01  0.31 -0.15 0.01  0.31 0.15 0.01  -0.31 0.15 0.01'/>
+        </IndexedLineSet></Shape>
+      <Transform translation='0 0 0.02'><Shape>
+        <Appearance><Material diffuseColor='0.92 0.94 0.86' emissiveColor='0.92 0.94 0.86'/></Appearance>
+        <Text string='"Jump"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
     <Transform translation='1.5499999999999996 2.0 -3.4'>
       <TouchSensor DEF='BtnStand'/>
-      <Shape><Appearance><Material diffuseColor='0.3 0.3 0.33' emissiveColor='0.3 0.3 0.33'/></Appearance>
-        <Box size='0.62 0.30 0.03'/></Shape>
-      <Transform translation='0 0 0.04'><Shape>
-        <Appearance><Material diffuseColor='0 0 0' emissiveColor='0 0 0'/></Appearance>
-        <Text string='"Stand"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.17'/></Text>
+      <Shape><Appearance><Material diffuseColor='0.08 0.13 0.10' emissiveColor='0.08 0.13 0.10'/></Appearance>
+        <Box size='0.62 0.3 0.012'/></Shape>
+      <Shape><Appearance><Material emissiveColor='0.92 0.94 0.86'/><LineProperties linewidthScaleFactor='2'/></Appearance>
+        <IndexedLineSet coordIndex='0 1 2 3 0 -1'>
+          <Coordinate point='-0.31 -0.15 0.01  0.31 -0.15 0.01  0.31 0.15 0.01  -0.31 0.15 0.01'/>
+        </IndexedLineSet></Shape>
+      <Transform translation='0 0 0.02'><Shape>
+        <Appearance><Material diffuseColor='0.92 0.94 0.86' emissiveColor='0.92 0.94 0.86'/></Appearance>
+        <Text string='"Stand"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.15'/></Text>
       </Shape></Transform>
     </Transform>
     <Script DEF='ModeSwitch'>
