@@ -19,6 +19,7 @@ Skeleton joint centers come from the Web3D archive character JinLOA4.x3d
 import json
 import math
 import os
+import re
 import subprocess
 
 from x3d import x3d as X
@@ -192,13 +193,13 @@ def gait_nodes():
         routes.append(X.ROUTE(fromNode="GaitClock", fromField="fraction_changed",
                               toNode=d, toField="set_fraction"))
         routes.append(X.ROUTE(fromNode=d, fromField="value_changed",
-                              toNode=joint, toField="set_rotation"))
+                              toNode=f"hanim_{joint}", toField="set_rotation"))
     bounce = [[0,0,0], [0,0.045,0], [0,0,0], [0,0.045,0], [0,0,0]]
     nodes.append(X.PositionInterpolator(DEF="bounce_int", key=GAIT_KEY, keyValue=bounce))
     routes.append(X.ROUTE(fromNode="GaitClock", fromField="fraction_changed",
                           toNode="bounce_int", toField="set_fraction"))
     routes.append(X.ROUTE(fromNode="bounce_int", fromField="value_changed",
-                          toNode="humanoid_root", toField="set_translation"))
+                          toNode="hanim_humanoid_root", toField="set_translation"))
     return nodes, routes
 
 # ---------------------------------------------------------------------------
@@ -253,14 +254,12 @@ def scenery():
 gait_int, gait_routes = gait_nodes()
 course_int, course_routes, LAP, COURSE_LEN = course_nodes()
 
-# Only the skeleton field is populated. x3d.py serializes the joints/segments
-# fields *before* skeleton, which would place every USE before its DEF
-# (unresolvable). The flat lists are optional bookkeeping, so we omit them.
-_root = build_joint("humanoid_root")
-_root.containerField = "skeleton"   # x3d.py omits it otherwise; Castle needs it
-humanoid = X.HAnimHumanoid(
-    DEF="Human", name="humanoid", version="2.0", loa=5,
-    skeleton=[_root])
+# The figure is the canonical AllBonesLOA5 bone-mesh humanoid (joints DEF'd
+# hanim_<name>, 244 bone-mesh Inlines). We embed the extracted fragment (not an
+# Inline) so its joint DEFs are in scene scope and the gait ROUTEs can reach
+# them. A placeholder Group marks the insertion point; replaced post-serialize.
+HUMANOID_FRAGMENT = open("assets/loa5/loa5_humanoid.x3dfrag").read()
+humanoid = X.Group(DEF="HumanoidSlot")
 
 traveler = X.Transform(DEF="Traveler", children=[
     X.Viewpoint(DEF="ChaseCam", position=[0,1.5,-3.2], orientation=[0,1,0,3.14159],
@@ -300,20 +299,16 @@ doc = X.X3D(profile="Immersive", version="4.0",
             Scene=scene)
 
 xml = doc.XML()
-# x3d.py drops two HAnim attributes on output: the skeleton field's
-# containerField (Castle renders the humanoid only via skeleton, not children)
-# and HAnimHumanoid version. Restore both.
-xml = xml.replace("<HAnimHumanoid DEF='Human'",
-                  "<HAnimHumanoid DEF='Human' version='2.0'", 1)
-xml = xml.replace("<HAnimJoint DEF='humanoid_root'",
-                  "<HAnimJoint DEF='humanoid_root' containerField='skeleton'", 1)
+# Insert the canonical bone-mesh humanoid at the placeholder.
+xml = re.sub(r"<Group DEF='HumanoidSlot'\s*/>|<Group DEF='HumanoidSlot'>\s*</Group>",
+             HUMANOID_FRAGMENT, xml, count=1)
 # Drop the DOCTYPE: the external DTD reference makes web players (X_ITE) stall
 # fetching it on load. The file stays valid X3D 4.0 via the XSD schemaLocation.
 xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
 with open("running_human.x3d", "w") as fh:
     fh.write(xml)
-print(f"wrote running_human.x3d via x3d.py ({len(xml)} bytes, {len(ORDER)} joints, "
-      f"course {COURSE_LEN:.1f} m @ {SPEED:.2f} m/s -> lap {LAP:.1f} s)")
+print(f"wrote running_human.x3d ({len(xml)} bytes, canonical AllBonesLOA5 bone-mesh "
+      f"humanoid; course {COURSE_LEN:.1f} m @ {SPEED:.2f} m/s -> lap {LAP:.1f} s)")
 
 # ---------------------------------------------------------------------------
 # web page: flatten HAnim -> core nodes, then official X3dToX3dom.xslt (Saxon)

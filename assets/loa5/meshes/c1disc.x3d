@@ -1,0 +1,217 @@
+<head>
+<meta charset="utf-8" />
+<meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="/x3d/content/404.html" />
+<link rel="shortlink" href="/x3d/content/404.html" />
+<meta name="viewport" content="width=device-width" />
+<link rel="shortcut icon" href="https://www.web3d.org/sites/default/files/web3d.ico" type="image/vnd.microsoft.icon" />
+<title>Resource Page Not Found | Web3D Consortium</title>
+<style type="text/css" media="all">
+@import url("https://www.web3d.org/modules/system/system.base.css?si4ozc");
+@import url("https://www.web3d.org/modules/system/system.menus.css?si4ozc");
+@import url("https://www.web3d.org/modules/system/system.messages.css?si4ozc");
+@import url("https://www.web3d.org/modules/system/system.theme.css?si4ozc");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.web3d.org/sites/all/modules/ctools/css/ctools.css?si4ozc");
+</style>
+<style type="text/css" media="all">
+@import url("https://www.web3d.org/sites/all/themes/media-responsive-theme/style.css?si4ozc");
+@import url("https://www.web3d.org/sites/all/themes/media-responsive-theme/media.css?si4ozc");
+@import url("https://www.web3d.org/sites/all/themes/media-responsive-theme/custom/web3d.css?si4ozc");
+@import url("https://www.web3d.org/sites/all/themes/media-responsive-theme/custom/web3d-responsive.css?si4ozc");
+</style>
+</head>
+<body class="html not-front not-logged-in no-sidebars page-node page-node- page-node-2574 node-type-page">
+    
+<div id="header_wrapper">
+  <div id="inner_header_wrapper">
+
+    <header id="header" role="banner">
+
+      <div class="top_center">
+		      </div>
+
+      <div class='top_sides'>
+      <div class="top_left">
+                  <div id="logo"><a href="/" title="Home"><img src="https://www.web3d.org/sites/default/files/Web3D_button_246x96.png"/></a></div>
+                <h1 id="site-title">
+          <a href="/" title="Home">Web3D Consortium</a>
+          <div id="site-description">Open Standards for Real-Time 3D Communication</div>
+        </h1>
+      </div>
+	  </div>
+
+    <div class="clear"></div>
+
+    </header>
+
+  </div>
+</div>
+  
+  <div id="container">
+
+    
+    <div class="content-sidebar-wrap">
+
+    <div id="content">
+      <section id="post-content" role="main">
+                                <h1 class="page-title">Resource Page Not Found</h1>                                        <div class="region region-content">
+  <div id="block-system-main" class="block block-system">
+
+      
+  <div class="content">
+                          <span property="dc:title" content="Page Not Found" class="rdf-meta element-hidden"></span><span property="sioc:num_replies" content="0" datatype="xsd:integer" class="rdf-meta element-hidden"></span>  
+      
+    
+  <div class="content node-page">
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+	  <div class="field-items">
+	    <div class="field-item even" property="content:encoded">
+		  <p>The page you requested was not found. Please do one of the following.</p>
+		  <ul>
+			<li>Return to the <a href="/x3d/content/examples/X3dResources.html">Resource Home</a>.</li>
+		    <li>Navigate from the <a href="/">Home Page</a>.</li>
+			<li><a href="/search/node">Search the site</a> for the desired content.</li>
+		  </ul>
+        </div>
+      </div>
+	</div>
+  </div>
+
+ 
+    </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+      </section> <!-- /#main -->
+    </div>
+  
+      
+    </div>
+  
+</div>
+
+<div id="footer">
+  <div id="footer_wrapper">
+     
+      <div id="footer-area" class="clearfix">
+                <div class="column"><div class="region region-footer-first">
+  <div id="block-block-5" class="block block-block">
+
+        <h2 >Case Studies</h2>
+    
+  <div class="content">
+    <p><a href="/case-studies"><img src="/static/images/icons/main_thumb_cases.jpg" style="float:left" width="85" height="85" />Great Projects by our Members</a></p>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+                        <div class="column"><div class="region region-footer-second">
+  <div id="block-block-4" class="block block-block">
+
+        <h2 >X3D &amp; VRML</h2>
+    
+  <div class="content">
+    <p><a href="/x3d-vrml-most-widely-used-3d-formats"><img src="/static/images/icons/main_thumb_x3d.jpg" style="float:left" width="85" height="85" />The Most Widely Used Formats</a></p>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+                        <div class="column"><div class="region region-footer-third">
+  <div id="block-block-3" class="block block-block">
+
+        <h2 >3D in HTML</h2>
+    
+  <div class="content">
+    <p><a href="/html-3d"><img src="/static/images/icons/main_thumb_x3dom.jpg" style="float:left" width="85" height="85" />X3DOM... 3D Without Plugins</a></p>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+                        <div class="column"><div class="region region-footer-forth">
+  <div id="block-block-2" class="block block-block">
+
+        <h2 >Web3D Videos</h2>
+    
+  <div class="content">
+    <p><a href="/youtube" target="_blank"><img src="/static/images/icons/videos-lighter.jpg" style="float:left" width="85" height="85" />X3D and VRML</a></p>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+</div>
+              </div>
+      </div>
+  <div class="footer_credit">
+    <div class="footer_inner_credit">
+           <div id="foot">
+        <div class="region region-footer">
+  <div id="block-block-51" class="block block-block">
+
+      
+  <div class="content">
+    <div class="rowcol">
+<div class="col-3">
+<h3 class="column-title">Support Web3D<sup>®</sup></h3>
+<div class="column-body">
+<div><a href="/join">Join</a> the Consortium</div>
+<div><a href="/donate">Donate</a> to the Consortium</div>
+<div> </div>
+<div>Web3D<sup>®</sup> and X3D<sup>®</sup> are trademarks owned by the Web3D Consortium.</div>
+</div>
+</div>
+<div class="col-3">
+<h3 class="column-title">Social Media</h3>
+<div class="column-body">
+<ul>
+<li><a href="/twitter">Twitter</a></li>
+<li><a href="/facebook">Facebook</a></li>
+<li><a href="/youtube">Youtube</a></li>
+<li><a href="/rss.xml">RSS</a></li>
+</ul>
+</div>
+</div>
+<div class="col-3">
+<h3 class="column-title">Links</h3>
+<div class="column-body">
+<ul>
+<li><a href="/about">About</a></li>
+<li><a href="/calendar/month">Calendar</a></li>
+<li><a href="/contact">Contact</a></li>
+<li><a href="/privacy">Privacy</a></li>
+<li><a href="/sitemap">Site Map</a></li>
+<li><a href="/events/now">Upcoming Events</a></li>
+</ul>
+</div>
+</div>
+<div class="col-3">
+<div class="column-body"><em>Web3D is a nonprofit organization that develops and maintains the X3D, VRML, and HAnim international standards. These are 3D graphics file formats and run-time specifications for the delivery and integration of interactive 3D data over networks. Web3D Consortium members work together to produce open, royalty-free and ISO-ratified capabilities for the Web.</em></div>
+</div>
+</div>
+  </div>
+  
+</div> <!-- /.block -->
+</div>
+ <!-- /.region -->
+      </div>
+         
+    <div id="copyright">
+     <p class="copyright">Copyright &copy; 1999-2024, Web3D Consortium </p> <p class="credits"> Design by  <a href="http://www.zymphonies.com">Zymphonies</a></p>
+    <div class="clear"></div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- code in footer -->
+<!-- page[content] -->
+  </body>
+</html>

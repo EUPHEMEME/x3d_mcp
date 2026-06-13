@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='skull.x3d' name='title'/>
+    <meta content='The human skull is generally considered to consist of 22 bones: eight cranial bones and fourteen facial skeleton bones. In the neurocranium these are the occipital bone, two temporal bones, two parietal bones, the sphenoid, ethmoid and frontal bones. The bones of the facial skeleton (14) are the vomer, two inferior nasal conchae, two nasal bones, two maxilla, two palatine bones, two zygomatic bones, and two lacrimal bones. This composite model also includes the upper teeth. The mandible and lower teeth are separate, animatable together, and included in the jaw.x3d model.' name='description'/>
+    <meta content='Bones in skull: l_ethmoid r_ethmoid frontal l_inferior_nasal_conchae r_inferior_nasal_conchae l_lacrimal r_lacrimal l_maxilla r_maxilla l_nasal r_nasal occipital l_parietal l_palatine r_palatine r_parietal sphenoid l_temporal r_temporal vomer l_zygomatic r_zygomatic' name='info'/>
+    <meta content='see vomer.x3d for display and coordinate components of skullbase location' name='info'/>
+    <meta content='Don Brutzman' name='creator'/>
+    <meta content='14 March 2026' name='created'/>
+    <meta content='24 April 2026' name='modified'/>
+    <meta content='jaw.x3d' name='reference'/>
+    <meta content='vomer.x3d' name='reference'/>
+    <meta content='skullWithFrontalBoneSelected.png' name='Image'/>
+    <meta content='https://en.wikipedia.org/wiki/Skull#Humans' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Human_tooth' name='reference'/>
+    <meta content='United States, https://en.wikipedia.org/wiki/Universal_Numbering_System' name='reference'/>
+    <meta content='ISO 3950, https://en.wikipedia.org/wiki/FDI_World_Dental_Federation_notation' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/FDI_World_Dental_Federation_notation#/media/File:Comparison_of_dental_notations.svg' name='reference'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/skull.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='skull.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <Transform DEF='SkullLocalOffset' translation='0 1.68 0'>
+      <ViewpointGroup DEF='ViewpointGroup_skull' description='skull model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='skull LOA-1 face from front' nearDistance='0.001' position='0 0 0.5' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='skull LOA-1 from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.5 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='skull LOA-1 from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.5' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='skull LOA-1 from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.5 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='skull LOA-1 from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.5 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='skull LOA-1 from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.5 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+    </Transform>
+    <Inline DEF='ethmoid' url='"ethmoid.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/ethmoid.x3d" "ethmoid.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/ethmoid.wrl"'/>
+    <Inline DEF='frontal' url='"frontal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/frontal.x3d" "frontal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/frontal.wrl"'/>
+    <Inline DEF='l_inferior_nasal_conchae' url='"l_inferior_nasal_conchae.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_inferior_nasal_conchae.x3d" "l_inferior_nasal_conchae.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_inferior_nasal_conchae.wrl"'/>
+    <Inline DEF='r_inferior_nasal_conchae' url='"r_inferior_nasal_conchae.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_inferior_nasal_conchae.x3d" "r_inferior_nasal_conchae.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_inferior_nasal_conchae.wrl"'/>
+    <Inline DEF='l_lacrimal' url='"l_lacrimal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_lacrimal.x3d" "l_lacrimal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_lacrimal.wrl"'/>
+    <Inline DEF='r_lacrimal' url='"r_lacrimal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_lacrimal.x3d" "r_lacrimal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_lacrimal.wrl"'/>
+    <Inline DEF='l_maxilla' url='"l_maxilla.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_maxilla.x3d" "l_maxilla.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_maxilla.wrl"'/>
+    <Inline DEF='r_maxilla' url='"r_maxilla.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_maxilla.x3d" "r_maxilla.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_maxilla.wrl"'/>
+    <Inline DEF='l_nasal' url='"l_nasal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_nasal.x3d" "l_nasal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_nasal.wrl"'/>
+    <Inline DEF='r_nasal' url='"r_nasal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_nasal.x3d" "r_nasal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_nasal.wrl"'/>
+    <Inline DEF='occipital' url='"occipital.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/occipital.x3d" "occipital.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/occipital.wrl"'/>
+    <Inline DEF='l_parietal' url='"l_parietal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_parietal.x3d" "l_parietal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_parietal.wrl"'/>
+    <Inline DEF='r_parietal' url='"r_parietal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_parietal.x3d" "r_parietal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_parietal.wrl"'/>
+    <Inline DEF='l_palatine' url='"l_palatine.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_palatine.x3d" "l_palatine.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_palatine.wrl"'/>
+    <Inline DEF='r_palatine' url='"r_palatine.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_palatine.x3d" "r_palatine.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_palatine.wrl"'/>
+    <Inline DEF='sphenoid' url='"sphenoid.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/sphenoid.x3d" "sphenoid.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/sphenoid.wrl"'/>
+    <Inline DEF='l_temporal' url='"l_temporal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_temporal.x3d" "l_temporal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_temporal.wrl"'/>
+    <Inline DEF='r_temporal' url='"r_temporal.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_temporal.x3d" "r_temporal.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_temporal.wrl"'/>
+    <Inline DEF='vomer' url='"vomer.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/vomer.x3d" "vomer.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/vomer.wrl"'/>
+    <Inline DEF='l_zygomatic' url='"l_zygomatic.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_zygomatic.x3d" "l_zygomatic.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_zygomatic.wrl"'/>
+    <Inline DEF='r_zygomatic' url='"r_zygomatic.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_zygomatic.x3d" "r_zygomatic.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_zygomatic.wrl"'/>
+    <Inline DEF='tooth_molar_1_18' url='"tooth_molar_1_18.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_1_18.x3d" "tooth_molar_1_18.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_1_18.wrl"'/>
+    <!-- r_molar3c.x3d r_molar3r.x3d -->
+    <Inline DEF='tooth_molar_2_17' url='"tooth_molar_2_17.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_2_17.x3d" "tooth_molar_2_17.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_2_17.wrl"'/>
+    <!-- r_molar2c.3xd r_molar2r.3xd -->
+    <Inline DEF='tooth_molar_3_16' url='"tooth_molar_3_16.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_3_16.x3d" "tooth_molar_3_16.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_3_16.wrl"'/>
+    <!-- r_molar1c.3xd r_molar1r.3xd -->
+    <Inline DEF='tooth_premolar_4_15' url='"tooth_premolar_4_15.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_4_15.x3d" "tooth_premolar_4_15.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_4_15.wrl"'/>
+    <!-- rpreol2c.x3d rpreol2r.x3d -->
+    <Inline DEF='tooth_premolar_5_14' url='"tooth_premolar_5_14.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_5_14.x3d" "tooth_premolar_5_14.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_5_14.wrl"'/>
+    <!-- rpreol1c.x3d rpreol1r.x3d -->
+    <Inline DEF='tooth_canine_6_13' url='"tooth_canine_6_13.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_6_13.x3d" "tooth_canine_6_13.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_6_13.wrl"'/>
+    <!-- r_caninec.x3d r_caniner.x3d -->
+    <Inline DEF='tooth_incisor_7_12' url='"tooth_incisor_7_12.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_7_12.x3d" "tooth_incisor_7_12.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_7_12.wrl"'/>
+    <!-- rlatincc.x3d rlatincr.x3d -->
+    <Inline DEF='tooth_incisor_8_11' url='"tooth_incisor_8_11.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_8_11.x3d" "tooth_incisor_8_11.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_8_11.wrl"'/>
+    <!-- rcenincc.x3d rcenincr.x3d -->
+    <Inline DEF='tooth_incisor_9_21' url='"tooth_incisor_9_21.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_9_21.x3d" "tooth_incisor_9_21.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_9_21.wrl"'/>
+    <!-- lcenincc.x3d lcenincr.x3d -->
+    <Inline DEF='tooth_incisor_10_22' url='"tooth_incisor_10_22.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_10_22.x3d" "tooth_incisor_10_22.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_10_22.wrl"'/>
+    <!-- llatincc.x3d llatincr.x3d -->
+    <Inline DEF='tooth_canine_11_23' url='"tooth_canine_11_23.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_11_23.x3d" "tooth_canine_11_23.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_11_23.wrl"'/>
+    <!-- l_caninec.x3d l_caniner.x3d -->
+    <Inline DEF='tooth_premolar_12_24' url='"tooth_premolar_12_24.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_12_24.x3d" "tooth_premolar_12_24.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_12_24.wrl"'/>
+    <!-- lpreol1c.x3d lpreol1r.x3d -->
+    <Inline DEF='tooth_premolar_13_25' url='"tooth_premolar_13_25.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_13_25.x3d" "tooth_premolar_13_25.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_13_25.wrl"'/>
+    <!-- lpreol2c.x3d lpreol2r.x3d -->
+    <Inline DEF='tooth_molar_14_26' url='"tooth_molar_14_26.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_14_26.x3d" "tooth_molar_14_26.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_14_26.wrl"'/>
+    <!-- l_molar1c.3xd l_molar1r.3xd -->
+    <Inline DEF='tooth_molar_15_27' url='"tooth_molar_15_27.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_15_27.x3d" "tooth_molar_15_27.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_15_27.wrl"'/>
+    <!-- l_molar2c.3xd l_molar2r.3xd -->
+    <Inline DEF='tooth_molar_16_28' url='"tooth_molar_16_28.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_16_28.x3d" "tooth_molar_16_28.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_16_28.wrl"'/>
+    <!-- l_molar3c.x3d l_molar3r.x3d -->
+  </Scene>
+</X3D>
