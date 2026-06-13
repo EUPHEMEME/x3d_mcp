@@ -4,8 +4,10 @@ A self-contained snapshot of both demos at this date. Everything needed to view
 them is in this folder; nothing outside it is required.
 
 ## What's here
+- `view-demos.command` — **double-click this to view the demos in a browser.**
+- `index.html` — landing page linking both demos and the PDFs.
 - `running_human.html` — the **runner**: a canonical HAnim LOA5 bone-mesh
-  skeleton (150 joints, 243 bones) running a slalom course.
+  skeleton (~277 bones) running a slalom course.
 - `classroom_skeleton.html` — the **classroom**: the same skeleton on a display
   stand, with clickable chalkboard buttons.
 - `*.x3d` — the X3D scenes the pages load.
@@ -14,14 +16,19 @@ them is in this folder; nothing outside it is required.
 - `paper/visual-changelog.pdf` — one-page picture history of the project.
 
 ## How to view
-**In a browser (recommended):** open `running_human.html` or
-`classroom_skeleton.html`. They use the X_ITE web player (loaded from the
-internet), which renders the real HAnim skeleton.
-*In the classroom, click the chalkboard buttons — Walk / Run / Jump / Stand — to
-switch the figure's motion.* (Click once, without dragging.)
+**In a browser (recommended): double-click `view-demos.command`.** It starts a
+tiny local web server and opens the demos. (Do NOT just double-click the `.html`
+files — browsers block X3D players from reading the bone meshes over a `file://`
+URL, so they fail to load. The launcher serves them over `http://localhost`,
+which works.) First time, macOS may warn it's from an unidentified developer:
+right-click the file → **Open** → **Open**. Close the Terminal window when done.
 
-**On the desktop:** open either `.x3d` in Castle Model Viewer for the highest-
-fidelity render.
+*In the classroom, click the chalkboard buttons — Walk / Run / Jump / Stand — to
+switch the figure's motion (click once, without dragging).* Each demo takes a few
+seconds to load all the bones.
+
+**On the desktop (no server needed):** open either `.x3d` in Castle Model Viewer
+for the highest-fidelity render.
 
 ## Notes
 - This is a point-in-time copy for showing the demo as it was on 2026-06-12.
