@@ -68,11 +68,24 @@ METAL = mat("0.62 0.64 0.67", metallic="0.9", roughness="0.28")
 SEAT = mat("0.20 0.35 0.55", roughness="0.5")
 
 # ---------------------------------------------------------------- skeleton
+# joint pivots in the assembled (metre) frame, measured from the bone models
+R_SHOULDER = "-0.203 1.446 -0.031"
+R_ELBOW    = "-0.217 1.092 0.011"
+NECK       = "0 1.55 -0.03"
+JAW_HINGE  = "0 1.62 -0.04"
+
+# bones that move; everything else is static
+_ANIM = {"BonesRightHumerus", "BonesRightRadiusUlna", "BonesRightHand",
+         "BonesHead", "BonesTeethTop", "BonesMandible", "BonesTeethBottom"}
+
+def _inline(b):
+    return f'<Inline DEF="{b}" url=\'"assets/medical/{b}.x3d"\'/>'
+
 def skeleton():
-    inlines = "\n        ".join(
-        f'<Inline DEF="{b}" url=\'"assets/medical/{b}.x3d"\'/>' for b in BONES)
+    static = "\n        ".join(_inline(b) for b in BONES if b not in _ANIM)
     return f'''
-    <!-- assembled anatomical skeleton (19 regional NIST bone models) -->
+    <!-- assembled anatomical skeleton (19 regional NIST bone models),
+         right arm / head / jaw wrapped in animated pivot groups -->
     <Transform DEF="SkeletonStand" translation="{SKEL_X} 0 {SKEL_Z}">
       <!-- rolling base -->
       {cyl(0, 0.03, 0, 0.06, 0.34, METAL)}
@@ -81,11 +94,56 @@ def skeleton():
       {cyl(0, 1.05, -0.30, 2.00, 0.022, METAL)}
       {cyl(0, 2.04, -0.15, 0.32, 0.015, METAL, rot="1 0 0 1.5708")}
       {cyl(0, 1.965, 0.0, 0.12, 0.008, METAL)}
-      <!-- the bones: shared frame, feet y=0, 60.89 units tall -->
-      <Transform translation="0 {HANG} 0" scale="{SCALE} {SCALE} {SCALE}">
-        {inlines}
+      <!-- bones share a frame (feet y=0); each Inline self-scales to metres -->
+      <Transform translation="0 {HANG} 0">
+        {static}
+        <!-- right arm: shoulder pivot (raised, waving) -->
+        <Transform DEF="RArm" center="{R_SHOULDER}" rotation="0 0 1 -1.9">
+          {_inline("BonesRightHumerus")}
+          <Transform DEF="RForearm" center="{R_ELBOW}" rotation="0 0 1 0">
+            {_inline("BonesRightRadiusUlna")}
+            {_inline("BonesRightHand")}
+          </Transform>
+        </Transform>
+        <!-- head turns; jaw chatters -->
+        <Transform DEF="HeadGrp" center="{NECK}" rotation="0 1 0 0">
+          {_inline("BonesHead")}
+          {_inline("BonesTeethTop")}
+          <Transform DEF="JawGrp" center="{JAW_HINGE}" rotation="1 0 0 0">
+            {_inline("BonesMandible")}
+            {_inline("BonesTeethBottom")}
+          </Transform>
+        </Transform>
       </Transform>
     </Transform>'''
+
+def animation():
+    """Bring the skeleton to life: sway/wave the raised right arm, chatter the
+    jaw, and slowly turn the head -- friendly 'hello class' loop."""
+    return '''
+    <!-- ===================== LIFE (skeleton animation) ===================== -->
+    <TimeSensor DEF="ArmClock"  cycleInterval="2.6" loop="true"/>
+    <TimeSensor DEF="WaveClock" cycleInterval="0.55" loop="true"/>
+    <TimeSensor DEF="JawClock"  cycleInterval="0.42" loop="true"/>
+    <TimeSensor DEF="HeadClock" cycleInterval="7.0" loop="true"/>
+
+    <OrientationInterpolator DEF="ArmSway" key="0 0.5 1"
+        keyValue="0 0 1 -1.78  0 0 1 -2.02  0 0 1 -1.78"/>
+    <OrientationInterpolator DEF="ForearmWave" key="0 0.25 0.5 0.75 1"
+        keyValue="0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38"/>
+    <OrientationInterpolator DEF="JawTalk" key="0 0.5 1"
+        keyValue="1 0 0 0  1 0 0 0.32  1 0 0 0"/>
+    <OrientationInterpolator DEF="HeadTurn" key="0 0.25 0.5 0.75 1"
+        keyValue="0 1 0 0  0 1 0 0.38  0 1 0 0  0 1 0 -0.38  0 1 0 0"/>
+
+    <ROUTE fromNode="ArmClock"  fromField="fraction_changed" toNode="ArmSway"     toField="set_fraction"/>
+    <ROUTE fromNode="WaveClock" fromField="fraction_changed" toNode="ForearmWave" toField="set_fraction"/>
+    <ROUTE fromNode="JawClock"  fromField="fraction_changed" toNode="JawTalk"     toField="set_fraction"/>
+    <ROUTE fromNode="HeadClock" fromField="fraction_changed" toNode="HeadTurn"    toField="set_fraction"/>
+    <ROUTE fromNode="ArmSway"     fromField="value_changed" toNode="RArm"     toField="set_rotation"/>
+    <ROUTE fromNode="ForearmWave" fromField="value_changed" toNode="RForearm" toField="set_rotation"/>
+    <ROUTE fromNode="JawTalk"     fromField="value_changed" toNode="JawGrp"   toField="set_rotation"/>
+    <ROUTE fromNode="HeadTurn"    fromField="value_changed" toNode="HeadGrp"  toField="set_rotation"/>'''
 
 # ---------------------------------------------------------------- classroom
 def classroom():
@@ -144,6 +202,7 @@ doc = f'''<?xml version="1.0" encoding="UTF-8"?>
 
     {classroom()}
 {skeleton()}
+{animation()}
   </Scene>
 </X3D>
 '''

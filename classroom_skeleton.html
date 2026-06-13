@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Science Classroom — Anatomical Skeleton (PBR)</title>
+    <title>Science Classroom — Living Skeleton</title>
     <link rel="stylesheet" href="https://www.x3dom.org/download/1.8.2/x3dom.css">
     <script src="https://www.x3dom.org/download/1.8.2/x3dom.js"></script>
     <style>
@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-    <h1>Science Classroom — Anatomical Skeleton (PBR)</h1>
+    <h1>Science Classroom — Living Skeleton</h1>
     <x3d width="100%" height="100vh">
         <scene>
             <worldinfo title="Science Classroom Skeleton"></worldinfo>
@@ -390,28 +390,52 @@
                         <cylinder height="0.12" radius="0.008"></cylinder>
                     </shape>
                 </transform>
-                <transform translation="0 0.12 0" scale="1.0 1.0 1.0">
-                    <inline def="BonesHead" url="&quot;assets/medical/BonesHead.x3d&quot;"></inline>
-                    <inline def="BonesMandible" url="&quot;assets/medical/BonesMandible.x3d&quot;"></inline>
-                    <inline def="BonesTeethTop" url="&quot;assets/medical/BonesTeethTop.x3d&quot;"></inline>
-                    <inline def="BonesTeethBottom" url="&quot;assets/medical/BonesTeethBottom.x3d&quot;"></inline>
+                <transform translation="0 0.12 0">
                     <inline def="BonesSpine" url="&quot;assets/medical/BonesSpine.x3d&quot;"></inline>
                     <inline def="BonesChest" url="&quot;assets/medical/BonesChest.x3d&quot;"></inline>
                     <inline def="BonesGirdle" url="&quot;assets/medical/BonesGirdle.x3d&quot;"></inline>
                     <inline def="BonesLeftHumerus" url="&quot;assets/medical/BonesLeftHumerus.x3d&quot;"></inline>
                     <inline def="BonesLeftRadiusUlna" url="&quot;assets/medical/BonesLeftRadiusUlna.x3d&quot;"></inline>
                     <inline def="BonesLeftHand" url="&quot;assets/medical/BonesLeftHand.x3d&quot;"></inline>
-                    <inline def="BonesRightHumerus" url="&quot;assets/medical/BonesRightHumerus.x3d&quot;"></inline>
-                    <inline def="BonesRightRadiusUlna" url="&quot;assets/medical/BonesRightRadiusUlna.x3d&quot;"></inline>
-                    <inline def="BonesRightHand" url="&quot;assets/medical/BonesRightHand.x3d&quot;"></inline>
                     <inline def="BonesLeftFemur" url="&quot;assets/medical/BonesLeftFemur.x3d&quot;"></inline>
                     <inline def="BonesLeftTibiaFibula" url="&quot;assets/medical/BonesLeftTibiaFibula.x3d&quot;"></inline>
                     <inline def="BonesLeftFoot" url="&quot;assets/medical/BonesLeftFoot.x3d&quot;"></inline>
                     <inline def="BonesRightFemur" url="&quot;assets/medical/BonesRightFemur.x3d&quot;"></inline>
                     <inline def="BonesRightTibiaFibula" url="&quot;assets/medical/BonesRightTibiaFibula.x3d&quot;"></inline>
                     <inline def="BonesRightFoot" url="&quot;assets/medical/BonesRightFoot.x3d&quot;"></inline>
+                    <transform def="RArm" center="-0.203 1.446 -0.031" rotation="0 0 1 -1.9">
+                        <inline def="BonesRightHumerus" url="&quot;assets/medical/BonesRightHumerus.x3d&quot;"></inline>
+                        <transform def="RForearm" center="-0.217 1.092 0.011" rotation="0 0 1 0">
+                            <inline def="BonesRightRadiusUlna" url="&quot;assets/medical/BonesRightRadiusUlna.x3d&quot;"></inline>
+                            <inline def="BonesRightHand" url="&quot;assets/medical/BonesRightHand.x3d&quot;"></inline>
+                        </transform>
+                    </transform>
+                    <transform def="HeadGrp" center="0 1.55 -0.03" rotation="0 1 0 0">
+                        <inline def="BonesHead" url="&quot;assets/medical/BonesHead.x3d&quot;"></inline>
+                        <inline def="BonesTeethTop" url="&quot;assets/medical/BonesTeethTop.x3d&quot;"></inline>
+                        <transform def="JawGrp" center="0 1.62 -0.04" rotation="1 0 0 0">
+                            <inline def="BonesMandible" url="&quot;assets/medical/BonesMandible.x3d&quot;"></inline>
+                            <inline def="BonesTeethBottom" url="&quot;assets/medical/BonesTeethBottom.x3d&quot;"></inline>
+                        </transform>
+                    </transform>
                 </transform>
             </transform>
+            <timesensor def="ArmClock" cycleinterval="2.6" loop="true"></timesensor>
+            <timesensor def="WaveClock" cycleinterval="0.55" loop="true"></timesensor>
+            <timesensor def="JawClock" cycleinterval="0.42" loop="true"></timesensor>
+            <timesensor def="HeadClock" cycleinterval="7.0" loop="true"></timesensor>
+            <orientationinterpolator def="ArmSway" key="0 0.5 1" keyvalue="0 0 1 -1.78  0 0 1 -2.02  0 0 1 -1.78"></orientationinterpolator>
+            <orientationinterpolator def="ForearmWave" key="0 0.25 0.5 0.75 1" keyvalue="0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38"></orientationinterpolator>
+            <orientationinterpolator def="JawTalk" key="0 0.5 1" keyvalue="1 0 0 0  1 0 0 0.32  1 0 0 0"></orientationinterpolator>
+            <orientationinterpolator def="HeadTurn" key="0 0.25 0.5 0.75 1" keyvalue="0 1 0 0  0 1 0 0.38  0 1 0 0  0 1 0 -0.38  0 1 0 0"></orientationinterpolator>
+            <route fromnode="ArmClock" fromfield="fraction_changed" tonode="ArmSway" tofield="set_fraction"></route>
+            <route fromnode="WaveClock" fromfield="fraction_changed" tonode="ForearmWave" tofield="set_fraction"></route>
+            <route fromnode="JawClock" fromfield="fraction_changed" tonode="JawTalk" tofield="set_fraction"></route>
+            <route fromnode="HeadClock" fromfield="fraction_changed" tonode="HeadTurn" tofield="set_fraction"></route>
+            <route fromnode="ArmSway" fromfield="value_changed" tonode="RArm" tofield="set_rotation"></route>
+            <route fromnode="ForearmWave" fromfield="value_changed" tonode="RForearm" tofield="set_rotation"></route>
+            <route fromnode="JawTalk" fromfield="value_changed" tonode="JawGrp" tofield="set_rotation"></route>
+            <route fromnode="HeadTurn" fromfield="value_changed" tonode="HeadGrp" tofield="set_rotation"></route>
         </scene>
     </x3d>
 </body>

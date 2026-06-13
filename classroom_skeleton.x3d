@@ -63,7 +63,8 @@
     <Transform translation="2.2 0.23 2.45"><Shape><Appearance><PhysicalMaterial baseColor="0.20 0.35 0.55" metallic="0" roughness="0.5"/></Appearance><Box size="0.4 0.04 0.38"/></Shape></Transform>
     <Transform translation="2.2 0.45 2.62"><Shape><Appearance><PhysicalMaterial baseColor="0.20 0.35 0.55" metallic="0" roughness="0.5"/></Appearance><Box size="0.4 0.45 0.04"/></Shape></Transform>
 
-    <!-- assembled anatomical skeleton (19 regional NIST bone models) -->
+    <!-- assembled anatomical skeleton (19 regional NIST bone models),
+         right arm / head / jaw wrapped in animated pivot groups -->
     <Transform DEF="SkeletonStand" translation="-1.2 0 -1.6">
       <!-- rolling base -->
       <Transform translation="0 0.03 0"><Shape><Appearance><PhysicalMaterial baseColor="0.62 0.64 0.67" metallic="0.9" roughness="0.28"/></Appearance><Cylinder height="0.06" radius="0.34"/></Shape></Transform>
@@ -72,28 +73,62 @@
       <Transform translation="0 1.05 -0.3"><Shape><Appearance><PhysicalMaterial baseColor="0.62 0.64 0.67" metallic="0.9" roughness="0.28"/></Appearance><Cylinder height="2.0" radius="0.022"/></Shape></Transform>
       <Transform translation="0 2.04 -0.15" rotation="1 0 0 1.5708"><Shape><Appearance><PhysicalMaterial baseColor="0.62 0.64 0.67" metallic="0.9" roughness="0.28"/></Appearance><Cylinder height="0.32" radius="0.015"/></Shape></Transform>
       <Transform translation="0 1.965 0.0"><Shape><Appearance><PhysicalMaterial baseColor="0.62 0.64 0.67" metallic="0.9" roughness="0.28"/></Appearance><Cylinder height="0.12" radius="0.008"/></Shape></Transform>
-      <!-- the bones: shared frame, feet y=0, 60.89 units tall -->
-      <Transform translation="0 0.12 0" scale="1.0 1.0 1.0">
-        <Inline DEF="BonesHead" url='"assets/medical/BonesHead.x3d"'/>
-        <Inline DEF="BonesMandible" url='"assets/medical/BonesMandible.x3d"'/>
-        <Inline DEF="BonesTeethTop" url='"assets/medical/BonesTeethTop.x3d"'/>
-        <Inline DEF="BonesTeethBottom" url='"assets/medical/BonesTeethBottom.x3d"'/>
+      <!-- bones share a frame (feet y=0); each Inline self-scales to metres -->
+      <Transform translation="0 0.12 0">
         <Inline DEF="BonesSpine" url='"assets/medical/BonesSpine.x3d"'/>
         <Inline DEF="BonesChest" url='"assets/medical/BonesChest.x3d"'/>
         <Inline DEF="BonesGirdle" url='"assets/medical/BonesGirdle.x3d"'/>
         <Inline DEF="BonesLeftHumerus" url='"assets/medical/BonesLeftHumerus.x3d"'/>
         <Inline DEF="BonesLeftRadiusUlna" url='"assets/medical/BonesLeftRadiusUlna.x3d"'/>
         <Inline DEF="BonesLeftHand" url='"assets/medical/BonesLeftHand.x3d"'/>
-        <Inline DEF="BonesRightHumerus" url='"assets/medical/BonesRightHumerus.x3d"'/>
-        <Inline DEF="BonesRightRadiusUlna" url='"assets/medical/BonesRightRadiusUlna.x3d"'/>
-        <Inline DEF="BonesRightHand" url='"assets/medical/BonesRightHand.x3d"'/>
         <Inline DEF="BonesLeftFemur" url='"assets/medical/BonesLeftFemur.x3d"'/>
         <Inline DEF="BonesLeftTibiaFibula" url='"assets/medical/BonesLeftTibiaFibula.x3d"'/>
         <Inline DEF="BonesLeftFoot" url='"assets/medical/BonesLeftFoot.x3d"'/>
         <Inline DEF="BonesRightFemur" url='"assets/medical/BonesRightFemur.x3d"'/>
         <Inline DEF="BonesRightTibiaFibula" url='"assets/medical/BonesRightTibiaFibula.x3d"'/>
         <Inline DEF="BonesRightFoot" url='"assets/medical/BonesRightFoot.x3d"'/>
+        <!-- right arm: shoulder pivot (raised, waving) -->
+        <Transform DEF="RArm" center="-0.203 1.446 -0.031" rotation="0 0 1 -1.9">
+          <Inline DEF="BonesRightHumerus" url='"assets/medical/BonesRightHumerus.x3d"'/>
+          <Transform DEF="RForearm" center="-0.217 1.092 0.011" rotation="0 0 1 0">
+            <Inline DEF="BonesRightRadiusUlna" url='"assets/medical/BonesRightRadiusUlna.x3d"'/>
+            <Inline DEF="BonesRightHand" url='"assets/medical/BonesRightHand.x3d"'/>
+          </Transform>
+        </Transform>
+        <!-- head turns; jaw chatters -->
+        <Transform DEF="HeadGrp" center="0 1.55 -0.03" rotation="0 1 0 0">
+          <Inline DEF="BonesHead" url='"assets/medical/BonesHead.x3d"'/>
+          <Inline DEF="BonesTeethTop" url='"assets/medical/BonesTeethTop.x3d"'/>
+          <Transform DEF="JawGrp" center="0 1.62 -0.04" rotation="1 0 0 0">
+            <Inline DEF="BonesMandible" url='"assets/medical/BonesMandible.x3d"'/>
+            <Inline DEF="BonesTeethBottom" url='"assets/medical/BonesTeethBottom.x3d"'/>
+          </Transform>
+        </Transform>
       </Transform>
     </Transform>
+
+    <!-- ===================== LIFE (skeleton animation) ===================== -->
+    <TimeSensor DEF="ArmClock"  cycleInterval="2.6" loop="true"/>
+    <TimeSensor DEF="WaveClock" cycleInterval="0.55" loop="true"/>
+    <TimeSensor DEF="JawClock"  cycleInterval="0.42" loop="true"/>
+    <TimeSensor DEF="HeadClock" cycleInterval="7.0" loop="true"/>
+
+    <OrientationInterpolator DEF="ArmSway" key="0 0.5 1"
+        keyValue="0 0 1 -1.78  0 0 1 -2.02  0 0 1 -1.78"/>
+    <OrientationInterpolator DEF="ForearmWave" key="0 0.25 0.5 0.75 1"
+        keyValue="0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38  0 0 1 -0.38  0 0 1 0.38"/>
+    <OrientationInterpolator DEF="JawTalk" key="0 0.5 1"
+        keyValue="1 0 0 0  1 0 0 0.32  1 0 0 0"/>
+    <OrientationInterpolator DEF="HeadTurn" key="0 0.25 0.5 0.75 1"
+        keyValue="0 1 0 0  0 1 0 0.38  0 1 0 0  0 1 0 -0.38  0 1 0 0"/>
+
+    <ROUTE fromNode="ArmClock"  fromField="fraction_changed" toNode="ArmSway"     toField="set_fraction"/>
+    <ROUTE fromNode="WaveClock" fromField="fraction_changed" toNode="ForearmWave" toField="set_fraction"/>
+    <ROUTE fromNode="JawClock"  fromField="fraction_changed" toNode="JawTalk"     toField="set_fraction"/>
+    <ROUTE fromNode="HeadClock" fromField="fraction_changed" toNode="HeadTurn"    toField="set_fraction"/>
+    <ROUTE fromNode="ArmSway"     fromField="value_changed" toNode="RArm"     toField="set_rotation"/>
+    <ROUTE fromNode="ForearmWave" fromField="value_changed" toNode="RForearm" toField="set_rotation"/>
+    <ROUTE fromNode="JawTalk"     fromField="value_changed" toNode="JawGrp"   toField="set_rotation"/>
+    <ROUTE fromNode="HeadTurn"    fromField="value_changed" toNode="HeadGrp"  toField="set_rotation"/>
   </Scene>
 </X3D>
