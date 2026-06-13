@@ -91,10 +91,56 @@ def textured_panel(t, size, name, rot=None):
 # (not Inlined) so its hanim_<joint> DEFs are in scope for the wave/head/jaw
 # ROUTEs. A placeholder Group marks where the fragment is spliced in.
 HUMANOID_FRAGMENT = open("assets/loa5/loa5_humanoid.x3dfrag").read()
-# Canonical LOA5 walk cycle (WalkTimer + 147 interpolators + routes), extracted
-# from AllBonesLOA5SkeletonsInlineAnimation.x3d. Its routes target hanim_<joint>,
-# matching the embedded humanoid. In-place (root only bobs vertically).
+# Canonical LOA5 locomotion cycles (each = a TimeSensor + 147 interpolators +
+# routes targeting hanim_<joint>), extracted from
+# AllBonesLOA5SkeletonsInlineAnimation.x3d. Timers default enabled='false' so
+# the figure starts at rest; chalkboard buttons enable one mode at a time.
 WALK_FRAGMENT = open("assets/loa5/walk_animation.x3dfrag").read()
+RUN_FRAGMENT  = open("assets/loa5/run_animation.x3dfrag").read()
+JUMP_FRAGMENT = open("assets/loa5/jump_animation.x3dfrag").read()
+
+def buttons_and_script():
+    """Clickable chalkboard buttons (TouchSensor panels) + a Script that enables
+    exactly one locomotion TimeSensor at a time (Stand disables all)."""
+    btns = [("Walk", "0.15 0.5 0.2"), ("Run", "0.7 0.35 0.1"),
+            ("Jump", "0.15 0.3 0.6"), ("Stand", "0.3 0.3 0.33")]
+    out = []
+    x0, y, z = -0.55, 2.0, -3.40   # row along the top of the blackboard
+    for i, (label, color) in enumerate(btns):
+        bx = x0 + i * 0.7
+        out.append(f"""    <Transform translation='{bx} {y} {z}'>
+      <TouchSensor DEF='Btn{label}'/>
+      <Shape><Appearance><Material diffuseColor='{color}' emissiveColor='{color}'/></Appearance>
+        <Box size='0.62 0.30 0.03'/></Shape>
+      <Transform translation='0 0 0.04'><Shape>
+        <Appearance><Material diffuseColor='0 0 0' emissiveColor='0 0 0'/></Appearance>
+        <Text string='"{label}"'><FontStyle justify='"MIDDLE" "MIDDLE"' size='0.17'/></Text>
+      </Shape></Transform>
+    </Transform>""")
+    script = """    <Script DEF='ModeSwitch'>
+      <field accessType='inputOnly' type='SFTime' name='walk'/>
+      <field accessType='inputOnly' type='SFTime' name='run'/>
+      <field accessType='inputOnly' type='SFTime' name='jump'/>
+      <field accessType='inputOnly' type='SFTime' name='stand'/>
+      <field accessType='outputOnly' type='SFBool' name='walkOn'/>
+      <field accessType='outputOnly' type='SFBool' name='runOn'/>
+      <field accessType='outputOnly' type='SFBool' name='jumpOn'/>
+<![CDATA[ecmascript:
+function walk(){ walkOn=true; runOn=false; jumpOn=false; }
+function run(){ walkOn=false; runOn=true; jumpOn=false; }
+function jump(){ walkOn=false; runOn=false; jumpOn=true; }
+function stand(){ walkOn=false; runOn=false; jumpOn=false; }
+]]>
+    </Script>"""
+    routes = """
+    <ROUTE fromNode='BtnWalk'  fromField='touchTime' toNode='ModeSwitch' toField='walk'/>
+    <ROUTE fromNode='BtnRun'   fromField='touchTime' toNode='ModeSwitch' toField='run'/>
+    <ROUTE fromNode='BtnJump'  fromField='touchTime' toNode='ModeSwitch' toField='jump'/>
+    <ROUTE fromNode='BtnStand' fromField='touchTime' toNode='ModeSwitch' toField='stand'/>
+    <ROUTE fromNode='ModeSwitch' fromField='walkOn' toNode='WalkTimer' toField='enabled'/>
+    <ROUTE fromNode='ModeSwitch' fromField='runOn'  toNode='RunTimer'  toField='enabled'/>
+    <ROUTE fromNode='ModeSwitch' fromField='jumpOn' toNode='JumpTimer' toField='enabled'/>"""
+    return "\n".join(out) + "\n" + script + routes
 
 def skeleton():
     base = [cyl([0, 0.03, 0], 0.06, 0.34, METAL)]
@@ -193,8 +239,9 @@ xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTextu
 # splice the canonical bone-mesh humanoid into the stand placeholder
 xml = re.sub(r"<Group DEF='HumanoidSlot'\s*/>|<Group DEF='HumanoidSlot'>\s*</Group>",
              HUMANOID_FRAGMENT, xml, count=1)
-# inject the canonical LOA5 walk cycle (drives the humanoid in place)
-xml = xml.replace("</Scene>", f"  {WALK_FRAGMENT}\n  </Scene>", 1)
+# inject the three locomotion cycles + chalkboard buttons + mode-switch Script
+_anim = "\n      ".join([WALK_FRAGMENT, RUN_FRAGMENT, JUMP_FRAGMENT])
+xml = xml.replace("</Scene>", f"  {_anim}\n{buttons_and_script()}\n  </Scene>", 1)
 # drop DOCTYPE so web players (X_ITE) and Saxon don't fetch the external DTD
 xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
 with open("classroom_skeleton.x3d", "w") as fh:
