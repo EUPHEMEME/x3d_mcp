@@ -391,33 +391,1078 @@
                     </shape>
                 </transform>
                 <transform translation="0 0.12 0">
-                    <inline def="BonesSpine" url="&quot;assets/medical/BonesSpine.x3d&quot;"></inline>
-                    <inline def="BonesChest" url="&quot;assets/medical/BonesChest.x3d&quot;"></inline>
-                    <inline def="BonesGirdle" url="&quot;assets/medical/BonesGirdle.x3d&quot;"></inline>
-                    <inline def="BonesLeftHumerus" url="&quot;assets/medical/BonesLeftHumerus.x3d&quot;"></inline>
-                    <inline def="BonesLeftRadiusUlna" url="&quot;assets/medical/BonesLeftRadiusUlna.x3d&quot;"></inline>
-                    <inline def="BonesLeftHand" url="&quot;assets/medical/BonesLeftHand.x3d&quot;"></inline>
-                    <inline def="BonesLeftFemur" url="&quot;assets/medical/BonesLeftFemur.x3d&quot;"></inline>
-                    <inline def="BonesLeftTibiaFibula" url="&quot;assets/medical/BonesLeftTibiaFibula.x3d&quot;"></inline>
-                    <inline def="BonesLeftFoot" url="&quot;assets/medical/BonesLeftFoot.x3d&quot;"></inline>
-                    <inline def="BonesRightFemur" url="&quot;assets/medical/BonesRightFemur.x3d&quot;"></inline>
-                    <inline def="BonesRightTibiaFibula" url="&quot;assets/medical/BonesRightTibiaFibula.x3d&quot;"></inline>
-                    <inline def="BonesRightFoot" url="&quot;assets/medical/BonesRightFoot.x3d&quot;"></inline>
-                    <transform def="RArm" center="-0.203 1.446 -0.031" rotation="0 0 1 -1.9">
-                        <inline def="BonesRightHumerus" url="&quot;assets/medical/BonesRightHumerus.x3d&quot;"></inline>
-                        <transform def="RForearm" center="-0.217 1.092 0.011" rotation="0 0 1 0">
-                            <inline def="BonesRightRadiusUlna" url="&quot;assets/medical/BonesRightRadiusUlna.x3d&quot;"></inline>
-                            <inline def="BonesRightHand" url="&quot;assets/medical/BonesRightHand.x3d&quot;"></inline>
-                        </transform>
-                    </transform>
-                    <transform def="HeadGrp" center="0.0 1.55 -0.03" rotation="0 1 0 0">
-                        <inline def="BonesHead" url="&quot;assets/medical/BonesHead.x3d&quot;"></inline>
-                        <inline def="BonesTeethTop" url="&quot;assets/medical/BonesTeethTop.x3d&quot;"></inline>
-                        <transform def="JawGrp" center="0.0 1.62 -0.04" rotation="1 0 0 0">
-                            <inline def="BonesMandible" url="&quot;assets/medical/BonesMandible.x3d&quot;"></inline>
-                            <inline def="BonesTeethBottom" url="&quot;assets/medical/BonesTeethBottom.x3d&quot;"></inline>
-                        </transform>
-                    </transform>
+                    <hanimhumanoid def="hanim_AllBonesSkeleton" loa="5" name="AllBonesSkeleton" version="2.0">
+                        <metadataset containerfield="metadata" name="HAnimHumanoid.info" reference="https://www.web3d.org/documents/specifications/19774/V2.0/Architecture/ObjectInterfaces.html#Humanoid"></metadataset>
+                        <hanimjoint def="hanim_humanoid_root" containerfield="skeleton" center="0 0.826 -0.016" name="humanoid_root">
+                            <hanimsegment def="hanim_sacrum" name="sacrum"></hanimsegment>
+                            <hanimjoint def="hanim_sacroiliac" center="0.0005 1.015 -0.0369" name="sacroiliac">
+                                <hanimsegment def="hanim_pelvis" name="pelvis">
+                                    <transform def="YellowBoxAtJointCenter_pelvis" translation="0.0005 1.015 -0.0369">
+                                        <shape def="BoxShape">
+                                            <appearance>
+                                                <material diffusecolor="0.9 0.9 0.4"></material>
+                                            </appearance>
+                                            <box size="0.03 0.03 0.03"></box>
+                                        </shape>
+                                    </transform>
+                                    <inline def="sacrum_bone_Inline" url="&quot;assets/loa5/meshes/sacrum_bone.x3d&quot;"></inline>
+                                </hanimsegment>
+                                <hanimsegment def="hanim_l_hip_bone" name="l_hip_bone">
+                                    <inline def="l_hip_bone_Inline" url="&quot;assets/loa5/meshes/l_hip_bone.x3d&quot;"></inline>
+                                </hanimsegment>
+                                <hanimsegment def="hanim_r_hip_bone" name="r_hip_bone">
+                                    <inline def="r_hip_bone_Inline" url="&quot;assets/loa5/meshes/r_hip_bone.x3d&quot;"></inline>
+                                </hanimsegment>
+                                <hanimsegment def="hanim_pubic_symphysis" name="pubic_symphysis">
+                                    <inline def="pubic_symphysis_Inline" url="&quot;assets/loa5/meshes/pubic_symphysis.x3d&quot;"></inline>
+                                </hanimsegment>
+                                <hanimsegment def="hanim_coccyx" name="coccyx">
+                                    <inline def="coccyx" url="&quot;assets/loa5/meshes/coccyx.x3d&quot;"></inline>
+                                </hanimsegment>
+                                <hanimjoint def="hanim_l_hip" center="0.0695 0.9238 -0.0254" name="l_hip">
+                                    <hanimsegment def="hanim_l_thigh" name="l_thigh">
+                                        <transform def="YellowBoxAtJointCenter_l_thigh" translation="0.0695 0.9238 -0.0254">
+                                            <shape use="BoxShape"></shape>
+                                        </transform>
+                                    </hanimsegment>
+                                    <hanimsegment def="hanim_l_femur" name="l_femur">
+                                        <inline def="l_femur" url="&quot;assets/loa5/meshes/l_femur.x3d&quot;"></inline>
+                                    </hanimsegment>
+                                    <hanimjoint def="hanim_l_knee" center="0.0858 0.4633 -0.0342" name="l_knee">
+                                        <hanimsegment def="hanim_l_calf" name="l_calf">
+                                            <transform def="YellowBoxAtJointCenter_l_knee" translation="0.0858 0.4633 -0.0342">
+                                                <shape use="BoxShape"></shape>
+                                            </transform>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_l_patella" name="l_patella">
+                                            <inline def="l_patella" url="&quot;assets/loa5/meshes/l_patella.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_l_tibia" name="l_tibia">
+                                            <inline def="l_tibia" url="&quot;assets/loa5/meshes/l_tibia.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_l_fibula" name="l_fibula">
+                                            <inline def="l_fibula" url="&quot;assets/loa5/meshes/l_fibula.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimjoint def="hanim_l_talocrural" center="0.0741 0.0829 -0.0641" name="l_talocrural">
+                                            <hanimsegment def="hanim_l_talus" name="l_talus">
+                                                <inline def="l_talus" url="&quot;assets/loa5/meshes/l_talus.x3d&quot;"></inline>
+                                                <transform def="YellowBoxAtJointCenter_l_talocrural" scale="0.8 0.8 0.8" translation="0.0741 0.0829 -0.0641">
+                                                    <shape use="BoxShape"></shape>
+                                                </transform>
+                                            </hanimsegment>
+                                            <hanimjoint def="hanim_l_talocalcaneonavicular" center="0.0606 0.0515 -0.0348" name="l_talocalcaneonavicular">
+                                                <hanimsegment def="hanim_l_navicular" name="l_navicular">
+                                                    <inline def="l_navicular" url="&quot;assets/loa5/meshes/l_navicular.x3d&quot;"></inline>
+                                                </hanimsegment>
+                                                <hanimjoint def="hanim_l_cuneonavicular_1" center="0.0673 0.0499 -0.0161" name="l_cuneonavicular_1">
+                                                    <hanimsegment def="hanim_l_cuneiform_1" name="l_cuneiform_1">
+                                                        <inline def="l_cuneiform_1" url="&quot;assets/loa5/meshes/l_cuneiform_1.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_l_tarsometatarsal_1" center="0.0622 0.0268 0.0273" name="l_tarsometatarsal_1">
+                                                        <hanimsegment def="hanim_l_metatarsal_1" name="l_metatarsal_1">
+                                                            <inline def="l_metatarsal_1" url="&quot;assets/loa5/meshes/l_metatarsal_1.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_l_metatarsophalangeal_1" center="0.0662 0.0109 0.0729" name="l_metatarsophalangeal_1">
+                                                            <hanimsegment def="hanim_l_tarsal_proximal_phalanx_1" name="l_tarsal_proximal_phalanx_1">
+                                                                <inline def="l_tarsal_proximal_phalanx_1" url="&quot;assets/loa5/meshes/l_tarsal_proximal_phalanx_1.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_l_tarsal_interphalangeal_1" center="0.0683 0.0052 0.0961" name="l_tarsal_interphalangeal_1">
+                                                                <hanimsegment def="hanim_l_tarsal_distal_phalanx_1" name="l_tarsal_distal_phalanx_1">
+                                                                    <inline def="l_tarsal_distal_phalanx_1" url="&quot;assets/loa5/meshes/l_tarsal_distal_phalanx_1.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                                <hanimjoint def="hanim_l_cuneonavicular_2" center="0.0837 0.0478 -0.0212" name="l_cuneonavicular_2">
+                                                    <hanimsegment def="hanim_l_cuneiform_2" name="l_cuneiform_2">
+                                                        <inline def="l_cuneiform_2" url="&quot;assets/loa5/meshes/l_cuneiform_2.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_l_tarsometatarsal_2" center="0.0775 0.0345 0.0239" name="l_tarsometatarsal_2">
+                                                        <hanimsegment def="hanim_l_metatarsal_2" name="l_metatarsal_2">
+                                                            <inline def="l_metatarsal_2" url="&quot;assets/loa5/meshes/l_metatarsal_2.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_l_metatarsophalangeal_2" center="0.089 0.0164 0.0573" name="l_metatarsophalangeal_2">
+                                                            <hanimsegment def="hanim_l_tarsal_proximal_phalanx_2" name="l_tarsal_proximal_phalanx_2">
+                                                                <inline def="l_tarsal_proximal_phalanx_2" url="&quot;assets/loa5/meshes/l_tarsal_proximal_phalanx_2.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_l_tarsal_proximal_interphalangeal_2" center="0.0945 0.0056 0.0925" name="l_tarsal_proximal_interphalangeal_2">
+                                                                <hanimsegment def="hanim_l_tarsal_middle_phalanx_2" name="l_tarsal_middle_phalanx_2">
+                                                                    <inline def="l_tarsal_middle_phalanx_2" url="&quot;assets/loa5/meshes/l_tarsal_middle_phalanx_2.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_l_tarsal_distal_interphalangeal_2" center="0.0969 0.0037 0.1046" name="l_tarsal_distal_interphalangeal_2">
+                                                                    <hanimsegment def="hanim_l_tarsal_distal_phalanx_2" name="l_tarsal_distal_phalanx_2">
+                                                                        <inline def="l_tarsal_distal_phalanx_2" url="&quot;assets/loa5/meshes/l_tarsal_distal_phalanx_2.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                                <hanimjoint def="hanim_l_cuneonavicular_3" center="0.0558 0.0427 -0.0109" name="l_cuneonavicular_3">
+                                                    <hanimsegment def="hanim_l_cuneiform_3" name="l_cuneiform_3">
+                                                        <inline def="l_cuneiform_3" url="&quot;assets/loa5/meshes/l_cuneiform_3.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_l_tarsometatarsal_3" center="0.0924 0.033 0.0189" name="l_tarsometatarsal_3">
+                                                        <hanimsegment def="hanim_l_metatarsal_3" name="l_metatarsal_3">
+                                                            <inline def="l_metatarsal_3" url="&quot;assets/loa5/meshes/l_metatarsal_3.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_l_metatarsophalangeal_3" center="0.1045 0.0111 0.0631" name="l_metatarsophalangeal_3">
+                                                            <hanimsegment def="hanim_l_tarsal_proximal_phalanx_3" name="l_tarsal_proximal_phalanx_3">
+                                                                <inline def="l_tarsal_proximal_phalanx_3" url="&quot;assets/loa5/meshes/l_tarsal_proximal_phalanx_3.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_l_tarsal_proximal_interphalangeal_3" center="0.1094 0.0057 0.0825" name="l_tarsal_proximal_interphalangeal_3">
+                                                                <hanimsegment def="hanim_l_tarsal_middle_phalanx_3" name="l_tarsal_middle_phalanx_3">
+                                                                    <inline def="l_tarsal_middle_phalanx_3" url="&quot;assets/loa5/meshes/l_tarsal_middle_phalanx_3.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_l_tarsal_distal_interphalangeal_3" center="0.1109 0.0049 0.0921" name="l_tarsal_distal_interphalangeal_3">
+                                                                    <hanimsegment def="hanim_l_tarsal_distal_phalanx_3" name="l_tarsal_distal_phalanx_3">
+                                                                        <inline def="l_tarsal_distal_phalanx_3" url="&quot;assets/loa5/meshes/l_tarsal_distal_phalanx_3.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                            <hanimjoint def="hanim_l_calcaneocuboid" center="0.0751 0.0338 -0.0873" name="l_calcaneocuboid">
+                                                <hanimsegment def="hanim_l_calcaneus" name="l_calcaneus">
+                                                    <inline def="l_calcaneus" url="&quot;assets/loa5/meshes/l_calcaneus.x3d&quot;"></inline>
+                                                </hanimsegment>
+                                                <hanimjoint def="hanim_l_transversetarsal" center="0.0862 0.042 -0.0367" name="l_transversetarsal">
+                                                    <hanimsegment def="hanim_l_cuboid" name="l_cuboid">
+                                                        <inline def="l_cuboid" url="&quot;assets/loa5/meshes/l_cuboid.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_l_tarsometatarsal_4" center="0.1029 0.029 0.0063" name="l_tarsometatarsal_4">
+                                                        <hanimsegment def="hanim_l_metatarsal_4" name="l_metatarsal_4">
+                                                            <inline def="l_metatarsal_4" url="&quot;assets/loa5/meshes/l_metatarsal_4.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_l_metatarsophalangeal_4" center="0.1161 0.0116 0.0465" name="l_metatarsophalangeal_4">
+                                                            <hanimsegment def="hanim_l_tarsal_proximal_phalanx_4" name="l_tarsal_proximal_phalanx_4">
+                                                                <inline def="l_tarsal_proximal_phalanx_4" url="&quot;assets/loa5/meshes/l_tarsal_proximal_phalanx_4.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_l_tarsal_proximal_interphalangeal_4" center="0.1203 0.0082 0.0633" name="l_tarsal_proximal_interphalangeal_4">
+                                                                <hanimsegment def="hanim_l_tarsal_middle_phalanx_4" name="l_tarsal_middle_phalanx_4">
+                                                                    <inline def="l_tarsal_middle_phalanx_4" url="&quot;assets/loa5/meshes/l_tarsal_middle_phalanx_4.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_l_tarsal_distal_interphalangeal_4" center="0.1211 0.0073 0.0711" name="l_tarsal_distal_interphalangeal_4">
+                                                                    <hanimsegment def="hanim_l_tarsal_distal_phalanx_4" name="l_tarsal_distal_phalanx_4">
+                                                                        <inline def="l_tarsal_distal_phalanx_4" url="&quot;assets/loa5/meshes/l_tarsal_distal_phalanx_4.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                    <hanimjoint def="hanim_l_tarsometatarsal_5" center="0.1137 0.0255 -0.0106" name="l_tarsometatarsal_5">
+                                                        <hanimsegment def="hanim_l_metatarsal_5" name="l_metatarsal_5">
+                                                            <inline def="l_metatarsal_5" url="&quot;assets/loa5/meshes/l_metatarsal_5.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_l_metatarsophalangeal_5" center="0.126 0.0138 0.034" name="l_metatarsophalangeal_5">
+                                                            <hanimsegment def="hanim_l_tarsal_proximal_phalanx_5" name="l_tarsal_proximal_phalanx_5">
+                                                                <inline def="l_tarsal_proximal_phalanx_5" url="&quot;assets/loa5/meshes/l_tarsal_proximal_phalanx_5.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_l_tarsal_proximal_interphalangeal_5" center="0.1314 0.0099 0.0505" name="l_tarsal_proximal_interphalangeal_5">
+                                                                <hanimsegment def="hanim_l_tarsal_middle_phalanx_5" name="l_tarsal_middle_phalanx_5">
+                                                                    <inline def="l_tarsal_middle_phalanx_5" url="&quot;assets/loa5/meshes/l_tarsal_middle_phalanx_5.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_l_tarsal_distal_interphalangeal_5" center="0.1273 0.0086 0.1019" name="l_tarsal_distal_interphalangeal_5">
+                                                                    <hanimsegment def="hanim_l_tarsal_distal_phalanx_5" name="l_tarsal_distal_phalanx_5"></hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                        </hanimjoint>
+                                    </hanimjoint>
+                                </hanimjoint>
+                                <hanimjoint def="hanim_r_hip" center="-0.0695 0.9238 -0.0254" name="r_hip">
+                                    <hanimsegment def="hanim_r_thigh" name="r_thigh">
+                                        <transform def="YellowBoxAtJointCenter_r_thigh" translation="-0.0695 0.9238 -0.0254">
+                                            <shape use="BoxShape"></shape>
+                                        </transform>
+                                    </hanimsegment>
+                                    <hanimsegment def="hanim_r_femur" name="r_femur">
+                                        <inline def="r_femur" url="&quot;assets/loa5/meshes/r_femur.x3d&quot;"></inline>
+                                    </hanimsegment>
+                                    <hanimjoint def="hanim_r_knee" center="-0.0858 0.4633 -0.0342" name="r_knee">
+                                        <hanimsegment def="hanim_r_calf" name="r_calf">
+                                            <transform def="YellowBoxAtJointCenter_r_knee" translation="-0.0858 0.4633 -0.0342">
+                                                <shape use="BoxShape"></shape>
+                                            </transform>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_r_patella" name="r_patella">
+                                            <inline def="r_patella" url="&quot;assets/loa5/meshes/r_patella.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_r_tibia" name="r_tibia">
+                                            <inline def="r_tibia" url="&quot;assets/loa5/meshes/r_tibia.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_r_fibula" name="r_fibula">
+                                            <inline def="r_fibula" url="&quot;assets/loa5/meshes/r_fibula.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimjoint def="hanim_r_talocrural" center="-0.0741 0.0829 -0.0641" name="r_talocrural">
+                                            <hanimsegment def="hanim_r_talus" name="r_talus">
+                                                <inline def="r_talus" url="&quot;assets/loa5/meshes/r_talus.x3d&quot;"></inline>
+                                                <transform def="YellowBoxAtJointCenter_r_talocrural" scale="0.8 0.8 0.8" translation="-0.0741 0.0829 -0.0641">
+                                                    <shape use="BoxShape"></shape>
+                                                </transform>
+                                            </hanimsegment>
+                                            <hanimjoint def="hanim_r_talocalcaneonavicular" center="-0.0606 0.0515 -0.0348" name="r_talocalcaneonavicular">
+                                                <hanimsegment def="hanim_r_navicular" name="r_navicular">
+                                                    <inline def="r_navicular" url="&quot;assets/loa5/meshes/r_navicular.x3d&quot;"></inline>
+                                                </hanimsegment>
+                                                <hanimjoint def="hanim_r_cuneonavicular_1" center="-0.0673 0.0499 -0.0161" name="r_cuneonavicular_1">
+                                                    <hanimsegment def="hanim_r_cuneiform_1" name="r_cuneiform_1">
+                                                        <inline def="r_cuneiform_1" url="&quot;assets/loa5/meshes/r_cuneiform_1.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_r_tarsometatarsal_1" center="-0.0622 0.0268 0.0273" name="r_tarsometatarsal_1">
+                                                        <hanimsegment def="hanim_r_metatarsal_1" name="r_metatarsal_1">
+                                                            <inline def="r_metatarsal_1" url="&quot;assets/loa5/meshes/r_metatarsal_1.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_r_metatarsophalangeal_1" center="-0.0662 0.0109 0.0729" name="r_metatarsophalangeal_1">
+                                                            <hanimsegment def="hanim_r_tarsal_proximal_phalanx_1" name="r_tarsal_proximal_phalanx_1">
+                                                                <inline def="r_tarsal_proximal_phalanx_1" url="&quot;assets/loa5/meshes/r_tarsal_proximal_phalanx_1.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_r_tarsal_interphalangeal_1" center="-0.0683 0.0052 0.0961" name="r_tarsal_interphalangeal_1">
+                                                                <hanimsegment def="hanim_r_tarsal_distal_phalanx_1" name="r_tarsal_distal_phalanx_1">
+                                                                    <inline def="r_tarsal_distal_phalanx_1" url="&quot;assets/loa5/meshes/r_tarsal_distal_phalanx_1.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                                <hanimjoint def="hanim_r_cuneonavicular_2" center="-0.0837 0.0478 -0.0212" name="r_cuneonavicular_2">
+                                                    <hanimsegment def="hanim_r_cuneiform_2" name="r_cuneiform_2">
+                                                        <inline def="r_cuneiform_2" url="&quot;assets/loa5/meshes/r_cuneiform_2.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_r_tarsometatarsal_2" center="-0.0775 0.0345 0.0239" name="r_tarsometatarsal_2">
+                                                        <hanimsegment def="hanim_r_metatarsal_2" name="r_metatarsal_2">
+                                                            <inline def="r_metatarsal_2" url="&quot;assets/loa5/meshes/r_metatarsal_2.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_r_metatarsophalangeal_2" center="-0.089 0.0164 0.0573" name="r_metatarsophalangeal_2">
+                                                            <hanimsegment def="hanim_r_tarsal_proximal_phalanx_2" name="r_tarsal_proximal_phalanx_2">
+                                                                <inline def="r_tarsal_proximal_phalanx_2" url="&quot;assets/loa5/meshes/r_tarsal_proximal_phalanx_2.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_r_tarsal_proximal_interphalangeal_2" center="-0.0945 0.0056 0.0925" name="r_tarsal_proximal_interphalangeal_2">
+                                                                <hanimsegment def="hanim_r_tarsal_middle_phalanx_2" name="r_tarsal_middle_phalanx_2">
+                                                                    <inline def="r_tarsal_middle_phalanx_2" url="&quot;assets/loa5/meshes/r_tarsal_middle_phalanx_2.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_r_tarsal_distal_interphalangeal_2" center="-0.0969 0.0037 0.1046" name="r_tarsal_distal_interphalangeal_2">
+                                                                    <hanimsegment def="hanim_r_tarsal_distal_phalanx_2" name="r_tarsal_distal_phalanx_2">
+                                                                        <inline def="r_tarsal_distal_phalanx_2" url="&quot;assets/loa5/meshes/r_tarsal_distal_phalanx_2.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                                <hanimjoint def="hanim_r_cuneonavicular_3" center="-0.0558 0.0427 -0.0109" name="r_cuneonavicular_3">
+                                                    <hanimsegment def="hanim_r_cuneiform_3" name="r_cuneiform_3">
+                                                        <inline def="r_cuneiform_3" url="&quot;assets/loa5/meshes/r_cuneiform_3.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_r_tarsometatarsal_3" center="-0.0924 0.033 0.0189" name="r_tarsometatarsal_3">
+                                                        <hanimsegment def="hanim_r_metatarsal_3" name="r_metatarsal_3">
+                                                            <inline def="r_metatarsal_3" url="&quot;assets/loa5/meshes/r_metatarsal_3.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_r_metatarsophalangeal_3" center="-0.1045 0.0111 0.0631" name="r_metatarsophalangeal_3">
+                                                            <hanimsegment def="hanim_r_tarsal_proximal_phalanx_3" name="r_tarsal_proximal_phalanx_3">
+                                                                <inline def="r_tarsal_proximal_phalanx_3" url="&quot;assets/loa5/meshes/r_tarsal_proximal_phalanx_3.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_r_tarsal_proximal_interphalangeal_3" center="-0.1094 0.0057 0.0825" name="r_tarsal_proximal_interphalangeal_3">
+                                                                <hanimsegment def="hanim_r_tarsal_middle_phalanx_3" name="r_tarsal_middle_phalanx_3">
+                                                                    <inline def="r_tarsal_middle_phalanx_3" url="&quot;assets/loa5/meshes/r_tarsal_middle_phalanx_3.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_r_tarsal_distal_interphalangeal_3" center="-0.1109 0.0049 0.0921" name="r_tarsal_distal_interphalangeal_3">
+                                                                    <hanimsegment def="hanim_r_tarsal_distal_phalanx_3" name="r_tarsal_distal_phalanx_3">
+                                                                        <inline def="r_tarsal_distal_phalanx_3" url="&quot;assets/loa5/meshes/r_tarsal_distal_phalanx_3.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                            <hanimjoint def="hanim_r_calcaneocuboid" center="-0.0751 0.0338 -0.0873" name="r_calcaneocuboid">
+                                                <hanimsegment def="hanim_r_calcaneus" name="r_calcaneus">
+                                                    <inline def="r_calcaneus" url="&quot;assets/loa5/meshes/r_calcaneus.x3d&quot;"></inline>
+                                                </hanimsegment>
+                                                <hanimjoint def="hanim_r_transversetarsal" center="-0.0862 0.042 -0.0367" name="r_transversetarsal">
+                                                    <hanimsegment def="hanim_r_cuboid" name="r_cuboid">
+                                                        <inline def="r_cuboid" url="&quot;assets/loa5/meshes/r_cuboid.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_r_tarsometatarsal_4" center="-0.1029 0.029 0.0063" name="r_tarsometatarsal_4">
+                                                        <hanimsegment def="hanim_r_metatarsal_4" name="r_metatarsal_4">
+                                                            <inline def="r_metatarsal_4" url="&quot;assets/loa5/meshes/r_metatarsal_4.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_r_metatarsophalangeal_4" center="-0.1161 0.0116 0.0465" name="r_metatarsophalangeal_4">
+                                                            <hanimsegment def="hanim_r_tarsal_proximal_phalanx_4" name="r_tarsal_proximal_phalanx_4">
+                                                                <inline def="r_tarsal_proximal_phalanx_4" url="&quot;assets/loa5/meshes/r_tarsal_proximal_phalanx_4.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_r_tarsal_proximal_interphalangeal_4" center="-0.1203 0.0082 0.0633" name="r_tarsal_proximal_interphalangeal_4">
+                                                                <hanimsegment def="hanim_r_tarsal_middle_phalanx_4" name="r_tarsal_middle_phalanx_4">
+                                                                    <inline def="r_tarsal_middle_phalanx_4" url="&quot;assets/loa5/meshes/r_tarsal_middle_phalanx_4.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_r_tarsal_distal_interphalangeal_4" center="-0.1211 0.0073 0.0711" name="r_tarsal_distal_interphalangeal_4">
+                                                                    <hanimsegment def="hanim_r_tarsal_distal_phalanx_4" name="r_tarsal_distal_phalanx_4">
+                                                                        <inline def="r_tarsal_distal_phalanx_4" url="&quot;assets/loa5/meshes/r_tarsal_distal_phalanx_4.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                    <hanimjoint def="hanim_r_tarsometatarsal_5" center="-0.1137 0.0255 -0.0106" name="r_tarsometatarsal_5">
+                                                        <hanimsegment def="hanim_r_metatarsal_5" name="r_metatarsal_5">
+                                                            <inline def="r_metatarsal_5" url="&quot;assets/loa5/meshes/r_metatarsal_5.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_r_metatarsophalangeal_5" center="-0.126 0.0138 0.034" name="r_metatarsophalangeal_5">
+                                                            <hanimsegment def="hanim_r_tarsal_proximal_phalanx_5" name="r_tarsal_proximal_phalanx_5">
+                                                                <inline def="r_tarsal_proximal_phalanx_5" url="&quot;assets/loa5/meshes/r_tarsal_proximal_phalanx_5.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_r_tarsal_proximal_interphalangeal_5" center="-0.1311 0.0101 0.048" name="r_tarsal_proximal_interphalangeal_5">
+                                                                <hanimsegment def="hanim_r_tarsal_middle_phalanx_5" name="r_tarsal_middle_phalanx_5">
+                                                                    <inline def="r_tarsal_middle_phalanx_5" url="&quot;assets/loa5/meshes/r_tarsal_middle_phalanx_5.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_r_tarsal_distal_interphalangeal_5" center="-0.1319 0.0087 0.0543" name="r_tarsal_distal_interphalangeal_5">
+                                                                    <hanimsegment def="hanim_r_tarsal_distal_phalanx_5" name="r_tarsal_distal_phalanx_5">
+                                                                        <inline def="r_tarsal_distal_phalanx_5" url="&quot;assets/loa5/meshes/r_tarsal_distal_phalanx_5.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                        </hanimjoint>
+                                    </hanimjoint>
+                                </hanimjoint>
+                            </hanimjoint>
+                            <hanimjoint def="hanim_vl5" center="0 1.0244 -0.0375" name="vl5">
+                                <hanimsegment def="hanim_l5" name="l5">
+                                    <inline def="l5" url="&quot;assets/loa5/meshes/l5.x3d&quot;"></inline>
+                                    <transform def="RedBoxAtJointCenter_l5" translation="0 1.0244 -0.0375">
+                                        <shape def="RedBoxShape">
+                                            <appearance>
+                                                <material diffusecolor="0.9 0.4 0.4" transparency="0.5"></material>
+                                            </appearance>
+                                            <box size="0.035 0.035 0.035"></box>
+                                        </shape>
+                                    </transform>
+                                </hanimsegment>
+                                <hanimsegment def="hanim_l5disc" name="l5disc">
+                                    <inline def="l5disc" url="&quot;assets/loa5/meshes/l5disc.x3d&quot;"></inline>
+                                </hanimsegment>
+                                <hanimjoint def="hanim_vl4" center="0 1.0589 -0.0249" name="vl4">
+                                    <hanimsegment def="hanim_l4" name="l4">
+                                        <inline def="l4" url="&quot;assets/loa5/meshes/l4.x3d&quot;"></inline>
+                                    </hanimsegment>
+                                    <hanimsegment def="hanim_l4disc" name="l4disc">
+                                        <inline def="l4disc" url="&quot;assets/loa5/meshes/l4disc.x3d&quot;"></inline>
+                                    </hanimsegment>
+                                    <hanimjoint def="hanim_vl3" center="0 1.0991 -0.0279" name="vl3">
+                                        <hanimsegment def="hanim_l3" name="l3">
+                                            <inline def="l3" url="&quot;assets/loa5/meshes/l3.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimsegment def="hanim_l3disc" name="l3disc">
+                                            <inline def="l3disc" url="&quot;assets/loa5/meshes/l3disc.x3d&quot;"></inline>
+                                        </hanimsegment>
+                                        <hanimjoint def="hanim_vl2" center="0 1.1367 -0.0314" name="vl2">
+                                            <hanimsegment def="hanim_l2" name="l2">
+                                                <inline def="l2" url="&quot;assets/loa5/meshes/l2.x3d&quot;"></inline>
+                                            </hanimsegment>
+                                            <hanimsegment def="hanim_l2disc" name="l2disc">
+                                                <inline def="l2disc" url="&quot;assets/loa5/meshes/l2disc.x3d&quot;"></inline>
+                                            </hanimsegment>
+                                            <hanimjoint def="hanim_vl1" center="0 1.174 -0.038" name="vl1">
+                                                <hanimsegment def="hanim_l1" name="l1">
+                                                    <inline def="l1" url="&quot;assets/loa5/meshes/l1.x3d&quot;"></inline>
+                                                </hanimsegment>
+                                                <hanimsegment def="hanim_l1disc" name="l1disc">
+                                                    <inline def="l1disc" url="&quot;assets/loa5/meshes/l1disc.x3d&quot;"></inline>
+                                                </hanimsegment>
+                                                <hanimjoint def="hanim_vt12" center="0 1.2051 -0.0545" name="vt12">
+                                                    <hanimsegment def="hanim_t12" name="t12">
+                                                        <inline def="t12" url="&quot;assets/loa5/meshes/t12.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimsegment def="hanim_t12disc" name="t12disc">
+                                                        <inline def="t12disc" url="&quot;assets/loa5/meshes/t12disc.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimsegment def="hanim_l_rib12" name="l_rib12">
+                                                        <inline def="l_rib12" url="&quot;assets/loa5/meshes/l_rib12.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimsegment def="hanim_r_rib12" name="r_rib12">
+                                                        <inline def="r_rib12" url="&quot;assets/loa5/meshes/r_rib12.x3d&quot;"></inline>
+                                                    </hanimsegment>
+                                                    <hanimjoint def="hanim_vt11" center="0 1.2429 -0.0615" name="vt11">
+                                                        <hanimsegment def="hanim_t11" name="t11">
+                                                            <inline def="t11" url="&quot;assets/loa5/meshes/t11.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimsegment def="hanim_t11disc" name="t11disc">
+                                                            <inline def="t11disc" url="&quot;assets/loa5/meshes/t11disc.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimsegment def="hanim_l_rib11" name="l_rib11">
+                                                            <inline def="l_rib11" url="&quot;assets/loa5/meshes/l_rib11.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimsegment def="hanim_r_rib11" name="r_rib11">
+                                                            <inline def="r_rib11" url="&quot;assets/loa5/meshes/r_rib11.x3d&quot;"></inline>
+                                                        </hanimsegment>
+                                                        <hanimjoint def="hanim_vt10" center="0 1.2733 -0.0679" name="vt10">
+                                                            <hanimsegment def="hanim_t10" name="t10">
+                                                                <inline def="t10" url="&quot;assets/loa5/meshes/t10.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimsegment def="hanim_t10disc" name="t10disc">
+                                                                <inline def="t10disc" url="&quot;assets/loa5/meshes/t10disc.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimsegment def="hanim_l_rib10" name="l_rib10">
+                                                                <inline def="l_rib10" url="&quot;assets/loa5/meshes/l_rib10.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimsegment def="hanim_r_rib10" name="r_rib10">
+                                                                <inline def="r_rib10" url="&quot;assets/loa5/meshes/r_rib10.x3d&quot;"></inline>
+                                                            </hanimsegment>
+                                                            <hanimjoint def="hanim_vt9" center="0 1.3029 -0.076" name="vt9">
+                                                                <hanimsegment def="hanim_t9" name="t9">
+                                                                    <inline def="t9" url="&quot;assets/loa5/meshes/t9.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimsegment def="hanim_t9disc" name="t9disc">
+                                                                    <inline def="t9disc" url="&quot;assets/loa5/meshes/t9disc.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimsegment def="hanim_l_rib9" name="l_rib9">
+                                                                    <inline def="l_rib9" url="&quot;assets/loa5/meshes/l_rib9.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimsegment def="hanim_r_rib9" name="r_rib9">
+                                                                    <inline def="r_rib9" url="&quot;assets/loa5/meshes/r_rib9.x3d&quot;"></inline>
+                                                                </hanimsegment>
+                                                                <hanimjoint def="hanim_vt8" center="0 1.3299 -0.0781" name="vt8">
+                                                                    <hanimsegment def="hanim_t8" name="t8">
+                                                                        <inline def="t8" url="&quot;assets/loa5/meshes/t8.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                    <hanimsegment def="hanim_t8disc" name="t8disc">
+                                                                        <inline def="t8disc" url="&quot;assets/loa5/meshes/t8disc.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                    <hanimsegment def="hanim_l_rib8" name="l_rib8">
+                                                                        <inline def="l_rib8" url="&quot;assets/loa5/meshes/l_rib8.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                    <hanimsegment def="hanim_r_rib8" name="r_rib8">
+                                                                        <inline def="r_rib8" url="&quot;assets/loa5/meshes/r_rib8.x3d&quot;"></inline>
+                                                                    </hanimsegment>
+                                                                    <hanimjoint def="hanim_vt7" center="0 1.3574 -0.0788" name="vt7">
+                                                                        <hanimsegment def="hanim_t7" name="t7">
+                                                                            <inline def="t7" url="&quot;assets/loa5/meshes/t7.x3d&quot;"></inline>
+                                                                        </hanimsegment>
+                                                                        <hanimsegment def="hanim_t7disc" name="t7disc">
+                                                                            <inline def="t7disc" url="&quot;assets/loa5/meshes/t7disc.x3d&quot;"></inline>
+                                                                        </hanimsegment>
+                                                                        <hanimsegment def="hanim_l_rib7" name="l_rib7">
+                                                                            <inline def="l_rib7" url="&quot;assets/loa5/meshes/l_rib7.x3d&quot;"></inline>
+                                                                        </hanimsegment>
+                                                                        <hanimsegment def="hanim_r_rib7" name="r_rib7">
+                                                                            <inline def="r_rib7" url="&quot;assets/loa5/meshes/r_rib7.x3d&quot;"></inline>
+                                                                        </hanimsegment>
+                                                                        <hanimjoint def="hanim_vt6" center="0 1.3803 -0.0785" name="vt6">
+                                                                            <hanimsegment def="hanim_t6" name="t6">
+                                                                                <inline def="t6" url="&quot;assets/loa5/meshes/t6.x3d&quot;"></inline>
+                                                                            </hanimsegment>
+                                                                            <hanimsegment def="hanim_t6disc" name="t6disc">
+                                                                                <inline def="t6disc" url="&quot;assets/loa5/meshes/t6disc.x3d&quot;"></inline>
+                                                                            </hanimsegment>
+                                                                            <hanimsegment def="hanim_l_rib6" name="l_rib6">
+                                                                                <inline def="l_rib6" url="&quot;assets/loa5/meshes/l_rib6.x3d&quot;"></inline>
+                                                                            </hanimsegment>
+                                                                            <hanimsegment def="hanim_r_rib6" name="r_rib6">
+                                                                                <inline def="r_rib6" url="&quot;assets/loa5/meshes/r_rib6.x3d&quot;"></inline>
+                                                                            </hanimsegment>
+                                                                            <hanimjoint def="hanim_vt5" center="0 1.4076 -0.0755" name="vt5">
+                                                                                <hanimsegment def="hanim_t5" name="t5">
+                                                                                    <inline def="t5" url="&quot;assets/loa5/meshes/t5.x3d&quot;"></inline>
+                                                                                </hanimsegment>
+                                                                                <hanimsegment def="hanim_t5disc" name="t5disc">
+                                                                                    <inline def="t5disc" url="&quot;assets/loa5/meshes/t5disc.x3d&quot;"></inline>
+                                                                                </hanimsegment>
+                                                                                <hanimsegment def="hanim_l_rib5" name="l_rib5">
+                                                                                    <inline def="l_rib5" url="&quot;assets/loa5/meshes/l_rib5.x3d&quot;"></inline>
+                                                                                </hanimsegment>
+                                                                                <hanimsegment def="hanim_r_rib5" name="r_rib5">
+                                                                                    <inline def="r_rib5" url="&quot;assets/loa5/meshes/r_rib5.x3d&quot;"></inline>
+                                                                                </hanimsegment>
+                                                                                <hanimjoint def="hanim_vt4" center="0 1.4341 -0.0717" name="vt4">
+                                                                                    <hanimsegment def="hanim_t4" name="t4">
+                                                                                        <inline def="t4" url="&quot;assets/loa5/meshes/t4.x3d&quot;"></inline>
+                                                                                    </hanimsegment>
+                                                                                    <hanimsegment def="hanim_t4disc" name="t4disc">
+                                                                                        <inline def="t4disc" url="&quot;assets/loa5/meshes/t4disc.x3d&quot;"></inline>
+                                                                                    </hanimsegment>
+                                                                                    <hanimsegment def="hanim_l_rib4" name="l_rib4">
+                                                                                        <inline def="l_rib4" url="&quot;assets/loa5/meshes/l_rib4.x3d&quot;"></inline>
+                                                                                    </hanimsegment>
+                                                                                    <hanimsegment def="hanim_r_rib4" name="r_rib4">
+                                                                                        <inline def="r_rib4" url="&quot;assets/loa5/meshes/r_rib4.x3d&quot;"></inline>
+                                                                                    </hanimsegment>
+                                                                                    <hanimjoint def="hanim_vt3" center="0 1.4529 -0.0631" name="vt3">
+                                                                                        <hanimsegment def="hanim_t3" name="t3">
+                                                                                            <inline def="t3" url="&quot;assets/loa5/meshes/t3.x3d&quot;"></inline>
+                                                                                        </hanimsegment>
+                                                                                        <hanimsegment def="hanim_t3disc" name="t3disc">
+                                                                                            <inline def="t3disc" url="&quot;assets/loa5/meshes/t3disc.x3d&quot;"></inline>
+                                                                                        </hanimsegment>
+                                                                                        <hanimsegment def="hanim_l_rib3" name="l_rib3">
+                                                                                            <inline def="l_rib3" url="&quot;assets/loa5/meshes/l_rib3.x3d&quot;"></inline>
+                                                                                        </hanimsegment>
+                                                                                        <hanimsegment def="hanim_r_rib3" name="r_rib3">
+                                                                                            <inline def="r_rib3" url="&quot;assets/loa5/meshes/r_rib3.x3d&quot;"></inline>
+                                                                                        </hanimsegment>
+                                                                                        <hanimjoint def="hanim_vt2" center="0 1.4738 -0.0548" name="vt2">
+                                                                                            <hanimsegment def="hanim_t2" name="t2">
+                                                                                                <inline def="t2" url="&quot;assets/loa5/meshes/t2.x3d&quot;"></inline>
+                                                                                            </hanimsegment>
+                                                                                            <hanimsegment def="hanim_t2disc" name="t2disc">
+                                                                                                <inline def="t2disc" url="&quot;assets/loa5/meshes/t2disc.x3d&quot;"></inline>
+                                                                                            </hanimsegment>
+                                                                                            <hanimsegment def="hanim_l_rib2" name="l_rib2">
+                                                                                                <inline def="l_rib2" url="&quot;assets/loa5/meshes/l_rib2.x3d&quot;"></inline>
+                                                                                            </hanimsegment>
+                                                                                            <hanimsegment def="hanim_r_rib2" name="r_rib2">
+                                                                                                <inline def="r_rib2" url="&quot;assets/loa5/meshes/r_rib2.x3d&quot;"></inline>
+                                                                                            </hanimsegment>
+                                                                                            <hanimjoint def="hanim_vt1" center="0 1.4942 -0.047" name="vt1">
+                                                                                                <hanimsegment def="hanim_t1" name="t1">
+                                                                                                    <inline def="t1" url="&quot;assets/loa5/meshes/t1.x3d&quot;"></inline>
+                                                                                                </hanimsegment>
+                                                                                                <hanimsegment def="hanim_t1disc" name="t1disc">
+                                                                                                    <inline def="t1disc" url="&quot;assets/loa5/meshes/t1disc.x3d&quot;"></inline>
+                                                                                                </hanimsegment>
+                                                                                                <hanimsegment def="hanim_l_rib1" name="l_rib1">
+                                                                                                    <inline def="l_rib1" url="&quot;assets/loa5/meshes/l_rib1.x3d&quot;"></inline>
+                                                                                                </hanimsegment>
+                                                                                                <hanimsegment def="hanim_r_rib1" name="r_rib1">
+                                                                                                    <inline def="r_rib1" url="&quot;assets/loa5/meshes/r_rib1.x3d&quot;"></inline>
+                                                                                                </hanimsegment>
+                                                                                                <hanimjoint def="hanim_vc7" center="0 1.5151 -0.0407" name="vc7">
+                                                                                                    <hanimsegment def="hanim_c7" name="c7">
+                                                                                                        <inline def="c7" url="&quot;assets/loa5/meshes/c7.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimsegment def="hanim_c7disc" name="c7disc">
+                                                                                                        <inline def="c7disc" url="&quot;assets/loa5/meshes/c7disc.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimsegment def="hanim_sternum" name="sternum">
+                                                                                                        <inline def="sternum" url="&quot;assets/loa5/meshes/sternum.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimsegment def="hanim_l_costal_cartilage" name="l_costal_cartilage">
+                                                                                                        <inline def="l_costal_cartilage" url="&quot;assets/loa5/meshes/l_costal_cartilage.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimsegment def="hanim_r_costal_cartilage" name="r_costal_cartilage">
+                                                                                                        <inline def="r_costal_cartilage" url="&quot;assets/loa5/meshes/r_costal_cartilage.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimjoint def="hanim_vc6" center="0 1.5308 -0.0346" name="vc6">
+                                                                                                        <hanimsegment def="hanim_c6" name="c6">
+                                                                                                            <inline def="c6" url="&quot;assets/loa5/meshes/c6.x3d&quot;"></inline>
+                                                                                                        </hanimsegment>
+                                                                                                        <hanimsegment def="hanim_c6disc" name="c6disc">
+                                                                                                            <inline def="c6disc" url="&quot;assets/loa5/meshes/c6disc.x3d&quot;"></inline>
+                                                                                                        </hanimsegment>
+                                                                                                        <hanimjoint def="hanim_vc5" center="0 1.5429 -0.0319" name="vc5">
+                                                                                                            <hanimsegment def="hanim_c5" name="c5">
+                                                                                                                <inline def="c5" url="&quot;assets/loa5/meshes/c5.x3d&quot;"></inline>
+                                                                                                            </hanimsegment>
+                                                                                                            <hanimsegment def="hanim_c5disc" name="c5disc">
+                                                                                                                <inline def="c5disc" url="&quot;assets/loa5/meshes/c5disc.x3d&quot;"></inline>
+                                                                                                            </hanimsegment>
+                                                                                                            <hanimjoint def="hanim_vc4" center="0 1.5621 -0.029" name="vc4">
+                                                                                                                <hanimsegment def="hanim_c4" name="c4">
+                                                                                                                    <inline def="c4" url="&quot;assets/loa5/meshes/c4.x3d&quot;"></inline>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimsegment def="hanim_c4disc" name="c4disc">
+                                                                                                                    <inline def="c4disc" url="&quot;assets/loa5/meshes/c4disc.x3d&quot;"></inline>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimjoint def="hanim_vc3" center="0 1.5771 -0.0284" name="vc3">
+                                                                                                                    <hanimsegment def="hanim_c3" name="c3">
+                                                                                                                        <inline def="c3" url="&quot;assets/loa5/meshes/c3.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_c3disc" name="c3disc">
+                                                                                                                        <inline def="c3disc" url="&quot;assets/loa5/meshes/c3disc.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimjoint def="hanim_vc2" center="0 1.5961 -0.0275" name="vc2">
+                                                                                                                        <hanimsegment def="hanim_c2" name="c2">
+                                                                                                                            <inline def="c2" url="&quot;assets/loa5/meshes/c2.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimsegment def="hanim_c2disc" name="c2disc">
+                                                                                                                            <inline def="c2disc" url="&quot;assets/loa5/meshes/c2disc.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_vc1" center="0 1.613 -0.0335" name="vc1">
+                                                                                                                            <hanimsegment def="hanim_c1" name="c1">
+                                                                                                                                <inline def="c1" url="&quot;assets/loa5/meshes/c1.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimsegment def="hanim_c1disc" name="c1disc"></hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_skullbase" center="0 1.6111 -0.0416" name="skullbase">
+                                                                                                                                <hanimsegment def="hanim_skull" name="skull">
+                                                                                                                                    <transform def="RedBoxAtJointCenter_skullbase" translation="0 1.6111 -0.0416">
+                                                                                                                                        <shape use="RedBoxShape"></shape>
+                                                                                                                                    </transform>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_ethmoid" name="ethmoid">
+                                                                                                                                    <inline def="ethmoid" url="&quot;assets/loa5/meshes/ethmoid.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_frontal" name="frontal">
+                                                                                                                                    <inline def="frontal" url="&quot;assets/loa5/meshes/frontal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_inferior_nasal_conchae" name="l_inferior_nasal_conchae">
+                                                                                                                                    <inline def="l_inferior_nasal_conchae" url="&quot;assets/loa5/meshes/l_inferior_nasal_conchae.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_inferior_nasal_conchae" name="r_inferior_nasal_conchae">
+                                                                                                                                    <inline def="r_inferior_nasal_conchae" url="&quot;assets/loa5/meshes/r_inferior_nasal_conchae.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_lacrimal" name="l_lacrimal">
+                                                                                                                                    <inline def="l_lacrimal" url="&quot;assets/loa5/meshes/l_lacrimal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_lacrimal" name="r_lacrimal">
+                                                                                                                                    <inline def="r_lacrimal" url="&quot;assets/loa5/meshes/r_lacrimal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_maxilla" name="l_maxilla">
+                                                                                                                                    <inline def="l_maxilla" url="&quot;assets/loa5/meshes/l_maxilla.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_maxilla" name="r_maxilla">
+                                                                                                                                    <inline def="r_maxilla" url="&quot;assets/loa5/meshes/r_maxilla.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_nasal" name="l_nasal">
+                                                                                                                                    <inline def="l_nasal" url="&quot;assets/loa5/meshes/l_nasal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_nasal" name="r_nasal">
+                                                                                                                                    <inline def="r_nasal" url="&quot;assets/loa5/meshes/r_nasal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_occipital" name="occipital">
+                                                                                                                                    <inline def="occipital" url="&quot;assets/loa5/meshes/occipital.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_parietal" name="l_parietal">
+                                                                                                                                    <inline def="l_parietal" url="&quot;assets/loa5/meshes/l_parietal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_parietal" name="r_parietal">
+                                                                                                                                    <inline def="r_parietal" url="&quot;assets/loa5/meshes/r_parietal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_palatine" name="l_palatine">
+                                                                                                                                    <inline def="l_palatine" url="&quot;assets/loa5/meshes/l_palatine.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_palatine" name="r_palatine">
+                                                                                                                                    <inline def="r_palatine" url="&quot;assets/loa5/meshes/r_palatine.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_sphenoid" name="sphenoid">
+                                                                                                                                    <inline def="sphenoid" url="&quot;assets/loa5/meshes/sphenoid.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_temporal" name="l_temporal">
+                                                                                                                                    <inline def="l_temporal" url="&quot;assets/loa5/meshes/l_temporal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_temporal" name="r_temporal">
+                                                                                                                                    <inline def="r_temporal" url="&quot;assets/loa5/meshes/r_temporal.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_vomer" name="vomer">
+                                                                                                                                    <inline def="vomer" url="&quot;assets/loa5/meshes/vomer.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_l_zygomatic" name="l_zygomatic">
+                                                                                                                                    <inline def="l_zygomatic" url="&quot;assets/loa5/meshes/l_zygomatic.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_r_zygomatic" name="r_zygomatic">
+                                                                                                                                    <inline def="r_zygomatic" url="&quot;assets/loa5/meshes/r_zygomatic.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimsegment def="hanim_upperTeeth" name="upperTeeth">
+                                                                                                                                    <inline def="upperTeeth" url="&quot;assets/loa5/meshes/upperTeeth.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_l_eyelid_joint" center="0.0505 1.4243 0.0329" name="l_eyelid_joint">
+                                                                                                                                    <hanimsegment def="hanim_l_eyelid" name="l_eyelid"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_r_eyelid_joint" center="-0.0505 1.4243 0.0329" name="r_eyelid_joint">
+                                                                                                                                    <hanimsegment def="hanim_r_eyelid" name="r_eyelid"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_l_eyeball_joint" center="0.0481 1.4049 0.083" name="l_eyeball_joint">
+                                                                                                                                    <hanimsegment def="hanim_l_eyeball" name="l_eyeball"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_r_eyeball_joint" center="-0.0481 1.4049 0.083" name="r_eyeball_joint">
+                                                                                                                                    <hanimsegment def="hanim_r_eyeball" name="r_eyeball"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_l_eyebrow_joint" center="0.0217 1.4139 0.1069" name="l_eyebrow_joint">
+                                                                                                                                    <hanimsegment def="hanim_l_eyebrow" name="l_eyebrow"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_r_eyebrow_joint" center="-0.0217 1.4139 0.1069" name="r_eyebrow_joint">
+                                                                                                                                    <hanimsegment def="hanim_r_eyebrow" name="r_eyebrow"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_l_ear_joint" center="-0.05 1.4139 0" name="l_ear_joint">
+                                                                                                                                    <hanimsegment def="hanim_l_ear" name="l_ear"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_r_ear_joint" center="-0.05 1.4139 0" name="r_ear_joint">
+                                                                                                                                    <hanimsegment def="hanim_r_ear" name="r_ear"></hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_tongue_base_joint" center="0 1.4139 0" name="tongue_base_joint">
+                                                                                                                                    <hanimsegment def="hanim_tongue_base" name="tongue_base"></hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_tongue_middle_joint" center="0 1.4139 0.2" name="tongue_middle_joint">
+                                                                                                                                        <hanimsegment def="hanim_tongue_middle" name="tongue_middle"></hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                                <hanimjoint def="hanim_temporomandibular" center="0 1.6354 -0.0228" name="temporomandibular">
+                                                                                                                                    <hanimsegment def="hanim_jaw" name="jaw"></hanimsegment>
+                                                                                                                                    <hanimsegment def="hanim_mandible" name="mandible">
+                                                                                                                                        <inline def="mandible" url="&quot;assets/loa5/meshes/mandible.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimsegment def="hanim_lowerTeeth" name="lowerTeeth">
+                                                                                                                                        <inline def="lowerTeeth" url="&quot;assets/loa5/meshes/lowerTeeth.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                </hanimjoint>
+                                                                                                            </hanimjoint>
+                                                                                                        </hanimjoint>
+                                                                                                    </hanimjoint>
+                                                                                                </hanimjoint>
+                                                                                                <hanimjoint def="hanim_l_sternoclavicular" center="0.0385 1.2087 -0.0138" name="l_sternoclavicular">
+                                                                                                    <hanimsegment def="hanim_l_clavicle" name="l_clavicle">
+                                                                                                        <inline def="l_clavicle" url="&quot;assets/loa5/meshes/l_clavicle.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimjoint def="hanim_l_acromioclavicular" center="0.1229 1.1918 -0.0129" name="l_acromioclavicular">
+                                                                                                        <hanimsegment def="hanim_l_scapula" name="l_scapula">
+                                                                                                            <inline def="l_scapula" url="&quot;assets/loa5/meshes/l_scapula.x3d&quot;"></inline>
+                                                                                                        </hanimsegment>
+                                                                                                        <hanimjoint def="hanim_l_shoulder" center="0.1829 1.4238 -0.0306" name="l_shoulder">
+                                                                                                            <hanimsegment def="hanim_l_upperarm" name="l_upperarm">
+                                                                                                                <transform def="YellowBoxAtJointCenter_l_shoulder" translation="0.1829 1.4238 -0.0306">
+                                                                                                                    <shape use="BoxShape"></shape>
+                                                                                                                </transform>
+                                                                                                            </hanimsegment>
+                                                                                                            <hanimsegment def="hanim_l_humerus" name="l_humerus">
+                                                                                                                <inline def="l_humerus" url="&quot;assets/loa5/meshes/l_humerus.x3d&quot;"></inline>
+                                                                                                            </hanimsegment>
+                                                                                                            <hanimjoint def="hanim_l_elbow" center="0.2067 1.0805 -0.0359" name="l_elbow">
+                                                                                                                <hanimsegment def="hanim_l_forearm" name="l_forearm">
+                                                                                                                    <transform def="YellowBoxAtJointCenter_l_forearm" scale="0.4 0.4 0.4" translation="0.2067 1.0805 -0.0359">
+                                                                                                                        <shape use="BoxShape"></shape>
+                                                                                                                    </transform>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimsegment def="hanim_l_radius" name="l_radius">
+                                                                                                                    <inline def="l_radius" url="&quot;assets/loa5/meshes/l_radius.x3d&quot;"></inline>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimsegment def="hanim_l_ulna" name="l_ulna">
+                                                                                                                    <inline def="l_ulna" url="&quot;assets/loa5/meshes/l_ulna.x3d&quot;"></inline>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimjoint def="hanim_l_radiocarpal" center="0.2144 0.852 0.068" name="l_radiocarpal">
+                                                                                                                    <hanimsegment def="hanim_l_carpal" name="l_carpal">
+                                                                                                                        <transform def="YellowBoxAtJointCenter_l_radiocarpal" scale="0.5 0.5 0.5" translation="0.2144 0.852 0.068">
+                                                                                                                            <shape use="BoxShape"></shape>
+                                                                                                                        </transform>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_l_scaphoid" name="l_scaphoid">
+                                                                                                                        <inline def="l_scaphoid" url="&quot;assets/loa5/meshes/l_scaphoid.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_l_lunate" name="l_lunate">
+                                                                                                                        <inline def="l_lunate" url="&quot;assets/loa5/meshes/l_lunate.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_l_triquetral" name="l_triquetral">
+                                                                                                                        <inline def="l_triquetral" url="&quot;assets/loa5/meshes/l_triquetral.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_l_pisiform" name="l_pisiform">
+                                                                                                                        <inline def="l_pisiform" url="&quot;assets/loa5/meshes/l_pisiform.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimjoint def="hanim_l_midcarpal_1" center="0.1878 0.8272 0.0865" name="l_midcarpal_1">
+                                                                                                                        <hanimsegment def="hanim_l_trapezium" name="l_trapezium">
+                                                                                                                            <inline def="l_trapezium" url="&quot;assets/loa5/meshes/l_trapezium.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_l_carpometacarpal_1" center="0.1889 0.8294 0.0855" name="l_carpometacarpal_1">
+                                                                                                                            <hanimsegment def="hanim_l_metacarpal_1" name="l_metacarpal_1">
+                                                                                                                                <inline def="l_metacarpal_1" url="&quot;assets/loa5/meshes/l_metacarpal_1.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_l_metacarpophalangeal_1" center="0.1694 0.7892 0.103" name="l_metacarpophalangeal_1">
+                                                                                                                                <hanimsegment def="hanim_l_carpal_proximal_phalanx_1" name="l_carpal_proximal_phalanx_1">
+                                                                                                                                    <inline def="l_carpal_proximal_phalanx_1" url="&quot;assets/loa5/meshes/l_carpal_proximal_phalanx_1.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_l_carpal_interphalangeal_1" center="0.1584 0.7677 0.1126" name="l_carpal_interphalangeal_1">
+                                                                                                                                    <hanimsegment def="hanim_l_carpal_distal_phalanx_1" name="l_carpal_distal_phalanx_1">
+                                                                                                                                        <inline def="l_carpal_distal_phalanx_1" url="&quot;assets/loa5/meshes/l_carpal_distal_phalanx_1.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                    <hanimjoint def="hanim_l_midcarpal_2" center="0.2065 0.8251 0.0879" name="l_midcarpal_2">
+                                                                                                                        <hanimsegment def="hanim_l_trapezoid" name="l_trapezoid">
+                                                                                                                            <inline def="l_trapezoid" url="&quot;assets/loa5/meshes/l_trapezoid.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_l_carpometacarpal_2" center="0.2055 0.8265 0.0908" name="l_carpometacarpal_2">
+                                                                                                                            <hanimsegment def="hanim_l_metacarpal_2" name="l_metacarpal_2">
+                                                                                                                                <inline def="l_metacarpal_2" url="&quot;assets/loa5/meshes/l_metacarpal_2.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_l_metacarpophalangeal_2" center="0.199 0.7707 0.1154" name="l_metacarpophalangeal_2">
+                                                                                                                                <hanimsegment def="hanim_l_carpal_proximal_phalanx_2" name="l_carpal_proximal_phalanx_2">
+                                                                                                                                    <inline def="l_carpal_proximal_phalanx_2" url="&quot;assets/loa5/meshes/l_carpal_proximal_phalanx_2.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_l_carpal_proximal_interphalangeal_2" center="0.1906 0.7379 0.128" name="l_carpal_proximal_interphalangeal_2">
+                                                                                                                                    <hanimsegment def="hanim_l_carpal_middle_phalanx_2" name="l_carpal_middle_phalanx_2">
+                                                                                                                                        <inline def="l_carpal_middle_phalanx_2" url="&quot;assets/loa5/meshes/l_carpal_middle_phalanx_2.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_l_carpal_distal_interphalangeal_2" center="0.1726 0.7253 0.1218" name="l_carpal_distal_interphalangeal_2">
+                                                                                                                                        <hanimsegment def="hanim_l_carpal_distal_phalanx_2" name="l_carpal_distal_phalanx_2">
+                                                                                                                                            <inline def="l_carpal_distal_phalanx_2" url="&quot;assets/loa5/meshes/l_carpal_distal_phalanx_2.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                    <hanimjoint def="hanim_l_midcarpal_3" center="0.214 0.8221 0.0792" name="l_midcarpal_3">
+                                                                                                                        <hanimsegment def="hanim_l_capitate" name="l_capitate">
+                                                                                                                            <inline def="l_capitate" url="&quot;assets/loa5/meshes/l_capitate.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_l_carpometacarpal_3" center="0.2147 0.825 0.0775" name="l_carpometacarpal_3">
+                                                                                                                            <hanimsegment def="hanim_l_metacarpal_3" name="l_metacarpal_3">
+                                                                                                                                <inline def="l_metacarpal_3" url="&quot;assets/loa5/meshes/l_metacarpal_3.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_l_metacarpophalangeal_3" center="0.2132 0.7627 0.0978" name="l_metacarpophalangeal_3">
+                                                                                                                                <hanimsegment def="hanim_l_carpal_proximal_phalanx_3" name="l_carpal_proximal_phalanx_3">
+                                                                                                                                    <inline def="l_carpal_proximal_phalanx_3" url="&quot;assets/loa5/meshes/l_carpal_proximal_phalanx_3.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_l_carpal_proximal_interphalangeal_3" center="0.189 0.7267 0.0972" name="l_carpal_proximal_interphalangeal_3">
+                                                                                                                                    <hanimsegment def="hanim_l_carpal_middle_phalanx_3" name="l_carpal_middle_phalanx_3">
+                                                                                                                                        <inline def="l_carpal_middle_phalanx_3" url="&quot;assets/loa5/meshes/l_carpal_middle_phalanx_3.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_l_carpal_distal_interphalangeal_3" center="0.1627 0.7207 0.0912" name="l_carpal_distal_interphalangeal_3">
+                                                                                                                                        <hanimsegment def="hanim_l_carpal_distal_phalanx_3" name="l_carpal_distal_phalanx_3">
+                                                                                                                                            <inline def="l_carpal_distal_phalanx_3" url="&quot;assets/loa5/meshes/l_carpal_distal_phalanx_3.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                    <hanimjoint def="hanim_l_midcarpal_4_5" center="0.2129 0.8423 0.064" name="l_midcarpal_4_5">
+                                                                                                                        <hanimsegment def="hanim_l_hamate" name="l_hamate">
+                                                                                                                            <inline def="l_hamate" url="&quot;assets/loa5/meshes/l_hamate.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_l_carpometacarpal_4" center="0.2191 0.8268 0.0673" name="l_carpometacarpal_4">
+                                                                                                                            <hanimsegment def="hanim_l_metacarpal_4" name="l_metacarpal_4">
+                                                                                                                                <inline def="l_metacarpal_4" url="&quot;assets/loa5/meshes/l_metacarpal_4.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_l_metacarpophalangeal_4" center="0.2206 0.7646 0.0759" name="l_metacarpophalangeal_4">
+                                                                                                                                <hanimsegment def="hanim_l_carpal_proximal_phalanx_4" name="l_carpal_proximal_phalanx_4">
+                                                                                                                                    <inline def="l_carpal_proximal_phalanx_4" url="&quot;assets/loa5/meshes/l_carpal_proximal_phalanx_4.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_l_carpal_proximal_interphalangeal_4" center="0.1949 0.73 0.0736" name="l_carpal_proximal_interphalangeal_4">
+                                                                                                                                    <hanimsegment def="hanim_l_carpal_middle_phalanx_4" name="l_carpal_middle_phalanx_4">
+                                                                                                                                        <inline def="l_carpal_middle_phalanx_4" url="&quot;assets/loa5/meshes/l_carpal_middle_phalanx_4.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_l_carpal_distal_interphalangeal_4" center="0.1668 0.7241 0.0703" name="l_carpal_distal_interphalangeal_4">
+                                                                                                                                        <hanimsegment def="hanim_l_carpal_distal_phalanx_4" name="l_carpal_distal_phalanx_4">
+                                                                                                                                            <inline def="l_carpal_distal_phalanx_4" url="&quot;assets/loa5/meshes/l_carpal_distal_phalanx_4.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                        <hanimjoint def="hanim_l_carpometacarpal_5" center="0.2216 0.8282 0.0605" name="l_carpometacarpal_5">
+                                                                                                                            <hanimsegment def="hanim_l_metacarpal_5" name="l_metacarpal_5">
+                                                                                                                                <inline def="l_metacarpal_5" url="&quot;assets/loa5/meshes/l_metacarpal_5.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_l_metacarpophalangeal_5" center="0.2227 0.7633 0.0553" name="l_metacarpophalangeal_5">
+                                                                                                                                <hanimsegment def="hanim_l_carpal_proximal_phalanx_5" name="l_carpal_proximal_phalanx_5">
+                                                                                                                                    <inline def="l_carpal_proximal_phalanx_5" url="&quot;assets/loa5/meshes/l_carpal_proximal_phalanx_5.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_l_carpal_proximal_interphalangeal_5" center="0.1995 0.7337 0.0517" name="l_carpal_proximal_interphalangeal_5">
+                                                                                                                                    <hanimsegment def="hanim_l_carpal_middle_phalanx_5" name="l_carpal_middle_phalanx_5">
+                                                                                                                                        <inline def="l_carpal_middle_phalanx_5" url="&quot;assets/loa5/meshes/l_carpal_middle_phalanx_5.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_l_carpal_distal_interphalangeal_5" center="0.1847 0.7247 0.0494" name="l_carpal_distal_interphalangeal_5">
+                                                                                                                                        <hanimsegment def="hanim_l_carpal_distal_phalanx_5" name="l_carpal_distal_phalanx_5">
+                                                                                                                                            <inline def="l_carpal_distal_phalanx_5" url="&quot;assets/loa5/meshes/l_carpal_distal_phalanx_5.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                </hanimjoint>
+                                                                                                            </hanimjoint>
+                                                                                                        </hanimjoint>
+                                                                                                    </hanimjoint>
+                                                                                                </hanimjoint>
+                                                                                                <hanimjoint def="hanim_r_sternoclavicular" center="-0.0385 1.2087 -0.0138" name="r_sternoclavicular">
+                                                                                                    <hanimsegment def="hanim_r_clavicle" name="r_clavicle">
+                                                                                                        <inline def="r_clavicle" url="&quot;assets/loa5/meshes/r_clavicle.x3d&quot;"></inline>
+                                                                                                    </hanimsegment>
+                                                                                                    <hanimjoint def="hanim_r_acromioclavicular" center="-0.1229 1.1918 -0.0129" name="r_acromioclavicular">
+                                                                                                        <hanimsegment def="hanim_r_scapula" name="r_scapula">
+                                                                                                            <inline def="r_scapula" url="&quot;assets/loa5/meshes/r_scapula.x3d&quot;"></inline>
+                                                                                                        </hanimsegment>
+                                                                                                        <hanimjoint def="hanim_r_shoulder" center="-0.1829 1.4238 -0.0306" name="r_shoulder">
+                                                                                                            <hanimsegment def="hanim_r_upperarm" name="r_upperarm">
+                                                                                                                <transform def="YellowBoxAtJointCenter_r_upperarm" translation="-0.1829 1.4238 -0.0306">
+                                                                                                                    <shape use="BoxShape"></shape>
+                                                                                                                </transform>
+                                                                                                            </hanimsegment>
+                                                                                                            <hanimsegment def="hanim_r_humerus" name="r_humerus">
+                                                                                                                <inline def="r_humerus" url="&quot;assets/loa5/meshes/r_humerus.x3d&quot;"></inline>
+                                                                                                            </hanimsegment>
+                                                                                                            <hanimjoint def="hanim_r_elbow" center="-0.2067 1.0805 -0.0359" name="r_elbow">
+                                                                                                                <hanimsegment def="hanim_r_forearm" name="r_forearm">
+                                                                                                                    <transform def="YellowBoxAtJointCenter_r_forearm" scale="0.4 0.4 0.4" translation="-0.2067 1.0805 -0.0359">
+                                                                                                                        <shape use="BoxShape"></shape>
+                                                                                                                    </transform>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimsegment def="hanim_r_ulna" name="r_ulna">
+                                                                                                                    <inline def="r_ulna" url="&quot;assets/loa5/meshes/r_ulna.x3d&quot;"></inline>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimsegment def="hanim_r_radius" name="r_radius">
+                                                                                                                    <inline def="r_radius" url="&quot;assets/loa5/meshes/r_radius.x3d&quot;"></inline>
+                                                                                                                </hanimsegment>
+                                                                                                                <hanimjoint def="hanim_r_radiocarpal" center="-0.2144 0.852 0.068" name="r_radiocarpal">
+                                                                                                                    <hanimsegment def="hanim_r_carpal" name="r_carpal">
+                                                                                                                        <transform def="YellowBoxAtJointCenter_r_radiocarpal" scale="0.5 0.5 0.5" translation="-0.2144 0.852 0.068">
+                                                                                                                            <shape use="BoxShape"></shape>
+                                                                                                                        </transform>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_r_scaphoid" name="r_scaphoid">
+                                                                                                                        <inline def="r_scaphoid" url="&quot;assets/loa5/meshes/r_scaphoid.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_r_lunate" name="r_lunate">
+                                                                                                                        <inline def="r_lunate" url="&quot;assets/loa5/meshes/r_lunate.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_r_triquetral" name="r_triquetral">
+                                                                                                                        <inline def="r_triquetral" url="&quot;assets/loa5/meshes/r_triquetral.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimsegment def="hanim_r_pisiform" name="r_pisiform">
+                                                                                                                        <inline def="r_pisiform" url="&quot;assets/loa5/meshes/r_pisiform.x3d&quot;"></inline>
+                                                                                                                    </hanimsegment>
+                                                                                                                    <hanimjoint def="hanim_r_midcarpal_1" center="-0.1878 0.8292 0.0905" name="r_midcarpal_1">
+                                                                                                                        <hanimsegment def="hanim_r_trapezium" name="r_trapezium">
+                                                                                                                            <inline def="r_trapezium" url="&quot;assets/loa5/meshes/r_trapezium.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_r_carpometacarpal_1" center="-0.1889 0.8294 0.0855" name="r_carpometacarpal_1">
+                                                                                                                            <hanimsegment def="hanim_r_metacarpal_1" name="r_metacarpal_1">
+                                                                                                                                <inline def="r_metacarpal_1" url="&quot;assets/loa5/meshes/r_metacarpal_1.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_r_metacarpophalangeal_1" center="-0.1694 0.7892 0.103" name="r_metacarpophalangeal_1">
+                                                                                                                                <hanimsegment def="hanim_r_carpal_proximal_phalanx_1" name="r_carpal_proximal_phalanx_1">
+                                                                                                                                    <inline def="r_carpal_proximal_phalanx_1" url="&quot;assets/loa5/meshes/r_carpal_proximal_phalanx_1.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_r_carpal_interphalangeal_1" center="-0.1584 0.7677 0.1126" name="r_carpal_interphalangeal_1">
+                                                                                                                                    <hanimsegment def="hanim_r_carpal_distal_phalanx_1" name="r_carpal_distal_phalanx_1">
+                                                                                                                                        <inline def="r_carpal_distal_phalanx_1" url="&quot;assets/loa5/meshes/r_carpal_distal_phalanx_1.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                    <hanimjoint def="hanim_r_midcarpal_2" center="-0.2065 0.8241 0.0889" name="r_midcarpal_2">
+                                                                                                                        <hanimsegment def="hanim_r_trapezoid" name="r_trapezoid">
+                                                                                                                            <inline def="r_trapezoid" url="&quot;assets/loa5/meshes/r_trapezoid.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_r_carpometacarpal_2" center="-0.1995 0.8265 0.0908" name="r_carpometacarpal_2">
+                                                                                                                            <hanimsegment def="hanim_r_metacarpal_2" name="r_metacarpal_2">
+                                                                                                                                <inline def="r_metacarpal_2" url="&quot;assets/loa5/meshes/r_metacarpal_2.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_r_metacarpophalangeal_2" center="-0.199 0.7707 0.1154" name="r_metacarpophalangeal_2">
+                                                                                                                                <hanimsegment def="hanim_r_carpal_proximal_phalanx_2" name="r_carpal_proximal_phalanx_2">
+                                                                                                                                    <inline def="r_carpal_proximal_phalanx_2" url="&quot;assets/loa5/meshes/r_carpal_proximal_phalanx_2.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_r_carpal_proximal_interphalangeal_2" center="-0.1906 0.7379 0.128" name="r_carpal_proximal_interphalangeal_2">
+                                                                                                                                    <hanimsegment def="hanim_r_carpal_middle_phalanx_2" name="r_carpal_middle_phalanx_2">
+                                                                                                                                        <inline def="r_carpal_middle_phalanx_2" url="&quot;assets/loa5/meshes/r_carpal_middle_phalanx_2.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_r_carpal_distal_interphalangeal_2" center="-0.1726 0.7253 0.1218" name="r_carpal_distal_interphalangeal_2">
+                                                                                                                                        <hanimsegment def="hanim_r_carpal_distal_phalanx_2" name="r_carpal_distal_phalanx_2">
+                                                                                                                                            <inline def="r_carpal_distal_phalanx_2" url="&quot;assets/loa5/meshes/r_carpal_distal_phalanx_2.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                    <hanimjoint def="hanim_r_midcarpal_3" center="-0.214 0.8221 0.0792" name="r_midcarpal_3">
+                                                                                                                        <hanimsegment def="hanim_r_capitate" name="r_capitate">
+                                                                                                                            <inline def="r_capitate" url="&quot;assets/loa5/meshes/r_capitate.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_r_carpometacarpal_3" center="-0.2127 0.825 0.0775" name="r_carpometacarpal_3">
+                                                                                                                            <hanimsegment def="hanim_r_metacarpal_3" name="r_metacarpal_3">
+                                                                                                                                <inline def="r_metacarpal_3" url="&quot;assets/loa5/meshes/r_metacarpal_3.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_r_metacarpophalangeal_3" center="-0.2132 0.7627 0.0978" name="r_metacarpophalangeal_3">
+                                                                                                                                <hanimsegment def="hanim_r_carpal_proximal_phalanx_3" name="r_carpal_proximal_phalanx_3">
+                                                                                                                                    <inline def="r_carpal_proximal_phalanx_3" url="&quot;assets/loa5/meshes/r_carpal_proximal_phalanx_3.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_r_carpal_proximal_interphalangeal_3" center="-0.189 0.7267 0.0972" name="r_carpal_proximal_interphalangeal_3">
+                                                                                                                                    <hanimsegment def="hanim_r_carpal_middle_phalanx_3" name="r_carpal_middle_phalanx_3">
+                                                                                                                                        <inline def="r_carpal_middle_phalanx_3" url="&quot;assets/loa5/meshes/r_carpal_middle_phalanx_3.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_r_carpal_distal_interphalangeal_3" center="-0.1627 0.7207 0.0912" name="r_carpal_distal_interphalangeal_3">
+                                                                                                                                        <hanimsegment def="hanim_r_carpal_distal_phalanx_3" name="r_carpal_distal_phalanx_3">
+                                                                                                                                            <inline def="r_carpal_distal_phalanx_3" url="&quot;assets/loa5/meshes/r_carpal_distal_phalanx_3.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                    <hanimjoint def="hanim_r_midcarpal_4_5" center="-0.2129 0.8423 0.068" name="r_midcarpal_4_5">
+                                                                                                                        <hanimsegment def="hanim_r_hamate" name="r_hamate">
+                                                                                                                            <inline def="r_hamate" url="&quot;assets/loa5/meshes/r_hamate.x3d&quot;"></inline>
+                                                                                                                        </hanimsegment>
+                                                                                                                        <hanimjoint def="hanim_r_carpometacarpal_4" center="-0.2211 0.8268 0.0683" name="r_carpometacarpal_4">
+                                                                                                                            <hanimsegment def="hanim_r_metacarpal_4" name="r_metacarpal_4">
+                                                                                                                                <inline def="r_metacarpal_4" url="&quot;assets/loa5/meshes/r_metacarpal_4.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_r_metacarpophalangeal_4" center="-0.2206 0.7646 0.0759" name="r_metacarpophalangeal_4">
+                                                                                                                                <hanimsegment def="hanim_r_carpal_proximal_phalanx_4" name="r_carpal_proximal_phalanx_4">
+                                                                                                                                    <inline def="r_carpal_proximal_phalanx_4" url="&quot;assets/loa5/meshes/r_carpal_proximal_phalanx_4.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_r_carpal_proximal_interphalangeal_4" center="-0.1949 0.73 0.0736" name="r_carpal_proximal_interphalangeal_4">
+                                                                                                                                    <hanimsegment def="hanim_r_carpal_middle_phalanx_4" name="r_carpal_middle_phalanx_4">
+                                                                                                                                        <inline def="r_carpal_middle_phalanx_4" url="&quot;assets/loa5/meshes/r_carpal_middle_phalanx_4.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_r_carpal_distal_interphalangeal_4" center="-0.1668 0.7241 0.0703" name="r_carpal_distal_interphalangeal_4">
+                                                                                                                                        <hanimsegment def="hanim_r_carpal_distal_phalanx_4" name="r_carpal_distal_phalanx_4">
+                                                                                                                                            <inline def="r_carpal_distal_phalanx_4" url="&quot;assets/loa5/meshes/r_carpal_distal_phalanx_4.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                        <hanimjoint def="hanim_r_carpometacarpal_5" center="-0.2216 0.8292 0.0615" name="r_carpometacarpal_5">
+                                                                                                                            <hanimsegment def="hanim_r_metacarpal_5" name="r_metacarpal_5">
+                                                                                                                                <inline def="r_metacarpal_5" url="&quot;assets/loa5/meshes/r_metacarpal_5.x3d&quot;"></inline>
+                                                                                                                            </hanimsegment>
+                                                                                                                            <hanimjoint def="hanim_r_metacarpophalangeal_5" center="-0.2227 0.7633 0.0553" name="r_metacarpophalangeal_5">
+                                                                                                                                <hanimsegment def="hanim_r_carpal_proximal_phalanx_5" name="r_carpal_proximal_phalanx_5">
+                                                                                                                                    <inline def="r_carpal_proximal_phalanx_5" url="&quot;assets/loa5/meshes/r_carpal_proximal_phalanx_5.x3d&quot;"></inline>
+                                                                                                                                </hanimsegment>
+                                                                                                                                <hanimjoint def="hanim_r_carpal_proximal_interphalangeal_5" center="-0.1995 0.7337 0.0517" name="r_carpal_proximal_interphalangeal_5">
+                                                                                                                                    <hanimsegment def="hanim_r_carpal_middle_phalanx_5" name="r_carpal_middle_phalanx_5">
+                                                                                                                                        <inline def="r_carpal_middle_phalanx_5" url="&quot;assets/loa5/meshes/r_carpal_middle_phalanx_5.x3d&quot;"></inline>
+                                                                                                                                    </hanimsegment>
+                                                                                                                                    <hanimjoint def="hanim_r_carpal_distal_interphalangeal_5" center="-0.1847 0.7247 0.0494" name="r_carpal_distal_interphalangeal_5">
+                                                                                                                                        <hanimsegment def="hanim_r_carpal_distal_phalanx_5" name="r_carpal_distal_phalanx_5">
+                                                                                                                                            <inline def="r_carpal_distal_phalanx_5" url="&quot;assets/loa5/meshes/r_carpal_distal_phalanx_5.x3d&quot;"></inline>
+                                                                                                                                        </hanimsegment>
+                                                                                                                                    </hanimjoint>
+                                                                                                                                </hanimjoint>
+                                                                                                                            </hanimjoint>
+                                                                                                                        </hanimjoint>
+                                                                                                                    </hanimjoint>
+                                                                                                                </hanimjoint>
+                                                                                                            </hanimjoint>
+                                                                                                        </hanimjoint>
+                                                                                                    </hanimjoint>
+                                                                                                </hanimjoint>
+                                                                                            </hanimjoint>
+                                                                                        </hanimjoint>
+                                                                                    </hanimjoint>
+                                                                                </hanimjoint>
+                                                                            </hanimjoint>
+                                                                        </hanimjoint>
+                                                                    </hanimjoint>
+                                                                </hanimjoint>
+                                                            </hanimjoint>
+                                                        </hanimjoint>
+                                                    </hanimjoint>
+                                                </hanimjoint>
+                                            </hanimjoint>
+                                        </hanimjoint>
+                                    </hanimjoint>
+                                </hanimjoint>
+                            </hanimjoint>
+                        </hanimjoint>
+                    </hanimhumanoid>
                 </transform>
             </transform>
             <timesensor def="ArmClock" cycleinterval="2.6" loop="true"></timesensor>
@@ -432,10 +1477,10 @@
             <route fromfield="fraction_changed" fromnode="WaveClock" tofield="set_fraction" tonode="ForearmWave"></route>
             <route fromfield="fraction_changed" fromnode="JawClock" tofield="set_fraction" tonode="JawTalk"></route>
             <route fromfield="fraction_changed" fromnode="HeadClock" tofield="set_fraction" tonode="HeadTurn"></route>
-            <route fromfield="value_changed" fromnode="ArmSway" tofield="set_rotation" tonode="RArm"></route>
-            <route fromfield="value_changed" fromnode="ForearmWave" tofield="set_rotation" tonode="RForearm"></route>
-            <route fromfield="value_changed" fromnode="JawTalk" tofield="set_rotation" tonode="JawGrp"></route>
-            <route fromfield="value_changed" fromnode="HeadTurn" tofield="set_rotation" tonode="HeadGrp"></route>
+            <route fromfield="value_changed" fromnode="ArmSway" tofield="set_rotation" tonode="hanim_r_shoulder"></route>
+            <route fromfield="value_changed" fromnode="ForearmWave" tofield="set_rotation" tonode="hanim_r_elbow"></route>
+            <route fromfield="value_changed" fromnode="JawTalk" tofield="set_rotation" tonode="hanim_temporomandibular"></route>
+            <route fromfield="value_changed" fromnode="HeadTurn" tofield="set_rotation" tonode="hanim_skullbase"></route>
         </scene>
     </x3d>
 </body>

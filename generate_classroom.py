@@ -17,6 +17,7 @@ Textures (assets/textures/*.png) are FLUX-generated; the generator falls back
 to plain colors when absent.
 """
 import os
+import re
 import subprocess
 
 from x3d import x3d as X
@@ -86,15 +87,10 @@ def textured_panel(t, size, name, rot=None):
     return tr
 
 # ------------------------------------------------------------------ skeleton
-R_SHOULDER = [-0.203, 1.446, -0.031]
-R_ELBOW    = [-0.217, 1.092, 0.011]
-NECK       = [0.0, 1.55, -0.03]
-JAW_HINGE  = [0.0, 1.62, -0.04]
-_ANIM = {"BonesRightHumerus", "BonesRightRadiusUlna", "BonesRightHand",
-         "BonesHead", "BonesTeethTop", "BonesMandible", "BonesTeethBottom"}
-
-def inline(b):
-    return X.Inline(DEF=b, url=[f"assets/medical/{b}.x3d"])
+# The hanging figure is the canonical AllBonesLOA5 bone-mesh humanoid, embedded
+# (not Inlined) so its hanim_<joint> DEFs are in scope for the wave/head/jaw
+# ROUTEs. A placeholder Group marks where the fragment is spliced in.
+HUMANOID_FRAGMENT = open("assets/loa5/loa5_humanoid.x3dfrag").read()
 
 def skeleton():
     base = [cyl([0, 0.03, 0], 0.06, 0.34, METAL)]
@@ -104,19 +100,8 @@ def skeleton():
     pole = [cyl([0, 1.05, -0.30], 2.00, 0.022, METAL),
             cyl([0, 2.04, -0.15], 0.32, 0.015, METAL, rot=[1,0,0,1.5708]),
             cyl([0, 1.965, 0.0], 0.12, 0.008, METAL)]
-
-    static = [inline(b) for b in BONES if b not in _ANIM]
-    r_arm = X.Transform(DEF="RArm", center=R_SHOULDER, rotation=[0,0,1,-1.9], children=[
-        inline("BonesRightHumerus"),
-        X.Transform(DEF="RForearm", center=R_ELBOW, rotation=[0,0,1,0], children=[
-            inline("BonesRightRadiusUlna"), inline("BonesRightHand")])])
-    head = X.Transform(DEF="HeadGrp", center=NECK, rotation=[0,1,0,0], children=[
-        inline("BonesHead"), inline("BonesTeethTop"),
-        X.Transform(DEF="JawGrp", center=JAW_HINGE, rotation=[1,0,0,0], children=[
-            inline("BonesMandible"), inline("BonesTeethBottom")])])
-
     bones_group = X.Transform(translation=[0, HANG, 0],
-                              children=static + [r_arm, head])
+                              children=[X.Group(DEF="HumanoidSlot")])
     return X.Transform(DEF="SkeletonStand", translation=[SKEL_X, 0, SKEL_Z],
                        children=base + pole + [bones_group])
 
@@ -162,10 +147,10 @@ def animation():
         R(fromNode="WaveClock", fromField="fraction_changed", toNode="ForearmWave", toField="set_fraction"),
         R(fromNode="JawClock", fromField="fraction_changed", toNode="JawTalk", toField="set_fraction"),
         R(fromNode="HeadClock", fromField="fraction_changed", toNode="HeadTurn", toField="set_fraction"),
-        R(fromNode="ArmSway", fromField="value_changed", toNode="RArm", toField="set_rotation"),
-        R(fromNode="ForearmWave", fromField="value_changed", toNode="RForearm", toField="set_rotation"),
-        R(fromNode="JawTalk", fromField="value_changed", toNode="JawGrp", toField="set_rotation"),
-        R(fromNode="HeadTurn", fromField="value_changed", toNode="HeadGrp", toField="set_rotation"),
+        R(fromNode="ArmSway", fromField="value_changed", toNode="hanim_r_shoulder", toField="set_rotation"),
+        R(fromNode="ForearmWave", fromField="value_changed", toNode="hanim_r_elbow", toField="set_rotation"),
+        R(fromNode="JawTalk", fromField="value_changed", toNode="hanim_temporomandibular", toField="set_rotation"),
+        R(fromNode="HeadTurn", fromField="value_changed", toNode="hanim_skullbase", toField="set_rotation"),
     ]
     return nodes + routes
 
@@ -209,13 +194,16 @@ xml = doc.XML()
 # Every ImageTexture in this scene is a display panel's emissive texture.
 xml = xml.replace("<EnvironmentLight ", "<EnvironmentLight global='true' ", 1)
 xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTexture' ")
+# splice the canonical bone-mesh humanoid into the stand placeholder
+xml = re.sub(r"<Group DEF='HumanoidSlot'\s*/>|<Group DEF='HumanoidSlot'>\s*</Group>",
+             HUMANOID_FRAGMENT, xml, count=1)
 # drop DOCTYPE so web players (X_ITE) and Saxon don't fetch the external DTD
 xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
 with open("classroom_skeleton.x3d", "w") as fh:
     fh.write(xml)
 textured = [n for n,(f,_) in TEXTURES.items() if os.path.exists(os.path.join(TEXTURE_DIR,f))]
-print(f"wrote classroom_skeleton.x3d via x3d.py ({len(xml)} bytes, {len(BONES)} bones, "
-      f"textures: {textured or 'none'})")
+print(f"wrote classroom_skeleton.x3d ({len(xml)} bytes, canonical AllBonesLOA5 "
+      f"bone-mesh humanoid; textures: {textured or 'none'})")
 
 # ------------------------------------------------------------------ web pages
 XITE_JS = "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.js"
