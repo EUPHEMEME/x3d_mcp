@@ -228,6 +228,7 @@ scene = X.Scene(children=[
 
 doc = X.X3D(profile="Immersive", version="4.0",
             head=X.head(children=[
+                X.component(name="HAnim", level=1),  # X_ITE needs this to build HAnim nodes
                 X.meta(name="title", content="classroom_skeleton.x3d"),
                 X.meta(name="description",
                        content=("Science classroom with a real anatomical skeleton "
@@ -247,8 +248,12 @@ xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTextu
 # splice the canonical bone-mesh humanoid into the stand placeholder
 xml = re.sub(r"<Group DEF='HumanoidSlot'\s*/>|<Group DEF='HumanoidSlot'>\s*</Group>",
              HUMANOID_FRAGMENT, xml, count=1)
+# default the walk cycle to play on load (so the articulation is visible
+# immediately); Run/Jump stay off until their button is clicked.
+walk_on = WALK_FRAGMENT.replace("DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='false'",
+                                "DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='true'")
 # inject the three locomotion cycles + chalkboard buttons + mode-switch Script
-_anim = "\n      ".join([WALK_FRAGMENT, RUN_FRAGMENT, JUMP_FRAGMENT])
+_anim = "\n      ".join([walk_on, RUN_FRAGMENT, JUMP_FRAGMENT])
 xml = xml.replace("</Scene>", f"  {_anim}\n{buttons_and_script()}\n  </Scene>", 1)
 # drop DOCTYPE so web players (X_ITE) and Saxon don't fetch the external DTD
 xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))

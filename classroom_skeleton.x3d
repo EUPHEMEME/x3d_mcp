@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <X3D profile='Immersive' version='4.0' xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
   <head>
+    <component level='1' name='HAnim'/>
     <meta content='classroom_skeleton.x3d' name='title'/>
     <meta content='Science classroom with a real anatomical skeleton (19 NIST bone models) on a rolling stand -- waving, head-turning, talking. PBR + EnvironmentLight. Built with x3d.py.' name='description'/>
     <meta content='generate_classroom.py (x3d.py canonical pipeline)' name='generator'/>
@@ -1852,7 +1853,7 @@
       </HAnimHumanoid>
       </Transform>
     </Transform>
-    <TimeSensor DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='false'/>
+    <TimeSensor DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='true'/>
       <OrientationInterpolator DEF='Walk_r_midcarpal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
       <OrientationInterpolator DEF='Walk_r_midcarpal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
       <OrientationInterpolator DEF='Walk_r_carpal_interphalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
