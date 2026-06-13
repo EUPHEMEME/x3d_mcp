@@ -1,3 +1,7 @@
+<!-- EARMARKED: include with the email to Don Brutzman (Web3D) alongside the
+     demo contribution + LaTeX chatlog PDF. Candidate venue for the demo:
+     X3dForAdvancedModeling/LargeLanguageModels/ (per Don's invitation). -->
+
 # x3d.py bug report: dropped `containerField` and wrong `EnvironmentLight.global` default
 
 **Package:** x3d.py (banner: `x3d.py package 4.0.65.3`)
