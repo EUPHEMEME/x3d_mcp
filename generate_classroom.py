@@ -91,6 +91,10 @@ def textured_panel(t, size, name, rot=None):
 # (not Inlined) so its hanim_<joint> DEFs are in scope for the wave/head/jaw
 # ROUTEs. A placeholder Group marks where the fragment is spliced in.
 HUMANOID_FRAGMENT = open("assets/loa5/loa5_humanoid.x3dfrag").read()
+# Canonical LOA5 walk cycle (WalkTimer + 147 interpolators + routes), extracted
+# from AllBonesLOA5SkeletonsInlineAnimation.x3d. Its routes target hanim_<joint>,
+# matching the embedded humanoid. In-place (root only bobs vertically).
+WALK_FRAGMENT = open("assets/loa5/walk_animation.x3dfrag").read()
 
 def skeleton():
     base = [cyl([0, 0.03, 0], 0.06, 0.34, METAL)]
@@ -165,7 +169,7 @@ scene = X.Scene(children=[
     X.PointLight(location=[0,2.9,0], intensity=0.4, radius=8),
     *classroom(),
     skeleton(),
-    *animation(),
+    # walk animation injected post-serialize (raw fragment, see below)
 ])
 
 doc = X.X3D(profile="Immersive", version="4.0",
@@ -189,6 +193,8 @@ xml = xml.replace("<ImageTexture ", "<ImageTexture containerField='emissiveTextu
 # splice the canonical bone-mesh humanoid into the stand placeholder
 xml = re.sub(r"<Group DEF='HumanoidSlot'\s*/>|<Group DEF='HumanoidSlot'>\s*</Group>",
              HUMANOID_FRAGMENT, xml, count=1)
+# inject the canonical LOA5 walk cycle (drives the humanoid in place)
+xml = xml.replace("</Scene>", f"  {WALK_FRAGMENT}\n  </Scene>", 1)
 # drop DOCTYPE so web players (X_ITE) and Saxon don't fetch the external DTD
 xml = "\n".join(l for l in xml.splitlines() if not l.startswith("<!DOCTYPE"))
 with open("classroom_skeleton.x3d", "w") as fh:
