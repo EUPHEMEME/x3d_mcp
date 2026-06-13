@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='l_foot.x3d' name='title'/>
+    <meta content='The foot is terminal limb of the leg, containing many bones. This model composes l_calcaneus, l_cuboid, l_cuneiform_1, l_cuneiform_2, l_cuneiform_3, l_metatarsal_1, l_metatarsal_2, l_metatarsal_3, l_metatarsal_4, l_metatarsal_5, l_navicular, l_talus, l_tarsal_distal_phalanx_1, l_tarsal_distal_phalanx_2, l_tarsal_distal_phalanx_3, l_tarsal_distal_phalanx_4, l_tarsal_distal_phalanx_5, l_tarsal_middle_phalanx_2, l_tarsal_middle_phalanx_3, l_tarsal_middle_phalanx_4, l_tarsal_middle_phalanx_5, l_tarsal_proximal_phalanx_1, l_tarsal_proximal_phalanx_2, l_tarsal_proximal_phalanx_3, l_tarsal_proximal_phalanx_4, l_tarsal_proximal_phalanx_5' name='description'/>
+    <meta content='Joe Williams, Don Brutzman' name='creator'/>
+    <meta content='10 March 2026' name='translated'/>
+    <meta content='23 April 2026' name='modified'/>
+    <meta content='missing a bone: l_tarsal_distal_phalanx_5.x3d and originals/lfdphal5.x3d' name='TODO'/>
+    <meta content='l_tarsal_distal_phalanx_5.x3d file is missing but geometry appears to be included in l_tarsal_middle_phalanx_5.x3d and so it needs to be split out' name='TODO'/>
+    <meta content='https://en.wikipedia.org/wiki/Tarsus_(skeleton)' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Foot' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Arches_of_the_foot' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Foot#/media/File:Blausen_0411_FootAnatomy.png' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/List_of_bones_of_the_human_skeleton' name='reference'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_foot.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='l_foot.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <NavigationInfo transitionType='"ANIMATE"' type='"EXAMINE"'/>
+    <Transform DEF='RightFootLocalOffset' translation='0.0741 0.0629 -0.0641'>
+      <ViewpointGroup DEF='ViewpointGroup_l_foot' description='l_foot model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='l_foot from front' nearDistance='0.001' position='0 0 0.5' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='l_foot from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.5 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='l_foot from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.5' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='l_foot from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.5 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='l_foot from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.5 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='l_foot from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.5 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+    </Transform>
+    <!-- <Viewpoint DEF='feet' centerOfRotation='0.1 0 0' description='LeftFoot' orientation='0 0 1 0' position='0.1 0.1 1'/> -->
+    <!-- ltalus lcalc lcuboid llcun lmcun lnaviclr [missingsomething] lfmet lmet2 lmet3 lmet4 lmet5 lfpprox2 lfpprox3 lfpprox4 lfpprox5 lfmphal lfmphal2 lfmphal3 lfmphal4 lfdphal lfdphal2 lfdphal3 lfdphal4 (lfdphal5 (missing)) -->
+    <Inline DEF='l_talus' url='"l_talus.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_talus.x3d" "l_talus.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_talus.wrl"'/>
+    <Inline DEF='l_navicular' url='"l_navicular.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_navicular.x3d" "l_navicular.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_navicular.wrl"'/>
+    <Inline DEF='l_cuneiform_1' url='"l_cuneiform_1.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuneiform_1.x3d" "l_cuneiform_1.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuneiform_1.wrl"'/>
+    <Inline DEF='l_metatarsal_1' url='"l_metatarsal_1.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_1.x3d" "l_metatarsal_1.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_1.wrl"'/>
+    <Inline DEF='l_tarsal_proximal_phalanx_1' url='"l_tarsal_proximal_phalanx_1.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_1.x3d" "l_tarsal_proximal_phalanx_1.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_1.wrl"'/>
+    <Inline DEF='l_tarsal_distal_phalanx_1' url='"l_tarsal_distal_phalanx_1.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_1.x3d" "l_tarsal_distal_phalanx_1.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_1.wrl"'/>
+    <Inline DEF='l_cuneiform_2' url='"l_cuneiform_2.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuneiform_2.x3d" "l_cuneiform_2.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuneiform_2.wrl"'/>
+    <Inline DEF='l_metatarsal_2' url='"l_metatarsal_2.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_2.x3d" "l_metatarsal_2.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_2.wrl"'/>
+    <Inline DEF='l_tarsal_proximal_phalanx_2' url='"l_tarsal_proximal_phalanx_2.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_2.x3d" "l_tarsal_proximal_phalanx_2.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_2.wrl"'/>
+    <Inline DEF='l_tarsal_middle_phalanx_2' url='"l_tarsal_middle_phalanx_2.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_2.x3d" "l_tarsal_middle_phalanx_2.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_2.wrl"'/>
+    <Inline DEF='l_tarsal_distal_phalanx_2' url='"l_tarsal_distal_phalanx_2.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_2.x3d" "l_tarsal_distal_phalanx_2.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_2.wrl"'/>
+    <Inline DEF='l_cuneiform_3' url='"l_cuneiform_3.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuneiform_3.x3d" "l_cuneiform_3.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuneiform_3.wrl"'/>
+    <Inline DEF='l_metatarsal_3' url='"l_metatarsal_3.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_3.x3d" "l_metatarsal_3.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_3.wrl"'/>
+    <Inline DEF='l_tarsal_proximal_phalanx_3' url='"l_tarsal_proximal_phalanx_3.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_3.x3d" "l_tarsal_proximal_phalanx_3.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_3.wrl"'/>
+    <Inline DEF='l_tarsal_middle_phalanx_3' url='"l_tarsal_middle_phalanx_3.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_3.x3d" "l_tarsal_middle_phalanx_3.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_3.wrl"'/>
+    <Inline DEF='l_tarsal_distal_phalanx_3' url='"l_tarsal_distal_phalanx_3.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_3.x3d" "l_tarsal_distal_phalanx_3.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_3.wrl"'/>
+    <Inline DEF='l_calcaneus' url='"l_calcaneus.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_calcaneus.x3d" "l_calcaneus.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_calcaneus.wrl"'/>
+    <Inline DEF='l_cuboid' url='"l_cuboid.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuboid.x3d" "l_cuboid.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_cuboid.wrl"'/>
+    <Inline DEF='l_metatarsal_4' url='"l_metatarsal_4.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_4.x3d" "l_metatarsal_4.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_4.wrl"'/>
+    <Inline DEF='l_tarsal_proximal_phalanx_4' url='"l_tarsal_proximal_phalanx_4.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_4.x3d" "l_tarsal_proximal_phalanx_4.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_4.wrl"'/>
+    <Inline DEF='l_tarsal_middle_phalanx_4' url='"l_tarsal_middle_phalanx_4.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_4.x3d" "l_tarsal_middle_phalanx_4.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_4.wrl"'/>
+    <Inline DEF='l_tarsal_distal_phalanx_4' url='"l_tarsal_distal_phalanx_4.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_4.x3d" "l_tarsal_distal_phalanx_4.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_distal_phalanx_4.wrl"'/>
+    <Inline DEF='l_metatarsal_5' url='"l_metatarsal_5.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_5.x3d" "l_metatarsal_5.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_metatarsal_5.wrl"'/>
+    <Inline DEF='l_tarsal_proximal_phalanx_5' url='"l_tarsal_proximal_phalanx_5.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_5.x3d" "l_tarsal_proximal_phalanx_5.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_proximal_phalanx_5.wrl"'/>
+    <Inline DEF='l_tarsal_middle_phalanx_5' url='"l_tarsal_middle_phalanx_5.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_5.x3d" "l_tarsal_middle_phalanx_5.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tarsal_middle_phalanx_5.wrl"'/>
+    <!-- TODO <Inline DEF='l_tarsal_distal_phalanx_5' url='"l_tarsal_distal_phalanx_5.x3d"'/> -->
+  </Scene>
+</X3D>

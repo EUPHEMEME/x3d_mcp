@@ -1,0 +1,49 @@
+\documentclass[10pt]{article}
+\usepackage[landscape,margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{parskip}
+\pagestyle{empty}
+\captionsetup{font=footnotesize, labelformat=empty, skip=2pt}
+
+\newcommand{\panel}[2]{%
+  \begin{minipage}[t]{0.235\textwidth}\centering
+    \includegraphics[width=\linewidth,height=3.4cm,keepaspectratio]{figures/#1}\\[1pt]
+    {\footnotesize #2}
+  \end{minipage}\hfill}
+
+\begin{document}
+\begin{center}
+{\Large\textbf{Visual Changelog --- HAnim LOA5 Demonstration}}\\[1pt]
+{\small How the running figure and classroom skeleton evolved. Each panel is a
+verified render; commit ids let you check out that exact state in git.}
+\end{center}
+\vspace{4pt}
+
+{\large\textbf{1.\ The runner}}\\[3pt]
+\panel{fig_stick_loa4.png}{\textbf{a) Generated stick figure (LOA-4).}
+Real HAnim joints, our gait, gait synced to ground speed.\\ \texttt{b1a4541}}
+\panel{fig_canonical_skeleton.png}{\textbf{b) Canonical LOA5 skeleton.}
+The Web3D \texttt{AllBonesLOA5} figure: 150 joints, 243 bone meshes.\\ \texttt{47ffc4f}}
+\panel{fig_runner_bonemesh.png}{\textbf{c) Bone-mesh runner.}
+The real skeleton runs the slalom course, driven through standard joints.\\ \texttt{47ffc4f}}
+\panel{fig_runner_xite_course.png}{\textbf{d) Browser delivery (X\_ITE).}
+The real HAnim scene in a web player---no flattening.\\ \texttt{0259f0c}}
+
+\vspace{10pt}
+{\large\textbf{2.\ The classroom}}\\[3pt]
+\panel{fig_flux_blackboard.png}{\textbf{e) Generated textures.}
+Chalkboard \& posters made locally with FLUX.1, applied as \texttt{ImageTexture}.\\ \texttt{132cb9d}}
+\panel{fig_pbr_torso.png}{\textbf{f) PBR look-dev.}
+Bone meshes re-authored to \texttt{PhysicalMaterial}; form returns under IBL.\\ \texttt{a05e930}}
+\panel{fig_classroom_buttons.png}{\textbf{g) Interactive classroom.}
+LOA5 skeleton on a stand; chalkboard buttons switch Walk/Run/Jump.\\ \texttt{b26a291}}
+\panel{fig_buttons_closeup.png}{\textbf{h) Chalk-styled controls.}
+Buttons restyled to read as chalk drawings on the board.\\ \texttt{9d0c601}}
+
+\vspace{14pt}
+\begin{center}\footnotesize
+Browse any step: \texttt{git show <id> -{}-stat} (what changed) \quad$\cdot$\quad
+\texttt{git checkout <id>} then \texttt{git checkout main} (time-travel and back).
+\end{center}
+\end{document}

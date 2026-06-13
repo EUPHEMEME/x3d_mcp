@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='l_carpal.x3d' name='title'/>
+    <meta content='The medical definition for carpal bones are eight small bones that make up the wrist (carpus) connecting the hand to the forearm. This l_carpal wrist model includes four LOA-5 bones l_scaphoid, l_lunate, l_triquetral, l_pisiform. The four additional bones are accounted for in separate LOA-4 models for l_trapezium, l_trapezoid, l_capitate, and l_hamate. l_carpal is LOA-1.' name='description'/>
+    <meta content='Don Brutzman, Joe Williams' name='creator'/>
+    <meta content='20 March 2026' name='created'/>
+    <meta content='25 April 2026' name='modified'/>
+    <meta content='axes display found in l_lunate.x3d' name='info'/>
+    <meta content='https://en.wikipedia.org/wiki/Wrist' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Carpal' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Carpal_bones#/media/File:3D_Medical_Animation_Human_Wrist.jpg' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Arm' name='reference'/>
+    <meta content='https://www.web3d.org/specifications/X3Dv4Draft/ISO-IEC19774/ISO-IEC19774-1/ISO-IEC19774-1v2.1/ISO-IEC19774-1v2.1-WD/Architecture/concepts.html#f-HandJoints' name='reference'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_carpal.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='l_carpal.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <Transform DEF='l_carpal' translation='0.2144 0.8470 0.0680'>
+      <ViewpointGroup DEF='ViewpointGroup_l_carpal' description='l_carpal model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='l_carpal (wrist) LOA-1 from front' nearDistance='0.001' position='0 0 0.2' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='l_carpal (wrist) LOA-1 from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.2 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='l_carpal (wrist) LOA-1 from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.2' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='l_carpal (wrist) LOA-1 from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.2 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='l_carpal (wrist) LOA-1 from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.2 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='l_carpal (wrist) LOA-1 from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.2 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+    </Transform>
+    <Inline DEF='l_scaphoid' url='"l_scaphoid.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_scaphoid.x3d" "l_scaphoid.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_scaphoid.wrl"'/>
+    <Inline DEF='l_lunate' url='"l_lunate.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_lunate.x3d" "l_lunate.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_lunate.wrl"'/>
+    <Inline DEF='l_triquetral' url='"l_triquetral.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_triquetral.x3d" "l_triquetral.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_triquetral.wrl"'/>
+    <Inline DEF='l_pisiform' url='"l_pisiform.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_pisiform.x3d" "l_pisiform.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_pisiform.wrl"'/>
+    <!-- four additional carpal bones are called out individually in LOA-4 -->
+  </Scene>
+</X3D>
