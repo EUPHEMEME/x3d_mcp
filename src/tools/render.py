@@ -10,6 +10,7 @@ Nikhil Narra and Nicholas Polys (Virginia Tech / Web3D Consortium).
 
 import functools
 import http.server
+import os
 import tempfile
 import threading
 from pathlib import Path
@@ -65,49 +66,63 @@ def _ensure_full_x3d(text: str) -> str:
             '<X3D profile="Immersive" version="4.0">\n' + body + '\n</X3D>\n')
 
 
-def _xite_page(width: int, height: int) -> str:
-    """A minimal X_ITE page that loads scene.x3d from the same directory."""
+def _xite_page(width: int, height: int, src: str = "scene.x3d") -> str:
+    """A minimal X_ITE page that loads `src` (relative to the served directory)."""
     return (
         '<!DOCTYPE html><html><head><meta charset="utf-8">'
         f'<script src="{_XITE_CDN_JS}"></script>'
         '<style>html,body{margin:0;background:#0a0a0c}'
         f'x3d-canvas,canvas{{width:{width}px;height:{height}px;display:block}}</style>'
-        '</head><body><x3d-canvas src="scene.x3d"></x3d-canvas></body></html>'
+        f'</head><body><x3d-canvas src="{src}"></x3d-canvas></body></html>'
     )
 
 
-async def _render_xite_async(text: str, width: int, height: int, wait_ms: int) -> bytes:
-    """Render an X3D scene to PNG via headless Chromium + X_ITE (async Playwright).
-
-    Async so it runs inside the MCP server's event loop -- the sync Playwright
-    API raises "Sync API inside the asyncio loop" when called from a tool.
-    """
+async def _shoot(serve_dir: str, page_name: str, width: int, height: int,
+                 wait_ms: int) -> bytes:
+    """Serve `serve_dir` over loopback and screenshot its `page_name` via X_ITE."""
     from playwright.async_api import async_playwright
 
+    httpd, port = _serve_dir(serve_dir)
+    try:
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(args=_RENDER_ARGS)
+            try:
+                page = await browser.new_page(viewport={"width": width, "height": height})
+                await page.goto(f"http://127.0.0.1:{port}/{page_name}",
+                                wait_until="networkidle", timeout=30000)
+                await page.wait_for_timeout(wait_ms)       # X_ITE: fetch CDN + draw
+                try:
+                    png = await page.locator("canvas").first.screenshot(timeout=8000)
+                except Exception:
+                    png = await page.screenshot()
+            finally:
+                await browser.close()
+    finally:
+        httpd.shutdown()
+    return png
+
+
+async def _render_xite_async(text: str, width: int, height: int, wait_ms: int) -> bytes:
+    """Render inline X3D to PNG via X_ITE (scene written to a temp dir)."""
     full = _ensure_full_x3d(text)
     with tempfile.TemporaryDirectory() as td:
         d = Path(td)
         (d / "scene.x3d").write_text(full, encoding="utf-8")
         (d / "index.html").write_text(_xite_page(width, height), encoding="utf-8")
-        httpd, port = _serve_dir(td)
-        try:
-            async with async_playwright() as pw:
-                browser = await pw.chromium.launch(args=_RENDER_ARGS)
-                try:
-                    page = await browser.new_page(
-                        viewport={"width": width, "height": height})
-                    await page.goto(f"http://127.0.0.1:{port}/index.html",
-                                    wait_until="networkidle", timeout=30000)
-                    await page.wait_for_timeout(wait_ms)   # X_ITE: fetch CDN + draw
-                    try:
-                        png = await page.locator("canvas").first.screenshot(timeout=8000)
-                    except Exception:
-                        png = await page.screenshot()
-                finally:
-                    await browser.close()
-        finally:
-            httpd.shutdown()
-    return png
+        return await _shoot(td, "index.html", width, height, wait_ms)
+
+
+async def _render_xite_path_async(x3d_path: str, width: int, height: int,
+                                  wait_ms: int) -> bytes:
+    """Render an X3D *file* by serving its own directory, so relative assets
+    (textures, inlined .x3d, etc.) resolve the same way they do in a browser."""
+    p = Path(x3d_path).expanduser().resolve()
+    page = p.parent / f"._x3d_render_{os.getpid()}.html"
+    page.write_text(_xite_page(width, height, src=p.name), encoding="utf-8")
+    try:
+        return await _shoot(str(p.parent), page.name, width, height, wait_ms)
+    finally:
+        page.unlink(missing_ok=True)
 
 
 def _escape_html(text: str) -> str:
@@ -328,6 +343,9 @@ def register(mcp: FastMCP):
         Viewpoint and a DirectionalLight and re-render. If it's still blank, bump
         wait_ms (X_ITE fetches its library from a CDN and needs a moment to draw).
 
+        When `path` is given, the file's own directory is served, so relative
+        assets (textures, inlined .x3d) resolve as they do in a browser.
+
         Args:
             content: X3D XML (full document or scene fragment), inline.
             path: Path to an X3D file to render instead of inline content.
@@ -338,7 +356,7 @@ def register(mcp: FastMCP):
             save_path: Optional path to also write the PNG to disk.
         """
         try:
-            text = load_x3d_source(content, path)
+            text = load_x3d_source(content, path)   # validates exactly-one-of
         except ValueError as exc:
             return f"Input error: {exc}"
         try:
@@ -350,7 +368,10 @@ def register(mcp: FastMCP):
                 "Until then, use x3dom_page(content) and open the HTML in a browser."
             )
         try:
-            png = await _render_xite_async(text, width, height, wait_ms)
+            if path:
+                png = await _render_xite_path_async(path, width, height, wait_ms)
+            else:
+                png = await _render_xite_async(text, width, height, wait_ms)
         except Exception as exc:
             return f"Render failed: {exc}"
         if save_path:
