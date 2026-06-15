@@ -523,33 +523,58 @@ def x3d_doc(scene):
     )
 
 
-def html_doc(scene, xite=False):
-    head_lib = ('<script src="https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.js"></script>'
-                if xite else
-                '<script src="https://x3dom.org/release/x3dom.js"></script>'
-                '<link rel="stylesheet" href="https://x3dom.org/release/x3dom.css">')
-    body = ('<x3d-canvas src="samwel_cave.x3d"></x3d-canvas>' if xite
-            else f'<x3d><Scene>{scene}</Scene></x3d>')
+XITE_VER = "15.1.4"          # pinned (was @latest)
+
+FILE_GUARD = """<script>
+if (location.protocol === 'file:') {
+  window.addEventListener('DOMContentLoaded', function () {
+    document.body.style.cssText = 'margin:0;height:100vh;display:flex;align-items:'
+      + 'center;justify-content:center;background:#0a0a0c;color:#cdbfa6;'
+      + 'font-family:Georgia,serif;text-align:center';
+    document.body.innerHTML = '<div style="max-width:540px;padding:24px;line-height:1.6">'
+      + '<h2 style="color:#e9d9b8">Start the local viewer</h2>'
+      + '<p>This 3-D viewer loads its data over <b>http</b>. Browsers block the '
+      + 'renderer from reading 3-D files over <code>file://</code>, so opening this '
+      + 'page by double-click shows nothing.</p>'
+      + '<p>In Terminal, from the project folder, run:</p>'
+      + '<p style="background:#1d1a14;padding:10px 16px;border-radius:6px;'
+      + 'display:inline-block;font-family:monospace">./start_caves.sh</p>'
+      + '<p>It serves the folder and opens '
+      + '<b>http://127.0.0.1:8099/caves.html</b> for you.</p></div>';
+  });
+}
+</script>"""
+
+SAMWEL_CAP = (
+    '<b>Samwel Cave</b> &mdash; Wintu <i>sawal</i>, "sacred place," the Cave of '
+    'the Lost Maiden. McCloud River, Shasta County. Surveyed by Furlong, Merriam '
+    '&amp; Sinclair (1903&ndash;06); cross-section after Feranec&nbsp;et&nbsp;al. '
+    '(2007). Now on the shore of Shasta Lake, on flooded Winnemem&nbsp;Wintu '
+    'homeland. <span style="opacity:.8">Chamber layout, the Magic Pools, and the '
+    '~90&nbsp;ft hole connecting the upper and lower levels are documented; room '
+    'sizes, exact pit geometry, speleothems and lighting are interpretive.</span>'
+)
+
+
+def xite_html(title, src, caption):
+    """A guarded, version-pinned X_ITE viewer page."""
     return f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Samwel Cave</title>
-{head_lib}
+<html><head><meta charset="utf-8"><title>{title}</title>
+{FILE_GUARD}
+<script src="https://cdn.jsdelivr.net/npm/x_ite@{XITE_VER}/dist/x_ite.min.js"></script>
 <style>
  html,body{{margin:0;background:#08080a;color:#cdbfa6;font-family:Georgia,serif}}
- x3d,x3d-canvas,canvas{{width:100vw;height:100vh;display:block}}
+ x3d-canvas,canvas{{width:100vw;height:100vh;display:block}}
  .cap{{position:fixed;left:18px;bottom:14px;max-width:560px;font-size:13px;
    line-height:1.45;text-shadow:0 1px 3px #000;z-index:10}}
  .cap b{{color:#e9d9b8}}
+ .home{{position:fixed;left:18px;top:14px;font-size:13px;z-index:10}}
+ .home a{{color:#cdbfa6;opacity:.75;text-decoration:none}}
 </style></head>
 <body>
-{body}
-<div class="cap"><b>Samwel Cave</b> &mdash; Wintu <i>sawal</i>, "sacred place,"
-the Cave of the Lost Maiden. McCloud River, Shasta County. Surveyed by
-Furlong, Merriam &amp; Sinclair (1903&ndash;06); cross-section after
-Feranec&nbsp;et&nbsp;al.&nbsp;(2007). Sister cave to Potter Creek. Now on the
-shore of Shasta Lake, on flooded Winnemem&nbsp;Wintu homeland.
-<span style="opacity:.8">Chamber layout, the Magic Pools, and the ~90&nbsp;ft
-hole connecting the upper and lower levels are documented; room sizes, exact pit
-geometry, speleothems and lighting are interpretive.</span></div>
+<x3d-canvas src="{src}"></x3d-canvas>
+<div class="home"><a href="caves.html">&larr; all caves</a></div>
+<div class="cap">{caption}</div>
 </body></html>
 """
 
@@ -558,11 +583,12 @@ def main():
     scene = build_scene()
     with open("samwel_cave.x3d", "w") as f:
         f.write(x3d_doc(scene))
-    with open("samwel_cave.html", "w") as f:
-        f.write(html_doc(scene, xite=False))
     with open("samwel_cave_xite.html", "w") as f:
-        f.write(html_doc(scene, xite=True))
-    print("wrote samwel_cave.x3d, samwel_cave.html, samwel_cave_xite.html")
+        f.write(xite_html("Samwel Cave", "samwel_cave.x3d", SAMWEL_CAP))
+    with open("samwel_cave_hero.html", "w") as f:
+        f.write(xite_html("Samwel Cave — the descent",
+                          "samwel_cave.x3d#Hero", SAMWEL_CAP))
+    print("wrote samwel_cave.x3d + xite/hero viewer pages")
 
 
 if __name__ == "__main__":
