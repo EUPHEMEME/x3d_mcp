@@ -74,11 +74,31 @@ def test_starter_generates_complete_page():
     assert "directionallight" in html.lower()
 
 
-# ---- render_image: actual headless render (Playwright-gated) ----
+# ---- helpers that don't need a browser ----
 
-def test_render_html_to_png_smoke():
+def test_ensure_full_x3d_wraps_fragment():
+    from tools.render import _ensure_full_x3d
+    out = _ensure_full_x3d('<Shape><Box/></Shape>')
+    assert out.lstrip().startswith("<?xml")
+    assert "<X3D" in out and "<Scene>" in out and "<Box/>" in out
+    # a full document is passed through untouched
+    full = '<?xml version="1.0"?>\n<X3D profile="Immersive"><Scene/></X3D>'
+    assert _ensure_full_x3d(full) == full
+
+
+def test_xite_page_loads_scene():
+    from tools.render import _xite_page
+    html = _xite_page(320, 240)
+    assert "x_ite" in html
+    assert 'src="scene.x3d"' in html
+
+
+# ---- render_image: actual headless X_ITE render (Playwright-gated) ----
+
+def test_render_xite_smoke():
     pytest.importorskip("playwright")
-    from tools.render import _x3dom_page, _render_html_to_png
+    import asyncio
+    from tools.render import _render_xite_async
     scene = (
         '<X3D profile="Immersive" version="4.1"><Scene>'
         '<Viewpoint position="0 0 6"/>'
@@ -86,6 +106,6 @@ def test_render_html_to_png_smoke():
         '<Shape><Appearance><Material diffuseColor="0.85 0.2 0.2"/></Appearance>'
         '<Box size="2 2 2"/></Shape></Scene></X3D>'
     )
-    png = _render_html_to_png(_x3dom_page(scene, "t", "320px", "240px"), 320, 240, 2500)
+    png = asyncio.run(_render_xite_async(scene, 320, 240, 6000))
     assert png[:8] == b"\x89PNG\r\n\x1a\n"   # valid PNG signature
     assert len(png) > 500                     # not an empty frame
