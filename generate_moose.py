@@ -308,20 +308,22 @@ C = {n: c for n, (p, c) in JOINTS.items()}
 #     skin-binding upgrade over rigid-per-segment geometry.
 # ---------------------------------------------------------------------------
 # station: (center, rx, ry, hump)   front -> back along the spine centreline
+# Morphology tuned to real Alces alces: long PENDULOUS overhanging muzzle (snout
+# droops below the lower jaw), tall shoulder hump, sloping back to a lower rump.
 TRUNK_STATIONS = [
-    ([0.0, 1.94, -1.99], 0.10,  0.10,  0.00),   # snout tip
-    ([0.0, 1.99, -1.80], 0.135, 0.125, 0.00),   # snout
-    ([0.0, 2.04, -1.62], 0.16,  0.18,  0.00),   # head front
-    ([0.0, 2.06, -1.45], 0.185, 0.205, 0.00),   # head / brow
-    ([0.0, 2.00, -1.26], 0.20,  0.20,  0.00),   # neck c3
-    ([0.0, 1.86, -0.96], 0.25,  0.25,  0.02),   # neck c2 (throat)
-    ([0.0, 1.74, -0.62], 0.31,  0.31,  0.05),   # neck c1
-    ([0.0, 1.73, -0.32], 0.40,  0.44,  0.22),   # withers / shoulder hump
-    ([0.0, 1.56, -0.05], 0.45,  0.50,  0.06),   # chest
+    ([0.0, 1.80, -2.05], 0.14,  0.17,  0.00),   # drooping bulbous snout tip (low + full)
+    ([0.0, 1.92, -1.86], 0.155, 0.16,  0.00),   # overhanging snout
+    ([0.0, 2.03, -1.63], 0.17,  0.19,  0.00),   # head front
+    ([0.0, 2.07, -1.45], 0.185, 0.205, 0.00),   # head / brow
+    ([0.0, 2.02, -1.26], 0.21,  0.21,  0.00),   # neck c3
+    ([0.0, 1.88, -0.96], 0.26,  0.26,  0.02),   # neck c2 (throat)
+    ([0.0, 1.75, -0.62], 0.32,  0.32,  0.06),   # neck c1
+    ([0.0, 1.74, -0.30], 0.41,  0.45,  0.36),   # withers / shoulder hump (taller)
+    ([0.0, 1.56, -0.03], 0.46,  0.51,  0.09),   # chest
     ([0.0, 1.48,  0.22], 0.47,  0.52,  0.00),   # barrel
-    ([0.0, 1.49,  0.48], 0.45,  0.49,  0.00),   # flank
-    ([0.0, 1.53,  0.70], 0.36,  0.39,  0.00),   # hindquarter
-    ([0.0, 1.50,  0.86], 0.20,  0.22,  0.00),   # rump
+    ([0.0, 1.48,  0.48], 0.44,  0.48,  0.00),   # flank
+    ([0.0, 1.51,  0.70], 0.34,  0.37,  0.00),   # hindquarter (lower -> sloping back)
+    ([0.0, 1.48,  0.86], 0.18,  0.20,  0.00),   # rump
 ]
 SPINE_CHAIN = ["skull", "neck_c3", "neck_c2", "neck_c1",
                "spine_thorax", "spine_lumbar", "moose_root"]
@@ -501,18 +503,18 @@ def seg_geom(name):
     # NOTE: the trunk (torso, hump, neck, head, snout) is now the continuous
     # skinCoord skin bound across the spine joints -- see build_trunk_skin().
     # Only rigid appendages remain as per-segment geometry below.
-    if name == "neck_c2":       # dewlap / bell hanging under the throat
-        v, f, uv = ellipsoid([0.0, 1.62, -1.02], [0.10, 0.20, 0.13], nu=12, nv=9, ytaper=0.5)
+    if name == "neck_c2":       # the BELL -- a long hanging dewlap of skin + hair
+        v, f, uv = ellipsoid([0.0, 1.46, -1.06], [0.11, 0.33, 0.14], nu=12, nv=11, ytaper=0.4)
         g.append(shape(v, f, "fur_body", uv, tile=2))
     if name == "skull":
-        # bulbous nose (rigid -- rides the skull joint, matches the skin's snout)
-        v, f, uv = ellipsoid([0.0, 1.92, -2.0], [0.115, 0.12, 0.12], nu=14, nv=10)
+        # big bulbous PENDULOUS nose (rigid; overhangs the lower jaw, moose signature)
+        v, f, uv = ellipsoid([0.0, 1.80, -2.06], [0.145, 0.165, 0.155], nu=16, nv=11)
         g.append(shape(v, f, "muzzle"))
         for sx in (1, -1):      # eyes
-            v, f, uv = ellipsoid([sx * 0.13, 2.06, -1.66], [0.035, 0.04, 0.035], nu=10, nv=8)
+            v, f, uv = ellipsoid([sx * 0.135, 2.07, -1.62], [0.036, 0.042, 0.036], nu=10, nv=8)
             g.append(shape(v, f, "eye"))
-    if name == "mandible":
-        v, f, uv = tube([0.0, 1.93, -1.66], [0.0, 1.9, -1.96], 0.10, 0.085, n=12, bulge=1.05)
+    if name == "mandible":      # shorter lower jaw, so the snout overhangs it
+        v, f, uv = tube([0.0, 1.92, -1.66], [0.0, 1.80, -1.90], 0.10, 0.085, n=12, bulge=1.05)
         g.append(shape(v, f, "fur_body", uv, tile=2))
     if name in ("l_ear", "r_ear"):
         sx = 1 if name == "l_ear" else -1
