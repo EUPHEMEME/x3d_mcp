@@ -204,3 +204,62 @@ def test_multiple_issues_all_reported():
 def test_invalid_xml_source():
     report = validate_semantic("<broken")
     assert "Parse Error" in report
+
+
+# ---- containerField correctness (X3DUOM-driven) ----
+
+def test_containerfield_texture_in_physicalmaterial():
+    # ImageTexture's default containerField 'texture' does not fit PhysicalMaterial
+    xml = _wrap("<Shape><Appearance><PhysicalMaterial>"
+                "<ImageTexture url='&quot;t.png&quot;'/>"
+                "</PhysicalMaterial></Appearance><Box/></Shape>")
+    report = validate_semantic(xml)
+    assert "containerfield-unknown" in report
+    assert "baseTexture" in report  # suggests a valid slot
+
+
+def test_containerfield_explicit_texture_ok():
+    xml = _wrap("<Shape><Appearance><PhysicalMaterial>"
+                "<ImageTexture containerField='baseTexture' url='&quot;t.png&quot;'/>"
+                "</PhysicalMaterial></Appearance><Box/></Shape>")
+    report = validate_semantic(xml)
+    assert "containerfield" not in report
+
+
+def test_containerfield_texture_in_appearance_ok():
+    # Appearance HAS a 'texture' field, so the default placement is correct
+    xml = _wrap("<Shape><Appearance>"
+                "<ImageTexture url='&quot;t.png&quot;'/>"
+                "</Appearance><Box/></Shape>")
+    report = validate_semantic(xml)
+    assert "containerfield" not in report
+
+
+def test_containerfield_hanim_joint_default_in_humanoid():
+    xml = _wrap("<HAnimHumanoid name='h'><HAnimJoint name='root'/></HAnimHumanoid>")
+    report = validate_semantic(xml)
+    assert "containerfield" in report
+    assert "joints" in report or "skeleton" in report
+
+
+def test_containerfield_clean_scene_no_flag():
+    xml = _wrap("<Transform><Shape><Appearance><Material/></Appearance>"
+                "<Box/></Shape></Transform>")
+    report = validate_semantic(xml)
+    assert "containerfield" not in report
+
+
+# ---- USE-before-DEF ordering ----
+
+def test_use_before_def_flagged():
+    xml = _wrap('<Group><Shape USE="S"/></Group>'
+                '<Shape DEF="S"><Appearance><Material/></Appearance><Box/></Shape>')
+    report = validate_semantic(xml)
+    assert "use-before-def" in report
+
+
+def test_def_before_use_ok():
+    xml = _wrap('<Shape DEF="S"><Appearance><Material/></Appearance><Box/></Shape>'
+                '<Group><Shape USE="S"/></Group>')
+    report = validate_semantic(xml)
+    assert "use-before-def" not in report

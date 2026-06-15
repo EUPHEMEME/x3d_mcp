@@ -326,6 +326,122 @@ def _check_route_validity(scene: etree._Element) -> list[Diagnostic]:
     return diagnostics
 
 
+_NODE_FIELD_TYPES = {"SFNode", "MFNode"}
+
+
+def _type_ancestry(typename: str, nodes: dict, abstracts: dict) -> set[str]:
+    """Return {typename} plus every abstract base it inherits from."""
+    chain = {typename}
+    cur = nodes.get(typename) or abstracts.get(typename)
+    while cur:
+        base = cur.get("baseType")
+        if not base or base in chain:
+            break
+        chain.add(base)
+        cur = nodes.get(base) or abstracts.get(base)
+    return chain
+
+
+def _node_field_map(typename: str, nodes: dict) -> dict:
+    return {f["name"]: f for f in nodes.get(typename, {}).get("fields", [])}
+
+
+def _field_accepts(field: dict, ancestry: set[str]) -> bool:
+    """True if a parent field can hold a node whose type ancestry is given."""
+    if field.get("type") not in _NODE_FIELD_TYPES:
+        return False
+    acc = field.get("acceptableNodeTypes")
+    if not acc:
+        return True                      # unspecified -> be lenient
+    return bool(ancestry & set(acc.split()))
+
+
+def _check_containerfield(scene: etree._Element) -> list[Diagnostic]:
+    """Verify every child node's containerField names a parent field that accepts it.
+
+    The single most common silent failure: a node's *default* containerField does
+    not fit the parent it's placed under, so a conforming viewer files it in the
+    wrong field (or drops it). Examples this catches: an ImageTexture (default
+    'texture') inside a PhysicalMaterial (needs baseTexture/normalTexture/...), or
+    an HAnimJoint (default 'children') used as an HAnimHumanoid skeleton root
+    (needs 'skeleton'). X3D requires an explicit containerField in these cases.
+    """
+    diagnostics: list[Diagnostic] = []
+    uom = get_x3duom()
+    nodes = uom.get_concrete_nodes()
+    abstracts = uom.get_abstract_types()
+
+    for parent in scene.iter():
+        ptag = _local_tag(parent)
+        if ptag not in nodes:
+            continue
+        pfields = _node_field_map(ptag, nodes)
+        for child in parent:
+            ctag = _local_tag(child)
+            if ctag not in nodes:        # skip ROUTE/field/IS/meta/comments
+                continue
+            cf = child.get("containerField") or nodes[ctag]["containerField"]
+            if not cf:
+                continue
+            anc = _type_ancestry(ctag, nodes, abstracts)
+            explicit = child.get("containerField") is not None
+            candidates = [n for n, f in pfields.items() if _field_accepts(f, anc)]
+            suggest = ""
+            if candidates:
+                head = f"containerField='{candidates[0]}'"
+                more = f" (or {', '.join(candidates[1:])})" if len(candidates) > 1 else ""
+                suggest = f" Use {head}{more} to place a {ctag} here."
+            field = pfields.get(cf)
+            hint = "" if explicit else (
+                f" {ctag}'s default containerField is '{cf}', which does not fit a {ptag} "
+                f"-- an explicit containerField is required here.")
+            if field is None:
+                diagnostics.append(Diagnostic(
+                    level="error", check="containerfield-unknown",
+                    message=f"{ctag} containerField='{cf}' but {ptag} has no field "
+                            f"named '{cf}'.{hint}{suggest}",
+                    node_tag=ctag, def_name=child.get("DEF", "")))
+            elif field.get("type") not in _NODE_FIELD_TYPES:
+                diagnostics.append(Diagnostic(
+                    level="error", check="containerfield-not-node",
+                    message=f"{ctag} containerField='{cf}' targets {ptag}.{cf}, which is a "
+                            f"{field.get('type')} value field, not a node container.{suggest}",
+                    node_tag=ctag, def_name=child.get("DEF", "")))
+            elif not _field_accepts(field, anc):
+                acc = field.get("acceptableNodeTypes", "")
+                alt = [c for c in candidates if c != cf]
+                s2 = (f" Use containerField='{alt[0]}'." if alt else "")
+                diagnostics.append(Diagnostic(
+                    level="error", check="containerfield-type-mismatch",
+                    message=f"{ptag}.{cf} does not accept a {ctag} (accepts: {acc}).{s2}",
+                    node_tag=ctag, def_name=child.get("DEF", "")))
+    return diagnostics
+
+
+def _check_use_before_def(scene: etree._Element) -> list[Diagnostic]:
+    """A USE must reference a DEF that PRECEDES it in document order (ISO 19775-1).
+
+    The existing DEF/USE check confirms the DEF exists somewhere; this catches the
+    distinct failure where the DEF is authored *after* the USE -- valid-looking but
+    unresolvable in a single-pass reader.
+    """
+    diagnostics: list[Diagnostic] = []
+    all_defs = {el.get("DEF") for el in scene.iter() if el.get("DEF")}
+    seen: set[str] = set()
+    for el in scene.iter():
+        use_name = el.get("USE")
+        if use_name and use_name not in seen and use_name in all_defs:
+            diagnostics.append(Diagnostic(
+                level="error", check="use-before-def",
+                message=f"USE='{use_name}' ({_local_tag(el)}) appears before its DEF in "
+                        f"document order. A USE must follow the DEF it references.",
+                node_tag=_local_tag(el), def_name=use_name))
+        def_name = el.get("DEF")
+        if def_name:
+            seen.add(def_name)
+    return diagnostics
+
+
 def _check_missing_viewpoint(scene: etree._Element) -> list[Diagnostic]:
     if list(scene.iter("Viewpoint")):
         return []
@@ -340,6 +456,8 @@ def _check_missing_viewpoint(scene: etree._Element) -> list[Diagnostic]:
 _ALL_CHECKS = [
     _check_duplicate_defs,
     _check_def_use_consistency,
+    _check_use_before_def,
+    _check_containerfield,
     _check_shape_completeness,
     _check_empty_groups,
     _check_route_validity,
