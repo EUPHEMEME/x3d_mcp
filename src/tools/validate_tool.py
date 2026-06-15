@@ -8,6 +8,7 @@ from mcp.server.fastmcp import FastMCP
 
 from validation.validate import validate_xml, validate_json
 from validation.semantic import validate_semantic as _validate_semantic
+from validation.autofix import autofix_containerfields
 from tools.granular import _scene
 from x3d_utils.source import load_x3d_source
 
@@ -63,3 +64,30 @@ def register(mcp: FastMCP):
         except ValueError as exc:
             return f"# Semantic Check: Input Error\n\n{exc}"
         return _validate_semantic(text)
+
+    @mcp.tool()
+    def autofix_x3d(content: str = "", path: str = "") -> str:
+        """Auto-correct containerField mistakes and return the FIXED X3D document.
+
+        The companion to validate_semantic's containerField check: instead of only
+        naming the right field, it rewrites it -- e.g. a texture defaulted to
+        'texture' under a PhysicalMaterial becomes containerField='baseTexture', and
+        an HAnimHumanoid skeleton root becomes containerField='skeleton'. Only
+        containerField attributes are touched; no node is moved, added, or removed.
+
+        Returns JSON {fixed, changes, unfixable}. `fixed` is the corrected document
+        -- use it directly. Each change flags `ambiguous` (several fields accept the
+        node) with the `alternatives`, so override the chosen slot if needed.
+        `unfixable` lists nodes whose parent accepts no such type (a real misplacement,
+        not just a label). Does NOT reorder USE-before-DEF (that's structural).
+
+        Args:
+            content: The X3D XML content string to fix (inline).
+            path: Path to an X3D file to fix instead of inline content.
+                  Provide exactly one of `content` or `path`.
+        """
+        try:
+            text = load_x3d_source(content, path)
+        except ValueError as exc:
+            return json.dumps({"error": str(exc)}, indent=2)
+        return json.dumps(autofix_containerfields(text), indent=2)

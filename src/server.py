@@ -48,7 +48,8 @@ NON-OBVIOUS RULES THAT CAUSE SILENT FAILURES (validate_semantic enforces all of 
 containerField only fits its usual parent; when you place it elsewhere you MUST set containerField \
 explicitly -- e.g. a texture inside PhysicalMaterial needs baseTexture/normalTexture/..., an \
 HAnimHumanoid skeleton root needs containerField='skeleton', skinCoord/skinNormal likewise. A wrong \
-or defaulted containerField makes a conforming viewer silently drop or misfile the node (blank render).
+or defaulted containerField makes a conforming viewer silently drop or misfile the node (blank render). \
+`autofix_x3d` rewrites these for you and returns the corrected document.
 - DEF before USE: a USE must appear AFTER the DEF it references, in document order.
 - ROUTE field types and access types must match source->target.
 

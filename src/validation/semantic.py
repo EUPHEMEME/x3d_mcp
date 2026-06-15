@@ -8,6 +8,7 @@ Adapted from semantic_check.py in https://github.com/niknarra/x3d-mcp by
 Nikhil Narra and Nicholas Polys (Virginia Tech / Web3D Consortium).
 """
 
+import re
 from dataclasses import dataclass
 from lxml import etree
 
@@ -353,7 +354,8 @@ def _field_accepts(field: dict, ancestry: set[str]) -> bool:
     acc = field.get("acceptableNodeTypes")
     if not acc:
         return True                      # unspecified -> be lenient
-    return bool(ancestry & set(acc.split()))
+    # acceptableNodeTypes is '|'-separated (some sources space-separate); accept both.
+    return bool(ancestry & set(re.split(r"[|\s]+", acc.strip())))
 
 
 def _check_containerfield(scene: etree._Element) -> list[Diagnostic]:

@@ -85,6 +85,8 @@ def register(mcp: FastMCP):
             "definitions, default values, ranges, and access types. Compare against "
             "what the document has.\n\n"
             "4. **Apply fixes if needed:**\n"
+            "   - `autofix_x3d(content)` to auto-correct containerField mistakes and "
+            "get the fixed document back (review any `ambiguous` choices it reports)\n"
             "   - `modify_x3d_node(content, def_name, field_changes)` to update a "
             "field on a DEF'd node\n"
             "   - `remove_x3d_node(content, def_name=...)` to drop a problem node\n"
