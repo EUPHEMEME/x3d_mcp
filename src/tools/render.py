@@ -8,7 +8,10 @@ Adapted from generation.py in https://github.com/niknarra/x3d-mcp by
 Nikhil Narra and Nicholas Polys (Virginia Tech / Web3D Consortium).
 """
 
+import functools
+import http.server
 import tempfile
+import threading
 from pathlib import Path
 
 from lxml import etree
@@ -20,6 +23,10 @@ from x3d_utils.source import load_x3d_source
 
 _X3DOM_CDN_CSS = "https://www.x3dom.org/download/1.8.2/x3dom.css"
 _X3DOM_CDN_JS = "https://www.x3dom.org/download/1.8.2/x3dom.js"
+# X_ITE is the render engine: unlike X3DOM it renders HAnim and X3D 4.0
+# PhysicalMaterial (PBR), and it actually draws geometry under headless
+# swiftshader (X3DOM only clears the background there).
+_XITE_CDN_JS = "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.js"
 
 # Software-GL flags so headless Chromium renders WebGL without a real GPU.
 _RENDER_ARGS = [
@@ -28,25 +35,78 @@ _RENDER_ARGS = [
 ]
 
 
-def _render_html_to_png(html: str, width: int, height: int, wait_ms: int) -> bytes:
-    """Render an X3DOM HTML page to PNG bytes via headless Chromium (Playwright)."""
-    from playwright.sync_api import sync_playwright
+class _QuietHandler(http.server.SimpleHTTPRequestHandler):
+    """SimpleHTTPRequestHandler that doesn't spam stderr."""
 
+    def log_message(self, *args):
+        pass
+
+
+def _serve_dir(directory: str):
+    """Serve `directory` over loopback on an ephemeral port. Returns (httpd, port).
+
+    X_ITE fetches the .x3d via XHR, which CORS blocks over file://, so we serve
+    the scene over http://127.0.0.1 -- the same path the standalone viewer uses.
+    """
+    handler = functools.partial(_QuietHandler, directory=directory)
+    httpd = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    return httpd, httpd.server_address[1]
+
+
+def _ensure_full_x3d(text: str) -> str:
+    """Wrap a bare scene fragment in a minimal X3D document if needed."""
+    s = text.strip()
+    first_tag = s.split(">", 1)[0].lower()
+    if s.startswith("<?xml") or "<x3d" in first_tag:
+        return s
+    body = s if first_tag.startswith("<scene") else f"<Scene>{s}</Scene>"
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<X3D profile="Immersive" version="4.0">\n' + body + '\n</X3D>\n')
+
+
+def _xite_page(width: int, height: int) -> str:
+    """A minimal X_ITE page that loads scene.x3d from the same directory."""
+    return (
+        '<!DOCTYPE html><html><head><meta charset="utf-8">'
+        f'<script src="{_XITE_CDN_JS}"></script>'
+        '<style>html,body{margin:0;background:#0a0a0c}'
+        f'x3d-canvas,canvas{{width:{width}px;height:{height}px;display:block}}</style>'
+        '</head><body><x3d-canvas src="scene.x3d"></x3d-canvas></body></html>'
+    )
+
+
+async def _render_xite_async(text: str, width: int, height: int, wait_ms: int) -> bytes:
+    """Render an X3D scene to PNG via headless Chromium + X_ITE (async Playwright).
+
+    Async so it runs inside the MCP server's event loop -- the sync Playwright
+    API raises "Sync API inside the asyncio loop" when called from a tool.
+    """
+    from playwright.async_api import async_playwright
+
+    full = _ensure_full_x3d(text)
     with tempfile.TemporaryDirectory() as td:
-        page_path = Path(td) / "scene.html"
-        page_path.write_text(html, encoding="utf-8")
-        with sync_playwright() as pw:
-            browser = pw.chromium.launch(args=_RENDER_ARGS)
-            try:
-                page = browser.new_page(viewport={"width": width, "height": height + 90})
-                page.goto(page_path.as_uri(), wait_until="networkidle", timeout=30000)
-                page.wait_for_timeout(wait_ms)        # let X3DOM init + draw a frame
+        d = Path(td)
+        (d / "scene.x3d").write_text(full, encoding="utf-8")
+        (d / "index.html").write_text(_xite_page(width, height), encoding="utf-8")
+        httpd, port = _serve_dir(td)
+        try:
+            async with async_playwright() as pw:
+                browser = await pw.chromium.launch(args=_RENDER_ARGS)
                 try:
-                    png = page.locator("canvas").first.screenshot(timeout=5000)
-                except Exception:
-                    png = page.screenshot()           # fall back to the whole page
-            finally:
-                browser.close()
+                    page = await browser.new_page(
+                        viewport={"width": width, "height": height})
+                    await page.goto(f"http://127.0.0.1:{port}/index.html",
+                                    wait_until="networkidle", timeout=30000)
+                    await page.wait_for_timeout(wait_ms)   # X_ITE: fetch CDN + draw
+                    try:
+                        png = await page.locator("canvas").first.screenshot(timeout=8000)
+                    except Exception:
+                        png = await page.screenshot()
+                finally:
+                    await browser.close()
+        finally:
+            httpd.shutdown()
     return png
 
 
@@ -248,23 +308,25 @@ def register(mcp: FastMCP):
         return _x3dom_page(content, title, width, height, show_stats, show_log)
 
     @mcp.tool()
-    def render_image(
+    async def render_image(
         content: str = "",
         path: str = "",
         width: int = 720,
         height: int = 540,
-        wait_ms: int = 2500,
+        wait_ms: int = 6000,
         save_path: str = "",
     ):
         """Render an X3D scene to a PNG image and return it so you can SEE the result.
 
         This closes the author -> validate -> RENDER loop: a scene can pass both
         validators and still be visually wrong (off-camera, unlit, mis-scaled).
-        Headlessly loads the scene in X3DOM (software WebGL) and screenshots it.
+        Renders with X_ITE in headless Chromium (software WebGL) -- X_ITE draws
+        HAnim humanoids and PhysicalMaterial (PBR) that X3DOM cannot.
 
         Tip: if the image is blank, the usual causes are no/!bound Viewpoint, no
         light, or geometry outside the view -- not a render failure. Add a
-        Viewpoint and a DirectionalLight and re-render.
+        Viewpoint and a DirectionalLight and re-render. If it's still blank, bump
+        wait_ms (X_ITE fetches its library from a CDN and needs a moment to draw).
 
         Args:
             content: X3D XML (full document or scene fragment), inline.
@@ -272,7 +334,7 @@ def register(mcp: FastMCP):
                   Provide exactly one of `content` or `path`.
             width: Render width in pixels.
             height: Render height in pixels.
-            wait_ms: Milliseconds to wait for X3DOM to initialise and draw.
+            wait_ms: Milliseconds to wait for X_ITE to initialise and draw.
             save_path: Optional path to also write the PNG to disk.
         """
         try:
@@ -280,17 +342,15 @@ def register(mcp: FastMCP):
         except ValueError as exc:
             return f"Input error: {exc}"
         try:
-            import playwright.sync_api  # noqa: F401
+            import playwright.async_api  # noqa: F401
         except ImportError:
             return (
                 "render_image needs Playwright (one-time setup):\n"
                 "  pip install playwright && python -m playwright install chromium\n"
                 "Until then, use x3dom_page(content) and open the HTML in a browser."
             )
-        html = _x3dom_page(text, title="X3D render",
-                           width=f"{width}px", height=f"{height}px")
         try:
-            png = _render_html_to_png(html, width, height, wait_ms)
+            png = await _render_xite_async(text, width, height, wait_ms)
         except Exception as exc:
             return f"Render failed: {exc}"
         if save_path:
@@ -298,31 +358,29 @@ def register(mcp: FastMCP):
         return Image(data=png, format="png")
 
     @mcp.tool()
-    def render_current_scene(width: int = 720, height: int = 540, wait_ms: int = 2500,
-                             save_path: str = ""):
+    async def render_current_scene(width: int = 720, height: int = 540,
+                                   wait_ms: int = 6000, save_path: str = ""):
         """Render the current granular (in-memory) scene to a PNG you can inspect.
 
         The granular-mode counterpart of render_image -- build with create_node/
-        add_child, then SEE the result before declaring done.
+        add_child, then SEE the result before declaring done. Uses X_ITE.
 
         Args:
             width: Render width in pixels.
             height: Render height in pixels.
-            wait_ms: Milliseconds to wait for X3DOM to initialise and draw.
+            wait_ms: Milliseconds to wait for X_ITE to initialise and draw.
             save_path: Optional path to also write the PNG to disk.
         """
         from tools.granular import _scene
         try:
-            import playwright.sync_api  # noqa: F401
+            import playwright.async_api  # noqa: F401
         except ImportError:
             return (
                 "render needs Playwright (one-time setup):\n"
                 "  pip install playwright && python -m playwright install chromium"
             )
-        html = _x3dom_page(_scene.to_xml(), title="X3D scene",
-                           width=f"{width}px", height=f"{height}px")
         try:
-            png = _render_html_to_png(html, width, height, wait_ms)
+            png = await _render_xite_async(_scene.to_xml(), width, height, wait_ms)
         except Exception as exc:
             return f"Render failed: {exc}"
         if save_path:
