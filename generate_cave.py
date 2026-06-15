@@ -76,11 +76,41 @@ def fmt_cols(cols):
     return " ".join(f"{fnum(r)} {fnum(g)} {fnum(b)}" for r, g, b in cols)
 
 
+def fmt_uvs(uvs):
+    return " ".join(f"{fnum(u)} {fnum(v)}" for u, v in uvs)
+
+
 def hash01(*a):
     """Deterministic pseudo-random in [0,1) from float args."""
     s = sum((i + 1) * v for i, v in enumerate(a))
     f = math.sin(s * 12.9898 + 4.1) * 43758.5453
     return f - math.floor(f)
+
+
+def _vn2(x, y, seed):
+    """Smooth 2D value noise in [0,1] (drives geometric wall displacement)."""
+    xi, yi = math.floor(x), math.floor(y)
+    xf, yf = x - xi, y - yi
+
+    def h(a, b):
+        return hash01(a + seed * 0.137, b - seed * 0.091)
+
+    u = xf * xf * (3 - 2 * xf)
+    v = yf * yf * (3 - 2 * yf)
+    a, b = h(xi, yi), h(xi + 1, yi)
+    c, d = h(xi, yi + 1), h(xi + 1, yi + 1)
+    return (a * (1 - u) + b * u) * (1 - v) + (c * (1 - u) + d * u) * v
+
+
+def fbm(x, y, seed=0.0, octaves=4):
+    """Fractal sum of value noise in [0,1]."""
+    s, amp, f, tot = 0.0, 0.5, 1.0, 0.0
+    for o in range(octaves):
+        s += amp * _vn2(x * f, y * f, seed + o)
+        tot += amp
+        amp *= 0.5
+        f *= 2.0
+    return s / tot
 
 
 def rock_color(x, y, phi, base=(0.66, 0.62, 0.55)):
@@ -135,22 +165,33 @@ def floor_y(x):
 PHI_MAX = math.pi / 2.0          # phi 0..pi/2 traces floor-left -> roof apex (z=0)
 
 
-def build_shell(nstations=46, arch=16):
-    """Lofted limestone walls + roof (back half). Returns (points, faces, colors)."""
-    pts, cols, ring = [], [], []
+TEX_FT = 16.0          # one texture tile spans this many feet
+
+
+def build_shell(nstations=64, arch=22):
+    """Lofted limestone walls + roof (back half), with multi-octave geometric
+    displacement and UVs for the PBR rock. Returns (points, faces, uvs)."""
+    pts, uvs, ring = [], [], []
     for i in range(nstations):
         x = LENGTH * i / (nstations - 1)
         wz, yf, yr = half_width(x), floor_y(x), roof_y(x)
+        ymid = 0.5 * (yf + yr)
         row = []
         for k in range(arch + 1):
             phi = PHI_MAX * k / arch          # 0 -> pi/2: floor-left up to roof apex (z=0)
             z = -wz * math.cos(phi)
             y = yf + (yr - yf) * math.sin(phi)
-            # add a little non-uniform rugosity so walls aren't a clean tube
-            r = 1.0 + 0.03 * math.sin(2.7 * phi + 0.5 * i) + 0.02 * math.cos(1.9 * i)
-            yy = yf + (y - yf) * r
-            row.append((x, yy, z * r))
-            cols.append(rock_color(x, yy, phi))
+            r = 1.0 + 0.03 * math.sin(2.7 * phi + 0.5 * i)
+            yy, zz = yf + (y - yf) * r, z * r
+            # push each vertex along its outward direction by fractal noise so the
+            # walls have real relief (silhouette), not just a normal-mapped sheen
+            d = (fbm(x * 0.06, phi * 1.5, 3.0) - 0.5) * 2.0 * 1.6
+            oy, oz = yy - ymid, zz
+            ol = math.hypot(oy, oz) or 1.0
+            yy += d * oy / ol
+            zz += d * oz / ol
+            row.append((x, yy, zz))
+            uvs.append((x / TEX_FT, yy / TEX_FT))
         ring.append([len(pts) + j for j in range(len(row))])
         pts.extend(row)
     faces = []
@@ -159,7 +200,7 @@ def build_shell(nstations=46, arch=16):
             a, b = ring[i][k], ring[i][k + 1]
             c, d = ring[i + 1][k + 1], ring[i + 1][k]
             faces.append([a, b, c, d])
-    return pts, faces, cols
+    return pts, faces, uvs
 
 
 def arch_y(x, z):
@@ -169,18 +210,20 @@ def arch_y(x, z):
     return yf + (yr - yf) * math.sqrt(s)
 
 
-def build_floor(nstations=34, ncross=12):
-    """The breccia floor as a fan surface. Returns (points, faces)."""
-    pts, grid = [], []
+def build_floor(nstations=40, ncross=16):
+    """The breccia floor as a fan surface. Returns (points, faces, uvs)."""
+    pts, uvs, grid = [], [], []
     for i in range(nstations):
         x = LENGTH * i / (nstations - 1)
         wz, yf = half_width(x), floor_y(x)
         row = []
         for j in range(ncross + 1):
             z = -wz + wz * j / ncross          # back half only: z from -wz to 0
-            # rubble undulation on the deposit surface
+            # rubble undulation + fractal lumpiness on the deposit surface
             bump = 0.8 * math.sin(0.5 * x + 0.9 * j) * math.exp(-((z) / (wz + 1)) ** 2)
+            bump += (fbm(x * 0.12, z * 0.18 + 5.0, 9.0) - 0.5) * 1.8
             row.append((x, yf - 0.5 + bump, z))
+            uvs.append((x / TEX_FT, z / TEX_FT))
         grid.append([len(pts) + j for j in range(len(row))])
         pts.extend(row)
     faces = []
@@ -189,15 +232,16 @@ def build_floor(nstations=34, ncross=12):
             a, b = grid[i][j], grid[i][j + 1]
             c, d = grid[i + 1][j + 1], grid[i + 1][j]
             faces.append([a, b, c, d])
-    return pts, faces
+    return pts, faces, uvs
 
 
-def ifs(points, faces, solid="false", colors=None, crease=1.2):
+def ifs(points, faces, solid="false", colors=None, crease=1.2, uvs=None):
     cattr = ' colorPerVertex="true"' if colors else ''
     cnode = f'<Color color="{fmt_cols(colors)}"/>' if colors else ''
+    tnode = f'<TextureCoordinate point="{fmt_uvs(uvs)}"/>' if uvs else ''
     return (f'<IndexedFaceSet solid="{solid}" creaseAngle="{crease}"{cattr} '
             f'coordIndex="{fmt_idx(faces)}">'
-            f'<Coordinate point="{fmt_pts(points)}"/>{cnode}</IndexedFaceSet>')
+            f'<Coordinate point="{fmt_pts(points)}"/>{cnode}{tnode}</IndexedFaceSet>')
 
 
 # ---------------------------------------------------------------------------
@@ -447,34 +491,72 @@ def pool(cx, cz, r, mat):
             f'side="false" bottom="false"/></Shape></Transform>')
 
 
-def daylight_shaft(cx, cz, mat):
-    """A faint translucent cone of daylight falling down the entrance pit."""
+def daylight_shaft(cx, cz):
+    """A god-ray down the entrance pit: nested translucent cones + dust motes.
+
+    Faked volumetrics -- X3D has no participating-media scattering, so the beam
+    is layered emissive cones (brighter core) with drifting motes for life.
+    """
     top, bot = roof_y(cx) + 4.0, floor_y(cx)
     h = top - bot
-    return (f'<Transform translation="{fnum(cx)} {fnum((top + bot) / 2)} {fnum(cz)}">'
-            f'<Shape>{mat}<Cone bottomRadius="7" height="{fnum(h)}" '
-            f'side="true" bottom="false"/></Shape></Transform>')
+    cy = (top + bot) / 2.0
+    out = [f'<Transform translation="{fnum(cx)} {fnum(cy)} {fnum(cz)}">']
+    for rad, em, tr in ((8.0, "0.34 0.45 0.62", 0.94),
+                        (5.0, "0.5 0.62 0.8", 0.9),
+                        (2.6, "0.7 0.82 1", 0.84)):
+        out.append(
+            f'<Shape><Appearance><Material emissiveColor="{em}" '
+            f'transparency="{tr}"/></Appearance>'
+            f'<Cone bottomRadius="{fnum(rad)}" height="{fnum(h)}" '
+            f'side="true" bottom="false"/></Shape>')
+    out.append('</Transform>')
+    # dust motes drifting in the shaft
+    for i in range(14):
+        mx = cx + (hash01(i, 1.1) - 0.5) * 9
+        my = bot + h * hash01(i, 2.2)
+        mz = cz + (hash01(i, 3.3) - 0.5) * 7
+        out.append(
+            f'<Transform translation="{fnum(mx)} {fnum(my)} {fnum(mz)}">'
+            f'<Shape><Appearance><Material emissiveColor="0.8 0.86 1" '
+            f'transparency="0.25"/></Appearance>'
+            f'<Sphere radius="{fnum(0.08 + 0.12 * hash01(i, 4.4))}"/></Shape></Transform>')
+    return "".join(out)
+
+
+def _pbr_rock(tint):
+    """PhysicalMaterial limestone: albedo + tangent-space normal + roughness.
+    metallic=0 (rock); roughness=1 lets the MR texture's green channel drive it."""
+    return (
+        f'<Appearance><PhysicalMaterial baseColor="{tint}" metallic="0" '
+        f'roughness="1" normalScale="1.6">'
+        f'<ImageTexture url=\'"cave_textures/limestone_albedo.png"\' '
+        f'containerField="baseTexture"/>'
+        f'<ImageTexture url=\'"cave_textures/limestone_normal.png"\' '
+        f'containerField="normalTexture"/>'
+        f'<ImageTexture url=\'"cave_textures/limestone_mr.png"\' '
+        f'containerField="metallicRoughnessTexture"/>'
+        f'</PhysicalMaterial></Appearance>')
 
 
 def build_scene():
-    sp, sf, sc = build_shell()
-    fp, ff = build_floor()
+    sp, sf, su = build_shell()
+    fp, ff, fu = build_floor()
 
-    # vertex colors carry the limestone variation, so the Material stays neutral
-    limestone = ('<Appearance><Material diffuseColor="1 1 1" '
-                 'specularColor="0.08 0.08 0.07" shininess="0.12" '
-                 'ambientIntensity="0.2"/></Appearance>')
-    breccia = ('<Appearance><Material diffuseColor="0.42 0.31 0.22" '
-               'specularColor="0.03 0.025 0.02" ambientIntensity="0.22"/></Appearance>')
+    # normal-mapped, displaced PBR limestone (walls slightly cool, floor warmer)
+    limestone = _pbr_rock("0.92 0.9 0.84")
+    breccia = _pbr_rock("0.6 0.45 0.32")
     # wet, banded flowstone: lighter, more specular than the dry wall
     flowstone = ('<Appearance><Material diffuseColor="0.62 0.58 0.5" '
                  'specularColor="0.35 0.34 0.3" shininess="0.55" '
                  'ambientIntensity="0.22"/></Appearance>')
     rubble = ('<Appearance><Material diffuseColor="0.38 0.3 0.23" '
               'specularColor="0.04 0.035 0.03" ambientIntensity="0.2"/></Appearance>')
-    water = ('<Appearance><Material diffuseColor="0.05 0.13 0.16" '
-             'specularColor="0.6 0.7 0.75" shininess="0.85" transparency="0.4" '
-             'ambientIntensity="0.1"/></Appearance>')
+    # rippled PBR water: low roughness reflections + a ripple normal map; the
+    # transparency reads as shallow refraction (true refraction isn't in X3D).
+    water = ('<Appearance><PhysicalMaterial baseColor="0.06 0.16 0.2" metallic="0" '
+             'roughness="0.08" transparency="0.35" normalScale="0.6">'
+             '<ImageTexture url=\'"cave_textures/water_normal.png"\' '
+             'containerField="normalTexture"/></PhysicalMaterial></Appearance>')
     beam = ('<Appearance><Material emissiveColor="0.4 0.52 0.72" '
             'transparency="0.9"/></Appearance>')
 
@@ -486,8 +568,8 @@ def build_scene():
     hero_o = look_orientation(hero, (32.0, 31.0, -6.0))
 
     parts = []
-    parts.append(f'<Shape>{limestone}{ifs(sp, sf, colors=sc)}</Shape>')
-    parts.append(f'<Shape>{breccia}{ifs(fp, ff, solid="false")}</Shape>')
+    parts.append(f'<Shape>{limestone}{ifs(sp, sf, uvs=su)}</Shape>')
+    parts.append(f'<Shape>{breccia}{ifs(fp, ff, solid="false", uvs=fu)}</Shape>')
 
     # speleothems + cave-floor detail (all interpretive -- see PROVENANCE)
     parts.append(stalactites(flowstone))
@@ -502,7 +584,7 @@ def build_scene():
     parts.append(pool(64.0, -9.0, 3.2, water))
     parts.append(pool(22.0, -7.0, 2.6, water))
     # a shaft of daylight falling down the great entrance pit
-    parts.append(daylight_shaft(PIT_X, -3.0, beam))
+    parts.append(daylight_shaft(PIT_X, -3.0))
 
     # chimneys above each fan apex (in the back wall, z slightly negative)
     parts.append(shaft(NW_FAN_X, -3, roof_y(NW_FAN_X) - 4, 34, 3.2, "0.05 0.05 0.06"))
