@@ -1088,11 +1088,10 @@ with open(x3d_path, "w") as fh:
     fh.write(xml)
 print(f"wrote {x3d_path}  ({len(xml):,} bytes, {len(JOINTS)} joints)")
 
-# X_ITE viewer page (renders real HAnim directly -- no flatten needed).
-# The scene is INLINED (not src=) so the page loads over file:// without CORS.
+# X_ITE viewer page. Uses src= (X_ITE's inline-X3D parsing renders black here);
+# MUST be served over http (file:// CORS-blocks the .x3d fetch) -- see README note.
 hdr = ("munching grass" if SCENE == "meadow"
        else "diving for water-lily bulbs")
-inline_x3d = xml[xml.index("<X3D"):]
 HTML = """<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <title>""" + title + """</title>
@@ -1103,13 +1102,19 @@ HTML = """<!DOCTYPE html>
   header{padding:.55rem .9rem;font-size:.92rem;border-bottom:1px solid #233}
   header b{color:#e8c87a} header span{color:#7f8da0}
   x3d-canvas{flex:1;width:100%;display:block}
+  #hint{position:fixed;bottom:0;left:0;right:0;padding:.5rem;text-align:center;
+        font-size:.85rem;color:#c98;background:#1a0e0e;display:none}
 </style></head>
 <body><div id="wrap">
   <header><b>Moose</b> &mdash; """ + hdr + """ &nbsp;<span>HAnim LOA5-spirit quadruped rig &middot; metallic-roughness PBR + fur maps &middot; drag to orbit, number keys switch views</span></header>
-  <x3d-canvas>
-""" + inline_x3d + """
-  </x3d-canvas>
-</div></body></html>
+  <x3d-canvas src=\"""" + x3d_path + """\"></x3d-canvas>
+</div>
+<div id="hint">Loaded from <code>file://</code>? The browser blocks reading the .x3d.
+  Serve it instead: <code>python3 -m http.server 8080</code> then open
+  <code>http://localhost:8080/""" + html_path + """</code></div>
+<script>
+  if (location.protocol === 'file:') document.getElementById('hint').style.display='block';
+</script></body></html>
 """
 with open(html_path, "w") as fh:
     fh.write(HTML)
