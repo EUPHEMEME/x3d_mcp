@@ -26,6 +26,28 @@ stratigraphic cut exposing the cave-earth layers.
 
 import math
 
+# ---------------------------------------------------------------------------
+# PROVENANCE -- what is documented vs. what is interpretive (imaginary).
+#
+# DOCUMENTED (to scale, from Sinclair 1904):
+#   * 107 ft chamber length, ~30 ft max width, ~75 ft roof height
+#   * two breccia fans sloping from the ends and coalescing in the middle
+#   * a chimney opening above each fan apex
+#   * the 42 ft vertical entrance pit ("great pit")
+#   * NW-fan stratigraphy (upper clay 13.5 ft, ash 1.5 ft, breccia below)
+#   * NW-SE trend, ~1500 ft elevation
+#
+# IMAGINARY / INTERPRETIVE (plausible cave dressing, NOT from the survey):
+#   * every speleothem -- stalactites, stalagmites, columns, draperies, flowstone
+#   * the exact wall shape / rugosity and the rock colouration & iron staining
+#   * standing-water pools and their placement
+#   * breakdown blocks (fallen rock) on the floor
+#   * all lighting, lanterns, and the daylight shaft down the pit
+#   * the 6 ft scale figure
+# Sinclair mapped the chamber, not its formations; these make it read as a
+# living cave while the geometry above stays faithful to the 1904 measurements.
+# ---------------------------------------------------------------------------
+
 FT = 1.0                      # 1 unit == 1 foot
 LENGTH = 107.0                # chamber length, NW->SE  (Sinclair)
 ROOF   = 75.0                 # max roof height above lowest floor
@@ -346,6 +368,94 @@ def look_orientation(eye, target):
 # assemble scene
 # ---------------------------------------------------------------------------
 
+def column(cx, cz, mat, segs=12, nc=11):
+    """A floor-to-roof column where a stalactite and stalagmite have fused."""
+    base, top = floor_y(cx) - 0.4, arch_y(cx, cz)
+    H = max(top - base, 2.0)
+    rmax = 0.7 + 0.6 * hash01(cx, 7.0)
+    rings, pts = [], []
+    for s in range(segs + 1):
+        t = s / segs
+        y = base + H * t
+        # wide at both ends, slim waist, with flowstone banding
+        prof = 0.45 + 0.55 * abs(math.cos(math.pi * t))
+        rad = rmax * prof * (1.0 + 0.14 * math.sin(9.0 * t + cx))
+        row = []
+        for j in range(nc + 1):
+            a = 2.0 * math.pi * j / nc
+            row.append((cx + rad * math.cos(a), y, cz + rad * math.sin(a)))
+        rings.append([len(pts) + k for k in range(len(row))])
+        pts.extend(row)
+    faces = []
+    for s in range(segs):
+        for j in range(nc):
+            faces.append([rings[s][j], rings[s][j + 1],
+                          rings[s + 1][j + 1], rings[s + 1][j]])
+    return f'<Shape>{mat}{ifs(pts, faces, solid="true", crease=1.0)}</Shape>'
+
+
+def drapery(x0, span, mat, nx=12, ny=8):
+    """A folded flowstone curtain hanging from the roof (thin wavy sheet)."""
+    pts, grid = [], []
+    for iy in range(ny + 1):
+        ty = iy / ny
+        for ix in range(nx + 1):
+            tx = ix / nx
+            x = x0 + span * tx
+            z = -(half_width(x) - 1.4)
+            top = arch_y(x, z)
+            y = top - (top - floor_y(x) - 2.0) * ty
+            fold = 0.9 * math.sin(7.0 * tx) * (1.0 - 0.5 * ty)
+            pts.append((x, y, z + 1.4 + fold))
+        grid.append([iy * (nx + 1) + ix for ix in range(nx + 1)])
+    faces = []
+    for iy in range(ny):
+        for ix in range(nx):
+            a, b = grid[iy][ix], grid[iy][ix + 1]
+            c, d = grid[iy + 1][ix + 1], grid[iy + 1][ix]
+            faces.append([a, b, c, d])
+    return f'<Shape>{mat}{ifs(pts, faces, solid="false", crease=1.6)}</Shape>'
+
+
+def breakdown(mat, n=11):
+    """Angular fallen-rock blocks (breakdown) scattered on the floor."""
+    out = []
+    for i in range(n):
+        x = 9.0 + 90.0 * hash01(i, 1.0)
+        wz = half_width(x)
+        z = -(1.0 + (wz - 2.5) * hash01(i, 2.0))
+        y = floor_y(x) - 0.2
+        s = 1.3 + 3.2 * hash01(i, 3.0)
+        sx = s * (0.7 + 0.6 * hash01(i, 4.0))
+        sy = s * (0.4 + 0.5 * hash01(i, 5.0))
+        sz = s * (0.6 + 0.6 * hash01(i, 6.0))
+        ang = 6.2832 * hash01(i, 7.0)
+        ax, ay, az = hash01(i, 8.0), 0.3 + hash01(i, 9.0), hash01(i, 10.0)
+        out.append(
+            f'<Transform translation="{fnum(x)} {fnum(y)} {fnum(z)}" '
+            f'rotation="{fnum(ax)} {fnum(ay)} {fnum(az)} {fnum(ang)}">'
+            f'<Shape>{mat}<Box size="{fnum(sx)} {fnum(sy)} {fnum(sz)}"/></Shape>'
+            f'</Transform>')
+    return "".join(out)
+
+
+def pool(cx, cz, r, mat):
+    """A reflective standing-water disc (the cave's quiet pools)."""
+    return (f'<Transform translation="{fnum(cx)} {fnum(floor_y(cx) - 0.3)} {fnum(cz)}" '
+            f'rotation="1 0 0 1.5707"><Shape>{mat}'
+            f'<Cylinder height="0.15" radius="{fnum(r)}" top="true" '
+            f'side="false" bottom="false"/></Shape></Transform>')
+
+
+def daylight_shaft(cx, cz, mat):
+    """A faint translucent cone of daylight falling down the entrance pit."""
+    top, bot = roof_y(cx) + 4.0, floor_y(cx)
+    h = top - bot
+    return (f'<Transform translation="{fnum(cx)} {fnum((top + bot) / 2)} {fnum(cz)}">'
+            f'<Shape>{mat}<Cone bottomRadius="7" height="{fnum(h)}" '
+            f'side="true" bottom="false"/></Shape></Transform>')
+
+
 def build_scene():
     sp, sf, sc = build_shell()
     fp, ff = build_floor()
@@ -360,19 +470,39 @@ def build_scene():
     flowstone = ('<Appearance><Material diffuseColor="0.62 0.58 0.5" '
                  'specularColor="0.35 0.34 0.3" shininess="0.55" '
                  'ambientIntensity="0.22"/></Appearance>')
+    rubble = ('<Appearance><Material diffuseColor="0.38 0.3 0.23" '
+              'specularColor="0.04 0.035 0.03" ambientIntensity="0.2"/></Appearance>')
+    water = ('<Appearance><Material diffuseColor="0.05 0.13 0.16" '
+             'specularColor="0.6 0.7 0.75" shininess="0.85" transparency="0.4" '
+             'ambientIntensity="0.1"/></Appearance>')
+    beam = ('<Appearance><Material emissiveColor="0.4 0.52 0.72" '
+            'transparency="0.9"/></Appearance>')
 
     eye = (LENGTH * 0.5, 54.0, 126.0)       # in front of the open section, raised
     tgt = (LENGTH * 0.5, 30.0, -6.0)
     orient = look_orientation(eye, tgt)
+    # hero: head-on, zoomed to the NW third -- entrance pit shaft, fan, columns
+    hero = (32.0, 50.0, 96.0)
+    hero_o = look_orientation(hero, (32.0, 31.0, -6.0))
 
     parts = []
     parts.append(f'<Shape>{limestone}{ifs(sp, sf, colors=sc)}</Shape>')
     parts.append(f'<Shape>{breccia}{ifs(fp, ff, solid="false")}</Shape>')
 
-    # speleothems
+    # speleothems + cave-floor detail (all interpretive -- see PROVENANCE)
     parts.append(stalactites(flowstone))
     parts.append(stalagmites(flowstone))
     parts.append(flowstone_drape(flowstone))
+    parts.append(drapery(60.0, 14.0, flowstone))
+    parts.append(column(40.0, -5.0, flowstone))
+    parts.append(column(73.0, -6.5, flowstone))
+    parts.append(breakdown(rubble))
+    # quiet pools in the low spots between and beside the fans
+    parts.append(pool(53.0, -5.0, 6.0, water))
+    parts.append(pool(64.0, -9.0, 3.2, water))
+    parts.append(pool(22.0, -7.0, 2.6, water))
+    # a shaft of daylight falling down the great entrance pit
+    parts.append(daylight_shaft(PIT_X, -3.0, beam))
 
     # chimneys above each fan apex (in the back wall, z slightly negative)
     parts.append(shaft(NW_FAN_X, -3, roof_y(NW_FAN_X) - 4, 34, 3.2, "0.05 0.05 0.06"))
@@ -406,10 +536,13 @@ def build_scene():
         f'<Fog fogType="LINEAR" color="0.04 0.04 0.05" visibilityRange="520"/>'
         f'<NavigationInfo type=\'"EXAMINE" "WALK" "ANY"\' headlight="false" '
         f'avatarSize="0.5 6 0.75" speed="12"/>'
-        f'<Viewpoint description="Down the chamber from the entrance" '
+        f'<Viewpoint DEF="Section" description="Down the chamber from the entrance" '
         f'position="{fnum(eye[0])} {fnum(eye[1])} {fnum(eye[2])}" '
         f'orientation="{orient}" fieldOfView="1.05"/>'
-        f'<Viewpoint description="Plan / overhead" position="53 130 1" '
+        f'<Viewpoint DEF="Hero" description="Hero -- the entrance fan and daylight shaft" '
+        f'position="{fnum(hero[0])} {fnum(hero[1])} {fnum(hero[2])}" '
+        f'orientation="{hero_o}" fieldOfView="0.95"/>'
+        f'<Viewpoint DEF="Plan" description="Plan / overhead" position="53 130 1" '
         f'orientation="1 0 0 -1.5707" fieldOfView="0.9"/>'
         f'{lights}'
         f'<Group>{"".join(parts)}</Group>'
@@ -455,7 +588,9 @@ def html_doc(scene):
 W.&nbsp;J.&nbsp;Sinclair, <i>The Exploration of Potter Creek Cave</i> (1904),
 excavation directed by John&nbsp;C.&nbsp;Merriam. Chamber 107&nbsp;ft long,
 roof ~75&nbsp;ft; two coalescing breccia fans under the chimneys; 42&nbsp;ft
-entrance pit. Drag to orbit; press <b>w</b> to walk. Press <b>2</b> for the plan view.</div>
+entrance pit. <span style="opacity:.8">Chamber, fans, chimneys and the pit are
+to scale from the 1904 survey; speleothems, pools, rock texture and lighting are
+interpretive.</span> Drag to orbit; press <b>2</b>/<b>3</b> for other views.</div>
 </body></html>
 """
 
