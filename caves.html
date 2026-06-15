@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Merriam Caves — Potter Creek &amp; Samwel</title>
+<style>
+ :root{color-scheme:dark}
+ html,body{margin:0;background:#0a0a0c;color:#cdbfa6;
+   font-family:Georgia,'Times New Roman',serif}
+ .wrap{max-width:1000px;margin:0 auto;padding:42px 24px 80px}
+ h1{font-size:30px;margin:0 0 6px;color:#ece0c4;font-weight:600}
+ .sub{opacity:.78;line-height:1.5;max-width:760px}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
+ a.card{display:block;text-decoration:none;color:inherit;background:#141318;
+   border:1px solid #2a2620;border-radius:10px;overflow:hidden;
+   transition:transform .12s ease,border-color .12s ease}
+ a.card:hover{transform:translateY(-3px);border-color:#5a4f3c}
+ a.card img{width:100%;height:188px;object-fit:cover;display:block;background:#000}
+ .cap{padding:12px 15px 15px}
+ .cap b{color:#ece0c4;font-size:17px}
+ .cap span{display:block;opacity:.72;font-size:13px;line-height:1.45;margin-top:5px}
+ .note{margin-top:34px;font-size:13px;opacity:.7;line-height:1.55;
+   border-top:1px solid #241f19;padding-top:18px}
+ code{background:#1d1a14;padding:1px 5px;border-radius:4px}
+</style></head>
+<body><div class="wrap">
+ <h1>The Merriam Caves</h1>
+ <p class="sub">Potter Creek Cave and Samwel Cave, Shasta County, California —
+ the Pleistocene fossil caves excavated by <b>John&nbsp;C.&nbsp;Merriam</b>
+ (1903–06). Built to scale from W.&nbsp;J.&nbsp;Sinclair (1904) and Furlong (1906)
+ / Feranec&nbsp;et&nbsp;al.&nbsp;(2007). Each scene opens as a cut-away section in
+ X_ITE. <i>Drag to orbit. Documented geometry vs. interpretive dressing is noted
+ in every scene's caption.</i></p>
+
+ <div class="grid">
+  <a class="card" href="potter_creek_cave_xite.html">
+   <img src="cave_refs/potter_creek_cave_pbr_section.png" alt="Potter Creek section">
+   <div class="cap"><b>Potter Creek — section</b>
+    <span>The 107-ft chamber: domed roof, the two breccia fans, chimneys, and the
+    42-ft entrance pit with its daylight shaft.</span></div></a>
+
+  <a class="card" href="potter_creek_cave_hero.html">
+   <img src="cave_refs/potter_creek_cave_pbr_hero.png" alt="Potter Creek hero">
+   <div class="cap"><b>Potter Creek — hero</b>
+    <span>Close on the entrance third: god-ray down the great pit, columns,
+    dripstone, breakdown and pools.</span></div></a>
+
+  <a class="card" href="samwel_cave_xite.html">
+   <img src="cave_refs/samwel_cave_pbr_section.png" alt="Samwel section">
+   <div class="cap"><b>Samwel — labelled section</b>
+    <span>The branching plan: Pleistocene Hall, Chamber One, Merriam's Chamber,
+    the entrances, and the deep drop to Chamber Two.</span></div></a>
+
+  <a class="card" href="samwel_cave_hero.html">
+   <img src="cave_refs/samwel_cave_pbr_hero.png" alt="Samwel hero">
+   <div class="cap"><b>Samwel — the descent</b>
+    <span>The ~90-ft hole the Lost Maiden fell down, connecting the upper level to
+    Chamber Two and the sacred <b>Magic Pool</b>.</span></div></a>
+ </div>
+
+ <p class="note">Started with <code>./start_caves.sh</code> (serves this folder on
+ <code>127.0.0.1:8099</code>). The X3DOM pages (<code>*_x3dom.html</code> /
+ <code>potter_creek_cave.html</code>) also open directly in a browser, but X_ITE
+ is the faithful renderer for the PBR materials. Both caves are Winnemem Wintu
+ sacred sites on the flooded McCloud River; treated with care, not as scenery.</p>
+</div></body></html>
