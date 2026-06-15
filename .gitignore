@@ -8,3 +8,6 @@ build/
 .venv/
 tools_x3d/*.jar
 .DS_Store
+
+# node deps (puppeteer for shot.js)
+node_modules/
