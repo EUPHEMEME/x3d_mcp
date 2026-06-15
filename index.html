@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moose — mflux → X3D pipeline</title>
+<style>
+  :root{color-scheme:dark}
+  *{box-sizing:border-box}
+  body{margin:0;background:#0e131a;color:#cdd6e4;font-family:system-ui,-apple-system,sans-serif;line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto;padding:2.2rem 1.2rem 4rem}
+  h1{font-size:1.7rem;margin:0 0 .2rem} h1 .em{color:#e8c87a}
+  .sub{color:#7f8da0;margin:0 0 2rem;font-size:.98rem}
+  h2{font-size:1.05rem;color:#9fb0c4;margin:2.4rem 0 .9rem;letter-spacing:.02em;text-transform:uppercase}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}}
+  a.card{display:block;text-decoration:none;color:inherit;background:#151c25;border:1px solid #233140;
+         border-radius:12px;overflow:hidden;transition:.15s border-color,.15s transform}
+  a.card:hover{border-color:#e8c87a;transform:translateY(-2px)}
+  a.card .thumb{aspect-ratio:16/9;background:#0b1016 center/cover no-repeat;display:block}
+  a.card .body{padding:.85rem 1rem}
+  a.card .t{font-weight:600;color:#e8c87a} a.card .d{color:#8a98ab;font-size:.9rem;margin-top:.15rem}
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+  @media(max-width:640px){.gal{grid-template-columns:1fr}}
+  .gal a{display:block;border-radius:10px;overflow:hidden;border:1px solid #233140}
+  .gal img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+  .gal .cap{font-size:.8rem;color:#8a98ab;padding:.4rem .6rem;background:#151c25}
+  .note{background:#1a130c;border:1px solid #4a3a1e;border-radius:10px;padding:.8rem 1rem;
+        color:#d9c08a;font-size:.9rem;margin-top:1.4rem}
+  code{background:#0b1016;padding:.1rem .35rem;border-radius:5px;color:#cdd6e4}
+  .links a{color:#7fb0e8;text-decoration:none;margin-right:1.2rem} .links a:hover{text-decoration:underline}
+  footer{color:#5d6b7d;font-size:.82rem;margin-top:2.5rem}
+</style></head>
+<body><div class="wrap">
+  <h1>🫎 <span class="em">Moose</span> — a local mflux → X3D creature pipeline</h1>
+  <p class="sub">Procedurally modeled, HAnim-rigged, fur-skinned and animated bull moose, with a
+     pose-locked photoreal compositing pass. Two scenes + the beauty passes.</p>
+
+  <h2>Live interactive scenes (WebGL)</h2>
+  <div class="cards">
+    <a class="card" href="moose_lake.html">
+      <span class="thumb" style="background-image:url('moose_refs/depth_dive_beauty.png')"></span>
+      <span class="body"><div class="t">Lake dive →</div>
+        <div class="d">Moose diving for water-lily bulbs · bubbles, ripple, animated water</div></span></a>
+    <a class="card" href="moose_x3dom.html">
+      <span class="thumb" style="background-image:url('moose_refs/depth_beauty2.png')"></span>
+      <span class="body"><div class="t">Meadow graze →</div>
+        <div class="d">Eased neck-arc graze cycle · shell fur · HAnim skinCoord rig</div></span></a>
+  </div>
+  <p class="sub" style="margin-top:.8rem;font-size:.88rem">Drag to orbit · press number keys
+     <b>1–4</b> to switch cameras · give it a couple seconds to load.</p>
+
+  <h2>Photoreal beauty passes (FLUX-Depth, pose-locked)</h2>
+  <div class="gal">
+    <a href="moose_refs/depth_dive_beauty.png"><img src="moose_refs/depth_dive_beauty.png" alt="dive">
+      <div class="cap">Underwater dive</div></a>
+    <a href="moose_refs/depth_beauty2.png"><img src="moose_refs/depth_beauty2.png" alt="meadow">
+      <div class="cap">Meadow, golden hour</div></a>
+    <a href="moose_refs/depth_head_beauty.png"><img src="moose_refs/depth_head_beauty.png" alt="portrait">
+      <div class="cap">Portrait</div></a>
+  </div>
+
+  <div class="note">If a scene is blank: it must be served over <code>http</code>
+    (you're good if this page's address starts with <code>http://localhost</code>).
+    Opening the <code>.html</code> directly from Finder won't work.</div>
+
+  <h2>The build</h2>
+  <p class="links">
+    <a href="PIPELINE.md">PIPELINE.md — VFX-department mapping</a>
+    <a href="moose_refs/">moose_refs/ — full visual progression</a>
+    <a href="generate_moose.py">generate_moose.py — the generator</a>
+  </p>
+
+  <footer>Branch <code>moose-pipeline</code> · generate_moose.py + generate_moose_textures.py +
+    generate_beauty.sh · X_ITE / HAnim / metallic-roughness PBR.</footer>
+</div></body></html>
