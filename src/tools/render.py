@@ -298,6 +298,38 @@ def register(mcp: FastMCP):
         return Image(data=png, format="png")
 
     @mcp.tool()
+    def render_current_scene(width: int = 720, height: int = 540, wait_ms: int = 2500,
+                             save_path: str = ""):
+        """Render the current granular (in-memory) scene to a PNG you can inspect.
+
+        The granular-mode counterpart of render_image -- build with create_node/
+        add_child, then SEE the result before declaring done.
+
+        Args:
+            width: Render width in pixels.
+            height: Render height in pixels.
+            wait_ms: Milliseconds to wait for X3DOM to initialise and draw.
+            save_path: Optional path to also write the PNG to disk.
+        """
+        from tools.granular import _scene
+        try:
+            import playwright.sync_api  # noqa: F401
+        except ImportError:
+            return (
+                "render needs Playwright (one-time setup):\n"
+                "  pip install playwright && python -m playwright install chromium"
+            )
+        html = _x3dom_page(_scene.to_xml(), title="X3D scene",
+                           width=f"{width}px", height=f"{height}px")
+        try:
+            png = _render_html_to_png(html, width, height, wait_ms)
+        except Exception as exc:
+            return f"Render failed: {exc}"
+        if save_path:
+            Path(save_path).expanduser().write_bytes(png)
+        return Image(data=png, format="png")
+
+    @mcp.tool()
     def x3dom_starter(
         title: str = "X3DOM Scene",
         width: str = "800px",
