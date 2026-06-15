@@ -444,6 +444,67 @@ def _check_use_before_def(scene: etree._Element) -> list[Diagnostic]:
     return diagnostics
 
 
+# Floats per key for each interpolator's keyValue (None = a variable multiple of
+# the base tuple, e.g. CoordinateInterpolator stores numCoords*3 per key).
+_INTERP_ARITY = {
+    "ScalarInterpolator": 1, "SplineScalarInterpolator": 1,
+    "PositionInterpolator2D": 2, "SplinePositionInterpolator2D": 2,
+    "PositionInterpolator": 3, "SplinePositionInterpolator": 3, "GeoPositionInterpolator": 3,
+    "ColorInterpolator": 3,
+    "OrientationInterpolator": 4, "SquadOrientationInterpolator": 4,
+    "CoordinateInterpolator": None, "NormalInterpolator": None,
+    "CoordinateInterpolator2D": None,
+}
+_INTERP_BASE = {"CoordinateInterpolator": 3, "NormalInterpolator": 3,
+                "CoordinateInterpolator2D": 2}
+
+
+def _count(attr: str) -> int:
+    return len([x for x in re.split(r"[\s,]+", attr.strip()) if x])
+
+
+def _check_interpolator_keys(scene: etree._Element) -> list[Diagnostic]:
+    """key and keyValue array lengths must agree (ISO 19775-1 19.x).
+
+    A mismatch is a common silent animation bug: the interpolator clamps or
+    produces garbage, and nothing warns. e.g. an OrientationInterpolator needs
+    exactly 4 keyValue floats (one SFRotation) per key.
+    """
+    diagnostics: list[Diagnostic] = []
+    for tag, arity in _INTERP_ARITY.items():
+        for el in scene.iter(tag):
+            key, kv = el.get("key"), el.get("keyValue")
+            if key is None or kv is None:
+                continue
+            nk, nv = _count(key), _count(kv)
+            label = f" (DEF={el.get('DEF')!r})" if el.get("DEF") else ""
+            if nk == 0:
+                continue
+            if nv % nk != 0:
+                diagnostics.append(Diagnostic(
+                    level="error", check="interpolator-key-length",
+                    message=f"{tag}{label}: keyValue has {nv} values, not divisible by the "
+                            f"{nk} key(s). Each key needs a whole keyValue entry.",
+                    node_tag=tag, def_name=el.get("DEF", "")))
+                continue
+            per = nv // nk
+            if arity is not None and per != arity:
+                diagnostics.append(Diagnostic(
+                    level="error", check="interpolator-key-length",
+                    message=f"{tag}{label}: expected {arity} keyValue float(s) per key "
+                            f"({nk} keys -> {nk * arity}), got {per} per key ({nv} total).",
+                    node_tag=tag, def_name=el.get("DEF", "")))
+            elif arity is None:
+                base = _INTERP_BASE.get(tag, 1)
+                if per % base != 0:
+                    diagnostics.append(Diagnostic(
+                        level="error", check="interpolator-key-length",
+                        message=f"{tag}{label}: {per} keyValue float(s) per key is not a "
+                                f"multiple of {base} (one coordinate is {base} floats).",
+                        node_tag=tag, def_name=el.get("DEF", "")))
+    return diagnostics
+
+
 def _check_missing_viewpoint(scene: etree._Element) -> list[Diagnostic]:
     if list(scene.iter("Viewpoint")):
         return []
@@ -463,6 +524,7 @@ _ALL_CHECKS = [
     _check_shape_completeness,
     _check_empty_groups,
     _check_route_validity,
+    _check_interpolator_keys,
     _check_missing_viewpoint,
 ]
 

@@ -263,3 +263,32 @@ def test_def_before_use_ok():
                 '<Group><Shape USE="S"/></Group>')
     report = validate_semantic(xml)
     assert "use-before-def" not in report
+
+
+# ---- interpolator key / keyValue length ----
+
+def test_orientation_interpolator_wrong_arity():
+    xml = _wrap('<OrientationInterpolator key="0 0.5 1" keyValue="0 1 0 0  0 1 0 1.5"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" in report  # 3 keys need 12 floats, got 8
+
+
+def test_orientation_interpolator_ok():
+    xml = _wrap('<OrientationInterpolator key="0 0.5 1" '
+                'keyValue="0 1 0 0  0 1 0 1.5  0 1 0 3"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" not in report
+
+
+def test_coordinate_interpolator_variable_ok():
+    # 2 keys, 2 coords each -> 12 floats, a multiple of 3 per key (6)
+    xml = _wrap('<CoordinateInterpolator key="0 1" '
+                'keyValue="0 0 0 1 1 1  0 0 0 2 2 2"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" not in report
+
+
+def test_scalar_interpolator_not_divisible():
+    xml = _wrap('<ScalarInterpolator key="0 0.5 1" keyValue="0 1"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" in report
