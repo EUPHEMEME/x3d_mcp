@@ -50,6 +50,32 @@ def fmt_idx(faces):
     return " ".join(" ".join(str(i) for i in f) + " -1" for f in faces)
 
 
+def fmt_cols(cols):
+    return " ".join(f"{fnum(r)} {fnum(g)} {fnum(b)}" for r, g, b in cols)
+
+
+def hash01(*a):
+    """Deterministic pseudo-random in [0,1) from float args."""
+    s = sum((i + 1) * v for i, v in enumerate(a))
+    f = math.sin(s * 12.9898 + 4.1) * 43758.5453
+    return f - math.floor(f)
+
+
+def rock_color(x, y, phi, base=(0.66, 0.62, 0.55)):
+    """Mottled, faintly iron-stained limestone; darker in low crevices."""
+    n = 0.84 + 0.26 * hash01(x * 0.7, phi * 1.3, y * 0.5)
+    # warm iron staining streaks
+    stain = 0.5 + 0.5 * math.sin(0.35 * x + 1.7 * phi)
+    r = base[0] * n + 0.06 * stain
+    g = base[1] * n + 0.03 * stain
+    b = base[2] * n
+    # damp slightly toward the floor line
+    if phi < 0.6:
+        k = 0.78 + 0.22 * (phi / 0.6)
+        r, g, b = r * k, g * k, b * k
+    return (round(r, 3), round(g, 3), round(b, 3))
+
+
 # ---------------------------------------------------------------------------
 # profiles along the chamber (functions of x in [0, LENGTH])
 # ---------------------------------------------------------------------------
@@ -88,8 +114,8 @@ PHI_MAX = math.pi / 2.0          # phi 0..pi/2 traces floor-left -> roof apex (z
 
 
 def build_shell(nstations=46, arch=16):
-    """Lofted limestone walls + roof (back half only). Returns (points, faces)."""
-    pts, ring = [], []
+    """Lofted limestone walls + roof (back half). Returns (points, faces, colors)."""
+    pts, cols, ring = [], [], []
     for i in range(nstations):
         x = LENGTH * i / (nstations - 1)
         wz, yf, yr = half_width(x), floor_y(x), roof_y(x)
@@ -100,7 +126,9 @@ def build_shell(nstations=46, arch=16):
             y = yf + (yr - yf) * math.sin(phi)
             # add a little non-uniform rugosity so walls aren't a clean tube
             r = 1.0 + 0.03 * math.sin(2.7 * phi + 0.5 * i) + 0.02 * math.cos(1.9 * i)
-            row.append((x, yf + (y - yf) * r, z * r))
+            yy = yf + (y - yf) * r
+            row.append((x, yy, z * r))
+            cols.append(rock_color(x, yy, phi))
         ring.append([len(pts) + j for j in range(len(row))])
         pts.extend(row)
     faces = []
@@ -109,7 +137,14 @@ def build_shell(nstations=46, arch=16):
             a, b = ring[i][k], ring[i][k + 1]
             c, d = ring[i + 1][k + 1], ring[i + 1][k]
             faces.append([a, b, c, d])
-    return pts, faces
+    return pts, faces, cols
+
+
+def arch_y(x, z):
+    """Height of the roof surface at (x, z) on the lofted arch."""
+    wz, yf, yr = half_width(x), floor_y(x), roof_y(x)
+    s = max(0.0, 1.0 - (z / wz) ** 2)
+    return yf + (yr - yf) * math.sqrt(s)
 
 
 def build_floor(nstations=34, ncross=12):
@@ -135,10 +170,110 @@ def build_floor(nstations=34, ncross=12):
     return pts, faces
 
 
-def ifs(points, faces, solid="false"):
-    return (f'<IndexedFaceSet solid="{solid}" creaseAngle="1.2" '
+def ifs(points, faces, solid="false", colors=None, crease=1.2):
+    cattr = ' colorPerVertex="true"' if colors else ''
+    cnode = f'<Color color="{fmt_cols(colors)}"/>' if colors else ''
+    return (f'<IndexedFaceSet solid="{solid}" creaseAngle="{crease}"{cattr} '
             f'coordIndex="{fmt_idx(faces)}">'
-            f'<Coordinate point="{fmt_pts(points)}"/></IndexedFaceSet>')
+            f'<Coordinate point="{fmt_pts(points)}"/>{cnode}</IndexedFaceSet>')
+
+
+# ---------------------------------------------------------------------------
+# speleothems -- stalactites, stalagmites, columns, flowstone drapery
+# ---------------------------------------------------------------------------
+
+def _dripstone(cx, cy, cz, length, radius, flip, mat, segs=7):
+    """A tapered, slightly irregular dripstone spike as an IndexedFaceSet.
+
+    flip=False: stalagmite (wide base at cy, taper up). flip=True: stalactite
+    (wide base at cy, taper down).
+    """
+    sign = -1.0 if flip else 1.0
+    rings, pts = [], []
+    nseg, nc = segs, 9
+    for s in range(nseg + 1):
+        t = s / nseg
+        y = cy + sign * length * t
+        # taper to a point, with a couple of bulges (flowstone banding)
+        rad = radius * (1.0 - t) ** 1.3 * (1.0 + 0.18 * math.sin(6.0 * t))
+        rad = max(rad, 0.02)
+        wob = 0.12 * radius * math.sin(3.0 * t + cx)
+        row = []
+        for j in range(nc + 1):
+            a = 2.0 * math.pi * j / nc
+            row.append((cx + (rad) * math.cos(a) + wob,
+                        y,
+                        cz + (rad) * math.sin(a)))
+        rings.append([len(pts) + k for k in range(len(row))])
+        pts.extend(row)
+    faces = []
+    for s in range(nseg):
+        for j in range(nc):
+            a, b = rings[s][j], rings[s][j + 1]
+            c, d = rings[s + 1][j + 1], rings[s + 1][j]
+            faces.append([a, b, c, d])
+    return f'<Shape>{mat}{ifs(pts, faces, solid="true", crease=1.0)}</Shape>'
+
+
+def stalactites(mat):
+    out = []
+    x = 6.0
+    while x < LENGTH - 5:
+        z = -(1.5 + 7.0 * hash01(x, 3.3))
+        if abs(z) > half_width(x) - 1.5:
+            z = -(half_width(x) - 1.5)
+        top = arch_y(x, z)
+        length = 1.8 + 7.0 * hash01(x, 1.1)
+        rad = 0.35 + 0.9 * hash01(x, 2.2)
+        if top - length > floor_y(x) + 1:        # don't pierce the floor
+            out.append(_dripstone(x, top - 0.3, z, length, rad, True, mat))
+        x += 4.0 + 4.0 * hash01(x, 9.0)
+    return "".join(out)
+
+
+def stalagmites(mat):
+    out = []
+    # cluster on and around the two breccia fans
+    for cxc in (NW_FAN_X, SE_FAN_X):
+        n = 6
+        for i in range(n):
+            x = cxc + (hash01(cxc, i) - 0.5) * 34
+            x = max(6.0, min(LENGTH - 6.0, x))
+            z = -(1.0 + 6.0 * hash01(x, i + 4))
+            if abs(z) > half_width(x) - 1.0:
+                continue
+            base = floor_y(x) - 0.5
+            length = 1.2 + 4.6 * hash01(x, i + 7)
+            rad = 0.4 + 0.9 * hash01(x, i + 2)
+            out.append(_dripstone(x, base, z, length, rad, False, mat))
+    return "".join(out)
+
+
+def flowstone_drape(mat):
+    """A draped flowstone sheet on the back wall near the SE end."""
+    x0, span = 92.0, 12.0
+    nx, ny = 10, 7
+    pts, grid = [], []
+    for iy in range(ny + 1):
+        ty = iy / ny
+        for ix in range(nx + 1):
+            tx = ix / nx
+            x = x0 + span * tx
+            z = -(half_width(x) - 1.2)
+            top = arch_y(x, z)
+            y = top - (top - floor_y(x) - 1.0) * ty
+            drape = 0.6 * math.sin(9.0 * tx + 1.5 * ty) * (1.0 - ty)
+            pts.append((x, y, z + 1.2 + drape))
+        grid.append([(ny + 1 - 0) ])  # placeholder, rebuilt below
+    # rebuild index grid cleanly
+    grid = [[iy * (nx + 1) + ix for ix in range(nx + 1)] for iy in range(ny + 1)]
+    faces = []
+    for iy in range(ny):
+        for ix in range(nx):
+            a, b = grid[iy][ix], grid[iy][ix + 1]
+            c, d = grid[iy + 1][ix + 1], grid[iy + 1][ix]
+            faces.append([a, b, c, d])
+    return f'<Shape>{mat}{ifs(pts, faces, solid="false", crease=1.5)}</Shape>'
 
 
 def shaft(cx, cz, base_y, height, radius, color, opacity="1"):
@@ -212,21 +347,32 @@ def look_orientation(eye, target):
 # ---------------------------------------------------------------------------
 
 def build_scene():
-    sp, sf = build_shell()
+    sp, sf, sc = build_shell()
     fp, ff = build_floor()
 
-    limestone = ('<Appearance><Material diffuseColor="0.5 0.48 0.43" '
-                 'specularColor="0.05 0.05 0.045" ambientIntensity="0.18"/></Appearance>')
+    # vertex colors carry the limestone variation, so the Material stays neutral
+    limestone = ('<Appearance><Material diffuseColor="1 1 1" '
+                 'specularColor="0.08 0.08 0.07" shininess="0.12" '
+                 'ambientIntensity="0.2"/></Appearance>')
     breccia = ('<Appearance><Material diffuseColor="0.42 0.31 0.22" '
                'specularColor="0.03 0.025 0.02" ambientIntensity="0.22"/></Appearance>')
+    # wet, banded flowstone: lighter, more specular than the dry wall
+    flowstone = ('<Appearance><Material diffuseColor="0.62 0.58 0.5" '
+                 'specularColor="0.35 0.34 0.3" shininess="0.55" '
+                 'ambientIntensity="0.22"/></Appearance>')
 
     eye = (LENGTH * 0.5, 54.0, 126.0)       # in front of the open section, raised
     tgt = (LENGTH * 0.5, 30.0, -6.0)
     orient = look_orientation(eye, tgt)
 
     parts = []
-    parts.append(f'<Shape>{limestone}{ifs(sp, sf)}</Shape>')
+    parts.append(f'<Shape>{limestone}{ifs(sp, sf, colors=sc)}</Shape>')
     parts.append(f'<Shape>{breccia}{ifs(fp, ff, solid="false")}</Shape>')
+
+    # speleothems
+    parts.append(stalactites(flowstone))
+    parts.append(stalagmites(flowstone))
+    parts.append(flowstone_drape(flowstone))
 
     # chimneys above each fan apex (in the back wall, z slightly negative)
     parts.append(shaft(NW_FAN_X, -3, roof_y(NW_FAN_X) - 4, 34, 3.2, "0.05 0.05 0.06"))
@@ -240,8 +386,8 @@ def build_scene():
     # lights: a soft daylight wash from the open section + warm lantern pools.
     # Headlight is OFF (NavigationInfo) so the cave keeps its depth and shadow.
     lights = (
-        '<DirectionalLight direction="0.1 -0.5 -1" intensity="0.42" color="0.8 0.84 0.95"/>'
-        '<DirectionalLight direction="-0.2 -1 0.1" intensity="0.14" color="0.55 0.58 0.68"/>'
+        '<DirectionalLight direction="0.1 -0.5 -1" intensity="0.6" color="0.82 0.86 0.96"/>'
+        '<DirectionalLight direction="-0.2 -1 0.1" intensity="0.2" color="0.55 0.58 0.68"/>'
         f'<PointLight location="{fnum(PIT_X)} {fnum(floor_y(PIT_X)+6)} -3" '
         'color="1 0.83 0.5" intensity="0.6" radius="48" attenuation="1 0.03 0.004"/>'
         f'<PointLight location="{fnum(NW_FAN_X)} {fnum(floor_y(NW_FAN_X)+5)} -3" '
@@ -256,6 +402,8 @@ def build_scene():
     scene = (
         f'<Background skyColor="0.02 0.02 0.03 0.04 0.04 0.05" '
         f'groundColor="0.02 0.02 0.02" skyAngle="1.2"/>'
+        # faint atmospheric haze (kept subtle -- the section is shallow in depth)
+        f'<Fog fogType="LINEAR" color="0.04 0.04 0.05" visibilityRange="520"/>'
         f'<NavigationInfo type=\'"EXAMINE" "WALK" "ANY"\' headlight="false" '
         f'avatarSize="0.5 6 0.75" speed="12"/>'
         f'<Viewpoint description="Down the chamber from the entrance" '

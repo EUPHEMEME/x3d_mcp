@@ -43,10 +43,54 @@ def fmt_idx(faces):
     return " ".join(" ".join(str(i) for i in f) + " -1" for f in faces)
 
 
-def ifs(points, faces, solid="false", crease=1.4):
-    return (f'<IndexedFaceSet solid="{solid}" creaseAngle="{crease}" '
+def fmt_cols(cols):
+    return " ".join(f"{fnum(r)} {fnum(g)} {fnum(b)}" for r, g, b in cols)
+
+
+def hash01(*a):
+    s = sum((i + 1) * v for i, v in enumerate(a))
+    f = math.sin(s * 12.9898 + 4.1) * 43758.5453
+    return f - math.floor(f)
+
+
+def rock_color(x, y, phi, base=(0.66, 0.62, 0.55)):
+    """Mottled, faintly iron-stained limestone; darker toward the floor."""
+    n = 0.84 + 0.26 * hash01(x * 0.7, phi * 1.3, y * 0.5)
+    stain = 0.5 + 0.5 * math.sin(0.35 * x + 1.7 * phi)
+    r, g, b = base[0] * n + 0.06 * stain, base[1] * n + 0.03 * stain, base[2] * n
+    if phi > 2.4:                       # near the chamber floor
+        k = 0.78 + 0.22 * (math.pi - phi) / (math.pi - 2.4)
+        r, g, b = r * k, g * k, b * k
+    return (round(r, 3), round(g, 3), round(b, 3))
+
+
+def ifs(points, faces, solid="false", crease=1.4, colors=None):
+    cattr = ' colorPerVertex="true"' if colors else ''
+    cnode = f'<Color color="{fmt_cols(colors)}"/>' if colors else ''
+    return (f'<IndexedFaceSet solid="{solid}" creaseAngle="{crease}"{cattr} '
             f'coordIndex="{fmt_idx(faces)}">'
-            f'<Coordinate point="{fmt_pts(points)}"/></IndexedFaceSet>')
+            f'<Coordinate point="{fmt_pts(points)}"/>{cnode}</IndexedFaceSet>')
+
+
+def dripstone(cx, cy, cz, length, radius, mat, segs=6, nc=8):
+    """A tapered stalactite hanging from a chamber roof."""
+    rings, pts = [], []
+    for s in range(segs + 1):
+        t = s / segs
+        y = cy - length * t
+        rad = max(radius * (1.0 - t) ** 1.3 * (1.0 + 0.18 * math.sin(6.0 * t)), 0.02)
+        row = []
+        for j in range(nc + 1):
+            a = 2.0 * math.pi * j / nc
+            row.append((cx + rad * math.cos(a), y, cz + rad * math.sin(a)))
+        rings.append([len(pts) + k for k in range(len(row))])
+        pts.extend(row)
+    faces = []
+    for s in range(segs):
+        for j in range(nc):
+            faces.append([rings[s][j], rings[s][j + 1],
+                          rings[s + 1][j + 1], rings[s + 1][j]])
+    return f'<Shape>{mat}{ifs(pts, faces, solid="true", crease=1.0)}</Shape>'
 
 
 # ---------------------------------------------------------------------------
@@ -54,8 +98,8 @@ def ifs(points, faces, solid="false", crease=1.4):
 # ---------------------------------------------------------------------------
 
 def room_mesh(cx, cy, rx, ry, rz, nv=11, nu=14, seed=0.0):
-    """Back-half ellipsoidal chamber void. Returns (points, faces)."""
-    pts, grid = [], []
+    """Back-half ellipsoidal chamber void. Returns (points, faces, colors)."""
+    pts, cols, grid = [], [], []
     for iv in range(nv + 1):
         phi = math.pi * iv / nv                 # 0..pi  (top to bottom)
         row = []
@@ -67,6 +111,7 @@ def room_mesh(cx, cy, rx, ry, rz, nv=11, nu=14, seed=0.0):
             y = cy + ry * rug * math.cos(phi)
             z = rz * rug * math.sin(phi) * math.sin(theta)
             row.append((x, y, z))
+            cols.append(rock_color(x, y, phi))
         grid.append([len(pts) + j for j in range(len(row))])
         pts.extend(row)
     faces = []
@@ -75,7 +120,7 @@ def room_mesh(cx, cy, rx, ry, rz, nv=11, nu=14, seed=0.0):
             a, b = grid[iv][iu], grid[iv][iu + 1]
             c, d = grid[iv + 1][iu + 1], grid[iv + 1][iu]
             faces.append([a, b, c, d])
-    return pts, faces
+    return pts, faces, cols
 
 
 def tube_mesh(p0, p1, r0, r1=None, ns=8, nc=8):
@@ -196,16 +241,33 @@ PASSAGES = [
 def build_scene():
     limestone = ('<Appearance><Material diffuseColor="0.5 0.48 0.43" '
                  'specularColor="0.05 0.05 0.045" ambientIntensity="0.18"/></Appearance>')
+    # neutral material: the chamber colour comes from per-vertex rock_color
+    limestone_vc = ('<Appearance><Material diffuseColor="1 1 1" '
+                    'specularColor="0.08 0.08 0.07" shininess="0.12" '
+                    'ambientIntensity="0.2"/></Appearance>')
+    flowstone = ('<Appearance><Material diffuseColor="0.62 0.58 0.5" '
+                 'specularColor="0.35 0.34 0.3" shininess="0.55" '
+                 'ambientIntensity="0.22"/></Appearance>')
     breccia = ('<Appearance><Material diffuseColor="0.42 0.31 0.22" '
                'specularColor="0.03 0.025 0.02" ambientIntensity="0.22"/></Appearance>')
 
     parts = []
 
-    # chambers
+    # chambers (mottled rock via vertex colour) + a little dripstone in the big rooms
+    drip_rooms = {"Pleistocene Hall", "Chamber One", "Merriam's Chamber", "Chamber Two"}
     for i, (name, (cx, cy, rx, ry, rz)) in enumerate(ROOMS.items()):
-        p, f = room_mesh(cx, cy, rx, ry, rz, seed=0.7 * i)
-        parts.append(shell_shape(p, f, limestone))
+        p, f, c = room_mesh(cx, cy, rx, ry, rz, seed=0.7 * i)
+        parts.append(f'<Shape>{limestone_vc}{ifs(p, f, colors=c)}</Shape>')
         parts.append(floor_patch(cx, cy - ry * 0.72, rx * 0.8, breccia))
+        if name in drip_rooms:
+            nd = 3 + int(3 * hash01(cx, cy))
+            for k in range(nd):
+                dx = cx + (hash01(cx, k) - 0.5) * 1.4 * rx
+                roof = cy + ry * 0.86 * math.sqrt(max(0.0, 1 - ((dx - cx) / rx) ** 2))
+                dz = -(1.0 + 0.5 * rz * hash01(cy, k))
+                length = ry * (0.2 + 0.4 * hash01(dx, k))
+                rad = 0.3 + 0.5 * hash01(dx, k + 5)
+                parts.append(dripstone(dx, roof, dz, length, rad, flowstone))
 
     # passages
     for p0, p1, r0, r1 in PASSAGES:
@@ -255,6 +317,7 @@ def build_scene():
     scene = (
         '<Background skyColor="0.02 0.02 0.03 0.03 0.03 0.045" '
         'groundColor="0.015 0.015 0.02" skyAngle="1.2"/>'
+        '<Fog fogType="LINEAR" color="0.03 0.03 0.045" visibilityRange="620"/>'
         '<NavigationInfo type=\'"EXAMINE" "ANY"\' headlight="false" speed="14"/>'
         f'<Viewpoint description="Cross-section" '
         f'position="{fnum(eye[0])} {fnum(eye[1])} {fnum(eye[2])}" '
