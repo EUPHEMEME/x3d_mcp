@@ -167,13 +167,62 @@ def floor_patch(cx, cy, rx, mat):
 
 
 def pool(cx, cy, r):
-    """A standing 'Magic Pool' -- a thin translucent water disc."""
+    """A standing 'Magic Pool' -- a reflective dark-water disc."""
     return (f'<Transform translation="{fnum(cx)} {fnum(cy)} -3" '
             f'rotation="1 0 0 1.5707"><Shape>'
-            f'<Appearance><Material diffuseColor="0.1 0.3 0.45" '
-            f'specularColor="0.4 0.5 0.6" transparency="0.45"/></Appearance>'
-            f'<Cylinder height="0.2" radius="{fnum(r)}" top="true" '
+            f'<Appearance><Material diffuseColor="0.05 0.13 0.16" '
+            f'specularColor="0.6 0.7 0.75" shininess="0.85" transparency="0.4" '
+            f'ambientIntensity="0.1"/></Appearance>'
+            f'<Cylinder height="0.15" radius="{fnum(r)}" top="true" '
             f'side="false" bottom="false"/></Shape></Transform>')
+
+
+def column(cx, cy, cz, height, rmax, mat, segs=11, nc=10):
+    """A floor-to-roof column (fused stalactite + stalagmite) in a chamber."""
+    rings, pts = [], []
+    for s in range(segs + 1):
+        t = s / segs
+        y = cy + height * t
+        prof = 0.45 + 0.55 * abs(math.cos(math.pi * t))
+        rad = max(rmax * prof * (1.0 + 0.14 * math.sin(9.0 * t + cx)), 0.05)
+        row = []
+        for j in range(nc + 1):
+            a = 2.0 * math.pi * j / nc
+            row.append((cx + rad * math.cos(a), y, cz + rad * math.sin(a)))
+        rings.append([len(pts) + k for k in range(len(row))])
+        pts.extend(row)
+    faces = []
+    for s in range(segs):
+        for j in range(nc):
+            faces.append([rings[s][j], rings[s][j + 1],
+                          rings[s + 1][j + 1], rings[s + 1][j]])
+    return f'<Shape>{mat}{ifs(pts, faces, solid="true", crease=1.0)}</Shape>'
+
+
+def breakdown(cx, cy, rx, mat, n=4):
+    """Angular fallen-rock blocks scattered on a chamber floor."""
+    out = []
+    for i in range(n):
+        x = cx + (hash01(cx, i) - 0.5) * 1.4 * rx
+        z = -(1.0 + 4.0 * hash01(cx, i + 2))
+        s = 1.0 + 2.4 * hash01(cx, i + 3)
+        sx, sy, sz = s * (0.7 + 0.5 * hash01(x, i)), s * (0.4 + 0.4 * hash01(x, i + 1)), \
+            s * (0.6 + 0.5 * hash01(x, i + 4))
+        ang = 6.2832 * hash01(x, i + 5)
+        ax, ay, az = hash01(x, i + 6), 0.3 + hash01(x, i + 7), hash01(x, i + 8)
+        out.append(
+            f'<Transform translation="{fnum(x)} {fnum(cy)} {fnum(z)}" '
+            f'rotation="{fnum(ax)} {fnum(ay)} {fnum(az)} {fnum(ang)}">'
+            f'<Shape>{mat}<Box size="{fnum(sx)} {fnum(sy)} {fnum(sz)}"/></Shape>'
+            f'</Transform>')
+    return "".join(out)
+
+
+def daylight_cone(cx, cy, height, mat):
+    """A faint translucent shaft of daylight at an entrance."""
+    return (f'<Transform translation="{fnum(cx)} {fnum(cy)} -2">'
+            f'<Shape>{mat}<Cone bottomRadius="6" height="{fnum(height)}" '
+            f'side="true" bottom="false"/></Shape></Transform>')
 
 
 def _esc(s):
@@ -215,8 +264,17 @@ def look_orientation(eye, target):
 
 
 # ---------------------------------------------------------------------------
-# the cave, laid out per Furlong's plan (x = East, y = up; section from +z)
+# PROVENANCE.  DOCUMENTED: the set of named chambers and their relative
+# arrangement (Entrance, Porcupine Entrance, Pleistocene Hall, Gate, Chamber
+# One, Merriam's Chamber, Chamber Two down a deep drop) follow Furlong's plan as
+# redrawn by Feranec et al. (2007); the standing water ("Magic Pools") and the
+# 460 m / McCloud-Limestone setting are documented.  IMAGINARY/INTERPRETIVE: the
+# individual room SIZES (Furlong's per-room dimensions weren't in reachable
+# sources), every speleothem, breakdown blocks, exact pool extents, the daylight
+# shafts, lighting, and rock colouration.  The topology is faithful; the
+# dimensions and dressing are plausible reconstruction.
 # ---------------------------------------------------------------------------
+# the cave, laid out per Furlong's plan (x = East, y = up; section from +z)
 # name: (cx, cy, rx, ry, rz)
 ROOMS = {
     "Entrance":            (150, 30, 11,  9,  9),
@@ -250,15 +308,21 @@ def build_scene():
                  'ambientIntensity="0.22"/></Appearance>')
     breccia = ('<Appearance><Material diffuseColor="0.42 0.31 0.22" '
                'specularColor="0.03 0.025 0.02" ambientIntensity="0.22"/></Appearance>')
+    rubble = ('<Appearance><Material diffuseColor="0.38 0.3 0.23" '
+              'specularColor="0.04 0.035 0.03" ambientIntensity="0.2"/></Appearance>')
+    beam = ('<Appearance><Material emissiveColor="0.4 0.52 0.72" '
+            'transparency="0.9"/></Appearance>')
 
     parts = []
 
-    # chambers (mottled rock via vertex colour) + a little dripstone in the big rooms
+    # chambers (mottled rock via vertex colour) + dripstone, breakdown, a column
     drip_rooms = {"Pleistocene Hall", "Chamber One", "Merriam's Chamber", "Chamber Two"}
+    col_rooms = {"Pleistocene Hall", "Chamber One"}
     for i, (name, (cx, cy, rx, ry, rz)) in enumerate(ROOMS.items()):
         p, f, c = room_mesh(cx, cy, rx, ry, rz, seed=0.7 * i)
         parts.append(f'<Shape>{limestone_vc}{ifs(p, f, colors=c)}</Shape>')
         parts.append(floor_patch(cx, cy - ry * 0.72, rx * 0.8, breccia))
+        parts.append(breakdown(cx, cy - ry * 0.7, rx, rubble))
         if name in drip_rooms:
             nd = 3 + int(3 * hash01(cx, cy))
             for k in range(nd):
@@ -268,6 +332,10 @@ def build_scene():
                 length = ry * (0.2 + 0.4 * hash01(dx, k))
                 rad = 0.3 + 0.5 * hash01(dx, k + 5)
                 parts.append(dripstone(dx, roof, dz, length, rad, flowstone))
+        if name in col_rooms:
+            base = cy - ry * 0.7
+            parts.append(column(cx - rx * 0.3, base, -(0.4 * rz),
+                                 ry * 1.5, 0.5 + 0.5 * hash01(cx, 3), flowstone))
 
     # passages
     for p0, p1, r0, r1 in PASSAGES:
@@ -283,6 +351,10 @@ def build_scene():
     parts.append(pool(54, 19 - 13 * 0.72 + 0.4, 4.5))    # Chamber One
     parts.append(pool(34, -12 - 10 * 0.72 + 0.4, 5))     # Chamber Two
 
+    # shafts of daylight at the two outside entrances
+    parts.append(daylight_cone(150, 30, 26, beam))
+    parts.append(daylight_cone(168, 13, 20, beam))
+
     # labels
     for name, (cx, cy, rx, ry, rz) in ROOMS.items():
         parts.append(label(cx, cy + ry + 2.5, name))
@@ -291,19 +363,22 @@ def build_scene():
     parts.append(label(34, -27, "Pit of the Lost Maiden", size=2.8,
                        col="0.85 0.8 0.7"))
 
-    # lighting: dim section wash + a warm lantern per room + cool entrance light
+    # lighting: section wash + a warm lantern per room (brighter so dripstone reads)
     lights = [
-        '<DirectionalLight direction="0.1 -0.5 -1" intensity="0.44" color="0.8 0.84 0.95"/>',
-        '<DirectionalLight direction="-0.2 -1 0.1" intensity="0.16" color="0.55 0.58 0.68"/>',
-        daylight(155, 31), daylight(170, 14, 0.6, 45),
-        lantern(100, 20, 0.8, 55), lantern(54, 16, 0.75), lantern(18, 33, 0.7),
-        lantern(34, -14, 0.65, 40, col="0.9 0.74 0.56"),
+        '<DirectionalLight direction="0.1 -0.5 -1" intensity="0.55" color="0.82 0.86 0.96"/>',
+        '<DirectionalLight direction="-0.2 -1 0.1" intensity="0.2" color="0.55 0.58 0.68"/>',
+        daylight(152, 31, 1.0), daylight(168, 14, 0.75, 45),
+        lantern(100, 19, 1.0, 60), lantern(54, 15, 0.95, 45),
+        lantern(18, 32, 0.9, 42), lantern(34, -14, 0.85, 42, col="0.92 0.76 0.56"),
     ]
 
     # framing: front-on section, fit the whole branching system
     eye = (92.0, 22.0, 215.0)
     tgt = (92.0, 14.0, -8.0)
     orient = look_orientation(eye, tgt)
+    # hero: close on the lower level -- Chamber One, the drop, and Chamber Two
+    hero = (44.0, 16.0, 86.0)
+    hero_o = look_orientation(hero, (40.0, 2.0, -6.0))
 
     title = (
         '<Transform translation="92 60 6"><Shape>'
@@ -319,9 +394,12 @@ def build_scene():
         'groundColor="0.015 0.015 0.02" skyAngle="1.2"/>'
         '<Fog fogType="LINEAR" color="0.03 0.03 0.045" visibilityRange="620"/>'
         '<NavigationInfo type=\'"EXAMINE" "ANY"\' headlight="false" speed="14"/>'
-        f'<Viewpoint description="Cross-section" '
+        f'<Viewpoint DEF="Section" description="Cross-section" '
         f'position="{fnum(eye[0])} {fnum(eye[1])} {fnum(eye[2])}" '
         f'orientation="{orient}" fieldOfView="0.95"/>'
+        f'<Viewpoint DEF="Hero" description="Lower level -- the drop to Chamber Two" '
+        f'position="{fnum(hero[0])} {fnum(hero[1])} {fnum(hero[2])}" '
+        f'orientation="{hero_o}" fieldOfView="0.95"/>'
         + "".join(lights)
         + title
         + f'<Group>{"".join(parts)}</Group>'
@@ -373,7 +451,9 @@ def html_doc(scene, xite=False):
 the Cave of the Lost Maiden. McCloud River, Shasta County. Surveyed by
 Furlong, Merriam &amp; Sinclair (1903&ndash;06); cross-section after
 Feranec&nbsp;et&nbsp;al.&nbsp;(2007). Sister cave to Potter Creek. Now on the
-shore of Shasta Lake, on flooded Winnemem&nbsp;Wintu homeland.</div>
+shore of Shasta Lake, on flooded Winnemem&nbsp;Wintu homeland.
+<span style="opacity:.8">Chamber layout and pools are documented; room sizes,
+speleothems and lighting are interpretive.</span></div>
 </body></html>
 """
 
