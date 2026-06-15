@@ -109,3 +109,22 @@ def test_render_xite_smoke():
     png = asyncio.run(_render_xite_async(scene, 320, 240, 6000))
     assert png[:8] == b"\x89PNG\r\n\x1a\n"   # valid PNG signature
     assert len(png) > 500                     # not an empty frame
+
+
+def test_render_xite_path_smoke(tmp_path):
+    pytest.importorskip("playwright")
+    import asyncio
+    from tools.render import _render_xite_path_async
+    f = tmp_path / "scene.x3d"
+    f.write_text(
+        '<X3D profile="Immersive" version="4.1"><Scene>'
+        '<Viewpoint position="0 0 6"/>'
+        '<DirectionalLight direction="-0.3 -0.5 -1" intensity="1"/>'
+        '<Shape><Appearance><Material diffuseColor="0.2 0.6 0.9"/></Appearance>'
+        '<Box size="2 2 2"/></Shape></Scene></X3D>'
+    )
+    png = asyncio.run(_render_xite_path_async(str(f), 320, 240, 6000))
+    assert png[:8] == b"\x89PNG\r\n\x1a\n"
+    assert len(png) > 500
+    # the temp preview page is cleaned up
+    assert not list(tmp_path.glob("._x3d_render_*.html"))
