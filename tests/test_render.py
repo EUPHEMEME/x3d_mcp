@@ -6,6 +6,7 @@ https://github.com/niknarra/x3d-mcp/blob/main/tests/test_generation.py
 """
 
 import sys
+import pytest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -71,3 +72,20 @@ def test_starter_generates_complete_page():
     assert "box" in html
     assert "material" in html
     assert "directionallight" in html.lower()
+
+
+# ---- render_image: actual headless render (Playwright-gated) ----
+
+def test_render_html_to_png_smoke():
+    pytest.importorskip("playwright")
+    from tools.render import _x3dom_page, _render_html_to_png
+    scene = (
+        '<X3D profile="Immersive" version="4.1"><Scene>'
+        '<Viewpoint position="0 0 6"/>'
+        '<DirectionalLight direction="-0.3 -0.5 -1" intensity="1"/>'
+        '<Shape><Appearance><Material diffuseColor="0.85 0.2 0.2"/></Appearance>'
+        '<Box size="2 2 2"/></Shape></Scene></X3D>'
+    )
+    png = _render_html_to_png(_x3dom_page(scene, "t", "320px", "240px"), 320, 240, 2500)
+    assert png[:8] == b"\x89PNG\r\n\x1a\n"   # valid PNG signature
+    assert len(png) > 500                     # not an empty frame

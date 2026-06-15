@@ -35,8 +35,9 @@ create_node / set_field / add_child / add_route).
 3. VALIDATE -- always BOTH: `validate_x3d` (XSD schema) and `validate_semantic` (the errors that \
 pass the schema but still break rendering -- wrong containerField, USE-before-DEF, broken ROUTEs). \
 validate_semantic names the exact fix; apply it.
-4. RENDER and LOOK (`x3dom_page` -> browser, or the render tool) before declaring done. \
-A scene that validates can still be visually wrong.
+4. RENDER and LOOK before declaring done: `render_image(content|path)` returns a PNG you \
+inspect directly; `x3dom_page` gives an interactive browser page. A scene that validates can \
+still be visually wrong (off-camera, unlit, mis-scaled).
 Rule: a scene is not finished until validate_semantic is clean AND you have rendered it.
 
 For any multi-step task, START from a prompt (build_scene, animate_scene, audit_scene, \
