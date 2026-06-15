@@ -828,6 +828,17 @@ if SCENE == "meadow":
         specs = neck_arc(NECK_PITCH, t_down=0.28, t_hold=0.56, t_up=0.74, t_settle=0.96,
                          stagger=0.05, antic=0.12, bob=0.04)
         specs.append(("mandible", *chew(0.30, 0.58, 6, -0.32), AX))
+        # legs reach for the graze: front carpus flex + hind stifle takes weight
+        for j in ("l_f_knee", "r_f_knee"):
+            specs.append((j, *bake([(0, 0, e_io), (0.28, -0.16, e_io), (0.56, -0.16, e_io),
+                                    (0.78, 0, e_out), (1.0, 0, e_lin)], spp=6), AX))
+        for j in ("l_h_stifle", "r_h_stifle"):
+            specs.append((j, *bake([(0, 0, e_io), (0.28, 0.12, e_io), (0.56, 0.12, e_io),
+                                    (0.78, 0, e_out), (1.0, 0, e_lin)], spp=6), AX))
+        # idle weight-shift sway (always on -- keeps the stance alive)
+        for j, sgn in (("l_shoulder", 1), ("r_shoulder", -1), ("l_hip", -1), ("r_hip", 1)):
+            specs.append((j, *bake([(0, 0, e_io), (0.33, 0.05 * sgn, e_io),
+                                    (0.7, -0.05 * sgn, e_io), (1.0, 0, e_io)], spp=5), (0, 0, 1)))
         # secondary action: ear flick (snappy, overshoot) + tail sway (lagging arc)
         specs.append(("l_ear", *bake([(0, 0, e_io), (0.40, 0, e_io), (0.46, 0.5, e_back),
                                       (0.54, 0, e_out), (1.0, 0, e_lin)], spp=5), AX))
@@ -851,6 +862,10 @@ else:  # lake dive
             (0.0, 0.0, e_io), (0.16, 0.06, e_back), (0.32, -0.72, e_io),
             (0.55, -0.72, e_io), (0.76, 0.0, e_out), (1.0, 0.0, e_lin)]), AX))
         specs.append(("mandible", *chew(0.32, 0.55, 5, -0.34), AX))
+        # legs splay/paddle through the dive then recover
+        for j in ("l_f_knee", "r_f_knee", "l_h_stifle", "r_h_stifle"):
+            specs.append((j, *bake([(0, 0, e_io), (0.16, -0.06, e_io), (0.40, 0.20, e_io),
+                                    (0.70, 0.05, e_out), (1.0, 0, e_lin)], spp=5), AX))
         specs.append(("l_ear", *bake([(0, 0, e_io), (0.82, 0, e_io), (0.88, 0.6, e_back),
                                       (0.95, 0, e_out), (1.0, 0, e_lin)], spp=5), AX))
         specs.append(("tail_1", *bake([(0, 0, e_io), (0.30, 0.15, e_io), (0.60, -0.15, e_io),
@@ -1068,6 +1083,13 @@ xml = xml.replace("DEF='MooseLegShape'",
 for _lvl in range(1, NSHELL + 1):
     xml = xml.replace(f"DEF='MooseShell{_lvl}'",
                       f"DEF='MooseShell{_lvl}' containerField='skin'", 1)
+# X_ITE drives RUNTIME skin deformation from the HAnimHumanoid `joints` list. We
+# can't author it via x3d.py (it serialises the USE-list before the skeleton DEFs
+# -> USE-before-DEF). Inject it AFTER the skeleton instead (DEF before USE), so the
+# skin re-skins live as joints animate (not just at load).
+_joints_use = "".join(f"<HAnimJoint USE='J_{n}' containerField='joints'></HAnimJoint>"
+                      for n in JOINTS)
+xml = xml.replace("</HAnimHumanoid>", _joints_use + "</HAnimHumanoid>", 1)
 # x3d.py also drops the containerField when an ImageTexture sits in a PBR slot,
 # so X_ITE rejects them ("Unknown field 'texture' in PhysicalMaterial"). Inject
 # the right slot per texture URL.
