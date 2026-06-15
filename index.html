@@ -31,31 +31,31 @@
 </style></head>
 <body><div class="wrap">
   <h1>🫎 <span class="em">Moose</span> — a local mflux → X3D creature pipeline</h1>
-  <p class="sub">Procedurally modeled, HAnim-rigged, fur-skinned and animated bull moose, with a
-     pose-locked photoreal compositing pass. Two scenes + the beauty passes.</p>
+  <p class="sub">Procedurally modeled, HAnim-rigged, fur-skinned and animated bull moose —
+     built to real <i>Alces alces</i> morphology. Two interactive scenes + renders.</p>
 
   <h2>Live interactive scenes (WebGL)</h2>
   <div class="cards">
     <a class="card" href="moose_lake.html">
-      <span class="thumb" style="background-image:url('moose_refs/depth_dive_beauty.png')"></span>
+      <span class="thumb" style="background-image:url('moose_refs/render_dive.png')"></span>
       <span class="body"><div class="t">Lake dive →</div>
         <div class="d">Moose diving for water-lily bulbs · bubbles, ripple, animated water</div></span></a>
     <a class="card" href="moose_x3dom.html">
-      <span class="thumb" style="background-image:url('moose_refs/depth_beauty2.png')"></span>
+      <span class="thumb" style="background-image:url('moose_refs/morph_Hero.png')"></span>
       <span class="body"><div class="t">Meadow graze →</div>
         <div class="d">Eased neck-arc graze cycle · shell fur · HAnim skinCoord rig</div></span></a>
   </div>
   <p class="sub" style="margin-top:.8rem;font-size:.88rem">Drag to orbit · press number keys
      <b>1–4</b> to switch cameras · give it a couple seconds to load.</p>
 
-  <h2>Photoreal beauty passes (FLUX-Depth, pose-locked)</h2>
+  <h2>Renders (real-time X_ITE captures of the X3D scene)</h2>
   <div class="gal">
-    <a href="moose_refs/depth_dive_beauty.png"><img src="moose_refs/depth_dive_beauty.png" alt="dive">
+    <a href="moose_refs/morph_Side.png"><img src="moose_refs/morph_Side.png" alt="side profile">
+      <div class="cap">Side profile — hump, sloping back, bell</div></a>
+    <a href="moose_refs/render_portrait.png"><img src="moose_refs/render_portrait.png" alt="portrait">
+      <div class="cap">Head — pendulous muzzle, shell fur</div></a>
+    <a href="moose_refs/render_dive.png"><img src="moose_refs/render_dive.png" alt="dive">
       <div class="cap">Underwater dive</div></a>
-    <a href="moose_refs/depth_beauty2.png"><img src="moose_refs/depth_beauty2.png" alt="meadow">
-      <div class="cap">Meadow, golden hour</div></a>
-    <a href="moose_refs/depth_head_beauty.png"><img src="moose_refs/depth_head_beauty.png" alt="portrait">
-      <div class="cap">Portrait</div></a>
   </div>
 
   <div class="note">If a scene is blank: it must be served over <code>http</code>

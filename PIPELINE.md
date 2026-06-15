@@ -13,7 +13,7 @@ pipelines): LucidLink, CG Spectrum, MASV, On Assemble, The Rookies, SideFX.
 | # | Department (aliases) | Studio responsibility | Where we do it | Status |
 |---|----------------------|-----------------------|----------------|--------|
 | — | **Development** | Greenlight, scope, methodology | Scene/scope decisions; `MOOSE_SCENE` (meadow/lake), render-target = "both" | ✅ |
-| — | **Art / Concept** | Define the look (turnarounds, color keys) | **mflux** photoreal references (`moose_refs/moose_side.png`) drive proportions & palette | ✅ |
+| — | **Art / Concept** | Define the look (turnarounds, color keys) | **Real moose reference photography + morphology research** (A-Z Animals, Britannica) drive the proportions: pendulous overhanging muzzle, shoulder hump, sloping back, bell/dewlap, long legs | ✅ |
 | — | **Previs / blocking** | Rough 3D staging & timing | `MOOSE_POSE=<0..1>` freezes any animation frame for blocking/staging stills | ✅ |
 | 1 | **Layout** | Place assets, set cameras, scale | Named `Viewpoint`s (`MOOSE_VIEW`: Hero/Side/Head/Front/Top, Dive/Above), `MooseRoot` Transform | ✅ |
 | 2 | **Modeling** | Build geometry, clean topology, UVs | Pure-Python primitives (`ellipsoid`/`tube`/`palmate_antler`/`cloven_hoof`) + swept **skin mesh** (`build_skin`); UVs generated per-primitive | ✅ |
@@ -26,7 +26,7 @@ pipelines): LucidLink, CG Spectrum, MASV, On Assemble, The Rookies, SideFX.
 | 9 | **Matte Painting / Environments** | Backgrounds & full environments | `Background` sky dome; **meadow** (ground + grass field) and **lake** (pond bottom, lily pads/flowers, submerged bulbs/stems, `Fog`) | ✅ |
 | 10 | **Lighting** | Light to match, set passes | `EnvironmentLight` (IBL-ish) + warm key / cool fill `DirectionalLight` + `Background` + underwater `Fog` | ✅ |
 | 11 | **Rendering** | Produce final frames on the farm | **X_ITE** real-time in-browser render (interactive); deterministic stills via pose-freeze + `shot.js` | ✅ |
-| 12 | **Compositing** | Combine passes/plates → final image | **mflux beauty pass** (`generate_beauty.sh`): restyle a rendered frame to photoreal. Two modes: schnell img2img (fast) and **FLUX.1-Depth-dev depth-conditioned** — derives depth from the render so the photoreal output is **pose-locked** to the exact rig pose. NB: Depth-dev needs `--quantize 8` (full precision decodes to noise). Result: `depth_beauty2.png` | ✅ |
+| 12 | **Compositing / Beauty** | Combine passes → final image | The real-time **X_ITE render IS the final image**. "Beauty pass" = a clean high-res render capture of the actual X3D scene (`moose_refs/render_*.png`, `morph_*.png`) — never AI imagery. | ✅ |
 | — | **Matchmove / Roto / Prep** | Integrate CG with live plates | N/A — pure CG, no live-action plates | ⚪ N/A |
 | — | **Editorial / Color / DI** | Cut, conform, grade, master | N/A for a single real-time shot (the render is the master) | ⚪ N/A |
 | ✲ | **Pipeline / TD** (cross-cutting) | Tools & data plumbing connecting depts | `generate_moose.py` *is* the pipeline: one parametric generator, env-var knobs, post-serialize fixers for x3d.py quirks | ✅ |
