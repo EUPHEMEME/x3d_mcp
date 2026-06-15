@@ -652,27 +652,60 @@ def x3d_doc(scene):
     )
 
 
-def html_doc(scene):
+XITE_VER = "15.1.4"          # pinned (was @latest); X_ITE renders the PBR
+
+# Shown instead of a black screen when the page is opened from file:// -- X_ITE
+# fetches the .x3d over http and the browser blocks that over file://.
+FILE_GUARD = """<script>
+if (location.protocol === 'file:') {
+  window.addEventListener('DOMContentLoaded', function () {
+    document.body.style.cssText = 'margin:0;height:100vh;display:flex;align-items:'
+      + 'center;justify-content:center;background:#0a0a0c;color:#cdbfa6;'
+      + 'font-family:Georgia,serif;text-align:center';
+    document.body.innerHTML = '<div style="max-width:540px;padding:24px;line-height:1.6">'
+      + '<h2 style="color:#e9d9b8">Start the local viewer</h2>'
+      + '<p>This 3-D viewer loads its data over <b>http</b>. Browsers block the '
+      + 'renderer from reading 3-D files over <code>file://</code>, so opening this '
+      + 'page by double-click shows nothing.</p>'
+      + '<p>In Terminal, from the project folder, run:</p>'
+      + '<p style="background:#1d1a14;padding:10px 16px;border-radius:6px;'
+      + 'display:inline-block;font-family:monospace">./start_caves.sh</p>'
+      + '<p>It serves the folder and opens '
+      + '<b>http://127.0.0.1:8099/caves.html</b> for you.</p></div>';
+  });
+}
+</script>"""
+
+POTTER_CAP = (
+    '<b>Potter Creek Cave</b>, Shasta County, CA &mdash; to scale from '
+    'W.&nbsp;J.&nbsp;Sinclair, <i>The Exploration of Potter Creek Cave</i> (1904), '
+    'excavation directed by John&nbsp;C.&nbsp;Merriam. Chamber 107&nbsp;ft long, '
+    'roof ~75&nbsp;ft; two coalescing breccia fans, chimneys, the 42&nbsp;ft '
+    'entrance pit. <span style="opacity:.8">Chamber, fans, chimneys and the pit '
+    'are to scale from the 1904 survey; speleothems, pools, rock texture and '
+    'lighting are interpretive.</span> Drag to orbit.'
+)
+
+
+def xite_html(title, src, caption):
+    """A guarded, version-pinned X_ITE viewer page."""
     return f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Potter Creek Cave</title>
-<script src="https://x3dom.org/release/x3dom.js"></script>
-<link rel="stylesheet" href="https://x3dom.org/release/x3dom.css">
+<html><head><meta charset="utf-8"><title>{title}</title>
+{FILE_GUARD}
+<script src="https://cdn.jsdelivr.net/npm/x_ite@{XITE_VER}/dist/x_ite.min.js"></script>
 <style>
  html,body{{margin:0;background:#08080a;color:#cdbfa6;font-family:Georgia,serif}}
- x3d,canvas{{width:100vw;height:100vh;display:block}}
- .cap{{position:fixed;left:18px;bottom:14px;max-width:520px;font-size:13px;
+ x3d-canvas,canvas{{width:100vw;height:100vh;display:block}}
+ .cap{{position:fixed;left:18px;bottom:14px;max-width:540px;font-size:13px;
    line-height:1.45;text-shadow:0 1px 3px #000;z-index:10}}
  .cap b{{color:#e9d9b8}}
+ .home{{position:fixed;left:18px;top:14px;font-size:13px;z-index:10}}
+ .home a{{color:#cdbfa6;opacity:.75;text-decoration:none}}
 </style></head>
 <body>
-<x3d><Scene>{scene}</Scene></x3d>
-<div class="cap"><b>Potter Creek Cave</b>, Shasta County, CA &mdash; to scale from
-W.&nbsp;J.&nbsp;Sinclair, <i>The Exploration of Potter Creek Cave</i> (1904),
-excavation directed by John&nbsp;C.&nbsp;Merriam. Chamber 107&nbsp;ft long,
-roof ~75&nbsp;ft; two coalescing breccia fans under the chimneys; 42&nbsp;ft
-entrance pit. <span style="opacity:.8">Chamber, fans, chimneys and the pit are
-to scale from the 1904 survey; speleothems, pools, rock texture and lighting are
-interpretive.</span> Drag to orbit; press <b>2</b>/<b>3</b> for other views.</div>
+<x3d-canvas src="{src}"></x3d-canvas>
+<div class="home"><a href="caves.html">&larr; all caves</a></div>
+<div class="cap">{caption}</div>
 </body></html>
 """
 
@@ -681,9 +714,12 @@ def main():
     scene = build_scene()
     with open("potter_creek_cave.x3d", "w") as f:
         f.write(x3d_doc(scene))
-    with open("potter_creek_cave.html", "w") as f:
-        f.write(html_doc(scene))
-    print("wrote potter_creek_cave.x3d and potter_creek_cave.html")
+    with open("potter_creek_cave_xite.html", "w") as f:
+        f.write(xite_html("Potter Creek Cave", "potter_creek_cave.x3d", POTTER_CAP))
+    with open("potter_creek_cave_hero.html", "w") as f:
+        f.write(xite_html("Potter Creek Cave — hero",
+                          "potter_creek_cave.x3d#Hero", POTTER_CAP))
+    print("wrote potter_creek_cave.x3d + xite/hero viewer pages")
 
 
 if __name__ == "__main__":
