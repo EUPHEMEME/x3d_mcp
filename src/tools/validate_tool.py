@@ -39,10 +39,21 @@ def register(mcp: FastMCP):
 
     @mcp.tool()
     def validate_current_scene() -> str:
-        """Validate the current granular scene against the X3D 4.1 schema."""
+        """Validate the current granular (in-memory) scene -- BOTH schema and semantic.
+
+        Runs the X3D 4.1 XSD check and the semantic checks (containerField, USE-order,
+        ROUTEs, Shape completeness, ...) on the scene built via create_node/add_child,
+        so granular-mode authoring gets the same safety net as content-based tools.
+        """
         xml_content = _scene.to_xml()
-        result = validate_xml(xml_content)
-        return json.dumps(result, indent=2)
+        schema = validate_xml(xml_content)
+        semantic = _validate_semantic(xml_content)
+        return (
+            "## Schema (XSD)\n```json\n"
+            + json.dumps(schema, indent=2)
+            + "\n```\n\n"
+            + semantic
+        )
 
     @mcp.tool()
     def validate_semantic(content: str = "", path: str = "") -> str:
