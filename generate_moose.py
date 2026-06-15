@@ -822,6 +822,96 @@ def neck_arc(amp_map, t_down, t_hold, t_up, t_settle, stagger=0.05, antic=0.12, 
         specs.append((j, keys, vals, AX))
     return specs
 
+# ---------------------------------------------------------------------------
+# 6b. FOOT IK -- 2-bone analytic solve that keeps each hoof PLANTED on its
+#     ground target while the body shifts its weight (legs flex to compensate).
+# ---------------------------------------------------------------------------
+def m_ident(): return [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+def m_mul(A, B):
+    return [[sum(A[i][k] * B[k][j] for k in range(4)) for j in range(4)] for i in range(4)]
+def m_T(t): return [[1, 0, 0, t[0]], [0, 1, 0, t[1]], [0, 0, 1, t[2]], [0, 0, 0, 1]]
+def m_R(axis, ang):
+    x, y, z = norm(axis); c = math.cos(ang); s = math.sin(ang); C_ = 1 - c
+    return [[c + x*x*C_, x*y*C_ - z*s, x*z*C_ + y*s, 0],
+            [y*x*C_ + z*s, c + y*y*C_, y*z*C_ - x*s, 0],
+            [z*x*C_ - y*s, z*y*C_ + x*s, c + z*z*C_, 0], [0, 0, 0, 1]]
+def m_apply(M, v):
+    return [M[0][0]*v[0] + M[0][1]*v[1] + M[0][2]*v[2] + M[0][3],
+            M[1][0]*v[0] + M[1][1]*v[1] + M[1][2]*v[2] + M[1][3],
+            M[2][0]*v[0] + M[2][1]*v[1] + M[2][2]*v[2] + M[2][3]]
+def m_rotT(M, v):                                # inverse-rotate a direction
+    return [M[0][0]*v[0] + M[1][0]*v[1] + M[2][0]*v[2],
+            M[0][1]*v[0] + M[1][1]*v[1] + M[2][1]*v[2],
+            M[0][2]*v[0] + M[1][2]*v[1] + M[2][2]*v[2]]
+def rot_between(a, b):
+    a, b = norm(a), norm(b); ax = cross(a, b); s = length(ax); c = dot(a, b)
+    if s < 1e-6:
+        return [1, 0, 0, 0.0] if c > 0 else [0, 0, 1, math.pi]
+    ax = norm(ax)
+    return [ax[0], ax[1], ax[2], math.atan2(s, c)]
+
+def _joint_local(name, r):                       # r = [x,y,z,angle] or None
+    R = m_R(r[:3], r[3]) if r else m_ident()
+    c = C[name]
+    return m_mul(m_T(c), m_mul(R, m_T([-c[0], -c[1], -c[2]])))
+def _world_M(name, rotf, cache):
+    if name in cache: return cache[name]
+    p = JOINTS[name][0]
+    loc = _joint_local(name, rotf(name))
+    M = loc if p is None else m_mul(_world_M(p, rotf, cache), loc)
+    cache[name] = M
+    return M
+
+# leg: (legroot, mid/bend joint, hoof, pole-Z sign for the bend direction)
+LEG_IK = {
+    "fl": ("l_shoulder", "l_f_knee", "l_f_hoof", -1),
+    "fr": ("r_shoulder", "r_f_knee", "r_f_hoof", -1),
+    "hl": ("l_hip", "l_h_hock", "l_h_hoof", 1),
+    "hr": ("r_hip", "r_h_hock", "r_h_hoof", 1),
+}
+
+def _ik_solve(lr, mid, hf, pole, rotf):
+    cache = {}
+    Mp = _world_M(JOINTS[lr][0], rotf, cache)    # parent of the leg-root
+    S = m_apply(Mp, C[lr])                        # shifted leg-root position
+    T = C[hf]                                     # planted target (bind ground pos)
+    L1 = length(sub(C[mid], C[lr]))
+    L2 = length(sub(C[hf], C[mid]))
+    d = sub(T, S); dist = length(d)
+    dist = max(abs(L1 - L2) + 1e-3, min(L1 + L2 - 1e-3, dist))
+    dn = norm(d)
+    a = (dist * dist + L1 * L1 - L2 * L2) / (2 * dist)
+    h = math.sqrt(max(0.0, L1 * L1 - a * a))
+    pol = sub([0, 0, pole], mul(dn, dot([0, 0, pole], dn)))   # bend dir, sagittal
+    pol = norm(pol) if length(pol) > 1e-4 else [0, -1, 0]
+    K = add(add(S, mul(dn, a)), mul(pol, h))      # knee/hock position
+    R1 = rot_between(sub(C[mid], C[lr]), m_rotT(Mp, sub(K, S)))
+    Mlr = m_mul(Mp, _joint_local(lr, R1))
+    R2 = rot_between(sub(C[hf], C[mid]), m_rotT(Mlr, sub(T, K)))
+    return R1, R2
+
+def ik_leg_specs(body_specs, N=18):
+    """Sample the body motion and solve each leg so its hoof stays planted.
+       Returns full-rotation specs (axis=None -> keyValue is [x,y,z,angle])."""
+    def rotf_at(f):
+        dd = {}
+        for (j, key, vals, axis) in body_specs:
+            r = _sample(key, vals, f)
+            dd[j] = [axis[0], axis[1], axis[2], r] if axis is not None else list(r)
+        return lambda n: dd.get(n)
+    keys = [round(i / N, 4) for i in range(N + 1)]
+    solved = {lg: ([], []) for lg in LEG_IK}
+    for f in keys:
+        rf = rotf_at(f)
+        for lg, (lr, mid, hf, pole) in LEG_IK.items():
+            R1, R2 = _ik_solve(lr, mid, hf, pole, rf)
+            solved[lg][0].append(R1); solved[lg][1].append(R2)
+    specs = []
+    for lg, (lr, mid, hf, pole) in LEG_IK.items():
+        specs.append((lr, keys, solved[lg][0], None))
+        specs.append((mid, keys, solved[lg][1], None))
+    return specs
+
 if SCENE == "meadow":
     CYCLE = 7.0                                          # a touch slower -> reads heavier
     NECK_PITCH = {"neck_c1": -0.30, "neck_c2": -0.45, "neck_c3": -0.50, "skull": -0.35}
@@ -830,17 +920,12 @@ if SCENE == "meadow":
         specs = neck_arc(NECK_PITCH, t_down=0.28, t_hold=0.56, t_up=0.74, t_settle=0.96,
                          stagger=0.05, antic=0.12, bob=0.04)
         specs.append(("mandible", *chew(0.30, 0.58, 6, -0.32), AX))
-        # legs reach for the graze: front carpus flex + hind stifle takes weight
-        for j in ("l_f_knee", "r_f_knee"):
-            specs.append((j, *bake([(0, 0, e_io), (0.28, -0.16, e_io), (0.56, -0.16, e_io),
-                                    (0.78, 0, e_out), (1.0, 0, e_lin)], spp=6), AX))
-        for j in ("l_h_stifle", "r_h_stifle"):
-            specs.append((j, *bake([(0, 0, e_io), (0.28, 0.12, e_io), (0.56, 0.12, e_io),
-                                    (0.78, 0, e_out), (1.0, 0, e_lin)], spp=6), AX))
-        # idle weight-shift sway (always on -- keeps the stance alive)
-        for j, sgn in (("l_shoulder", 1), ("r_shoulder", -1), ("l_hip", -1), ("r_hip", 1)):
-            specs.append((j, *bake([(0, 0, e_io), (0.33, 0.05 * sgn, e_io),
-                                    (0.7, -0.05 * sgn, e_io), (1.0, 0, e_io)], spp=5), (0, 0, 1)))
+        # body weight-shift: a gentle lateral roll (sway). The legs FLEX to keep
+        # the hooves PLANTED -- solved by foot IK, not authored as FK.
+        body = [("moose_root", *bake([(0, 0, e_io), (0.30, 0.05, e_io),
+                                      (0.70, -0.05, e_io), (1.0, 0, e_io)], spp=6), (0, 0, 1))]
+        specs += body
+        specs += ik_leg_specs(body)
         # secondary action: ear flick (snappy, overshoot) + tail sway (lagging arc)
         specs.append(("l_ear", *bake([(0, 0, e_io), (0.40, 0, e_io), (0.46, 0.5, e_back),
                                       (0.54, 0, e_out), (1.0, 0, e_lin)], spp=5), AX))
@@ -899,7 +984,7 @@ def anim_nodes():
     nodes, routes = [], []
     for joint, key, angles, axis in SPECS:
         d = f"{joint}_int"
-        kv = [[axis[0], axis[1], axis[2], a] for a in angles]
+        kv = list(angles) if axis is None else [[axis[0], axis[1], axis[2], a] for a in angles]
         nodes.append(X.OrientationInterpolator(DEF=d, key=key, keyValue=kv))
         routes.append(X.ROUTE(fromNode="MunchClock", fromField="fraction_changed",
                               toNode=d, toField="set_fraction"))
@@ -921,7 +1006,8 @@ FIG_TRANS = [0, 0, 0]                          # whole-figure offset (the body s
 if POSE is not None:                           # freeze a known frame (no clock)
     f = float(POSE)
     for joint, key, angles, axis in SPECS:
-        BAKE_ROT[joint] = [axis[0], axis[1], axis[2], _sample(key, angles, f)]
+        s = _sample(key, angles, f)
+        BAKE_ROT[joint] = list(s) if axis is None else [axis[0], axis[1], axis[2], s]
     FIG_TRANS = _sample(BODY_KEY, BODY_KV, f)
     anim_int, anim_routes = [], []
     print(f"[pose-freeze] baked frame f={f}")
