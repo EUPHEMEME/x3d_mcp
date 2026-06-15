@@ -754,65 +754,112 @@ SCENE = os.environ.get("MOOSE_SCENE", "meadow")   # "meadow" | "lake"
 AX = (1, 0, 0)   # pitch axis
 WATER_Y = 2.45   # lake surface height (moose stands on bottom y=0)
 
-def osc_keys(t0, t1, n, amp, base=0.0):
-    """Open/close oscillation over [t0,t1] -> (keys, vals) with n full chews."""
+# --- easing curves (0..1 -> 0..1): the slow-in/slow-out principle ----------
+def e_lin(t): return t
+def e_io(t):  return t * t * (3 - 2 * t)               # smoothstep: ease in & out
+def e_in(t):  return t * t * t                         # accelerate
+def e_out(t): return 1 - (1 - t) ** 3                  # decelerate / settle
+def e_back(t, k=1.9):                                  # overshoot, then settle
+    u = t - 1.0
+    return 1 + (k + 1) * u ** 3 + k * u ** 2
+
+def _lerp(a, b, e):
+    if isinstance(a, (list, tuple)):
+        return [a[i] + (b[i] - a[i]) * e for i in range(len(a))]
+    return a + (b - a) * e
+
+def bake(kfs, spp=8):
+    """kfs = [(time, value, ease_to_next)] -> dense keys/vals tracing the eased
+       curve. Linear storage, but the *shape* carries the easing (so any X3D
+       viewer reproduces slow-in/out, anticipation, overshoot)."""
     keys, vals = [], []
-    for i in range(n * 2 + 1):
-        keys.append(round(t0 + (t1 - t0) * i / (n * 2), 4))
-        vals.append(amp if i % 2 == 1 else base)
+    for i in range(len(kfs) - 1):
+        t0, v0, ef = kfs[i]
+        t1, v1 = kfs[i + 1][0], kfs[i + 1][1]
+        for s in range(spp):
+            f = s / spp
+            keys.append(round(t0 + (t1 - t0) * f, 4))
+            vals.append(_lerp(v0, v1, ef(f)))
+    keys.append(round(kfs[-1][0], 4)); vals.append(kfs[-1][1])
     return keys, vals
 
-def chew_keys(n_down=7, n_idle=2, win=(0.25, 0.62)):
-    """Mandible open/close (NEGATIVE = jaw drops open)."""
-    keys, vals = [0.0], [0.0]
-    k, v = osc_keys(win[0], win[1], n_down, -0.32); keys += k; vals += v
-    k, v = osc_keys(0.80, 0.98, n_idle, -0.24); keys += k; vals += v
-    keys.append(1.0); vals.append(0.0)
-    return keys, vals
+def hold_bob(keys, vals, t0, t1, amp, cycles):
+    """Moving hold: add a small sine onto a baked channel within [t0,t1]."""
+    return keys, [v + (amp * math.sin((k - t0) / (t1 - t0) * cycles * 2 * math.pi)
+                       if t0 <= k <= t1 else 0.0) for k, v in zip(keys, vals)]
+
+def chew(t0, t1, n, amp):
+    """Eased jaw chews -- each open/close is a smoothstep, not a linear tri-wave."""
+    kfs = [(0.0, 0.0, e_io)]
+    for i in range(n):
+        kfs.append((t0 + (t1 - t0) * i / n, 0.0, e_io))
+        kfs.append((t0 + (t1 - t0) * (i + 0.5) / n, amp, e_io))
+    kfs.append((t1, 0.0, e_io)); kfs.append((1.0, 0.0, e_lin))
+    return bake(kfs, spp=4)
+
+NECK = ["neck_c1", "neck_c2", "neck_c3", "skull"]
+
+def neck_arc(amp_map, t_down, t_hold, t_up, t_settle, stagger=0.05, antic=0.12, bob=0.0):
+    """Overlapping action: the bend propagates DOWN the cervical chain (each joint
+       lags its parent) so the neck curls in an arc -- with anticipation (a small
+       lift before the plunge), an overshoot on arrival, and a settle on the lift."""
+    specs = []
+    for i, j in enumerate(NECK):
+        amp = amp_map[j]
+        d = i * stagger
+        keys, vals = bake([
+            (0.0, 0.0, e_io),
+            (t_down * 0.42 + d, -antic * amp, e_back),   # anticipation -> plunge (overshoot)
+            (t_down + d, amp, e_io),                     # arrive
+            (t_hold + d, amp, e_io),                     # hold at the bottom
+            (t_up + d, 0.0, e_out),                      # lift back (decelerate to rest)
+            (t_settle, 0.0, e_lin),
+        ])
+        if bob and j == "skull":                         # moving hold: gentle head bob
+            keys, vals = hold_bob(keys, vals, t_down + d, t_hold + d, bob, 2)
+        specs.append((j, keys, vals, AX))
+    return specs
 
 if SCENE == "meadow":
-    CYCLE = 6.0
-    DIP_KEY = [0.0, 0.1, 0.25, 0.62, 0.78, 1.0]
-    # NEGATIVE pitch about +X lowers the muzzle toward the grass. Sum ~ -1.6 rad.
+    CYCLE = 7.0                                          # a touch slower -> reads heavier
     NECK_PITCH = {"neck_c1": -0.30, "neck_c2": -0.45, "neck_c3": -0.50, "skull": -0.35}
 
     def rot_specs():
-        specs = [(j, DIP_KEY, [0, p * 0.35, p, p, 0.0, 0.0], AX)
-                 for j, p in NECK_PITCH.items()]
-        ck, cv = chew_keys()
-        specs.append(("mandible", ck, cv, AX))
-        specs.append(("l_ear", [0, 0.4, 0.45, 0.5, 1.0], [0, 0, 0.5, 0, 0], AX))
-        specs.append(("tail_1", [0, 0.3, 0.5, 0.7, 1.0], [0, 0.2, -0.2, 0.2, 0], (0, 1, 0)))
+        specs = neck_arc(NECK_PITCH, t_down=0.28, t_hold=0.56, t_up=0.74, t_settle=0.96,
+                         stagger=0.05, antic=0.12, bob=0.04)
+        specs.append(("mandible", *chew(0.30, 0.58, 6, -0.32), AX))
+        # secondary action: ear flick (snappy, overshoot) + tail sway (lagging arc)
+        specs.append(("l_ear", *bake([(0, 0, e_io), (0.40, 0, e_io), (0.46, 0.5, e_back),
+                                      (0.54, 0, e_out), (1.0, 0, e_lin)], spp=5), AX))
+        specs.append(("tail_1", *bake([(0, 0, e_io), (0.32, 0.18, e_io), (0.58, -0.15, e_io),
+                                       (0.80, 0.10, e_io), (1.0, 0, e_io)], spp=5), (0, 1, 0)))
         return specs
 
-    BODY_KEY = DIP_KEY
-    BODY_KV = [[0, 0, 0], [0, -0.01, -0.02], [0, -0.03, -0.05],
-               [0, -0.03, -0.05], [0, 0, 0], [0, 0, 0]]
+    BODY_KEY, BODY_KV = bake([                            # eased weight-shift down
+        (0.0, [0, 0, 0], e_io), (0.30, [0, -0.035, -0.05], e_io),
+        (0.56, [0, -0.035, -0.05], e_io), (0.78, [0, 0, 0], e_out), (1.0, [0, 0, 0], e_lin)])
 else:  # lake dive
-    CYCLE = 10.0
-    # surface(0) -> plunge head & sink to bottom (0.28-0.55, browse bulbs) ->
-    # rise & level (0.72) -> head breaks surface, shake (0.88) -> settle
-    DIVE_KEY = [0.0, 0.12, 0.28, 0.55, 0.72, 0.88, 1.0]
+    CYCLE = 11.0
     NECK_PITCH = {"neck_c1": -0.30, "neck_c2": -0.46, "neck_c3": -0.50, "skull": -0.40}
-    # head-down plunge: the neck bend + body tilt reach the bottom; only a small
-    # whole-figure sink (feet stay near the bed, no clipping through the floor).
-    ROOT_PITCH = [0.0, -0.22, -0.70, -0.72, -0.26, 0.05, 0.0]
-    BODY_KEY = DIVE_KEY
-    BODY_KV = [[0, 0, 0], [0, -0.10, -0.06], [0, -0.26, -0.12], [0, -0.26, -0.12],
-               [0, -0.12, -0.06], [0, 0.03, 0], [0, 0, 0]]      # gentle sink + back
 
     def rot_specs():
-        specs = [(j, DIVE_KEY, [0, p * 0.30, p, p, p * 0.45, 0.0, 0.0], AX)
-                 for j, p in NECK_PITCH.items()]
-        specs.append(("moose_root", DIVE_KEY, ROOT_PITCH, AX))    # whole-body dive tilt
-        # browse the bulbs at the bottom (chews during 0.30-0.55)
-        ck, cv = [0.0], [0.0]
-        k, v = osc_keys(0.30, 0.55, 6, -0.34); ck += k; cv += v
-        ck.append(1.0); cv.append(0.0)
-        specs.append(("mandible", ck, cv, AX))
-        specs.append(("l_ear", [0, 0.85, 0.9, 0.95, 1.0], [0, 0, 0.6, 0, 0], AX))
-        specs.append(("tail_1", [0, 0.3, 0.6, 1.0], [0, 0.15, -0.15, 0], (0, 1, 0)))
+        specs = neck_arc(NECK_PITCH, t_down=0.30, t_hold=0.55, t_up=0.74, t_settle=0.96,
+                         stagger=0.05, antic=0.14, bob=0.03)
+        # whole-body dive tilt: anticipatory coil (head rises a touch) -> plunge
+        # with overshoot -> hold head-down -> level out
+        specs.append(("moose_root", *bake([
+            (0.0, 0.0, e_io), (0.16, 0.06, e_back), (0.32, -0.72, e_io),
+            (0.55, -0.72, e_io), (0.76, 0.0, e_out), (1.0, 0.0, e_lin)]), AX))
+        specs.append(("mandible", *chew(0.32, 0.55, 5, -0.34), AX))
+        specs.append(("l_ear", *bake([(0, 0, e_io), (0.82, 0, e_io), (0.88, 0.6, e_back),
+                                      (0.95, 0, e_out), (1.0, 0, e_lin)], spp=5), AX))
+        specs.append(("tail_1", *bake([(0, 0, e_io), (0.30, 0.15, e_io), (0.60, -0.15, e_io),
+                                       (1.0, 0, e_io)], spp=5), (0, 1, 0)))
         return specs
+
+    BODY_KEY, BODY_KV = bake([                            # anticipatory coil then sink
+        (0.0, [0, 0, 0], e_io), (0.16, [0, 0.03, 0], e_io), (0.32, [0, -0.26, -0.12], e_io),
+        (0.55, [0, -0.26, -0.12], e_io), (0.76, [0, 0, 0], e_out), (1.0, [0, 0, 0], e_lin)])
 
 def _sample(key, vals, f):
     if f <= key[0]:
