@@ -8,3 +8,6 @@ build/
 .venv/
 tools_x3d/*.jar
 .DS_Store
+
+# session chatlogs (local record, not for the shared repo)
+sessions/
