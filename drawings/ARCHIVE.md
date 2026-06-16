@@ -56,6 +56,13 @@ Catalogue is machine-readable in `archive.json`.
 > (Pls. 50-51) is published only as **photographs**, so the genuine published *line
 > drawing* of the type animal is its **dental** Text Fig. 1. The Shasta ground sloth,
 > by contrast, has a full lateral **skeletal** line drawing.
+>
+> **3-D:** the three traces are assembled into an X3D archive plate,
+> `fauna_plate.x3d` (`fauna_to_x3d.py` → IndexedLineSet, viewable in X_ITE;
+> preview `fauna_plate_preview.png`). Each bay is shown legibly with its citation
+> and **true dimension stated in words** — we deliberately do *not* stand a full
+> sloth *skeleton* beside isolated *skulls* on one to-scale baseline, which would
+> compare wholes against parts and mislead.
 
 ### F1 - *Euceratherium collinum* (shrub-ox) - left superior dental series
 - **Original:** Sinclair, W.J. & Furlong, E.L. (1904) *Euceratherium, a new ungulate
