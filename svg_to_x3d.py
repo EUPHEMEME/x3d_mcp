@@ -13,6 +13,7 @@ from svgpathtools import svg2paths
 
 SVG, OUT, REAL_W = sys.argv[1], sys.argv[2], float(sys.argv[3])
 TITLE = sys.argv[4] if len(sys.argv) > 4 else ""
+SOURCE = sys.argv[5] if len(sys.argv) > 5 else TITLE   # full citation for the archive
 
 raw = open(SVG).read()
 # potrace wraps everything in <g transform="translate(tx,ty) scale(sx,sy)">
@@ -73,6 +74,8 @@ x3d = f"""<?xml version="1.0" encoding="UTF-8"?>
 <head>
 <meta name="title" content="{TITLE}"/>
 <meta name="description" content="Documented line model traced from the original survey drawing; geometry to scale ({W_ft:.0f} x {H_ft:.0f} ft)."/>
+<meta name="source" content="{SOURCE}"/>
+<meta name="rights" content="Trace of a public-domain survey drawing; faithful reproduction, no AI imagery."/>
 </head>
 <Scene>
 <Background skyColor="1 1 1"/>
