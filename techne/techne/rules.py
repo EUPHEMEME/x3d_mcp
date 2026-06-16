@@ -52,6 +52,31 @@ NONDEFAULT_SLOTS = {
                  "ambientTexture"},
 }
 
+# Texture node types that route into a material's texture *slot* (not the default
+# 'texture' container, which PBR/unlit materials do not define).
+TEXTURE_NODES = {"ImageTexture", "PixelTexture", "MovieTexture"}
+
+# The legal texture slots per material type. With several legal slots, Technē
+# cannot guess WHICH (baseTexture vs normalTexture is intent) — it blocks + lists.
+MATERIAL_TEXTURE_SLOTS = {
+    "PhysicalMaterial": ["baseTexture", "emissiveTexture", "normalTexture",
+                         "occlusionTexture", "metallicRoughnessTexture"],
+    "UnlitMaterial": ["emissiveTexture"],
+    "Material": ["diffuseTexture", "emissiveTexture", "normalTexture",
+                 "occlusionTexture", "specularTexture", "shininessTexture",
+                 "ambientTexture"],
+}
+
+# Legal non-default slots for a child placed directly under an HAnimHumanoid,
+# keyed by child node type.
+HUMANOID_SLOTS = {
+    "HAnimJoint": ["skeleton", "joints"],
+    "HAnimSegment": ["segments"],
+    "HAnimSite": ["sites", "viewpoints"],
+    "Coordinate": ["skinCoord"],
+    "Normal": ["skinNormal"],
+}
+
 # Interpolator value-components per key (keyValue length must == len(key) * this).
 INTERP_COMPONENTS = {
     "OrientationInterpolator": 4,      # SFRotation
@@ -80,6 +105,20 @@ CATALOG = {
         "Node '{node_type}' in field '{field}' has containerField='{got}', but it "
         "must equal the field it is placed in: set containerField='{field}'. "
         "(x3d.py Bug 1: containerField must match the slot.)",
+        "docs/x3dpy-bug-report.md#bug-1",
+    ),
+    "container_field_required": (
+        HARD,
+        "Adding '{child}' to '{parent}' needs an explicit containerField, but none "
+        "was given — it would default to '{default}', which '{parent}' does not "
+        "define as a field, so the child is silently dropped. Specify "
+        "containerField as one of: {slots}. (x3d.py Bug 1.)",
+        "docs/x3dpy-bug-report.md#bug-1",
+    ),
+    "container_field_invalid_slot": (
+        HARD,
+        "containerField='{got}' is not a legal slot for '{child}' in '{parent}'. "
+        "Use one of: {slots}. (x3d.py Bug 1.)",
         "docs/x3dpy-bug-report.md#bug-1",
     ),
     "envlight_global_set": (

@@ -10,11 +10,12 @@ is the craft.
 (cognate with text/texture) — the weaving of disparate elements into an ordered
 whole. A scene graph, literally.
 """
-from .craft import (CraftResult, check_container_field, check_envlight_global,
-                    check_interpolator, check_use_after_def, advise_texture_url,
-                    merge, MISSING)
+from .craft import (CraftResult, check_container_field, check_placement,
+                    legal_slots, check_envlight_global, check_interpolator,
+                    check_use_after_def, advise_texture_url, merge, MISSING)
 from . import rules
 
-__all__ = ["CraftResult", "check_container_field", "check_envlight_global",
-           "check_interpolator", "check_use_after_def", "advise_texture_url",
-           "merge", "MISSING", "rules"]
+__all__ = ["CraftResult", "check_container_field", "check_placement",
+           "legal_slots", "check_envlight_global", "check_interpolator",
+           "check_use_after_def", "advise_texture_url", "merge", "MISSING",
+           "rules"]

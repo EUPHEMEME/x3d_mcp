@@ -74,6 +74,57 @@ def check_container_field(node_type: str, parent_field: str, parent_type: str,
     return r
 
 
+# --- mode 1b: slot-based placement (the real add_child path) ---------------
+
+def legal_slots(parent_type: str, child_type: str) -> list[str] | None:
+    """The legal non-default containerField slots for placing child under parent,
+    or None if this combination has no known non-default rule."""
+    if (parent_type in rules.MATERIAL_TEXTURE_SLOTS
+            and child_type in rules.TEXTURE_NODES):
+        return rules.MATERIAL_TEXTURE_SLOTS[parent_type]
+    if parent_type == "HAnimHumanoid" and child_type in rules.HUMANOID_SLOTS:
+        return rules.HUMANOID_SLOTS[child_type]
+    return None
+
+
+def check_placement(parent_type: str, child_type: str, container_field: Any,
+                    args: dict, cf_key: str = "container_field") -> CraftResult:
+    """Validate an add_child-style placement (child referenced into a parent).
+
+    REPAIR only when there is exactly one legal slot (no intent to guess);
+    otherwise BLOCK and list the legal slots — Technē refuses to pick baseTexture
+    vs normalTexture for the model.
+    """
+    r = CraftResult(repaired=dict(args))
+    valid = legal_slots(parent_type, child_type)
+    if not valid:
+        return r
+    cf = container_field
+    if cf in valid:
+        return r                                     # explicitly correct
+    if cf in (None, MISSING, ""):
+        default = rules.DEFAULT_CONTAINER.get(child_type, "children")
+        if len(valid) == 1:
+            r.repaired[cf_key] = valid[0]
+            r.notes.append("Technē set containerField='%s'. " % valid[0]
+                           + rules.correction("container_field_required",
+                             child=child_type, parent=parent_type, default=default,
+                             slots=", ".join(valid)))
+            r.applied.append("container_field_required")
+        else:
+            r.corrections.append(rules.correction(
+                "container_field_required", child=child_type, parent=parent_type,
+                default=default, slots=", ".join(valid)))
+            r.applied.append("container_field_required")
+    else:
+        # a containerField was given but it is not a legal slot here
+        r.corrections.append(rules.correction(
+            "container_field_invalid_slot", got=cf, child=child_type,
+            parent=parent_type, slots=", ".join(valid)))
+        r.applied.append("container_field_invalid_slot")
+    return r
+
+
 # --- mode 2: EnvironmentLight.global (Bug 2) -------------------------------
 
 def check_envlight_global(global_value: Any, args: dict) -> CraftResult:
