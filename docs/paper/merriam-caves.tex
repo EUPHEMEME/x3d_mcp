@@ -231,6 +231,36 @@ triangulated into a floor surface (coloured by elevation). The chamber floor is 
 long, shallow ribbon, so the relief ($\sim\pm2$\,ft over 107\,ft) is shown with
 $8\times$ vertical exaggeration.}
 
+\paragraph{Documented fauna.} The same trace-don't-invent rule extends to the
+animals the caves are famous for. Rather than generate plausible-looking
+creatures, we located the \emph{original published anatomical drawings} of the
+excavated taxa and vectorised them with the identical pipeline, each carrying its
+full citation. Three are traced (Fig.~\ref{fig:fauna_plate}): the Shasta ground
+sloth \emph{Nothrotheriops shastensis} as a complete lateral skeleton (Stock
+1925~[17], Fig.~4), the dire wolf \emph{Canis dirus} as a lateral skull (Merriam
+1912~[18], text-fig.~1), and the shrub-ox \emph{Euceratherium collinum} ---
+described from Potter Creek itself --- as its upper dental series (Sinclair
+\& Furlong 1904~[13], Text Fig.~1). The provenance discipline did real work here too:
+the \emph{Euceratherium} type cranium is published only as halftone
+\emph{photographs} (Pls.~50--51), so the genuine published \emph{line drawing} of
+the type animal is the dental figure, not a skull; and the short-faced bear
+\emph{Arctodus simus} is omitted entirely, because its material was figured only
+photographically and no line drawing exists to trace. The three traces are
+assembled into an X3D archive plate (\texttt{fauna\_to\_x3d.py}), shown as a
+legible gallery in which each bay states its citation and \emph{true dimension in
+words} --- we deliberately avoid standing a whole sloth skeleton beside isolated
+skulls on one to-scale baseline, which would compare wholes against parts and
+mislead. A machine-readable catalogue (\texttt{archive.json}) and a B\&W
+presentation sheet accompany the set.
+
+\fig{fauna_plate}{0.98}{The documented fauna plate: faithful vector traces of the
+original published drawings of the excavated megafauna --- \emph{Nothrotheriops
+shastensis} (Stock 1925), \emph{Canis dirus} (Merriam 1912), and the
+Potter-Creek-type \emph{Euceratherium collinum} (Sinclair \& Furlong 1904) ---
+assembled into a navigable X3D \texttt{IndexedLineSet} gallery. Each bay is
+captioned with its source and real size; no AI imagery is used anywhere in the
+archive.}
+
 \section{The render loop and the X3D MCP server}
 
 Our governing practice is \emph{verify by render}: a scene that passes both the
@@ -312,14 +342,16 @@ features and the contested gloss of \emph{sawal}.}
 \section{Ideas and future work}
 
 \begin{itemize}[leftmargin=1.4em]
-\item \textbf{Populate the caves with their fauna} (planned, hybrid). Keeping the
-provenance discipline, the documented move is to pin the excavated assemblage ---
-\emph{Euceratherium}, the short-faced bear, the Shasta ground sloth, dire wolf,
-mammoth --- to its \emph{recorded depths} as labelled bone-horizon markers in the
-section and topography (the deposits and finds are documented). One hero
-reconstruction, the type \emph{Euceratherium collinum}, posed in the chamber and
-flagged interpretive, would supply the living counterpart --- reusing the rigged-
-creature pipeline built for a moose.
+\item \textbf{Place the documented fauna in the caves} (begun). The first,
+documented step is now done: the excavated taxa are traced from their original
+anatomical drawings and assembled into the archive plate above
+(Fig.~\ref{fig:fauna_plate}). The remaining, partly interpretive step is to pin
+that assemblage to its \emph{recorded depths} as labelled bone-horizon markers in
+the section and topography (the deposits and finds are documented), and to pose
+one hero --- the Potter-Creek-type \emph{Euceratherium collinum}, or the
+full-skeleton Shasta ground sloth --- in the chamber, flagged interpretive, as the
+living counterpart, reusing the rigged-creature pipeline built for a moose. Still
+to trace: the mammoth (Osborn 1942) and \emph{Camelops}.
 \item \textbf{Ground-truth from the field.} An in-person visit to Samwel could
 supply photographs of the real chambers and formations, replacing estimated room
 sizes and invented dripstone with measured shapes --- closing the interpretive gap
@@ -416,6 +448,10 @@ Cave. \emph{Radiocarbon} 49(1):117--121.
 Potter Creek Cave. \emph{J. California Anthropology} 3(1):51--58.
 \bibitem{sinclair05} W.~J.~Sinclair (1905) New Mammalia from the Quaternary caves
 of California. \emph{Univ. Calif. Publ. Geol.} 4:145--161.
+\bibitem{stock25} C.~Stock (1925) \emph{Cenozoic gravigrade edentates of western
+North America}. Carnegie Institution of Washington, Publ.~331.
+\bibitem{merriam12} J.~C.~Merriam (1912) The fauna of Rancho La Brea, Part~II:
+Canidae. \emph{Mem. Univ. California} 1(2):217--272.
 \end{thebibliography}
 
 \end{document}
