@@ -19,5 +19,9 @@ drawings/pcc_plan-*.png
 drawings/feranec_p2-2.png
 drawings/pcc_xsec_plate12.svg
 drawings/pcc_xsec_plate13.svg
+# fauna trace intermediates (large; SVG trace + _preview kept, rest regenerable)
+drawings/fauna/*_src.jpg
+drawings/fauna/*_crop.png
+drawings/fauna/*_traced.png
 potter_creek_plan.x3d
 potter_creek_floor.x3d
