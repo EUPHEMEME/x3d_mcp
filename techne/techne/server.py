@@ -77,12 +77,20 @@ def tag_tools(tools: list) -> list:
 
 
 async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
-                           arguments: dict | None) -> list:
-    """The decision + forward + relay logic for one tool call (testable core)."""
+                           arguments: dict | None) -> "types.CallToolResult":
+    """The decision + forward + relay logic for one tool call (testable core).
+
+    Returns a CallToolResult directly so the SDK passes it through untouched —
+    relaying the upstream's structuredContent (real FastMCP tools declare an
+    outputSchema, so content-only would fail validation) and isError, while
+    appending Technē notes / the blank-gate warning. A BLOCK is an isError result
+    carrying the prescriptive correction."""
     decision = proxy.decide(name, arguments or {})
     if decision.blocked:
-        return [types.TextContent(type="text",
-                                  text=proxy.correction_message(decision))]
+        return types.CallToolResult(
+            content=[types.TextContent(
+                type="text", text=proxy.correction_message(decision))],
+            isError=True)
     result = await upstream.call_tool(name, decision.args)
     proxy.observe_result(decision, _text_of(result))
     content = list(getattr(result, "content", None) or [])
@@ -93,7 +101,10 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
         warn = _blank_warning(result)
         if warn:
             content.append(types.TextContent(type="text", text=warn))
-    return content
+    return types.CallToolResult(
+        content=content,
+        structuredContent=getattr(result, "structuredContent", None),
+        isError=bool(getattr(result, "isError", False)))
 
 
 async def run(upstream_cmd: list[str]) -> None:
@@ -115,8 +126,10 @@ async def run(upstream_cmd: list[str]) -> None:
             async def list_tools() -> list:
                 return tag_tools((await upstream.list_tools()).tools)
 
-            @server.call_tool()
-            async def call_tool(name: str, arguments: dict | None) -> list:
+            # validate_input=False: Technē must see the model's RAW args so its
+            # SAP repair can run; the upstream server does its own validation.
+            @server.call_tool(validate_input=False)
+            async def call_tool(name: str, arguments: dict | None):
                 return await handle_call_tool(proxy, upstream, name, arguments)
 
             async with stdio_server() as (r, w):

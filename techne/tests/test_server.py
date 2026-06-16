@@ -82,7 +82,7 @@ def test_blocked_call_never_forwards():
                {"parent_id": "physicalmaterial_1", "child_id": "imagetexture_2",
                 "container_field": ""}))
     assert len(up.calls) == before                          # add_child NOT forwarded
-    assert "baseTexture" in out[0].text                     # prescriptive correction
+    assert out.isError and "baseTexture" in out.content[0].text                     # prescriptive correction
 
 
 # --- repaired forward + relay + state ---------------------------------------
@@ -94,7 +94,7 @@ def test_envlight_repaired_forward_relays_note_and_commits_state():
     # forwarded with global repaired to True
     assert up.calls[-1][1]["fields"]["global"] is True
     # the upstream content is relayed, plus a Technē note
-    assert any("Technē" in getattr(b, "text", "") for b in out)
+    assert any("Technē" in getattr(b, "text", "") for b in out.content)
     # state committed from the (successful) result
     assert p.state.id_to_type.get("environmentlight_1") == "EnvironmentLight"
 
@@ -105,11 +105,11 @@ def test_blank_render_appends_warning():
     p, up = TechneProxy(), FakeUpstream()
     up.render = _png(solid=True)                            # blank
     out = _run(handle_call_tool(p, up, "render_image", {"path": "s.x3d"}))
-    assert any("BLANK" in getattr(b, "text", "") for b in out)
+    assert any("BLANK" in getattr(b, "text", "") for b in out.content)
 
 
 def test_non_blank_render_no_warning():
     p, up = TechneProxy(), FakeUpstream()
     up.render = _png(solid=False)                           # has geometry
     out = _run(handle_call_tool(p, up, "render_image", {"path": "s.x3d"}))
-    assert not any("BLANK" in getattr(b, "text", "") for b in out)
+    assert not any("BLANK" in getattr(b, "text", "") for b in out.content)
