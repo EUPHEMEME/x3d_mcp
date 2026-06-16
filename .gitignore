@@ -11,3 +11,9 @@ tools_x3d/*.jar
 
 # session chatlogs (local record, not for the shared repo)
 sessions/
+
+# cave drawing sources (large; reproducible via trace_drawing.sh)
+drawings/ucp002-003.pdf
+drawings/*_traced.png
+drawings/pcc_plan-*.png
+drawings/feranec_p2-2.png
