@@ -261,6 +261,42 @@ assembled into a navigable X3D \texttt{IndexedLineSet} gallery. Each bay is
 captioned with its source and real size; no AI imagery is used anywhere in the
 archive.}
 
+\paragraph{Bone horizons --- where provenance does the hardest work.} The most
+tempting place to invent is the join between the deposit and its fauna: a viewer
+\emph{wants} to see each beast at its depth. The sources mostly forbid it, and
+saying so precisely is the contribution. We distilled the primary stratigraphic
+literature --- Sinclair (1904), Payen \& Taylor (1976), Feranec et al.\ (2007) ---
+into a cited spec (\texttt{strata\_spec.json}) and built two section scenes from it
+(\texttt{generate\_fauna\_strata.py}). For \textbf{Potter Creek}
+(Fig.~\ref{fig:pcc_strata}) we render Sinclair's documented NW-fan column to scale
+(strata S,A,B,C,D,E,F,G,H in feet) but pin a taxon to a layer only where a depth is
+actually recorded: the \emph{Euceratherium} radius and ulna at 170\,cm
+(8250$\pm$330\,$^{14}$C\,BP, the first direct date on the species; Payen \& Taylor
+1976), the polished ``bone implements'' at 80--140\,in whose \emph{human origin is
+refuted}, the late-Holocene flake, and the cultural midden. The rest of the
+52-species assemblage gets one honest marker spanning the bone-bearing clay and
+breccia, quoting Sinclair directly: ``No distinction is to be drawn between the
+collections from the different layers \ldots the fauna listed is a unit'' (p.~19).
+The Shasta ground sloth --- a real traced skeleton, but with no recorded provenance
+--- therefore stands \emph{beside} the column at life size, flagged interpretive and
+unprovenanced, never embedded in a stratum. \textbf{Samwel}
+(\texttt{samwel\_strata.x3d}) is the counter-case: Feranec et al.'s four AMS-dated
+Chamber-Two specimens \emph{do} carry real square-and-inch levels, so they are
+pinned --- but the scene's title is ``depth is not age,'' because the deposit is not
+chronologically stratified (the shallower \emph{Lepus} is older than the deeper
+\emph{Aplodontia}). The discipline is the same in both: the geometry shows exactly
+what the record supports, and labels the seam where it stops.
+
+\fig{pcc_strata}{0.99}{Potter Creek bone-horizon section (interpretive hero at left,
+documented column at centre, cited depth-callouts at right). Sinclair's strata are
+drawn to scale; fauna are pinned only at documented depths (the 170\,cm
+\emph{Euceratherium} date; the depth-documented but human-origin-\emph{refuted}
+polished bone). The mixed assemblage is a single bracketed marker quoting Sinclair's
+``the fauna listed is a unit'' (p.~19); the ground-sloth skeleton (Stock 1925) is
+flagged interpretive and unprovenanced, standing beside --- never inside --- the
+deposit. Thicknesses are Sinclair's ``greatest'' values, so the stacked depths are a
+render composite, which the legend states.}
+
 \section{The render loop and the X3D MCP server}
 
 Our governing practice is \emph{verify by render}: a scene that passes both the
@@ -342,16 +378,13 @@ features and the contested gloss of \emph{sawal}.}
 \section{Ideas and future work}
 
 \begin{itemize}[leftmargin=1.4em]
-\item \textbf{Place the documented fauna in the caves} (begun). The first,
-documented step is now done: the excavated taxa are traced from their original
-anatomical drawings and assembled into the archive plate above
-(Fig.~\ref{fig:fauna_plate}). The remaining, partly interpretive step is to pin
-that assemblage to its \emph{recorded depths} as labelled bone-horizon markers in
-the section and topography (the deposits and finds are documented), and to pose
-one hero --- the Potter-Creek-type \emph{Euceratherium collinum}, or the
-full-skeleton Shasta ground sloth --- in the chamber, flagged interpretive, as the
-living counterpart, reusing the rigged-creature pipeline built for a moose. Still
-to trace: the mammoth (Osborn 1942) and \emph{Camelops}.
+\item \textbf{Place the documented fauna in the caves} (done; see
+Fig.~\ref{fig:pcc_strata}). The taxa are traced from their original drawings
+(Fig.~\ref{fig:fauna_plate}) and the bone-horizon section scenes now pin them at
+documented depths with an interpretive sloth hero flagged beside the column. Next
+is to fold these markers into the immersive PBR cave itself and to animate a hero
+with the rigged-creature pipeline built for a moose. Still to trace: the mammoth
+(Osborn 1942) and \emph{Camelops}.
 \item \textbf{Ground-truth from the field.} An in-person visit to Samwel could
 supply photographs of the real chambers and formations, replacing estimated room
 sizes and invented dripstone with measured shapes --- closing the interpretive gap

@@ -54,6 +54,29 @@
       ]
     },
     {
+      "id": "A6",
+      "subject": "Potter Creek Cave — bone-horizon section + interpretive hero (derived)",
+      "citation": "Sinclair 1904 (NW-fan column S–H + the faunal 'unit', p.19); Payen & Taylor 1976 (Euceratherium radius+ulna at 170 cm, 8250±330 BP, UCR-381; polished 'bone tools' human origin refuted, p.56).",
+      "source_url": "see A1; Payen & Taylor 1976, J. Calif. Anthropology 3(1):51-58 (eScholarship qt8zs315nk)",
+      "public_domain": true,
+      "trace": "derived; grounding in strata_spec.json",
+      "x3d": [
+        "potter_creek_strata.x3d"
+      ],
+      "note": "Fauna pinned ONLY where documented; mixed assemblage shown as one 'throughout, not depth-sorted' marker; sloth hero flagged interpretive/unprovenanced."
+    },
+    {
+      "id": "A7",
+      "subject": "Samwel Cave — per-specimen dated levels, 'depth != age' (derived)",
+      "citation": "Feranec, Hadly, Blois, Barnosky & Paytan (2007) Radiocarbon 49(1):117-121, Table 2 (four Chamber-Two AMS dates at real square+inch levels; deposit not chronologically stratified).",
+      "source_url": "https://ib.berkeley.edu/labs/barnosky/feranec%20et%20al.%202007-2.pdf",
+      "public_domain": true,
+      "trace": "derived; grounding in strata_spec.json",
+      "x3d": [
+        "samwel_strata.x3d"
+      ]
+    },
+    {
       "id": "F1",
       "subject": "Euceratherium collinum (shrub-ox) — left superior dental series",
       "citation": "Sinclair, W.J. & Furlong, E.L. (1904) Euceratherium, a new ungulate from the Quaternary caves of California, Text Fig. 1 (\"Left superior dental series, x1/3\"). Univ. Calif. Bull. Dept. Geol. 3(20):411-418. Type locality: Potter Creek Cave (type cranium UCMP 8751). [Pls. 50-51 are halftone photographs, not line drawings.]",

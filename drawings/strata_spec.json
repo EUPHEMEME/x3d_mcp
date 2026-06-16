@@ -1,0 +1,315 @@
+{
+  "potter_creek_column": [
+    {
+      "name": "S — Surface stalagmite crust",
+      "lithology": "Thin stalagmitic flowstone (cave-onyx) crust draping the deposit top; on west margin a thin stalagmite sheet (usually 0.5-1 inch).",
+      "top_ft": 0,
+      "bottom_ft": 0.1,
+      "bone_bearing": false,
+      "documented": true,
+      "color_hint": "0.85 0.83 0.78",
+      "citation": "Sinclair 1904 Pl.12/13 legend 'S—Surface stalagmite'; p.5 (thin stalagmite sheet 0.5-1 in on west margin)"
+    },
+    {
+      "name": "A — Clay with gravel lenses (upper clay)",
+      "lithology": "Dull yellow clay approaching red when wet (like the hillside soil), abundant angular blue-limestone fragments + roof stalactite pieces; two lenticular gravel sheets within.",
+      "top_ft": 0.1,
+      "bottom_ft": 13.5,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.62 0.48 0.30",
+      "citation": "Sinclair 1904 p.5 'A. Clay with gravel lenses, greatest depth 13.5 feet.'"
+    },
+    {
+      "name": "B — Persistent limestone gravel",
+      "lithology": "Angular, drip-worn limestone gravel washed from the clay by roof-drip; locally coincides with stalagmite sheets.",
+      "top_ft": 13.5,
+      "bottom_ft": 15,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.55 0.55 0.52",
+      "citation": "Sinclair 1904 p.5 'B. Persistent gravel stratum, 6 inches to 1.5 feet.'; p.6"
+    },
+    {
+      "name": "C — Volcanic ash",
+      "lithology": "Fine pale-straw volcanic glass, thin-bedded (deposited in standing water), part stained ochreous by limonite. CONTAINS NO BONES.",
+      "top_ft": 15,
+      "bottom_ft": 16.5,
+      "bone_bearing": false,
+      "documented": true,
+      "color_hint": "0.86 0.82 0.66",
+      "citation": "Sinclair 1904 p.5 'C. Volcanic ash, 0 to 1.5 feet.'; p.6; p.11 (no bones in ash)"
+    },
+    {
+      "name": "D — Clay with fallen limestone blocks",
+      "lithology": "Clay like upper A (inseparable beyond ash limits), with limestone boulders, hardened by stalagmitic material.",
+      "top_ft": 16.5,
+      "bottom_ft": 19.5,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.60 0.46 0.30",
+      "citation": "Sinclair 1904 p.5 'D. Clay with fallen limestone blocks, 0 to 3 feet.'; p.7"
+    },
+    {
+      "name": "E — Cemented breccia ('false floor')",
+      "lithology": "Yellow clay + numerous limestone fragments cemented by stalagmite into a compact breccia too hard to dig without blasting; 1902 excavation halted here. This is the principal bone-bearing cemented breccia.",
+      "top_ft": 19.5,
+      "bottom_ft": 22,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.58 0.50 0.40",
+      "citation": "Sinclair 1904 p.5 'E. Clay and gravel cemented with stalagmite (false floor), 6 inches to 2.5 feet.'; p.7"
+    },
+    {
+      "name": "F — Soft yellow clay",
+      "lithology": "Soft yellow clay beneath the false floor; not constant, disappears to SE where E rests directly on stalagmite bosses.",
+      "top_ft": 22,
+      "bottom_ft": 26,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.70 0.58 0.34",
+      "citation": "Sinclair 1904 p.5 'F. Soft clay, maximum thickness 4 feet.'; p.7"
+    },
+    {
+      "name": "G — Stalagmite blocks in clay matrix (with chocolate-mud lenses)",
+      "lithology": "Large loose yellow-calcite blocks in clay matrix, locally cemented; deep floor basins filled with stratified soft chocolate-colored mud (pool deposit). Chocolate mud CONTAINS NO BONES; greatest depth NOT determined (open-ended base).",
+      "top_ft": 26,
+      "bottom_ft": 31,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.40 0.30 0.22",
+      "citation": "Sinclair 1904 p.5 'G. Stalagmite blocks in clay matrix, greatest depth not determined.'; p.7. NOTE: base is open-ended/undetermined — 31.0 ft is a NOMINAL render floor, not a measured depth."
+    },
+    {
+      "name": "H — Stalagmite bosses (cave floor)",
+      "lithology": "Massive white stalagmite bosses (not a sheet) with deep depressions between, mantling the limestone; the rock floor on which all clastic deposits accumulated. Cope's Arctotherium simum TYPE skull (Richardson 1878) was in the stalagmite floor of the main chamber — a surface/floor occurrence, NO measured depth.",
+      "top_ft": 31,
+      "bottom_ft": 33,
+      "bone_bearing": false,
+      "documented": true,
+      "color_hint": "0.88 0.86 0.80",
+      "citation": "Sinclair 1904 p.5 'H. Stalagmite bosses—cave floor.'; p.8; pp.2,4 (type skull in stalagmite floor). Below H: Carboniferous McCloud limestone bedrock."
+    }
+  ],
+  "samwel_column": [
+    {
+      "name": "Reddish clay (cap)",
+      "lithology": "Thin layer of reddish clay capping the column (no cm thickness stated).",
+      "top_cm": 0,
+      "bottom_cm": 1,
+      "bone_bearing": false,
+      "documented": true,
+      "color_hint": "0.55 0.34 0.26",
+      "citation": "Feranec et al. 2007 p.118 (Furlong 1906); thickness not given — 0-1 cm is nominal."
+    },
+    {
+      "name": "Flowstone (cap)",
+      "lithology": "Flowstone crust.",
+      "top_cm": 1,
+      "bottom_cm": 4,
+      "bone_bearing": false,
+      "documented": true,
+      "color_hint": "0.82 0.80 0.74",
+      "citation": "Feranec et al. 2007 p.118 'capped by a flowstone (3 cm)'"
+    },
+    {
+      "name": "Gravel",
+      "lithology": "Gravel (10-45 cm; 45 cm = maximum used here).",
+      "top_cm": 4,
+      "bottom_cm": 49,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.56 0.54 0.50",
+      "citation": "Feranec et al. 2007 p.118 'covered by gravel (10-45 cm)'. Bone-bearing flag is interpretive overlay: dated specimens are tagged by square+inch, NOT mapped to this named unit."
+    },
+    {
+      "name": "Breccia",
+      "lithology": "Breccia, 60 cm, overlying the lower flowstone.",
+      "top_cm": 49,
+      "bottom_cm": 109,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.58 0.50 0.42",
+      "citation": "Feranec et al. 2007 p.118 'Breccia overlays the flowstone (60 cm)'. Bone-bearing flag interpretive (see note)."
+    },
+    {
+      "name": "Flowstone (lower)",
+      "lithology": "Flowstone, 2.5-10 cm (10 cm max used).",
+      "top_cm": 109,
+      "bottom_cm": 119,
+      "bone_bearing": false,
+      "documented": true,
+      "color_hint": "0.80 0.78 0.72",
+      "citation": "Feranec et al. 2007 p.118 'overlain by a flowstone (2.5-10 cm)'"
+    },
+    {
+      "name": "Earth and breccia (bottommost)",
+      "lithology": "Mix of earth and breccia, 30-140 cm (140 cm max used); deepest excavation reached 2.5 m (250 cm).",
+      "top_cm": 119,
+      "bottom_cm": 259,
+      "bone_bearing": true,
+      "documented": true,
+      "color_hint": "0.46 0.38 0.30",
+      "citation": "Feranec et al. 2007 p.118 'bottommost layer is a mix of earth and breccia (30-140 cm)'; 'At its deepest, the excavation was 2.5 m.' Bone-bearing flag interpretive (see note)."
+    }
+  ],
+  "bone_horizon_markers": [
+    {
+      "label": "Fauna occur THROUGHOUT the bone-bearing clay and cemented breccia — a mixed, time-averaged talus / pitfall assemblage, NOT depth-sorted",
+      "cave": "potter_creek",
+      "layer_name": "All bone-bearing strata A,B,D,E,F,G (absent only in C volcanic ash and the chocolate-mud lens within G)",
+      "status": "documented",
+      "depth_text": "spans the whole column",
+      "taxa": [
+        "52-species assemblage (21 extinct)",
+        "Arctotherium simum",
+        "Euceratherium collinum",
+        "Nothrotheriops (Nothrotherium) shastense",
+        "Equus",
+        "Bison",
+        "mammoth (Elephas)",
+        "Camelidae"
+      ],
+      "rationale": "DECISIVE per Sinclair: 'No distinction is to be drawn between the collections from the different layers... The fauna listed is a unit' (p.19); 'Bones were found in all the strata explored excepting the volcanic ash and the chocolate-colored mud' (p.11). The published 52-species list carries NO per-taxon stratum/depth. This is the ONE honest faunal marker for Potter Creek.",
+      "citation": "Sinclair 1904 pp.11, 19"
+    },
+    {
+      "label": "Arctotherium (partial skull) + Ursus on the loose-rock SURFACE of the SE fan",
+      "cave": "potter_creek",
+      "layer_name": "SE fan surface (structureless breccia lumped as 'stratum A' in Pl.12)",
+      "status": "documented",
+      "depth_text": "surface / top of deposit",
+      "taxa": [
+        "Arctotherium",
+        "Ursus"
+      ],
+      "rationale": "One of the few depth-anchored faunal facts Sinclair gives: 'Part of the skull of an Arctotherium and some remains of Ursus lay among the loose rocks on the surface of the southeast fan' (p.11). A surface occurrence, not a measured level.",
+      "citation": "Sinclair 1904 p.11"
+    },
+    {
+      "label": "Articulated squirrels, wood-rats (Neotoma), a snake (Crotalus) and a bat in the gravel layers",
+      "cave": "potter_creek",
+      "layer_name": "B — limestone gravel (and gravel lenses in A)",
+      "status": "documented",
+      "depth_text": "gravel stratum B",
+      "taxa": [
+        "Sciuridae",
+        "Neotoma",
+        "Crotalus",
+        "Chiroptera"
+      ],
+      "rationale": "Sinclair: 'Associated parts of the skeletons of a few squirrels and wood-rats, a snake (Crotalus), and a bat were found in the gravel layers' (p.11). This is a layer-qualitative observation, not a per-taxon measured depth.",
+      "citation": "Sinclair 1904 p.11"
+    },
+    {
+      "label": "Euceratherium collinum radius+ulna IN HARD BRECCIA, 170 cm (~5.6 ft) below surface, entrance chamber — 8250±330 14C BP (UCR-381), first direct date on the species",
+      "cave": "potter_creek",
+      "layer_name": "Hard limestone breccia (ossiferous fill), entrance-chamber trench (1965)",
+      "status": "documented",
+      "depth_text": "170 cm (~5.58 ft) below surface",
+      "taxa": [
+        "Euceratherium collinum"
+      ],
+      "rationale": "The single genuinely depth-and-date-anchored megafaunal specimen at Potter Creek: 'bone collagen from the distal ends of a Euceratherium radius and ulna found imbedded in breccia 170 cm. below the surface in the entrance chamber' (Payen & Taylor p.55). Distinct from Sinclair's NW-fan lettered strata — it is from the 1965 entrance-chamber trench.",
+      "citation": "Payen & Taylor 1976 p.55 (UCR-381)"
+    },
+    {
+      "label": "Polished/bevelled bone pieces at depth (M3894 Sec.33, 80-90 in; M3982 Sec.20, 130-140 in; M3997 Sec.7, 80-100 in) — DEPTHS documented; HUMAN origin NOT established",
+      "cave": "potter_creek",
+      "layer_name": "Soft clay / ossiferous fill, by numbered 4-ft excavation section (spatial tags, NOT lettered strata A-H)",
+      "status": "documented",
+      "depth_text": "80-140 inches below present surface",
+      "taxa": [],
+      "rationale": "Find depths are documented in inches against numbered sections (Sinclair Pl.7; pp.12-13), and Euceratherium teeth were recorded 6 ft above M3894 (antiquity argument). BUT these inch-depths are spatial provenience tags, NOT correlated to lettered strata. Human origin is explicitly UNPROVEN: Sinclair 'does not feel justified in positively asserting the human origin' (p.14); Payen & Taylor conclude they were 'produced by bone-crushing carnivores and smoothed through water action' (p.56). Label the depth, NOT a human attribution.",
+      "citation": "Sinclair 1904 Pl.7, pp.12-14; Payen & Taylor 1976 p.56"
+    },
+    {
+      "label": "Chipped-stone flake + charcoal + Euceratherium tooth + mammoth-tooth fragment + Margaritifera shell, scattered 6-18 in below the gallery-passage floor — charcoal REDATED 1910±150 BP (UCR-150) = late Holocene, NOT Pleistocene",
+      "cave": "potter_creek",
+      "layer_name": "Clay flooring of the passage to the top of the swinging ladder",
+      "status": "documented",
+      "depth_text": "6-18 inches (~0.5-1.5 ft) below passage floor (charcoal band; flake has no separate numeric depth)",
+      "taxa": [
+        "Euceratherium collinum (tooth)",
+        "mammoth (Elephas, tooth fragment)",
+        "Margaritifera/Margaritana (shell)"
+      ],
+      "rationale": "Sinclair gives a positional descriptor + a 6-18 in charcoal band (p.15); the flake is 'associated with the charcoal,' so it has no independent measured depth. Payen & Taylor redated charcoal from this same zone to 1910±150 BP (UCR-150, ~1st c. AD), i.e. the association is late Holocene intrusion, NOT a Pleistocene human-megafauna association. Place only with this redating caveat.",
+      "citation": "Sinclair 1904 pp.10,15; Payen & Taylor 1976 p.53 (UCR-150)"
+    },
+    {
+      "label": "Dark cultural midden (top 15-30 cm) with basalt core tools/flakes, obsidian scrapers & points, Margaritifera shell, and the atlatl + dart-shaft cache — ~1900-2010 14C BP (≈1st c. AD)",
+      "cave": "potter_creek",
+      "layer_name": "Dark midden (entrance chamber), 0 to 15-30 cm — the only genuinely cultural stratum",
+      "status": "documented",
+      "depth_text": "0-30 cm (top of column)",
+      "taxa": [],
+      "rationale": "Documented stratum + dates: 'The first layer was a dark midden ranging from 15 to 30 cm. in thickness' (p.53); dart-shaft wood UCR-148 1915±150, UCR-151 2010±150, midden charcoal UCR-150 1910±150 BP (Table 1). Establishes human occupation ~2000 BP, ~6000 yr YOUNGER than the extinct fauna. Keep this strictly separate from the Pleistocene bone fill.",
+      "citation": "Payen & Taylor 1976 p.53, Table 1 p.55"
+    },
+    {
+      "label": "Aplodontia sp. femur — Chamber Two, Section 4, 30 in (76.2 cm) down — 16,240±150 14C BP / 17,100-17,850 cal BC (UCMP 17309, CAMS 117319)",
+      "cave": "samwel",
+      "layer_name": "Chamber Two (Furlong's Room) fossil fill — square + inch level (NOT mapped to the named lithologic units)",
+      "status": "documented",
+      "depth_text": "Section 4; 30 in = 76.2 cm below datum",
+      "taxa": [
+        "Aplodontia sp."
+      ],
+      "rationale": "Per-specimen square-and-depth record with a direct AMS date (Table 2 row 1). The YOUNGER member of the stratigraphically-inverted pair (deeper yet younger than the Section-5 Lepus). Depth is provenance, NOT age order — deposit is unstratified.",
+      "citation": "Feranec et al. 2007 Table 2 p.120; depth note p.119"
+    },
+    {
+      "label": "Rodentia (indet.) phalanx — Chamber Two, Section 4, 12 in (~30.5 cm) down — 16,110±130 14C BP / 17,100-17,500 cal BC (CAMS 117320)",
+      "cave": "samwel",
+      "layer_name": "Chamber Two fossil fill — square + inch level (NOT mapped to named lithologic units)",
+      "status": "documented",
+      "depth_text": "Section 4; 12 in = ~30.5 cm below datum",
+      "taxa": [
+        "Rodentia indet."
+      ],
+      "rationale": "Per-specimen square-and-depth record with direct AMS date (Table 2 row 2). All five dated specimens fall within the LGM, supporting a late-Pleistocene age for the fauna as a whole, NOT a within-deposit time sequence.",
+      "citation": "Feranec et al. 2007 Table 2 p.120"
+    },
+    {
+      "label": "Lepus washingtonii jaw — Chamber Two, Section 5, 20 in (50.8 cm) down — 19,960±210 14C BP / 21,300-22,500 cal BC (UCMP 9773, CAMS 117321) — SHALLOWER YET OLDER (inversion)",
+      "cave": "samwel",
+      "layer_name": "Chamber Two fossil fill — square + inch level (NOT mapped to named lithologic units)",
+      "status": "documented",
+      "depth_text": "Section 5; 20 in = 50.8 cm below datum",
+      "taxa": [
+        "Lepus washingtonii"
+      ],
+      "rationale": "The OLDER member of the inverted pair: shallower (50.8 cm) but older than the 76.2 cm Aplodontia. Feranec: 'the data currently do not support stratified deposition' (p.119). Use to ILLUSTRATE that Samwel depth does not track age.",
+      "citation": "Feranec et al. 2007 Table 2 p.120; p.119"
+    },
+    {
+      "label": "Mammalia (indet.) bone — Chamber Two, Section 3, 36 in (~91.4 cm) down — 20,770±240 14C BP / 22,300-23,600 cal BC (CAMS 117322)",
+      "cave": "samwel",
+      "layer_name": "Chamber Two fossil fill — square + inch level (NOT mapped to named lithologic units)",
+      "status": "documented",
+      "depth_text": "Section 3; 36 in = ~91.4 cm below datum",
+      "taxa": [
+        "Mammalia indet."
+      ],
+      "rationale": "Deepest dated specimen and the oldest, but because the fill is unstratified this is consistent (not causal) — do not draw a depth-age line through the four points.",
+      "citation": "Feranec et al. 2007 Table 2 p.120"
+    }
+  ],
+  "must_not_invent": [
+    "Per-taxon depths/levels for the Potter Creek 52-species list — Sinclair is explicit: 'No distinction is to be drawn between the collections from the different layers... The fauna listed is a unit' (p.19). Do NOT pin any of the 52 species (sloth, horse, bison, camel, mammoth, etc.) to a numbered stratum A-H or to a depth.",
+    "Do NOT place the Euceratherium collinum TYPE at Potter Creek. The type cranium (No. M8751) is from SAMWEL Cave (Sinclair 1904 footnote p.18). Potter Creek yielded only referred Euceratherium teeth (plus the separately-dated radius/ulna).",
+    "Do NOT assign the Samwel Euceratherium jaw fragment (UCMP 9128, 16,310±100 BP) to any depth/level — its section;level is recorded 'na' in Feranec Table 2.",
+    "Do NOT map the four dated Samwel specimens onto the named lithologic units (reddish clay / flowstone / gravel / breccia / earth+breccia). They are tagged only by square + inch (Sections 3/4/5; 12/20/30/36 in). The named-layer-to-specimen correlation does not exist in the source.",
+    "Do NOT treat Samwel depth as age order. The Section-5 Lepus at 50.8 cm is OLDER than the Section-4 Aplodontia at 76.2 cm; 'the data currently do not support stratified deposition' (Feranec p.119).",
+    "Do NOT relabel the Samwel calibrated ages as cal BP. Table 2 reports cal BC (e.g. Aplodontia 16,240±150 14C BP -> 17,100-17,850 cal BC).",
+    "Do NOT give Cope's Arctotherium simum TYPE skull (Richardson 1878) a measured depth — it was 'in the stalagmite floor' of the main chamber, a surface/floor occurrence with no inch/foot figure.",
+    "Do NOT assert human origin for the Potter Creek polished/bevelled bone 'implements.' Sinclair declined to assert it (p.14); Payen & Taylor attribute them to carnivore gnawing + water-smoothing (p.56).",
+    "Do NOT give the chipped-stone flake a precise standalone find depth. Only a positional descriptor (clay flooring of the passage to the swinging ladder) plus a 6-18 in charcoal band exist; that charcoal is redated young (UCR-150, 1910±150 BP).",
+    "Do NOT make Potter Creek B-H cumulative absolute depths exact or additive. Thicknesses are 'greatest' values that pinch/feather laterally; G's base was 'not determined'; the SE fan is structureless cemented breccia lumped as 'stratum A' (Pl.12), so the A-H stack is the NW-fan local maximum, not a cave-wide measured depth.",
+    "Do NOT put bones in stratum C (volcanic ash) or in the chocolate-colored mud lens within G — Sinclair records these two as the only barren deposits (p.11).",
+    "Do NOT use Feranec Fig. 2 (Samwel) to draw layered stratigraphy — it is a single-line schematic cave-void outline with NO lithologic units; use it only for chamber/passage shape."
+  ],
+  "hero_recommendation": "Pose EUCERATHERIUM (shrub-ox), not the Nothrotheriops sloth, and place it as a clearly-labelled interpretive reconstruction at the Potter Creek entrance-chamber breccia, anchored to the one documented depth: 170 cm (~5.6 ft) below surface, imbedded in the hard limestone breccia. Rationale: Euceratherium is the single Potter Creek megafaunal taxon with BOTH a documented find depth AND a direct radiocarbon date (radius+ulna, UCR-381, 8250±330 14C BP; Payen & Taylor p.55), and it is the genus whose type cranium (M8751) comes from the sister cave Samwel — so it ties the two scenes together honestly. The interpretive flag must say plainly: 'Only a radius and ulna are documented at this 170 cm level; the full skeleton and life pose are an interpretive reconstruction.' Do NOT pin the Nothrotheriops (Shasta ground sloth) full skeleton to any layer or depth — it appears only in the undifferentiated megafauna list with NO provenance in these sources; if a sloth is shown at all it must FLOAT as a clearly-labelled 'context only, unprovenanced — not depth-resolved' figure beside the column, never embedded in a stratum. A defensible secondary hero is Arctotherium simum posed at the SE-fan SURFACE (documented surface occurrence of a partial skull + Ursus, p.11), also interpretive as to completeness.",
+  "summary": "Two caves, two honesty regimes. POTTER CREEK (feet): build Sinclair's documented NW-fan stack top-down S (surface stalagmite) > A clay 0-13.5 ft > B gravel > C volcanic ash (barren) > D clay > E cemented breccia ('false floor') > F soft clay > G stalagmite-blocks/chocolate-mud (base undetermined, open-ended) > H stalagmite bosses (cave floor) over McCloud limestone. Thicknesses are documented 'greatest' values that pinch laterally, so the cumulative depths I stacked are a render composite, NOT additive measured depths — flag this. The fauna are a MIXED, time-averaged talus/pitfall assemblage that Sinclair explicitly refuses to differentiate by layer ('the fauna listed is a unit,' p.19); the single honest faunal marker is therefore 'fauna occur throughout the bone-bearing clay and breccia, not depth-sorted,' plus a handful of genuinely depth-anchored isolated facts (Arctotherium+Ursus on the SE-fan surface; micro-vertebrates in the gravel; the Payen-Taylor Euceratherium radius/ulna at 170 cm, 8250±330 BP; the polished-bone pieces at 80-140 in with human origin REFUTED; the late-Holocene flake/charcoal cluster redated to 1910 BP; and the 15-30 cm cultural midden / atlatl cache at ~2000 BP). SAMWEL (cm): Feranec's documented column is reddish clay > flowstone (3 cm) > gravel (10-45) > breccia (60) > flowstone (2.5-10) > earth+breccia (30-140), excavation to 2.5 m. Four Chamber-Two specimens carry real square+inch levels AND AMS dates and CAN be documented markers (Aplodontia 76.2 cm, Rodentia 30.5 cm, Lepus 50.8 cm, Mammalia 91.4 cm) — but depth does NOT equal age (the shallower Lepus is older; deposit unstratified), the Euceratherium jaw has no level ('na'), and dates are cal BC not cal BP. Hero: pose Euceratherium at the 170 cm Potter Creek breccia horizon, clearly flagged interpretive (only radius+ulna documented there); keep the Nothrotheriops sloth unprovenanced and floating, never embedded. Everything else of the 'do not invent' kind is enumerated in must_not_invent."
+}

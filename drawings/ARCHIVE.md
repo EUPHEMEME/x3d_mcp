@@ -47,6 +47,31 @@ Catalogue is machine-readable in `archive.json`.
   depth × the surveyed 6-inch interval and triangulating (`extrude_contours.py`).
 - **Model:** `potter_creek_floor.x3d` (8× vertical exaggeration).
 
+### A6 · Potter Creek Cave — bone-horizon section + interpretive hero (derived)
+- **What:** Sinclair's documented NW-fan column (S,A,B,C,D,E,F,G,H, to scale in feet)
+  with the fauna pinned **only where the literature gives a depth**. The mixed
+  assemblage gets one honest "fauna occur *throughout* the bone-bearing clay &
+  breccia — not depth-sorted" marker (Sinclair's *"the fauna listed is a unit,"*
+  p.19); the genuinely depth-anchored facts (Euceratherium radius+ulna at 170 cm,
+  8250±330 BP; polished bone 80–140 in with **human origin refuted**; the
+  late-Holocene flake; the cultural midden) are callouts. The Shasta ground-sloth
+  skeleton (F2) stands beside the column as a flagged **interpretive, unprovenanced**
+  hero — never embedded in a layer.
+- **Sources:** Sinclair 1904 (column + faunal unit); Payen & Taylor 1976 (170 cm
+  Euceratherium date; refuted bone tools). Grounding catalogued in `strata_spec.json`.
+- **Build:** `generate_fauna_strata.py` → `potter_creek_strata.x3d` (preview
+  `potter_creek_strata_preview.png`).
+
+### A7 · Samwel Cave — per-specimen dated levels, "depth ≠ age" (derived)
+- **What:** the Feranec et al. (2007) Chamber-Two column (cm) with the four AMS-dated
+  specimens at their real square+inch levels — the **one** Merriam-caves dataset
+  with per-specimen depth. The deposit is *not* chronologically stratified: the
+  shallower *Lepus* (50.8 cm) is **older** than the deeper *Aplodontia* (76.2 cm),
+  highlighted as the teaching point. Ages are cal BC, not cal BP.
+- **Source:** Feranec et al. 2007 (Radiocarbon 49(1):117–121), Table 2.
+- **Build:** `generate_fauna_strata.py` → `samwel_strata.x3d` (preview
+  `samwel_strata_preview.png`).
+
 ---
 
 ## Fauna — real anatomical drawings (traced, public-domain; no AI)
