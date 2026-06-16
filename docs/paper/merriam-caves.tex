@@ -27,8 +27,9 @@
 
 \title{\textbf{Reconstructing Historic Fossil Caves in X3D from\\
 Century-Old Survey Data: A Human--AI Case Study}}
-\author{Alexander Hoffman \and Claude (Anthropic Claude Code)\\[2pt]
-  \small\textit{Draft --- collaborative authorship; see Use of AI statement}}
+\author{Alexander Hoffman\thanks{Corresponding author: \texttt{alex@euphe.me}}
+  \and Claude (Anthropic's Claude Code)\\[2pt]
+  \small\textit{collaborative authorship; see Use of AI statement}}
 \date{\today}
 
 \begin{document}
@@ -77,8 +78,8 @@ California vertebrate palaeontologist who later led the Carnegie Institution and
 co-founded the Save the Redwoods League --- and the human author's
 great-great-grandfather. Potter Creek Cave was excavated principally in
 1902--1903 and Samwel Cave in 1903--1906; the reports that resulted (Sinclair
-1903, 1904, 1905; Furlong 1906) are among the founding documents of West Coast
-Pleistocene palaeontology. We asked: can a human--AI pair turn those century-old
+1903~[11], 1904~[10], 1905~[16]; Furlong 1906~[12]) are among the founding
+documents of West Coast Pleistocene palaeontology. We asked: can a human--AI pair turn those century-old
 prose surveys into faithful, inspectable 3D --- honestly labelled as to what is
 measured versus imagined --- using only the open Web3D toolchain?
 
@@ -108,19 +109,21 @@ rope ladder. The galleries trend northwest--southeast, parallel to the strike of
 the McCloud Limestone, at $\sim$1500\,ft (460\,m) elevation. The deposit yielded
 roughly 52 vertebrate species, 21 of them extinct --- including the type specimen
 of the shrub-ox \emph{Euceratherium collinum}, a new genus and species named from
-this cave (Sinclair \& Furlong 1904)~[13], abundant remains of the giant
+this cave (Furlong \& Sinclair 1904)~[13], abundant remains of the giant
 short-faced bear \emph{Arctodus simus}, the Shasta ground sloth
 \emph{Nothrotheriops shastensis}, \emph{Megalonyx}, \emph{Canis dirus}, mammoth,
-camel, and horse.
+camel, and horse. Polished bone and a stone chip recovered at depth raised an
+early human-association question, later evaluated by radiocarbon (Payen \& Taylor
+1976)~[15].
 
 \paragraph{Samwel Cave.} Five kilometres north on the same McCloud arm, Samwel
 Cave (Wintu \emph{sawal}) is a branching two-level system in the McCloud Limestone
-at 460\,m ($\sim$1500\,ft) elevation. The name is contested: it is variously
+at $\sim$1500\,ft (460\,m) elevation. The name is contested: it is variously
 translated ``sacred/holy place'' and identified with the Wintu word for grizzly
 bear. Furlong's 1906 survey~[12], redrawn in Feranec et al.\ (2007, Fig.~2)~[14],
 names its spaces: the Entrance and Porcupine Entrance, the large Pleistocene Hall,
-the Gate, Chamber One, Merriam's Chamber, and Chamber Two (``Furlong's Room''),
-the lower level reached only by a deep drop requiring climbing gear
+the Gate, Chamber One, Merriam's Chamber, and Chamber Two (``Furlong's Room'')
+--- the lower level, reached only by a deep drop requiring climbing gear
 (Fig.~\ref{fig:samwel_section}). Tradition records the cave as the \emph{Cave of
 the Lost Maiden} --- the Wintu girl Olchanolmet, who by legend fell to her death
 down a ``90-foot-deep hole'' --- and as the \emph{Cave of the Magic Pools}, where
@@ -151,7 +154,13 @@ becomes a lofted longitudinal section (Fig.~\ref{fig:pcc_section}); Samwel becom
 a labelled cross-section of ellipsoidal chambers connected by passages, echoing
 Furlong's plate.
 
-\paragraph{Physically-based look-development.} Walls and floor use the X3D~4.0
+\fig{pcc_section}{0.86}{Potter Creek Cave as a lofted longitudinal section (back
+half, $z\le0$), to scale from Sinclair (1904): the domed roof, the two breccia
+fans, the chimney shafts, the banded stratigraphic column, and the light shaft
+down the 42\,ft entrance pit. The back-half cut opens the interior so it both
+reads and lights.}
+
+\paragraph{Physically based look-development.} Walls and floor use the X3D~4.0
 \texttt{PhysicalMaterial} node (Shape component~[1]; its metallic-roughness model
 follows glTF~2.0~[7]) with a tileable texture set --- base-colour, tangent-space
 normal, and metallic-roughness maps generated from value-noise --- combined with
@@ -170,7 +179,7 @@ speleothems and detail, to displaced normal-mapped \texttt{PhysicalMaterial}.}
 
 \paragraph{Provenance discipline.} Because the geometry is part measured and part
 imagined, every generator carries a \texttt{PROVENANCE} block, and every scene a
-caption, that each state plainly which features are \emph{to scale from the
+caption, that each states plainly which features are \emph{to scale from the
 survey} (chamber dimensions, the fans, the chimneys, the 42\,ft pit; Samwel's
 chamber topology and the documented deep drop joining its two levels) and which
 are \emph{interpretive} (all speleothems, the rock texture, pool extents,
@@ -199,15 +208,15 @@ scenes pass both validators cleanly.
 
 The decisive engineering finding was that the loop's last step was broken for
 exactly the scenes we care about. The MCP's \texttt{render\_image} tool used
-X3DOM with the synchronous Playwright API. Two failures compounded: (i) called
+X3DOM~[9] with the synchronous Playwright API. Two failures compounded: (i) called
 from an asynchronous MCP tool it raised \emph{``Sync API inside the asyncio
 loop''}; and (ii) under our headless pipeline (Chromium via Playwright~1.60,
 software WebGL via ANGLE/SwiftShader) X3DOM cleared the background but drew no
-geometry, and it does not implement the X3D~4.0 \texttt{PhysicalMaterial} or HAnim
-material paths. We scope this claim to what we tested --- X3DOM from
-\texttt{x3dom.org/release} (1.8.x) under headless SwiftShader --- and present it
-as a rendering-coverage and headless-software-WebGL gap, not a blanket statement
-about X3DOM in all configurations. The controlled result is shown in
+geometry for either scene. We state this as the empirical result we observed,
+scoped to what we tested --- X3DOM from \texttt{x3dom.org/release} (1.8.x) under
+headless SwiftShader --- a rendering-coverage and headless-software-WebGL gap,
+not a blanket statement about X3DOM in all configurations. (X3DOM does not
+support HAnim~[3]; its X3D~4.0 \texttt{PhysicalMaterial} coverage is limited.) The controlled result is shown in
 Fig.~\ref{fig:x3dom_vs_xite}: two identical scene files --- the PBR cave and the
 HAnim slalom-runner of our companion study --- render empty under X3DOM and fully
 under \xite{}, which is the capability (PBR \emph{and} HAnim) the Web3D community
@@ -217,9 +226,9 @@ most needs an authoring agent to be able to see.
 same headless Chromium/SwiftShader pipeline. X3DOM (left) draws only the scene
 background; \xite{} (right) renders the displaced, normal-mapped
 \texttt{PhysicalMaterial} cave (top) and the HAnim humanoid on its slalom course
-(bottom, \texttt{running\_human.x3d}). X3DOM additionally implements neither
-\texttt{PhysicalMaterial} nor HAnim skinning. This motivated the new \xite{}
-render backend.}
+(bottom, \texttt{running\_human.x3d}). Beyond this headless result, X3DOM does not
+support HAnim and has limited X3D~4.0 \texttt{PhysicalMaterial} coverage. This
+motivated the new \xite{} render backend.}
 
 We rebuilt the backend around \textbf{\xite{}}~[5], which renders both PBR and
 HAnim. The new implementation (i) uses asynchronous Playwright so it runs inside
@@ -235,9 +244,9 @@ was produced through it, pinned to \xite{}~15.1.4 for reproducibility.
 
 \begin{enumerate}[leftmargin=1.4em]
 \item \textbf{Renderer choice is a correctness property, not an aesthetic one.}
-Under our headless setup X3DOM rendered nothing and implements neither the X3D~4.0
-material model nor HAnim, whereas \xite{} renders both. An authoring tool that
-cannot render the standard's current material model cannot verify its own work.
+Under our headless setup X3DOM rendered neither the PBR cave nor the HAnim scene,
+whereas \xite{} rendered both. An authoring tool that cannot render the standard's
+current material model cannot verify its own work.
 \item \textbf{Transport matters.} \texttt{file://} silently defeats \xite{} (the
 same-origin policy for local files); inline X3D inside HTML is mangled by the HTML
 parser's tag lowercasing. A small local HTTP server is the reliable path, and
@@ -281,9 +290,10 @@ the provenance block currently flags.
 Creek's clay/ash/breccia; Samwel's flowstone--breccia--gravel column) as a
 scrubbable cut, with fauna pinned to levels and radiocarbon ages on hover.
 \item \textbf{Toward true volumetrics.} Our light shafts and ``refractive'' water
-are faked with layered translucent geometry; X3D has no participating-media /
-atmospheric-scattering primitive (distinct from the VolumeRendering component,
-which targets sampled volume data). A screen-space or volumetric approach in
+are faked with layered translucent geometry; X3D's \texttt{Fog}/\texttt{LocalFog}
+give distance attenuation but no participating-media \emph{in-scattering}
+primitive for god-ray-style effects (the VolumeRendering component targets sampled
+volume data, not atmosphere). A screen-space or volumetric approach in
 \xite{} would be a genuine rendering contribution.
 \item \textbf{A reusable survey$\rightarrow$X3D recipe.} The section-cut + PBR +
 provenance pattern generalises to any cave or excavation with a published plan;
@@ -295,7 +305,8 @@ it could become a small documented template for the AI-with-X3D community.
 Beyond the scenes, the work produced concrete improvements to the Web3D X3D MCP
 server, carried on a dedicated branch and covered by tests: the \xite{} rendering
 backend described above (async, loopback-served, asset-aware); semantic
-validators for \texttt{containerField} (with the canonical field suggested),
+validators (built from the X3D Unified Object Model, X3DUOM~[4]) for
+\texttt{containerField} (with the canonical field suggested),
 USE-before-DEF ordering, and interpolator \texttt{key}/\texttt{keyValue} length;
 an \texttt{autofix\_x3d} tool that rewrites \texttt{containerField}s and returns
 the corrected document; granular-mode parity for non-default node placement; and
@@ -314,7 +325,8 @@ Two caves that a family forebear opened a hundred and twenty years ago now exist
 as honest, inspectable, standards-conformant 3D, made entirely through the open
 Web3D toolchain by a human and a model working as a pair. The engineering lesson
 is blunt: an authoring agent is only as good as its ability to see what it made,
-and for X3D~4.0 material that means \xite{}. The human lessons --- provenance,
+and for X3D~4.0 material that means an X3D-4.0-complete renderer such as \xite{}.
+The human lessons --- provenance,
 attribution, and care for whose sacred ground this is --- were supplied by the
 person, and they are the part that matters most.
 
@@ -348,14 +360,15 @@ v4.0.65.3. \url{https://pypi.org/project/x3d/}
 PBR material model).
 \bibitem{mcp} Anthropic, \emph{Model Context Protocol specification}.
 \url{https://modelcontextprotocol.io}
-\bibitem{x3dom} J.~Behr et al., \emph{X3DOM}. \url{https://www.x3dom.org/}
+\bibitem{x3dom} J.~Behr et al., \emph{X3DOM} (\texttt{x3dom.org/release}, 1.8.x
+tested). \url{https://www.x3dom.org/}
 \bibitem{sinclair04} W.~J.~Sinclair (1904) The exploration of the Potter Creek
 Cave. \emph{Univ. Calif. Publ. Amer. Arch. Ethn.} 2(1):1--27.
 \bibitem{sinclair03} W.~J.~Sinclair (1903) A preliminary account of the
 exploration of the Potter Creek Cave. \emph{Science} 17(435):708--712.
 \bibitem{furlong06} E.~L.~Furlong (1906) The exploration of Samwel Cave.
 \emph{Am. J. Sci.} 22(129):235--247.
-\bibitem{sf04} W.~J.~Sinclair \& E.~L.~Furlong (1904) \emph{Euceratherium}, a new
+\bibitem{sf04} E.~L.~Furlong \& W.~J.~Sinclair (1904) \emph{Euceratherium}, a new
 ungulate from the Quaternary caves of California. \emph{Univ. Calif. Publ. Bull.
 Dept. Geol.} 3:411--418.
 \bibitem{feranec07} R.~S.~Feranec, E.~A.~Hadly, J.~L.~Blois, A.~D.~Barnosky \&
