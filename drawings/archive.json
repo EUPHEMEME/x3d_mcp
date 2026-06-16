@@ -1,0 +1,42 @@
+{
+  "title": "Potter Creek & Samwel Caves — 3-D archive of the survey record",
+  "principle": "Every item is a faithful vector trace of a real published drawing, fully cited. No AI imagery; no invented geometry.",
+  "pipeline": "trace_drawing.sh (pdftoppm -> crop -> threshold -> potrace -> SVG); svg_to_x3d.py / extrude_contours.py for to-scale X3D.",
+  "entries": [
+    {
+      "id": "A1", "subject": "Potter Creek Cave — topographic plan of the chamber floor",
+      "citation": "Sinclair, W.J. (1904) The Exploration of the Potter Creek Cave, Plate 14 (\"Topographic map of the floor of the main chamber… contour interval 6 inches\"). Univ. Calif. Publ. Amer. Arch. Ethn. 2(1):1-27.",
+      "source_url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp002-003.pdf (p.40); https://archive.org/details/explorationpott00mitrgoog",
+      "public_domain": true, "trace": "pcc_plan_plate14.svg", "x3d": ["potter_creek_plan.x3d", "potter_creek_floor.x3d"]
+    },
+    {
+      "id": "A2", "subject": "Potter Creek Cave — longitudinal section of the buried gallery",
+      "citation": "Sinclair, W.J. (1904), Plate 11. Univ. Calif. Publ. Amer. Arch. Ethn. 2(1).",
+      "source_url": "https://archive.org/download/explorationpott00mitrgoog/page/n55_w3884.jpg",
+      "public_domain": true, "trace": "pcc_section_plate11.svg", "x3d": []
+    },
+    {
+      "id": "A3", "subject": "Potter Creek Cave — deposit cross-sections 1–6",
+      "citation": "Sinclair, W.J. (1904), Plates 12–13. Univ. Calif. Publ. Amer. Arch. Ethn. 2(1).",
+      "source_url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp002-003.pdf (pp.38-39)",
+      "public_domain": true, "trace": "pcc_xsec_plate12.svg / pcc_xsec_plate13.svg (gitignored, regenerable)", "x3d": []
+    },
+    {
+      "id": "A4", "subject": "Samwel Cave — cross-sectional view",
+      "citation": "Feranec, R.S., Hadly, E.A., Blois, J.L., Barnosky, A.D. & Paytan, A. (2007) Radiocarbon Dates from the Pleistocene Fossil Deposits of Samwel Cave, Figure 2. Radiocarbon 49(1):117-121.",
+      "source_url": "https://ib.berkeley.edu/labs/barnosky/feranec%20et%20al.%202007-2.pdf",
+      "public_domain": true, "trace": "samwel_fig2.svg", "x3d": []
+    },
+    {
+      "id": "A5", "subject": "Potter Creek Cave — 3-D floor topography (derived)",
+      "citation": "Derived from Sinclair, W.J. (1904), Plate 14 — contours lifted by nesting depth × the surveyed 6-inch interval and triangulated.",
+      "source_url": "see A1", "public_domain": true, "trace": "derived from pcc_plan_plate14.svg", "x3d": ["potter_creek_floor.x3d"]
+    },
+    {
+      "id": "F1", "subject": "Euceratherium collinum (shrub-ox) — type skull",
+      "citation": "Sinclair, W.J. & Furlong, E.L. (1904) Euceratherium, a new ungulate from the Quaternary caves of California, Plates 50 & 51 (type cranium). Univ. Calif. Bull. Dept. Geol. 3(20):411-418. Type locality: Potter Creek Cave.",
+      "source_url": "https://archive.org/details/bulletinofde319021904univ",
+      "public_domain": true, "trace": "pending", "x3d": [], "status": "pending"
+    }
+  ]
+}
