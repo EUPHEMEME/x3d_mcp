@@ -22,6 +22,10 @@
   \small\textit{Draft --- collaborative authorship}}
 \date{\today}
 
+\usepackage{draftwatermark}
+\SetWatermarkText{DRAFT}
+\SetWatermarkScale{4}
+\SetWatermarkColor[gray]{0.92}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -186,6 +190,8 @@ Both scenes share a physically based look-development pass built on the X3D~4.0 
 
 At the opposite end of the provenance spectrum from the dressed reconstruction is an archive that invents nothing at all. Every published plate is reproduced as a faithful vector trace of the original line art (the trace-don't-invent pipeline of \S\ref{sec:provenance}), then lifted to a to-scale X3D \texttt{IndexedLineSet}: Sinclair's 1904 topographic plan of the Potter Creek chamber floor (Plate~14), his longitudinal section (Plate~11) and deposit cross-sections (Plates~12--13), and the Samwel cross-section from Feranec et al.\ 2007 (Furlong's own 1906 report carries no plan or section, only photographs and an in-text column). Figure~\ref{fig:pcc_plan} is the \emph{measured} extreme: Plate~14 reproduced identically and made navigable in the same web pipeline as the interpretive model. Going one step further, a contour-extruder reads the plan's nested loops, lifts each by its nesting depth times the documented 6-inch interval, and triangulates a floor surface clipped to the cave outline (Fig.~\ref{fig:pcc_topo}): a 3-D documented topography whose every elevation comes from the 1904 survey, shown with $8\times$ vertical exaggeration because the real relief is only about $\pm2$\,ft over 107\,ft.
 
+\fig{cave_drawings_sheet}{0.66}{The survey-plate archive on one sheet: Sinclair's (1904) Potter Creek floor plan, longitudinal section, and deposit cross-sections, with the Samwel cross-section after Feranec et al.\ (2007) --- each reproduced as a faithful vector trace of the published line art. This is the documentary pole of the archive, the geometry from which the to-scale X3D models are lifted.}
+
 The same trace-don't-invent rule governs the fauna (Fig.~\ref{fig:fauna_plate}; \S\ref{sec:provenance}): each excavated taxon is reproduced from its original published anatomical drawing, vectorised by the identical pipeline and carrying its full citation. The presentation choice is what is specific here --- each bay states its source and its true dimension \emph{in words}, since we refuse to stand a whole sloth skeleton beside isolated skulls on one baseline, which would compare wholes against parts and mislead. No AI imagery appears anywhere in the archive.
 
 \fig{fauna_plate}{0.98}{The documented fauna plate: faithful vector traces of the original published drawings of the excavated megafauna --- \emph{Nothrotheriops shastensis} (Stock 1925), \emph{Canis dirus} (Merriam 1912), and \emph{Euceratherium collinum} (Sinclair \& Furlong 1904) --- assembled into a to-scale X3D \texttt{IndexedLineSet} gallery. No AI imagery is used anywhere in the archive.}
@@ -196,6 +202,8 @@ The same trace-don't-invent rule governs the fauna (Fig.~\ref{fig:fauna_plate}; 
 The join between a deposit and its fauna is where the provenance discipline does its hardest work; the full walkthrough --- Sinclair's documented column rendered to scale, fauna pinned only at recorded depths --- is given in \S\ref{sec:provenance} (Fig.~\ref{fig:pcc_strata}). What is specific to the flagship is that we built a section scene for each cave from the cited \texttt{strata\_spec.json}.
 
 \textbf{Samwel} (\texttt{samwel\_strata.x3d}) is the instructive counter-case: its four AMS-dated Chamber-Two specimens \cite{feranec07} carry real square-and-inch levels, yet the scene's title remains ``depth is not age,'' because the deposit is not chronologically stratified (\S\ref{sec:provenance}). That seam --- visible, labelled, and refused as a place to invent --- is the heart of the whole project.
+
+\fig{samwel_strata}{0.92}{Samwel Cave, the counter-case (\texttt{samwel\_strata.x3d}): the four AMS-dated Chamber-Two specimens placed at their documented square-and-inch levels (Feranec et al.\ 2007). The shallower \emph{Lepus} is \emph{older} than the deeper \emph{Aplodontia} --- depth is an excavation tag, not an age order --- so the panel is titled ``depth is not age'' and refuses to let the viewer read time off the column.}
 
 \section{What this becomes}
 \label{sec:future}
