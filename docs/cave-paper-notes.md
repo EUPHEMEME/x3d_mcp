@@ -44,7 +44,7 @@ sacred sites now drowned by Shasta Dam.
 - NW-fan stratigraphy: upper clay to **13.5 ft**, volcanic ash ~**1.5 ft**,
   cemented breccia below.
 - Fauna: **~52 vertebrate species, 21 extinct.** ***Euceratherium collinum***
-  (shrub-ox) — **TYPE LOCALITY here** (new genus & species, Sinclair & Furlong
+  (shrub-ox) — **TYPE LOCALITY here** (new genus & species, Furlong & Sinclair
   1904). Abundant
   *Arctodus simus* (giant short-faced bear); *Nothrotheriops shastensis* (Shasta
   ground sloth); *Megalonyx*; *Canis dirus*; *Mammuthus*; *Camelops*; *Equus*;
@@ -80,7 +80,7 @@ sacred sites now drowned by Shasta Dam.
   Creek Cave.* **Science** 17(435):708–712.
 - Sinclair, W.J. (1904) *The Exploration of the Potter Creek Cave.* Univ. Calif.
   Publ. Amer. Arch. Ethn. **2(1).** (archive.org `explorationpott00mitrgoog`)
-- Sinclair, W.J. & Furlong, E.L. (1904) *Euceratherium, a New Ungulate from the
+- Furlong, E.L. & Sinclair, W.J. (1904) *Euceratherium, a New Ungulate from the
   Quaternary Caves of California.* Univ. Calif. Publ. Bull. Dept. Geol.
   **3:411–418.** (type description of *Euceratherium collinum*)
 - Sinclair, W.J. (1905) *New Mammalia from the Quaternary Caves of California.*
