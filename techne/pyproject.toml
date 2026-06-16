@@ -1,0 +1,26 @@
+[project]
+name = "techne"
+version = "0.1.0"
+description = "A deterministic craft layer for MCP servers, built on BAML — makes a model's tool-call arguments conform to a format's unwritten conventions, and gates expensive irreversible work behind a render-and-sign-off."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "mcp>=1.0",        # the man-in-the-middle transport (client + server)
+  "Pillow>=10",      # the occupation gate's eyes (blank-render detection)
+]
+
+[project.optional-dependencies]
+# the BAML SAP-repair path (canonical rules live in baml_src/; runtime is the
+# deterministic Python mirror, so this is optional).
+baml = ["baml-py>=0.222"]
+test = ["pytest>=7"]
+
+[project.scripts]
+techne = "techne.server:main"
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["techne"]
