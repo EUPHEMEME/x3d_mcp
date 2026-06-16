@@ -4,58 +4,100 @@
   "pipeline": "trace_drawing.sh (pdftoppm -> crop -> threshold -> potrace -> SVG); svg_to_x3d.py / extrude_contours.py for to-scale X3D.",
   "entries": [
     {
-      "id": "A1", "subject": "Potter Creek Cave — topographic plan of the chamber floor",
+      "id": "A1",
+      "subject": "Potter Creek Cave — topographic plan of the chamber floor",
       "citation": "Sinclair, W.J. (1904) The Exploration of the Potter Creek Cave, Plate 14 (\"Topographic map of the floor of the main chamber… contour interval 6 inches\"). Univ. Calif. Publ. Amer. Arch. Ethn. 2(1):1-27.",
       "source_url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp002-003.pdf (p.40); https://archive.org/details/explorationpott00mitrgoog",
-      "public_domain": true, "trace": "pcc_plan_plate14.svg", "x3d": ["potter_creek_plan.x3d", "potter_creek_floor.x3d"]
+      "public_domain": true,
+      "trace": "pcc_plan_plate14.svg",
+      "x3d": [
+        "potter_creek_plan.x3d",
+        "potter_creek_floor.x3d"
+      ]
     },
     {
-      "id": "A2", "subject": "Potter Creek Cave — longitudinal section of the buried gallery",
+      "id": "A2",
+      "subject": "Potter Creek Cave — longitudinal section of the buried gallery",
       "citation": "Sinclair, W.J. (1904), Plate 11. Univ. Calif. Publ. Amer. Arch. Ethn. 2(1).",
       "source_url": "https://archive.org/download/explorationpott00mitrgoog/page/n55_w3884.jpg",
-      "public_domain": true, "trace": "pcc_section_plate11.svg", "x3d": []
+      "public_domain": true,
+      "trace": "pcc_section_plate11.svg",
+      "x3d": []
     },
     {
-      "id": "A3", "subject": "Potter Creek Cave — deposit cross-sections 1–6",
+      "id": "A3",
+      "subject": "Potter Creek Cave — deposit cross-sections 1–6",
       "citation": "Sinclair, W.J. (1904), Plates 12–13. Univ. Calif. Publ. Amer. Arch. Ethn. 2(1).",
       "source_url": "https://digitalassets.lib.berkeley.edu/anthpubs/ucb/text/ucp002-003.pdf (pp.38-39)",
-      "public_domain": true, "trace": "pcc_xsec_plate12.svg / pcc_xsec_plate13.svg (gitignored, regenerable)", "x3d": []
+      "public_domain": true,
+      "trace": "pcc_xsec_plate12.svg / pcc_xsec_plate13.svg (gitignored, regenerable)",
+      "x3d": []
     },
     {
-      "id": "A4", "subject": "Samwel Cave — cross-sectional view",
+      "id": "A4",
+      "subject": "Samwel Cave — cross-sectional view",
       "citation": "Feranec, R.S., Hadly, E.A., Blois, J.L., Barnosky, A.D. & Paytan, A. (2007) Radiocarbon Dates from the Pleistocene Fossil Deposits of Samwel Cave, Figure 2. Radiocarbon 49(1):117-121.",
       "source_url": "https://ib.berkeley.edu/labs/barnosky/feranec%20et%20al.%202007-2.pdf",
-      "public_domain": true, "trace": "samwel_fig2.svg", "x3d": []
+      "public_domain": true,
+      "trace": "samwel_fig2.svg",
+      "x3d": []
     },
     {
-      "id": "A5", "subject": "Potter Creek Cave — 3-D floor topography (derived)",
+      "id": "A5",
+      "subject": "Potter Creek Cave — 3-D floor topography (derived)",
       "citation": "Derived from Sinclair, W.J. (1904), Plate 14 — contours lifted by nesting depth × the surveyed 6-inch interval and triangulated.",
-      "source_url": "see A1", "public_domain": true, "trace": "derived from pcc_plan_plate14.svg", "x3d": ["potter_creek_floor.x3d"]
+      "source_url": "see A1",
+      "public_domain": true,
+      "trace": "derived from pcc_plan_plate14.svg",
+      "x3d": [
+        "potter_creek_floor.x3d"
+      ]
     },
     {
-      "id": "F1", "subject": "Euceratherium collinum (shrub-ox) — left superior dental series",
+      "id": "F1",
+      "subject": "Euceratherium collinum (shrub-ox) — left superior dental series",
       "citation": "Sinclair, W.J. & Furlong, E.L. (1904) Euceratherium, a new ungulate from the Quaternary caves of California, Text Fig. 1 (\"Left superior dental series, x1/3\"). Univ. Calif. Bull. Dept. Geol. 3(20):411-418. Type locality: Potter Creek Cave (type cranium UCMP 8751). [Pls. 50-51 are halftone photographs, not line drawings.]",
       "source_url": "https://archive.org/details/bulletinofde319021904univ (leaf n598)",
-      "public_domain": true, "trace": "fauna/euceratherium_dental.svg", "x3d": [], "status": "traced"
+      "public_domain": true,
+      "trace": "fauna/euceratherium_dental.svg",
+      "x3d": [
+        "fauna_plate.x3d"
+      ],
+      "status": "traced"
     },
     {
-      "id": "F2", "subject": "Nothrotheriops shastensis (Shasta ground sloth) — lateral skeleton",
+      "id": "F2",
+      "subject": "Nothrotheriops shastensis (Shasta ground sloth) — lateral skeleton",
       "citation": "Stock, C. (1925) Cenozoic Gravigrade Edentates of Western North America, Fig. 4 (skeleton in lateral view). Carnegie Institution of Washington Publication 331, p. 33.",
       "source_url": "https://www.biodiversitylibrary.org/item/275982 ; https://archive.org/details/cenozoicgravigra00stoc (leaf 57)",
-      "public_domain": true, "trace": "fauna/nothrotheriops_skeleton.svg", "x3d": [], "status": "traced", "note": "The hero — a full articulated skeletal line drawing."
+      "public_domain": true,
+      "trace": "fauna/nothrotheriops_skeleton.svg",
+      "x3d": [
+        "fauna_plate.x3d"
+      ],
+      "status": "traced",
+      "note": "The hero — a full articulated skeletal line drawing."
     },
     {
-      "id": "F3", "subject": "Canis dirus (dire wolf) — lateral skull",
+      "id": "F3",
+      "subject": "Canis dirus (dire wolf) — lateral skull",
       "citation": "Merriam, J.C. (1912) The Fauna of Rancho La Brea, Part II: Canidae, text-fig. 1 (skull no. 10834, lateral, x1/2). Memoirs of the University of California 1(2), p. 224.",
       "source_url": "https://archive.org/details/faunaofrancholab02merr (leaf 12)",
-      "public_domain": true, "trace": "fauna/canis_dirus_skull.svg", "x3d": [], "status": "traced"
+      "public_domain": true,
+      "trace": "fauna/canis_dirus_skull.svg",
+      "x3d": [
+        "fauna_plate.x3d"
+      ],
+      "status": "traced"
     },
     {
-      "id": "F-pending", "subject": "Located, not yet traced",
+      "id": "F-pending",
+      "subject": "Located, not yet traced",
       "mammuthus": "Osborn, H.F. (1942) Proboscidea vol. 2, Figs. 996-998, p. 1130 (archive.org proboscideamonog02osbo, leaf 364).",
       "camelops": "from the same fossil hunt; exact figure pending.",
       "arctodus_simus": "No line drawing exists; Merriam & Stock (1925), Carnegie Publ. 347, figures the skull/skeleton only as photographs. Skipped under the no-AI / real-drawing rule.",
-      "public_domain": true, "status": "pending"
+      "public_domain": true,
+      "status": "pending"
     }
   ]
 }
