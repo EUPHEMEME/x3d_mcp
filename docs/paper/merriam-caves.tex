@@ -212,13 +212,24 @@ cross-sections (Pls.~12--13), and the Samwel cross-section. A short converter
 (\texttt{svg\_to\_x3d.py}) then lifts the traced paths into an X3D
 \texttt{IndexedLineSet} to scale, so the documented plan becomes navigable
 geometry in the same web pipeline as the interpretive model --- the
-\emph{measured} extreme of the same provenance discipline.
+\emph{measured} extreme of the same provenance discipline. Going one step
+further, \texttt{extrude\_contours.py} reads the plan's contour loops, lifts each
+by its nesting depth times the documented 6-inch interval (the stalagmite bosses
+rising as mounds, the depression contours sinking as a basin), and triangulates a
+floor surface clipped to the cave outline (Fig.~\ref{fig:pcc_topo}) --- a 3-D
+documented topography whose every elevation is taken from the 1904 survey.
 
 \fig{pcc_plan}{0.96}{The \emph{documented} extreme: a faithful vector trace of
 Sinclair's (1904, Plate~14) ``topographic map of the floor of the main chamber in
 the Potter Creek Cave, contour interval 6 inches'' --- floor contours, section
 lines~1--7, stalagmite bosses, the altar, and the buried galleries, reproduced
 identically and lifted to a to-scale X3D \texttt{IndexedLineSet}.}
+
+\fig{pcc_topo}{0.8}{The documented plan extruded into 3-D topography: each Plate-14
+contour lifted by its nesting depth times the surveyed 6-inch interval, then
+triangulated into a floor surface (coloured by elevation). The chamber floor is a
+long, shallow ribbon, so the relief ($\sim\pm2$\,ft over 107\,ft) is shown with
+$8\times$ vertical exaggeration.}
 
 \section{The render loop and the X3D MCP server}
 
