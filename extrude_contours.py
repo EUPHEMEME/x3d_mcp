@@ -162,6 +162,8 @@ x3d = f"""<?xml version="1.0" encoding="UTF-8"?>
 <head>
 <meta name="title" content="Potter Creek Cave -- documented floor topography (Sinclair 1904, Pl. 14)"/>
 <meta name="description" content="3D surface extruded from the documented 6-inch contour plan; vertical exaggeration {VEXAG:g}x."/>
+<meta name="source" content="Sinclair, W.J. (1904) The Exploration of the Potter Creek Cave, Plate 14. Univ. Calif. Publ. Amer. Arch. Ethn. 2(1):1-27. Public domain."/>
+<meta name="rights" content="Trace of a public-domain survey drawing; faithful reproduction, no AI imagery."/>
 </head>
 <Scene>
 <Background skyColor="0.93 0.93 0.95 0.82 0.84 0.9" groundColor="0.5 0.5 0.52" skyAngle="1.2"/>
