@@ -63,18 +63,24 @@ print(X.Appearance(material=X.UnlitMaterial(emissiveColor=[1,1,1],
 print(X.Appearance(material=X.PhysicalMaterial(baseColor=[1,1,1],
         baseTexture=X.ImageTexture(url=["t.png"]))).XML())
 ```
-**Actual (both):**
+**Actual:**
 ```xml
 <Appearance>
   <UnlitMaterial emissiveColor='1 1 1'>
     <ImageTexture url='"t.png"'/>              <!-- no containerField -->
   </UnlitMaterial>
 </Appearance>
+<Appearance>
+  <PhysicalMaterial baseColor='1 1 1'>
+    <ImageTexture url='"t.png"'/>              <!-- no containerField -->
+  </PhysicalMaterial>
+</Appearance>
 ```
 **Expected:** `containerField='emissiveTexture'` (resp. `'baseTexture'`).
-**Impact:** the texture binds to the material's default `texture` slot, which
-the metallic-roughness/unlit lighting model ignores, so textured surfaces
-render as a flat base color (e.g. a textured chalkboard renders solid white).
+**Impact:** the texture is emitted with `ImageTexture`'s default `containerField`
+`texture`, which `PhysicalMaterial`/`UnlitMaterial` do not define as a field, so
+it is dropped/ignored and the surface renders untextured — a flat base color
+(e.g. a textured chalkboard renders solid white).
 
 ### Control (works) — node in its default field
 ```python
@@ -96,9 +102,14 @@ print(repr(getattr(j, "containerField", "<none>")))   # -> '<none>'
 field), set each child's `containerField` to the field's container name whenever
 it differs from the child type's default `containerField`.
 
+Note that x3d.py exposes no `containerField` setter at all — the constructor
+rejects a `containerField=` kwarg and a post-construction attribute assignment is
+ignored at `XML()` time — which is why string post-processing of the serialized
+output is the only available workaround.
+
 ---
 
-## Bug 2 — `EnvironmentLight.global` default is `True`, contradicting the X3D spec (`false`)
+## Bug 2 — `EnvironmentLight.global` default is `True`, diverging from the X3D 4.0 spec default (`false`)
 
 ```python
 from x3d import x3d as X
@@ -106,15 +117,24 @@ print(repr(X.EnvironmentLight().global_))   # -> True
 e = X.EnvironmentLight(); e.global_ = True
 print(e.XML())                              # -> <EnvironmentLight/>   (global omitted)
 ```
-The X3D 4.0 specification default for `EnvironmentLight` `global` is **`false`**
-(see x3d-4.0.dtd: `global %SFBool; "false"`). Because x3d.py's default is
-`True`, an explicit `global_=True` equals the (wrong) internal default and is
-omitted from output. A conformant reader then parses the missing attribute as
-`false`, so the light is **not** global and does not illuminate the scene as
-authored.
+The normative X3D 4.0 Lighting component specifies the `EnvironmentLight` field
+table as `SFBool [in,out] global FALSE` — i.e. the specified default is
+**`false`**. (The x3d-4.0.dtd line `global %SFBool; "false"` agrees, but note it
+sits inside a commented-out block in the DTD, so the field table is the primary
+authority here.) Because x3d.py's default is `True`, an explicit `global_=True`
+equals the internal default and is omitted from output. A conformant reader then
+parses the missing attribute as `false`, so the light is **not** global and does
+not illuminate the scene as authored.
 
-**Expected:** default `global = False` (matching the spec); `global_=True` then
-serializes as `global='true'`.
+This is a spec-divergence rather than a flat contradiction: x3d.py's `True`
+matches the convention used by the point/spot light nodes and X_ITE's documented
+behavior for `EnvironmentLight`, but the normative spec field table specifies
+`FALSE` for `EnvironmentLight.global`. The practical problem is that the
+divergent default is silently dropped from serialization, so output authored
+against x3d.py renders differently in a spec-default reader.
+
+**Expected:** default `global = False` (matching the normative spec field
+table); `global_=True` then serializes as `global='true'`.
 **Impact:** image-based ambient lighting silently fails; the scene is lit only
 by remaining direct lights. Confirmed in Castle Model Viewer; worked only after
 `global='true'` was injected post-serialization.

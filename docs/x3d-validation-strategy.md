@@ -33,13 +33,21 @@ The X3D MCP must generate **valid X3D** output. This document captures the valid
 
 ### Layer 4: Semantic Validation (Schematron-level)
 
-- DEF must be declared before USE reference
-- Interpolator `key` array length must match `keyValue` divisions
-- `coordIndex` values must be within `Coordinate.point` bounds
-- ROUTE `fromNode`/`toNode` must reference valid DEF names
-- ROUTE field names must exist on referenced nodes
-- `url` fields should have fallback values
-- No circular prototype definitions
+Implemented in `src/validation/semantic.py` (see `_ALL_CHECKS`):
+
+- DONE — DEF must be declared before USE reference (`_check_use_before_def`); USE must reference an existing DEF (`_check_def_use_consistency`)
+- DONE — Interpolator `key` array length must match `keyValue` divisions (`_check_interpolator_keys`)
+- DONE — ROUTE `fromNode`/`toNode` must reference valid DEF names (`_check_route_validity`)
+- DONE — ROUTE field names must exist on referenced nodes (`_check_route_validity`, also accessType direction + field-type checks)
+- DONE — `containerField` must name a real node container on the parent that accepts the child (`_check_containerfield`: unknown / not-node / type-mismatch)
+- DONE — Duplicate DEF names within a scene (`_check_duplicate_defs`)
+- DONE — Unused DEF: defined but never USE'd (`_check_def_use_consistency`)
+- DONE — Shape completeness: geometry + appearance children (`_check_shape_completeness`)
+- DONE — Empty grouping nodes have no effect (`_check_empty_groups`, with HAnimJoint/HAnimSegment/HAnimSite exemption)
+- DONE — Missing Viewpoint (`_check_missing_viewpoint`)
+- TODO — `coordIndex` values must be within `Coordinate.point` bounds
+- TODO — `url` fields should have fallback values
+- TODO — No circular prototype definitions
 
 ## Implementation Options
 

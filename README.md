@@ -22,6 +22,13 @@ cd x3d_mcp
 uv sync
 ```
 
+**Optional (PNG rendering):** the X_ITE render tools (`render_image`, `render_current_scene`) need Playwright-driven headless Chromium. This is optional and heavy, so it ships as an extra:
+
+```bash
+uv sync --extra render
+uv run python -m playwright install chromium
+```
+
 To verify the server starts correctly:
 
 ```bash
@@ -160,16 +167,18 @@ x3d_mcp/
       validate_tool.py     # Validation MCP tool wrappers
       convert.py           # Encoding conversion (XML, JSON, VRML)
       query.py             # Node/field metadata queries
-      render.py            # X3DOM HTML page wrapper for browser viewing
+      render.py            # X3DOM HTML page wrapper + X_ITE headless PNG rendering
       scene_ops.py         # Scene CRUD: modify, remove, move nodes
       animate.py           # Animation chain generation (TimeSensor + Interpolator + ROUTE)
       prompts.py           # MCP prompts for guided workflows
     x3d_utils/
       scene.py             # Scene graph state management
       x3duom.py            # X3DUOM parser, node/field metadata
+      source.py            # Shared inline-content / file-path input loader
     validation/
       validate.py          # XSD + JSON validation pipeline
       semantic.py          # Layer 4 semantic checks (DEF/USE, ROUTE validity, etc.)
+      autofix.py           # containerField auto-correction (autofix_x3d)
       schemas/             # Bundled x3d-4.1.xsd, x3d-4.1.dtd, X3DUOM 4.1
   dataset/
     schema.py              # Canonical training example schema, normalization
@@ -219,8 +228,9 @@ x3d_mcp/
 | Tool | Description |
 |------|-------------|
 | `validate_x3d` | Validate an X3D document (XML or JSON) against the XSD schema. Returns pass/fail with detailed error messages. |
-| `validate_current_scene` | Validate the current granular scene against the XSD schema. |
+| `validate_current_scene` | Validate the current granular scene; runs BOTH the XSD schema check and the semantic checks. |
 | `validate_semantic` | Run semantic checks on X3D XML beyond XSD: missing geometry/appearance on Shapes, empty grouping nodes, duplicate DEFs, USE/DEF consistency, ROUTE field/access-type/type-match validity, missing Viewpoints. Returns a markdown report. |
+| `autofix_x3d` | Auto-correct wrong/defaulted containerField attributes and return the fixed X3D document; companion to `validate_semantic`. |
 
 ### Conversion Tools
 
@@ -239,8 +249,12 @@ x3d_mcp/
 
 ### Render Tools
 
+There are **two rendering paths**. **X3DOM** powers interactive in-browser HTML previews (`x3dom_page`, `x3dom_starter`). **X_ITE** powers headless PNG capture (`render_image`, `render_current_scene`) via Playwright-driven Chromium, because X3DOM does not render `PhysicalMaterial`/HAnim and draws no meshes under headless SwiftShader (it only clears the background). Use X_ITE when you need a PNG to inspect; use X3DOM for an interactive page to open in a browser.
+
 | Tool | Description |
 |------|-------------|
+| `render_image` | Render an X3D scene (inline `content` or a file `path`) to a PNG via X_ITE in headless Chromium; renders HAnim + PhysicalMaterial PBR that X3DOM cannot. |
+| `render_current_scene` | Render the current granular (in-memory) scene to a PNG via X_ITE. The granular-mode counterpart of `render_image`. |
 | `x3dom_page` | Wrap X3D content (full document or scene fragment) in a standalone X3DOM HTML page for browser viewing. Lowercases tag/attr names, strips namespace declarations, embeds X3DOM 1.8.2 from CDN. Adapted from [niknarra/x3d-mcp](https://github.com/niknarra/x3d-mcp). |
 | `x3dom_starter` | Return a starter X3DOM HTML page with a small example scene. Useful as a known-good baseline. |
 
@@ -358,6 +372,7 @@ Full node reference: [docs/x3d-node-reference.md](docs/x3d-node-reference.md)
 | `lxml` | >=6.0 | XSD validation, Schematron validation, XSLT transforms |
 | `xmlschema` | >=4.3 | Pure-Python XSD validation (fallback) |
 | `jsonschema` | >=4.26 | JSON Schema validation for X3D JSON encoding |
+| `playwright` | >=1.40 | Optional (`--extra render`) -- headless Chromium for X_ITE PNG rendering |
 
 ## Docker
 

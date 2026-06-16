@@ -10,18 +10,21 @@ map; you approve each step.
 ## Already open (yours)
 - **PR #9** --- `fix/render-and-semantic-validation-bugs` --- *"Fix X3DOM renderer
   crashes/escaping and ROUTE semantic-checker false positives."* OPEN.
-  ⚠️ Overlaps today's work: our new X\_ITE backend **replaces** the X3DOM render
-  path, and the new semantic checks extend the same checker. Decide whether to (a)
-  fold the X\_ITE backend into #9, or (b) land it separately and note in #9 that
-  it supersedes the X3DOM crash fixes. (Recommend (b): #9 is a self-contained
-  bugfix; let it merge, then the X\_ITE PR builds on top.)
+  ✅ **Reconciliation verified (no conflict).** PR #9's `render.py` and
+  `semantic.py` fixes are already byte-identical in `main` (and thus in our
+  branches' ancestry); our X\_ITE work is purely *additive* and **keeps** the
+  X3DOM page path (so PR #9's escaping fix stays live) and the ROUTE/HAnim-grouping
+  semantic fixes. `git merge-tree --write-tree HEAD fix/render-and-semantic-validation-bugs`
+  returns **0 conflicts**. Recommendation: let PR #9 merge as the self-contained
+  bugfix it is; our PRs sit cleanly on top with no manual render.py/semantic.py
+  reconciliation.
 - PR #8 --- not ours (streamable-http transport).
 
 ## Branches and where they go
 | Branch | Commits vs main | Nature | Destination |
 |---|---|---|---|
 | `mcp-improvements` | 7 | canonical MCP contributions | **PR(s) to origin** |
-| `potter-creek-cave` | 19 (= mcp-improvements + 12 cave) | creative/heritage app | fork backup + demo |
+| `potter-creek-cave` | 20 (= 7 mcp-improvements + 13 cave) | creative/heritage app | fork backup + demo |
 | `moose-pipeline` | creative | rigged-moose pipeline | fork backup |
 | `fix/render-and-semantic-validation-bugs` | — | already PR #9 | (open) |
 | `main` | ahead 29 of origin/main | prior HAnim/classroom work | discuss w/ Don |
@@ -49,14 +52,15 @@ reviewable PRs**:
   (PBR)** that X3DOM cannot, and that don't draw at all headless under X3DOM.
 - Commits: `05be664` (initial render\_image), `903da38` (X\_ITE backend),
   `bac2d45` (serve file's directory).
-- Coordinate with PR #9 (it touches the old X3DOM renderer).
+- Stacks cleanly on PR #9 (verified no conflict; the X3DOM page path is retained).
 
 **PR B --- Semantic validation + autofix + canonical guidance**
 - containerField check (suggests the correct field), USE-before-DEF,
   interpolator key/keyValue length; `autofix_x3d`; granular non-default
   placement; proactive server `instructions`.
 - Commits: `aee0542`, `2ea847a`, `799c6a4`, `a812bc9`.
-- Some ROUTE/semantic overlap with PR #9 --- reconcile before opening.
+- Retains PR #9's ROUTE/HAnim-grouping semantic fixes (verified no conflict);
+  the new checks are additive.
 
 *(Alternatively land all 7 as one "X\_ITE rendering + semantic validation" PR ---
 simpler to file, larger to review.)*

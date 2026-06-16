@@ -353,13 +353,14 @@ def shaft(cx, cz, base_y, height, radius, color, opacity="1"):
 
 
 def strat_column(cx, cz):
-    """Banded stratigraphic cut of the NW fan (Sinclair's section)."""
-    # (label, thickness ft, color) bottom-up
+    """Banded stratigraphic cut of the NW fan, in Sinclair's (1904) documented
+    sequence (bottom-up): cemented breccia, ~1.5 ft volcanic ash, upper clay to
+    ~13.5 ft. Thicknesses scaled down so the band column fits the section."""
+    # (label, thickness ft, color) bottom-up -- matches the cited NW-fan section
     bands = [
-        ("cemented breccia", 6.0, "0.32 0.24 0.18"),
-        ("lower clay",       4.0, "0.45 0.34 0.26"),
+        ("cemented breccia", 5.0, "0.32 0.24 0.18"),
         ("volcanic ash",     1.5, "0.78 0.76 0.70"),
-        ("upper clay",       2.0, "0.5 0.38 0.28"),
+        ("upper clay",       6.5, "0.5 0.38 0.28"),
     ]
     out = ['<Group>']
     y = floor_y(cx) - sum(b[1] for b in bands)   # sink the column into the fan
