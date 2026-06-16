@@ -49,19 +49,41 @@ Catalogue is machine-readable in `archive.json`.
 
 ---
 
-## Fauna — anatomical drawings (in progress)
+## Fauna — real anatomical drawings (traced, public-domain; no AI)
 
-> Per the archive principle, each excavated taxon is to be represented by a **real
-> published anatomical / skeletal line drawing**, traced and cited — not AI imagery.
-> Hero: the type *Euceratherium collinum* skull from its original description.
+> Each excavated taxon is represented by a **real published anatomical / skeletal
+> line drawing**, traced and cited. Honesty note: the *Euceratherium* type skull
+> (Pls. 50-51) is published only as **photographs**, so the genuine published *line
+> drawing* of the type animal is its **dental** Text Fig. 1. The Shasta ground sloth,
+> by contrast, has a full lateral **skeletal** line drawing.
 
-### F1 · *Euceratherium collinum* (shrub-ox) — type skull
-- **Original:** Sinclair, W. J. & Furlong, E. L. (1904) *Euceratherium, a new ungulate
-  from the Quaternary caves of California*, **Plates 50 & 51** (type cranium, lateral
-  & facial). University of California, Bulletin of the Department of Geology **3(20):
-  411–418.** Type locality: **Potter Creek Cave**.
-- **Source scan:** archive.org `bulletinofde319021904univ` (BHL/Smithsonian).
-- **Trace:** _pending_ (leaf numbers from the fauna-drawing hunt).
+### F1 - *Euceratherium collinum* (shrub-ox) - left superior dental series
+- **Original:** Sinclair, W.J. & Furlong, E.L. (1904) *Euceratherium, a new ungulate
+  from the Quaternary caves of California*, **Text Fig. 1** ("Left superior dental
+  series, x1/3"). Univ. Calif. Bull. Dept. Geology **3(20):411-418.** Type locality:
+  **Potter Creek Cave** (type cranium UCMP 8751). [Plates 50-51 are halftone photos.]
+- **Source:** archive.org `bulletinofde319021904univ`, leaf n598. Public domain (1904).
+- **Trace:** `fauna/euceratherium_dental.svg`
 
-_(further taxa — Nothrotheriops, Canis dirus, Arctodus, Mammuthus, Camelops — appended
-as their public-domain skeletal plates are located and traced.)_
+### F2 - *Nothrotheriops shastensis* (Shasta ground sloth) - lateral skeleton
+- **Original:** Stock, C. (1925) *Cenozoic Gravigrade Edentates of Western North
+  America*, **Fig. 4** (skeleton in lateral view). Carnegie Institution of Washington,
+  Publication **331**, p. 33. (Ground sloth first named: Sinclair 1905.)
+- **Source:** BHL item 275982 / archive.org `cenozoicgravigra00stoc`, leaf 57. US work
+  pub. 1925 -> public domain in the US.
+- **Trace:** `fauna/nothrotheriops_skeleton.svg`  *(the hero - a full articulated skeleton)*
+
+### F3 - *Canis dirus* (dire wolf) - lateral skull
+- **Original:** Merriam, J.C. (1912) *The Fauna of Rancho La Brea, Part II: Canidae*,
+  **text-fig. 1** (skull no. 10834, lateral, x1/2). Memoirs of the University of
+  California **1(2)**, p. 224. (Pen line drawing, not a photograph.)
+- **Source:** archive.org `faunaofrancholab02merr`, leaf 12. Public domain (1912).
+- **Trace:** `fauna/canis_dirus_skull.svg`
+
+### Located, not yet traced
+- ***Mammuthus*** - lateral skeletal line drawings: Osborn, H.F. (1942) *Proboscidea*
+  vol. 2, Figs. 996-998, p. 1130 (archive.org `proboscideamonog02osbo`, leaf 364).
+- ***Camelops*** - from the same hunt; exact figure pending.
+- ***Arctodus simus*** - **no line drawing exists**; Merriam & Stock (1925), Carnegie
+  Publ. 347, figures the skull/skeleton only as **photographs**. Skipped under the
+  no-AI / real-drawing rule.

@@ -33,10 +33,29 @@
       "source_url": "see A1", "public_domain": true, "trace": "derived from pcc_plan_plate14.svg", "x3d": ["potter_creek_floor.x3d"]
     },
     {
-      "id": "F1", "subject": "Euceratherium collinum (shrub-ox) — type skull",
-      "citation": "Sinclair, W.J. & Furlong, E.L. (1904) Euceratherium, a new ungulate from the Quaternary caves of California, Plates 50 & 51 (type cranium). Univ. Calif. Bull. Dept. Geol. 3(20):411-418. Type locality: Potter Creek Cave.",
-      "source_url": "https://archive.org/details/bulletinofde319021904univ",
-      "public_domain": true, "trace": "pending", "x3d": [], "status": "pending"
+      "id": "F1", "subject": "Euceratherium collinum (shrub-ox) — left superior dental series",
+      "citation": "Sinclair, W.J. & Furlong, E.L. (1904) Euceratherium, a new ungulate from the Quaternary caves of California, Text Fig. 1 (\"Left superior dental series, x1/3\"). Univ. Calif. Bull. Dept. Geol. 3(20):411-418. Type locality: Potter Creek Cave (type cranium UCMP 8751). [Pls. 50-51 are halftone photographs, not line drawings.]",
+      "source_url": "https://archive.org/details/bulletinofde319021904univ (leaf n598)",
+      "public_domain": true, "trace": "fauna/euceratherium_dental.svg", "x3d": [], "status": "traced"
+    },
+    {
+      "id": "F2", "subject": "Nothrotheriops shastensis (Shasta ground sloth) — lateral skeleton",
+      "citation": "Stock, C. (1925) Cenozoic Gravigrade Edentates of Western North America, Fig. 4 (skeleton in lateral view). Carnegie Institution of Washington Publication 331, p. 33.",
+      "source_url": "https://www.biodiversitylibrary.org/item/275982 ; https://archive.org/details/cenozoicgravigra00stoc (leaf 57)",
+      "public_domain": true, "trace": "fauna/nothrotheriops_skeleton.svg", "x3d": [], "status": "traced", "note": "The hero — a full articulated skeletal line drawing."
+    },
+    {
+      "id": "F3", "subject": "Canis dirus (dire wolf) — lateral skull",
+      "citation": "Merriam, J.C. (1912) The Fauna of Rancho La Brea, Part II: Canidae, text-fig. 1 (skull no. 10834, lateral, x1/2). Memoirs of the University of California 1(2), p. 224.",
+      "source_url": "https://archive.org/details/faunaofrancholab02merr (leaf 12)",
+      "public_domain": true, "trace": "fauna/canis_dirus_skull.svg", "x3d": [], "status": "traced"
+    },
+    {
+      "id": "F-pending", "subject": "Located, not yet traced",
+      "mammuthus": "Osborn, H.F. (1942) Proboscidea vol. 2, Figs. 996-998, p. 1130 (archive.org proboscideamonog02osbo, leaf 364).",
+      "camelops": "from the same fossil hunt; exact figure pending.",
+      "arctodus_simus": "No line drawing exists; Merriam & Stock (1925), Carnegie Publ. 347, figures the skull/skeleton only as photographs. Skipped under the no-AI / real-drawing rule.",
+      "public_domain": true, "status": "pending"
     }
   ]
 }
