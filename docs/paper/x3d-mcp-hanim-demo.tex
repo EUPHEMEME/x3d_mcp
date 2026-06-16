@@ -34,8 +34,8 @@
 
 \title{\textbf{Authoring Standards-Conformant HAnim Humanoids with an\\
 X3D Model Context Protocol Server: A Human--AI Case Study}}
-\author{Alexander Hoffman \and Claude (Anthropic Claude Code)\\[2pt]
-  \small\textit{Draft --- collaborative authorship}}
+\author{Alexander Hoffman\\[2pt]
+  \small\textit{Draft --- see the Use of Generative AI statement}}
 \date{\today}
 
 \usepackage{draftwatermark}
@@ -51,7 +51,7 @@ We describe the collaborative construction of two interactive 3D demonstrations
 on the emerging ISO/IEC 19774 (HAnim) Level of Articulation~5 (LOA5) draft and
 delivered entirely through an X3D Model Context Protocol (MCP) server driven by a
 large language model. Rather than treating the model output as a finished
-artifact, we treat the human--AI pair as co-authors: the human supplies intent,
+artifact, we treat the human--AI pair as collaborators: the human supplies intent,
 domain pointers, and aesthetic judgment; the AI supplies generation, a tight
 verify-by-render feedback loop, and bug-level contributions back to the toolchain.
 We report the architecture (X3D MCP, the canonical \texttt{x3d.py} package, the
@@ -404,5 +404,12 @@ verify-by-render loop so the agent is accountable to what the scene looks like,
 not just whether it parses. The result is a standards-conformant, interactive
 LOA5 humanoid demonstration---and a short list of contributions handed back to
 the tools that made it.
+
+\paragraph{Use of generative AI.} Anthropic's Claude (Claude Code) was used as a
+tool throughout this work---procedural generation, schema and semantic validation,
+render automation, and drafting---under the human author's direction. In keeping
+with the ACM Policy on Authorship, the generative AI is not credited as an author:
+the human author conceived the work, made every substantive decision, and is
+solely responsible for the content. This statement discloses its use as required.
 
 \end{document}
