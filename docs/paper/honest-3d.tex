@@ -1,0 +1,394 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage[htt]{hyphenat}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{parskip}
+\setlength{\emergencystretch}{3em}
+\hypersetup{colorlinks=true, linkcolor=blue!45!black,
+  urlcolor=blue!45!black, citecolor=blue!45!black}
+\graphicspath{{figures/}}
+\newcommand{\fig}[3]{\begin{figure}[ht]\centering
+  \includegraphics[width=#2\linewidth]{#1}
+  \caption{#3}\label{fig:#1}\end{figure}}
+\newcommand{\xite}{X\_ITE}
+
+\title{\textbf{Honest 3-D at Machine Speed: Provenance-Disciplined, Standards-Conformant X3D Authored by a Human-AI Pair}}
+\author{Alexander Hoffman \and Claude (Anthropic Claude Code)\\[2pt]
+  \small\textit{Draft --- collaborative authorship}}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Generative models can produce interactive 3-D almost instantly, but their default failure mode -- confident, plausible invention -- is disqualifying for heritage work, where a convincing fabrication is a falsified record. We present a research program showing that a human--AI pair can author standards-conformant, interactive X3D at machine speed without sacrificing honesty, provided three conditions hold together: the authoring agent can verify-by-render what it makes; the work integrates the actual ISO standards (X3D 4.0 and HAnim) rather than reinventing them; and a hard provenance discipline keeps documented geometry forever distinct from interpretive dressing while refusing AI-generated imagery and invented geometry. The program comprises three interlocking artifacts. The first is a reusable X3D Model Context Protocol toolchain whose central finding is that the choice of renderer is a correctness property, not an aesthetic one -- a headless X\_ITE backend renders the PBR and HAnim content that X3DOM leaves blank. The second is a character-and-creature pipeline built on the canonical 150-joint HAnim figure. The third, and the flagship, is a heritage archive of two Pleistocene fossil caves excavated under John C. Merriam a century ago and now beneath Shasta Lake. Throughout, an explicit on-screen seam separates what the survey records from what we inferred. We report the engineering, the discipline, a roadmap, and the ethical commitments -- to the Winnemem Wintu, to honest authorship, to fabrication-free accuracy -- that bind the work into one.
+\end{abstract}
+
+\section{The problem and the vision}\label{sec:vision}
+
+A generative model will build you a cave in seconds, and that is exactly the danger. Asked for a chamber it has never seen, a language model returns confident, fluent, plausible geometry --- a roof of reasonable height, a sloth at a believable depth, a stratigraphic column that reads like a textbook's --- and none of it need be true, nor will any of it announce that it is not. For most of computer graphics that fluency is a gift. For a heritage archive, whose entire worth is its fidelity to a documented past, it is a hazard: the faster the fabrication, the more convincing the falsified record. The animating question of this paper is whether the speed can be kept while the hazard is removed.
+
+We argue that it can, and that the answer is a method rather than a model. A human and an AI agent, working as a pair, can author standards-conformant, interactive 3-D at machine speed \emph{without} sacrificing honesty --- but only under three conditions held together. First, the agent must be able to \emph{see} what it makes: a toolchain that closes a verify-by-render loop, so that no scene is called finished until it has been rendered and inspected, because schema-valid is not the same as correct. Second, the work must \emph{integrate the actual ISO standards} --- X3D~4.0~\cite{x3d4} and HAnim~\cite{hanim} --- rather than reinvent them, looking the normative rules up instead of recalling them and routing motion and material into the standard's own nodes. Third, a hard \emph{provenance discipline} must keep what is \emph{documented} forever distinct from what is \emph{interpretive}, and must refuse outright the two things a generative pipeline is most tempted to add: AI-generated imagery and invented geometry. Remove any one of the three and the speed becomes a liability; held together, they make fast 3-D that a community can trust.
+
+\fig{samwel_hero}{0.9}{The flagship, and the thesis in one frame: the interpretive descent into Samwel Cave --- Chamber One, the deep drop we identify (and label) with the legendary $\sim$90\,ft hole of the Lost Maiden, and Chamber Two with its glowing Magic Pool at the bottom. Every element is flagged documented or interpretive in the scene's own on-screen caption. This is honest 3-D at machine speed: fast, lit, navigable --- and answerable to its sources.}
+
+These commitments are realized in three interlocking artifacts, presented here as one research program. The first is a reusable toolchain --- an X3D Model Context Protocol (MCP) server~\cite{mcp} --- whose central contribution is that it lets an authoring agent look up the standard, validate against the object model, and render and inspect its own output; the single hardest engineering finding of the project, that the choice of renderer is a correctness property and not a preference, lives here (\S\ref{sec:toolchain}, Fig.~\ref{fig:x3dom_vs_xite}). The second is a character-and-creature pipeline that adopts the canonical 150-joint HAnim figure wholesale and drives our own motion into its joints, carrying a human runner and a ``living'' classroom skeleton through to the rigged, PBR-shaded fauna the caves will need (\S\ref{sec:characters}). The third, and the flagship, is a heritage 3-D archive of two Pleistocene fossil caves, authored end-to-end under the provenance discipline (\S\ref{sec:caves}).
+
+The caves are where method becomes subject. Potter Creek Cave and Samwel Cave, in Shasta County, California, were excavated in the early 1900s by field parties under \textbf{John Campbell Merriam}, and the reports that came out of them are founding documents of West Coast Pleistocene palaeontology~\cite{sinclair04,sf04,feranec07}. The work is also personal: the man who directed the digs was the human author's great-great-grandfather, the ground is sacred to the Winnemem Wintu, and it now lies beneath the reservoir that Shasta Dam raised over the McCloud canyon between 1935 and 1945. The stakes of getting it right --- to scale, to source, and to the line between what is recorded and what is imagined --- are not abstract here. The archive therefore carries two honesty regimes side by side: a lit, dripstone-clad immersive reconstruction that is openly interpretive, and a documented extreme that invents nothing at all --- faithful vector traces of the original survey plates and of the published anatomical drawings of the excavated animals (Figs.~\ref{fig:samwel_hero} and~\ref{fig:pcc_plan}). The boundary between them is drawn explicitly, on screen, in every scene.
+
+That boundary begins as engineering and ends as ethics, and the paper is organized to follow it across. Section~\ref{sec:provenance} states the provenance discipline and shows where it does its hardest work. Section~\ref{sec:toolchain} describes the toolchain that lets the agent see, including the renderer finding on which the speed claim rests. Section~\ref{sec:characters} develops the character-and-creature pipeline. Section~\ref{sec:caves} presents the caves flagship in full. Section~\ref{sec:future} sets the roadmap --- anatomy outward from the skeleton, living and dated caves, and a reusable survey-to-archive recipe. Section~\ref{sec:ethics} argues that, toward the Winnemem Wintu, toward honest authorship, and toward an ethic that refuses fabrication, these are one commitment seen from three sides. Throughout, the byline is meant literally: we built this --- a person answerable for every judgment, and a fast tool answerable to that person's eye.
+
+\section{The provenance discipline}\label{sec:provenance}
+
+The central risk in letting a generative model author a heritage reconstruction is not that it will fail --- it is that it will succeed too smoothly. A language model's default failure mode is confident, plausible invention: asked for a cave it has never seen, it will happily produce a chamber of reasonable proportions, a sloth at a believable depth, a stratigraphic column that reads like one from a textbook. None of these need be true, and none will announce that they are not. For an archive whose entire value rests on its relationship to a documented past, that fluency is a hazard rather than a feature. The discipline described here exists to convert that hazard into a governed boundary --- a hard, always-visible line between what is \emph{documented} (measured, cited, and traceable to a public-domain source) and what is \emph{interpretive} (plausible dressing supplied to make the documented skeleton legible and lit) --- and to refuse outright the two things a generative pipeline is most tempted to add: AI-generated imagery and invented geometry.
+
+We state the rule plainly because it is meant to be enforced, not admired. Every generator program carries a \texttt{PROVENANCE} comment block; every scene carries an on-screen caption; and both say, feature by feature, which geometry is to scale from the survey and which is interpretive. In Potter Creek the documented set is the 107\,ft chamber, the $\sim$75\,ft domed roof, the two coalescing breccia fans, the near-vertical chimneys, and the 42\,ft entrance pit, all from Sinclair's 1904 monograph~\cite{sinclair04}; the interpretive set is every speleothem, the rock texture, the pool extents, and the lighting. For Samwel the documented set is the chamber \emph{topology} after Feranec et al.~\cite{feranec07} --- Entrance and Porcupine Entrance, the Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber, and the deep drop to Chamber Two --- while the individual room \emph{sizes}, which no source records, are interpretive. The same caption surfaces the seam between fact and tradition --- the surveyed drop we identify with the legendary hole, a choice we own rather than hide (\S\ref{sec:caves}).
+
+\subsection{Trace, do not invent}
+
+The cleanest expression of the rule is the documented extreme: the survey drawings themselves. The original plates are line art, not text, so OCR --- which recovered the chamber \emph{names} --- cannot recover their geometry. Instead of asking a model to draw ``a cave plan,'' we reproduce the actual plate. The pipeline is mechanical on purpose: \texttt{pdftoppm} rasterises the figure at full resolution, we crop and threshold it, \texttt{potrace} vectorises the result to SVG, and \texttt{svg\_to\_x3d.py} lifts the traced paths into a to-scale X3D \texttt{IndexedLineSet}~\cite{x3d4}. Nothing in that chain originates pixels; it only transfers them from a public-domain scan into navigable geometry. Figure~\ref{fig:pcc_plan} is the worked case --- a faithful trace of Sinclair's (1904) Plate~14, the ``topographic map of the floor of the main chamber, contour interval 6 inches,'' carrying its floor contours, the seven numbered section lines, the stalagmite bosses, the altar, and the buried galleries, reproduced identically and placed in the same web pipeline as the interpretive model. It is the measured pole of the same discipline that governs the lit, dripstone-clad hero view: one archive, two honesty regimes, the boundary between them drawn explicitly rather than blurred.
+
+\fig{pcc_plan}{0.96}{The documented extreme: a faithful vector trace of Sinclair's (1904, Plate~14) topographic map of the Potter Creek chamber floor, contour interval 6 inches --- floor contours, section lines~1--7, stalagmite bosses, the altar, and the buried galleries, reproduced identically and lifted to a to-scale X3D \texttt{IndexedLineSet}. No pixel in this trace originates with the model; it is transferred from the public-domain scan.}
+
+The same trace-don't-invent rule extends to the fauna the caves are famous for. Rather than generate plausible creatures, we located the \emph{original published anatomical drawings} of the excavated taxa and vectorised them with the identical pipeline: the Shasta ground sloth as a complete lateral skeleton (Stock 1925~\cite{stock25}), the dire wolf as a lateral skull (Merriam 1912~\cite{merriam12}), and the Potter-Creek-type shrub-ox \emph{Euceratherium collinum} as its dental series (Sinclair \& Furlong 1904~\cite{sf04}). Here the discipline did real, subtractive work. The \emph{Euceratherium} type cranium survives only as halftone \emph{photographs}, so the genuine published \emph{line drawing} of the type animal is the teeth, not a skull; and the giant short-faced bear \emph{Arctodus simus} is omitted entirely, because its material was figured only photographically and no line drawing exists to trace. A rule that lets you keep a thing only when a real drawing exists is a rule that occasionally forces you to drop a thing you would like to show. That is the point.
+
+\subsection{Where provenance does its hardest work}
+
+The most tempting place to invent is the join between a deposit and its fauna: a viewer \emph{wants} each beast pinned at its depth, and a model will happily oblige. The sources mostly forbid it, and saying so precisely is the contribution. We distilled the primary stratigraphic literature --- Sinclair 1904~\cite{sinclair04}, Payen \& Taylor 1976~\cite{payen76}, Feranec et al.\ 2007~\cite{feranec07} --- into a citation-anchored spec, \texttt{strata\_spec.json}, in which every named layer and every faunal marker carries its source and page, and a \texttt{must\_not\_invent} list enumerates the inferences the record will not bear. Figure~\ref{fig:pcc_strata} renders that spec for Potter Creek. Sinclair's NW-fan column (strata S,A,B,C,D,E,F,G,H, in feet) is drawn to scale, but a taxon is pinned to a layer \emph{only} where a depth is actually recorded: the \emph{Euceratherium} radius and ulna at 170\,cm (8250$\pm$330\,$^{14}$C\,BP, the first direct date on the species; Payen \& Taylor 1976), the polished ``bone implements'' at 80--140\,in whose depths are documented but whose \emph{human origin is refuted}, the redated late-Holocene flake, and the cultural midden. The remaining 52-species assemblage gets one honest marker spanning the bone-bearing clay and breccia, quoting Sinclair directly: ``No distinction is to be drawn between the collections from the different layers \ldots the fauna listed is a unit'' (p.~19). The Shasta ground sloth --- a real traced skeleton, but with no recorded provenance --- therefore stands \emph{beside} the column at life size, flagged interpretive and unprovenanced, never embedded in a stratum. Even the stacked thicknesses are honest: they are Sinclair's ``greatest'' values, which pinch laterally, so the column is a render composite, and the legend says so. Samwel is the counter-case --- four AMS-dated Chamber-Two specimens \emph{do} carry real square-and-inch levels and are pinned --- but its title is ``depth is not age,'' because the shallower \emph{Lepus} is older than the deeper \emph{Aplodontia} and the deposit is not chronologically stratified.
+
+\fig{pcc_strata}{0.99}{Potter Creek bone-horizon section, where provenance does its hardest work (interpretive hero at left, documented column at centre, cited depth-callouts at right). Sinclair's strata are to scale; fauna are pinned only at documented depths. The mixed assemblage is a single bracketed marker quoting Sinclair's ``the fauna listed is a unit'' (p.~19); the ground-sloth skeleton (Stock 1925) is flagged interpretive and unprovenanced, standing beside --- never inside --- the deposit. The legend states that the stacked ``greatest'' thicknesses are a render composite.}
+
+None of this is enforced by good intentions alone. The boundary is materialised in the artifacts: the on-screen documented-vs-interpretive caption in every scene, the cited \texttt{strata\_spec.json} with its \texttt{must\_not\_invent} clauses, and a machine-readable \texttt{archive.json} catalogue in which each traced drawing records its original plate, its source scan, and its public-domain status. The cost is modest --- recording what is measured versus imagined takes minutes --- and the return is twofold: it removes a class of future mis-citation, and it forces better research, since you cannot label a feature ``documented'' until you have found the page that documents it. It is how we caught that the maiden's fall is legend while the level-joining drop is survey, and it is the standard against which the rest of this paper asks to be measured.
+
+\section{The toolchain: making an agent that can see}\label{sec:toolchain}
+
+Speed without sight is just fast wrongness. An agent that can emit a thousand lines of X3D a second but cannot tell whether those lines drew anything is not an author; it is a random-XML generator with good manners. The enabling layer of this whole program is therefore not the generation step --- language models generate fluently --- but the \emph{verify-by-render loop} that closes around generation: a way for the agent to \emph{look up} the standard instead of recalling it, to \emph{validate} against the rules that schema checking misses, and finally to \emph{render and inspect} its own output before declaring anything finished. We built that loop into an X3D Model Context Protocol (MCP)~\cite{mcp} server, and the rest of this paper's speed claim rests on it.
+
+\subsection{The canonical path}
+
+The MCP exposes the toolchain to the model the way an editor's menus expose it to a person, but programmatically. Its tools encode exactly one sanctioned authoring order, and the server's own instructions refuse to let the agent improvise around it:
+\texttt{describe\_node} (look up a node's exact fields, types, and default \texttt{containerField}) $\rightarrow$ build $\rightarrow$ \texttt{validate\_x3d} \emph{and} \texttt{validate\_semantic} $\rightarrow$ \textbf{render and look}. The rule is blunt: a scene is not done until \texttt{validate\_semantic} is clean \emph{and} the agent has rendered it and looked at the image. Both cave scenes and both HAnim demos pass this path with zero validator errors --- but passing the validators is the middle of the path, never the end.
+
+\subsection{Look up, do not recall}
+
+The first reason the loop matters is that an LLM's memory of a 4,000-page ISO standard is plausible rather than exact, and X3D punishes plausibility in one particular place: \texttt{containerField}. Every child node belongs to a specific \emph{field} of its parent, and a node's default \texttt{containerField} only fits its usual parent. Place a texture inside a \texttt{PhysicalMaterial} and it must declare \texttt{baseTexture}, \texttt{normalTexture}, or \texttt{metallicRoughnessTexture}; place a skeleton root inside an \texttt{HAnimHumanoid} and it must say \texttt{containerField='skeleton'}. Get it wrong --- or let it default --- and a conforming viewer silently drops or misfiles the node. Nothing errors; the render is simply blank or missing a limb. This is the commonest silent failure in the whole enterprise, and it is precisely the kind of thing recall gets wrong.
+
+\texttt{describe\_node} removes the guess. For the caves, every material field we used --- \texttt{baseTexture}, \texttt{normalTexture}, \texttt{metallicRoughnessTexture}, and the scalar \texttt{metallic} (default \texttt{1}, which we set to \texttt{0} so dielectric limestone does not read as polished metal) --- came from the node description, not from memory. Looking up costs one tool call; recalling wrong costs a blank render, a confused debugging session, and a dent in the trust that makes the pair work.
+
+\subsection{Validators built from the object model}
+
+Schema validation is necessary and insufficient. \texttt{validate\_x3d} runs the XSD and catches malformed XML, but a great deal of broken-but-schema-valid X3D sails straight through it. So we built a second checker, \texttt{validate\_semantic}, from the X3D Unified Object Model (X3DUOM)~\cite{x3duom} --- the machine-readable description of every node's fields and accepted child types. It enforces the rules that the schema cannot see: a wrong or defaulted \texttt{containerField} (and it names the canonical field the node should be using, so the fix is mechanical, not a search); a \texttt{USE} that appears before its \texttt{DEF}, which leaves a dangling reference; and interpolator \texttt{key}/\texttt{keyValue} arrays of mismatched length, which silently corrupt an animation. Crucially the semantic checker does not merely reject --- it prescribes. Paired with it, \texttt{autofix\_x3d} rewrites the offending \texttt{containerField}s and returns the corrected document, so the agent's most frequent mistake has a one-call repair. The value of a validator that names the exact fix, rather than merely flagging that something is wrong, is hard to overstate when the consumer is a model iterating at speed.
+
+\subsection{Why ``schema-valid'' is not ``correct''}
+
+Even with both validators green, a scene can be visually wrong in ways no static check will ever catch: geometry off camera, a surface unlit, a model mis-scaled to a speck or a wall, a node silently dropped for a reason the validators happened not to cover. The only instrument that detects these is the one a human author uses without thinking --- an eye. So the last step of the path is to render the scene to a PNG and have the agent inspect it directly. On the HAnim side this loop caught an invisible humanoid, a neon-glowing skull, a blank chalkboard, and washed-out PBR lighting, each of which validated cleanly and looked wrong. \emph{Schema-valid is not the same as correct}, and the render step is where that gap is closed.
+
+\subsection{The renderer is a correctness property}
+
+This is where the choice of renderer stops being an aesthetic preference and becomes a hard correctness property of the toolchain --- the single most important engineering finding of the project. The MCP's original \texttt{render\_image} tool drove X3DOM~\cite{x3dom} through the synchronous Playwright API, and it failed for exactly the scenes we cared about in two compounding ways. First, called from an asynchronous MCP tool it raised \emph{``Sync API inside the asyncio loop.''} Second, and more fundamental: under our headless pipeline --- Chromium via Playwright, software WebGL through ANGLE/SwiftShader --- X3DOM cleared the background and drew \emph{no geometry at all} for either a PBR cave or an HAnim figure. We scope that claim to what we tested (X3DOM \texttt{x3dom.org/release}, 1.8.x, under headless SwiftShader); it is a rendering-coverage and headless-software-WebGL gap, not a verdict on X3DOM everywhere. But the consequence is stark: an authoring agent whose renderer cannot draw the standard's current material model, or its humanoid model, cannot verify its own work. The render step --- the part that makes the agent honest --- was silently a no-op for the most important content.
+
+\fig{x3dom_vs_xite}{0.82}{Controlled comparison: two identical scene files under the same headless Chromium/SwiftShader pipeline. X3DOM (left) draws only the background; \xite{} (right) renders the displaced, normal-mapped \texttt{PhysicalMaterial} cave (top) and the HAnim humanoid on its slalom course (bottom). X3DOM does not support HAnim and has limited X3D~4.0 \texttt{PhysicalMaterial} coverage; \xite{} renders both --- which is exactly the capability an authoring agent must have to see what it makes.}
+
+Figure~\ref{fig:x3dom_vs_xite} is the controlled result: the same two scene files, the same headless pipeline, X3DOM drawing only background and \xite{}~\cite{xite} rendering the full PBR cave and the full HAnim runner. PBR \emph{and} HAnim together are the capability the community most needs an authoring agent to be able to see, and only one of the two players delivers it headless.
+
+\subsection{The \xite{} backend, and why transport is part of it}
+
+So we rebuilt the render backend around \xite{}, and contributed it back to the MCP. Three details make it work where the naive version does not. It uses \emph{asynchronous} Playwright, so it runs inside the MCP event loop instead of raising. It serves the scene over an \emph{ephemeral loopback HTTP server}, because \xite{} fetches the \texttt{.x3d} by XHR and the browser's same-origin policy blocks that for \texttt{file://} URLs --- a black screen and a CORS error otherwise. And it is \emph{asset-aware}: given a file path it serves that file's own directory, so relative PBR textures and inlined geometry resolve exactly as they would in a browser. The two transport traps are worth stating plainly because both cost real time before we found them: \texttt{file://} silently defeats \xite{}, and inline X3D pasted into HTML is mangled by the HTML parser lowercasing tag and attribute names. A small local HTTP server is the only reliable path, and pages should \emph{detect} \texttt{file://} and say so rather than show black. With this backend every rendered figure in this program was produced through the agent's own eye, pinned to \xite{}~15.1.4 for reproducibility.
+
+\subsection{Generation and delivery, the canonical way}
+
+Around the loop sits a deliberately conventional pipeline, chosen so the work composes with the ecosystem rather than forking it. Programmatic node construction uses \texttt{x3d.py}~\cite{x3dpy}, the Web3D Consortium's official Python package, which builds a 150-joint humanoid or a procedural cave as objects that serialize to valid XML --- far more maintainable than string templating. Delivery to the browser runs the authored \texttt{.x3d} through the canonical \texttt{X3dToX3dom.xslt}~\cite{x3dtox3dom} stylesheet via the Saxon~\cite{saxon} XSLT~2.0 processor. For standards-side checking and desktop viewing we lean on X3D-Edit in NetBeans~\cite{netbeans} and the GPU-accelerated Castle Model Viewer~\cite{castle}. The authored file stays the source of truth, full of real HAnim and PBR nodes; when a player cannot render a construct, we adapt the \emph{page}, never the source.
+
+\subsection{Friction handed back as contribution}
+
+Using the canon at speed surfaces its rough edges, and we treated each as a contribution rather than a private workaround. Into the MCP went the \xite{} backend, the X3DUOM-built semantic validators with their named fixes, \texttt{autofix\_x3d}, granular-mode parity for non-default node placement, and server instructions that frame the canonical path for every fresh model instance. Outward we carry a standing report against \texttt{x3d.py} (v4.0.65.3): it \emph{drops} \texttt{containerField} on nodes placed in a non-default field --- a joint in \texttt{skeleton}, a texture in \texttt{baseTexture} --- and it defaults \texttt{EnvironmentLight.global} to \texttt{true} where the normative spec~\cite{x3d4} specifies \texttt{false}. Both serialize to schema-valid XML that nonetheless renders wrong, which is the entire lesson of this section in one bug: the things that pass the schema and still break the picture are the ones that matter, and only an agent that renders and looks will ever catch them. And the X3DOM HAnim gap remains a concrete, well-scoped opportunity for the community to close.
+
+\section{The character pipeline}\label{sec:characters}
+
+The figural strand of the program asks a narrower version of the central question: can a human--AI pair author an articulated, animate \emph{character} fast, and still stay inside the standard rather than around it? Characters are where the temptation to fake is strongest. A skeleton is a deep hierarchy with strict naming, and the quickest way to make something that \emph{looks} like it moves is to nest a pile of \texttt{Transform} nodes and rotate them. That shortcut produces a puppet that no standards tool recognizes as a humanoid. The discipline we held instead was to adopt the canonical HAnim figure wholesale and route our motion into \emph{its} joints---and the payoff is a pipeline that carries straight through to the interpretive fauna of the caves.
+
+\subsection{The stick-figure turn: from faked joints to real HAnim}
+
+The first runnable figure did exactly the tempting thing. It faked articulation with nested \texttt{Transform} nodes and generated stick geometry, and it ran a slalom course with its gait cadence locked to ground speed so the feet did not skate (Figure~\ref{fig:fig_stick_loa4}). It looked plausible in a single viewer and validated against the schema. But it was not a humanoid in any sense the ISO/IEC 19774 HAnim standard~\cite{hanim} would recognize: no \texttt{HAnimHumanoid}, no named \texttt{HAnimJoint} hierarchy, no \texttt{HAnimSegment} carrying the geometry. Schema-valid is not the same as standards-conformant, and neither is the same as correct.
+
+\fig{fig_stick_loa4}{0.6}{An early LOA-4 figure with generated stick geometry running the slalom course, before the switch to real \texttt{HAnimJoint}/\texttt{HAnimSegment} nodes. The gait cadence is locked to ground speed so the feet do not skate.}
+
+
+The turn was to throw the puppet away and adopt the real thing: the Web3D \texttt{AllBonesLOA5Skeletons} model~\cite{allbones}, a 150-joint figure at the draft Level of Articulation~5~\cite{loa5draft} whose segments inline 243 individual bone meshes (Figure~\ref{fig:fig_canonical_skeleton}). The published 2019 standard tops out at LOA-4; LOA5 is the active draft, and the example archive ships both the figure and standardized Walk, Run, and Jump cycles driven by interpolators. We extracted the 150-joint humanoid as a reusable fragment and embedded it so that its \texttt{hanim\_}-prefixed joint \texttt{DEF}s stayed in scope for our own animation \texttt{ROUTE}s. Our gait now drove the standard joints by their standard names; the same figure became the actor in both demonstrations.
+
+\fig{fig_canonical_skeleton}{0.55}{The canonical HAnim LOA5 bone-mesh humanoid --- 150 \texttt{HAnimJoint} nodes and 243 individual bone meshes from the Web3D \texttt{AllBonesLOA5Skeletons} model. The same figure is the actor in both demonstrations.}
+
+
+One property of the standard made this far less work than it sounds. An \texttt{HAnimJoint}'s rest pose is the identity transform---each joint sits at its named center with no rotation until an interpolator moves it. That means segment geometry can be authored in \emph{absolute} world coordinates and still articulate correctly: you place a bone where it really belongs in the standing figure, attach it to its joint, and the joint hierarchy handles the rest when motion arrives. We did not have to re-express every bone in its parent joint's local frame, which is exactly the bookkeeping that makes hand-rolled skeletons fragile. Adopting the canon was not just more honest than the puppet; it was less code.
+
+\subsection{Two demonstrations: a runner and a living classroom skeleton}
+
+The first demonstration puts the canonical figure on the slalom course, gait routed into the standard joints, cadence still locked to ground speed so the stride reads as running rather than sliding. Delivered to the browser through \xite{}~\cite{xite}, the real HAnim skeleton renders directly with no flattening (Figure~\ref{fig:fig_runner_xite_course})---a point we return to below, because the other major web player does not.
+
+\fig{fig_runner_xite_course}{0.85}{The runner delivered to the browser via \xite{}: the real HAnim figure traverses the course with the standardized gait, rendered directly with no flattening.}
+
+
+The second demonstration is a ``living'' classroom skeleton: the same figure on a display stand, given the standard's own locomotion cycles plus clickable controls. Each cycle---Walk, Run, Jump---was lifted from the standardized animation as a \texttt{TimeSensor} plus a bank of 147 interpolators and their routes. The trick of a switchable character is making sure exactly one cycle drives the joints at any moment; a tangle of always-live interpolators fighting over the same \texttt{rotation} fields produces twitching nonsense. A small ECMAScript \texttt{Script} node arbitrates, enabling a single cycle at a time, and \texttt{TouchSensor} button panels mounted on the chalkboard trigger the switch (Figure~\ref{fig:fig_classroom_buttons}). Clicking \emph{Walk}, \emph{Run}, \emph{Jump}, or \emph{Stand} swaps the active motion. The whole thing is declarative X3D~\cite{x3d4} with one short script---no engine, no build step, viewable from a single file in a browser.
+
+\fig{fig_classroom_buttons}{0.85}{The classroom: the canonical LOA5 skeleton with PBR bones, a FLUX-generated chalkboard and posters, and clickable Walk/Run/Jump/Stand buttons that switch the standardized motion cycles.}
+
+
+\subsection{Look development: Phong flatness to PBR form}
+
+The canonical bone meshes shipped with old-style Phong materials set to very high ambient reflectance. Under image-based lighting this is fatal to legibility: every surface returns nearly all incident light regardless of orientation, so the ribcage, spine, and pelvis wash out to a flat white blur with no readable depth. The fix was a batch look-development pass that re-authored each material as an X3D~4 \texttt{PhysicalMaterial}~\cite{x3d4}---\texttt{metalness}~0 for bone, a matte \texttt{roughness}---so that an \texttt{EnvironmentLight} could do its job and restore three-dimensional form (Figure~\ref{fig:fig_pbr_torso}). This is the physically based shading model X3D~4 shares with glTF~2.0~\cite{gltf}; choosing it meant the figure lights consistently with the rest of the modern ecosystem rather than relying on a viewer's legacy Phong path. The pass was mechanical---walk the document, rewrite every \texttt{Material} as a \texttt{PhysicalMaterial}---which is precisely the kind of bulk, error-prone edit the MCP toolchain makes cheap and the verify-by-render loop makes safe.
+
+\fig{fig_pbr_torso}{0.6}{After the \texttt{PhysicalMaterial} pass: the ribcage, spine, and pelvis recover three-dimensional form from image-based lighting, instead of the flat wash the high-ambient Phong materials produced.}
+
+
+\subsection{The texture loop: locally generated, honestly labelled}
+
+The classroom needed a chalkboard and a few anatomy posters. We generated these locally with mflux~\cite{mflux}---FLUX.1 running on Apple's MLX---from text prompts, then applied each as an X3D \texttt{ImageTexture} (Figure~\ref{fig:fig_flux_blackboard}). The point is not the particular generator: any text-to-image model substitutes, and only the local runner changes. The point is that generate-image~$\rightarrow$~place-in-3D \emph{composes} as a loop, and that it stays inside the project's provenance discipline. A diffusion-generated chalkboard is set dressing---a texture on a flat surface, openly synthetic and labelled as such. It is categorically different from generated \emph{geometry} or AI-imagined fauna, which the program refuses. Decorative pixels on a quad are honest; an invented bone is not. Keeping that line bright is what lets us use generative tools at all.
+
+\fig{fig_flux_blackboard}{0.6}{A classroom chalkboard texture generated locally with mflux (FLUX.1 on Apple MLX) from a text prompt, then applied as an X3D \texttt{ImageTexture}: the image-generation and 3-D-authoring loops compose.}
+
+
+\subsection{Forward to the creatures---and to the cave}
+
+The same loop, pushed one step further, becomes a creature pipeline. Instead of a flat texture, mflux-class generation feeds reference and material choices for a \emph{rigged}, PBR-shaded animal authored in X3D---our first being a moose---built on the identical HAnim-style joint hierarchy and \texttt{PhysicalMaterial} look-development the classroom skeleton established. A rigged creature is just the character pipeline with a non-human skeleton: named joints at rest-identity, geometry in absolute coordinates, motion routed in, matte PBR materials lit by an \texttt{EnvironmentLight}.
+
+That is the bridge to the flagship application. The Pleistocene caves are a heritage archive whose hardest authorship problem is fauna: the animals are \emph{documented}---measured bones, traced plates---but any standing, breathing, walking restoration is necessarily \emph{interpretive}. The character pipeline is exactly the machinery that will one day pose a documented-but-interpretive \emph{Euceratherium} in the chamber: a rigged, PBR creature, articulated through real joints, animated by the same cycle-switching scaffolding as the classroom skeleton---and, under the program's provenance rule, always rendered so the viewer can tell the measured skeleton from the flesh we inferred around it.
+
+\section{Flagship: the caves heritage archive}\label{sec:caves}
+
+Everything in the preceding sections --- the verify-by-render loop, the \xite{} backend, the semantic validators, the provenance discipline --- was built so that it could be aimed at this. Two caves in Shasta County, California, opened a hundred and twenty years ago, are the place where the toolchain, the standards, and the honesty rules stop being method and become a subject. They are also where the work is personal: the man who directed the digs was the human author's great-great-grandfather, and the ground itself is sacred to the Winnemem Wintu and now lies underwater. The stakes of getting it right --- to scale, to source, and to the line between what is recorded and what is imagined --- are not abstract here.
+
+\subsection{The sites and the stakes}
+
+\emph{Potter Creek Cave} and \emph{Samwel Cave} sit roughly five kilometres apart in the McCloud Limestone, at about 1500\,ft (460\,m) elevation, above a stretch of the McCloud River. Both were excavated in the early 1900s by field parties under \textbf{John Campbell Merriam} (1869--1945), the University of California vertebrate palaeontologist who later led the Carnegie Institution and co-founded the Save the Redwoods League. Potter Creek was worked principally in 1902--03 and Samwel in 1903--06, and the reports that came out of them --- Sinclair 1903, 1904, 1905; Furlong 1906; with the type description of the shrub-ox \emph{Euceratherium collinum} in Sinclair \& Furlong 1904 --- are founding documents of West Coast Pleistocene palaeontology \cite{sinclair04,sinclair03,furlong06,sinclair05,sf04}. Potter Creek alone yielded roughly 52 vertebrate species, 21 of them extinct.
+
+The ethical weight is inseparable from the geology. Both caves are Winnemem Wintu sacred places, and Shasta Dam (built 1935--45) flooded the McCloud canyon --- its villages, burial and ceremonial places --- so that the two caves now sit on the Shasta Lake shore. We name these connections explicitly and surface the dam-flooding in each scene's on-screen caption; we return to the ethical weight of these places, and to the contested meaning of the names, in \S\ref{sec:ethics}.
+
+\subsection{Immersive reconstructions, to scale}
+
+The two interactive scenes are built procedurally from the survey prose, each declared \texttt{profile='Immersive' version='4.0'}, and each opened toward the viewer as a \emph{back-half section} ($z\le0$) --- the same longitudinal and cross-section conventions the 1904 and 1906 reports used on paper, which is also what makes a closed, unlit cave both legible and lightable on screen. Potter Creek becomes a lofted longitudinal section to Sinclair's measurements (Fig.~\ref{fig:pcc_section}): a chamber ``one hundred and seven feet long,'' a roof rising about seventy-five feet above the lowest floor point, the two ``fan-like deposits of earth and stalagmite-cemented breccia'' that slope from opposite ends and coalesce in the middle, near-vertical chimneys above each fan apex, and the 42\,ft entrance pit that the original parties descended by rope ladder \cite{sinclair04}. The hero view down that pit, with its god-ray shaft, is Fig.~\ref{fig:pcc_hero}. Samwel becomes a labelled cross-section after Feranec et al.\ (2007, Fig.~2), naming the spaces the survey names --- the Entrance and Porcupine Entrance, the Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber, and Chamber Two (``Furlong's Room'') down a deep drop to the lower level (Fig.~\ref{fig:samwel_section}) \cite{feranec07}. The descent view (Fig.~\ref{fig:samwel_hero}) carries the emotional and geometric focus of the whole archive: Chamber One, the deep drop we identify with the legendary $\sim$90\,ft hole, and Chamber Two with its glowing Magic Pool at the bottom.
+
+\fig{samwel_section}{0.84}{Samwel Cave as a labelled cross-section after Feranec et al.\ (2007, Fig.~2): Entrance and Porcupine Entrance, the Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber, and Chamber Two down the deep drop. Room sizes and surface detail are interpretive.}
+
+
+\fig{pcc_section}{0.85}{Potter Creek Cave as a longitudinal section cut, exposing the chamber interior to Sinclair's (1904) measurements: the domed roof, the two coalescing breccia fans, and the banded stratigraphic deposit.}
+
+
+\fig{pcc_hero}{0.85}{Potter Creek Cave, the hero view: down the 42\,ft pit with a god-ray shaft, dripstone, and pools. The chamber geometry is to scale from Sinclair (1904); the speleothems and lighting are flagged interpretive.}
+
+
+Both scenes share a physically based look-development pass built on the X3D~4.0 \texttt{PhysicalMaterial} node \cite{x3d4}, whose metallic-roughness model follows glTF~2.0 \cite{gltf} --- displaced, normal-mapped limestone (with \texttt{metallic} set to 0; \S\ref{sec:toolchain}), procedural speleothems, rippled PBR pools, and layered light shafts. But the reconstructions are deliberately and visibly \emph{interpretive}: the speleothems, rock texture, pool extents, lighting, and --- for Samwel --- the individual room sizes the sources never give. The on-screen captions say so, and they keep documented fact distinct from legend: that a deep drop joins Samwel's two levels is surveyed; that the maiden fell ninety feet is tradition; and our identification of the two is our interpretive choice, labelled as such.
+
+\subsection{The documented archive}
+
+At the opposite end of the provenance spectrum from the dressed reconstruction is an archive that invents nothing at all. Every published plate is reproduced as a faithful vector trace of the original line art (the trace-don't-invent pipeline of \S\ref{sec:provenance}), then lifted to a to-scale X3D \texttt{IndexedLineSet}: Sinclair's 1904 topographic plan of the Potter Creek chamber floor (Plate~14), his longitudinal section (Plate~11) and deposit cross-sections (Plates~12--13), and the Samwel cross-section from Feranec et al.\ 2007 (Furlong's own 1906 report carries no plan or section, only photographs and an in-text column). Figure~\ref{fig:pcc_plan} is the \emph{measured} extreme: Plate~14 reproduced identically and made navigable in the same web pipeline as the interpretive model. Going one step further, a contour-extruder reads the plan's nested loops, lifts each by its nesting depth times the documented 6-inch interval, and triangulates a floor surface clipped to the cave outline (Fig.~\ref{fig:pcc_topo}): a 3-D documented topography whose every elevation comes from the 1904 survey, shown with $8\times$ vertical exaggeration because the real relief is only about $\pm2$\,ft over 107\,ft.
+
+The same trace-don't-invent rule governs the fauna (Fig.~\ref{fig:fauna_plate}; \S\ref{sec:provenance}): each excavated taxon is reproduced from its original published anatomical drawing, vectorised by the identical pipeline and carrying its full citation. The presentation choice is what is specific here --- each bay states its source and its true dimension \emph{in words}, since we refuse to stand a whole sloth skeleton beside isolated skulls on one baseline, which would compare wholes against parts and mislead. No AI imagery appears anywhere in the archive.
+
+\fig{fauna_plate}{0.98}{The documented fauna plate: faithful vector traces of the original published drawings of the excavated megafauna --- \emph{Nothrotheriops shastensis} (Stock 1925), \emph{Canis dirus} (Merriam 1912), and \emph{Euceratherium collinum} (Sinclair \& Furlong 1904) --- assembled into a to-scale X3D \texttt{IndexedLineSet} gallery. No AI imagery is used anywhere in the archive.}
+
+
+\subsection{Bone horizons in the two caves}
+
+The join between a deposit and its fauna is where the provenance discipline does its hardest work; the full walkthrough --- Sinclair's documented column rendered to scale, fauna pinned only at recorded depths --- is given in \S\ref{sec:provenance} (Fig.~\ref{fig:pcc_strata}). What is specific to the flagship is that we built a section scene for each cave from the cited \texttt{strata\_spec.json}.
+
+\textbf{Samwel} (\texttt{samwel\_strata.x3d}) is the instructive counter-case: its four AMS-dated Chamber-Two specimens \cite{feranec07} carry real square-and-inch levels, yet the scene's title remains ``depth is not age,'' because the deposit is not chronologically stratified (\S\ref{sec:provenance}). That seam --- visible, labelled, and refused as a place to invent --- is the heart of the whole project.
+
+\section{What this becomes}
+\label{sec:future}
+
+The work described so far is a foundation, not a finished thing. Three artifacts now exist and interlock: a reusable MCP toolchain that can \emph{see} what it authors, a character-and-creature pipeline that produces standards-conformant rigged figures, and a heritage archive of two Pleistocene caves built under a strict provenance discipline. The program from here is to push each forward without loosening the rule that has held throughout---documented forever distinct from interpretive, no AI-generated imagery, no invented geometry. We group the goals by horizon: what is within reach, what is a season's work, and what is genuinely ambitious. Every item is chosen so that doing it well produces something the X3D community can reuse: a node convention, a draft contribution, a renderer feature, or a recipe.
+
+\subsection{Near term: anatomy outward from the skeleton}
+
+The most immediate horizon is anatomical. The LOA5 humanoid~\cite{loa5draft,hanim} is a 150-joint frame, and a frame is meant to carry layers. Each layer attaches to the \emph{same} joint hierarchy, so they compose by construction: animate the joints once and every layer follows. We have sketched the dependency order. \emph{Coveroids and clothing} come first---a closed covering surface, the simplest skin, realized as garment pieces parented to single joints (helmet to skullbase, shoes to the talocrural joint) graduating to a weighted \texttt{HAnimHumanoid.skin} \texttt{IndexedFaceSet} bound through \texttt{skinCoordIndex}/\texttt{skinCoordWeight} linear-blend skinning. \emph{Ligaments and tendons} are two-site followers: thin \texttt{Extrusion} segments anchored at two \texttt{HAnimSite} feature points that the LOA5 skeleton already defines, stretching as the joints move. \emph{Muscles} are the place \texttt{HAnimDisplacer} earns its keep---volumetric bodies skinned to their spanning joints, with displacer morphs driving contraction bulge. Then \emph{organs} as segment-parented meshes (heart and lungs to the thoracic segments), \emph{nerve and vascular nets} as procedurally generated site-to-site \texttt{IndexedLineSet} graphs, the full weighted \emph{skin} envelope, and finally \emph{hair} as card strips or tufts on the skullbase. A teacher then peels the figure from skin to muscle to bone with a \texttt{Switch}. This is not only a demo: the current HAnim draft~\cite{hanim} standardizes the skeleton and the skin, but ligament, muscle, organ, and nerve conventions are open ground. Each layer we author cleanly---with named containerFields, real site references, and morphs that the standard already affords~\cite{x3d4}---is a candidate contribution back to the people who write the standard, and a candidate addition to the MCP's node knowledge~\cite{x3duom,allbones}.
+
+\subsection{Mid term: living, dated, ground-truthed caves}
+
+The caves are the flagship, and three mid-term goals deepen them. First, \emph{populate them with their documented fauna, animated}. The taxa are already traced from their original published drawings---the Shasta ground sloth from Stock~\cite{stock25}, the dire wolf from Merriam~\cite{merriam12}, the Potter-Creek-type shrub-ox from Sinclair~\&~Furlong~\cite{sf04}---and pinned to documented bone horizons. The next step is to rig a hero animal with the same creature pipeline we built for a moose and let it move through the immersive PBR chamber, flagged interpretive throughout, never embedded in a stratum it cannot be placed in. The mammoth (Osborn~\cite{osborn42}) and \emph{Camelops} are still to trace, by the identical trace-don't-invent route.
+
+Second, \emph{stratigraphic interactivity}. The bone-horizon sections are presently static. We want the documented strata---Potter Creek's clay, ash, and breccia; Samwel's flowstone--breccia--gravel column---exposed as a scrubbable cut, with fauna pinned to levels and radiocarbon ages surfaced on hover: the 170\,cm \emph{Euceratherium} date~\cite{payen76}, Feranec et al.'s AMS-dated Chamber-Two specimens~\cite{feranec07}. The discipline carries straight into the interaction design---Samwel's panel must keep its title ``depth is not age,'' because the deposit is not chronologically stratified, and the interface should make that legible rather than imply a false chronology by letting the viewer scrub depth as if it were time.
+
+Third, \emph{ground-truthing from the field}. The single largest interpretive gap our provenance blocks flag is Samwel's individual room sizes, which the sources do not give. An in-person visit could supply photographs of the real chambers and formations, replacing estimated room volumes and invented dripstone with measured shapes---and the to-scale documented floor topography we already extruded from Sinclair's Plate-14 contours (Fig.~\ref{fig:pcc_topo}) shows the standard such a survey would have to meet: every elevation traceable to a record.
+
+\fig{pcc_topo}{0.8}{The documented Potter Creek floor as 3-D topography---each Plate-14 contour lifted by its surveyed depth. This is the bar a field visit must clear for Samwel: measured, not estimated, with every value attributable.}
+
+\subsection{Far term: real volumetrics and a survey-to-archive recipe}
+
+Two goals are genuinely ambitious. The first is \emph{true volumetric atmosphere}. The god-rays down our open shafts and the in-scattered haze of the Magic Pool are currently faked with layered translucent geometry, because X3D has no primitive for them: \texttt{Fog} and \texttt{LocalFog} give distance attenuation but no participating-media in-scattering, and the VolumeRendering component targets sampled volume data, not atmosphere~\cite{x3d4}. A screen-space or volumetric in-scattering approach contributed to \xite{}~\cite{xite} would be a real rendering advance, not a trick---and the kind of upstream contribution this program is built to produce, alongside the continuing stream against the MCP server, the X3DOM HAnim and PBR gaps~\cite{x3dom}, and \texttt{x3d.py}~\cite{x3dpy}.
+
+The second, and the one that matters most, is a reusable, documented \emph{survey~$\rightarrow$~standards-3-D archive recipe}. The pattern we used---section-cut for legibility and light, PBR look-development on documented geometry, an explicit provenance block separating measured from imagined, and trace-don't-invent for every drawing and creature---is not specific to two caves on the McCloud. It generalizes to any cave, dig, or heritage site with a published record. Captured as a small documented template, it lets the next human--AI pair turn their own century-old survey into honest, inspectable, conformant 3-D without rediscovering the loop or relaxing the discipline. That template, more than any single scene, is what this becomes: a way to do heritage 3-D at machine speed that a community can trust.
+
+\section{Ethics, attribution, and stewardship}\label{sec:ethics}
+
+A reconstruction is a set of claims about a real place, real animals, and real
+people, and so the discipline that governs it cannot be only technical. The
+verify-by-render loop and the provenance block are, at bottom, instruments of
+conscience: they exist so that the record we publish is answerable to its
+sources, to the dead whose bones the caves held, and to the living people whose
+sacred ground this is. This section states the three commitments that bound the
+work --- toward the Winnemem Wintu, toward honest authorship, and toward an
+ethic of accuracy that refuses fabrication --- and argues that they are one
+commitment seen from three sides.
+
+\subsection{Whose land this is}
+
+Potter Creek Cave and Samwel Cave do not belong to palaeontology. They are
+Winnemem Wintu sacred places on the McCloud River, the tribe's homeland, and
+they sit today on the shore of Shasta Lake because Shasta Dam (built 1935--45)
+flooded that river canyon --- its villages, its burial and ceremonial places ---
+under the reservoir. The caves Merriam's parties entered were not empty ground
+waiting to be measured; they were, and are, holy. Samwel is the Wintu
+\emph{sawal}; the gloss is contested, recorded variously as a word for a sacred
+or holy place and as the Wintu word for the grizzly bear whose spirits were held
+to dwell there, and we do not resolve the dispute or assert one reading over the
+other. Tradition knows the cave as the \emph{Cave of the Lost Maiden}, for the
+Wintu girl Olchanolmet who by legend fell to her death down a deep hole, and as
+the \emph{Cave of the Magic Pools}, where Wintu medicine people bathed to gain
+strength. These are not set dressing. They are the meaning of the place, older
+and larger than the excavation that made it famous in journals.
+
+We tried to let that govern concrete choices rather than sit in a footnote.
+First, we name whose places these are: the Winnemem connection, the Lost Maiden,
+and the Magic Pools appear explicitly and with attribution, surfaced in each
+scene's on-screen caption alongside the fact of the dam-flooding, as context and
+not scenery. Second, we keep legend and survey distinct precisely so that the
+tradition is honored as tradition and not quietly converted into a measurement:
+the surveyed drop we identify with the maiden's legendary fall is a choice we
+flag as ours, not the Wintu's (\S\ref{sec:caves}). Third, the reconstruction removes
+nothing and adds no claim of ownership; it is built entirely from already-published
+survey literature. And because these are living sacred sites still vulnerable to
+disturbance, we do not publish the protected physical location. A heritage archive
+that exposed the coordinates of a sacred cave would be doing harm in the name of
+preservation. The most respectful thing a 3-D model can sometimes do is decline to
+make the place easier to reach.
+
+\subsection{Authorship: ``we built this''}
+
+This paper carries an unusual byline, and it should be read exactly as written.
+The work was done by a human--AI pair, and the honest description is ``we built
+this'' --- not ``the AI built this,'' which is both inaccurate and a quiet
+evasion of responsibility. The division of labor is real and we state it plainly.
+The human author conceived the project, chose the caves, supplied the sources and
+the family knowledge, and made every aesthetic and ethical decision --- what to
+build, what to leave out, how to name the Wintu connection, where to draw the
+line between documented and interpretive --- and is responsible for the content.
+The AI (Anthropic's Claude, in Claude Code) did procedural generation, schema and
+semantic validation, the verify-by-render passes, and drafting under that
+direction. None of the judgments that make this an ethical artifact were
+delegated to it.
+
+We list the AI on the byline for transparency, as a tool-use disclosure rather
+than a claim of independent authorship. The intent is candor in both directions:
+to refuse the marketing inflation that credits a model with work a person
+governed, and equally to refuse the concealment of pretending no model was
+involved. For venues whose policies bar AI authorship, the named co-author should
+be read as exactly such a disclosure, with the human author bearing full
+accountability for every assertion in the paper and every artifact in the
+archive. Speed without accountability is not a contribution; the point of the
+pair is that a person remains answerable for what the fast tool produces.
+
+\subsection{Accuracy as an ethic: no fabrication}
+
+The third commitment is the one most easily mistaken for a mere stylistic
+preference, and it is the load-bearing one. In a heritage archive a plausible
+fabrication is not a harmless illustration --- it is a falsified record. A
+convincingly rendered cave wall, a confidently drawn skeleton, an animal placed
+at a depth it was never recorded at: each of these, once published as part of an
+archive, becomes a thing future readers may cite, and the more convincing it is
+the more damage it does. We therefore adopted a hard rule against AI-generated
+imagery and invented geometry anywhere the archive makes a documentary claim.
+Every drawing in the fauna set is a faithful vector trace of a cited,
+public-domain original --- Stock (1925), Merriam (1912), Sinclair \& Furlong
+(1904) --- reproduced rather than imagined, and where no published line drawing
+exists the taxon is omitted rather than confabulated, as with the short-faced
+bear, whose material survives only as photographs \cite{stock25,merriam12,sf04}.
+Every interpretive element --- speleothems, rock texture, lighting, the estimated
+room sizes Samwel's sources never give --- is flagged as interpretive in the
+generator's provenance block and in the on-screen caption \cite{sinclair04,feranec07}.
+
+This is where the three threads converge. Provenance discipline began as method
+--- a way to keep the engineering honest --- but applied to this subject it is
+plainly an ethic. To trace rather than invent is respect for the science, whose
+specimens deserve to be represented by their actual published anatomy and not a
+generative approximation. To label what is measured against what is imagined is
+respect for the dead, whose deposit is not a stage on which to pose plausible
+beasts. And to separate the surveyed drop from the maiden's hole, to name the
+Magic Pools, to decline to invent where the record is silent, is respect for the
+Winnemem Wintu, whose place and whose story are not ours to embellish. The same
+refusal --- we will not publish what we cannot source --- protects the data, the
+ancestors, and the living tradition at once. That is the sense in which honesty,
+in this project, is not a constraint on the work but the substance of it.
+
+\section{Conclusion}\label{sec:conclusion}
+
+We set out to show that a human--AI pair can author standards-conformant, interactive 3-D at machine speed without trading away honesty, and we built the proof rather than argued it. Three artifacts now exist and interlock: an X3D MCP toolchain that lets an authoring agent see what it makes; a character-and-creature pipeline that stays inside ISO HAnim~\cite{hanim} and X3D~4 physically based shading~\cite{x3d4} rather than faking them; and a heritage archive of two Pleistocene caves authored end-to-end under a provenance discipline that keeps documented forever distinct from interpretive and refuses AI-generated imagery and invented geometry.
+
+The engineering reduces to one stubborn lesson, stated in a single bug: a scene can pass every schema and semantic validator and still draw the wrong picture --- or nothing at all. The things that slip through static checking --- a defaulted \texttt{containerField}, a renderer that clears the background and omits the geometry --- are exactly the things that matter, and only an agent that renders and looks will ever catch them. That is why, in this program, the choice of renderer is a correctness property and not a preference (Fig.~\ref{fig:x3dom_vs_xite}), and why the verify-by-render loop is the load-bearing wall under every speed claim we make.
+
+The discipline reduces to a seam: the visible, labelled boundary where evidence stops and interpretation begins. It is the surveyed drop set apart from the maiden's legendary fall; the ground-sloth skeleton standing beside the deposit and never inside it; the short-faced bear omitted entirely because no line drawing exists to trace. Recording what is measured against what is imagined costs minutes, and it forces better research --- you cannot call a feature documented until you have found the page that documents it.
+
+What this finally becomes is not two caves but a pattern others can reuse: a survey-to-archive recipe in which a century-old published record becomes honest, inspectable, conformant 3-D without rediscovering the loop or relaxing the rule. The friction we met along the way --- the \xite{} render backend, the semantic validators that name their own fixes, the standing reports against \texttt{x3d.py}~\cite{x3dpy} and the X3DOM HAnim and PBR gaps~\cite{x3dom} --- we hand back to the community as contributions, not private workarounds. And the byline stays literal: we built this, fast, and a person remains answerable for all of it. Speed without accountability is not a contribution; the point of the pair is that honesty is not a constraint on the work but the substance of it.
+
+\begin{thebibliography}{99}
+\small
+\bibitem{x3d4} ISO/IEC 19775-1:2023, \emph{X3D Architecture and base components}
+(X3D 4.0). Web3D Consortium / ISO.
+\bibitem{hanim} ISO/IEC 19774-1:2019, \emph{Humanoid Animation (HAnim)
+architecture}.
+\bibitem{loa5draft} Web3D Consortium, \emph{X3D version 4 draft: ISO/IEC 19774
+Humanoid Animation}, including the draft Level of Articulation~5 (LOA5).
+\url{https://www.web3d.org/specifications/X3Dv4Draft/ISO-IEC19774/}
+\bibitem{allbones} Web3D Consortium, \emph{AllBonesLOA5Skeletons} example model
+(HumanoidAnimation/Bones).
+\url{https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/}
+\bibitem{x3duom} Web3D Consortium, \emph{X3D Unified Object Model (X3DUOM)}.
+\bibitem{xite} H.~Seelig, \emph{\xite{} X3D Browser}, v15.1.4.
+\url{https://create3000.github.io/x_ite/}
+\bibitem{x3dom} J.~Behr et al., \emph{X3DOM} (\texttt{x3dom.org/release}).
+\url{https://www.x3dom.org/}
+\bibitem{x3dpy} Web3D Consortium, \emph{x3d.py --- X3D Python SAI package},
+v4.0.65.3. \url{https://pypi.org/project/x3d/}
+\bibitem{x3dtox3dom} Web3D Consortium, \emph{X3dToX3dom.xslt} stylesheet.
+\url{https://www.web3d.org/x3d/stylesheets/X3dToX3dom.xslt}
+\bibitem{saxon} Saxonica, \emph{Saxon-HE} (XSLT~2.0 processor), v9.9.1-8.
+\bibitem{castle} M.~Kambur\-elis, \emph{Castle Model Viewer} (Castle Game Engine).
+\url{https://castle-engine.io/castle-model-viewer}
+\bibitem{netbeans} Web3D Consortium / Naval Postgraduate School, \emph{X3D-Edit}
+(Apache NetBeans plugin). \url{https://savage.nps.edu/X3D-Edit/}
+\bibitem{gltf} Khronos Group, \emph{glTF 2.0 Specification} (metallic-roughness
+PBR material model).
+\bibitem{mcp} Anthropic, \emph{Model Context Protocol specification}.
+\url{https://modelcontextprotocol.io}
+\bibitem{mflux} Black Forest Labs, \emph{FLUX.1} text-to-image model, run locally
+on Apple MLX via \emph{mflux}. \url{https://github.com/filipstrand/mflux}
+\bibitem{sinclair03} W.~J.~Sinclair (1903) A preliminary account of the
+exploration of the Potter Creek Cave. \emph{Science} 17(435):708--712.
+\bibitem{sinclair04} W.~J.~Sinclair (1904) The exploration of the Potter Creek
+Cave. \emph{Univ. Calif. Publ. Amer. Arch. Ethn.} 2(1):1--27.
+\bibitem{sinclair05} W.~J.~Sinclair (1905) New Mammalia from the Quaternary caves
+of California. \emph{Univ. Calif. Publ. Geol.} 4:145--161.
+\bibitem{sf04} W.~J.~Sinclair \& E.~L.~Furlong (1904) \emph{Euceratherium}, a new
+ungulate from the Quaternary caves of California. \emph{Univ. Calif. Publ. Bull.
+Dept. Geol.} 3(20):411--418.
+\bibitem{furlong06} E.~L.~Furlong (1906) The exploration of Samwel Cave.
+\emph{Am. J. Sci.} 22(129):235--247.
+\bibitem{merriam12} J.~C.~Merriam (1912) The fauna of Rancho La Brea, Part~II:
+Canidae. \emph{Mem. Univ. California} 1(2):217--272.
+\bibitem{merriamstock25} J.~C.~Merriam \& C.~Stock (1925) \emph{Relationships and
+structure of the short-faced bear, Arctotherium, from the Pleistocene of
+California}. Carnegie Institution of Washington, Publ.~347.
+\bibitem{stock25} C.~Stock (1925) \emph{Cenozoic gravigrade edentates of western
+North America}. Carnegie Institution of Washington, Publ.~331.
+\bibitem{osborn42} H.~F.~Osborn (1942) \emph{Proboscidea}, vol.~2. American
+Museum of Natural History.
+\bibitem{payen76} L.~A.~Payen \& R.~E.~Taylor (1976) Man and Pleistocene fauna at
+Potter Creek Cave. \emph{J. California Anthropology} 3(1):51--58.
+\bibitem{feranec07} R.~S.~Feranec, E.~A.~Hadly, J.~L.~Blois, A.~D.~Barnosky \&
+A.~Paytan (2007) Radiocarbon dates from the Pleistocene fossil deposits of Samwel
+Cave. \emph{Radiocarbon} 49(1):117--121.
+\end{thebibliography}
+\end{document}
