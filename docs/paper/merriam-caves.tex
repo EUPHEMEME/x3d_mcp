@@ -118,13 +118,16 @@ early human-association question, later evaluated by radiocarbon (Payen \& Taylo
 
 \paragraph{Samwel Cave.} Five kilometres north on the same McCloud arm, Samwel
 Cave (Wintu \emph{sawal}) is a branching two-level system in the McCloud Limestone
-at $\sim$1500\,ft (460\,m) elevation. The name is contested: it is variously
-translated ``sacred/holy place'' and identified with the Wintu word for grizzly
-bear. Furlong's 1906 survey~[12], redrawn in Feranec et al.\ (2007, Fig.~2)~[14],
-names its spaces: the Entrance and Porcupine Entrance, the large Pleistocene Hall,
-the Gate, Chamber One, Merriam's Chamber, and Chamber Two (``Furlong's Room'')
---- the lower level, reached only by a deep drop requiring climbing gear
-(Fig.~\ref{fig:samwel_section}). Tradition records the cave as the \emph{Cave of
+at $\sim$1500\,ft (460\,m) elevation (the scholarly literature spells it
+``Samwell''). \emph{Sa-Wal} is the Wintu word for grizzly bear: the cave was holy
+because grizzly-bear spirits were held to dwell there, and Wintu men prayed there
+for strength before a hunt; other names and etymologies are also recorded. The
+cross-section in Feranec et al.\ (2007, Fig.~2)~[14] names its spaces: the Entrance
+and Porcupine Entrance, the large Pleistocene Hall, the Gate, Chamber One,
+Merriam's Chamber, and Chamber Two (``Furlong's Room'') --- the lower level,
+reached only by a deep drop requiring climbing gear
+(Fig.~\ref{fig:samwel_section}). Furlong's 1906 report~[12] itself carries no plan
+or section drawing --- only photographs and an in-text stratigraphic column. Tradition records the cave as the \emph{Cave of
 the Lost Maiden} --- the Wintu girl Olchanolmet, who by legend fell to her death
 down a ``90-foot-deep hole'' --- and as the \emph{Cave of the Magic Pools}, where
 ``Wintu medicine men bathed in the water pools to get magic strength.'' Nearly
@@ -132,7 +135,7 @@ down a ``90-foot-deep hole'' --- and as the \emph{Cave of the Magic Pools}, wher
 ($\sim$23{,}600--17{,}100 cal~BC)~[14].
 
 \paragraph{An ethical note.} Both caves are Winnemem Wintu sacred places. Shasta
-Dam (completed 1945) flooded the McCloud River canyon --- villages, burial and
+Dam (built 1935--45) flooded the McCloud River canyon --- villages, burial and
 ceremonial places --- and the caves now sit on the Shasta Lake shore. We name the
 Winnemem connection, the Lost Maiden, and the Magic Pools explicitly and with
 attribution, as context rather than scenery, and the dam-flooding is surfaced in
@@ -190,11 +193,32 @@ is tradition, and our identification of the two is an interpretive choice. We
 regard this explicit separation as a small but reusable contribution to honest
 heritage and scientific reconstruction.
 
-\fig{samwel_section}{0.9}{Samwel Cave as a labelled cross-section after Furlong
-(1906)~/ Feranec et al.\ (2007). \emph{Documented} topology: Entrance and
-Porcupine Entrance, Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber,
-and Chamber Two down a deep drop to the lower level with its Magic Pool. Room
-sizes and surface detail are interpretive.}
+\fig{samwel_section}{0.9}{Samwel Cave as a labelled cross-section after Feranec et
+al.\ (2007, Fig.~2). \emph{Documented} topology: Entrance and Porcupine Entrance,
+Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber, and Chamber Two down a
+deep drop to the lower level with its Magic Pool. Room sizes and surface detail
+are interpretive.}
+
+\paragraph{Documented drawings.} At the opposite end of the provenance spectrum
+from the interpretive reconstruction, we also captured the survey drawings
+themselves. The original plates are line art, not text, so OCR (which gave us the
+chamber \emph{names}) cannot recover their geometry; instead we extract the figure
+raster at full resolution and vectorise it (\texttt{pdftoppm}~$\rightarrow$~crop
+$\rightarrow$~threshold~$\rightarrow$~\texttt{potrace}~$\rightarrow$~SVG). This
+reproduces each drawing identically as clean vector --- Sinclair's (1904)
+topographic plan of the Potter Creek chamber floor (Pl.~14;
+Fig.~\ref{fig:pcc_plan}), his longitudinal section (Pl.~11) and deposit
+cross-sections (Pls.~12--13), and the Samwel cross-section. A short converter
+(\texttt{svg\_to\_x3d.py}) then lifts the traced paths into an X3D
+\texttt{IndexedLineSet} to scale, so the documented plan becomes navigable
+geometry in the same web pipeline as the interpretive model --- the
+\emph{measured} extreme of the same provenance discipline.
+
+\fig{pcc_plan}{0.96}{The \emph{documented} extreme: a faithful vector trace of
+Sinclair's (1904, Plate~14) ``topographic map of the floor of the main chamber in
+the Potter Creek Cave, contour interval 6 inches'' --- floor contours, section
+lines~1--7, stalagmite bosses, the altar, and the buried galleries, reproduced
+identically and lifted to a to-scale X3D \texttt{IndexedLineSet}.}
 
 \section{The render loop and the X3D MCP server}
 
