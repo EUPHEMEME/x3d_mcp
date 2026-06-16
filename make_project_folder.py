@@ -176,9 +176,13 @@ for title, blurb, cards in SECTIONS:
 
 # ---- papers & generators ---------------------------------------------------
 papers = [
+    ("honest-3d.pdf", "★ Honest 3-D at Machine Speed (the vision paper)",
+     "The headline paper: the whole program as one — provenance-disciplined, "
+     "standards-conformant X3D authored by a human–AI pair. Toolchain + character "
+     "pipeline + the caves flagship + roadmap + ethics. 24 pp."),
     ("merriam-caves.pdf", "Potter Creek & Samwel Caves — the heritage 3-D archive",
-     "The caves write-up (provenance discipline, the render loop, the fauna & "
-     "bone-horizon work). NOTE: being superseded by a broader vision paper."),
+     "The earlier caves-focused write-up (provenance discipline, the render loop, "
+     "the fauna & bone-horizon work); now a component of the vision paper above."),
     ("x3d-mcp-hanim-demo.pdf", "AI-aided X3D authoring — the HAnim classroom demo",
      "The companion paper on the MCP toolchain and the rigged-skeleton classroom "
      "demo."),
