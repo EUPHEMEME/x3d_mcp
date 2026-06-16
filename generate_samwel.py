@@ -8,10 +8,11 @@ which reproduces Furlong's (1906) survey, and from Furlong, "The Exploration
 of Samwel Cave" (Am. J. Sci. 22:235-247, 1906). Excavation 1903-1906 by
 E. L. Furlong, J. C. Merriam and W. J. Sinclair.
 
-Samwel = Wintu 'sawal', "holy / sacred place." Also the Cave of the Lost
-Maiden, for the Wintu girl Olchanolmet who fell to her death in the dark
-lower level; her remains were recovered before Shasta Dam (1945) flooded
-the McCloud River canyon -- Winnemem Wintu homeland.
+Samwel (Wintu 'sawal') is variously translated "sacred / holy place" and
+identified with the Wintu word for grizzly bear; the gloss is contested. It
+is also called the Cave of the Lost Maiden -- by tradition the Wintu girl
+Olchanolmet fell to her death down a deep hole into the lower level -- in the
+Winnemem Wintu homeland later flooded by Shasta Dam (1945).
 
 Hard facts used (1 X3D unit = 1 foot):
   * branching two-level system in the McCloud Limestone, 460 m elevation
@@ -19,7 +20,7 @@ Hard facts used (1 X3D unit = 1 foot):
     Hall, the Gate, Chamber One, Merriam's Chamber, and Chamber Two
     ("Furlong's Room") down a deep drop to the lower level
   * "Cave of the Magic Pools" -- several standing water pools
-  * fauna: 45 mammal + 13 bird species, LGM age (~17,000-23,600 cal BC)
+  * fauna: 45 mammal + 13 bird species, LGM age (~23,600-17,100 cal BC)
 
 Outputs:  samwel_cave.x3d   (X3D 4.0 XML)
           samwel_cave.html  (X3DOM page)  +  samwel_cave_xite.html (X_ITE)
@@ -353,17 +354,19 @@ def look_orientation(eye, target):
 
 
 # ---------------------------------------------------------------------------
-# PROVENANCE.  DOCUMENTED: the named chambers and their arrangement (Entrance,
-# Porcupine Entrance, Pleistocene Hall, Gate, Chamber One, Merriam's Chamber,
-# Chamber Two down a deep drop) follow Furlong's plan as redrawn by Feranec et
-# al. (2007); Chamber Two is the lower level reached only via a "~90-foot-deep
-# hole" -- the shaft the maiden fell down, which connects the upper/main level
-# to the lower one; the "Cave of the Magic Pools" and its sacred restorative
-# pool ("Wintu medicine men bathed in the water pools to get magic strength")
-# and the 460 m / McCloud-Limestone setting are documented.
-# IMAGINARY/INTERPRETIVE: the individual room SIZES and the exact pit geometry
-# (only its ~90 ft depth is documented), every speleothem, breakdown blocks,
-# exact pool placements, the daylight shafts, lighting, and surface detail.
+# PROVENANCE.
+# DOCUMENTED: the named chambers and their arrangement (Entrance, Porcupine
+#   Entrance, Pleistocene Hall, Gate, Chamber One, Merriam's Chamber, Chamber
+#   Two) follow Furlong's plan as redrawn by Feranec et al. (2007); the lower
+#   level (Chamber Two) is reached only by a deep drop requiring climbing gear;
+#   the "Cave of the Magic Pools" and its pools ("Wintu medicine men bathed in
+#   the water pools to get magic strength"); the 460 m / McCloud-Limestone
+#   setting.  LEGEND (tradition, not survey): the Lost Maiden Olchanolmet fell
+#   into a "~90-foot-deep hole."
+# INTERPRETIVE: identifying that deep drop AS the maiden's ~90-ft hole (we model
+#   them as one shaft); the individual room SIZES and the exact pit geometry;
+#   every speleothem, breakdown blocks, exact pool placements, the daylight
+#   shafts, lighting, and surface detail.
 # ---------------------------------------------------------------------------
 # the cave, laid out per Furlong's plan (x = East, y = up; section from +z)
 # name: (cx, cy, rx, ry, rz)
@@ -373,10 +376,10 @@ ROOMS = {
     "Pleistocene Hall":    (100, 23, 30, 16, 17),
     "Chamber One":         ( 54, 19, 16, 13, 13),
     "Merriam's Chamber":   ( 18, 35, 14, 11, 12),
-    # the deep lower level -- reached only by the ~90 ft hole the maiden fell
-    # down (sources: she "fell to her death into a 90-foot-deep hole"). The hole
-    # connects the upper/main level (Chamber One) to this lower chamber.
-    "Chamber Two":         ( 40, -58, 17, 12, 14),
+    # the deep lower level, reached only by a deep drop requiring climbing gear
+    # (documented); by legend the maiden fell ~90 ft down it. Placed so the
+    # descent from Chamber One (~y8) to this floor (~y-90) reads ~90 ft.
+    "Chamber Two":         ( 40, -78, 17, 12, 14),
 }
 
 PASSAGES = [
@@ -429,12 +432,12 @@ def build_scene():
         p, f = tube_mesh(p0, p1, r0, r1)
         parts.append(shell_shape(p, f, limestone))
 
-    # THE ~90 FT HOLE: the vertical shaft the maiden fell down, connecting the
-    # upper/main level (Chamber One floor, ~y 8) to the lower level (Chamber Two,
-    # ~y -46 at its roof). Built as a long, slightly-bent back-half tube.
-    p, f = tube_mesh((45, 8), (42, -20), 4.0, 4.6, ns=12)
+    # THE DEEP DROP to the lower level (documented); by legend the ~90 ft hole the
+    # maiden fell down. A long, slightly-bent back-half tube from Chamber One floor
+    # (~y 8) to the roof of Chamber Two (~y -64), ~72 ft of shaft.
+    p, f = tube_mesh((45, 8), (42, -30), 4.0, 4.6, ns=14)
     parts.append(shell_shape(p, f, limestone))
-    p, f = tube_mesh((42, -20), (40, -46), 4.6, 6.0, ns=12)
+    p, f = tube_mesh((42, -30), (40, -64), 4.6, 6.0, ns=14)
     parts.append(shell_shape(p, f, limestone))
 
     # standing water -- the Cave of the Magic Pools. Wintu medicine men bathed in
@@ -442,7 +445,7 @@ def build_scene():
     parts.append(pool(100, 23 - 16 * 0.72 + 0.4, 7))     # Pleistocene Hall
     parts.append(pool(54, 19 - 13 * 0.72 + 0.4, 4.0))    # Chamber One
     # the famous Magic Pool on the floor of the deep lower chamber
-    parts.append(magic_pool(40, -58 - 12 * 0.72 + 0.5, 8))
+    parts.append(magic_pool(40, -78 - 12 * 0.72 + 0.5, 8))
 
     # shafts of daylight at the two outside entrances
     parts.append(god_ray(150, 30, 26))
@@ -452,11 +455,12 @@ def build_scene():
     for name, (cx, cy, rx, ry, rz) in ROOMS.items():
         parts.append(label(cx, cy + ry + 2.5, name))
     parts.append(label(66, 30, "the Gate", size=2.6, col="0.8 0.78 0.66"))
-    # the ~90 ft hole and the sacred pool, marked respectfully
-    parts.append(label(48, -22, "the 90 ft hole", size=2.4, col="0.8 0.78 0.66"))
-    parts.append(label(40, -34, "Pit of the Lost Maiden", size=2.8,
+    # the deep drop (legend: the ~90 ft hole) and the sacred pool, marked respectfully
+    parts.append(label(49, -36, "the deep drop (~90 ft, by legend)", size=2.3,
+                       col="0.8 0.78 0.66"))
+    parts.append(label(40, -52, "Pit of the Lost Maiden", size=2.8,
                        col="0.85 0.8 0.7"))
-    parts.append(label(40, -72, "the Magic Pool", size=3.0, col="0.7 0.92 0.95"))
+    parts.append(label(40, -92, "the Magic Pool", size=3.0, col="0.7 0.92 0.95"))
 
     # lighting: section wash + a warm lantern per room (brighter so dripstone reads)
     lights = [
@@ -464,16 +468,16 @@ def build_scene():
         '<DirectionalLight direction="-0.2 -1 0.1" intensity="0.2" color="0.55 0.58 0.68"/>',
         daylight(152, 31, 1.0), daylight(168, 14, 0.75, 45),
         lantern(100, 19, 1.0, 60), lantern(54, 15, 0.95, 45),
-        lantern(18, 32, 0.9, 42), lantern(40, -56, 0.8, 46, col="0.92 0.76 0.56"),
+        lantern(18, 32, 0.9, 42), lantern(40, -76, 0.8, 46, col="0.92 0.76 0.56"),
     ]
 
     # framing: front-on section, fit the whole system incl. the deep lower level
-    eye = (95.0, -6.0, 238.0)
-    tgt = (92.0, -12.0, -8.0)
+    eye = (95.0, -18.0, 278.0)
+    tgt = (92.0, -24.0, -8.0)
     orient = look_orientation(eye, tgt)
-    # hero: the descent -- Chamber One, the ~90 ft hole, Chamber Two + Magic Pool
-    hero = (46.0, -18.0, 122.0)
-    hero_o = look_orientation(hero, (42.0, -32.0, -8.0))
+    # hero: the descent -- Chamber One, the deep drop, Chamber Two + Magic Pool
+    hero = (46.0, -30.0, 150.0)
+    hero_o = look_orientation(hero, (42.0, -48.0, -8.0))
 
     title = (
         '<Transform translation="92 60 6"><Shape>'
@@ -546,13 +550,14 @@ if (location.protocol === 'file:') {
 </script>"""
 
 SAMWEL_CAP = (
-    '<b>Samwel Cave</b> &mdash; Wintu <i>sawal</i>, "sacred place," the Cave of '
-    'the Lost Maiden. McCloud River, Shasta County. Surveyed by Furlong, Merriam '
-    '&amp; Sinclair (1903&ndash;06); cross-section after Feranec&nbsp;et&nbsp;al. '
-    '(2007). Now on the shore of Shasta Lake, on flooded Winnemem&nbsp;Wintu '
-    'homeland. <span style="opacity:.8">Chamber layout, the Magic Pools, and the '
-    '~90&nbsp;ft hole connecting the upper and lower levels are documented; room '
-    'sizes, exact pit geometry, speleothems and lighting are interpretive.</span>'
+    '<b>Samwel Cave</b> &mdash; Wintu <i>sawal</i> (glossed both "sacred place" '
+    'and the word for grizzly bear), the Cave of the Lost Maiden. McCloud River, '
+    'Shasta County. Surveyed by Furlong, Merriam &amp; Sinclair (1903&ndash;06); '
+    'cross-section after Feranec&nbsp;et&nbsp;al. (2007). Now on the shore of '
+    'Shasta Lake, on flooded Winnemem&nbsp;Wintu homeland. '
+    '<span style="opacity:.8">Chamber layout and the Magic Pools are documented, '
+    'and a deep drop joins the two levels; the ~90&nbsp;ft "hole" is from legend. '
+    'Room sizes, pit geometry, speleothems and lighting are interpretive.</span>'
 )
 
 

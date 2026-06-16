@@ -16,24 +16,19 @@
   urlcolor=blue!50!black, citecolor=blue!50!black}
 
 \definecolor{codebg}{gray}{0.96}
-\definecolor{promptbg}{rgb}{0.95,0.97,1.0}
 \lstdefinestyle{code}{basicstyle=\ttfamily\small, backgroundcolor=\color{codebg},
   breaklines=true, frame=single, framerule=0pt, columns=fullflexible,
   showstringspaces=false, xleftmargin=4pt, xrightmargin=4pt}
-\lstdefinestyle{prompt}{basicstyle=\ttfamily\small\itshape,
-  backgroundcolor=\color{promptbg}, breaklines=true, frame=leftline,
-  framerule=2pt, rulecolor=\color{blue!40}, columns=fullflexible,
-  xleftmargin=8pt, aboveskip=6pt, belowskip=6pt}
 \lstset{style=code}
-\lstnewenvironment{prompt}{\lstset{style=prompt}}{}
 \newcommand{\fig}[3]{\begin{figure}[ht]\centering
   \includegraphics[width=#2\linewidth]{figures/#1}
   \caption{#3}\label{fig:#1}\end{figure}}
+\newcommand{\xite}{X\_ITE}
 
 \title{\textbf{Reconstructing Historic Fossil Caves in X3D from\\
 Century-Old Survey Data: A Human--AI Case Study}}
 \author{Alexander Hoffman \and Claude (Anthropic Claude Code)\\[2pt]
-  \small\textit{Draft --- collaborative authorship}}
+  \small\textit{Draft --- collaborative authorship; see Use of AI statement}}
 \date{\today}
 
 \begin{document}
@@ -41,218 +36,246 @@ Century-Old Survey Data: A Human--AI Case Study}}
 
 \begin{abstract}
 We reconstruct two Pleistocene fossil caves of the McCloud River, California ---
-\emph{Potter Creek Cave} and \emph{Samwel Cave}, both excavated 1903--06 under the
-direction of the vertebrate palaeontologist John~C.~Merriam --- as interactive,
-to-scale X3D scenes built procedurally from the original survey literature
-(Sinclair 1904; Furlong 1906; Feranec et al.\ 2007). As in our companion
-HAnim study, we treat the human--AI pair as co-authors: the human supplies
-intent, domain pointers, family knowledge, and aesthetic and ethical judgment;
-the AI supplies procedural generation, a tight verify-by-render loop, and
-contributions back to the toolchain. We report three results. First, a method for
-turning narrative cave surveys into standards-conformant X3D, organised around a
-\emph{provenance discipline} that explicitly separates documented geometry from
-interpretive dressing. Second, a physically-based cave look-development pass ---
-displaced and normal-mapped limestone, layered ``god-ray'' light shafts, and
-rippled water --- rendered in the X\_ITE web player. Third, and most useful to the
-toolchain, an \textbf{X\_ITE rendering backend} for the X3D Model Context Protocol
-(MCP) server that lets the tool \emph{see} HAnim humanoids and X3D~4.0
-PhysicalMaterial (PBR) scenes that the previous X3DOM path could not render at
-all under headless software WebGL. A personal and ethical thread runs throughout:
-the excavator was the human author's great-great-grandfather, and the caves are
-Winnemem Wintu sacred sites now drowned by Shasta Dam.
+\emph{Potter Creek Cave} and \emph{Samwel Cave}, both excavated in the early
+1900s under the direction of the vertebrate palaeontologist John~C.~Merriam ---
+as interactive, to-scale X3D scenes built procedurally from the original survey
+literature (Sinclair 1904; Furlong 1906; Feranec et al.\ 2007). As in our
+companion HAnim study, we treat the human--AI pair as co-authors: the human
+supplies intent, domain pointers, family knowledge, and aesthetic and ethical
+judgment; the AI supplies procedural generation, a tight verify-by-render loop,
+and contributions back to the toolchain. We report three results. First, a method
+for turning narrative cave surveys into standards-conformant X3D~4.0, organised
+around a \emph{provenance discipline} that explicitly separates documented
+geometry from interpretive dressing. Second, a physically-based cave
+look-development pass --- displaced and normal-mapped limestone
+(\texttt{PhysicalMaterial}), layered light-shaft effects, and rippled water ---
+rendered in the \xite{} web player. Third, and most useful to the toolchain, an
+\textbf{\xite{} rendering backend} for the X3D Model Context Protocol (MCP) server
+that lets the tool \emph{see} HAnim humanoids and X3D~4.0 \texttt{PhysicalMaterial}
+(physically-based rendering, PBR) scenes that the previous X3DOM-based path did
+not draw under our headless software-WebGL pipeline. A personal and ethical thread
+runs throughout: the excavator was the human author's great-great-grandfather, and
+the caves are Winnemem Wintu sacred places above a stretch of the McCloud River
+that Shasta Dam later flooded.
 \end{abstract}
 
 \section{Introduction}
 
 This paper is a worked example of human--AI pairing applied to a problem that is
-equal parts engineering, archival scholarship, and cultural care. Over two
-sessions a human collaborator and an AI agent (Anthropic's Claude, in Claude
-Code) built two interactive X3D scenes that reconstruct the chambers of
-\emph{Potter Creek Cave} and \emph{Samwel Cave} in Shasta County, California ---
-to the dimensions recorded in their original early-twentieth-century surveys, and
-viewable in a web browser.
+equal parts engineering, archival scholarship, and cultural care. A human
+collaborator and an AI agent (Anthropic's Claude, in Claude Code) built two
+interactive X3D scenes reconstructing the chambers of \emph{Potter Creek Cave}
+and \emph{Samwel Cave} in Shasta County, California --- to the dimensions
+recorded in their original surveys, and viewable in a web browser. The Model
+Context Protocol (MCP)~[8] is an open protocol that exposes tools to a language
+model; the Web3D Consortium's X3D MCP server exposes X3D node lookup, scene
+construction, validation, and rendering as such tools.
 
-The motivation was personal. The caves were excavated between 1903 and 1906 by
-field parties under \textbf{John Campbell Merriam} (1869--1945), the University of
+The motivation was personal. The caves were excavated in the early 1900s by field
+parties under \textbf{John Campbell Merriam} (1869--1945), the University of
 California vertebrate palaeontologist who later led the Carnegie Institution and
-helped found Save the Redwoods --- and the human author's great-great-grandfather.
-The reports that resulted (Sinclair 1903, 1904, 1905; Furlong 1906) are among the
-founding documents of West Coast Pleistocene palaeontology. We set out to ask: can
-a human--AI pair turn those century-old prose surveys into faithful, inspectable
-3D, honestly labelled as to what is measured versus imagined, using only the
-open Web3D toolchain?
+co-founded the Save the Redwoods League --- and the human author's
+great-great-grandfather. Potter Creek Cave was excavated principally in
+1902--1903 and Samwel Cave in 1903--1906; the reports that resulted (Sinclair
+1903, 1904, 1905; Furlong 1906) are among the founding documents of West Coast
+Pleistocene palaeontology. We asked: can a human--AI pair turn those century-old
+prose surveys into faithful, inspectable 3D --- honestly labelled as to what is
+measured versus imagined --- using only the open Web3D toolchain?
 
 The contribution is less the scenes than the \emph{method and the discipline}:
 every artifact was produced through the X3D MCP server, validated against the X3D
 schema and a set of semantic checks, and visually verified by the agent rendering
-each scene and reading the resulting image. Along the way we found and fixed the
-single largest gap in that loop --- the MCP could not actually render the modern
-material model --- and contributed the fix upstream.
+each scene (Figs.~\ref{fig:pcc_hero}--\ref{fig:samwel_hero}) and reading the
+resulting image. Along the way we found and fixed the single largest gap in that
+loop --- the MCP could not render the standard's current material model --- and
+contributed the fix upstream.
 
-\fig{pcc_hero}{0.86}{Potter Creek Cave, hero view near the entrance third.
-Documented to Sinclair (1904): the 107\,ft chamber, $\sim$75\,ft domed roof, the
-two coalescing breccia fans, and the 42\,ft entrance pit (left, with its daylight
-shaft). Interpretive: speleothems, pools, rock texture, and lighting.}
+\fig{pcc_hero}{0.84}{Potter Creek Cave, hero view near the entrance third,
+rendered in \xite{}. \emph{Documented} to Sinclair (1904): the 107\,ft chamber,
+$\sim$75\,ft domed roof, the two coalescing breccia fans, and the 42\,ft entrance
+pit (left, with its light shaft). \emph{Interpretive}: speleothems, pools, rock
+texture, and lighting.}
 
 \section{The sites and their sources}
 
-\paragraph{Potter Creek Cave.} Sinclair's 1904 monograph gives a chamber
+\paragraph{Potter Creek Cave.} Sinclair's 1904 monograph~[10] gives a chamber
 ``one hundred and seven feet long, about thirty feet wide at its widest part,
 with the roof rising about seventy-five feet above the lowest point of the
 floor.'' Two ``fan-like deposits of earth and stalagmite-cemented breccia''
 slope from opposite ends and coalesce in the middle, with near-vertical chimneys
 above each fan apex; access required ``a vertical descent of forty-two feet'' by
 rope ladder. The galleries trend northwest--southeast, parallel to the strike of
-the McCloud limestone, at 1500\,ft elevation. The deposit yielded roughly 52
-vertebrate species, 21 of them extinct --- including the type specimens of the
-shrub-ox \emph{Euceratherium collinum} (a new genus and species named from this
-cave), abundant remains of the giant short-faced bear \emph{Arctodus simus}, the
-Shasta ground sloth \emph{Nothrotheriops shastensis}, \emph{Megalonyx},
-\emph{Canis dirus}, mammoth, camel, and horse.
+the McCloud Limestone, at $\sim$1500\,ft (460\,m) elevation. The deposit yielded
+roughly 52 vertebrate species, 21 of them extinct --- including the type specimen
+of the shrub-ox \emph{Euceratherium collinum}, a new genus and species named from
+this cave (Sinclair \& Furlong 1904)~[13], abundant remains of the giant
+short-faced bear \emph{Arctodus simus}, the Shasta ground sloth
+\emph{Nothrotheriops shastensis}, \emph{Megalonyx}, \emph{Canis dirus}, mammoth,
+camel, and horse.
 
 \paragraph{Samwel Cave.} Five kilometres north on the same McCloud arm, Samwel
-Cave (Wintu \emph{sawal}, ``holy place'') is a branching two-level system in the
-McCloud Limestone at 460\,m elevation. Furlong's 1906 survey, redrawn in Feranec
-et al.\ (2007, Fig.~2), names its spaces: the Entrance and Porcupine Entrance, the
-large Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber, and Chamber Two
-(``Furlong's Room''), reached only by a deep drop. Tradition records the cave as
-the \emph{Cave of the Lost Maiden} --- the Wintu girl Olchanolmet, who fell to her
-death down a ``90-foot-deep hole'' --- and as the \emph{Cave of the Magic Pools},
-where ``Wintu medicine men bathed in the water pools to get magic strength.''
-Nearly 1000 specimens (45 mammal, 13 bird species) span the Last Glacial Maximum
-($\sim$17{,}100--23{,}600 cal~BC).
+Cave (Wintu \emph{sawal}) is a branching two-level system in the McCloud Limestone
+at 460\,m ($\sim$1500\,ft) elevation. The name is contested: it is variously
+translated ``sacred/holy place'' and identified with the Wintu word for grizzly
+bear. Furlong's 1906 survey~[12], redrawn in Feranec et al.\ (2007, Fig.~2)~[14],
+names its spaces: the Entrance and Porcupine Entrance, the large Pleistocene Hall,
+the Gate, Chamber One, Merriam's Chamber, and Chamber Two (``Furlong's Room''),
+the lower level reached only by a deep drop requiring climbing gear
+(Fig.~\ref{fig:samwel_section}). Tradition records the cave as the \emph{Cave of
+the Lost Maiden} --- the Wintu girl Olchanolmet, who by legend fell to her death
+down a ``90-foot-deep hole'' --- and as the \emph{Cave of the Magic Pools}, where
+``Wintu medicine men bathed in the water pools to get magic strength.'' Nearly
+1000 specimens (45 mammal, 13 bird species) span the Last Glacial Maximum
+($\sim$23{,}600--17{,}100 cal~BC)~[14].
 
-\paragraph{An ethical note.} Both caves are Winnemem Wintu sacred sites. Shasta
-Dam (1945) flooded the McCloud River canyon --- villages, burial and ceremonial
-places --- and the caves now sit on the Shasta Lake shore. We name the Winnemem
-connection, the Lost Maiden, and the Magic Pools explicitly and with attribution,
-as context rather than scenery, and we surface the dam-flooding in every scene's
-caption.
+\paragraph{An ethical note.} Both caves are Winnemem Wintu sacred places. Shasta
+Dam (completed 1945) flooded the McCloud River canyon --- villages, burial and
+ceremonial places --- and the caves now sit on the Shasta Lake shore. We name the
+Winnemem connection, the Lost Maiden, and the Magic Pools explicitly and with
+attribution, as context rather than scenery, and the dam-flooding is surfaced in
+each scene's on-screen caption.
 
 \section{Method: from narrative survey to standards-conformant X3D}
 
 Each cave is generated procedurally by a single Python program emitting X3D~4.0
-XML (\texttt{generate\_cave.py}, \texttt{generate\_samwel.py}). Three ideas did
-most of the work.
+XML, declared \texttt{profile='Immersive' version='4.0'} (ISO/IEC
+19775-1:2023~[1]; XML encoding ISO/IEC 19776-1~[2]). Three ideas did most of the
+work.
 
 \paragraph{Sectioning.} A closed cave shell is a dark blob from outside and is
 unlit from within. We instead build the \emph{back half} of each surface (the
 $z\le0$ portion), opening the chamber toward the viewer --- the same longitudinal
 and cross-section conventions the 1904 and 1906 reports used to draw the caves on
 paper. This makes the interior simultaneously legible and lightable. Potter Creek
-becomes a lofted longitudinal section; Samwel becomes a labelled cross-section of
-ellipsoidal chambers connected by passages, echoing Furlong's plate.
+becomes a lofted longitudinal section (Fig.~\ref{fig:pcc_section}); Samwel becomes
+a labelled cross-section of ellipsoidal chambers connected by passages, echoing
+Furlong's plate.
 
-\paragraph{Physically-based look-development.} Walls and floor use X3D~4.0
-\texttt{PhysicalMaterial} with a tileable metallic-roughness texture set ---
-albedo, tangent-space normal, and metallic-roughness maps generated from
-value-noise with NumPy/PIL (\texttt{generate\_cave\_textures.py}) --- combined
-with multi-octave geometric displacement of the mesh for true silhouette relief.
-On top sit procedural speleothems (stalactites, stalagmites, fused columns,
-flowstone draperies), breakdown blocks, rippled PBR pools, and layered emissive
-``god-ray'' cones with drifting dust motes down the open shafts.
+\paragraph{Physically-based look-development.} Walls and floor use the X3D~4.0
+\texttt{PhysicalMaterial} node (Shape component~[1]; its metallic-roughness model
+follows glTF~2.0~[7]) with a tileable texture set --- base-colour, tangent-space
+normal, and metallic-roughness maps generated from value-noise --- combined with
+multi-octave geometric displacement of the mesh for true silhouette relief. Note
+that \texttt{PhysicalMaterial} defaults \texttt{metallic=1} and
+\texttt{roughness=1}~[1], so dielectric rock must explicitly set
+\texttt{metallic=0}. On top sit procedural speleothems (stalactites, stalagmites,
+fused columns, flowstone draperies), breakdown blocks, rippled PBR pools, and
+layered emissive light-shaft cones with drifting motes down the open shafts.
 
 \paragraph{Provenance discipline.} Because the geometry is part measured and part
 imagined, every generator carries a \texttt{PROVENANCE} block, and every scene a
-caption, that state plainly which features are \emph{to scale from the survey}
-(chamber dimensions, the fans, the chimneys, the 42\,ft pit; Samwel's chamber
-topology, the $\sim$90\,ft hole, the Magic Pools) and which are
-\emph{interpretive} (all speleothems, the rock texture, pool extents, lighting,
-and --- for Samwel --- the individual room sizes, which the sources do not give).
-We regard this explicit separation as a small but reusable contribution to honest
+caption, that each state plainly which features are \emph{to scale from the
+survey} (chamber dimensions, the fans, the chimneys, the 42\,ft pit; Samwel's
+chamber topology and the documented deep drop joining its two levels) and which
+are \emph{interpretive} (all speleothems, the rock texture, pool extents,
+lighting, and --- for Samwel --- the individual room sizes, which the sources do
+not give). We are careful to separate documented fact from legend: that a deep
+drop joins Samwel's two levels is surveyed, whereas the maiden's ``90-foot hole''
+is tradition, and our identification of the two is an interpretive choice. We
+regard this explicit separation as a small but reusable contribution to honest
 heritage and scientific reconstruction.
 
 \fig{samwel_section}{0.9}{Samwel Cave as a labelled cross-section after Furlong
-(1906) / Feranec et al.\ (2007). Documented topology: Entrance and Porcupine
-Entrance, Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber, and Chamber
-Two down the $\sim$90\,ft hole to the sacred Magic Pool. Room sizes and surface
-detail are interpretive.}
+(1906)~/ Feranec et al.\ (2007). \emph{Documented} topology: Entrance and
+Porcupine Entrance, Pleistocene Hall, the Gate, Chamber One, Merriam's Chamber,
+and Chamber Two down a deep drop to the lower level with its Magic Pool. Room
+sizes and surface detail are interpretive.}
 
 \section{The render loop and the X3D MCP server}
 
 Our governing practice is \emph{verify by render}: a scene that passes both the
 XSD schema check and our semantic checks can still be visually wrong --- off
 camera, unlit, mis-scaled, or silently dropped. The canonical loop is therefore
-\texttt{describe\_node} (look up exact fields and containerFields) $\rightarrow$
-build $\rightarrow$ \texttt{validate\_x3d} \emph{and} \texttt{validate\_semantic}
-$\rightarrow$ \textbf{render and look}. Both cave scenes pass both validators
-cleanly.
+\texttt{describe\_node} (look up exact fields and \texttt{containerField}s)
+$\rightarrow$ build $\rightarrow$ \texttt{validate\_x3d} \emph{and}
+\texttt{validate\_semantic} $\rightarrow$ \textbf{render and look}. Both cave
+scenes pass both validators cleanly.
 
-The decisive finding of today's session was that the loop's last step was broken
-for exactly the scenes we care about. The MCP's \texttt{render\_image} tool used
+The decisive engineering finding was that the loop's last step was broken for
+exactly the scenes we care about. The MCP's \texttt{render\_image} tool used
 X3DOM with the synchronous Playwright API. Two failures compounded: (i) called
 from an asynchronous MCP tool it raised \emph{``Sync API inside the asyncio
-loop''}; and (ii) X3DOM under headless software WebGL (SwiftShader) clears the
-background but \emph{draws no geometry at all}, and in any browser it does not
-implement X3D~4.0 PhysicalMaterial or HAnim. The tool literally could not see a
-PBR cave or an articulated humanoid.
+loop''}; and (ii) under our headless pipeline (Chromium via Playwright~1.60,
+software WebGL via ANGLE/SwiftShader) X3DOM cleared the background but drew no
+geometry, and it does not implement the X3D~4.0 \texttt{PhysicalMaterial} or HAnim
+material paths. We scope this claim to what we tested --- X3DOM from
+\texttt{x3dom.org/release} (1.8.x) under headless SwiftShader --- and present it
+as a rendering-coverage and headless-software-WebGL gap, not a blanket statement
+about X3DOM in all configurations. The controlled result is shown in
+Fig.~\ref{fig:x3dom_vs_xite}: the identical scene file renders empty under X3DOM
+and fully under \xite{}.
 
-We rebuilt the backend around \textbf{X\_ITE}, which renders both. The new
-implementation (i) uses asynchronous Playwright so it runs inside the MCP event
-loop; (ii) serves the scene over an ephemeral loopback HTTP server, because
-X\_ITE fetches the \texttt{.x3d} by XHR and browsers block that over
-\texttt{file://}; and (iii) when given a file path, serves that file's own
-directory so relative assets (PBR textures, inlined geometry) resolve as they do
-in a browser. With this in place the agent could finally inspect its own output;
-every figure in this paper was produced through it.
+\fig{x3dom_vs_xite}{0.98}{Controlled comparison: the identical
+\texttt{potter\_creek\_cave.x3d} under the same headless Chromium/SwiftShader
+pipeline. X3DOM (left) draws only the scene background; \xite{} (right) renders
+the displaced, normal-mapped \texttt{PhysicalMaterial} scene. This motivated the
+new \xite{} render backend.}
 
-\fig{pcc_section}{0.92}{Potter Creek Cave, full longitudinal section, rendered
-through the new X\_ITE MCP backend. Visible: displaced, normal-mapped limestone;
-the two breccia fans; the three shafts; columns and dripstone; the banded
-stratigraphic column; and the daylight shaft down the great pit.}
+We rebuilt the backend around \textbf{\xite{}}~[5], which renders both PBR and
+HAnim. The new implementation (i) uses asynchronous Playwright so it runs inside
+the MCP event loop; (ii) serves the scene over an ephemeral loopback HTTP server,
+because \xite{} fetches the \texttt{.x3d} by XHR and the browser's same-origin
+policy blocks that for \texttt{file://} URLs (reported as a CORS error); and
+(iii) when given a file path, serves that file's own directory so relative assets
+(PBR textures, inlined geometry) resolve as they do in a browser. With this in
+place the agent could finally inspect its own output; every rendered figure here
+was produced through it, pinned to \xite{}~15.1.4 for reproducibility.
 
-\section{What we learned today}
+\section{Findings}
 
 \begin{enumerate}[leftmargin=1.4em]
 \item \textbf{Renderer choice is a correctness property, not an aesthetic one.}
-For X3D~4.0 PBR and HAnim, X3DOM is not merely lower-fidelity --- under our
-headless setup it renders \emph{nothing}, and it omits the material model
-entirely. X\_ITE is the faithful player. An authoring tool that cannot render the
-standard's current material model cannot verify its own work.
-\item \textbf{Transport matters.} \texttt{file://} silently defeats X\_ITE (CORS);
-inline X3D inside HTML is mangled by the HTML parser's lowercasing. A tiny local
-HTTP server is the reliable path, and pages should \emph{detect} \texttt{file://}
-and say so rather than show a black screen.
+For X3D~4.0 PBR and HAnim, the player matters: under our headless setup X3DOM
+rendered nothing, and it does not implement the current material model, whereas
+\xite{} renders both. An authoring tool that cannot render the standard's current
+material model cannot verify its own work.
+\item \textbf{Transport matters.} \texttt{file://} silently defeats \xite{} (the
+same-origin policy for local files); inline X3D inside HTML is mangled by the HTML
+parser's tag lowercasing. A small local HTTP server is the reliable path, and
+pages should \emph{detect} \texttt{file://} and say so rather than show a black
+screen.
 \item \textbf{Look up, do not recall.} Every material field
 (\texttt{baseTexture}, \texttt{normalTexture}, \texttt{metallicRoughnessTexture};
-\texttt{metallic} whose default is $1$ and must be set to $0$ for rock) came from
-\texttt{describe\_node}, not memory. Guessing containerFields is the most common
-silent failure, and the validators that name the exact fix are worth more than
-the schema check.
-\item \textbf{Provenance is cheap and clarifying.} Writing down what is measured
-versus imagined took minutes and removed a whole class of future
-mis-citation --- and it forced better research (it is how we caught that the
-maiden's fall was a documented \emph{90-foot} drop, and corrected the pit from a
-shallow notch to a true shaft connecting the two levels).
-\item \textbf{Get the legend right.} A late prompt --- ``make sure you read the
-map legends correctly'' --- sent us back to the published cross-section to verify
-chamber identities and to discover the famous Magic Pool, which then became the
-emotional and geometric focus of the Samwel descent view.
+\texttt{metallic}, default 1, set to 0 for rock) came from \texttt{describe\_node},
+not memory. Guessing \texttt{containerField}s is the most common silent failure,
+and the semantic checks that name the exact fix are worth more than the schema
+check alone.
+\item \textbf{Provenance is cheap and clarifying.} Recording what is measured
+versus imagined took minutes and removed a class of future mis-citation --- and it
+forced better research: it is how we caught that the maiden's fall is a documented
+\emph{legend} of a 90-foot drop while the level-connecting passage is what the
+\emph{survey} attests, and corrected the model to keep the two distinct.
+\item \textbf{Get the legend right.} A late instruction --- ``read the map legends
+correctly'' --- sent us back to the published cross-section to verify chamber
+identities and to surface the Magic Pool, which then became the emotional and
+geometric focus of the Samwel descent view (Fig.~\ref{fig:samwel_hero}).
 \end{enumerate}
 
-\fig{samwel_hero}{0.86}{Samwel Cave, the descent: Chamber One, the $\sim$90\,ft
-hole the Lost Maiden fell down (the only connection between the upper and lower
-levels), and Chamber Two with the glowing Magic Pool.}
+\fig{samwel_hero}{0.84}{Samwel Cave, the descent: Chamber One, the deep drop
+(the $\sim$90\,ft ``hole'' of legend), and Chamber Two with the glowing Magic
+Pool at the bottom. The on-screen caption marks documented vs.\ interpretive
+features and the contested gloss of \emph{sawal}.}
 
 \section{Ideas and future work}
 
 \begin{itemize}[leftmargin=1.4em]
-\item \textbf{Populate the caves with their fauna.} The whole point of these
-caves was what came out of them. The procedural-creature pipeline already built
-for a rigged moose could place the actually-excavated megafauna --- the type
-\emph{Euceratherium}, the short-faced bear, the Shasta ground sloth --- at their
-recorded depths, turning each cave into a labelled palaeontological diorama.
-\item \textbf{Ground-truth from the field.} A planned in-person visit to Samwel
-could supply photographs of the real chambers and formations, letting us replace
-estimated room sizes and invented dripstone with measured shapes --- closing the
-interpretive gap the provenance block currently flags.
-\item \textbf{Stratigraphic interactivity.} Expose the documented strata
-(Potter Creek's clay/ash/breccia; Samwel's flowstone--breccia--gravel column) as
-a scrubbable cut, with fauna pinned to levels and radiocarbon ages on hover.
-\item \textbf{Toward true volumetrics.} Our god-rays and ``refractive'' water are
-faked with layered translucent geometry; X3D lacks participating-media
-scattering. A volumetric or screen-space approach in X\_ITE would be a genuine
-rendering contribution.
+\item \textbf{Populate the caves with their fauna.} The procedural-creature
+pipeline already built for a rigged moose could place the actually-excavated
+megafauna --- the type \emph{Euceratherium}, the short-faced bear, the Shasta
+ground sloth --- at their recorded depths, turning each cave into a labelled
+palaeontological diorama.
+\item \textbf{Ground-truth from the field.} An in-person visit to Samwel could
+supply photographs of the real chambers and formations, replacing estimated room
+sizes and invented dripstone with measured shapes --- closing the interpretive gap
+the provenance block currently flags.
+\item \textbf{Stratigraphic interactivity.} Expose the documented strata (Potter
+Creek's clay/ash/breccia; Samwel's flowstone--breccia--gravel column) as a
+scrubbable cut, with fauna pinned to levels and radiocarbon ages on hover.
+\item \textbf{Toward true volumetrics.} Our light shafts and ``refractive'' water
+are faked with layered translucent geometry; X3D has no participating-media /
+atmospheric-scattering primitive (distinct from the VolumeRendering component,
+which targets sampled volume data). A screen-space or volumetric approach in
+\xite{} would be a genuine rendering contribution.
 \item \textbf{A reusable survey$\rightarrow$X3D recipe.} The section-cut + PBR +
 provenance pattern generalises to any cave or excavation with a published plan;
 it could become a small documented template for the AI-with-X3D community.
@@ -260,18 +283,20 @@ it could become a small documented template for the AI-with-X3D community.
 
 \section{Contributions back to the toolchain}
 
-Beyond the scenes, the session produced concrete improvements to the Web3D X3D
-MCP server, carried on a dedicated branch and covered by tests: the X\_ITE
-rendering backend described above (async, loopback-served, asset-aware);
-semantic validators for containerField (with the canonical field suggested),
-USE-before-DEF ordering, and interpolator key/keyValue length; an
-\texttt{autofix\_x3d} tool that rewrites containerFields and returns the corrected
-document; granular-mode parity for non-default node placement; and proactive
-server \texttt{instructions} that frame the canonical describe$\rightarrow$build
-$\rightarrow$validate-both$\rightarrow$render path for fresh model instances. We
-also maintain an upstream \texttt{x3d.py} bug report documenting a dropped
-\texttt{containerField} on non-default fields and a non-spec
-\texttt{EnvironmentLight.global} default --- both of which serialise to
+Beyond the scenes, the work produced concrete improvements to the Web3D X3D MCP
+server, carried on a dedicated branch and covered by tests: the \xite{} rendering
+backend described above (async, loopback-served, asset-aware); semantic
+validators for \texttt{containerField} (with the canonical field suggested),
+USE-before-DEF ordering, and interpolator \texttt{key}/\texttt{keyValue} length;
+an \texttt{autofix\_x3d} tool that rewrites \texttt{containerField}s and returns
+the corrected document; granular-mode parity for non-default node placement; and
+proactive server \texttt{instructions} that frame the canonical
+describe~$\rightarrow$~build~$\rightarrow$~validate-both~$\rightarrow$~render path
+for fresh model instances. We also maintain an upstream report against
+\textbf{x3d.py}~[6], the Web3D Consortium's official X3D Python (Scene Access
+Interface) package, version 4.0.65.3: it drops \texttt{containerField} on
+non-default fields and defaults \texttt{EnvironmentLight.global} to \texttt{true}
+where the normative spec specifies \texttt{false} --- both of which serialise to
 schema-valid XML that nonetheless renders incorrectly.
 
 \section{Conclusion}
@@ -280,13 +305,57 @@ Two caves that a family forebear opened a hundred and twenty years ago now exist
 as honest, inspectable, standards-conformant 3D, made entirely through the open
 Web3D toolchain by a human and a model working as a pair. The engineering lesson
 is blunt: an authoring agent is only as good as its ability to see what it made,
-and for modern X3D that means X\_ITE. The human lessons --- provenance,
+and for X3D~4.0 material that means \xite{}. The human lessons --- provenance,
 attribution, and care for whose sacred ground this is --- were supplied by the
 person, and they are the part that matters most.
 
+\paragraph{Use of AI.} The named AI ``co-author'' is Anthropic's Claude (Claude
+Code), which performed procedural generation, rendering, validation, and drafting
+under the human author's direction; the human author conceived the project,
+supplied sources and family knowledge, made all aesthetic and ethical decisions,
+and is responsible for the content. We list the AI on the byline for transparency;
+venues that bar AI authorship should treat this as a tool-use disclosure.
+
 \paragraph{Reproducibility.} All generators, textures, scenes, viewer pages, and
-the full render history are in the project repository; \texttt{./start\_caves.sh}
-serves the launcher locally. Documented-versus-interpretive provenance is recorded
-in each generator and on screen.
+the full render history are in the project repository (branch
+\texttt{potter-creek-cave}); \texttt{./start\_caves.sh} serves the launcher
+locally. Renders used \xite{}~15.1.4, X3DOM \texttt{x3dom.org/release} (1.8.x),
+Playwright~1.60 with headless Chromium and ANGLE/SwiftShader software WebGL. The
+exact commit/tag accompanies publication.
+
+\begin{thebibliography}{99}
+\small
+\bibitem{x3d4} ISO/IEC 19775-1:2023, \emph{X3D Architecture and base components}
+(X3D 4.0). Web3D Consortium / ISO.
+\bibitem{x3dxml} ISO/IEC 19776-1, \emph{X3D encodings --- Part 1: XML encoding}.
+\bibitem{hanim} ISO/IEC 19774-1:2019, \emph{Humanoid Animation (HAnim)
+architecture}.
+\bibitem{x3duom} Web3D Consortium, \emph{X3D Unified Object Model (X3DUOM)}.
+\bibitem{xite} H.~Seelig, \emph{\xite{} X3D Browser}, v15.1.4.
+\url{https://create3000.github.io/x_ite/}
+\bibitem{x3dpy} Web3D Consortium, \emph{x3d.py --- X3D Python SAI package},
+v4.0.65.3. \url{https://pypi.org/project/x3d/}
+\bibitem{gltf} Khronos Group, \emph{glTF 2.0 Specification} (metallic-roughness
+PBR material model).
+\bibitem{mcp} Anthropic, \emph{Model Context Protocol specification}.
+\url{https://modelcontextprotocol.io}
+\bibitem{x3dom} J.~Behr et al., \emph{X3DOM}. \url{https://www.x3dom.org/}
+\bibitem{sinclair04} W.~J.~Sinclair (1904) The exploration of the Potter Creek
+Cave. \emph{Univ. Calif. Publ. Amer. Arch. Ethn.} 2(1):1--27.
+\bibitem{sinclair03} W.~J.~Sinclair (1903) A preliminary account of the
+exploration of the Potter Creek Cave. \emph{Science} 17(435):708--712.
+\bibitem{furlong06} E.~L.~Furlong (1906) The exploration of Samwel Cave.
+\emph{Am. J. Sci.} 22(129):235--247.
+\bibitem{sf04} W.~J.~Sinclair \& E.~L.~Furlong (1904) \emph{Euceratherium}, a new
+ungulate from the Quaternary caves of California. \emph{Univ. Calif. Publ. Bull.
+Dept. Geol.} 3:411--418.
+\bibitem{feranec07} R.~S.~Feranec, E.~A.~Hadly, J.~L.~Blois, A.~D.~Barnosky \&
+A.~Paytan (2007) Radiocarbon dates from the Pleistocene fossil deposits of Samwel
+Cave. \emph{Radiocarbon} 49(1):117--121.
+\bibitem{payen76} L.~A.~Payen \& R.~E.~Taylor (1976) Man and Pleistocene fauna at
+Potter Creek Cave. \emph{J. California Anthropology} 3(1):51--58.
+\bibitem{sinclair05} W.~J.~Sinclair (1905) New Mammalia from the Quaternary caves
+of California. \emph{Univ. Calif. Publ. Geol.} 4:145--161.
+\end{thebibliography}
 
 \end{document}

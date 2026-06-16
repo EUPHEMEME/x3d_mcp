@@ -16,8 +16,9 @@ A Human–AI Case Study (Potter Creek & Samwel Caves).*
 
 ## One-paragraph abstract (draft)
 We reconstruct two Pleistocene fossil caves of the McCloud River, California —
-Potter Creek Cave and Samwel Cave, both excavated 1903–06 under **John C.
-Merriam** — as interactive, to-scale X3D scenes built procedurally from the
+Potter Creek Cave and Samwel Cave, excavated under **John C. Merriam** in a
+program running roughly **1902–06** (Potter Creek from ~1902; Samwel
+~1903/1904–06) — as interactive, to-scale X3D scenes built procedurally from the
 original survey literature (Sinclair 1904; Furlong 1906; Feranec et al. 2007).
 The work was produced by a human–AI pair through the Web3D X3D MCP server, with a
 tight author→validate→**render** loop. We contribute (i) a method for turning
@@ -43,14 +44,17 @@ sacred sites now drowned by Shasta Dam.
 - NW-fan stratigraphy: upper clay to **13.5 ft**, volcanic ash ~**1.5 ft**,
   cemented breccia below.
 - Fauna: **~52 vertebrate species, 21 extinct.** ***Euceratherium collinum***
-  (shrub-ox) — **TYPE LOCALITY here** (new genus & species, Sinclair). Abundant
+  (shrub-ox) — **TYPE LOCALITY here** (new genus & species, Sinclair & Furlong
+  1904). Abundant
   *Arctodus simus* (giant short-faced bear); *Nothrotheriops shastensis* (Shasta
   ground sloth); *Megalonyx*; *Canis dirus*; *Mammuthus*; *Camelops*; *Equus*;
   mastodon. Polished bone + a stone chip at depth → the human-association
   question (Payen & Taylor 1976).
 
 ### Samwel Cave (~5 km N, same McCloud arm)
-- Wintu **sawal = "holy/sacred place."** Also the **Cave of the Lost Maiden**
+- Wintu **sawal / Samwel** — gloss is **contested**: variously translated
+  "sacred/holy place" AND identified with the Wintu word for **grizzly bear**;
+  do not assert a single meaning. Also the **Cave of the Lost Maiden**
   (the girl **Olchanolmet**) and the **Cave of the Magic Pools.**
 - Branching **two-level** system, **460 m** elevation, McCloud Limestone. Named
   spaces (Furlong's plan, redrawn in Feranec et al. 2007 Fig. 2): **Entrance,
@@ -63,7 +67,9 @@ sacred sites now drowned by Shasta Dam.
   (2.5–10 cm) → breccia (60 cm) → gravel (10–45 cm) → flowstone cap (3 cm) →
   reddish clay; deepest dig **2.5 m**; excavated in **4-ft² pits, 10-in levels.**
 - Fauna: **45 mammal + 13 bird species**, **~1000 specimens**; radiocarbon = Last
-  Glacial Maximum (**~17,100–23,600 cal BC**). Shares *Euceratherium collinum*,
+  Glacial Maximum (**~23,600–17,100 cal BC**, oldest-first). *Note: verify the
+  units (cal BC vs cal BP) and exact bounds against Feranec et al. 2007 before
+  publication.* Shares *Euceratherium collinum*,
   *Arctodus*, *Nothrotheriops*, *Megalonyx*, *Canis dirus*, *Mammuthus*.
 - Gated since **1972**; key from the **Shasta Lake Ranger District** (Shasta-
   Trinity NF). Winnemem Wintu sacred site; **Shasta Dam (1945)** drowned the
@@ -74,6 +80,9 @@ sacred sites now drowned by Shasta Dam.
   Creek Cave.* **Science** 17(435):708–712.
 - Sinclair, W.J. (1904) *The Exploration of the Potter Creek Cave.* Univ. Calif.
   Publ. Amer. Arch. Ethn. **2(1).** (archive.org `explorationpott00mitrgoog`)
+- Sinclair, W.J. & Furlong, E.L. (1904) *Euceratherium, a New Ungulate from the
+  Quaternary Caves of California.* Univ. Calif. Publ. Bull. Dept. Geol.
+  **3:411–418.** (type description of *Euceratherium collinum*)
 - Sinclair, W.J. (1905) *New Mammalia from the Quaternary Caves of California.*
   Univ. Calif. Publ. Geol. 4:145–161.
 - Furlong, E.L. (1906) *The Exploration of Samwel Cave.* **Am. J. Sci.**
@@ -107,6 +116,11 @@ sacred sites now drowned by Shasta Dam.
 ## Key figures (committed in `cave_refs/`)
 - `potter_creek_cave_pbr_section.png`, `potter_creek_cave_pbr_hero.png`
 - `samwel_cave_pbr_section.png`, `samwel_cave_pbr_hero.png`
+- **Figure-name mapping** (`cave_refs/` source → `docs/paper/figures/` in the paper):
+  - `potter_creek_cave_pbr_section.png` → `docs/paper/figures/pcc_section.png`
+  - `potter_creek_cave_pbr_hero.png` → `docs/paper/figures/pcc_hero.png`
+  - `samwel_cave_pbr_section.png` → `docs/paper/figures/samwel_section.png`
+  - `samwel_cave_pbr_hero.png` → `docs/paper/figures/samwel_hero.png`
 - Iteration history (`cave_*`, `*_lookdev*`, `*_push*`) → a **visual changelog**
   (cf. `docs/paper/visual-changelog.tex`).
 
