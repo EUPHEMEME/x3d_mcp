@@ -20,12 +20,13 @@ def _create(p, node_type, fields=None, nid=None):
 
 # --- create_node adapters ---------------------------------------------------
 
-def test_envlight_global_repaired_on_create():
+def test_envlight_global_advised_not_injected_on_create():
     p = TechneProxy()
     d, _ = _create(p, "EnvironmentLight", {})
     assert not d.blocked
-    assert d.args["fields"]["global"] is True
-    assert "envlight_global_set" in d.applied
+    assert "global" not in d.args["fields"]          # not injected (x3d.py would error)
+    assert "envlight_global_set" in d.applied        # but advised
+    assert any("global" in n for n in d.notes)
 
 
 def test_interpolator_mismatch_blocks_on_create():

@@ -87,13 +87,13 @@ def test_blocked_call_never_forwards():
 
 # --- repaired forward + relay + state ---------------------------------------
 
-def test_envlight_repaired_forward_relays_note_and_commits_state():
+def test_envlight_forward_advises_without_breaking_upstream():
     p, up = TechneProxy(), FakeUpstream()
     out = _run(handle_call_tool(p, up, "create_node",
                {"node_type": "EnvironmentLight", "fields": {}}))
-    # forwarded with global repaired to True
-    assert up.calls[-1][1]["fields"]["global"] is True
-    # the upstream content is relayed, plus a Technē note
+    # NOT injected into fields (x3d.py rejects a 'global' kwarg — the smoke proved it)
+    assert "global" not in up.calls[-1][1]["fields"]
+    # but the advisory note is relayed
     assert any("Technē" in getattr(b, "text", "") for b in out.content)
     # state committed from the (successful) result
     assert p.state.id_to_type.get("environmentlight_1") == "EnvironmentLight"

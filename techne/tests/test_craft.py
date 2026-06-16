@@ -45,11 +45,13 @@ def test_container_correct_value_is_noop():
 
 # --- Bug 2: EnvironmentLight.global ----------------------------------------
 
-def test_envlight_global_missing_is_written_true():
+def test_envlight_global_missing_is_advised_not_repaired():
+    # Bug 2 is a serialization-layer issue; the args layer cannot fix it (x3d.py
+    # rejects a 'global' kwarg), so Technē advises rather than injecting a broken arg.
     r = check_envlight_global(MISSING, {"node_type": "EnvironmentLight"})
     assert not r.blocked
-    assert r.repaired["global"] is True
-    assert "envlight_global_set" in r.applied
+    assert "global" not in r.repaired          # not auto-injected (would error)
+    assert r.notes and "envlight_global_set" in r.applied
 
 
 def test_envlight_global_explicit_is_kept():

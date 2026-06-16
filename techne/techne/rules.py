@@ -122,11 +122,13 @@ CATALOG = {
         "docs/x3dpy-bug-report.md#bug-1",
     ),
     "envlight_global_set": (
-        HARD,
+        SOFT,
         "EnvironmentLight omits 'global'. The X3D 4.0 spec default is FALSE, so an "
         "omitted 'global' reads as non-global and image-based lighting silently "
-        "dies. Write global='true' explicitly for scene-wide IBL. "
-        "(x3d.py Bug 2: wrong EnvironmentLight.global default.)",
+        "dies. NOTE: x3d.py rejects a 'global' constructor kwarg (it uses 'global_') "
+        "and omits its 'global_=True' default from the XML — so this cannot be "
+        "fixed in the create_node args; inject global='true' into the emitted XML "
+        "(serialization/autofix layer) for scene-wide IBL. (x3d.py Bug 2.)",
         "docs/x3dpy-bug-report.md#bug-2",
     ),
     "interp_lengths_match": (

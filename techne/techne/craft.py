@@ -128,12 +128,16 @@ def check_placement(parent_type: str, child_type: str, container_field: Any,
 # --- mode 2: EnvironmentLight.global (Bug 2) -------------------------------
 
 def check_envlight_global(global_value: Any, args: dict) -> CraftResult:
+    """Bug 2 is a SERIALIZATION-layer problem, not a constructor-arg one: x3d.py
+    rejects a `global` kwarg (reserved word; it uses `global_`) and omits its
+    `global_=True` default from the XML — so Technē cannot fix it by rewriting the
+    create_node args (the live smoke proved injecting `global` errors upstream).
+    At the args layer this is therefore a SOFT advisory; the hard fix belongs in
+    the serialization/autofix step (the gate), which injects global='true' into
+    the emitted XML."""
     r = CraftResult(repaired=dict(args))
     if global_value is MISSING:
-        # omitted -> reads as false -> IBL silently dies. Write it explicitly.
-        r.repaired["global"] = True
-        r.notes.append("Technē set global='true'. " + rules.correction(
-            "envlight_global_set"))
+        r.notes.append(rules.correction("envlight_global_set"))
         r.applied.append("envlight_global_set")
     return r
 

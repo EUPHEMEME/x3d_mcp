@@ -67,8 +67,8 @@ async def main():
 
             e = text_of(await call(s, "create_node",
                                    {"node_type": "EnvironmentLight", "fields": {}}))
-            log("create EnvironmentLight -> global repaired",
-                ("global" in e and "true" in e.lower()), e)
+            log("create EnvironmentLight -> created + global advised",
+                ("ID:" in e) and ("global" in e.lower()), e)
 
             try:
                 rtxt = text_of(await call(s, "render_current_scene", {}, t=70))
