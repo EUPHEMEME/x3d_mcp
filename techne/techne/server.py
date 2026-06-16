@@ -8,10 +8,11 @@ core (proxy.py):
   * `call_tool` runs `proxy.decide`: a HARD violation is answered with the
     prescriptive correction (the call never reaches the real server); a repair
     forwards the rewritten args; the upstream result is relayed with any Technē
-    notes, and `observe_result` updates scene state.
+    notes; `observe_result` commits scene state on success; and for render verbs
+    the cheap occupation gate appends a blank-render warning.
 
-The decision logic is fully unit-tested in test_proxy.py; this module is the thin,
-SDK-correct wiring around it. Run:
+The decision logic and these handlers are unit-tested (test_proxy.py,
+test_server.py); `run()` is the thin stdio wiring. Run:
 
     python -m techne.server -- python /path/to/x3d-mcp/src/server.py
 
@@ -19,13 +20,24 @@ SDK-correct wiring around it. Run:
 """
 from __future__ import annotations
 
+import base64
 import os
 import sys
 from typing import Any
 
+from mcp import types
+
+from . import gate
 from .proxy import TechneProxy
 
 GUARDED_HINT = "  [Technē-guarded: args are repaired/validated before forwarding.]"
+
+# render verbs trigger the CHEAP occupation gate (soft, advisory): inspect the
+# returned image for blankness — the silent failure only the render catches. The
+# HARD expensive gate (human sign-off before an offline photoreal render) is the
+# OccupationGate library; x3d-mcp has no offline-render verb to attach it to yet,
+# so a host drives it explicitly (see gate.py / README).
+_RENDER_VERBS = {"render_image", "render_current_scene"}
 
 
 def _text_of(result: Any) -> str:
@@ -38,8 +50,54 @@ def _text_of(result: Any) -> str:
     return "\n".join(parts)
 
 
+def _blank_warning(result: Any) -> str | None:
+    """If a render result carries a blank image, return a Technē warning, else None."""
+    for block in getattr(result, "content", None) or []:
+        data = getattr(block, "data", None)
+        if data and getattr(block, "type", "") == "image":
+            try:
+                receipt = gate.inspect_render(base64.b64decode(data))
+            except Exception:
+                continue
+            if not receipt.non_blank:
+                return ("Technē occupation gate: the render looks BLANK "
+                        "(stddev %.1f) — no geometry visible. Check it is on "
+                        "camera, lit, and that HAnim/PBR containerFields are "
+                        "correct (X_ITE, not X3DOM, for HAnim)." % receipt.stddev)
+    return None
+
+
+def tag_tools(tools: list) -> list:
+    """Append the guarded hint to the description of each Technē-guarded tool."""
+    guarded = TechneProxy._ADAPTERS
+    for t in tools:
+        if getattr(t, "name", None) in guarded:
+            t.description = (getattr(t, "description", "") or "") + GUARDED_HINT
+    return tools
+
+
+async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
+                           arguments: dict | None) -> list:
+    """The decision + forward + relay logic for one tool call (testable core)."""
+    decision = proxy.decide(name, arguments or {})
+    if decision.blocked:
+        return [types.TextContent(type="text",
+                                  text=proxy.correction_message(decision))]
+    result = await upstream.call_tool(name, decision.args)
+    proxy.observe_result(decision, _text_of(result))
+    content = list(getattr(result, "content", None) or [])
+    if decision.notes:
+        content.append(types.TextContent(
+            type="text", text="Technē: " + "; ".join(decision.notes)))
+    if name in _RENDER_VERBS:
+        warn = _blank_warning(result)
+        if warn:
+            content.append(types.TextContent(type="text", text=warn))
+    return content
+
+
 async def run(upstream_cmd: list[str]) -> None:
-    from mcp import ClientSession, StdioServerParameters, types
+    from mcp import ClientSession, StdioServerParameters
     from mcp.client.stdio import stdio_client
     from mcp.server import Server
     from mcp.server.stdio import stdio_server
@@ -55,27 +113,11 @@ async def run(upstream_cmd: list[str]) -> None:
 
             @server.list_tools()
             async def list_tools() -> list:
-                tools = (await upstream.list_tools()).tools
-                guarded = TechneProxy._ADAPTERS
-                for t in tools:
-                    if t.name in guarded:
-                        t.description = (t.description or "") + GUARDED_HINT
-                return tools
+                return tag_tools((await upstream.list_tools()).tools)
 
             @server.call_tool()
             async def call_tool(name: str, arguments: dict | None) -> list:
-                decision = proxy.decide(name, arguments or {})
-                if decision.blocked:
-                    return [types.TextContent(
-                        type="text", text=proxy.correction_message(decision))]
-                result = await upstream.call_tool(name, decision.args)
-                proxy.observe_result(name, decision.args, _text_of(result))
-                content = list(result.content or [])
-                if decision.notes:
-                    content.append(types.TextContent(
-                        type="text",
-                        text="Technē: " + "; ".join(decision.notes)))
-                return content
+                return await handle_call_tool(proxy, upstream, name, arguments)
 
             async with stdio_server() as (r, w):
                 await server.run(r, w, server.create_initialization_options())
@@ -90,15 +132,13 @@ def _parse_upstream(argv: list[str]) -> list[str]:
     if env:
         import shlex
         return shlex.split(env)
-    # default: x3d-mcp in this repo
     repo = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     return [sys.executable, os.path.join(repo, "src", "server.py")]
 
 
 def main() -> None:
     import asyncio
-    upstream = _parse_upstream(sys.argv[1:])
-    asyncio.run(run(upstream))
+    asyncio.run(run(_parse_upstream(sys.argv[1:])))
 
 
 if __name__ == "__main__":

@@ -82,3 +82,19 @@ def test_clean_semantic_proceeds():
                        semantic_validator=lambda s: "No issues found; scene is clean")
     res = g.check("scene", CHEAP)
     assert res.passed
+
+
+def test_real_validator_all_clear_output_passes():
+    # the actual x3d-mcp validate_semantic clean string (note: "Clear", not "clean")
+    clean = "# Semantic Check: All Clear\n\nNo semantic issues found in the scene."
+    g = OccupationGate(renderer=lambda s: _png("noise"),
+                       semantic_validator=lambda s: clean)
+    assert g.check("scene", CHEAP).passed
+
+
+def test_real_validator_issue_output_blocks():
+    dirty = ("# Semantic Check\n\n2 issues found:\n"
+             "- containerField on HAnimJoint should be 'skeleton'")
+    g = OccupationGate(renderer=lambda s: _png("noise"),
+                       semantic_validator=lambda s: dirty)
+    assert not g.check("scene", CHEAP).passed

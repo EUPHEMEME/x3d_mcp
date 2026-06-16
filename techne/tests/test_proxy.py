@@ -14,7 +14,7 @@ def _create(p, node_type, fields=None, nid=None):
     """Helper: run create_node through decide + observe with a fake server reply."""
     d = p.decide("create_node", {"node_type": node_type, "fields": fields or {}})
     nid = nid or (node_type.lower() + "_1")
-    p.observe_result("create_node", d.args, f"Created {node_type} with ID: {nid}")
+    p.observe_result(d, f"Created {node_type} with ID: {nid}")
     return d, nid
 
 
@@ -86,6 +86,17 @@ def test_add_texture_with_wrong_slot_blocks():
     assert "container_field_invalid_slot" in d.applied
 
 
+def test_unlit_material_normal_texture_is_valid():
+    # UnlitMaterial defines both emissiveTexture AND normalTexture — neither blocks.
+    p = TechneProxy()
+    _, mid = _create(p, "UnlitMaterial", nid="u")
+    _, tid = _create(p, "ImageTexture", nid="t")
+    for slot in ("emissiveTexture", "normalTexture"):
+        d = p.decide("add_child", {"parent_id": mid, "child_id": tid,
+                                   "container_field": slot})
+        assert not d.blocked, slot
+
+
 def test_add_child_unknown_type_passes_with_note():
     p = TechneProxy()
     d = p.decide("add_child", {"parent_id": "x", "child_id": "y",
@@ -100,9 +111,53 @@ def test_use_before_def_blocks_then_passes():
     p = TechneProxy()
     d = p.decide("use_node", {"def_name": "Hero"})
     assert d.blocked
-    p.decide("def_node", {"node_id": "n1", "name": "Hero"})
+    # def_node only commits on confirmed success (observe_result), not at decide()
+    dd = p.decide("def_node", {"node_id": "n1", "name": "Hero"})
+    assert "Hero" not in p.state.defined_defs            # deferred
+    p.observe_result(dd, "Assigned DEF 'Hero' to n1")
+    assert "Hero" in p.state.defined_defs
     d2 = p.decide("use_node", {"def_name": "Hero"})
     assert not d2.blocked
+
+
+def test_failed_def_does_not_satisfy_later_use():
+    p = TechneProxy()
+    dd = p.decide("def_node", {"node_id": "n1", "name": "Ghost"})
+    p.observe_result(dd, "Error: no node with that ID")   # upstream failed
+    assert "Ghost" not in p.state.defined_defs
+    assert p.decide("use_node", {"def_name": "Ghost"}).blocked
+
+
+def test_use_reference_inherits_type_so_add_child_is_checked():
+    p = TechneProxy()
+    _, mid = _create(p, "PhysicalMaterial", nid="m")
+    _, tid = _create(p, "ImageTexture", nid="t")
+    dd = p.decide("def_node", {"node_id": tid, "name": "Tex"})
+    p.observe_result(dd, "Assigned DEF 'Tex' to %s" % tid)
+    du = p.decide("use_node", {"def_name": "Tex"})
+    p.observe_result(du, "Created USE reference to 'Tex' with ID: use_9")
+    assert p.state.id_to_type["use_9"] == "ImageTexture"   # USE inherits type
+    # so a placement of the USE'd texture is now actually checked, not skipped
+    d = p.decide("add_child", {"parent_id": mid, "child_id": "use_9",
+                               "container_field": ""})
+    assert d.blocked and "container_field_required" in d.applied
+
+
+def test_overlapping_creates_register_correctly():
+    p = TechneProxy()
+    d1 = p.decide("create_node", {"node_type": "Box", "fields": {}})
+    d2 = p.decide("create_node", {"node_type": "Cone", "fields": {}})
+    # results arrive; each decision carries its own pending (no shared mutable)
+    p.observe_result(d2, "Created Cone with ID: c2")
+    p.observe_result(d1, "Created Box with ID: b1")
+    assert p.state.id_to_type == {"b1": "Box", "c2": "Cone"}
+
+
+def test_failed_create_is_not_registered():
+    p = TechneProxy()
+    d = p.decide("create_node", {"node_type": "Box", "fields": {}})
+    p.observe_result(d, "Error: invalid node type")
+    assert p.state.id_to_type == {}
 
 
 # --- opt-in passthrough -----------------------------------------------------

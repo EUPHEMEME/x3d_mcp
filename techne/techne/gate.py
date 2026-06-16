@@ -31,6 +31,21 @@ EXPENSIVE = "expensive"
 # (all-background, no geometry) — the silent failure only the render catches.
 BLANK_STDDEV = 3.0
 
+# markers the real x3d-mcp validate_semantic emits when a scene is clean, e.g.
+# "# Semantic Check: All Clear\n\nNo semantic issues found ...". The gate treats
+# an empty validator string OR any of these as clean; anything else is dirty.
+CLEAN_MARKERS = ("all clear", "no semantic issues", "no issues found", "no issues")
+
+
+def looks_clean(validator_output: str) -> bool:
+    s = (validator_output or "").strip().lower()
+    return (not s) or any(m in s for m in CLEAN_MARKERS)
+
+
+def inspect_render(png_bytes: bytes) -> "RenderReceipt":
+    """Public: inspect an already-rendered PNG for blankness (no geometry)."""
+    return _png_dims_and_stddev(png_bytes or b"")
+
 
 @dataclass
 class RenderReceipt:
@@ -76,21 +91,32 @@ def _png_dims_and_stddev(data: bytes) -> RenderReceipt:
         return RenderReceipt(sd >= BLANK_STDDEV, im.width, im.height, sd)
     except Exception:
         pass
-    # fallback: IHDR for size; sample raw IDAT entropy as a blank-ish proxy
+    # fallback (PIL absent): IHDR for size; sample raw scanlines, skipping the
+    # per-scanline PNG filter byte so it does not inject artificial variance.
     try:
         w, h = struct.unpack(">II", data[16:24])
+        bit_depth, color_type = data[24], data[25]
+        channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}.get(color_type, 1)
+        stride = 1 + w * channels * (bit_depth // 8 or 1)   # 1 filter byte + row
         idat = b"".join(
             data[i + 8:i + 8 + struct.unpack(">I", data[i:i + 4])[0]]
             for i in _png_chunks(data, b"IDAT"))
         raw = zlib.decompress(idat) if idat else b""
         if not raw:
             return RenderReceipt(False, w, h, 0.0, "no IDAT")
-        sample = raw[:: max(1, len(raw) // 4096)]
+        pix = bytearray()                                   # drop filter bytes
+        for off in range(0, len(raw), stride):
+            pix += raw[off + 1:off + stride]
+        if not pix:
+            return RenderReceipt(False, w, h, 0.0, "no pixels")
+        sample = pix[:: max(1, len(pix) // 4096)]
         m = sum(sample) / len(sample)
         sd = (sum((b - m) ** 2 for b in sample) / len(sample)) ** 0.5
         return RenderReceipt(sd >= BLANK_STDDEV, w, h, sd, "fallback estimate")
     except Exception as e:
-        return RenderReceipt(True, 0, 0, 0.0, "could not inspect (%s)" % e)
+        # fail SAFE: an image we cannot inspect is treated as blank (blocks),
+        # never as non-blank (which would pass a possibly-blank render).
+        return RenderReceipt(False, 0, 0, 0.0, "could not inspect (%s)" % e)
 
 
 def _png_chunks(data: bytes, kind: bytes):
@@ -125,7 +151,7 @@ class OccupationGate:
               preview_path: str = "") -> GateResult:
         # 1. semantic validation — block with the errors as corrections
         errs = (self.validate(scene) or "").strip()
-        if errs and "no " not in errs.lower()[:6] and "clean" not in errs.lower():
+        if not looks_clean(errs):
             return GateResult(False, cost, "validate_semantic not clean",
                               corrections=[errs])
         # 2. render and look

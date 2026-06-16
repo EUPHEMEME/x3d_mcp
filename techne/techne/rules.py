@@ -46,7 +46,7 @@ NONDEFAULT_SLOTS = {
                       "skinNormal", "skin"},
     "PhysicalMaterial": {"baseTexture", "emissiveTexture", "normalTexture",
                          "occlusionTexture", "metallicRoughnessTexture"},
-    "UnlitMaterial": {"emissiveTexture"},
+    "UnlitMaterial": {"emissiveTexture", "normalTexture"},
     "Material": {"diffuseTexture", "emissiveTexture", "normalTexture",
                  "occlusionTexture", "specularTexture", "shininessTexture",
                  "ambientTexture"},
@@ -61,7 +61,7 @@ TEXTURE_NODES = {"ImageTexture", "PixelTexture", "MovieTexture"}
 MATERIAL_TEXTURE_SLOTS = {
     "PhysicalMaterial": ["baseTexture", "emissiveTexture", "normalTexture",
                          "occlusionTexture", "metallicRoughnessTexture"],
-    "UnlitMaterial": ["emissiveTexture"],
+    "UnlitMaterial": ["emissiveTexture", "normalTexture"],
     "Material": ["diffuseTexture", "emissiveTexture", "normalTexture",
                  "occlusionTexture", "specularTexture", "shininessTexture",
                  "ambientTexture"],
