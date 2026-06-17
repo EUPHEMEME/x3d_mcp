@@ -67,17 +67,23 @@ retry loop. Technē earns its place by shortening it:
 
 ---
 
-## The spine: measure it
+## The spine: measure it — built (`eval/`)
 "Better" must be provable, or it is just a claim (the review's sharpest demand).
-The next build is an **evaluation harness**: run a fixed set of X3D authoring
-tasks through `x3d_mcp` **with and without Technē**, and report:
-- **first-pass render-correctness** (fraction non-blank / passing on the first try),
-- **round-trips to a correct scene** (tool calls / render attempts),
-- **silent failures caught** (blank renders / dropped containerFields prevented),
-- **tokens / context spent**.
+The **evaluation harness** (`techne/eval/`, see its README) runs a fixed set of
+X3D authoring tasks through `x3d_mcp` **with and without Technē** and reports:
+- **mistakes caught vs leaked silently** (the documented silent-failure modes),
+- **round-trips to a correct scene** (the efficiency column),
+- **render liveness** (non-blank, via the gate — honestly *not* correctness),
+- **tokens spent** (live mode).
 
-Every goal above is scored against these. Coherence and efficiency are the
-priorities precisely because they are the columns of this table we can move now.
+Two modes: a deterministic **scripted** scoreboard (keyless, CI-able) and a
+**live** mode where a real model authors through each stack. First scripted run:
+raw lets **2 of 3** documented mistakes pass *silently* into the scene; Technē
+lets **0 of 3** through, every block naming the fix, at **+5 round-trips over 4
+tasks** — and is byte-identical to raw on already-correct input (no false
+positives). Every goal above is scored against this table. Coherence and
+efficiency are the priorities precisely because they are the columns we can move
+now; grow the task set as `rules.py` grows.
 
 ## Out of scope (for now)
 The venture / "TechnicalDiplomacy" / narrative framings belong to EUPHEME's
