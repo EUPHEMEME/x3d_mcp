@@ -21,11 +21,12 @@ NOT built (TECHNE_SPEC §6).
 """
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass, field as dc_field
 from typing import Any
 
-from . import craft, repair
+from . import craft, repair, semantics
 from .craft import MISSING
 
 _TEXTURE_NODES = craft.rules.TEXTURE_NODES
@@ -39,11 +40,13 @@ class SceneState:
     node_fields: dict[str, dict] = dc_field(default_factory=dict)
     defined_defs: set[str] = dc_field(default_factory=set)
     def_name_to_type: dict[str, str] = dc_field(default_factory=dict)
+    surfaced_reminders: set[str] = dc_field(default_factory=set)   # coherence: fired once/session
 
     def reset(self):
         for d in (self.id_to_type, self.node_fields, self.def_name_to_type):
             d.clear()
         self.defined_defs.clear()
+        self.surfaced_reminders.clear()
 
 
 @dataclass
@@ -53,6 +56,7 @@ class Decision:
     args: dict                        # repaired args (forward) / original (block)
     corrections: list[str] = dc_field(default_factory=list)   # HARD (why blocked)
     notes: list[str] = dc_field(default_factory=list)         # SOFT / repairs done
+    reminders: list[str] = dc_field(default_factory=list)     # SOFT / coherence standing semantics
     applied: list[str] = dc_field(default_factory=list)
     pending: dict | None = None       # state to commit iff upstream succeeds
 
@@ -78,8 +82,25 @@ def _is_error(text: str) -> bool:
 class TechneProxy:
     """Holds scene state and applies the craft adapters per tool call."""
 
-    def __init__(self):
+    def __init__(self, semantics_on: bool = True):
         self.state = SceneState()
+        # coherence reminders default on; TECHNE_SEMANTICS=0 disables (A/B isolation)
+        self.semantics_on = semantics_on and os.environ.get("TECHNE_SEMANTICS", "1") != "0"
+
+    def _semantics_for(self, tool: str, args: dict) -> list[str]:
+        """Standing-semantics reminders for this call: triggered, de-duped once per
+        session, capped. Marks only the ones actually emitted as surfaced."""
+        if not self.semantics_on:
+            return []
+        out: list[str] = []
+        for key, text in semantics.advise(tool, args, self.state):
+            if key in self.state.surfaced_reminders:
+                continue
+            out.append(text)
+            self.state.surfaced_reminders.add(key)
+            if len(out) >= 2:                          # never flood a single result
+                break
+        return out
 
     # -- adapters: read state + repaired args -> craft.CraftResult ----------
 
@@ -168,6 +189,7 @@ class TechneProxy:
         d = Decision("forward", tool, res.repaired, notes=res.notes,
                      applied=res.applied)
         d.pending = self._pending_for(tool, res.repaired)
+        d.reminders = self._semantics_for(tool, res.repaired)   # coherence (soft)
         return d
 
     @staticmethod

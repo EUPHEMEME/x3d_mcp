@@ -40,6 +40,7 @@ class LiveMetrics:
     turns: int = 0
     tool_calls: int = 0
     techne_blocks: int = 0
+    techne_reminders: int = 0
     tokens_in: int = 0
     tokens_out: int = 0
     expect_hits: int = 0
@@ -99,6 +100,8 @@ async def run_live_task(client, stack: str, task) -> LiveMetrics:
                         txt = text_of(res)
                         if is_techne_block(res, txt):
                             m.techne_blocks += 1
+                        if "Techn" in txt and "reminder" in txt.lower():
+                            m.techne_reminders += 1
                         results.append({"type": "tool_result", "tool_use_id": blk.id,
                                         "content": txt or "(no text)",
                                         "is_error": bool(getattr(res, "isError", False))})
@@ -127,14 +130,14 @@ async def _score_live_render(s, m: LiveMetrics):
 
 
 def _print(rows):
-    hdr = ["task", "stack", "turns", "calls", "blocks", "tok_in", "tok_out", "intent", "render"]
-    w = [22, 7, 6, 6, 7, 8, 8, 7, 7]
+    hdr = ["task", "stack", "turns", "calls", "blocks", "remind", "tok_in", "tok_out", "intent", "render"]
+    w = [22, 7, 6, 6, 7, 7, 8, 8, 7, 7]
     line = lambda c: "  ".join(str(x).ljust(wi) for x, wi in zip(c, w))
     print(line(hdr)); print(line(["-" * x for x in w]))
     for m in rows:
         intent = f"{m.expect_hits}/{m.expect_total}"
         print(line([m.task, m.stack, m.turns, m.tool_calls, m.techne_blocks,
-                    m.tokens_in, m.tokens_out, intent, m.final_render]))
+                    m.techne_reminders, m.tokens_in, m.tokens_out, intent, m.final_render]))
     errs = [(m.task, m.stack, m.error) for m in rows if m.error]
     for t, st, e in errs:
         print(f"  [{st}/{t}] {e}")

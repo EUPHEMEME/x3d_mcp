@@ -97,6 +97,9 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
     if decision.notes:
         content.append(types.TextContent(
             type="text", text="Technē: " + "; ".join(decision.notes)))
+    if decision.reminders:
+        content.append(types.TextContent(
+            type="text", text="Technē reminder: " + " ".join(decision.reminders)))
     if name in _RENDER_VERBS:
         warn = _blank_warning(result)
         if warn:

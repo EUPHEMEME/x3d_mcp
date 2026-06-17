@@ -38,11 +38,14 @@ The floor: output that passes the XSD yet renders wrong or blank. Mechanisms:
 ### 2. Coherence — is the scene internally consistent, across a long session?
 LLMs *drift*: they forget the handedness of the axes, the unit, the timer
 conventions, what they already DEF'd. Coherence mechanisms:
-- **Standing semantics, injected not hoped.** The few invariants the model keeps
-  losing — coordinate system / handedness, default units, `TimeSensor`
-  conventions, that an `HAnimJoint` rest pose is identity — surfaced
-  deterministically every relevant call, so they hold by mechanism rather than by
-  a prompt the model may not re-read. *(To build.)*
+- **Standing semantics, injected not hoped** (built — `semantics.py`). The few
+  invariants the model keeps losing — right-handed / +Y-up / radians-and-metres,
+  `TimeSensor`-animates-only-through-ROUTEs, the `HAnimJoint` identity rest pose,
+  PBR-and-the-default-headlight — ride back as a SOFT reminder on the relevant
+  tool result, once per session, capped, advisory-only (never blocks). The text
+  is spec-grounded and adversarially tightened (the `verify-x3d-invariants`
+  workflow caught and fixed a wrong "PBR renders black" claim). Toggle with
+  `TECHNE_SEMANTICS=0` for A/B isolation in the eval.
 - **Cross-call consistency** — the minimal `SceneState` Technē already tracks
   (id→type, DEFs) is the seed. Enforce the few hard cross-call edges:
   USE references a real prior DEF; no orphaned nodes; consistent units. This is

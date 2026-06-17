@@ -12,6 +12,10 @@ Two modes, same task set (`tasks.py`):
 | **scripted** (`run_scripted.py`) | deterministic tool-call sequences | free, CI-able | does Technē catch the documented mistakes, and what does it cost? |
 | **live** (`run_live.py`) | a real model in an agentic tool-use loop | needs an API key | does it help a model in a *natural* authoring session? |
 
+The live table also counts **`remind`** — standing-semantics reminders surfaced
+(`semantics.py`, the coherence layer). To isolate their effect, run the `techne`
+stack twice with `TECHNE_SEMANTICS=1` vs `=0` and compare drift / tokens.
+
 ## Run
 
 ```bash
