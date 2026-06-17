@@ -61,8 +61,10 @@ def is_techne_block(result, txt: str) -> bool:
 
 
 def is_techne_repair(txt: str) -> bool:
-    """A silent repair rides back as a leading 'Technē: ...' note on a success."""
-    return txt.lstrip().startswith("Techn") and "block" not in txt.lower()
+    """A repair / soft-advisory rides back as a 'Technē: ...' note *appended after*
+    the upstream content (so it is mid-text, not leading). Distinct from a
+    'Technē reminder: ...' coherence line (note the 'ē: ' vs 'ē reminder:')."""
+    return "Technē: " in txt and "block" not in txt.lower()
 
 
 @dataclass
