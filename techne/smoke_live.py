@@ -77,6 +77,21 @@ async def main():
             except Exception as ex:
                 log("render_current_scene", False, f"render error/timeout: {ex}")
 
+            # edit-tool post-pass: modify writes a misspelled field as "success";
+            # Technē re-validates the result through the server's own validate_x3d.
+            doc = ("<?xml version='1.0' encoding='UTF-8'?>"
+                   "<X3D profile='Immersive' version='4.0'><Scene>"
+                   "<Shape><Appearance><Material DEF='M'/></Appearance><Box/>"
+                   "</Shape></Scene></X3D>")
+            try:
+                mr = text_of(await call(s, "modify_x3d_node",
+                             {"content": doc, "def_name": "M",
+                              "field_changes": '{"diffusColor": "1 0 0"}'}, t=40))
+                log("modify_x3d_node (bad field) -> Technē post-check",
+                    "post-check" in mr.lower() and "diffuscolor" in mr.lower(), mr)
+            except Exception as ex:
+                log("modify_x3d_node post-check", False, f"error: {ex}")
+
 
 if __name__ == "__main__":
     try:

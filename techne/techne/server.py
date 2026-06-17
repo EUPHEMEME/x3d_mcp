@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import base64
 import os
+import re
 import sys
 from typing import Any
 
@@ -31,6 +32,7 @@ from . import gate
 from .proxy import TechneProxy
 
 GUARDED_HINT = "  [Technē-guarded: args are repaired/validated before forwarding.]"
+POSTCHECK_HINT = "  [Technē-guarded: output re-validated through the server's own validators.]"
 
 # render verbs trigger the CHEAP occupation gate (soft, advisory): inspect the
 # returned image for blankness — the silent failure only the render catches. The
@@ -67,12 +69,77 @@ def _blank_warning(result: Any) -> str | None:
     return None
 
 
+# content-based edit tools operate on a whole serialized X3D document and validate
+# almost nothing (modify writes unvalidated attributes; move never re-checks
+# containerField; convert silently drops nodes; all return errors as plain strings
+# indistinguishable from a success document). Technē post-validates their output
+# through the server's OWN validators — the authoritative pass it already fronts —
+# and surfaces what the edit broke, without re-implementing or coupling to X3DUOM.
+_EDIT_VERBS = {"modify_x3d_node", "move_x3d_node", "remove_x3d_node",
+               "add_x3d_route", "convert_x3d"}
+
+
+def _looks_like_doc(text: str) -> bool:
+    return (text or "").lstrip().startswith(("<?xml", "<X3D", "<!DOCTYPE", "<Scene"))
+
+
+def _is_error_like(text: str) -> bool:
+    t = (text or "").strip().lower()
+    return bool(t) and (t.startswith(("error", "no node", "invalid", "failed"))
+                        or "not found" in t or "error:" in t[:60])
+
+
+def _vx_errors(vx: str) -> str:
+    """Best-effort schema-error summary from a validate_x3d result (robust to the
+    tool's nested-JSON framing — substring detection, not strict parsing)."""
+    if '"valid": true' in vx or '"valid":true' in vx:
+        return ""
+    if '"valid": false' in vx or '"valid":false' in vx:
+        errs = re.findall(r'"(Line \d+:[^"]*)"', vx)
+        return "; ".join(e.replace('\\"', "'") for e in errs[:3]) or "schema invalid"
+    return ""                                   # unparseable -> fail safe (no alarm)
+
+
+def _vs_errors(vs: str) -> str:
+    """Surface only HARD semantic errors (skip warnings/infos like no-viewpoint and
+    unused-def, which the study flagged as noise)."""
+    if "## Errors" not in vs:
+        return ""
+    section = vs.split("## Errors", 1)[1].split("\n## ", 1)[0]
+    bullets = re.findall(r'- \*\*\[[^\]]+\]\*\*\s*(.+)', section)
+    return "; ".join(b.strip()[:120] for b in bullets[:3])
+
+
+async def _post_validate_edit(upstream: Any, doc: str) -> list[str]:
+    """Run an edited document back through the server's validators; return problem
+    lines (empty if clean). Catches modify's unvalidated attributes (XSD) and move's
+    misfiled containerFields (semantic) -- the silent failures the edit tools miss."""
+    out: list[str] = []
+    try:
+        e = _vx_errors(_text_of(await upstream.call_tool("validate_x3d", {"content": doc})))
+        if e:
+            out.append("validate_x3d -> " + e)
+    except Exception:
+        pass
+    try:
+        e = _vs_errors(_text_of(await upstream.call_tool("validate_semantic", {"content": doc})))
+        if e:
+            out.append("validate_semantic -> " + e)
+    except Exception:
+        pass
+    return out
+
+
 def tag_tools(tools: list) -> list:
-    """Append the guarded hint to the description of each Technē-guarded tool."""
-    guarded = TechneProxy._ADAPTERS
+    """Append the appropriate guarded hint per Technē-guarded tool: arg-repair for
+    the granular adapters, output-revalidation for the content-based edit tools."""
+    adapters = set(TechneProxy._ADAPTERS)
     for t in tools:
-        if getattr(t, "name", None) in guarded:
+        n = getattr(t, "name", None)
+        if n in adapters:
             t.description = (getattr(t, "description", "") or "") + GUARDED_HINT
+        elif n in _EDIT_VERBS:
+            t.description = (getattr(t, "description", "") or "") + POSTCHECK_HINT
     return tools
 
 
@@ -119,6 +186,18 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
         warn = _blank_warning(result)
         if warn:
             content.append(types.TextContent(type="text", text=warn))
+    if name in _EDIT_VERBS and not getattr(result, "isError", False):
+        doc = _text_of(result)
+        if _looks_like_doc(doc):
+            probs = await _post_validate_edit(upstream, doc)
+            if probs:
+                content.append(types.TextContent(
+                    type="text", text="Technē post-check: the edited document has "
+                    "issues the edit tool did not catch -- " + "; ".join(probs)))
+        elif _is_error_like(doc):
+            content.append(types.TextContent(
+                type="text", text="Technē: this edit returned an error string, not "
+                "a document -- the edit did not apply: " + doc[:200]))
     return types.CallToolResult(
         content=content,
         structuredContent=structured,
