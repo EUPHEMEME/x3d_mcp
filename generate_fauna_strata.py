@@ -62,7 +62,7 @@ def slab(cx, cz, w, d, top_y, bot_y, color):
 
 def text(x, y, z, s, size, color, fam="SANS", style="", justify="MIDDLE",
          vjust="MIDDLE"):
-    st = f' style=\'"{style}"\'' if style else ""
+    st = f' style="{style}"' if style else ""   # FontStyle.style is SFString (bare token)
     return (f'<Transform translation="{x:.3f} {y:.3f} {z:.3f}">'
             f'<Shape><Appearance><Material diffuseColor="{color}"/></Appearance>'
             f'<Text string=\'"{esc(s)}"\' solid="false">'
@@ -71,7 +71,7 @@ def text(x, y, z, s, size, color, fam="SANS", style="", justify="MIDDLE",
 
 
 def multitext(x, y, z, lines, size, color, fam="SANS", style="", justify="BEGIN"):
-    st = f' style=\'"{style}"\'' if style else ""
+    st = f' style="{style}"' if style else ""   # FontStyle.style is SFString (bare token)
     strs = " ".join(f'"{esc(l)}"' for l in lines)
     return (f'<Transform translation="{x:.3f} {y:.3f} {z:.3f}">'
             f'<Shape><Appearance><Material diffuseColor="{color}"/></Appearance>'
@@ -102,7 +102,7 @@ def depth_pin(face_x, z, y, label_lines, color=PIN, side=-1, lead=3.2,
     st = "ITALIC" if interp else ""
     col = INTERP if interp else color
     strs = " ".join(f'"{esc(l)}"' for l in label_lines)
-    sc = f' style=\'"{st}"\'' if st else ""
+    sc = f' style="{st}"' if st else ""   # FontStyle.style is SFString
     out.append(
         f'<Transform translation="{lx:.3f} {y:.3f} {z:.3f}">'
         f'<Shape><Appearance><Material diffuseColor="{col}"/></Appearance>'
@@ -127,7 +127,7 @@ def callout_stack(items, face_x, side, x_label, y_top, y_bot, z, size=0.4,
                             (x_label - side * 0.4, ly, z)], leadcolor,
                            idx="0 1 2 -1"))
         just = "END" if side < 0 else "BEGIN"
-        sc = f' style=\'"{style}"\'' if style else ""
+        sc = f' style="{style}"' if style else ""   # FontStyle.style is SFString
         strs = " ".join(f'"{esc(l)}"' for l in lines)
         yoff = (len(lines) - 1) * size * 1.15 / 2
         out.append(
