@@ -65,12 +65,17 @@ source before building; the study cited every one.
    (a utility for the cave pipeline / tools, NOT an automatic proxy transform — it
    would surprise model output). *Source: cave-models study.*
 
-8. **Provenance rule-set from `must_not_invent`** (the integration the cave work
-   *reveals*). Load the 12-clause `strata_spec.json:must_not_invent` into `rules.py`
-   as HARD provenance rules (the clause text IS the correction, with its citation),
-   and extend `gate.py` so a scene can't pass unless geometry/caption carries a
-   `documented|interpretive` tag. Optionally an `archive.json` asset-allowlist:
-   a documentary texture must resolve to a cited public-domain entry.
+8. **◐ PROTOTYPE — Provenance bridge** (`techne/provenance.py`, 11 tests; see
+   `techne/PROVENANCE_BRIDGE.md`). Enforces the standardized X3D provenance
+   MetadataSet (from docs/provenance-metadata-proposal.md) against an archive.json-
+   shaped asset ledger. **Layer 1 (sourcing) BUILT**: documented-needs-resolvable-
+   citation, catalogId-resolves, public-domain-only, generated-must-disclose,
+   well-formed-status — the message is the correction; demoed against the real
+   archive.json. *Decision pending* (PROVENANCE_BRIDGE.md §"The decision"): bless
+   the vocabulary, adopt in the cave generators (emit the blocks), wire the gate
+   (opt-in TECHNE_ASSET_LEDGER), and whether to build **Layer 2** (the content-
+   semantic must_not_invent rules — taxon/depth/cal-BC — needing a domain claim
+   schema). Not auto-wired: a scope extension awaiting your call.
    *Source: drawings/strata_spec.json, archive.json; generate_*.py PROVENANCE blocks.*
 
 ## Tier 4 — X3DUOM depth (supports Tiers 1–2)
