@@ -292,3 +292,39 @@ def test_scalar_interpolator_not_divisible():
     xml = _wrap('<ScalarInterpolator key="0 0.5 1" keyValue="0 1"/>')
     report = validate_semantic(xml)
     assert "interpolator-key-length" in report
+
+
+# ---- ROUTEs into dynamic interfaces (Script <field> + ProtoInstance) ----
+# Regression: validate_semantic must read a Script's user-declared fields and a
+# ProtoInstance's interface, which X3DUOM does not know -- else it false-flags
+# valid ROUTEs (surfaced by Len Bullard's MCCF holodeck scene, 2026-06).
+
+def test_route_to_script_declared_field_is_valid():
+    xml = _wrap(
+        '<TimeSensor DEF="T" cycleInterval="2" loop="true"/>'
+        '<Script DEF="S" directOutput="true">'
+        '<field name="arrived" type="SFTime" accessType="inputOnly"/></Script>'
+        '<ROUTE fromNode="T" fromField="cycleTime" toNode="S" toField="arrived"/>')
+    report = validate_semantic(xml)
+    assert "route-invalid-to-field" not in report   # 'arrived' is a declared field
+
+
+def test_route_to_protoinstance_interface_field_is_valid():
+    xml = _wrap(
+        '<ProtoDeclare name="Mover"><ProtoInterface>'
+        '<field name="set_pos" type="SFVec3f" accessType="inputOnly"/>'
+        '</ProtoInterface><ProtoBody><Transform/></ProtoBody></ProtoDeclare>'
+        '<PositionInterpolator DEF="PI" key="0 1" keyValue="0 0 0 1 1 1"/>'
+        '<Mover DEF="M"/>'
+        '<ROUTE fromNode="PI" fromField="value_changed" toNode="M" toField="set_pos"/>')
+    report = validate_semantic(xml)
+    assert "route-invalid-to-field" not in report   # 'set_pos' is in the interface
+
+
+def test_route_to_truly_missing_field_still_flagged():
+    xml = _wrap(
+        '<TimeSensor DEF="T" cycleInterval="2"/>'
+        '<Script DEF="S"><field name="arrived" type="SFTime" accessType="inputOnly"/></Script>'
+        '<ROUTE fromNode="T" fromField="cycleTime" toNode="S" toField="nonexistent"/>')
+    report = validate_semantic(xml)
+    assert "route-invalid-to-field" in report        # still catches a real typo
