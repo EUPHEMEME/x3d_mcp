@@ -35,14 +35,16 @@ source before building; the study cited every one.
 
 ## Tier 2 — extend Technē to the unguarded edit surface (output quality + coherence)
 
-4. **Guard the content-based edit tools.** `modify_x3d_node` (no field/type/
-   containerField validation — writes typos as success), `move_x3d_node` (never
-   sets containerField → reparenting misfiles), `convert_x3d` (silently drops
-   unknown nodes/attributes/containerFields). Add adapters: validate fields on
-   modify, re-assert containerField on move, and a convert node/attr-count diff
-   that reports drops. Also: these return errors as **plain strings** indistinguishable
-   from success — add the leading-`<?xml` sniff so Technē/callers can tell.
-   *Source: scene_ops.py, convert.py.*
+4. **✅ BUILT — Guard the content-based edit tools** (commit "guard the content-based
+   edit tools via a validate post-pass"). After modify/move/remove/convert/
+   add_x3d_route, Technē runs the result back through the server's own validate_x3d
+   + validate_semantic and appends a "Technē post-check:" note listing what the edit
+   broke (modify's typos via XSD; move's misfiled containerField via semantic; HARD
+   errors only, warnings/infos skipped as noise). Error-string returns are flagged
+   ("returned an error string, not a document"). No X3DUOM coupling, no re-impl.
+   Verified live (modify with a bad 'diffusColor' trips the post-check). *Open
+   refinement:* a convert node/attr-count drop-diff (convert can drop silently
+   without producing a validate error). *Source: scene_ops.py, convert.py.*
 
 5. **Uniform error handling across granular tools.** Only `add_child` catches
    `SceneError` → friendly text; the rest let it propagate (isError). Normalize so
