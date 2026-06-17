@@ -83,6 +83,14 @@ def _looks_like_doc(text: str) -> bool:
     return (text or "").lstrip().startswith(("<?xml", "<X3D", "<!DOCTYPE", "<Scene"))
 
 
+_TAG_RE = re.compile(r"<([A-Za-z][\w.\-]*)\b")
+
+
+def _node_count(xml: str) -> int:
+    """Cheap element-tag count (dependency-free) for the convert drop-diff."""
+    return len(_TAG_RE.findall(xml or ""))
+
+
 def _is_error_like(text: str) -> bool:
     t = (text or "").strip().lower()
     return bool(t) and (t.startswith(("error", "no node", "invalid", "failed"))
@@ -194,6 +202,15 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
                 content.append(types.TextContent(
                     type="text", text="Technē post-check: the edited document has "
                     "issues the edit tool did not catch -- " + "; ".join(probs)))
+            if name == "convert_x3d":
+                # convert silently skips unknown nodes/attrs -> a valid but smaller
+                # doc that no validator flags. Surface the element-count drop.
+                before, after = _node_count((arguments or {}).get("content", "")), _node_count(doc)
+                if before and after < before:
+                    content.append(types.TextContent(
+                        type="text", text=f"Technē: convert kept {after} of {before} "
+                        "elements -- convert_x3d silently drops unknown nodes/"
+                        "attributes; verify nothing important was lost."))
         elif _is_error_like(doc):
             content.append(types.TextContent(
                 type="text", text="Technē: this edit returned an error string, not "

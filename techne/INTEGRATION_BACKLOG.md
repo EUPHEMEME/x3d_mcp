@@ -41,10 +41,10 @@ source before building; the study cited every one.
    + validate_semantic and appends a "Technē post-check:" note listing what the edit
    broke (modify's typos via XSD; move's misfiled containerField via semantic; HARD
    errors only, warnings/infos skipped as noise). Error-string returns are flagged
-   ("returned an error string, not a document"). No X3DUOM coupling, no re-impl.
-   Verified live (modify with a bad 'diffusColor' trips the post-check). *Open
-   refinement:* a convert node/attr-count drop-diff (convert can drop silently
-   without producing a validate error). *Source: scene_ops.py, convert.py.*
+   ("returned an error string, not a document"). convert_x3d also gets an
+   element-count **drop-diff** (it leaves a valid-but-smaller doc no validator
+   flags). No X3DUOM coupling, no re-impl. Verified live. *Source: scene_ops.py,
+   convert.py.*
 
 5. **Uniform error handling across granular tools.** Only `add_child` catches
    `SceneError` → friendly text; the rest let it propagate (isError). Normalize so

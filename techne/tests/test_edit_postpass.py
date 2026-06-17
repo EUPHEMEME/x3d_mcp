@@ -72,6 +72,20 @@ def test_clean_edit_is_quiet():
     assert "post-check" not in _text(res)
 
 
+def test_convert_drop_diff_flags_lost_nodes():
+    # convert returns a valid but smaller document (dropped an unknown node); no
+    # validator flags it, so the element-count diff must.
+    out = "<?xml version='1.0'?><X3D><Scene><Shape/></Scene></X3D>"
+    up = EditUpstream(doc=out)        # validators clean by default
+    big = ("<?xml version='1.0'?><X3D><Scene><Shape/><WeirdCustomNode/>"
+           "<AnotherNode/></Scene></X3D>")
+    res = _run(handle_call_tool(TechneProxy(), up, "convert_x3d",
+                                {"content": big, "from_encoding": "xml",
+                                 "to_encoding": "xml"}))
+    txt = _text(res)
+    assert "convert kept" in txt and "elements" in txt
+
+
 def test_error_string_flagged_without_validating():
     up = EditUpstream(doc="No node with DEF=Foo found. Available DEFs: Bar.")
     res = _run(handle_call_tool(TechneProxy(), up, "modify_x3d_node",
