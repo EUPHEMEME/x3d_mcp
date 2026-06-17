@@ -57,10 +57,13 @@ source before building; the study cited every one.
 
 ## Tier 3 — efficiency + the caves→Technē provenance bridge
 
-7. **DEF/USE-deduplication pass** (efficiency). Collapse repeated identical
-   `Appearance`/texture blocks into one DEF + USE — the Samwel cave inlines the same
-   3-texture PBR appearance 39× (39 `ImageTexture` nodes for 4 files). A pure-win
-   deterministic post-processor. *Source: cave-models study.*
+7. **✅ BUILT — DEF/USE-deduplication** (efficiency; commit "DEF/USE appearance
+   dedup"). `craft.dedupe_appearances(xml)`: collapses byte-identical `Appearance`
+   subtrees to one DEF + USE references — deterministic, idempotent, collision-safe,
+   only touches un-DEF'd identical blocks. Verified on the real Samwel cave: **39 →
+   5 inlined `ImageTexture` nodes**, 81 appearances → USE, re-parses valid. Opt-in
+   (a utility for the cave pipeline / tools, NOT an automatic proxy transform — it
+   would surprise model output). *Source: cave-models study.*
 
 8. **Provenance rule-set from `must_not_invent`** (the integration the cave work
    *reveals*). Load the 12-clause `strata_spec.json:must_not_invent` into `rules.py`

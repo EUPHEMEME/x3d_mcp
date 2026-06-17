@@ -5,7 +5,8 @@ richer interpolator arity matching semantic.py), the serialization-layer
 EnvironmentLight.global re-assertion, and the catalog/coverage map."""
 from techne import rules
 from techne.craft import (check_interpolator, check_duplicate_def,
-                          check_route_defs, reassert_envlight_global)
+                          check_route_defs, reassert_envlight_global,
+                          dedupe_appearances)
 from techne.proxy import TechneProxy
 
 
@@ -122,3 +123,34 @@ def test_reassert_handles_open_tag():
     out = reassert_envlight_global(
         "<EnvironmentLight rotation='0 1 0 0'></EnvironmentLight>")
     assert "global='true'" in out and out.endswith("</EnvironmentLight>")
+
+
+# -- DEF/USE appearance dedup -----------------------------------------------
+
+def _app(color):
+    return f"<Appearance><Material diffuseColor='{color}'/></Appearance>"
+
+
+def test_dedupe_collapses_identical_appearances():
+    xml = f"<Scene><Shape>{_app('1 0 0')}</Shape><Shape>{_app('1 0 0')}</Shape>" \
+          f"<Shape>{_app('1 0 0')}</Shape></Scene>"
+    out = dedupe_appearances(xml)
+    assert out.count("DEF='App1'") == 1            # first defined once
+    assert out.count("USE='App1'") == 2            # the other two reference it
+    assert out.count("<Material") == 1             # material inlined only once now
+
+
+def test_dedupe_leaves_unique_and_already_named_alone():
+    xml = f"<Scene>{_app('1 0 0')}{_app('0 1 0')}</Scene>"          # all unique
+    assert dedupe_appearances(xml) == xml
+    named = "<Scene><Appearance DEF='Mine'><Material/></Appearance>" \
+            "<Appearance DEF='Mine2'><Material/></Appearance></Scene>"
+    assert dedupe_appearances(named) == named      # pre-DEF'd left untouched
+
+
+def test_dedupe_avoids_name_collision_and_is_idempotent():
+    xml = f"<Scene><Appearance DEF='App1'><Box/></Appearance>" \
+          f"<Shape>{_app('1 0 0')}</Shape><Shape>{_app('1 0 0')}</Shape></Scene>"
+    out = dedupe_appearances(xml)
+    assert "DEF='App2'" in out and "USE='App2'" in out   # skipped the taken App1
+    assert dedupe_appearances(out) == out                # idempotent

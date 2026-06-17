@@ -244,6 +244,55 @@ def merge(*results: CraftResult) -> CraftResult:
 # pass, applied where Technē has the emitted XML in hand (autofix output, a
 # fetched scene, or the gate's pre-render step).
 
+_APPEARANCE_RE = re.compile(r"<Appearance\b[^>]*?(?:/>|>.*?</Appearance>)", re.DOTALL)
+
+
+def dedupe_appearances(xml: str) -> str:
+    """Collapse byte-identical <Appearance> subtrees to one DEF + USE references —
+    an efficiency win (the Samwel cave inlines the same 3-texture PBR appearance 39
+    times, re-binding the textures each time). Deterministic and SAFE: only groups
+    verbatim-identical appearances that carry no DEF/USE already, assigns a fresh
+    DEF (avoiding existing names) to the first, and replaces the rest with
+    <Appearance USE='..'/>. Opt-in (not an automatic proxy transform). Idempotent."""
+    matches = list(_APPEARANCE_RE.finditer(xml))
+    if not matches:
+        return xml
+    existing = set(re.findall(r"\bDEF=['\"]([^'\"]+)['\"]", xml))
+    groups: dict[str, list] = {}
+    for m in matches:
+        block = m.group(0)
+        if re.search(r"\b(?:DEF|USE)=", block):
+            continue                                   # already named — leave it
+        groups.setdefault(block, []).append(m)
+
+    repl: dict[tuple, str] = {}
+    n = 0
+    for block, occ in groups.items():
+        if len(occ) < 2:
+            continue
+        n += 1
+        name = f"App{n}"
+        while name in existing:
+            n += 1
+            name = f"App{n}"
+        existing.add(name)
+        repl[occ[0].span()] = re.sub(r"^<Appearance\b",
+                                     f"<Appearance DEF='{name}'", block, count=1)
+        for m in occ[1:]:
+            repl[m.span()] = f"<Appearance USE='{name}'/>"
+    if not repl:
+        return xml
+
+    out, last = [], 0
+    for m in matches:
+        if m.span() in repl:
+            out.append(xml[last:m.start()])
+            out.append(repl[m.span()])
+            last = m.end()
+    out.append(xml[last:])
+    return "".join(out)
+
+
 _ENVLIGHT_TAG = re.compile(r"<EnvironmentLight\b([^>]*?)(/?>)")
 
 
