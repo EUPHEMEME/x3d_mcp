@@ -40,11 +40,12 @@ class SceneState:
     node_fields: dict[str, dict] = dc_field(default_factory=dict)
     defined_defs: set[str] = dc_field(default_factory=set)
     def_name_to_type: dict[str, str] = dc_field(default_factory=dict)
+    id_to_def: dict[str, str] = dc_field(default_factory=dict)        # node id -> its DEF name
     surfaced_reminders: dict[str, int] = dc_field(default_factory=dict)  # coherence key -> last call index
 
     def reset(self):
         for d in (self.id_to_type, self.node_fields, self.def_name_to_type,
-                  self.surfaced_reminders):
+                  self.id_to_def, self.surfaced_reminders):
             d.clear()
         self.defined_defs.clear()
 
@@ -173,11 +174,19 @@ class TechneProxy:
 
     def _adapt_def_node(self, args: dict) -> craft.CraftResult:
         # NOTE: do not mutate defined_defs here — commit on confirmed success.
-        return craft.CraftResult(repaired=dict(args))
+        return craft.check_duplicate_def(
+            args.get("name", ""), self.state.defined_defs, args)
 
     def _adapt_use_node(self, args: dict) -> craft.CraftResult:
         return craft.check_use_after_def(
             args.get("def_name", ""), self.state.defined_defs, args)
+
+    def _adapt_add_route(self, args: dict) -> craft.CraftResult:
+        # the granular add_route references nodes by tracking id; both must already
+        # carry a DEF (scene.add_route raises a bare error otherwise).
+        return craft.check_route_defs(
+            args.get("from_node", ""), args.get("to_node", ""),
+            self.state.id_to_def, args)
 
     def _adapt_set_field(self, args: dict) -> craft.CraftResult:
         node_id = args.get("node_id", "")
@@ -198,6 +207,7 @@ class TechneProxy:
         "def_node": "_adapt_def_node",
         "use_node": "_adapt_use_node",
         "set_field": "_adapt_set_field",
+        "add_route": "_adapt_add_route",
     }
 
     # -- the public decision surface ----------------------------------------
@@ -251,7 +261,12 @@ class TechneProxy:
             m = _ASSIGNED_RE.search(result_text)
             if m:
                 name, nid = m.group(1), m.group(2)
+                old = st.id_to_def.get(nid)
+                if old and old != name:        # node re-DEF'd: free its old name
+                    st.defined_defs.discard(old)
+                    st.def_name_to_type.pop(old, None)
                 st.defined_defs.add(name)
+                st.id_to_def[nid] = name
                 if nid in st.id_to_type:
                     st.def_name_to_type[name] = st.id_to_type[nid]
         elif p["kind"] == "use":

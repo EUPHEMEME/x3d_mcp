@@ -19,6 +19,7 @@ determinism commitment.
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field as dc_field
 from typing import Any
 
@@ -146,21 +147,58 @@ def check_envlight_global(global_value: Any, args: dict) -> CraftResult:
 
 def check_interpolator(node_type: str, key: list, key_value: list,
                        num_coords: int | None, args: dict) -> CraftResult:
+    """key/keyValue arity, mirroring the server's validate_semantic exactly:
+    fixed-arity interpolators need `arity` floats per key; variable-arity ones
+    (Coordinate/Normal) need a whole multiple of a base tuple per key."""
     r = CraftResult(repaired=dict(args))
-    comp = rules.INTERP_COMPONENTS.get(node_type)
-    if comp is None:
-        if node_type == "CoordinateInterpolator" and num_coords:
-            comp = 3 * num_coords
-        else:
-            return r        # unknown interpolator type; nothing to assert
-    n_key = len(key)
-    n_val = len(key_value)
-    expected = n_key * comp
-    if n_val != expected:
+    if node_type not in rules.INTERP_ARITY:
+        return r                              # not a known interpolator
+    n_key, n_val = len(key), len(key_value)
+    if n_key == 0:
+        return r
+
+    def fail(detail):
         r.corrections.append(rules.correction(
             "interp_lengths_match", node_type=node_type, n_key=n_key,
-            n_val=n_val, expected=expected, comp=comp))
+            n_val=n_val, detail=detail))
         r.applied.append("interp_lengths_match")
+
+    if n_val % n_key != 0:
+        fail(f"{n_val} is not divisible by the {n_key} key(s); each key needs a "
+             f"whole keyValue entry")
+        return r
+    per = n_val // n_key
+    arity = rules.INTERP_ARITY[node_type]
+    if arity is not None:
+        if per != arity:
+            fail(f"expected {arity} per key ({n_key} keys -> {n_key * arity}), "
+                 f"got {per} per key")
+    else:
+        base = rules.INTERP_BASE.get(node_type, 1)
+        if per % base != 0:
+            fail(f"{per} per key is not a multiple of {base} "
+                 f"(one coordinate is {base} floats)")
+    return r
+
+
+def check_duplicate_def(name: str, defined_names: set, args: dict) -> CraftResult:
+    """A DEF name must be unique within a scene (validate_semantic duplicate-def)."""
+    r = CraftResult(repaired=dict(args))
+    if name and name in defined_names:
+        r.corrections.append(rules.correction("duplicate_def", name=name))
+        r.applied.append("duplicate_def")
+    return r
+
+
+def check_route_defs(from_id: str, to_id: str, id_to_def: dict,
+                     args: dict) -> CraftResult:
+    """A ROUTE references nodes by DEF; both endpoints must already have one
+    (validate_semantic route-missing-from/to-node; scene.add_route raises bare)."""
+    r = CraftResult(repaired=dict(args))
+    for nid in (from_id, to_id):
+        if nid and nid not in id_to_def:
+            r.corrections.append(rules.correction("route_no_def", node_id=nid))
+            r.applied.append("route_no_def")
     return r
 
 
@@ -196,3 +234,27 @@ def merge(*results: CraftResult) -> CraftResult:
         out.notes += res.notes
         out.applied += res.applied
     return out
+
+
+# --- serialization layer: re-assert omitted-but-required defaults ----------
+# x3d.py drops any field left at its library default from the XML. For
+# EnvironmentLight that means an omitted `global` (so image-based lighting reads
+# as non-global and silently dies). This cannot be fixed at the create_node args
+# layer (x3d.py rejects a `global` kwarg) -- it is a post-serialization string
+# pass, applied where Technē has the emitted XML in hand (autofix output, a
+# fetched scene, or the gate's pre-render step).
+
+_ENVLIGHT_TAG = re.compile(r"<EnvironmentLight\b([^>]*?)(/?>)")
+
+
+def reassert_envlight_global(xml: str) -> str:
+    """Inject global='true' on any EnvironmentLight start-tag lacking a `global`
+    attribute, so scene-wide IBL actually renders (x3d.py Bug 2). Deterministic
+    and idempotent; only touches EnvironmentLight (changing a PointLight/SpotLight
+    scope would alter lighting semantics, so those are left alone)."""
+    def fix(m: "re.Match") -> str:
+        attrs, close = m.group(1), m.group(2)
+        if re.search(r"\bglobal\s*=", attrs):
+            return m.group(0)                  # already set -> idempotent
+        return f"<EnvironmentLight global='true'{attrs}{close}"
+    return _ENVLIGHT_TAG.sub(fix, xml)

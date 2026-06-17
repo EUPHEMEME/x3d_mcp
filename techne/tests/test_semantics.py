@@ -101,10 +101,14 @@ def test_reminder_rearms_after_cooldown():
 
 
 def test_route_tool_still_gets_reminder_via_decide():
-    # add_route is a passthrough tool (no adapter) — it must still nudge timer wiring
+    # add_route now has an adapter (route-needs-DEF); with both endpoints DEF'd it
+    # forwards, and the timer-wiring reminder must still ride along.
     p = TechneProxy()
-    d = p.decide("add_route", {"from_node": "a", "from_field": "x",
-                               "to_node": "b", "to_field": "y"})
+    for nid, name in (("a", "Timer"), ("b", "Interp")):
+        p.observe_result(p.decide("def_node", {"node_id": nid, "name": name}),
+                         f"Assigned DEF '{name}' to {nid}")
+    d = p.decide("add_route", {"from_node": "a", "from_field": "fraction_changed",
+                               "to_node": "b", "to_field": "set_fraction"})
     assert not d.blocked
     assert any("ROUTE" in r for r in d.reminders)
 

@@ -94,6 +94,18 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
     result = await upstream.call_tool(name, decision.args)
     proxy.observe_result(decision, _text_of(result))
     content = list(getattr(result, "content", None) or [])
+    structured = getattr(result, "structuredContent", None)
+    if name == "autofix_x3d":
+        # autofix returns corrected X3D but fixes only containerFields; also
+        # re-assert the omitted EnvironmentLight 'global' (x3d.py Bug 2) so IBL works.
+        from .craft import reassert_envlight_global
+        content = [
+            types.TextContent(type="text", text=reassert_envlight_global(b.text))
+            if getattr(b, "type", "") == "text" and getattr(b, "text", None) else b
+            for b in content]
+        if isinstance(structured, dict) and isinstance(structured.get("result"), str):
+            structured = {**structured,
+                          "result": reassert_envlight_global(structured["result"])}
     if decision.notes:
         # an applied repair (args were rewritten) vs an advisory note Technē could
         # not act on — distinct markers so a consumer (and the eval) can tell them apart
@@ -109,7 +121,7 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
             content.append(types.TextContent(type="text", text=warn))
     return types.CallToolResult(
         content=content,
-        structuredContent=getattr(result, "structuredContent", None),
+        structuredContent=structured,
         isError=bool(getattr(result, "isError", False)))
 
 

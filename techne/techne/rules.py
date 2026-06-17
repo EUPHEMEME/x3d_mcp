@@ -77,16 +77,25 @@ HUMANOID_SLOTS = {
     "Normal": ["skinNormal"],
 }
 
-# Interpolator value-components per key (keyValue length must == len(key) * this).
-INTERP_COMPONENTS = {
-    "OrientationInterpolator": 4,      # SFRotation
-    "PositionInterpolator": 3,         # SFVec3f
-    "PositionInterpolator2D": 2,
+# Floats per key for each interpolator's keyValue (keyValue length must be
+# len(key) * arity). None = a variable multiple of a base tuple (e.g. a
+# CoordinateInterpolator stores numCoords*3 per key). Mirrors the server's own
+# validate_semantic._INTERP_ARITY / _INTERP_BASE so Technē's per-call check agrees
+# with the authoritative whole-scene validator. (src/validation/semantic.py)
+INTERP_ARITY = {
+    "ScalarInterpolator": 1, "SplineScalarInterpolator": 1,
+    "PositionInterpolator2D": 2, "SplinePositionInterpolator2D": 2,
+    "PositionInterpolator": 3, "SplinePositionInterpolator": 3,
+    "GeoPositionInterpolator": 3,
     "ColorInterpolator": 3,
-    "ScalarInterpolator": 1,
-    "NormalInterpolator": 3,
-    # CoordinateInterpolator is per-key variable (numCoords); handled specially.
+    "OrientationInterpolator": 4, "SquadOrientationInterpolator": 4,
+    "CoordinateInterpolator": None, "NormalInterpolator": None,
+    "CoordinateInterpolator2D": None,
 }
+INTERP_BASE = {"CoordinateInterpolator": 3, "NormalInterpolator": 3,
+               "CoordinateInterpolator2D": 2}
+# back-compat alias: membership tests ("is this an interpolator?") still work.
+INTERP_COMPONENTS = INTERP_ARITY
 
 
 # --- the rule -> prescriptive-correction catalog ----------------------------
@@ -133,11 +142,9 @@ CATALOG = {
     ),
     "interp_lengths_match": (
         HARD,
-        "{node_type} has {n_key} key fractions but {n_val} keyValue components "
-        "(expected {expected} = {n_key} x {comp} per key). Mismatched key/keyValue "
-        "lengths silently corrupt the animation. Make keyValue length == "
-        "len(key) x {comp}.",
-        "TECHNE_SPEC.md#3.2",
+        "{node_type}: {n_key} key fraction(s) but {n_val} keyValue value(s) -- "
+        "{detail}. Mismatched key/keyValue lengths silently corrupt the animation.",
+        "src/validation/semantic.py (interpolator-key-length)",
     ),
     "use_after_def": (
         HARD,
@@ -158,6 +165,135 @@ CATALOG = {
         "(.png/.jpg/.jpeg/.gif/.webp). Verify the path resolves.",
         "TECHNE_SPEC.md#3.1",
     ),
+
+    # --- mirrored from the server's validate_semantic (the authoritative
+    #     whole-scene validator). Technē enforces the incrementally-checkable
+    #     ones per-call (see SCOPE); the rest it CATALOGS and defers to the
+    #     upstream validate_semantic pass it fronts, rather than re-implementing
+    #     a 596-line whole-scene engine that would drift. ----------------------
+
+    "duplicate_def": (
+        HARD,
+        "Duplicate DEF name '{name}': it is already defined in this scene. DEF "
+        "names must be unique. Rename this one, or USE='{name}' to reference the "
+        "existing node instead of redefining it.",
+        "src/validation/semantic.py (duplicate-def)",
+    ),
+    "route_no_def": (
+        HARD,
+        "ROUTE endpoint node '{node_id}' has no DEF name, but a ROUTE references "
+        "nodes by DEF. def_node it (def_node('{node_id}', '<Name>')) before "
+        "routing, then ROUTE from/to that name.",
+        "src/validation/semantic.py (route-missing-from/to-node); scene.add_route",
+    ),
+
+    # whole-scene catalog (deferred to upstream validate_semantic; SCOPE marks these)
+    "use_undefined_def": (
+        HARD,
+        "USE='{use}' references a DEF that does not exist in this scene. Available "
+        "DEF names: {available}.",
+        "src/validation/semantic.py (use-undefined-def)",
+    ),
+    "use_before_def": (
+        HARD,
+        "USE='{use}' appears before its DEF in document order. A USE must follow "
+        "the DEF it references.",
+        "src/validation/semantic.py (use-before-def)",
+    ),
+    "unused_def": (
+        SOFT,
+        "DEF='{name}' is defined but never USE'd. Fine if referenced via ROUTE or "
+        "externally.",
+        "src/validation/semantic.py (unused-def)",
+    ),
+    "route_missing_from_node": (
+        HARD,
+        "ROUTE fromNode='{node}' not found. Available DEFs: {available}.",
+        "src/validation/semantic.py (route-missing-from-node)",
+    ),
+    "route_missing_to_node": (
+        HARD,
+        "ROUTE toNode='{node}' not found. Available DEFs: {available}.",
+        "src/validation/semantic.py (route-missing-to-node)",
+    ),
+    "route_invalid_from_field": (
+        HARD,
+        "ROUTE fromField='{field}' does not exist on {type} (DEF='{node}').",
+        "src/validation/semantic.py (route-invalid-from-field)",
+    ),
+    "route_invalid_to_field": (
+        HARD,
+        "ROUTE toField='{field}' does not exist on {type} (DEF='{node}').",
+        "src/validation/semantic.py (route-invalid-to-field)",
+    ),
+    "route_wrong_access_type": (
+        HARD,
+        "ROUTE {field}='{name}' on {type} has accessType='{access}' -- a source "
+        "must be outputOnly/inputOutput and a destination inputOnly/inputOutput.",
+        "src/validation/semantic.py (route-wrong-access-type)",
+    ),
+    "route_type_mismatch": (
+        HARD,
+        "ROUTE type mismatch: {from_ref} is {from_type} but {to_ref} is {to_type}. "
+        "ROUTE requires matching field types.",
+        "src/validation/semantic.py (route-type-mismatch)",
+    ),
+    "shape_no_geometry": (
+        SOFT,
+        "Shape{label} has no geometry child. Add a geometry node like Box, Sphere, "
+        "or IndexedFaceSet, or it draws nothing.",
+        "src/validation/semantic.py (shape-no-geometry)",
+    ),
+    "shape_no_appearance": (
+        SOFT,
+        "Shape{label} has no Appearance; it renders with a default white material.",
+        "src/validation/semantic.py (shape-no-appearance)",
+    ),
+    "empty_group": (
+        SOFT,
+        "{tag}{label} has no children. Empty grouping nodes have no effect.",
+        "src/validation/semantic.py (empty-group)",
+    ),
+    "no_viewpoint": (
+        SOFT,
+        "Scene has no Viewpoint; the browser uses a default camera. Add a Viewpoint "
+        "for a defined initial view.",
+        "src/validation/semantic.py (no-viewpoint)",
+    ),
+    "containerfield_unknown": (
+        HARD,
+        "{child} containerField='{cf}' but {parent} has no field named '{cf}'.{suggest}",
+        "src/validation/semantic.py (containerfield-unknown)",
+    ),
+    "containerfield_not_node": (
+        HARD,
+        "{child} containerField='{cf}' targets {parent}.{cf}, a value field, not a "
+        "node container.{suggest}",
+        "src/validation/semantic.py (containerfield-not-node)",
+    ),
+    "containerfield_type_mismatch": (
+        HARD,
+        "{parent}.{cf} does not accept a {child} (accepts: {accepts}).{suggest}",
+        "src/validation/semantic.py (containerfield-type-mismatch)",
+    ),
+}
+
+# Coverage map: which catalog rules Technē enforces INCREMENTALLY (per tool call,
+# before the call lands) vs which it defers to the upstream whole-scene
+# validate_semantic it fronts. Honest about what the proxy can and cannot see from
+# a single call's arguments + its minimal SceneState.
+PER_CALL = {
+    "container_field_present", "container_field_correct", "container_field_required",
+    "container_field_invalid_slot", "envlight_global_set", "interp_lengths_match",
+    "use_after_def", "hanim_version_explicit", "texture_url_image_ext",
+    "duplicate_def", "route_no_def",
+}
+WHOLE_SCENE = {
+    "use_undefined_def", "use_before_def", "unused_def",
+    "route_missing_from_node", "route_missing_to_node", "route_invalid_from_field",
+    "route_invalid_to_field", "route_wrong_access_type", "route_type_mismatch",
+    "shape_no_geometry", "shape_no_appearance", "empty_group", "no_viewpoint",
+    "containerfield_unknown", "containerfield_not_node", "containerfield_type_mismatch",
 }
 
 
