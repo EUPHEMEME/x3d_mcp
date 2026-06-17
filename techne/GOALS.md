@@ -80,13 +80,14 @@ X3D authoring tasks through `x3d_mcp` **with and without Technē** and reports:
 - **tokens spent** (live mode).
 
 Two modes: a deterministic **scripted** scoreboard (keyless, CI-able) and a
-**live** mode where a real model authors through each stack. First scripted run:
-raw lets **2 of 3** documented mistakes pass *silently* into the scene; Technē
-lets **0 of 3** through, every block naming the fix, at **+5 round-trips to a
-*correct* scene over 4 tasks** — and on already-correct input adds no blocks and
-no extra round-trips (no false positives in the catch/leak columns; with
-reminders on, a soft coherence line may still ride along — `TECHNE_SEMANTICS=0`
-restores byte-identity). Every goal above is scored against this table. Coherence and
+**live** mode where a real model authors through each stack. Scripted run (6
+tasks, 5 documented mistakes): raw lets **2** pass *silently* into the scene and
+rejects **3** loudly with no fix; Technē catches **5/5**, every block naming the
+fix, at **+9 round-trips to a *correct* scene** — and on already-correct input
+adds no blocks and no extra round-trips (no false positives in the catch/leak
+columns; with reminders on, a soft coherence line may still ride along —
+`TECHNE_SEMANTICS=0` restores byte-identity). Every goal above is scored against
+this table. Coherence and
 efficiency are the priorities precisely because they are the columns we can move
 now; grow the task set as `rules.py` grows.
 

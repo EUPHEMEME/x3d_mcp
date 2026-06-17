@@ -111,7 +111,49 @@ CONTROL_CLEAN = ScriptedTask(
     ],
 )
 
-SCRIPTED = [CONTROL_CLEAN, TEXTURED_MATERIAL, USE_BEFORE_DEF, INTERPOLATOR_PARITY]
+# A DEF name must be unique in a scene. The granular scene raises a bare
+# "DEF name already in use"; Technē blocks it with the prescriptive fix first.
+DUPLICATE_DEF = ScriptedTask(
+    "duplicate-def",
+    "A second DEF reuses a name already defined",
+    [
+        Step("reset_scene", {}),
+        Step("create_node", {"node_type": "Shape", "fields": {}}, capture="a"),
+        Step("def_node", {"node_id": "@a", "name": "Hero"}),
+        Step("create_node", {"node_type": "Shape", "fields": {}}, capture="b"),
+        Step("def_node", {"node_id": "@b", "name": "Hero"},
+             mistake="DEF name 'Hero' reused -> duplicate-def (scene rejects bare)",
+             block_token="Hero",
+             fix={"name": "Hero2"}),
+    ],
+)
+
+# A ROUTE references nodes by DEF; both endpoints must be DEF'd first. The scene
+# raises a bare "Source node has no DEF name"; Technē names the fix.
+ROUTE_NO_DEF = ScriptedTask(
+    "route-no-def",
+    "A ROUTE is added before its endpoint nodes are DEF'd",
+    [
+        Step("reset_scene", {}),
+        Step("create_node", {"node_type": "TimeSensor",
+                             "fields": {"loop": True, "cycleInterval": 2.0}}, capture="t"),
+        Step("create_node", {"node_type": "ScalarInterpolator",
+                             "fields": {"key": [0.0, 1.0], "keyValue": [0.0, 1.0]}}, capture="i"),
+        Step("add_route", {"from_node": "@t", "from_field": "fraction_changed",
+                          "to_node": "@i", "to_field": "set_fraction"},
+             mistake="ROUTE endpoints have no DEF -> route fails",
+             block_token="DEF",
+             fix_steps=[
+                 Step("def_node", {"node_id": "@t", "name": "Clock"}),
+                 Step("def_node", {"node_id": "@i", "name": "Spin"}),
+             ]),
+    ],
+    caveat="like use-before-def, this is a LOUD failure on the raw server, not a "
+           "silent one; Technē's win is the actionable correction + auto-recovery.",
+)
+
+SCRIPTED = [CONTROL_CLEAN, TEXTURED_MATERIAL, USE_BEFORE_DEF, INTERPOLATOR_PARITY,
+            DUPLICATE_DEF, ROUTE_NO_DEF]
 
 
 @dataclass

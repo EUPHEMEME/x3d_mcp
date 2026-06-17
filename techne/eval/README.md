@@ -39,13 +39,22 @@ state are fully isolated between tasks.
 task                  stack    calls   caught   leaked   loud    render
 control-clean         raw      4       0/0      0/0      0/0     -
 control-clean         techne   4       0/0      0/0      0/0     -
+duplicate-def         raw      5       0/1      0/1      1/1     -
+duplicate-def         techne   6       1/1      0/1      0/1     -
 interpolator-parity   raw      2       0/1      1/1      0/1     -
 interpolator-parity   techne   3       1/1      0/1      0/1     -
+route-no-def          raw      4       0/1      0/1      1/1     -
+route-no-def          techne   7       1/1      0/1      0/1     -
 textured-material     raw      4       0/1      1/1      0/1     -
 textured-material     techne   5       1/1      0/1      0/1     -
 use-before-def        raw      3       0/1      0/1      1/1     -
 use-before-def        techne   6       1/1      0/1      0/1     -
 ```
+
+5 documented mistakes: raw lets **2 pass silently** + **3 rejected loudly with no
+fix**; Technē catches **5/5**, every block naming the fix, +9 round-trips to a
+correct scene. (`duplicate-def` and `route-no-def` exercise the rules mirrored
+from the server's `validate_semantic` — both loud-on-raw, like `use-before-def`.)
 
 - **`caught`** — the mistake was blocked (with a prescriptive correction the agent
   applied) or silently repaired before it reached the scene.

@@ -8,26 +8,23 @@ source before building; the study cited every one.
 
 ## Tier 1 — align Technē with the server's own ground truth (output quality)
 
-1. **Mirror `validate_semantic` into `rules.py`.** The server's validator runs 9
-   checks / 18 check-IDs; Technē's catalog mirrors only a subset. Port the
-   **ROUTE-validity family** (missing from/to-node, invalid from/to-field, wrong
-   access-type, type-mismatch), **duplicate-def** (HARD), **shape-no-geometry /
-   shape-no-appearance / empty-group / no-viewpoint** (SOFT), and replace
-   `INTERP_COMPONENTS` with semantic.py's richer `_INTERP_ARITY`/`_INTERP_BASE`
-   (Spline/Geo/Squad, 2D, variable-arity Coordinate). Split `use_after_def` into
-   `use-undefined-def` vs `use-before-def`. *Source: src/validation/semantic.py.*
-   → This is the single highest-value move: it makes Technē match the authoritative
-   validator instead of approximating it.
+1. **✅ BUILT — Mirror `validate_semantic` into `rules.py`** (commit "mirror the
+   server's validate_semantic catalog"). Enforced per-call: **duplicate-def**
+   (def_node), **ROUTE-needs-DEF** (new add_route adapter + `SceneState.id_to_def`),
+   and the **richer interpolator arity** (`INTERP_ARITY`/`INTERP_BASE`, Spline/Geo/
+   Squad/2D/variable). Catalogued + scope-mapped (`PER_CALL`/`WHOLE_SCENE`): the
+   full ROUTE family, shape/group/viewpoint, use-undefined/before, containerfield
+   IDs — deferred to the upstream whole-scene `validate_semantic` Technē fronts,
+   rather than re-implementing (and drifting from) the 596-line engine. Two new
+   eval tasks (duplicate-def, route-no-def) demonstrate it. *src/validation/semantic.py.*
 
-2. **Serialization-layer default re-assertion** (the real fix for silent-failure
-   #2). `x3d.py` omits any field left at its library default, so
-   `EnvironmentLight/PointLight/SpotLight global='true'` (default True) can *never*
-   appear in output → IBL silently dies. Add a string pass in `scene.to_xml()`
-   (sibling to the existing `autofix_containerfields`) that force-injects the
-   omitted-but-semantically-required defaults. Centralize the reserved-word map
-   (`global↔global_`, `class↔class_`, `id↔id_`, `style↔style_`). Guard the
-   `setattr(node, cf, child)` bridge: a cf that isn't a real field name silently
-   vanishes at serialization (no `__slots__`). *Source: x3d.py lib map; scene.py:217-246.*
+2. **◐ PARTIAL — Serialization-layer default re-assertion.** Built
+   `craft.reassert_envlight_global(xml)` (deterministic + idempotent; injects the
+   omitted `EnvironmentLight global='true'` so IBL works) and wired it into
+   `autofix_x3d`'s output. *Still open:* generalize to PointLight/SpotLight only
+   where safe; the reserved-word map (`global↔global_` etc.); guarding the
+   `setattr(node, cf, child)` vanish — these belong upstream in `scene.py:217-246`,
+   not in the proxy. *Source: x3d.py lib map; scene.py.*
 
 3. **Field-name + type pre-validation via X3DUOM.** `create_node`/`set_field` accept
    unknown fields loosely (an unknown field raises a raw `TypeError` from x3d.py, or
