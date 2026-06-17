@@ -77,6 +77,25 @@ def test_invalid_status_blocks():
     assert issues and "not one of" in issues[0]
 
 
+def test_level1_disclosure_is_ledger_free():
+    # documented-uncited is an L2 (sourcing) concern -> at L1 it does NOT fire,
+    # and no ledger is needed. This is the universal slop-resistance rung.
+    assert P.check_block({"provenance": "documented", "_host": "Shape"}, level=1) == []
+    # but generated-must-disclose (L1) still fires at L1
+    g = {"provenance": "generated", "_host": "Shape"}
+    assert P.check_block(g, level=1) and "generationMethod" in P.check_block(g, level=1)[0]
+    # invalid status (L1) too
+    assert P.check_block({"provenance": "surveyed", "_host": "Shape"}, level=1)
+
+
+def test_level2_adds_sourcing():
+    b = {"provenance": "documented", "_host": "Shape"}
+    assert P.check_block(b, LEDGER, level=2)            # uncited fires at L2
+    # a clean documented claim still passes at L2
+    assert P.check_block({"provenance": "documented", "catalogId": "F2", "_host": "S"},
+                         LEDGER, level=2) == []
+
+
 def test_check_scene_aggregates():
     xml = _scene(
         _block("Good", ("provenance", "documented"), ("catalogId", "F2")),

@@ -1,0 +1,46 @@
+"""Profiles: CORRECTNESS always on, COHERENCE default, PROVENANCE opt-in. The split
+that keeps Technē universally useful (no arbitrary policy gate by default)."""
+from techne.config import Config
+from techne.proxy import TechneProxy
+
+
+def test_default_is_core_plus_coherence_no_provenance():
+    c = Config.from_env({})
+    assert c.coherence and not c.provenance and c.provenance_level == 1
+
+
+def test_legacy_semantics_flag_still_disables_coherence():
+    assert not Config.from_env({"TECHNE_SEMANTICS": "0"}).coherence
+
+
+def test_explicit_profile_core_only_drops_coherence():
+    c = Config.from_env({"TECHNE_PROFILE": "core"})
+    assert not c.coherence and not c.provenance
+
+
+def test_profile_opts_into_provenance_with_knobs():
+    c = Config.from_env({"TECHNE_PROFILE": "core,coherence,provenance",
+                         "TECHNE_PROVENANCE_LEVEL": "2",
+                         "TECHNE_ASSET_LEDGER": "/tmp/ledger.json",
+                         "TECHNE_STRICT": "1"})
+    assert c.coherence and c.provenance and c.provenance_level == 2
+    assert c.ledger_path == "/tmp/ledger.json" and c.strict
+
+
+def test_level_is_clamped_1_to_3():
+    assert Config.from_env({"TECHNE_PROVENANCE_LEVEL": "9"}).provenance_level == 3
+    assert Config.from_env({"TECHNE_PROVENANCE_LEVEL": "0"}).provenance_level == 1
+
+
+def test_proxy_core_only_silences_coherence_reminders():
+    p = TechneProxy(config=Config.from_env({"TECHNE_PROFILE": "core"}))
+    assert p.decide("create_node", {"node_type": "Viewpoint"}).reminders == []
+    # but CORE correctness still fires regardless of profile
+    p.state.id_to_type.update({"m": "PhysicalMaterial", "t": "ImageTexture"})
+    assert p.decide("add_child", {"parent_id": "m", "child_id": "t",
+                                  "container_field": ""}).blocked
+
+
+def test_proxy_coherence_profile_restores_reminders():
+    p = TechneProxy(config=Config.from_env({"TECHNE_PROFILE": "core,coherence"}))
+    assert p.decide("create_node", {"node_type": "Viewpoint"}).reminders

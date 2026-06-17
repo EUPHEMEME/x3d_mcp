@@ -68,14 +68,16 @@ over them. That is a domain-specific "fossil-claim" schema that *builds on* Laye
 and it is heavier (a vocabulary per domain). Layer 1 is the reusable spine; Layer 2
 is opt-in per corpus.
 
-## Wiring — deliberately not automatic yet
+## Wiring — opt-in via the profile (off by default)
 
-`check_scene_provenance` is a library function. It is **not** wired into the proxy,
-because the gate needs two things that are your call: a **configured ledger** and a
-scene that actually **carries the metadata**. Once both exist, the hookup is one
-block in the occupation gate / a render post-pass (the same shape as the blank-render
-warning): fetch the scene XML, run the check, and on a hard violation *withhold
-sign-off* — provenance becomes an enforced gate, not a hope.
+The gate is now wired, but **off unless the profile opts in** — see `PROFILES.md`.
+With `TECHNE_PROFILE=…,provenance` it runs on edit-tool output and `render_image`
+content at `TECHNE_PROVENANCE_LEVEL` (default L1, ledger-free), riding back as a
+**soft** `Technē provenance (Ln, note): …` advisory. It never blocks unless
+`TECHNE_STRICT=1`. With the default profile it is completely silent. L2+ needs a
+`TECHNE_ASSET_LEDGER`. This is the correctness-vs-policy split: a mandatory
+provenance wall would frustrate workflows that don't share the discipline, so it
+ships as an opt-in policy, nudge-by-default.
 
 ## The decision in front of you
 

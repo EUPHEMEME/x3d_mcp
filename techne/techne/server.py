@@ -118,6 +118,23 @@ def _vs_errors(vs: str) -> str:
     return "; ".join(b.strip()[:120] for b in bullets[:3])
 
 
+def _provenance_note(proxy: TechneProxy, xml: str) -> "types.TextContent | None":
+    """Opt-in provenance gate (only when the profile enables it). Soft by default —
+    appends a 'Technē provenance:' WARN note, never blocks (don't wall artistic
+    workflows that don't opt in; even when on, nudge unless TECHNE_STRICT)."""
+    if not getattr(proxy, "config", None) or not proxy.config.provenance:
+        return None
+    from . import provenance
+    issues = provenance.check_scene_provenance(
+        xml, proxy.ledger(), proxy.config.provenance_level)
+    if not issues:
+        return None
+    tag = "violation" if proxy.config.strict else "note"
+    return types.TextContent(type="text", text=(
+        f"Technē provenance (L{proxy.config.provenance_level}, {tag}): "
+        + "; ".join(issues[:5])))
+
+
 async def _post_validate_edit(upstream: Any, doc: str) -> list[str]:
     """Run an edited document back through the server's validators; return problem
     lines (empty if clean). Catches modify's unvalidated attributes (XSD) and move's
@@ -194,6 +211,10 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
         warn = _blank_warning(result)
         if warn:
             content.append(types.TextContent(type="text", text=warn))
+    if name == "render_image" and (arguments or {}).get("content"):
+        pnote = _provenance_note(proxy, arguments["content"])   # opt-in policy
+        if pnote:
+            content.append(pnote)
     if name in _EDIT_VERBS and not getattr(result, "isError", False):
         doc = _text_of(result)
         if _looks_like_doc(doc):
@@ -211,6 +232,9 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
                         type="text", text=f"Technē: convert kept {after} of {before} "
                         "elements -- convert_x3d silently drops unknown nodes/"
                         "attributes; verify nothing important was lost."))
+            pnote = _provenance_note(proxy, doc)          # opt-in policy (off by default)
+            if pnote:
+                content.append(pnote)
         elif _is_error_like(doc):
             content.append(types.TextContent(
                 type="text", text="Technē: this edit returned an error string, not "

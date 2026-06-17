@@ -27,6 +27,7 @@ from dataclasses import dataclass, field as dc_field
 from typing import Any
 
 from . import craft, repair, semantics
+from .config import Config
 from .craft import MISSING
 
 _TEXTURE_NODES = craft.rules.TEXTURE_NODES
@@ -103,11 +104,27 @@ class TechneProxy:
     # at a late-session drift point instead of firing once early and going silent.
     REMINDER_COOLDOWN = 30
 
-    def __init__(self, semantics_on: bool = True):
+    def __init__(self, semantics_on: bool = True, config: "Config | None" = None):
         self.state = SceneState()
-        # coherence reminders default on; TECHNE_SEMANTICS=0 disables (A/B isolation)
-        self.semantics_on = semantics_on and os.environ.get("TECHNE_SEMANTICS", "1") != "0"
+        self.config = config or Config.from_env()
+        # CORE craft (the adapters) is always on; COHERENCE follows the profile
+        # (legacy TECHNE_SEMANTICS still honoured) and the explicit arg can force off.
+        self.semantics_on = semantics_on and self.config.coherence
         self._call_index = 0
+        self._ledger: dict | None = None
+
+    def ledger(self) -> dict:
+        """The asset ledger for the provenance gate (lazy, cached). Empty unless a
+        TECHNE_ASSET_LEDGER is configured -- L1 disclosure needs none."""
+        if self._ledger is None:
+            self._ledger = {}
+            if self.config.ledger_path:
+                try:
+                    from . import provenance
+                    self._ledger = provenance.load_ledger(self.config.ledger_path)
+                except Exception:
+                    self._ledger = {}
+        return self._ledger
 
     def _semantics_for(self, tool: str, args: dict) -> list[str]:
         """Standing-semantics reminders for this call: triggered, de-duped, capped.

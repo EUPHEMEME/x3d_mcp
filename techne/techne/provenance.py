@@ -35,6 +35,22 @@ SOFT = "soft"
 
 PROV_VALUES = {"documented", "interpretive", "generated"}
 
+# Provenance is GRADUATED so it stays universally useful (see PROVENANCE_BRIDGE.md):
+#   L1 disclosure  — keep any provenance tags well-formed + AI content disclosed.
+#                    Ledger-free, near-zero friction; the universal slop-resistance
+#                    rung (cf. C2PA "is this AI?" content credentials).
+#   L2 sourcing    — documented claims must resolve to a cited, public-domain asset
+#                    in a ledger. For curated / training repositories.
+#   L3 content     — the domain must_not_invent rules (taxon/depth/cal-BC): needs a
+#                    structured claim schema; NOT built (deliberately deferred).
+RULE_LEVEL = {
+    "provenance_invalid_status": 1,
+    "provenance_generated_undisclosed": 1,
+    "provenance_documented_uncited": 2,
+    "provenance_catalogid_unresolved": 2,
+    "provenance_not_public_domain": 2,
+}
+
 # the provenance rule catalog (kept separate from rules.CATALOG: different domain)
 RULES = {
     "provenance_documented_uncited": (
@@ -125,35 +141,44 @@ def _truthy(v) -> bool:
     return str(v).strip().lower() in ("true", "1", "yes")
 
 
-def check_block(prov: dict, ledger: dict) -> list[str]:
-    """Validate one provenance block against the ledger; return correction lines."""
+def check_block(prov: dict, ledger: dict | None = None, level: int = 2) -> list[str]:
+    """Validate one provenance block at the given level. Only rules whose
+    RULE_LEVEL <= level apply, so L1 (disclosure) needs no ledger and never flags an
+    uncited documented claim — that is an L2 (sourcing) concern."""
+    ledger = ledger or {}
     host = "%s%s" % (prov.get("_host", "node"),
                      " (DEF=%s)" % prov["_def"] if prov.get("_def") else "")
     status = (prov.get("provenance") or "").strip()
     out: list[str] = []
+
+    def emit(rule, **f):
+        if RULE_LEVEL[rule] <= level:
+            out.append(correction(rule, host=host, **f))
+
     if status and status not in PROV_VALUES:
-        out.append(correction("provenance_invalid_status", host=host, status=status))
+        emit("provenance_invalid_status", status=status)
         return out
-    if status == "documented":
+    if status == "generated":
+        if not prov.get("generationMethod"):
+            emit("provenance_generated_undisclosed")
+    elif status == "documented":
         cid, cite = prov.get("catalogId"), prov.get("sourceCitation")
         if not cid and not cite:
-            out.append(correction("provenance_documented_uncited", host=host))
+            emit("provenance_documented_uncited")
         elif cid and cid not in ledger:
             avail = ", ".join(sorted(ledger)[:8]) or "(empty ledger)"
-            out.append(correction("provenance_catalogid_unresolved",
-                                   host=host, id=cid, available=avail))
+            emit("provenance_catalogid_unresolved", id=cid, available=avail)
         elif cid and not _truthy(ledger[cid].get("public_domain")):
-            out.append(correction("provenance_not_public_domain", host=host, id=cid))
-    elif status == "generated":
-        if not prov.get("generationMethod"):
-            out.append(correction("provenance_generated_undisclosed", host=host))
+            emit("provenance_not_public_domain", id=cid)
     return out
 
 
-def check_scene_provenance(xml: str, ledger: dict) -> list[str]:
-    """Run the provenance gate over a whole scene. Returns all violations (empty =
-    clean). The host wires this into the occupation gate / a render post-pass."""
+def check_scene_provenance(xml: str, ledger: dict | None = None,
+                           level: int = 2) -> list[str]:
+    """Run the provenance gate over a whole scene at `level` (1 disclosure /
+    2 sourcing / 3 content). Returns all violations (empty = clean). The host wires
+    this into the occupation gate / a render post-pass when the profile enables it."""
     issues: list[str] = []
     for prov in parse_provenance_blocks(xml):
-        issues += check_block(prov, ledger)
+        issues += check_block(prov, ledger, level)
     return issues

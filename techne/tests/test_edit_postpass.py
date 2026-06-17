@@ -6,6 +6,11 @@ import asyncio
 from mcp import types
 from techne.server import handle_call_tool, tag_tools, POSTCHECK_HINT
 from techne.proxy import TechneProxy
+from techne.config import Config
+
+_GEN_SCENE = ("<X3D><Scene><Transform DEF='X'><MetadataSet name='provenance'>"
+              "<MetadataString name='provenance' value='\"generated\"'/>"
+              "</MetadataSet></Transform></Scene></X3D>")
 
 
 class FakeResult:
@@ -84,6 +89,22 @@ def test_convert_drop_diff_flags_lost_nodes():
                                  "to_encoding": "xml"}))
     txt = _text(res)
     assert "convert kept" in txt and "elements" in txt
+
+
+def test_provenance_gate_is_off_by_default():
+    # an undisclosed 'generated' asset, but the default profile has provenance OFF:
+    # Technē must NOT nag. This is what keeps it universally useful.
+    res = _run(handle_call_tool(TechneProxy(), EditUpstream(doc=_GEN_SCENE),
+                                "modify_x3d_node", {"def_name": "X", "field_changes": "{}"}))
+    assert "Technē provenance" not in _text(res)     # no Technē note added (gate off)
+
+
+def test_provenance_gate_fires_when_profile_opts_in():
+    p = TechneProxy(config=Config.from_env({"TECHNE_PROFILE": "core,provenance"}))
+    res = _run(handle_call_tool(p, EditUpstream(doc=_GEN_SCENE),
+                                "modify_x3d_node", {"def_name": "X", "field_changes": "{}"}))
+    txt = _text(res)
+    assert "Technē provenance" in txt and "generationMethod" in txt   # L1 disclosure, soft
 
 
 def test_error_string_flagged_without_validating():

@@ -91,6 +91,16 @@ this table. Coherence and
 efficiency are the priorities precisely because they are the columns we can move
 now; grow the task set as `rules.py` grows.
 
+## Correctness is universal; policy is opt-in (`PROFILES.md`)
+To stay useful to *everyone*, Technē separates **correctness** (the silent-failure
+catalog, blank gate, edit post-pass — objective, always on) from **policy** (the
+provenance/honesty gate — opinionated, off by default), the way ESLint splits
+`recommended` from opinionated configs. `core` is the zero-config "it just renders
+right" floor; `coherence` is default-on soft; `provenance` is opt-in
+(`TECHNE_PROFILE`), graduated (L1 ledger-free disclosure → L2 sourcing → L3 content),
+and soft-by-default. A mandatory provenance wall would make Technē niche; this keeps
+it universal while preserving the slop-resistance value for those who want it.
+
 ## Out of scope (for now)
 The venture / "TechnicalDiplomacy" / narrative framings belong to EUPHEME's
 separate roadmap and are **not** part of Technē until deliberately specified.
