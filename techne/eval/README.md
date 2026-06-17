@@ -54,9 +54,13 @@ use-before-def        techne   6       1/1      0/1      0/1     -
 - **`loud`** — the server rejected it with an error but *no* actionable fix. Raw is
   loud on 1/3 (`use-before-def`); Technē turns that bare error into a named
   correction *and* auto-recovers.
-- **`control-clean`** is identical on both stacks — Technē adds no blocks and no
-  extra round-trips on already-correct input. No false positives.
-- Cost: **+5 round-trips over 4 tasks**, every block's text named the fix (3/3).
+- **`control-clean`** adds no blocks and no extra round-trips on already-correct
+  input — no false positives in the catch/leak columns. (With semantics on, a soft
+  reminder may still ride along on a clean call by design; `TECHNE_SEMANTICS=0`
+  restores byte-identity.)
+- Cost: **+5 round-trips to a correct scene over 4 tasks** (this includes
+  authoring the missing DEF, not just proxy overhead), every block named the
+  fix (3/3).
 
 ## Honest caveats (these are load-bearing)
 

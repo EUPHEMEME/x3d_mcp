@@ -95,8 +95,11 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
     proxy.observe_result(decision, _text_of(result))
     content = list(getattr(result, "content", None) or [])
     if decision.notes:
+        # an applied repair (args were rewritten) vs an advisory note Technē could
+        # not act on — distinct markers so a consumer (and the eval) can tell them apart
+        prefix = "Technē repaired: " if decision.rewrote else "Technē note: "
         content.append(types.TextContent(
-            type="text", text="Technē: " + "; ".join(decision.notes)))
+            type="text", text=prefix + "; ".join(decision.notes)))
     if decision.reminders:
         content.append(types.TextContent(
             type="text", text="Technē reminder: " + " ".join(decision.reminders)))

@@ -40,13 +40,13 @@ class SceneState:
     node_fields: dict[str, dict] = dc_field(default_factory=dict)
     defined_defs: set[str] = dc_field(default_factory=set)
     def_name_to_type: dict[str, str] = dc_field(default_factory=dict)
-    surfaced_reminders: set[str] = dc_field(default_factory=set)   # coherence: fired once/session
+    surfaced_reminders: dict[str, int] = dc_field(default_factory=dict)  # coherence key -> last call index
 
     def reset(self):
-        for d in (self.id_to_type, self.node_fields, self.def_name_to_type):
+        for d in (self.id_to_type, self.node_fields, self.def_name_to_type,
+                  self.surfaced_reminders):
             d.clear()
         self.defined_defs.clear()
-        self.surfaced_reminders.clear()
 
 
 @dataclass
@@ -58,6 +58,7 @@ class Decision:
     notes: list[str] = dc_field(default_factory=list)         # SOFT / repairs done
     reminders: list[str] = dc_field(default_factory=list)     # SOFT / coherence standing semantics
     applied: list[str] = dc_field(default_factory=list)
+    rewrote: bool = False             # did Technē actually change the forwarded args?
     pending: dict | None = None       # state to commit iff upstream succeeds
 
     @property
@@ -77,28 +78,52 @@ def _is_error(text: str) -> bool:
         or "error:" in t[:40] or "no node with" in t or "not found" in t
 
 
+def _args_changed(emitted: dict, forwarded: dict) -> bool:
+    """Did Technē actually rewrite a value the model cares about? Ignores additive
+    normalisation noise (an empty fields={} or container_field='' the adapters
+    insert) so an advisory-only forward is not mislabelled as a repair."""
+    def norm(a: dict) -> dict:
+        a = {k: v for k, v in (a or {}).items()}
+        if a.get("fields") == {}:
+            a.pop("fields", None)
+        for cf in ("container_field", "containerField"):
+            if a.get(cf) in ("", None):
+                a.pop(cf, None)
+        return a
+    return norm(emitted) != norm(forwarded)
+
+
 # --- the proxy --------------------------------------------------------------
 
 class TechneProxy:
     """Holds scene state and applies the craft adapters per tool call."""
 
+    # re-arm a reminder this many calls after it last surfaced, so it nudges again
+    # at a late-session drift point instead of firing once early and going silent.
+    REMINDER_COOLDOWN = 30
+
     def __init__(self, semantics_on: bool = True):
         self.state = SceneState()
         # coherence reminders default on; TECHNE_SEMANTICS=0 disables (A/B isolation)
         self.semantics_on = semantics_on and os.environ.get("TECHNE_SEMANTICS", "1") != "0"
+        self._call_index = 0
 
     def _semantics_for(self, tool: str, args: dict) -> list[str]:
-        """Standing-semantics reminders for this call: triggered, de-duped once per
-        session, capped. Marks only the ones actually emitted as surfaced."""
+        """Standing-semantics reminders for this call: triggered, de-duped, capped.
+        Not once-*forever*: a key re-fires REMINDER_COOLDOWN calls after it last
+        surfaced (the model drifts late in a session, not just at the top). Records
+        the call index only for the keys actually emitted."""
         if not self.semantics_on:
             return []
         out: list[str] = []
+        seen = self.state.surfaced_reminders                # key -> last call index
         for key, text in semantics.advise(tool, args, self.state):
-            if key in self.state.surfaced_reminders:
+            last = seen.get(key)
+            if last is not None and self._call_index - last < self.REMINDER_COOLDOWN:
                 continue
             out.append(text)
-            self.state.surfaced_reminders.add(key)
-            if len(out) >= 2:                          # never flood a single result
+            seen[key] = self._call_index
+            if len(out) >= 2:                               # never flood a single result
                 break
         return out
 
@@ -178,16 +203,20 @@ class TechneProxy:
     # -- the public decision surface ----------------------------------------
 
     def decide(self, tool: str, args: dict) -> Decision:
+        self._call_index += 1
+        emitted = args                                 # what the model sent (pre-repair)
         args = repair.sap_repair(args)                 # step 1: deterministic repair
         adapter = self._ADAPTERS.get(tool)
         if adapter is None:                            # opt-in: unknown tool passes
-            return Decision("forward", tool, args)
+            d = Decision("forward", tool, args, rewrote=_args_changed(emitted, args))
+            d.reminders = self._semantics_for(tool, args)   # still nudge (e.g. add_route)
+            return d
         res: craft.CraftResult = getattr(self, adapter)(args)
         if res.corrections:                            # HARD violation -> block
             return Decision("block", tool, args, corrections=res.corrections,
                             notes=res.notes, applied=res.applied)
         d = Decision("forward", tool, res.repaired, notes=res.notes,
-                     applied=res.applied)
+                     applied=res.applied, rewrote=_args_changed(emitted, res.repaired))
         d.pending = self._pending_for(tool, res.repaired)
         d.reminders = self._semantics_for(tool, res.repaired)   # coherence (soft)
         return d

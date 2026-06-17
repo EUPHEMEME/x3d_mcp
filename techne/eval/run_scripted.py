@@ -49,7 +49,9 @@ def summarize(rows):
     print(f"  Technē — passed silently into the scene  : {tec_silent}/{planned}")
     print(f"  Technē — caught (block or repair)        : {tec_caught}/{planned}")
     print(f"  Technē blocks whose text named the fix   : {named}/{tec_caught}")
-    print(f"  extra round-trips Technē cost (net)      : +{extra} over {len(SCRIPTED)} tasks")
+    print(f"  extra round-trips to a CORRECT scene     : +{extra} over {len(SCRIPTED)} tasks")
+    print(f"    (incl. authoring the missing DEF; raw used fewer calls but shipped")
+    print(f"     {raw_silent} silently-wrong + {raw_loud} loudly-rejected/broken scenes)")
     errs = [(m.task, m.stack, e) for m in rows for e in m.errors]
     if errs:
         print("  notes / errors:")

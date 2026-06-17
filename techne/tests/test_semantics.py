@@ -4,7 +4,7 @@ separately (the verify-x3d-invariants workflow); here we pin the mechanism."""
 import os
 
 from techne import semantics
-from techne.proxy import TechneProxy, SceneState
+from techne.proxy import TechneProxy, SceneState, _args_changed
 
 
 def keys(advice):
@@ -63,6 +63,18 @@ def test_no_fire_on_irrelevant_call():
     assert semantics.advise("validate_semantic", {}, st) == []
 
 
+def test_texturetransform_rotation_is_scalar_not_sfrotation():
+    st = SceneState()
+    # TextureTransform.rotation is SFFloat — must NOT get the SFRotation 4-tuple nudge
+    assert "units_angles" not in keys(
+        semantics.advise("create_node", {"node_type": "TextureTransform",
+                                         "fields": {"rotation": 1.57}}, st))
+    st.id_to_type["tt"] = "TextureTransform"
+    assert "units_angles" not in keys(
+        semantics.advise("set_field", {"node_id": "tt", "field_name": "rotation",
+                                       "value": 1.57}, st))
+
+
 def test_reminder_text_is_ascii_and_short():
     for k, v in semantics.REMINDERS.items():
         assert v.isascii(), f"{k} reminder must be ASCII"
@@ -76,7 +88,39 @@ def test_once_per_session_dedup():
     d1 = p.decide("create_node", {"node_type": "Viewpoint"})
     assert any("right-handed" in r or "right-hand" in r for r in d1.reminders)
     d2 = p.decide("create_node", {"node_type": "Viewpoint"})
-    assert d2.reminders == []          # already surfaced this session
+    assert d2.reminders == []          # within cooldown -> suppressed
+
+
+def test_reminder_rearms_after_cooldown():
+    p = TechneProxy()
+    assert p.decide("create_node", {"node_type": "Viewpoint"}).reminders   # fires
+    for _ in range(TechneProxy.REMINDER_COOLDOWN):                         # advance calls
+        p.decide("list_nodes", {})
+    # past the cooldown the same invariant nudges again (late-session drift)
+    assert p.decide("create_node", {"node_type": "Viewpoint"}).reminders
+
+
+def test_route_tool_still_gets_reminder_via_decide():
+    # add_route is a passthrough tool (no adapter) — it must still nudge timer wiring
+    p = TechneProxy()
+    d = p.decide("add_route", {"from_node": "a", "from_field": "x",
+                               "to_node": "b", "to_field": "y"})
+    assert not d.blocked
+    assert any("ROUTE" in r for r in d.reminders)
+
+
+def test_rewrote_flag_distinguishes_repair_from_advisory():
+    # _args_changed ignores additive normalisation noise...
+    assert _args_changed({"node_type": "X"}, {"node_type": "X", "fields": {}}) is False
+    assert _args_changed({"p": "a", "container_field": ""},
+                         {"p": "a", "container_field": ""}) is False
+    # ...but catches a real containerField rewrite
+    assert _args_changed({"p": "a", "container_field": ""},
+                         {"p": "a", "container_field": "baseTexture"}) is True
+    # an EnvironmentLight.global advisory forwards UNCHANGED -> rewrote False (a 'note')
+    p = TechneProxy()
+    d = p.decide("create_node", {"node_type": "EnvironmentLight", "fields": {}})
+    assert not d.blocked and d.notes and d.rewrote is False
 
 
 def test_cap_two_per_call():

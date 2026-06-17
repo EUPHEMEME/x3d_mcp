@@ -55,16 +55,29 @@ def _png_of(result):
     return None
 
 
+def _is_error_text(txt: str) -> bool:
+    """Mirror proxy._is_error: the granular tools return 'Error: ...' text with
+    isError=False (they catch SceneError and return a string), so the isError flag
+    alone undercounts loud rejections."""
+    t = (txt or "").strip().lower()
+    return t.startswith(("error", "failed", "traceback")) \
+        or "error:" in t[:40] or "no node with" in t or "not found" in t
+
+
+def errored(result, txt: str) -> bool:
+    return bool(getattr(result, "isError", False)) or _is_error_text(txt)
+
+
 def is_techne_block(result, txt: str) -> bool:
     """A Technē block is an isError result whose text is the prescriptive correction."""
     return bool(getattr(result, "isError", False)) and "Techn" in txt and "block" in txt.lower()
 
 
 def is_techne_repair(txt: str) -> bool:
-    """A repair / soft-advisory rides back as a 'Technē: ...' note *appended after*
-    the upstream content (so it is mid-text, not leading). Distinct from a
-    'Technē reminder: ...' coherence line (note the 'ē: ' vs 'ē reminder:')."""
-    return "Technē: " in txt and "block" not in txt.lower()
+    """A real repair (args rewritten) rides back as a 'Technē repaired: ...' note,
+    distinct from a 'Technē note: ...' advisory Technē could not act on and from a
+    'Technē reminder: ...' coherence line. Only a rewrite counts as a catch."""
+    return "Technē repaired: " in txt
 
 
 @dataclass
@@ -135,13 +148,13 @@ async def run_scripted_task(stack: str, task, render=False) -> Metrics:
                             retry = {**_resolve(step.args, caps), **step.fix}
                             rr = await _call(s, step.tool, retry)
                             m.tool_calls += 1
-                            if getattr(rr, "isError", False):
+                            if errored(rr, text_of(rr)):
                                 m.errors.append(f"retry of {step.tool} still errored")
                                 m.completed = False
                         elif step.fix_steps:
                             rr = await _call(s, step.tool, _resolve(step.args, caps))
                             m.tool_calls += 1
-                            if getattr(rr, "isError", False):
+                            if errored(rr, text_of(rr)):
                                 m.errors.append(f"retry of {step.tool} still errored")
                                 m.completed = False
                     elif step.mistake and is_techne_repair(txt):
@@ -149,14 +162,14 @@ async def run_scripted_task(stack: str, task, render=False) -> Metrics:
                         m.mistakes_caught += 1
                     elif step.mistake:
                         # no Technē block, no Technē repair: how did the stack react?
-                        if getattr(res, "isError", False):
+                        if errored(res, txt):
                             # the server rejected it loudly — safe, but no fix offered
                             m.rejected_loud += 1
                         else:
                             # it passed straight into the scene: the dangerous mode
                             m.leaked_silent += 1
                     else:
-                        if getattr(res, "isError", False):
+                        if errored(res, txt):
                             m.errors.append(f"clean step {step.tool} errored: {txt[:120]}")
                             m.completed = False
 

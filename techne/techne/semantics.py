@@ -22,6 +22,9 @@ from __future__ import annotations
 from . import craft
 
 ROTATION_FIELDS = {"rotation", "orientation"}
+# nodes whose `rotation` is a scalar SFFloat (radians), NOT an SFRotation 4-tuple,
+# so the axis-angle units_angles reminder would give wrong value-shape guidance.
+SCALAR_ROTATION_TYPES = {"TextureTransform"}
 LIGHT_TYPES = {"DirectionalLight", "PointLight", "SpotLight", "EnvironmentLight"}
 VIEWPOINT_TYPES = {"Viewpoint", "OrthoViewpoint", "GeoViewpoint"}
 HANIM_TYPES = {"HAnimHumanoid", "HAnimJoint", "HAnimSegment", "HAnimSite",
@@ -56,9 +59,9 @@ REMINDERS: dict[str, str] = {
         "center to its rest location, pose via rotation. Attach root with "
         "containerField='skeleton', USE every joint in 'joints'.",
     "viewpoint_missing":
-        "Add a Viewpoint that frames your geometry: with none bound, the default "
-        "camera sits at 0 0 10 looking down -Z (+Y up, right-handed), so shapes "
-        "far from origin can render blank/off-screen.",
+        "If no Viewpoint is bound, the default camera sits at 0 0 10 looking down "
+        "-Z (+Y up, right-handed), so shapes far from origin can render blank/"
+        "off-screen -- add one that frames your geometry.",
     "pbr_lighting":
         "PhysicalMaterial is lit by all lights incl. the default headlight "
         "(NavigationInfo headlight=TRUE), so not black with no light node. Add "
@@ -80,10 +83,13 @@ def advise(tool: str, args: dict, state) -> list[tuple[str, str]]:
     def fire(key):
         out.append((key, REMINDERS[key]))
 
-    # radians/metres — a rotation-bearing field is being authored
-    if (tool == "create_node" and (set(fields) & ROTATION_FIELDS
-                                   or node_type == "OrientationInterpolator")) \
-            or (tool == "set_field" and args.get("field_name") in ROTATION_FIELDS):
+    # radians/metres — a rotation-bearing SFRotation field is being authored
+    # (skip nodes whose rotation is a scalar SFFloat, e.g. TextureTransform)
+    set_field_nt = getattr(state, "id_to_type", {}).get(args.get("node_id", ""), "")
+    if (tool == "create_node" and node_type not in SCALAR_ROTATION_TYPES
+            and (set(fields) & ROTATION_FIELDS or node_type == "OrientationInterpolator")) \
+            or (tool == "set_field" and args.get("field_name") in ROTATION_FIELDS
+                and set_field_nt not in SCALAR_ROTATION_TYPES):
         fire("units_angles")
 
     # handedness — first spatial framing node
