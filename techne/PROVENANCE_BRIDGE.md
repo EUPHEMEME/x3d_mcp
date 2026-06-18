@@ -1,7 +1,7 @@
 # The provenance bridge
 
 *Where the caves work and Technē meet. A working prototype (`techne/provenance.py`,
-11 tests) that enforces the documented/interpretive honesty discipline as
+13 tests) that enforces the documented/interpretive honesty discipline as
 deterministic checks — and the decision it puts in front of you.*
 
 ## What it is
