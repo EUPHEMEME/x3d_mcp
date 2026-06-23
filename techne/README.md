@@ -75,7 +75,7 @@ Configured via `TECHNE_PROFILE` (+ `TECHNE_SEMANTICS`, `TECHNE_PROVENANCE_LEVEL`
 - **`rules.py`** — the rule→fix catalog: `{rule: (severity, prescriptive_correction, source)}`,
   **27 rules**. The error message *is* the fix. **Mirrors the server's own
   `validate_semantic`** (containerField, duplicate-DEF, USE/ROUTE, interpolator arity,
-  shape/group/viewpoint): **11 enforced per-call**, 16 catalogued and deferred to the
+  shape/group/viewpoint): **11 enforced per-call**, 16 cataloged and deferred to the
   upstream whole-scene validator rather than re-implemented (so it can't drift).
 - **`craft.py`** — the deterministic engine. Determinable rules **repair** the args;
   unrepairable ones **block + return the correction**. Also `reassert_envlight_global`
@@ -92,7 +92,7 @@ Configured via `TECHNE_PROFILE` (+ `TECHNE_SEMANTICS`, `TECHNE_PROVENANCE_LEVEL`
   almost nothing themselves.
 
 **Coherence** (default-on, soft) — **`semantics.py`**: a few invariants the model keeps
-losing (right-handed/+Y-up/radians-and-metres, TimeSensor-via-ROUTEs, the HAnim identity
+losing (right-handed/+Y-up/radians-and-meters, TimeSensor-via-ROUTEs, the HAnim identity
 rest pose, PBR-and-the-headlight) surfaced as a SOFT reminder on the relevant call,
 de-duped with a re-arm cooldown. Never blocks. The text is spec-grounded and adversarially
 verified.
@@ -162,7 +162,7 @@ the fact, *before* the call lands.
 
 Kept narrow on purpose (after an adversarial review): the occupation gate is a
 **liveness / blank screen**, not a correctness proof — a non-blank scene can still be
-mis-scaled or wrong-coloured; the catalogue is **seeded**, not a community flywheel;
+mis-scaled or wrong-colored; the catalog is **seeded**, not a community flywheel;
 "format-agnostic" is a **hypothesis** (only X3D is built); and the eval is a measurement
 *spine* (small N), not a benchmark suite. The cross-call order-of-operations automaton is
 **deliberately not built** — instrument first, let usage vote.

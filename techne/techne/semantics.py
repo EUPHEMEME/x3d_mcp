@@ -1,6 +1,6 @@
 """Standing-semantics injector — the coherence layer (GOALS.md §2).
 
-LLMs drift over a session: they forget X3D is right-handed and metres-and-radians,
+LLMs drift over a session: they forget X3D is right-handed and meters-and-radians,
 that a TimeSensor animates only through ROUTEs, that an HAnimJoint's rest pose is
 identity. These invariants are few, well-documented, and exactly the ones a prompt
 read once at the top of a session stops holding. So Technē surfaces them
@@ -33,6 +33,8 @@ GEOMETRY_TYPES = {"Shape", "Box", "Sphere", "Cone", "Cylinder", "IndexedFaceSet"
                   "IndexedTriangleSet", "TriangleSet", "TriangleStripSet",
                   "Extrusion", "ElevationGrid", "Text", "PointSet", "LineSet",
                   "IndexedLineSet", "GeoElevationGrid", "NurbsPatchSurface"}
+INDEXED_GEOMETRY_TYPES = {"IndexedFaceSet", "IndexedTriangleSet", "IndexedLineSet",
+                          "IndexedTriangleFanSet", "IndexedTriangleStripSet"}
 ROUTE_TOOLS = {"add_route", "add_x3d_route"}
 TRANSFORM_TYPES = {"Transform", "HAnimHumanoid", "HAnimJoint", "HAnimSite"}
 
@@ -49,7 +51,7 @@ REMINDERS: dict[str, str] = {
     "handedness":
         "X3D is right-handed: +X right, +Y up, +Z toward viewer; default view "
         "looks down -Z at origin. Default Viewpoint position 0 0 10, orientation "
-        "0 0 1 0. Angles in radians, lengths in metres.",
+        "0 0 1 0. Angles in radians, lengths in meters.",
     "timesensor_routes":
         "Wire animation via ROUTEs: TimeSensor.fraction_changed->Interpolator."
         "set_fraction, then value_changed->target.field. Match interpolator type "
@@ -63,9 +65,14 @@ REMINDERS: dict[str, str] = {
         "-Z (+Y up, right-handed), so shapes far from origin can render blank/"
         "off-screen -- add one that frames your geometry.",
     "pbr_lighting":
-        "PhysicalMaterial is lit by all lights incl. the default headlight "
-        "(NavigationInfo headlight=TRUE), so not black with no light node. Add "
-        "EnvironmentLight (IBL) for good PBR; metallic needs IBL.",
+        "Default headlight (NavigationInfo headlight=TRUE) lights PhysicalMaterial "
+        "-- not black without a light node. Add a DirectionalLight for richer "
+        "shading. EnvironmentLight/IBL suits metallic but is experimental in X3D "
+        "4.1 -- use deliberately.",
+    "indexedfaceset_convention":
+        "IndexedFaceSet coordIndex uses -1 as face separator: '0 1 2 -1 3 4 5 -1'. "
+        "Needs a Coordinate child (containerField='coord') whose point count "
+        "exceeds the highest coordIndex. Faces with <3 unique vertices degenerate.",
 }
 
 
@@ -83,7 +90,7 @@ def advise(tool: str, args: dict, state) -> list[tuple[str, str]]:
     def fire(key):
         out.append((key, REMINDERS[key]))
 
-    # radians/metres — a rotation-bearing SFRotation field is being authored
+    # radians/meters — a rotation-bearing SFRotation field is being authored
     # (skip nodes whose rotation is a scalar SFFloat, e.g. TextureTransform)
     set_field_nt = getattr(state, "id_to_type", {}).get(args.get("node_id", ""), "")
     if (tool == "create_node" and node_type not in SCALAR_ROTATION_TYPES
@@ -115,5 +122,9 @@ def advise(tool: str, args: dict, state) -> list[tuple[str, str]]:
     if tool == "create_node" and node_type == "PhysicalMaterial" \
             and not _has_type(state, LIGHT_TYPES):
         fire("pbr_lighting")
+
+    # indexed geometry conventions
+    if tool == "create_node" and node_type in INDEXED_GEOMETRY_TYPES:
+        fire("indexedfaceset_convention")
 
     return out

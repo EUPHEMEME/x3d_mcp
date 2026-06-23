@@ -12,7 +12,7 @@ source before building; the study cited every one.
    server's validate_semantic catalog"). Enforced per-call: **duplicate-def**
    (def_node), **ROUTE-needs-DEF** (new add_route adapter + `SceneState.id_to_def`),
    and the **richer interpolator arity** (`INTERP_ARITY`/`INTERP_BASE`, Spline/Geo/
-   Squad/2D/variable). Catalogued + scope-mapped (`PER_CALL`/`WHOLE_SCENE`): the
+   Squad/2D/variable). Cataloged + scope-mapped (`PER_CALL`/`WHOLE_SCENE`): the
    full ROUTE family, shape/group/viewpoint, use-undefined/before, containerfield
    IDs — deferred to the upstream whole-scene `validate_semantic` Technē fronts,
    rather than re-implementing (and drifting from) the 596-line engine. Two new

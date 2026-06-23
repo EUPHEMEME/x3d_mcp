@@ -75,7 +75,7 @@ from the server's `validate_semantic` — both loud-on-raw, like `use-before-def
 
 - **The render column is liveness, not correctness.** It reuses Technē's own blank
   detector (`gate.inspect_render`, stddev ≥ 3.0 = non-blank). A non-blank scene can
-  still be mis-scaled or wrong-coloured. It is off by default here because the
+  still be mis-scaled or wrong-colored. It is off by default here because the
   current tasks build node fragments, not full framed scenes; the **live** mode,
   where the model builds complete scenes, is where the render column earns its keep.
 - **`use-before-def` is a *loud* failure on this server, not a silent one** — the
@@ -84,7 +84,7 @@ from the server's `validate_semantic` — both loud-on-raw, like `use-before-def
   silent modes are `textured-material` and `interpolator-parity`.
 - **Small N.** Four tasks, three documented mistakes. This is a measurement *spine*,
   not a benchmark suite — the point is that the columns exist and move. Grow the task
-  set as the rule catalogue (`rules.py`) grows; each new rule should arrive with a
+  set as the rule catalog (`rules.py`) grows; each new rule should arrive with a
   task that demonstrates it.
 
 ## Extending
@@ -93,4 +93,4 @@ Add a `ScriptedTask` to `tasks.py` (a `Step` with `mistake=...`, a `block_token`
 correction must name, and a `fix`/`fix_steps` the agent applies on a block) or a
 `LivePrompt` for the live mode. The exit code is non-zero if Technē ever leaks a
 silent mistake or breaks a clean task — wire `run_scripted.py` into CI to keep the
-catalogue honest.
+catalog honest.

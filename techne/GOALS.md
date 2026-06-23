@@ -11,7 +11,7 @@ invention.
 
 The honest scope (set by an adversarial review, June 2026): Technē is a
 deterministic repair + craft-validation + render-gate layer for one format
-(X3D) with a documented bug catalogue. It is a candidate best-practice and
+(X3D) with a documented bug catalog. It is a candidate best-practice and
 tooling contribution to the WG's `x3d_mcp`, not "infrastructure the field already
 has." Claims kept narrow on purpose.
 
@@ -21,7 +21,7 @@ has." Claims kept narrow on purpose.
 
 ### 1. Output quality — does the scene render *right*, not just validate?
 The floor: output that passes the XSD yet renders wrong or blank. Mechanisms:
-- **Craft catalogue** (`rules.py`) — documented silent-failure modes turned into
+- **Craft catalog** (`rules.py`) — documented silent-failure modes turned into
   deterministic, *prescriptive* corrections ("use `containerField='baseTexture'`",
   not "invalid"). Built: containerField slots, `EnvironmentLight.global`,
   interpolator `key`/`keyValue` parity, USE-before-DEF. *Grow this as new modes
@@ -29,7 +29,7 @@ The floor: output that passes the XSD yet renders wrong or blank. Mechanisms:
 - **The gate, named honestly.** It is a **liveness / blank screen** — it catches
   the documented *blank-producing* bugs (a dropped `containerField` renders
   nothing) and surfaces the image for a look. It is **not** a correctness proof;
-  a non-blank scene can still be mis-scaled, off-camera, or wrong-coloured.
+  a non-blank scene can still be mis-scaled, off-camera, or wrong-colored.
   Correctness stays the human's job. (Drop the phrase "the renderer is a
   correctness property.")
 - **Look up, don't recall** — lean on `describe_node`/`autofix` so the model
@@ -39,7 +39,7 @@ The floor: output that passes the XSD yet renders wrong or blank. Mechanisms:
 LLMs *drift*: they forget the handedness of the axes, the unit, the timer
 conventions, what they already DEF'd. Coherence mechanisms:
 - **Standing semantics, injected not hoped** (built — `semantics.py`). The few
-  invariants the model keeps losing — right-handed / +Y-up / radians-and-metres,
+  invariants the model keeps losing — right-handed / +Y-up / radians-and-meters,
   `TimeSensor`-animates-only-through-ROUTEs, the `HAnimJoint` identity rest pose,
   PBR-and-the-default-headlight — ride back as a SOFT reminder on the relevant
   tool result, once per session, capped, advisory-only (never blocks). The text

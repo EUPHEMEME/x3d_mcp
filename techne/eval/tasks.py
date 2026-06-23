@@ -176,7 +176,7 @@ LIVE = [
     LivePrompt(
         "textured-pbr-floor",
         "Build an X3D 4.0 scene with a flat floor whose PhysicalMaterial carries "
-        "an image texture as its base colour. Make sure the texture actually "
+        "an image texture as its base color. Make sure the texture actually "
         "shows. Validate semantically and render before you finish.",
         expect_xml=["PhysicalMaterial", "ImageTexture", "baseTexture"],
     ),

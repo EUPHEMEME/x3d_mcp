@@ -57,6 +57,14 @@ def test_pbr_lighting_only_when_unlit():
     assert "pbr_lighting" not in keys(semantics.advise("create_node", {"node_type": "PhysicalMaterial"}, st))
 
 
+def test_indexedfaceset_convention_fires():
+    st = SceneState()
+    assert "indexedfaceset_convention" in keys(
+        semantics.advise("create_node", {"node_type": "IndexedFaceSet"}, st))
+    assert "indexedfaceset_convention" not in keys(
+        semantics.advise("create_node", {"node_type": "Box"}, st))
+
+
 def test_no_fire_on_irrelevant_call():
     st = SceneState()
     assert semantics.advise("create_node", {"node_type": "Material"}, st) == []
@@ -114,7 +122,7 @@ def test_route_tool_still_gets_reminder_via_decide():
 
 
 def test_rewrote_flag_distinguishes_repair_from_advisory():
-    # _args_changed ignores additive normalisation noise...
+    # _args_changed ignores additive normalization noise...
     assert _args_changed({"node_type": "X"}, {"node_type": "X", "fields": {}}) is False
     assert _args_changed({"p": "a", "container_field": ""},
                          {"p": "a", "container_field": ""}) is False
