@@ -2,7 +2,7 @@
 
 A model connects to Technē; Technē fronts the real x3d-mcp. Per `tools/call`:
 
-  1. SAP repair  — coerce/normalise the model's sloppy args into conforming shape.
+  1. SAP repair  — coerce/normalize the model's sloppy args into conforming shape.
   2. Route       — if the tool has a craft adapter, apply it; else pass through
                    (Technē is opt-in per tool: absence of a rule == no known
                    silent-failure here).
@@ -82,8 +82,8 @@ def _is_error(text: str) -> bool:
 
 def _args_changed(emitted: dict, forwarded: dict) -> bool:
     """Did Technē actually rewrite a value the model cares about? Ignores additive
-    normalisation noise (an empty fields={} or container_field='' the adapters
-    insert) so an advisory-only forward is not mislabelled as a repair."""
+    normalization noise (an empty fields={} or container_field='' the adapters
+    insert) so an advisory-only forward is not mislabeled as a repair."""
     def norm(a: dict) -> dict:
         a = {k: v for k, v in (a or {}).items()}
         if a.get("fields") == {}:
@@ -108,7 +108,7 @@ class TechneProxy:
         self.state = SceneState()
         self.config = config or Config.from_env()
         # CORE craft (the adapters) is always on; COHERENCE follows the profile
-        # (legacy TECHNE_SEMANTICS still honoured) and the explicit arg can force off.
+        # (legacy TECHNE_SEMANTICS still honored) and the explicit arg can force off.
         self.semantics_on = semantics_on and self.config.coherence
         self._call_index = 0
         self._ledger: dict | None = None
@@ -162,6 +162,9 @@ class TechneProxy:
                 None, {"fields": fields}))
         if node_type in _TEXTURE_NODES and fields.get("url"):
             subs.append(craft.advise_texture_url(_first(fields["url"]), {}))
+        if node_type in craft.INDEXED_TYPES and "coordIndex" in fields:
+            subs.append(craft.check_coordindex(
+                node_type, fields["coordIndex"], {"fields": fields}))
         if node_type == "HAnimHumanoid" and "version" not in fields:
             res.notes.append(craft.rules.correction("hanim_version_explicit"))
             res.applied.append("hanim_version_explicit")
@@ -216,6 +219,8 @@ class TechneProxy:
                 return craft.check_interpolator(
                     node_type, _as_list(merged["key"]),
                     _as_list(merged["keyValue"]), None, args)
+        if node_type in craft.INDEXED_TYPES and fname == "coordIndex":
+            return craft.check_coordindex(node_type, args.get("value"), args)
         return craft.CraftResult(repaired=dict(args))
 
     _ADAPTERS: dict[str, str] = {

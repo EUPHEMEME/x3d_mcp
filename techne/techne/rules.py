@@ -187,6 +187,36 @@ CATALOG = {
         "src/validation/semantic.py (route-missing-from/to-node); scene.add_route",
     ),
 
+    # --- geometry health (inspired by Blender craft catalog) -------------------
+
+    "empty_coordindex": (
+        HARD,
+        "{node_type} has an empty coordIndex — renders invisible. Provide "
+        "coordinate indices to define faces (e.g. coordIndex='0 1 2 -1 2 3 0 -1').",
+        "blender_craft analogy (empty_mesh)",
+    ),
+    "coordindex_no_separator": (
+        SOFT,
+        "{node_type} coordIndex has {n_indices} indices but no -1 face separator — "
+        "this defines a single {n_indices}-vertex polygon. If multiple faces were "
+        "intended, separate them with -1 (e.g. '0 1 2 -1 3 4 5 -1').",
+        "blender_craft analogy (ngon_faces)",
+    ),
+    "coordindex_out_of_range": (
+        HARD,
+        "{node_type} coordIndex references vertex {max_idx} but Coordinate.point "
+        "has only {n_points} entries (0..{max_valid}). Indices beyond the point "
+        "array cause undefined rendering.",
+        "blender_craft analogy (non_manifold / missing data)",
+    ),
+    "degenerate_face": (
+        SOFT,
+        "{node_type} coordIndex contains {n_degenerate} degenerate face(s) with "
+        "fewer than 3 unique vertices — zero-area faces cause shading artifacts. "
+        "Remove or fix the degenerate index groups.",
+        "blender_craft analogy (zero_area_faces)",
+    ),
+
     # whole-scene catalog (deferred to upstream validate_semantic; SCOPE marks these)
     "use_undefined_def": (
         HARD,
@@ -287,6 +317,8 @@ PER_CALL = {
     "container_field_invalid_slot", "envlight_global_set", "interp_lengths_match",
     "use_after_def", "hanim_version_explicit", "texture_url_image_ext",
     "duplicate_def", "route_no_def",
+    "empty_coordindex", "coordindex_no_separator", "coordindex_out_of_range",
+    "degenerate_face",
 }
 WHOLE_SCENE = {
     "use_undefined_def", "use_before_def", "unused_def",

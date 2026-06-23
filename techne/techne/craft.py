@@ -212,6 +212,77 @@ def check_use_after_def(use_name: str, defined_names: set, args: dict) -> CraftR
     return r
 
 
+# --- mode 5: geometry health (IndexedFaceSet / IndexedLineSet) -------------
+
+INDEXED_FACE_TYPES = {"IndexedFaceSet", "IndexedTriangleSet"}
+INDEXED_TYPES = INDEXED_FACE_TYPES | {"IndexedLineSet", "IndexedTriangleStripSet",
+                                       "IndexedTriangleFanSet"}
+
+
+def _parse_coordindex(raw) -> list[int]:
+    """Coerce a coordIndex value (list, string, or nested) to a flat int list."""
+    if isinstance(raw, str):
+        return [int(x) for x in raw.replace(",", " ").split() if x.lstrip("-").isdigit()]
+    if isinstance(raw, (list, tuple)):
+        return [int(x) for x in raw]
+    return []
+
+
+def check_coordindex(node_type: str, coordindex_raw, args: dict) -> CraftResult:
+    r = CraftResult(repaired=dict(args))
+    if node_type not in INDEXED_TYPES:
+        return r
+    indices = _parse_coordindex(coordindex_raw)
+    if not indices:
+        r.corrections.append(rules.correction("empty_coordindex",
+                                               node_type=node_type))
+        r.applied.append("empty_coordindex")
+        return r
+    if node_type in INDEXED_FACE_TYPES and -1 not in indices and len(indices) > 4:
+        r.notes.append(rules.correction("coordindex_no_separator",
+                                         node_type=node_type,
+                                         n_indices=len(indices)))
+        r.applied.append("coordindex_no_separator")
+    positives = [i for i in indices if i >= 0]
+    if positives:
+        faces = []
+        current = []
+        for i in indices:
+            if i == -1:
+                if current:
+                    faces.append(current)
+                current = []
+            else:
+                current.append(i)
+        if current:
+            faces.append(current)
+        n_degenerate = sum(1 for f in faces if len(set(f)) < 3)
+        if n_degenerate and node_type in INDEXED_FACE_TYPES:
+            r.notes.append(rules.correction("degenerate_face",
+                                             node_type=node_type,
+                                             n_degenerate=n_degenerate))
+            r.applied.append("degenerate_face")
+    return r
+
+
+def check_coordindex_bounds(node_type: str, coordindex_raw,
+                            n_points: int, args: dict) -> CraftResult:
+    r = CraftResult(repaired=dict(args))
+    if node_type not in INDEXED_TYPES or n_points <= 0:
+        return r
+    indices = _parse_coordindex(coordindex_raw)
+    positives = [i for i in indices if i >= 0]
+    if positives:
+        max_idx = max(positives)
+        if max_idx >= n_points:
+            r.corrections.append(rules.correction(
+                "coordindex_out_of_range", node_type=node_type,
+                max_idx=max_idx, n_points=n_points,
+                max_valid=n_points - 1))
+            r.applied.append("coordindex_out_of_range")
+    return r
+
+
 # --- soft advisories --------------------------------------------------------
 
 _IMG_EXT = (".png", ".jpg", ".jpeg", ".gif", ".webp")

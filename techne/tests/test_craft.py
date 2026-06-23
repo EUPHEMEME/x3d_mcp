@@ -6,8 +6,9 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from techne import (check_container_field, check_envlight_global,        # noqa: E402
-                    check_interpolator, check_use_after_def, advise_texture_url,
-                    MISSING)
+                    check_interpolator, check_use_after_def,
+                    check_coordindex, check_coordindex_bounds,
+                    advise_texture_url, MISSING)
 
 
 # --- Bug 1: containerField --------------------------------------------------
@@ -108,3 +109,71 @@ def test_texture_url_non_image_warns_but_does_not_block():
     assert r.notes
     ok = advise_texture_url("limestone.png", {})
     assert ok.notes == []
+
+
+# --- geometry health: coordIndex checks --------------------------------------
+
+def test_empty_coordindex_blocks():
+    r = check_coordindex("IndexedFaceSet", [], {})
+    assert r.blocked
+    assert "empty_coordindex" in r.applied
+
+
+def test_empty_coordindex_string_blocks():
+    r = check_coordindex("IndexedFaceSet", "", {})
+    assert r.blocked
+
+
+def test_valid_coordindex_passes():
+    r = check_coordindex("IndexedFaceSet", [0, 1, 2, -1, 2, 3, 0, -1], {})
+    assert not r.blocked
+    assert r.applied == []
+
+
+def test_coordindex_no_separator_warns():
+    r = check_coordindex("IndexedFaceSet", [0, 1, 2, 3, 4, 5, 6, 7], {})
+    assert not r.blocked
+    assert "coordindex_no_separator" in r.applied
+    assert "8" in r.notes[0]
+
+
+def test_coordindex_no_separator_small_polygon_ok():
+    """A 3- or 4-vertex face without -1 is normal (single quad/triangle)."""
+    r = check_coordindex("IndexedFaceSet", [0, 1, 2], {})
+    assert not r.blocked
+    assert "coordindex_no_separator" not in r.applied
+
+
+def test_coordindex_degenerate_face_warns():
+    r = check_coordindex("IndexedFaceSet", [0, 0, 1, -1, 2, 3, 4, -1], {})
+    assert not r.blocked
+    assert "degenerate_face" in r.applied
+
+
+def test_coordindex_non_indexed_type_ignored():
+    r = check_coordindex("Box", [0, 1, 2, -1], {})
+    assert not r.blocked
+    assert r.applied == []
+
+
+def test_coordindex_bounds_in_range_passes():
+    r = check_coordindex_bounds("IndexedFaceSet", [0, 1, 2, -1], 3, {})
+    assert not r.blocked
+
+
+def test_coordindex_bounds_out_of_range_blocks():
+    r = check_coordindex_bounds("IndexedFaceSet", [0, 1, 5, -1], 3, {})
+    assert r.blocked
+    assert "coordindex_out_of_range" in r.applied
+    assert "5" in r.corrections[0] and "3" in r.corrections[0]
+
+
+def test_coordindex_string_parsing():
+    r = check_coordindex("IndexedFaceSet", "0 1 2 -1 3 4 5 -1", {})
+    assert not r.blocked
+    assert r.applied == []
+
+
+def test_indexedlineset_empty_blocks():
+    r = check_coordindex("IndexedLineSet", [], {})
+    assert r.blocked

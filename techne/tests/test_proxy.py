@@ -185,3 +185,45 @@ def test_sap_repair_strips_markdown_and_preamble():
 def test_sap_repair_never_raises():
     assert repair.sap_repair("not json at all") == {}
     assert repair.sap_repair(None) == {}
+
+
+# --- geometry health: coordIndex via proxy ------------------------------------
+
+def test_create_ifs_empty_coordindex_blocks():
+    p = TechneProxy()
+    d = p.decide("create_node", {"node_type": "IndexedFaceSet",
+                                  "fields": {"coordIndex": []}})
+    assert d.blocked
+    assert "empty_coordindex" in d.applied
+
+
+def test_create_ifs_valid_coordindex_forwards():
+    p = TechneProxy()
+    d = p.decide("create_node", {"node_type": "IndexedFaceSet",
+                                  "fields": {"coordIndex": [0, 1, 2, -1]}})
+    assert not d.blocked
+
+
+def test_set_field_coordindex_empty_blocks():
+    p = TechneProxy()
+    _, nid = _create(p, "IndexedFaceSet", nid="ifs_1")
+    d = p.decide("set_field", {"node_id": nid, "field_name": "coordIndex",
+                                "value": []})
+    assert d.blocked
+    assert "empty_coordindex" in d.applied
+
+
+def test_set_field_coordindex_valid_forwards():
+    p = TechneProxy()
+    _, nid = _create(p, "IndexedFaceSet", nid="ifs_1")
+    d = p.decide("set_field", {"node_id": nid, "field_name": "coordIndex",
+                                "value": [0, 1, 2, -1, 2, 3, 0, -1]})
+    assert not d.blocked
+
+
+def test_create_ifs_no_separator_warns():
+    p = TechneProxy()
+    d = p.decide("create_node", {"node_type": "IndexedFaceSet",
+                                  "fields": {"coordIndex": list(range(8))}})
+    assert not d.blocked
+    assert "coordindex_no_separator" in d.applied
