@@ -48,9 +48,12 @@ conventions, what they already DEF'd. Coherence mechanisms:
   `TECHNE_SEMANTICS=0` for A/B isolation in the eval.
 - **Cross-call consistency** — the minimal `SceneState` Technē already tracks
   (id→type, DEFs) is the seed. Enforce the few hard cross-call edges:
-  USE references a real prior DEF; no orphaned nodes; consistent units. This is
-  the *coherence* half of the deferred "Point 1" — built as guarded edges, not a
-  full order-of-operations straitjacket.
+  USE references a real prior DEF; no orphaned nodes; consistent units.
+  **Instrumentation is now built (Point 1):** `trace.py` records verb order per
+  session to JSONL; the analyzer discovers ordering constraints from collected
+  traces. Next step: run enough sessions to let the data vote on whether a
+  call-order automaton is warranted — built as guarded edges informed by
+  evidence, not a full order-of-operations straitjacket.
 - **Provenance coherence** — the documented-vs-interpretive tag keeps the scene's
   *claims* consistent and honest; a candidate input to the WG's metadata effort.
 

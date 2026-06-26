@@ -15,9 +15,11 @@ Render scoring is optional (`render=True`) and reuses Technē's own blank detect
 (`gate.inspect_render`) — honest about what it measures: non-blank, not correct.
 """
 import asyncio
+import glob
 import os
 import re
 import sys
+import tempfile
 from dataclasses import dataclass, field, asdict
 
 from mcp import ClientSession, StdioServerParameters
@@ -34,10 +36,18 @@ STACKS = {
 }
 
 
-def _env_for(stack: str) -> dict:
+def _want_trace() -> bool:
+    """True when the harness should enable Point-1 instrumentation."""
+    return os.environ.get("TECHNE_TRACE", "0").strip().lower() in ("1", "true", "yes", "on")
+
+
+def _env_for(stack: str, trace_dir: str = "") -> dict:
     env = dict(os.environ)
     if stack == "techne":
         env["PYTHONPATH"] = f"{REPO}/techne" + os.pathsep + env.get("PYTHONPATH", "")
+        if trace_dir:
+            env["TECHNE_TRACE"] = "1"
+            env["TECHNE_TRACE_DIR"] = trace_dir
     return env
 
 
@@ -95,6 +105,7 @@ class Metrics:
     final_render: str = "skip"    # ok | blank | error | skip
     render_stddev: float = 0.0
     completed: bool = True        # the task built its intended end-state
+    trace_path: str = ""          # JSONL trace file (when TECHNE_TRACE=1)
     errors: list = field(default_factory=list)
 
 
@@ -122,10 +133,18 @@ async def _do_step(s, step, caps, m: Metrics):
     return res, txt
 
 
-async def run_scripted_task(stack: str, task, render=False) -> Metrics:
+async def run_scripted_task(stack: str, task, render=False, trace=False) -> Metrics:
     m = Metrics(task=task.name, stack=stack)
+    # When tracing is requested and running the techne stack, give each task its
+    # own trace dir so we can reliably locate the JSONL file afterward.
+    trace_active = trace and stack == "techne"
+    trace_dir = ""
+    if trace_active:
+        trace_dir = os.path.join(
+            tempfile.gettempdir(), "techne_eval_traces", f"{task.name}_{stack}")
+        os.makedirs(trace_dir, exist_ok=True)
     params = StdioServerParameters(command=STACKS[stack][0], args=STACKS[stack][1:],
-                                   env=_env_for(stack))
+                                   env=_env_for(stack, trace_dir=trace_dir))
     try:
         async with stdio_client(params) as (r, w):
             async with ClientSession(r, w) as s:
@@ -175,6 +194,12 @@ async def run_scripted_task(stack: str, task, render=False) -> Metrics:
 
                 if render:
                     await _score_render(s, m)
+        # The subprocess has exited and flushed its trace (proxy.close() in
+        # techne.server's finally block).  Find the JSONL file it wrote.
+        if trace_active and trace_dir:
+            traces = sorted(glob.glob(os.path.join(trace_dir, "trace_*.jsonl")))
+            if traces:
+                m.trace_path = traces[-1]       # latest (only one per task dir)
     except Exception as ex:
         m.completed = False
         m.errors.append(f"{type(ex).__name__}: {ex}")

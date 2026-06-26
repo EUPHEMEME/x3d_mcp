@@ -29,6 +29,7 @@ from typing import Any
 from . import craft, repair, semantics
 from .config import Config
 from .craft import MISSING
+from .trace import SessionTrace
 
 _TEXTURE_NODES = craft.rules.TEXTURE_NODES
 
@@ -112,6 +113,9 @@ class TechneProxy:
         self.semantics_on = semantics_on and self.config.coherence
         self._call_index = 0
         self._ledger: dict | None = None
+        self.trace: SessionTrace | None = (
+            SessionTrace(self.config.trace_dir or None)
+            if self.config.instrumentation else None)
 
     def ledger(self) -> dict:
         """The asset ledger for the provenance gate (lazy, cached). Empty unless a
@@ -242,15 +246,19 @@ class TechneProxy:
         if adapter is None:                            # opt-in: unknown tool passes
             d = Decision("forward", tool, args, rewrote=_args_changed(emitted, args))
             d.reminders = self._semantics_for(tool, args)   # still nudge (e.g. add_route)
+            self._trace_decision(d, args)
             return d
         res: craft.CraftResult = getattr(self, adapter)(args)
         if res.corrections:                            # HARD violation -> block
-            return Decision("block", tool, args, corrections=res.corrections,
-                            notes=res.notes, applied=res.applied)
+            d = Decision("block", tool, args, corrections=res.corrections,
+                         notes=res.notes, applied=res.applied)
+            self._trace_decision(d, args)
+            return d
         d = Decision("forward", tool, res.repaired, notes=res.notes,
                      applied=res.applied, rewrote=_args_changed(emitted, res.repaired))
         d.pending = self._pending_for(tool, res.repaired)
         d.reminders = self._semantics_for(tool, res.repaired)   # coherence (soft)
+        self._trace_decision(d, res.repaired)
         return d
 
     @staticmethod
@@ -274,11 +282,13 @@ class TechneProxy:
         if not p or _is_error(result_text):
             return
         st = self.state
+        mutation = None
         if p["kind"] == "create":
             m = _CREATED_RE.search(result_text)
             if m:
                 st.id_to_type[m.group(1)] = p["node_type"]
                 st.node_fields[m.group(1)] = dict(p["fields"])
+                mutation = {"create": p["node_type"], "id": m.group(1)}
         elif p["kind"] == "def":
             m = _ASSIGNED_RE.search(result_text)
             if m:
@@ -291,14 +301,36 @@ class TechneProxy:
                 st.id_to_def[nid] = name
                 if nid in st.id_to_type:
                     st.def_name_to_type[name] = st.id_to_type[nid]
+                mutation = {"def": name, "node_id": nid}
         elif p["kind"] == "use":
             m = _CREATED_RE.search(result_text)
             if m:
                 t = st.def_name_to_type.get(p["def_name"])
                 if t:
                     st.id_to_type[m.group(1)] = t
+                mutation = {"use": p["def_name"], "id": m.group(1)}
         elif p["kind"] == "set_field":
             st.node_fields.setdefault(p["node_id"], {})[p["field"]] = p["value"]
+            mutation = {"set_field": p["field"], "node_id": p["node_id"]}
+        if mutation and self.trace:
+            self.trace.record_mutation(self._call_index, mutation)
+
+    def _trace_decision(self, d: Decision, args: dict) -> None:
+        if self.trace:
+            self.trace.record_decision(
+                call_index=self._call_index, tool=d.tool, args=args,
+                action=d.action, applied=d.applied, rewrote=d.rewrote,
+                corrections=d.corrections, notes=d.notes,
+                reminders=d.reminders)
+
+    def record_render(self, stddev: float, non_blank: bool) -> None:
+        if self.trace:
+            self.trace.record_render(self._call_index, stddev, non_blank)
+
+    def close(self):
+        if self.trace:
+            return self.trace.close()
+        return None
 
     def correction_message(self, decision: Decision) -> str:
         """The text returned to the model when a call is blocked — the fix itself."""

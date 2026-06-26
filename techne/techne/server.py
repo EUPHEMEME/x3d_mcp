@@ -52,8 +52,8 @@ def _text_of(result: Any) -> str:
     return "\n".join(parts)
 
 
-def _blank_warning(result: Any) -> str | None:
-    """If a render result carries a blank image, return a Technē warning, else None."""
+def _blank_warning(result: Any) -> tuple[str | None, "gate.RenderReceipt | None"]:
+    """If a render result carries a blank image, return a Technē warning + receipt."""
     for block in getattr(result, "content", None) or []:
         data = getattr(block, "data", None)
         if data and getattr(block, "type", "") == "image":
@@ -65,8 +65,10 @@ def _blank_warning(result: Any) -> str | None:
                 return ("Technē occupation gate: the render looks BLANK "
                         "(stddev %.1f) — no geometry visible. Check it is on "
                         "camera, lit, and that HAnim/PBR containerFields are "
-                        "correct (X_ITE, not X3DOM, for HAnim)." % receipt.stddev)
-    return None
+                        "correct (X_ITE, not X3DOM, for HAnim)." % receipt.stddev,
+                        receipt)
+            return None, receipt
+    return None, None
 
 
 # content-based edit tools operate on a whole serialized X3D document and validate
@@ -208,9 +210,11 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
         content.append(types.TextContent(
             type="text", text="Technē reminder: " + " ".join(decision.reminders)))
     if name in _RENDER_VERBS:
-        warn = _blank_warning(result)
+        warn, receipt = _blank_warning(result)
         if warn:
             content.append(types.TextContent(type="text", text=warn))
+        if receipt:
+            proxy.record_render(receipt.stddev, receipt.non_blank)
     if name == "render_image" and (arguments or {}).get("content"):
         pnote = _provenance_note(proxy, arguments["content"])   # opt-in policy
         if pnote:
@@ -270,8 +274,11 @@ async def run(upstream_cmd: list[str]) -> None:
             async def call_tool(name: str, arguments: dict | None):
                 return await handle_call_tool(proxy, upstream, name, arguments)
 
-            async with stdio_server() as (r, w):
-                await server.run(r, w, server.create_initialization_options())
+            try:
+                async with stdio_server() as (r, w):
+                    await server.run(r, w, server.create_initialization_options())
+            finally:
+                proxy.close()
 
 
 def _parse_upstream(argv: list[str]) -> list[str]:

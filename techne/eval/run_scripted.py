@@ -11,7 +11,7 @@ import asyncio
 import json
 import sys
 
-from eval.harness import run_scripted_task, metrics_to_dict
+from eval.harness import run_scripted_task, metrics_to_dict, _want_trace
 from eval.tasks import SCRIPTED
 
 
@@ -52,6 +52,11 @@ def summarize(rows):
     print(f"  extra round-trips to a CORRECT scene     : +{extra} over {len(SCRIPTED)} tasks")
     print(f"    (incl. authoring the missing DEF; raw used fewer calls but shipped")
     print(f"     {raw_silent} silently-wrong + {raw_loud} loudly-rejected/broken scenes)")
+    traces = [(m.task, m.trace_path) for m in rows if m.trace_path]
+    if traces:
+        print("  traces:")
+        for t, p in traces:
+            print(f"    {t}: {p}")
     errs = [(m.task, m.stack, e) for m in rows for e in m.errors]
     if errs:
         print("  notes / errors:")
@@ -59,11 +64,11 @@ def summarize(rows):
             print(f"    [{st}/{t}] {e}")
 
 
-async def main(render: bool, json_out: str | None):
+async def main(render: bool, json_out: str | None, trace: bool = False):
     rows = []
     for task in SCRIPTED:
         for stack in ("raw", "techne"):
-            rows.append(await run_scripted_task(stack, task, render=render))
+            rows.append(await run_scripted_task(stack, task, render=render, trace=trace))
     rows.sort(key=lambda m: (m.task, m.stack))
     print_table(rows)
     summarize(rows)
@@ -78,6 +83,9 @@ async def main(render: bool, json_out: str | None):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--render", action="store_true", help="also score a final render (needs Playwright)")
+    ap.add_argument("--trace", action="store_true",
+                    help="enable Point-1 instrumentation (also via TECHNE_TRACE=1)")
     ap.add_argument("--json", dest="json_out", default=None)
     args = ap.parse_args()
-    sys.exit(asyncio.run(main(args.render, args.json_out)))
+    trace = args.trace or _want_trace()
+    sys.exit(asyncio.run(main(args.render, args.json_out, trace=trace)))

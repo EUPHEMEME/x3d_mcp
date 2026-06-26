@@ -34,6 +34,8 @@ class Config:
     provenance_level: int = 1          # 1 disclosure / 2 sourcing / 3 content
     ledger_path: str = ""              # asset ledger (archive.json shape), L2+
     strict: bool = False               # policy violations block (else warn)
+    instrumentation: bool = False      # Point-1 verb-order trace logging
+    trace_dir: str = ""                # trace output dir (default: ./techne_traces)
 
     @classmethod
     def from_env(cls, env: dict | None = None) -> "Config":
@@ -43,9 +45,11 @@ class Config:
         if groups:                                   # explicit profile wins
             coherence = "coherence" in groups
             provenance = "provenance" in groups
+            instrumentation = "instrumentation" in groups
         else:                                        # legacy / default
             coherence = env.get("TECHNE_SEMANTICS", "1") != "0"
             provenance = False
+            instrumentation = _flag(env.get("TECHNE_TRACE"))
         try:
             level = int(env.get("TECHNE_PROVENANCE_LEVEL", "1") or "1")
         except ValueError:
@@ -56,4 +60,6 @@ class Config:
             provenance_level=max(1, min(3, level)),
             ledger_path=env.get("TECHNE_ASSET_LEDGER", "") or "",
             strict=_flag(env.get("TECHNE_STRICT")),
+            instrumentation=instrumentation,
+            trace_dir=env.get("TECHNE_TRACE_DIR", "") or "",
         )
