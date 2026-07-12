@@ -1121,6 +1121,14 @@
    "description": "single bone at base of spine"
   },
   {
+   "name": "ethmoid",
+   "display": "Ethmoid",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "paired complex bone/cartilage structure in skull that separates nasal cavity from brain, located at roof of nose, between the two orbits, LOA-5 part of skull LOA-1"
+  },
+  {
    "name": "frontal",
    "display": "Frontal",
    "region": "axial",
@@ -1215,14 +1223,6 @@
    "kind": "cartilage",
    "groupFallback": "Costal cartilage",
    "description": "costal cartilage, also known as rib cartilage, are bars of hyaline cartilage that serve to prolong the ribs forward and contribute to elasticity of walls of thorax"
-  },
-  {
-   "name": "l_ethmoid",
-   "display": "L. Ethmoid",
-   "region": "axial",
-   "kind": "bone",
-   "groupFallback": "Cranium",
-   "description": "paired complex bone/cartilage structure in skull that separates nasal cavity from brain, located at roof of nose, between the two orbits, LOA-5 part of skull LOA-1"
   },
   {
    "name": "l_inferior_nasal_conchae",
@@ -1407,14 +1407,6 @@
    "kind": "cartilage",
    "groupFallback": "Costal cartilage",
    "description": "costal cartilage, also known as rib cartilage, are bars of hyaline cartilage that serve to prolong the ribs forward and contribute to elasticity of walls of thorax"
-  },
-  {
-   "name": "r_ethmoid",
-   "display": "R. Ethmoid",
-   "region": "axial",
-   "kind": "bone",
-   "groupFallback": "Cranium",
-   "description": "paired complex bone/cartilage structure in skull that separates nasal cavity from brain, located at roof of nose, between the two orbits, LOA-5 part of skull LOA-1"
   },
   {
    "name": "r_inferior_nasal_conchae",
@@ -2058,13 +2050,13 @@
   }
  ],
  "counts": {
-  "total": 257,
-  "axial": 131,
+  "total": 256,
+  "axial": 130,
   "appendicular": 126,
-  "with_prose": 257
+  "with_prose": 256
  },
  "kinds": {
-  "bone": 199,
+  "bone": 198,
   "cartilage": 3,
   "disc": 23,
   "tooth": 32
@@ -2081,8 +2073,8 @@
   "Thoracic vertebrae": 12,
   "Metacarpals": 10,
   "Metatarsals": 10,
-  "Cranium": 9,
   "Leg": 8,
+  "Cranium": 8,
   "Cervical vertebrae": 7,
   "Arm": 6,
   "Lumbar vertebrae": 5,

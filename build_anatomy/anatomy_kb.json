@@ -362,23 +362,7 @@
    ],
    "note": "The sphenoid contacts every other cranial bone \u2014 hence \"keystone.\" Its name is from Greek sphenoeides, \"wedge-shaped,\" and surgeons reach the pituitary by passing through the nose and the air-filled sphenoid sinus (the trans-sphenoidal approach)."
   },
-  "l_ethmoid": {
-   "group": "Cranial bones (neurocranium) \u2014 left half of the single, unpaired ethmoid",
-   "function": "The left half of the ethmoid forms the left ethmoidal labyrinth: it separates the medial orbit from the nasal cavity via the paper-thin lamina papyracea, carries the left superior and middle nasal conchae that warm and humidify inhaled air, and its cribriform plate transmits the left olfactory nerve fibres into the skull.",
-   "articulates_with": [
-    "Frontal",
-    "Sphenoid",
-    "Both nasal bones",
-    "Both maxillae",
-    "Both lacrimal bones",
-    "Both palatine bones",
-    "Both inferior nasal conchae",
-    "Vomer",
-    "(the whole ethmoid articulates with 13 bones)"
-   ],
-   "note": "Anatomically the ethmoid is ONE unpaired midline bone \u2014 the model splits it into left/right halves for display, so do not count it twice. Its orbital wall, the lamina papyracea (\"sheet of paper\"), is so thin that a medial-wall fracture lets air pass from the nose into the orbit and eyelid when the patient blows their nose (orbital emphysema)."
-  },
-  "r_ethmoid": {
+  "ethmoid": {
    "group": "Cranial bones (neurocranium) \u2014 right half of the single, unpaired ethmoid",
    "function": "The right half of the ethmoid forms the right ethmoidal labyrinth: it separates the right orbit from the nasal cavity, carries the right superior and middle conchae, and is perforated by the cribriform plate for the right olfactory nerve fibres.",
    "articulates_with": [
@@ -1156,8 +1140,8 @@
  ],
  "tours": [
   {
-   "id": "why-257",
-   "title": "Why 257, not 206?",
+   "id": "why-256",
+   "title": "Why 256, not 206?",
    "subtitle": "An honest audit of a number you were told to memorise",
    "steps": [
     {
@@ -1271,18 +1255,17 @@
      "isolate": false
     },
     {
-     "title": "A bone cut in half",
-     "text": "The ethmoid is a single bone \u2014 the delicate honeycomb between your eye sockets that roofs the nasal cavity. This model builds it as a left and a right half, so it costs you two clicks instead of one. That is a modelling decision, not anatomy, and it quietly adds one to the total.",
+     "title": "A bone stored in two pieces",
+     "text": "The ethmoid is a single bone \u2014 the delicate honeycomb between your eye sockets that roofs the nasal cavity. In this asset set its geometry lives in two files, a left and a right labyrinth, which a third file correctly assembles into one bone. Any tool that decides what a bone IS by looking at filenames counts it twice and hands you half a bone. The first version of this explorer did exactly that. The assets were right; the tool was wrong.",
      "bones": [
-      "l_ethmoid",
-      "r_ethmoid"
+      "ethmoid"
      ],
      "view": "VP_Skull",
      "isolate": false
     },
     {
      "title": "And a bone that is simply missing",
-     "text": "The left little toe here has only two phalanges; the right has three. Its distal phalanx exists in the skeleton's hierarchy but has no geometry, so you cannot click it. That error subtracts one, the split ethmoid adds one, and they cancel \u2014 which is exactly why nobody caught either. The ledger closes: 206 \u2212 6 \u2212 1 \u2212 1 + 1 = 199 bones, plus 58 parts that are not bones, is 257.",
+     "text": "The left little toe here has two phalanges; the right has three. Its distal phalanx exists in the skeleton's hierarchy but its file contains no geometry at all, so there is nothing to click. That one is a real defect in the source assets. The ledger closes: 206 \u2212 6 ossicles \u2212 1 hyoid \u2212 1 missing toe bone = 198 bones, plus 58 parts that are not bones \u2014 256.",
      "bones": [
       "l_tarsal_proximal_phalanx_5",
       "l_tarsal_middle_phalanx_5",
@@ -1309,8 +1292,7 @@
       "l_temporal",
       "r_temporal",
       "sphenoid",
-      "l_ethmoid",
-      "r_ethmoid",
+      "ethmoid",
       "vomer",
       "mandible",
       "l_maxilla",
@@ -1382,7 +1364,7 @@
     },
     {
      "title": "Eight bones make the braincase",
-     "text": "Frontal, two parietals, two temporals, occipital, sphenoid and ethmoid \u2014 eight bones fused into one vault by sutures. A suture is a joint that exists to grow, not to move: it lets the skull expand around an enlarging brain in infancy, then locks. Note the ethmoid appears twice here, as left and right halves; that is this model's convention, not anatomy.",
+     "text": "Frontal, two parietals, two temporals, occipital, sphenoid and ethmoid \u2014 eight bones fused into one vault by sutures. A suture is a joint that exists to grow, not to move: it lets the skull expand around an enlarging brain in infancy, then locks.",
      "bones": [
       "frontal",
       "l_parietal",
@@ -1391,8 +1373,7 @@
       "l_temporal",
       "r_temporal",
       "sphenoid",
-      "l_ethmoid",
-      "r_ethmoid"
+      "ethmoid"
      ],
      "view": "VP_Skull",
      "isolate": true
@@ -1644,7 +1625,7 @@
     },
     {
      "title": "Twenty-three discs \u2014 and why not twenty-four",
-     "text": "Twenty-four mobile vertebrae ought to have 23 discs between them, and they do \u2014 but not where you would guess. The top disc is C2\u2013C3, not C1\u2013C2: the atlas has no body to press against, so there is no disc above C2 and none between skull and atlas. And a disc is not a bone. It is fibrocartilage, and it is a third of the reason this model has 257 parts.",
+     "text": "Twenty-four mobile vertebrae ought to have 23 discs between them, and they do \u2014 but not where you would guess. The top disc is C2\u2013C3, not C1\u2013C2: the atlas has no body to press against, so there is no disc above C2 and none between skull and atlas. And a disc is not a bone. It is fibrocartilage, and it is a third of the reason this model has 256 parts.",
      "bones": [
       "c2disc",
       "c3disc",
@@ -2186,26 +2167,26 @@
    "prompt": "Find the structure between the last lumbar vertebra and the sacrum that everyone calls part of the spine \u2014 but which is not a bone at all.",
    "answer": "l5disc",
    "level": 3,
-   "teach": "The L5\u2013S1 disc is fibrocartilage: a tough anulus around a gel nucleus, built to be squeezed. It is the lowest of the adult's 23 discs (the first is C2\u2013C3 \u2014 there is none above C2, because the atlas has no body). Together with L4\u2013L5 it is the disc most often herniated. Discs are a large part of why this model has 257 parts and not 206 bones.",
+   "teach": "The L5\u2013S1 disc is fibrocartilage: a tough anulus around a gel nucleus, built to be squeezed. It is the lowest of the adult's 23 discs (the first is C2\u2013C3 \u2014 there is none above C2, because the atlas has no body). Together with L4\u2013L5 it is the disc most often herniated. Discs are a large part of why this model has 256 parts and not 206 bones.",
    "accept": []
   }
  ],
  "reconciliation": {
-  "headline": "257 clickable parts, 199 of them bones",
+  "headline": "256 clickable parts, 198 of them bones",
   "kinds": {
-   "bone": 199,
+   "bone": 198,
    "cartilage": 3,
    "disc": 23,
    "tooth": 32
   },
   "canonical_bones": 206,
-  "model_bones": 199,
+  "model_bones": 198,
   "rows": [
    {
     "group": "Cranium",
-    "model": 9,
+    "model": 8,
     "canonical": 8,
-    "delta": 1
+    "delta": 0
    },
    {
     "group": "Facial skeleton",

@@ -57,7 +57,7 @@
   .bone-row:hover { background:rgba(255,255,255,.08); color:var(--ink); }
   .bone-row.sel { background:rgba(255,185,46,.16); color:var(--gold); }
 
-  /* the 257-vs-206 reconciliation */
+  /* the 256-vs-206 reconciliation */
   #recon { margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid var(--line); }
   .rbar { display:flex; height:9px; border-radius:5px; overflow:hidden; margin:10px 0 9px; }
   .rbar i { display:block; }
@@ -172,11 +172,11 @@
 <body>
 
 <x3d-canvas id="cv" src="anatomy_explorer.x3d" update="auto"></x3d-canvas>
-<div id="load"><div><div class="spin"></div><p>Loading 257 bones</p></div></div>
+<div id="load"><div><div class="spin"></div><p>Loading the skeleton</p></div></div>
 
 <div id="title" class="hud glass">
   <h1>LOA5 Anatomy Explorer</h1>
-  <p><b id="nbones">257</b> parts · 150 joints · HAnim LOA-5 · X3D</p>
+  <p><b id="nbones">256</b> parts · 150 joints · HAnim LOA-5 · X3D</p>
   <div id="tabs">
     <button data-m="explore" class="on">Explore</button>
     <button data-m="learn">Learn</button>
@@ -344,7 +344,7 @@ function select(bone, opts = {}) {
 
   const fld = (h, t, cls) => t ? `<div class="fld ${cls||''}"><h4>${h}</h4><p>${t}</p></div>` : '';
   let html = '';
-  // 84 of the 257 parts carry researched entries; the rest fall back on the
+  // 83 of the 256 parts carry researched entries; the rest fall back on the
   // model's own group and the prose that ships inside the mesh file.
   html += fld('Group', k.group || b.groupFallback);
   if (k.function)  html += fld('Function', k.function);
@@ -458,7 +458,7 @@ function buildTree() {
   });
 }
 
-/* ---------- why 257 parts and not 206 bones? ---------- */
+/* ---------- why N parts and not 206 bones? ---------- */
 function buildRecon() {
   if (!KB || !KB.reconciliation) return;
   const r = KB.reconciliation, k = r.kinds;
@@ -476,18 +476,19 @@ function buildRecon() {
     <div><em>${x.group}</em><span class="d ${x.delta>0?'pos':'neg'}">${x.delta>0?'+':''}${x.delta}</span></div>`).join('');
 
   $('#recon').innerHTML = `
-    <h3 class="sec">Why 257 parts, not 206 bones?</h3>
+    <h3 class="sec">Why ${total} parts, not ${r.canonical_bones} bones?</h3>
     <div class="rbar">${bar}</div>
     <div class="rkey">${key}</div>
     <p>You have <b>${r.canonical_bones} bones</b>. This model has <b>${total} clickable
        parts</b> — because it also carries the teeth, the intervertebral discs and some
        cartilage, and <i>none of those are bones</i>. Strip them out and
        <b>${r.model_bones} bones</b> remain. The last ${Math.abs(r.model_bones - r.canonical_bones)}
-       are where the model and the body disagree:</p>
+       are simply absent from the model:</p>
     <div class="rdelta">${deltas}</div>
-    <p style="margin-top:10px">The ossicles and the hyoid were never modelled. The ethmoid is
-       <i>one</i> midline bone but is built here as a left and a right half. And the left little
-       toe is simply missing its tip — a real gap in the source asset, not a fact about you.</p>`;
+    <p style="margin-top:10px">The six <b>auditory ossicles</b> are sealed inside the temporal
+       bone and were never modelled. Nor was the <b>hyoid</b>, which is the one bone in you that
+       articulates with no other bone. And the left little toe is missing its tip — a real gap
+       in the source asset, not a fact about you.</p>`;
 }
 
 /* ---------- modes ---------- */

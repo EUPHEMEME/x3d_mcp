@@ -35,6 +35,72 @@ CANON = {
 CANON_TOTAL = sum(CANON.values())        # 206
 
 
+# --- corrections to the researched copy -------------------------------------
+# The teaching text was written against an EARLIER build of the model, in which
+# the flattener keyed bone identity per FILE. The ethmoid's geometry lives in two
+# files (l_ethmoid.x3d, r_ethmoid.x3d) which ethmoid.x3d correctly assembles into
+# one bone -- so that build counted the ethmoid twice and reported 257 parts /
+# 199 bones. The assets were right and the tool was wrong; flatten_anatomy.py now
+# merges them (see split_bones()), giving 256 parts / 198 bones.
+#
+# Rewritten rather than regenerated, because the correction is a fact about our
+# own tooling that no amount of anatomy research would have surfaced.
+KEY_REMAP = {"l_ethmoid": "ethmoid", "r_ethmoid": "ethmoid"}
+
+TOUR_ID_REMAP = {"why-257": "why-256"}
+
+STEP_OVERRIDES = {
+    ("why-256", 5): {          # 0-indexed: step 6
+        "title": "A bone stored in two pieces",
+        "text": "The ethmoid is a single bone — the delicate honeycomb between your eye "
+                "sockets that roofs the nasal cavity. In this asset set its geometry lives "
+                "in two files, a left and a right labyrinth, which a third file correctly "
+                "assembles into one bone. Any tool that decides what a bone IS by looking at "
+                "filenames counts it twice and hands you half a bone. The first version of "
+                "this explorer did exactly that. The assets were right; the tool was wrong.",
+        "bones": ["ethmoid"],
+    },
+    ("why-256", 6): {          # 0-indexed: step 7
+        "title": "And a bone that is simply missing",
+        "text": "The left little toe here has two phalanges; the right has three. Its distal "
+                "phalanx exists in the skeleton's hierarchy but its file contains no geometry "
+                "at all, so there is nothing to click. That one is a real defect in the source "
+                "assets. The ledger closes: 206 − 6 ossicles − 1 hyoid − 1 missing toe bone = "
+                "198 bones, plus 58 parts that are not bones — 256.",
+    },
+}
+
+TEXT_FIXES = [
+    # the ethmoid is no longer double-counted, so this aside is now false
+    (" Note the ethmoid appears twice here, as left and right halves; that is "
+     "this model's convention, not anatomy.", ""),
+    ("this model has 257 parts", "this model has 256 parts"),
+    ("257 parts", "256 parts"),
+]
+
+
+def apply_corrections(teaching: dict) -> dict:
+    for t in teaching.get("tours", []):
+        t["id"] = TOUR_ID_REMAP.get(t["id"], t["id"])
+        t["title"] = t["title"].replace("Why 257", "Why 256")
+        for i, s in enumerate(t.get("steps", [])):
+            ov = STEP_OVERRIDES.get((t["id"], i))
+            if ov:
+                s.update(ov)
+            for old, new in TEXT_FIXES:
+                s["title"] = s["title"].replace(old, new)
+                s["text"] = s["text"].replace(old, new)
+        for s in t.get("steps", []):
+            s["bones"] = list(dict.fromkeys(KEY_REMAP.get(b, b) for b in s.get("bones", [])))
+    for q in teaching.get("quiz", []):
+        q["answer"] = KEY_REMAP.get(q["answer"], q["answer"])
+        q["accept"] = [KEY_REMAP.get(a, a) for a in q.get("accept", [])]
+        for old, new in TEXT_FIXES:
+            q["prompt"] = q["prompt"].replace(old, new)
+            q["teach"] = q.get("teach", "").replace(old, new)
+    return teaching
+
+
 def load_research(path: str) -> dict:
     """The workflow's result is a JSON object embedded in the task output."""
     raw = open(path, encoding="utf-8", errors="replace").read()
@@ -87,14 +153,14 @@ def main() -> None:
             "key_counts": region.get("key_counts", []),
         })
         for b in region.get("bones", []):
-            n = b.get("name")
+            n = KEY_REMAP.get(b.get("name"), b.get("name"))
             if n not in known:          # researcher invented / mis-keyed a name
                 dropped.append(n)
                 continue
             kb_bones[n] = {k: v for k, v in b.items()
                            if k in ("group", "function", "articulates_with", "note") and v}
 
-    teaching = research.get("teaching") or {}
+    teaching = apply_corrections(research.get("teaching") or {})
 
     # ---- tours: drop any step bone the model does not actually have ---------
     tours = []
