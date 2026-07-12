@@ -73,9 +73,9 @@ Configured via `TECHNE_PROFILE` (+ `TECHNE_SEMANTICS`, `TECHNE_PROVENANCE_LEVEL`
 
 **Core correctness** (always on):
 - **`rules.py`** — the rule→fix catalog: `{rule: (severity, prescriptive_correction, source)}`,
-  **27 rules**. The error message *is* the fix. **Mirrors the server's own
+  **33 rules**. The error message *is* the fix. **Mirrors the server's own
   `validate_semantic`** (containerField, duplicate-DEF, USE/ROUTE, interpolator arity,
-  shape/group/viewpoint): **11 enforced per-call**, 16 cataloged and deferred to the
+  shape/group/viewpoint): **17 enforced per-call**, 16 cataloged and deferred to the
   upstream whole-scene validator rather than re-implemented (so it can't drift).
 - **`craft.py`** — the deterministic engine. Determinable rules **repair** the args;
   unrepairable ones **block + return the correction**. Also `reassert_envlight_global`

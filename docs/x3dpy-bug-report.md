@@ -2,7 +2,7 @@
      demo contribution + LaTeX chatlog PDF. Candidate venue for the demo:
      X3dForAdvancedModeling/LargeLanguageModels/ (per Don's invitation). -->
 
-# x3d.py bug report: dropped `containerField` and wrong `EnvironmentLight.global` default
+# x3d.py bug report: dropped `containerField`, wrong `EnvironmentLight.global` default, and undeclared X3D components
 
 **Package:** x3d.py (banner: `x3d.py package 4.0.65.3`)
 **Python:** 3.12
@@ -11,8 +11,12 @@
 serialized with `X3D(...).XML()`, then rendered in Castle Model Viewer and
 validated against the X3D 4.0 schema.
 
-Two issues cause valid-looking output that renders incorrectly (or not at all)
-in conformant players. Both are in XML serialization.
+Three issues cause valid-looking output that renders incorrectly — or not at all —
+in conformant players. All three are in XML serialization.
+
+(The numbering follows the mode catalog in the Technē paper, whose modes 3 and 4 —
+interpolator `key`/`keyValue` arity and USE-before-DEF ordering — are authoring
+faults rather than x3d.py serializer bugs, so they are not reproduced here.)
 
 ---
 
@@ -141,6 +145,84 @@ by remaining direct lights. Confirmed in Castle Model Viewer; worked only after
 
 ---
 
+## Bug 5 — no `<component>` is ever declared, so HAnim scenes are discarded on load; and `create_scene(profile=…)` is silently dropped
+
+Two divergences that compound into the widest silent failure in the set: the
+granular authoring API **cannot produce a working HAnim scene**, and nothing
+reports it.
+
+### 5a — the profile argument never reaches the header
+
+```python
+create_scene(description="…", profile="Interactive")   # accepted
+get_scene(encoding="xml")
+# -> <X3D profile='Interchange' version='4.1' …>       # Interactive is gone
+```
+
+The model states its intent, the server takes the argument, and the serializer
+emits `Interchange` regardless. No error, no warning.
+
+### 5b — a node outside the profile is discarded, with its whole subtree
+
+`Interchange` admits 49 node types. It does not admit `HAnimHumanoid`,
+`TouchSensor`, `EnvironmentLight` or `PhysicalMaterial`. And the granular API
+offers **no way to declare an X3D `<component>`** — `create_scene` takes no
+component list, and there is no `add_component` verb. So an HAnim humanoid built
+through `create_node`/`add_child` serializes into a document whose profile does
+not admit it, and a conformant player discards the humanoid and everything under
+it.
+
+`validate_x3d` reports `valid: true` throughout. Profile conformance is simply
+not what schema validation checks.
+
+### Reproduction — measured by render, not by argument
+
+A minimal HAnim figure (one joint, one segment, one white `Box`) rendered in
+X_ITE 11.6.6 under every combination. Lit pixels, 400×300:
+
+| profile | `<component name='HAnim' level='1'/>` | result |
+|---|---|---|
+| Interchange | — | **0.0 % — VANISHES** |
+| Interchange | yes | 19.8 % — renders |
+| Interactive | — | **0.0 % — VANISHES** |
+| Immersive | — | **0.0 % — VANISHES** |
+| Immersive | yes | 19.8 % — renders |
+| Full | — | 19.8 % — renders |
+
+**No profile below `Full` admits HAnim.** Raising the profile is *not* the fix —
+and `Immersive` sounding like it covers everything is exactly the trap. The
+component declaration is the fix, and it works at any profile.
+
+Harness: `scratchpad/isolate_hanim.py`. End-to-end A/B through the real server:
+`scratchpad/proof.py` — the same granular call sequence emits a document that
+renders **0.0 %** raw and **17.6 %** through Technē.
+
+### Diagnosis
+
+Like Bug 2, the divergence lives **below the wire**: the model has no argument
+through which to comply, so this cannot be repaired in the tool-call arguments.
+Blocking the call would be a false positive — there is nothing the model could
+do differently.
+
+### Fix
+
+Either (a) make `create_scene` honor its `profile` argument and accept a
+component list, or (b) have the serializer derive the required components from
+the nodes actually present and declare them.
+
+Technē implements (b) at the serialization boundary — `craft.reassert_profile()`,
+the same demotion `reassert_envlight_global()` makes for Bug 2. The
+profile→node and node→component tables are **transcribed from the server's own
+`list_profiles` and `describe_node`** (`techne/gen_profiles.py`), not invented, so
+the rule is derived from the spec rather than hand-authored.
+
+Components are declared at the highest level known for that component: an
+under-declared level silently drops nodes, while an over-declared level is always
+legal. (The server's per-node level metadata is not entirely trustworthy — it
+reports `EnvironmentLight`, an X3D 4.0 addition, as `Lighting` level 1.)
+
+---
+
 ## Minor note (not a bug)
 `HAnimHumanoid(version="2.0")` is omitted from output because x3d.py's default
 for `version` is already `"2.0"`. That is valid default-omission, but HAnim
@@ -151,8 +233,14 @@ for `HAnimHumanoid`.
 
 ## Net effect
 Programmatically built HAnim humanoids and PBR/IBL scenes serialize to XML that
-**passes XSD schema validation** yet renders incorrectly, because the errors are
-in `containerField` routing and a non-spec default — neither of which the schema
-checks. Workaround currently in use: post-process the `.XML()` string to inject
+**passes XSD schema validation** yet renders incorrectly — or not at all. The
+errors are in `containerField` routing, a non-spec default, and an undeclared
+component: none of which the schema checks.
+
+Bug 5 is the one that admits no argument-level fix at all. A dropped
+`containerField` mis-files one node; an undeclared component discards **the entire
+humanoid**, and the granular API gives the model no way to prevent it.
+
+Workaround currently in use: post-process the `.XML()` string to inject
 `containerField='skeleton'`, `containerField='emissiveTexture'`/`'baseTexture'`,
-and `global='true'`.
+`global='true'`, and the `<component>` declarations the scene's own nodes require.

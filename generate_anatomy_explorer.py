@@ -55,36 +55,31 @@ def main() -> None:
         gaits.append(anchor(strip_timer(f)))
     anim = "\n".join(gaits)
 
-    # Two header facts, either of which silently empties the scene:
+    # The spine already comes back from the proxy with its profile restored and
+    # the components its own nodes need declared. This step splices in HAnim nodes
+    # the spine never had, so the document needs one more component -- and rather
+    # than hand-write it (this generator used to hardcode <component name='HAnim'/>
+    # and a profile bump), we run the composed document back through the same
+    # function the proxy uses. The generator does not need to know that HAnim is a
+    # component at all.
     #
-    # 1. The granular API always emits profile='Interchange', which contains
-    #    neither HAnim nor TouchSensor nor the Lighting nodes we authored.
-    # 2. NO profile includes HAnim -- it is a separate component, and a scene
-    #    that uses HAnimHumanoid without declaring it gets its whole humanoid
-    #    discarded by the browser. No error, no warning: a beautifully lit empty
-    #    room. (The XSD says valid: true throughout -- profile/component
-    #    conformance is simply not what schema validation checks.)
-    #
-    # Immersive + an explicit HAnim component is what the repo's working
-    # classroom scene does, and it is the combination proven to render.
-    scene = spine.replace("profile='Interchange' version='4.1'",
-                          "profile='Immersive' version='4.0'")
-    scene = scene.replace(
-        "https://www.web3d.org/specifications/x3d-4.1.xsd",
-        "https://www.web3d.org/specifications/x3d-4.0.xsd")
+    # This is Bug 5, and it is the reason it matters: a scene using HAnimHumanoid
+    # without an explicit <component name='HAnim'/> has its whole humanoid
+    # DISCARDED on load -- a beautifully lit empty room, with the XSD reporting
+    # valid:true throughout. No profile below Full admits HAnim; raising the
+    # profile does not help. See docs/x3dpy-bug-report.md#bug-5.
+    sys.path.insert(0, f"{REPO}/techne")
+    from techne.craft import reassert_profile
 
-    head = (
-        "\n  <head>\n"
-        "    <component level='1' name='HAnim'/>\n"
-        "    <meta content='LOA5 Anatomy Explorer' name='title'/>\n"
-        "    <meta content='HAnim LOA5 skeleton, 257 individually addressable bones.' name='description'/>\n"
-        "    <meta content='Bone meshes: Don Brutzman, Joe Williams, John Carlson, Damon Hernandez (Web3D Consortium).' name='reference'/>\n"
-        "  </head>"
+    scene = spine.replace("</Scene>", f"{skeleton}\n{anim}\n</Scene>", 1)
+
+    meta = (
+        "\n    <meta content='LOA5 Anatomy Explorer' name='title'/>"
+        "\n    <meta content='HAnim LOA5 skeleton, 256 individually addressable parts.' name='description'/>"
+        "\n    <meta content='Bone meshes: Don Brutzman, Joe Williams, John Carlson, Damon Hernandez (Web3D Consortium).' name='reference'/>"
     )
-    scene = scene.replace(">\n  <Scene>", f">{head}\n  <Scene>", 1)
-
-    body = f"{skeleton}\n{anim}\n"
-    scene = scene.replace("</Scene>", f"{body}</Scene>", 1)
+    scene = reassert_profile(scene)                    # declares HAnim, keeps the rest
+    scene = scene.replace("<head>", "<head>" + meta, 1)
 
     with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(scene)

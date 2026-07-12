@@ -26,7 +26,7 @@ import re
 from dataclasses import dataclass, field as dc_field
 from typing import Any
 
-from . import craft, repair, semantics
+from . import craft, profiles, repair, semantics
 from .config import Config
 from .craft import MISSING
 from .trace import SessionTrace
@@ -44,12 +44,19 @@ class SceneState:
     def_name_to_type: dict[str, str] = dc_field(default_factory=dict)
     id_to_def: dict[str, str] = dc_field(default_factory=dict)        # node id -> its DEF name
     surfaced_reminders: dict[str, int] = dc_field(default_factory=dict)  # coherence key -> last call index
+    # The profile the model ASKED create_scene for. The server accepts it and then
+    # serializes profile='Interchange' regardless, so this is the only record that
+    # the request was ever made -- and the components a scene needs depend on it.
+    requested_profile: str | None = None
+    created_types: set[str] = dc_field(default_factory=set)
 
     def reset(self):
         for d in (self.id_to_type, self.node_fields, self.def_name_to_type,
                   self.id_to_def, self.surfaced_reminders):
             d.clear()
         self.defined_defs.clear()
+        self.created_types.clear()
+        self.requested_profile = None
 
 
 @dataclass
@@ -151,11 +158,34 @@ class TechneProxy:
 
     # -- adapters: read state + repaired args -> craft.CraftResult ----------
 
+    def _adapt_create_scene(self, args: dict) -> craft.CraftResult:
+        """Record the profile the model asked for. It will not survive the server."""
+        res = craft.CraftResult(repaired=dict(args))
+        prof = args.get("profile")
+        if prof and prof != "Interchange":
+            res.notes.append(craft.rules.correction(
+                "profile_dropped", requested=prof, emitted="Interchange"))
+            res.applied.append("profile_dropped")
+        return res
+
     def _adapt_create_node(self, args: dict) -> craft.CraftResult:
         node_type = args.get("node_type", "")
         fields = dict(args.get("fields") or {})
         res = craft.CraftResult(repaired=dict(args))
         subs = []
+
+        # Bug 5: a node whose component the declared profile does not admit is
+        # DISCARDED on load, with everything under it. Advisory, not blocking:
+        # create_scene takes no component list, so the model cannot comply from
+        # here. Technē declares it at serialization instead (reassert_profile).
+        prof = self.state.requested_profile or "Interchange"
+        need = profiles.missing_components([node_type], prof)
+        if need:
+            comp, level = need[0]
+            res.notes.append(craft.rules.correction(
+                "component_not_in_profile", node_type=node_type,
+                component=comp, level=level, profile=prof))
+            res.applied.append("component_not_in_profile")
         if node_type == "EnvironmentLight":
             subs.append(craft.check_envlight_global(
                 fields.get("global", MISSING), {"fields": fields}))
@@ -228,6 +258,7 @@ class TechneProxy:
         return craft.CraftResult(repaired=dict(args))
 
     _ADAPTERS: dict[str, str] = {
+        "create_scene": "_adapt_create_scene",
         "create_node": "_adapt_create_node",
         "add_child": "_adapt_add_child",
         "def_node": "_adapt_def_node",
@@ -263,6 +294,8 @@ class TechneProxy:
 
     @staticmethod
     def _pending_for(tool: str, args: dict) -> dict | None:
+        if tool == "create_scene":
+            return {"kind": "scene", "profile": args.get("profile")}
         if tool == "create_node":
             return {"kind": "create", "node_type": args.get("node_type", ""),
                     "fields": dict(args.get("fields") or {})}
@@ -283,11 +316,16 @@ class TechneProxy:
             return
         st = self.state
         mutation = None
-        if p["kind"] == "create":
+        if p["kind"] == "scene":
+            st.reset()
+            st.requested_profile = p["profile"]
+            mutation = {"scene": p["profile"]}
+        elif p["kind"] == "create":
             m = _CREATED_RE.search(result_text)
             if m:
                 st.id_to_type[m.group(1)] = p["node_type"]
                 st.node_fields[m.group(1)] = dict(p["fields"])
+                st.created_types.add(p["node_type"])
                 mutation = {"create": p["node_type"], "id": m.group(1)}
         elif p["kind"] == "def":
             m = _ASSIGNED_RE.search(result_text)

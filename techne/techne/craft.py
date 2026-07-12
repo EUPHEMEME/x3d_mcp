@@ -378,3 +378,68 @@ def reassert_envlight_global(xml: str) -> str:
             return m.group(0)                  # already set -> idempotent
         return f"<EnvironmentLight global='true'{attrs}{close}"
     return _ENVLIGHT_TAG.sub(fix, xml)
+
+
+# --- profile / component conformance (Bug 5) -------------------------------
+
+_X3D_TAG = re.compile(r"<X3D\b([^>]*?)(/?>)")
+_HEAD_OPEN = re.compile(r"<head\b[^>]*>", re.I)
+_PROFILE_ATTR = re.compile(r"\bprofile\s*=\s*['\"]([^'\"]*)['\"]")
+_NODE_TAG = re.compile(r"<([A-Z][A-Za-z0-9]*)\b")
+_COMPONENT_DECL = re.compile(r"<component\b[^>]*\bname\s*=\s*['\"]([^'\"]+)['\"]", re.I)
+
+
+def used_node_types(xml: str) -> set[str]:
+    """Every element name in the document that looks like an X3D node."""
+    return {m.group(1) for m in _NODE_TAG.finditer(xml)} - {"X3D"}
+
+
+def reassert_profile(xml: str, requested: str | None = None) -> str:
+    """Restore the requested profile and declare the components the scene needs.
+
+    Two upstream divergences meet here, and neither can be repaired in the
+    tool-call arguments:
+
+      1. create_scene(profile='Interactive') is accepted, then serialized as
+         profile='Interchange'. The model's stated intent is dropped.
+      2. The granular API has no way to declare an X3D <component> at all -- and
+         a node whose component the profile does not admit is DISCARDED on load,
+         with the whole subtree under it. HAnimHumanoid under any profile below
+         Full is the load-bearing case: the humanoid silently vanishes and the
+         XSD still says valid.
+
+    So, like reassert_envlight_global, the fix is pushed to serialization.
+    Deterministic, idempotent, and additive: it never removes a declaration and
+    never lowers a level.
+    """
+    from . import profiles as P
+
+    # 1. the profile
+    m = _X3D_TAG.search(xml)
+    if not m:
+        return xml
+    attrs = m.group(1)
+    emitted = (_PROFILE_ATTR.search(attrs) or [None, None])[1] \
+        if _PROFILE_ATTR.search(attrs) else None
+    profile = requested or emitted or "Interchange"
+    if requested and emitted and requested != emitted:
+        new_attrs = _PROFILE_ATTR.sub(f"profile='{requested}'", attrs, count=1)
+        xml = xml[:m.start()] + f"<X3D{new_attrs}{m.group(2)}" + xml[m.end():]
+
+    # 2. the components
+    need = P.missing_components(used_node_types(xml), profile)
+    if not need:
+        return xml
+    already = {c.lower() for c in _COMPONENT_DECL.findall(xml)}
+    decls = "".join(
+        f"\n    <component name='{c}' level='{lv}'/>"
+        for c, lv in need if c.lower() not in already)
+    if not decls:
+        return xml                                    # idempotent
+
+    h = _HEAD_OPEN.search(xml)
+    if h:                                             # append into the existing <head>
+        return xml[:h.end()] + decls + xml[h.end():]
+
+    m = _X3D_TAG.search(xml)                          # no <head>: create one
+    return xml[:m.end()] + f"\n  <head>{decls}\n  </head>" + xml[m.end():]

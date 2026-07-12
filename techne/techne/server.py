@@ -32,6 +32,12 @@ from . import gate
 from .proxy import TechneProxy
 
 GUARDED_HINT = "  [Technē-guarded: args are repaired/validated before forwarding.]"
+# Tools whose result is a serialized X3D document. Every one of them is a place
+# the below-the-wire divergences (EnvironmentLight.global; the missing <component>
+# declaration and the dropped profile) must be repaired, because the argument
+# layer cannot reach them.
+_XML_EMITTING = {"get_scene", "autofix_x3d", "convert_x3d", "compose_scene"}
+
 POSTCHECK_HINT = "  [Technē-guarded: output re-validated through the server's own validators.]"
 
 # render verbs trigger the CHEAP occupation gate (soft, advisory): inspect the
@@ -189,17 +195,31 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
     proxy.observe_result(decision, _text_of(result))
     content = list(getattr(result, "content", None) or [])
     structured = getattr(result, "structuredContent", None)
-    if name == "autofix_x3d":
-        # autofix returns corrected X3D but fixes only containerFields; also
-        # re-assert the omitted EnvironmentLight 'global' (x3d.py Bug 2) so IBL works.
-        from .craft import reassert_envlight_global
+    if name in _XML_EMITTING:
+        # The serialization boundary: two divergences live below the wire and
+        # cannot be repaired in the tool-call arguments, so they are fixed here.
+        #
+        #   * EnvironmentLight omits 'global' (x3d.py Bug 2) -> IBL silently dies.
+        #   * The scene declares no <component>, and the granular API gives the
+        #     model no way to declare one -- so a node outside the profile (an
+        #     HAnimHumanoid under anything below Full) is discarded on load, with
+        #     its whole subtree. And create_scene's profile argument never reaches
+        #     the header at all: ask for Interactive, get Interchange. (Bug 5.)
+        from .craft import reassert_envlight_global, reassert_profile
+
+        prof = proxy.state.requested_profile
+
+        def _fix(xml: str) -> str:
+            return reassert_profile(reassert_envlight_global(xml), requested=prof)
+
         content = [
-            types.TextContent(type="text", text=reassert_envlight_global(b.text))
-            if getattr(b, "type", "") == "text" and getattr(b, "text", None) else b
+            types.TextContent(type="text", text=_fix(b.text))
+            if getattr(b, "type", "") == "text" and getattr(b, "text", None)
+            and "<X3D" in b.text else b
             for b in content]
-        if isinstance(structured, dict) and isinstance(structured.get("result"), str):
-            structured = {**structured,
-                          "result": reassert_envlight_global(structured["result"])}
+        if isinstance(structured, dict) and isinstance(structured.get("result"), str) \
+                and "<X3D" in structured["result"]:
+            structured = {**structured, "result": _fix(structured["result"])}
     if decision.notes:
         # an applied repair (args were rewritten) vs an advisory note Technē could
         # not act on — distinct markers so a consumer (and the eval) can tell them apart

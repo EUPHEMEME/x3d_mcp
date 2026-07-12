@@ -140,6 +140,43 @@ CATALOG = {
         "(serialization/autofix layer) for scene-wide IBL. (x3d.py Bug 2.)",
         "docs/x3dpy-bug-report.md#bug-2",
     ),
+    # --- profile/component conformance (Bug 5) ------------------------------
+    # The fifth documented silent-failure mode, and the widest: a node whose
+    # COMPONENT the declared profile does not admit is discarded on load. The
+    # whole subtree goes with it. The XSD says valid:true -- profile conformance
+    # is simply not what schema validation checks.
+    #
+    # Measured against X_ITE 11.6.6 with a minimal HAnim figure:
+    #     Interchange + <component name='HAnim' level='1'/>  -> RENDERS
+    #     Immersive   without it                             -> VANISHES
+    #     Full        without it                             -> RENDERS
+    # NO profile below Full admits HAnim. Raising the profile is not the fix --
+    # and "Immersive" sounding like it covers everything is exactly the trap.
+    #
+    # Neither rule can be repaired in the tool-call arguments: create_scene takes
+    # no component list, so the model has no way to comply. Blocking a call the
+    # model cannot satisfy would be a false positive. Both are therefore SOFT at
+    # the wire and repaired at the serialization boundary -- the same demotion
+    # `envlight_global_set` makes, for the same reason.
+    "component_not_in_profile": (
+        SOFT,
+        "'{node_type}' belongs to the {component} component, which profile "
+        "'{profile}' does not admit — a conformant player discards the node and "
+        "everything under it, while the XSD still reports valid. Declare "
+        "<component name='{component}' level='{level}'/> in <head>. Raising the "
+        "profile does NOT fix this: only 'Full' admits {component} implicitly "
+        "(verified against X_ITE 11.6.6). Technē injects the declaration at "
+        "serialization.",
+        "verified by render: techne/tests/test_profiles.py",
+    ),
+    "profile_dropped": (
+        SOFT,
+        "create_scene(profile='{requested}') was asked for, but the server "
+        "serializes profile='{emitted}' — the requested profile is silently "
+        "dropped. Technē restores it at serialization. (Upstream: create_scene's "
+        "profile argument does not reach the X3D header.)",
+        "verified: build_anatomy_spine.py asked Interactive, got Interchange",
+    ),
     "interp_lengths_match": (
         HARD,
         "{node_type}: {n_key} key fraction(s) but {n_val} keyValue value(s) -- "
@@ -319,6 +356,16 @@ PER_CALL = {
     "duplicate_def", "route_no_def",
     "empty_coordindex", "coordindex_no_separator", "coordindex_out_of_range",
     "degenerate_face",
+    "component_not_in_profile", "profile_dropped",
+}
+
+# Rules the argument layer can only ADVISE on, because the divergence lives below
+# the wire: the model has no argument through which to comply. Each has a matching
+# repair applied to the emitted XML at the serialization boundary.
+SERIALIZATION_REPAIRED = {
+    "envlight_global_set",        # -> craft.reassert_envlight_global
+    "component_not_in_profile",   # -> craft.reassert_profile
+    "profile_dropped",            # -> craft.reassert_profile
 }
 WHOLE_SCENE = {
     "use_undefined_def", "use_before_def", "unused_def",
