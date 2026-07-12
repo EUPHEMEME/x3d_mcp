@@ -46,14 +46,23 @@ conventions, what they already DEF'd. Coherence mechanisms:
   is spec-grounded and adversarially tightened (the `verify-x3d-invariants`
   workflow caught and fixed a wrong "PBR renders black" claim). Toggle with
   `TECHNE_SEMANTICS=0` for A/B isolation in the eval.
-- **Cross-call consistency** — the minimal `SceneState` Technē already tracks
-  (id→type, DEFs) is the seed. Enforce the few hard cross-call edges:
-  USE references a real prior DEF; no orphaned nodes; consistent units.
-  **Instrumentation is now built (Point 1):** `trace.py` records verb order per
-  session to JSONL; the analyzer discovers ordering constraints from collected
-  traces. Next step: run enough sessions to let the data vote on whether a
-  call-order automaton is warranted — built as guarded edges informed by
-  evidence, not a full order-of-operations straitjacket.
+- **Cross-call consistency — ASKED AND ANSWERED. The automaton stays unbuilt.**
+  `trace.py` records verb order per session; `analyze_traces.py` mines it. But
+  observation only tells you what models *do*, not what X3D *requires*, so
+  `eval/order_ablation.py` settles it by experiment instead: take a program that
+  renders, violate each candidate ordering edge, and render the result.
+
+  Across 3 authoring programs and 14 candidate edges: **SILENT 0, LOUD 2,
+  DATAFLOW 5, FREE 7.** Not one ordering constraint fails silently. And the reason
+  is architectural — the granular API passes **opaque node ids, not names**, so an
+  ordering constraint becomes a *dataflow* constraint, which the transport enforces
+  for free. The one place a name enters the surface (`use_node(def_name)`) is
+  checked eagerly and refuses loudly.
+
+  **An id-passing tool surface makes order-of-operations bugs unrepresentable.**
+  Half the "obvious" conventions are FREE; an automaton enforcing them would
+  produce only false positives. Silent failure lives in *arguments* and in the
+  *document* — not in order. See [`docs/point1-ablation.md`](../docs/point1-ablation.md).
 - **Provenance coherence** — the documented-vs-interpretive tag keeps the scene's
   *claims* consistent and honest; a candidate input to the WG's metadata effort.
 
