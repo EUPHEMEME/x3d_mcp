@@ -14,9 +14,10 @@ validated against the X3D 4.0 schema.
 Three issues cause valid-looking output that renders incorrectly — or not at all —
 in conformant players. All three are in XML serialization.
 
-(The numbering follows the mode catalog in the Technē paper, whose modes 3 and 4 —
-interpolator `key`/`keyValue` arity and USE-before-DEF ordering — are authoring
-faults rather than x3d.py serializer bugs, so they are not reproduced here.)
+(Numbering is not contiguous: it follows a working catalog of X3D silent-failure
+modes, two of which — interpolator `key`/`keyValue` arity and USE-before-DEF
+ordering — are authoring faults rather than x3d.py serializer bugs, so they are not
+reproduced here.)
 
 ---
 
@@ -193,16 +194,15 @@ X_ITE 11.6.6 under every combination. Lit pixels, 400×300:
 and `Immersive` sounding like it covers everything is exactly the trap. The
 component declaration is the fix, and it works at any profile.
 
-Harness: `scratchpad/isolate_hanim.py`. End-to-end A/B through the real server:
-`scratchpad/proof.py` — the same granular call sequence emits a document that
-renders **0.0 %** raw and **17.6 %** through Technē.
+End-to-end through the real server: the same granular call sequence emits a document
+that renders **0.0 %** as serialized, and **17.6 %** once the required `<component>`
+declarations are added to the emitted XML. Nothing else changes.
 
 ### Diagnosis
 
-Like Bug 2, the divergence lives **below the wire**: the model has no argument
-through which to comply, so this cannot be repaired in the tool-call arguments.
-Blocking the call would be a false positive — there is nothing the model could
-do differently.
+The divergence lives **below the wire**: the model has no argument through which to
+comply, so this cannot be repaired at the tool-call layer at all. Rejecting the call
+would be a false positive — there is nothing the model could do differently.
 
 ### Fix
 
@@ -210,16 +210,16 @@ Either (a) make `create_scene` honor its `profile` argument and accept a
 component list, or (b) have the serializer derive the required components from
 the nodes actually present and declare them.
 
-Technē implements (b) at the serialization boundary — `craft.reassert_profile()`,
-the same demotion `reassert_envlight_global()` makes for Bug 2. The
-profile→node and node→component tables are **transcribed from the server's own
-`list_profiles` and `describe_node`** (`techne/gen_profiles.py`), not invented, so
-the rule is derived from the spec rather than hand-authored.
+(b) is straightforward and needs no new spec knowledge: the server already publishes
+both halves of the table. `list_profiles` gives each profile's admitted node set, and
+`describe_node` gives every node's component and level — so the required declarations
+can be **derived** from the nodes a scene actually contains rather than hand-written.
 
-Components are declared at the highest level known for that component: an
-under-declared level silently drops nodes, while an over-declared level is always
-legal. (The server's per-node level metadata is not entirely trustworthy — it
-reports `EnvironmentLight`, an X3D 4.0 addition, as `Lighting` level 1.)
+One caution if you implement it: declare each component at the highest level known
+for it. An under-declared level silently drops nodes (the failure we are trying to
+prevent), while an over-declared level is always legal and merely admits more than
+the scene uses. The per-node level metadata is not entirely trustworthy — it reports
+`EnvironmentLight`, an X3D 4.0 addition, as `Lighting` level 1.
 
 ---
 
