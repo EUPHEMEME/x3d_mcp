@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOA5 Anatomy Explorer — HAnim / X3D</title>
+<script src="https://cdn.jsdelivr.net/npm/x_ite@11.6.6/dist/x_ite.min.js"></script>
+<style>
+  :root {
+    --bg:#0a0b0e; --panel:rgba(19,21,27,.86); --line:rgba(255,255,255,.10);
+    --ink:#e8eaf0; --dim:#8d93a3; --dim2:#c3c8d4;
+    --gold:#ffb92e; --axial:#5ac8fa; --appen:#ff9f6e;
+    --good:#4ade80; --bad:#f87171;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink);
+              font-family:var(--font); overflow:hidden; }
+  x3d-canvas { position:fixed; inset:0; width:100vw; height:100vh; display:block; }
+
+  .hud { position:fixed; z-index:10; }
+  .glass { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+           backdrop-filter:blur(22px) saturate(1.3); -webkit-backdrop-filter:blur(22px) saturate(1.3);
+           box-shadow:0 18px 50px rgba(0,0,0,.55); }
+
+  /* ---------- title + mode tabs ---------- */
+  #title { top:20px; left:22px; width:326px; padding:14px 16px 0; }
+  #title h1 { margin:0; font-size:14.5px; letter-spacing:.10em; text-transform:uppercase; font-weight:650; }
+  #title p  { margin:5px 0 12px; font-size:11.5px; color:var(--dim); }
+  #tabs { display:flex; gap:0; border-top:1px solid var(--line); margin:0 -16px; }
+  #tabs button { flex:1; border:0; border-radius:0; background:transparent; padding:11px 0;
+                 font-size:11.5px; font-weight:600; letter-spacing:.05em; color:var(--dim); cursor:pointer; }
+  #tabs button:first-child { border-bottom-left-radius:13px; }
+  #tabs button:last-child  { border-bottom-right-radius:13px; }
+  #tabs button.on { color:var(--gold); background:rgba(255,185,46,.10); }
+  #tabs button:hover:not(.on) { color:var(--ink); background:rgba(255,255,255,.05); }
+
+  /* ---------- left working panel ---------- */
+  #rail { top:158px; left:22px; width:326px; max-height:calc(100vh - 260px);
+          padding:16px; overflow-y:auto; }
+  #rail::-webkit-scrollbar { width:5px; }
+  #rail::-webkit-scrollbar-thumb { background:rgba(255,255,255,.14); border-radius:3px; }
+  .pane { display:none; } .pane.on { display:block; }
+  h3.sec { margin:0 0 10px; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+           color:var(--dim); font-weight:650; }
+
+  /* group browser */
+  .grp-row { display:flex; justify-content:space-between; align-items:center; padding:8px 10px;
+             border-radius:8px; cursor:pointer; font-size:12.5px; }
+  .grp-row:hover { background:rgba(255,255,255,.07); }
+  .grp-row .n { font-family:var(--mono); font-size:11px; color:var(--dim); }
+  .grp-row.open { background:rgba(255,255,255,.06); }
+  .grp-kids { display:none; padding:2px 0 8px 10px; }
+  .grp-kids.on { display:block; }
+  .bone-row { padding:5.5px 10px; border-radius:6px; cursor:pointer; font-size:12px; color:var(--dim2); }
+  .bone-row:hover { background:rgba(255,255,255,.08); color:var(--ink); }
+  .bone-row.sel { background:rgba(255,185,46,.16); color:var(--gold); }
+
+  /* the 257-vs-206 reconciliation */
+  #recon { margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid var(--line); }
+  .rbar { display:flex; height:9px; border-radius:5px; overflow:hidden; margin:10px 0 9px; }
+  .rbar i { display:block; }
+  .rkey { display:flex; flex-wrap:wrap; gap:9px; font-size:10.5px; color:var(--dim); margin-bottom:11px; }
+  .rkey span { display:flex; align-items:center; gap:4px; }
+  .rkey b { width:8px; height:8px; border-radius:2px; }
+  #recon p { font-size:12px; line-height:1.6; color:var(--dim2); margin:0 0 10px; }
+  .rdelta { font-family:var(--mono); font-size:11px; line-height:1.75; }
+  .rdelta div { display:flex; justify-content:space-between; gap:10px; }
+  .rdelta .d { font-weight:650; }
+  .rdelta .neg { color:var(--bad); } .rdelta .pos { color:var(--good); }
+  .rdelta em { color:var(--dim); font-style:normal; }
+
+  /* region essay, shown when a group is opened in the tree */
+  .essay { font-size:12px; line-height:1.62; color:var(--dim2); padding:10px 10px 12px;
+           border-left:2px solid rgba(255,185,46,.4); margin:2px 0 8px 10px; }
+
+  /* tours */
+  .tour { padding:11px 12px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px;
+          cursor:pointer; }
+  .tour:hover { background:rgba(255,255,255,.06); }
+  .tour b { display:block; font-size:13px; font-weight:600; margin-bottom:3px; }
+  .tour span { font-size:11.5px; color:var(--dim); line-height:1.45; }
+  #tourRun { display:none; } #tourRun.on { display:block; }
+  #tstep { font-size:13.5px; font-weight:650; margin:0 0 8px; }
+  #ttext { font-size:12.5px; line-height:1.62; color:var(--dim2); margin:0 0 14px; }
+  #tnav { display:flex; gap:8px; align-items:center; }
+  #tprog { flex:1; font-size:11px; color:var(--dim); font-family:var(--mono); }
+
+  /* quiz */
+  #qprompt { font-size:14px; line-height:1.5; font-weight:600; margin:0 0 12px; }
+  #qfeed { font-size:12.5px; line-height:1.6; margin:12px 0 0; padding:11px 12px; border-radius:9px; display:none; }
+  #qfeed.on { display:block; }
+  #qfeed.good { background:rgba(74,222,128,.13); border:1px solid rgba(74,222,128,.35); }
+  #qfeed.bad  { background:rgba(248,113,113,.13); border:1px solid rgba(248,113,113,.35); }
+  #qscore { display:flex; gap:14px; font-size:11px; color:var(--dim); font-family:var(--mono);
+            margin-bottom:12px; }
+  #qscore b { color:var(--ink); }
+
+  /* ---------- detail ---------- */
+  #detail { top:20px; right:22px; width:340px; padding:18px 20px 20px; }
+  #detail.empty .filled { display:none; }
+  #detail .hint { color:var(--dim); font-size:12.5px; line-height:1.55; margin:0; }
+  #detail:not(.empty) .hint { display:none; }
+  #bname { margin:0; font-size:23px; font-weight:650; letter-spacing:-.01em; line-height:1.15; }
+  #bmeta { margin:9px 0 13px; display:flex; gap:6px; flex-wrap:wrap; }
+  .chip { font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:650;
+          padding:3.5px 8px; border-radius:20px; border:1px solid currentColor; }
+  .chip.axial { color:var(--axial); } .chip.appendicular { color:var(--appen); }
+  .chip.id { color:var(--dim); font-family:var(--mono); text-transform:none;
+             letter-spacing:0; border-color:var(--line); }
+  .chip.nb { color:#c9a4ff; }
+  #bbody { max-height:52vh; overflow-y:auto; }
+  #bbody::-webkit-scrollbar { width:5px; }
+  #bbody::-webkit-scrollbar-thumb { background:rgba(255,255,255,.14); border-radius:3px; }
+  .fld { margin:0 0 13px; }
+  .fld h4 { margin:0 0 4px; font-size:9.5px; letter-spacing:.11em; text-transform:uppercase;
+            color:var(--dim); font-weight:650; }
+  .fld p { margin:0; font-size:12.5px; line-height:1.6; color:var(--dim2); }
+  .fld.note p { color:#e6d7b0; }
+  .arts { display:flex; flex-wrap:wrap; gap:5px; }
+  .arts span { font-size:11px; padding:3px 7px; border-radius:6px; background:rgba(255,255,255,.07);
+               color:var(--dim2); }
+
+  /* ---------- controls ---------- */
+  #controls { bottom:20px; left:50%; transform:translateX(-50%);
+              padding:11px 13px; display:flex; gap:14px; align-items:center; }
+  .grp { display:flex; gap:5px; align-items:center; }
+  .grp > label { font-size:9.5px; letter-spacing:.11em; text-transform:uppercase;
+                 color:var(--dim); margin-right:3px; font-weight:650; }
+  button { font-family:inherit; font-size:12px; font-weight:550; color:var(--ink);
+           background:rgba(255,255,255,.055); border:1px solid var(--line);
+           padding:6.5px 12px; border-radius:8px; cursor:pointer; transition:.14s; white-space:nowrap; }
+  button:hover { background:rgba(255,255,255,.13); }
+  button.on { background:var(--gold); border-color:var(--gold); color:#1a1205; }
+  button:disabled { opacity:.35; cursor:default; }
+  .sep { width:1px; height:24px; background:var(--line); }
+
+  /* ---------- search ---------- */
+  #search { top:20px; left:50%; transform:translateX(-50%); width:300px; padding:0; }
+  #q { width:100%; background:transparent; border:0; outline:0; color:var(--ink);
+       font-family:inherit; font-size:13px; padding:11px 14px; }
+  #q::placeholder { color:var(--dim); }
+  #hits { list-style:none; margin:0; padding:0; max-height:300px; overflow-y:auto;
+          border-top:1px solid var(--line); display:none; }
+  #hits.show { display:block; }
+  #hits li { padding:8px 14px; font-size:12.5px; cursor:pointer; display:flex;
+             justify-content:space-between; gap:10px; }
+  #hits li:hover { background:rgba(255,255,255,.09); }
+  #hits li .r { font-size:9.5px; text-transform:uppercase; color:var(--dim); }
+
+  #tip { position:fixed; z-index:20; pointer-events:none; padding:5px 9px; border-radius:7px;
+         background:rgba(10,11,14,.92); border:1px solid var(--line); font-size:11.5px;
+         font-weight:550; opacity:0; transition:opacity .1s; white-space:nowrap; }
+  #tip.show { opacity:1; }
+
+  #load { position:fixed; inset:0; z-index:50; display:grid; place-items:center;
+          background:var(--bg); transition:opacity .5s; }
+  #load.gone { opacity:0; pointer-events:none; }
+  #load p { color:var(--dim); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+            margin:16px 0 0; text-align:center; }
+  .spin { width:26px; height:26px; margin:0 auto; border:2px solid rgba(255,255,255,.14);
+          border-top-color:var(--gold); border-radius:50%; animation:s .8s linear infinite; }
+  @keyframes s { to { transform:rotate(360deg); } }
+
+  #credit { bottom:92px; right:22px; padding:9px 12px; font-size:10px; color:var(--dim);
+            line-height:1.5; max-width:300px; }
+  #credit b { color:#aeb4c2; font-weight:600; }
+  @media (max-width:1200px) { #credit { display:none; } }
+</style>
+</head>
+<body>
+
+<x3d-canvas id="cv" src="anatomy_explorer.x3d" update="auto"></x3d-canvas>
+<div id="load"><div><div class="spin"></div><p>Loading 257 bones</p></div></div>
+
+<div id="title" class="hud glass">
+  <h1>LOA5 Anatomy Explorer</h1>
+  <p><b id="nbones">257</b> parts · 150 joints · HAnim LOA-5 · X3D</p>
+  <div id="tabs">
+    <button data-m="explore" class="on">Explore</button>
+    <button data-m="learn">Learn</button>
+    <button data-m="quiz">Quiz</button>
+  </div>
+</div>
+
+<div id="rail" class="hud glass">
+  <!-- EXPLORE: browse by anatomical group -->
+  <div class="pane on" id="pane-explore">
+    <h3 class="sec">Browse by region</h3>
+    <div id="tree"></div>
+  </div>
+
+  <!-- LEARN: the count reconciliation, then the guided tours -->
+  <div class="pane" id="pane-learn">
+    <div id="recon"></div>
+    <div id="tourList"><h3 class="sec">Guided lessons</h3></div>
+    <div id="tourRun">
+      <h3 class="sec" id="ttitle"></h3>
+      <p id="tstep"></p>
+      <p id="ttext"></p>
+      <div id="tnav">
+        <button id="tprev">← Back</button>
+        <button id="tnext" class="on">Next →</button>
+        <span id="tprog"></span>
+        <button id="tquit">Exit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="pane" id="pane-quiz">
+    <div id="qintro">
+      <h3 class="sec">Find the bone</h3>
+      <p style="font-size:12.5px;line-height:1.6;color:var(--dim2);margin:0 0 14px">
+        You'll be asked to find a bone by what it <i>does</i>, not by its name.
+        Click it on the skeleton.</p>
+      <button id="qstart" class="on">Start quiz</button>
+    </div>
+    <div id="qrun" style="display:none">
+      <div id="qscore"><span>Q <b id="qn">1</b>/<b id="qtot">20</b></span>
+                       <span>Score <b id="qsc">0</b></span>
+                       <span>Streak <b id="qst">0</b></span></div>
+      <p id="qprompt"></p>
+      <div style="display:flex;gap:8px">
+        <button id="qskip">Skip</button>
+        <button id="qreveal">Show me</button>
+      </div>
+      <div id="qfeed"></div>
+    </div>
+  </div>
+</div>
+
+<div id="search" class="hud glass">
+  <input id="q" type="text" placeholder="Search — femur, C4, scaphoid…" autocomplete="off">
+  <ul id="hits"></ul>
+</div>
+
+<div id="detail" class="hud glass empty">
+  <p class="hint">Click any bone to identify it.<br>Hover to preview.</p>
+  <div class="filled">
+    <h2 id="bname"></h2>
+    <div id="bmeta"></div>
+    <div id="bbody"></div>
+  </div>
+</div>
+
+<div id="controls" class="hud glass">
+  <div class="grp" id="gait">
+    <label>Gait</label>
+    <button data-t="" class="on">Stand</button>
+    <button data-t="WalkTimer">Walk</button>
+    <button data-t="RunTimer">Run</button>
+    <button data-t="JumpTimer">Jump</button>
+  </div>
+  <div class="sep"></div>
+  <div class="grp" id="views">
+    <label>View</label>
+    <button data-v="VP_Body" class="on">Body</button>
+    <button data-v="VP_Skull">Skull</button>
+    <button data-v="VP_Ribcage">Ribs</button>
+    <button data-v="VP_Spine">Spine</button>
+    <button data-v="VP_Hand">Hand</button>
+    <button data-v="VP_Foot">Foot</button>
+  </div>
+  <div class="sep"></div>
+  <div class="grp" id="regions">
+    <label>Region</label>
+    <button data-r="all" class="on">All</button>
+    <button data-r="axial">Axial</button>
+    <button data-r="appendicular">Appendicular</button>
+  </div>
+  <div class="sep"></div>
+  <button id="isolate">Isolate</button>
+  <button id="reset">Reset</button>
+</div>
+
+<div id="credit" class="hud glass">
+  Bone meshes &amp; anatomical text: <b>Don Brutzman, Joe Williams, John Carlson,
+  Damon Hernandez</b> — Web3D Consortium HAnim <b>AllBonesLOA5Skeletons</b>.
+  Scene authored through <b>x3d_mcp</b> + <b>Technē</b>. Rendered by X_ITE.
+</div>
+
+<div id="tip"></div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Each bone exposes a naming triple, and that is the whole scene API:
+//     <bone>       Transform        -> .visible     (region toggles, isolate)
+//     TS_<bone>    TouchSensor      -> isOver       (what is under the cursor)
+//     MAT_<bone>   PhysicalMaterial -> .baseColor   (highlight)
+// ---------------------------------------------------------------------------
+const GOLD  = [1.00, 0.72, 0.13];
+const GLOW  = [0.42, 0.26, 0.00];
+const HOVER = [0.62, 0.80, 1.00];
+const TEACH = [0.35, 0.85, 1.00];   // tour highlight: cyan, distinct from selection
+const TGLOW = [0.05, 0.22, 0.34];
+const RIGHT = [0.30, 0.90, 0.45];   // quiz: correct
+const WRONG = [0.95, 0.35, 0.35];
+
+const $  = s => document.querySelector(s);
+const cv = $('#cv');
+const sf = c => new X3D.SFColor(c[0], c[1], c[2]);
+
+let scene = null, BONES = [], byName = {}, KB = null;
+const M = {};                        // bone -> {mat, tf, base}
+let lastOver = null, selected = null, isolated = false, region = 'all';
+let painted = new Set();             // bones currently painted by tour/quiz
+let mode = 'explore';
+
+/* ---------- painting ---------- */
+function paint(bone, base, emis) {
+  const m = M[bone]; if (!m || !m.mat) return;
+  try {
+    m.mat.baseColor = sf(base);
+    if ('emissiveColor' in m.mat) m.mat.emissiveColor = sf(emis || [0,0,0]);
+  } catch (e) {}
+}
+function restore(bone) { const m = M[bone]; if (m) paint(bone, m.base, [0,0,0]); }
+function clearPainted() { painted.forEach(b => { if (b !== selected) restore(b); }); painted.clear(); }
+
+function setVisible(bone, on) {
+  const m = M[bone]; if (!m || !m.tf) return;
+  try { m.tf.visible = on; } catch (e) {}
+}
+function showAll() { BONES.forEach(b => setVisible(b.name, true)); }
+
+/* ---------- selection + detail panel ---------- */
+function select(bone, opts = {}) {
+  if (selected && selected !== bone && !painted.has(selected)) restore(selected);
+  selected = bone;
+  if (!bone) { $('#detail').classList.add('empty'); return; }
+  if (!opts.noPaint) paint(bone, GOLD, GLOW);
+
+  const b = byName[bone] || { display: bone, region: '', description: '' };
+  const k = (KB && KB.bones && KB.bones[bone]) || {};
+
+  $('#bname').textContent = b.display;
+
+  const chips = [`<span class="chip ${b.region}">${b.region}</span>`,
+                 `<span class="chip id">${bone}</span>`];
+  if (b.kind && b.kind !== 'bone') chips.push(`<span class="chip nb">${b.kind}</span>`);
+  $('#bmeta').innerHTML = chips.join('');
+
+  const fld = (h, t, cls) => t ? `<div class="fld ${cls||''}"><h4>${h}</h4><p>${t}</p></div>` : '';
+  let html = '';
+  // 84 of the 257 parts carry researched entries; the rest fall back on the
+  // model's own group and the prose that ships inside the mesh file.
+  html += fld('Group', k.group || b.groupFallback);
+  if (k.function)  html += fld('Function', k.function);
+  html += fld('Description', b.description);
+  if (k.articulates_with && k.articulates_with.length)
+    html += `<div class="fld"><h4>Articulates with</h4><div class="arts">` +
+            k.articulates_with.map(a => `<span>${a}</span>`).join('') + `</div></div>`;
+  if (k.note)      html += fld('Note', k.note, 'note');
+  $('#bbody').innerHTML = html;
+  $('#detail').classList.remove('empty');
+
+  // keep the tree in sync
+  document.querySelectorAll('.bone-row').forEach(r =>
+    r.classList.toggle('sel', r.dataset.n === bone));
+
+  if (isolated) applyIsolate();
+}
+
+/* ---------- region / isolate ---------- */
+function applyRegion() {
+  BONES.forEach(b => setVisible(b.name,
+    isolated ? (b.name === selected) : (region === 'all' || b.region === region)));
+}
+function applyIsolate() {
+  if (isolated) BONES.forEach(b => setVisible(b.name, b.name === selected));
+  else applyRegion();
+}
+
+/* ---------- scene hookup ---------- */
+function hookScene() {
+  const browser = cv.browser;
+  scene = browser.currentScene;
+  // X_ITE pops its own chip whenever a Viewpoint binds, and renders
+  // TouchSensor.description as a native tooltip. Both fight the HTML chrome.
+  try { browser.setBrowserOption('Notifications', false); } catch (e) {}
+  try { browser.setBrowserOption('Shading', 'PHONG'); } catch (e) {}
+
+  let hooked = 0;
+  for (const b of BONES) {
+    const rec = {};
+    try { rec.mat = scene.getNamedNode('MAT_' + b.name);
+          rec.base = Array.from(rec.mat.baseColor); } catch (e) { rec.base = [1,1,1]; }
+    try { rec.tf = scene.getNamedNode(b.name); } catch (e) {}
+    M[b.name] = rec;
+    try {
+      const ts = scene.getNamedNode('TS_' + b.name);
+      // isOver is the only reliable identity signal: touchTime does NOT fire
+      // while the figure is animating (the bone moves out from under the cursor
+      // between press and release, so X3D suppresses the touch). Selection is
+      // therefore driven from the DOM pointerdown below, using lastOver.
+      ts.getField('isOver').addFieldCallback('ax', over => {
+        if (over) {
+          lastOver = b.name;
+          if (b.name !== selected && !painted.has(b.name)) paint(b.name, HOVER, [.05,.09,.16]);
+          const t = $('#tip'); t.textContent = b.display; t.classList.add('show');
+        } else {
+          if (lastOver === b.name) { lastOver = null; $('#tip').classList.remove('show'); }
+          if (b.name !== selected && !painted.has(b.name)) restore(b.name);
+        }
+      });
+      hooked++;
+    } catch (e) {}
+  }
+  $('#nbones').textContent = hooked;
+  buildTree();
+  buildRecon();
+  $('#load').classList.add('gone');
+}
+
+addEventListener('pointermove', e => {
+  const t = $('#tip');
+  t.style.left = (e.clientX + 14) + 'px';
+  t.style.top  = (e.clientY + 16) + 'px';
+});
+cv.addEventListener('pointerdown', () => {
+  if (!lastOver) return;
+  if (mode === 'quiz' && quiz.live) return answer(lastOver);
+  select(lastOver);
+});
+
+/* ---------- group tree (grouped by the model's own classification) ---------- */
+function buildTree() {
+  const groups = {};
+  for (const b of BONES) (groups[b.groupFallback || 'Other'] ||= []).push(b);
+  const order = Object.keys(groups).sort((a, c) => groups[c].length - groups[a].length);
+
+  $('#tree').innerHTML = order.map(g => `
+    <div class="grp-row" data-g="${g}"><span>${g}</span><span class="n">${groups[g].length}</span></div>
+    <div class="grp-kids" data-k="${g}">
+      ${groups[g].map(b => `<div class="bone-row" data-n="${b.name}">${b.display}</div>`).join('')}
+    </div>`).join('');
+
+  $('#tree').addEventListener('click', e => {
+    const g = e.target.closest('.grp-row');
+    if (g) {
+      const kids = $(`.grp-kids[data-k="${CSS.escape(g.dataset.g)}"]`);
+      const open = kids.classList.toggle('on');
+      g.classList.toggle('open', open);
+      clearPainted();
+      if (open) {
+        // light the whole group at once — seeing "all 24 ribs" or "all 8 carpals"
+        // as one lit set is the point of browsing by group
+        for (const el of kids.querySelectorAll('.bone-row')) {
+          paint(el.dataset.n, TEACH, TGLOW); painted.add(el.dataset.n);
+        }
+      }
+      return;
+    }
+    const b = e.target.closest('.bone-row');
+    if (b) select(b.dataset.n);
+  });
+}
+
+/* ---------- why 257 parts and not 206 bones? ---------- */
+function buildRecon() {
+  if (!KB || !KB.reconciliation) return;
+  const r = KB.reconciliation, k = r.kinds;
+  const total = Object.values(k).reduce((a, b) => a + b, 0);
+  const COL = { bone:'#e8eaf0', tooth:'#c9a4ff', disc:'#5ac8fa', cartilage:'#ffd479' };
+
+  const bar = Object.entries(k).map(([n, v]) =>
+    `<i style="width:${(v/total*100).toFixed(2)}%;background:${COL[n]||'#666'}"></i>`).join('');
+  const LABEL = { bone:'bones', tooth:'teeth', disc:'discs', cartilage:'cartilage' };
+  const key = Object.entries(k).map(([n, v]) =>
+    `<span><b style="background:${COL[n]||'#666'}"></b>${v} ${LABEL[n] || n}</span>`).join('');
+
+  // only the groups that actually differ — that is the whole story
+  const deltas = r.rows.filter(x => x.delta !== 0).map(x => `
+    <div><em>${x.group}</em><span class="d ${x.delta>0?'pos':'neg'}">${x.delta>0?'+':''}${x.delta}</span></div>`).join('');
+
+  $('#recon').innerHTML = `
+    <h3 class="sec">Why 257 parts, not 206 bones?</h3>
+    <div class="rbar">${bar}</div>
+    <div class="rkey">${key}</div>
+    <p>You have <b>${r.canonical_bones} bones</b>. This model has <b>${total} clickable
+       parts</b> — because it also carries the teeth, the intervertebral discs and some
+       cartilage, and <i>none of those are bones</i>. Strip them out and
+       <b>${r.model_bones} bones</b> remain. The last ${Math.abs(r.model_bones - r.canonical_bones)}
+       are where the model and the body disagree:</p>
+    <div class="rdelta">${deltas}</div>
+    <p style="margin-top:10px">The ossicles and the hyoid were never modelled. The ethmoid is
+       <i>one</i> midline bone but is built here as a left and a right half. And the left little
+       toe is simply missing its tip — a real gap in the source asset, not a fact about you.</p>`;
+}
+
+/* ---------- modes ---------- */
+$('#tabs').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-m]'); if (!btn) return;
+  mode = btn.dataset.m;
+  document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x === btn));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === 'pane-' + mode));
+  clearPainted(); showAll(); isolated = false; $('#isolate').classList.remove('on');
+  if (mode !== 'learn') tour.stop();
+  if (mode !== 'quiz')  quiz.stop();
+});
+
+/* ---------- guided tours ---------- */
+const tour = {
+  t: null, i: 0,
+  start(id) {
+    this.t = KB.tours.find(x => x.id === id); this.i = 0;
+    $('#tourList').style.display = 'none';
+    $('#tourRun').classList.add('on');
+    $('#ttitle').textContent = this.t.title;
+    this.render();
+  },
+  render() {
+    const s = this.t.steps[this.i];
+    $('#tstep').textContent = s.title;
+    $('#ttext').textContent = s.text;
+    $('#tprog').textContent = `${this.i + 1} / ${this.t.steps.length}`;
+    $('#tprev').disabled = this.i === 0;
+    $('#tnext').textContent = this.i === this.t.steps.length - 1 ? 'Done' : 'Next →';
+
+    clearPainted(); showAll(); isolated = false;
+    if (s.view) { try { scene.getNamedNode(s.view).set_bind = true; } catch (e) {} }
+    const set = new Set(s.bones.filter(b => M[b]));
+    if (s.isolate) BONES.forEach(b => setVisible(b.name, set.has(b.name)));
+    set.forEach(b => { paint(b, TEACH, TGLOW); painted.add(b); });
+    if (set.size === 1) select([...set][0], { noPaint: true });
+  },
+  next() { if (this.i < this.t.steps.length - 1) { this.i++; this.render(); } else this.stop(); },
+  prev() { if (this.i > 0) { this.i--; this.render(); } },
+  stop() {
+    this.t = null;
+    $('#tourRun').classList.remove('on');
+    $('#tourList').style.display = '';
+    clearPainted(); showAll();
+    try { scene.getNamedNode('VP_Body').set_bind = true; } catch (e) {}
+  },
+};
+$('#tnext').addEventListener('click', () => tour.next());
+$('#tprev').addEventListener('click', () => tour.prev());
+$('#tquit').addEventListener('click', () => tour.stop());
+
+/* ---------- quiz ---------- */
+const quiz = {
+  qs: [], i: 0, score: 0, streak: 0, live: false,
+  start() {
+    this.qs = KB.quiz.slice().sort((a, b) => a.level - b.level);
+    this.i = 0; this.score = 0; this.streak = 0;
+    $('#qintro').style.display = 'none';
+    $('#qrun').style.display = '';
+    $('#qtot').textContent = this.qs.length;
+    this.ask();
+  },
+  ask() {
+    clearPainted(); showAll();
+    $('#qfeed').classList.remove('on', 'good', 'bad');
+    const q = this.qs[this.i];
+    if (!q) return this.done();
+    this.live = true;
+    $('#qn').textContent = this.i + 1;
+    $('#qsc').textContent = this.score;
+    $('#qst').textContent = this.streak;
+    $('#qprompt').textContent = q.prompt;
+  },
+  judge(bone) {
+    const q = this.qs[this.i];
+    const ok = bone === q.answer || (q.accept || []).includes(bone);
+    this.live = false;
+    if (ok) { this.score++; this.streak++; } else { this.streak = 0; }
+
+    paint(bone, ok ? RIGHT : WRONG, ok ? [.03,.2,.07] : [.22,.03,.03]);
+    painted.add(bone);
+    if (!ok && M[q.answer]) { paint(q.answer, RIGHT, [.03,.2,.07]); painted.add(q.answer); }
+
+    const truth = byName[q.answer] ? byName[q.answer].display : q.answer;
+    const f = $('#qfeed');
+    f.className = 'on ' + (ok ? 'good' : 'bad');
+    f.innerHTML = `<b>${ok ? 'Correct' : 'Not quite'}</b> — ${truth}.<br>${q.teach || ''}
+      <div style="margin-top:10px"><button id="qnext">${this.i === this.qs.length - 1 ? 'Finish' : 'Next question →'}</button></div>`;
+    $('#qnext').addEventListener('click', () => { this.i++; this.ask(); });
+    $('#qsc').textContent = this.score;
+    $('#qst').textContent = this.streak;
+  },
+  done() {
+    this.live = false;
+    $('#qprompt').textContent = `Finished — ${this.score} of ${this.qs.length}.`;
+    $('#qfeed').className = 'on good';
+    $('#qfeed').innerHTML = `<div><button id="qagain">Try again</button></div>`;
+    $('#qagain').addEventListener('click', () => this.start());
+  },
+  stop() { this.live = false; $('#qintro').style.display = ''; $('#qrun').style.display = 'none'; },
+};
+function answer(bone) { quiz.judge(bone); select(bone, { noPaint: true }); }
+$('#qstart').addEventListener('click', () => quiz.start());
+$('#qskip').addEventListener('click', () => { if (quiz.live) { quiz.streak = 0; quiz.i++; quiz.ask(); } });
+$('#qreveal').addEventListener('click', () => { if (quiz.live) quiz.judge('__none__'); });
+
+/* ---------- controls ---------- */
+const only = (g, el) => g.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === el));
+$('#gait').addEventListener('click', e => {
+  const b = e.target.closest('button[data-t]'); if (!b) return;
+  only($('#gait'), b);
+  ['WalkTimer','RunTimer','JumpTimer'].forEach(t => {
+    try { scene.getNamedNode(t).enabled = (t === b.dataset.t); } catch (err) {}
+  });
+});
+$('#views').addEventListener('click', e => {
+  const b = e.target.closest('button[data-v]'); if (!b) return;
+  only($('#views'), b);
+  try { scene.getNamedNode(b.dataset.v).set_bind = true; } catch (err) {}
+});
+$('#regions').addEventListener('click', e => {
+  const b = e.target.closest('button[data-r]'); if (!b) return;
+  only($('#regions'), b);
+  region = b.dataset.r; isolated = false; $('#isolate').classList.remove('on');
+  applyRegion();
+});
+$('#isolate').addEventListener('click', e => {
+  if (!selected) return;
+  isolated = !isolated; e.target.classList.toggle('on', isolated); applyIsolate();
+});
+$('#reset').addEventListener('click', () => {
+  clearPainted();
+  if (selected) restore(selected);
+  selected = null; isolated = false; region = 'all';
+  $('#isolate').classList.remove('on');
+  only($('#regions'), $('#regions').querySelector('[data-r=all]'));
+  only($('#views'),   $('#views').querySelector('[data-v=VP_Body]'));
+  only($('#gait'),    $('#gait').querySelector('[data-t=""]'));
+  ['WalkTimer','RunTimer','JumpTimer'].forEach(t => {
+    try { scene.getNamedNode(t).enabled = false; } catch (e) {}
+  });
+  showAll();
+  try { scene.getNamedNode('VP_Body').set_bind = true; } catch (e) {}
+  $('#detail').classList.add('empty');
+});
+
+/* ---------- search ---------- */
+const q = $('#q'), hits = $('#hits');
+q.addEventListener('input', () => {
+  const s = q.value.trim().toLowerCase();
+  if (!s) { hits.classList.remove('show'); hits.innerHTML = ''; return; }
+  const found = BONES.filter(b => b.name.toLowerCase().includes(s) ||
+                                  b.display.toLowerCase().includes(s)).slice(0, 40);
+  hits.innerHTML = found.map(b =>
+    `<li data-n="${b.name}">${b.display}<span class="r">${b.region}</span></li>`).join('');
+  hits.classList.toggle('show', found.length > 0);
+});
+hits.addEventListener('click', e => {
+  const li = e.target.closest('li'); if (!li) return;
+  select(li.dataset.n); hits.classList.remove('show'); q.value = '';
+});
+
+/* ---------- boot ---------- */
+(async () => {
+  const man = await (await fetch('build_anatomy/bone_manifest.json')).json();
+  BONES = man.bones;
+  byName = Object.fromEntries(BONES.map(b => [b.name, b]));
+
+  // the teaching layer is optional: without it the explorer still works,
+  // it just has no tours, no quiz and no enriched fields.
+  try {
+    KB = await (await fetch('build_anatomy/anatomy_kb.json')).json();
+  } catch (e) { KB = null; }
+
+  if (KB && KB.tours) {
+    $('#tourList').innerHTML = '<h3 class="sec">Guided lessons</h3>' +
+      KB.tours.map(t => `<div class="tour" data-i="${t.id}"><b>${t.title}</b><span>${t.subtitle}</span></div>`).join('');
+    $('#tourList').addEventListener('click', e => {
+      const t = e.target.closest('.tour'); if (t) tour.start(t.dataset.i);
+    });
+  } else {
+    $('#tourList').innerHTML = '<h3 class="sec">Guided lessons</h3><p style="font-size:12px;color:var(--dim)">Knowledge base not built.</p>';
+    $('#qintro').innerHTML = '<p style="font-size:12px;color:var(--dim)">Knowledge base not built.</p>';
+  }
+
+  const wait = setInterval(() => {
+    if (!cv.browser || !cv.browser.currentScene) return;
+    try { cv.browser.currentScene.getNamedNode('TS_l_femur'); } catch (e) { return; }
+    clearInterval(wait);
+    if (!scene) hookScene();
+  }, 400);
+})();
+</script>
+</body>
+</html>

@@ -29,3 +29,8 @@ fauna_plate.x3d
 potter_creek_strata.x3d
 # curated export bundle (regenerable via make_project_folder.py)
 Shasta_X3D_Project/
+
+# LOA5 Anatomy Explorer — generated scene (10 MB each; rebuild with
+#   flatten_anatomy.py && build_anatomy_spine.py && generate_anatomy_explorer.py)
+/anatomy_explorer.x3d
+/build_anatomy/skeleton.x3dfrag

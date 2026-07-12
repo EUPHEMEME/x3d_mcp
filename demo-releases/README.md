@@ -13,6 +13,7 @@ through the project's evolution by opening folders rather than reading commits.
 | Snapshot | Date | Highlights |
 |---|---|---|
 | `2026-06-12_loa5-v1` | 2026-06-12 | First LOA5 release: canonical bone-mesh runner + interactive classroom (Walk/Run/Jump), PBR, X_ITE. Paper + visual changelog included. |
+| `2026-07-12_anatomy-explorer` | 2026-07-12 | **LOA5 Anatomy Explorer.** All 257 parts individually clickable — click a bone, it lights gold and explains itself (group, function, articulations, clinical note). Browse by region, 6 guided lessons, a 20-question quiz, and the honest "why 257 parts, not 206 bones?" audit. Studio-lit; picking works *while the figure runs*. Scene spine authored through the Technē proxy. |
 
 To add the next snapshot, copy the current demo outputs (`*.html`, `*.x3d`,
 `assets/`) plus the latest paper/changelog into a new dated folder.

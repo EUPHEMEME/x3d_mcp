@@ -1,0 +1,2326 @@
+{
+ "bones": {
+  "c1": {
+   "group": "Cervical vertebrae",
+   "function": "Cradles the skull and transmits its entire weight into the neck through its two lateral masses, acting as a bony washer that lets the head nod (\"yes\") at the atlanto-occipital joints.",
+   "articulates_with": [
+    "Occipital condyles of the skull (atlanto-occipital joints)",
+    "The axis (C2), via the median atlantoaxial joint with the dens and the two lateral atlantoaxial facet joints"
+   ],
+   "note": "Named for the Titan Atlas, who held up the heavens. It is the only vertebra with neither a body nor a true spinous process (it has a posterior tubercle instead) \u2014 its centrum separated in development and contributes to the dens of C2. Axial loading, classically diving into shallow water, drives the occipital condyles into its ring and bursts it: a Jefferson fracture."
+  },
+  "c2": {
+   "group": "Cervical vertebrae",
+   "function": "Provides the dens (odontoid process), the vertical peg around which the atlas and the whole head pivot; the atlantoaxial joints supply roughly half of all cervical rotation.",
+   "articulates_with": [
+    "The atlas (C1), via the median atlantoaxial joint and the two lateral atlantoaxial joints",
+    "C3, via the C2\u2013C3 intervertebral disc and paired facet (zygapophysial) joints"
+   ],
+   "note": "The dens is held against the anterior arch of the atlas by the transverse ligament of the atlas; if that ligament ruptures or is lax \u2014 as in Down syndrome or rheumatoid arthritis \u2014 the dens can encroach on the spinal cord (atlantoaxial instability). Bilateral fracture through the C2 pars interarticularis is the \"hangman's fracture\" (traumatic spondylolisthesis of the axis)."
+  },
+  "c3": {
+   "group": "Cervical vertebrae",
+   "function": "A typical cervical vertebra: a small body for load plus a large triangular vertebral foramen for the cord, with a transverse foramen conducting the vertebral artery and vein toward the skull.",
+   "articulates_with": [
+    "C2 above, via the C2\u2013C3 disc and facet joints",
+    "C4 below, via the C3\u2013C4 disc and facet joints"
+   ],
+   "note": "The anterior rami of C3, C4 and C5 form the phrenic nerve \u2014 \"C3, 4, 5 keeps the diaphragm alive.\" A complete cord injury above C3 abolishes spontaneous breathing, which is why high cervical fractures are immediately life-threatening. C3 sits at the upper margin of the cervical enlargement, which spans roughly vertebral levels C3\u2013T2 and is widest near C6."
+  },
+  "c4": {
+   "group": "Cervical vertebrae",
+   "function": "Typical cervical vertebra; its small body bears load while its bifid spinous process anchors muscles and its uncinate processes form uncovertebral joints that guide and limit side-to-side motion.",
+   "articulates_with": [
+    "C3 above, via the C3\u2013C4 disc and facet joints",
+    "C5 below, via the C4\u2013C5 disc and facet joints"
+   ],
+   "note": "A rough clinical level marker: the upper border of the thyroid cartilage and the bifurcation of the common carotid artery are classically placed at about C4, though both vary by roughly a level between individuals."
+  },
+  "c5": {
+   "group": "Cervical vertebrae",
+   "function": "Typical cervical vertebra that carries load through its body while its shallow, obliquely-set facet joints permit the large flexion, extension and rotation range of the mid-to-lower neck.",
+   "articulates_with": [
+    "C4 above, via the C4\u2013C5 disc and facet joints",
+    "C6 below, via the C5\u2013C6 disc and facet joints"
+   ],
+   "note": "C5\u2013C6 and C6\u2013C7 are the two most frequently herniated cervical discs and together account for the large majority of cases. Map disc to root carefully: a C5\u2013C6 herniation compresses the C6 root (weak wrist extension, diminished brachioradialis reflex, numb thumb), whereas the classic C5 root picture \u2014 weak deltoid and biceps with a dulled biceps reflex \u2014 usually comes from a C4\u2013C5 herniation."
+  },
+  "c6": {
+   "group": "Cervical vertebrae",
+   "function": "Typical cervical vertebra; its prominent anterior tubercle gives the carotid artery something firm to be compressed against, and its transverse foramen is usually where the vertebral artery begins its climb.",
+   "articulates_with": [
+    "C5 above, via the C5\u2013C6 disc and facet joints",
+    "C7 below, via the C6\u2013C7 disc and facet joints"
+   ],
+   "note": "The anterior tubercle of C6 is the carotid (Chassaignac) tubercle \u2014 palpable between trachea and sternocleidomastoid, and the landmark against which the common carotid can be pressed. The vertebral artery enters the transverse foramen at C6 in roughly 87\u201392% of people and then ascends through C1; entry at C5 or C7 is the usual variant."
+  },
+  "c7": {
+   "group": "Cervical vertebrae",
+   "function": "The transitional vertebra prominens: its long spinous process is a palpable attachment for the nuchal ligament, trapezius and rhomboid minor, and it hands cervical load on to the thorax.",
+   "articulates_with": [
+    "C6 above, via the C6\u2013C7 disc and facet joints",
+    "T1 below, via the C7\u2013T1 disc and facet joints"
+   ],
+   "note": "Its transverse foramen usually transmits only small accessory vertebral veins, not the vertebral artery. An extra rib can grow from its transverse process (cervical rib, present in about 1% of people), compressing the brachial plexus and subclavian artery \u2014 thoracic outlet syndrome. Its spinous process is usually single rather than bifid, but prevalence of bifidity varies by population: about 0.3% in one white sample, roughly 10% in a southwestern Nigerian CT series."
+  },
+  "t1": {
+   "group": "Thoracic vertebrae",
+   "function": "Atypical thoracic vertebra at the cervicothoracic junction: it takes the whole head of rib 1 and begins the rib cage's chain of load transfer while passing neck load into the thorax.",
+   "articulates_with": [
+    "C7 above, via the C7\u2013T1 disc and facet joints",
+    "T2 below, via the T1\u2013T2 disc and facet joints",
+    "The head of rib 1, on a complete (whole) costal facet, and the head of rib 2, on an inferior demifacet",
+    "The tubercle of rib 1, on its transverse costal facet"
+   ],
+   "note": "T1 is atypical because it carries a whole \u2014 not half \u2014 costal facet: rib 1 articulates with T1 alone. Its spinous process is long and nearly horizontal and can be as prominent as C7's, so counting down from \"the bump\" at the base of the neck can mislead you by one level."
+  },
+  "t2": {
+   "group": "Thoracic vertebrae",
+   "function": "Typical thoracic vertebra: its heart-shaped body carries load while costal facets tie it to two ribs, converting spine and thorax into a single stiff, protective box.",
+   "articulates_with": [
+    "T1 above, via the T1\u2013T2 disc and facet joints",
+    "T3 below, via the T2\u2013T3 disc and facet joints",
+    "The head of rib 2, on a superior demifacet, and the head of rib 3, on an inferior demifacet",
+    "The tubercle of rib 2, on its transverse costal facet"
+   ],
+   "note": "T2 shows the demifacet rule cleanly: the head of a typical rib straddles the intervertebral disc and grips two vertebrae at once \u2014 rib 3's head sits on T2's inferior demifacet and T3's superior demifacet. That double grip is part of why the thoracic spine moves so little."
+  },
+  "t3": {
+   "group": "Thoracic vertebrae",
+   "function": "Typical thoracic vertebra; its long, downward-sloping spinous process is a muscle lever and its costal facets anchor ribs 3 and 4.",
+   "articulates_with": [
+    "T2 above, via the T2\u2013T3 disc and facet joints",
+    "T4 below, via the T3\u2013T4 disc and facet joints",
+    "The head of rib 3, on a superior demifacet, and the head of rib 4, on an inferior demifacet",
+    "The tubercle of rib 3, on its transverse costal facet"
+   ],
+   "note": "A standard surface landmark: with the arms at the sides, the root (medial end) of the spine of the scapula lies at about the T3 level \u2014 one of the quicker ways to start counting thoracic levels on a patient's back."
+  },
+  "t4": {
+   "group": "Thoracic vertebrae",
+   "function": "Typical thoracic vertebra; it carries load, anchors ribs 4 and 5, and sits at the mediastinal watershed where the great vessels and the airway divide.",
+   "articulates_with": [
+    "T3 above, via the T3\u2013T4 disc and facet joints",
+    "T5 below, via the T4\u2013T5 disc and facet joints",
+    "The head of rib 4, on a superior demifacet, and the head of rib 5, on an inferior demifacet",
+    "The tubercle of rib 4, on its transverse costal facet"
+   ],
+   "note": "The sternal angle (angle of Louis) is classically taught to lie at the T4\u2013T5 disc \u2014 the plane of the carina, of the beginning and end of the aortic arch, and of the lower limit of the superior mediastinum. Treat this as a teaching convention rather than a measurement: CT series find the sternal angle at the T4\u2013T5 disc in only about a third of people, and frequently at T5."
+  },
+  "t5": {
+   "group": "Thoracic vertebrae",
+   "function": "One of the most typical thoracic vertebrae (T5\u2013T8): a heart-shaped, slightly wedged body that carries load and helps generate the thoracic kyphosis, with demifacets for two ribs.",
+   "articulates_with": [
+    "T4 above, via the T4\u2013T5 disc and facet joints",
+    "T6 below, via the T5\u2013T6 disc and facet joints",
+    "The head of rib 5, on a superior demifacet, and the head of rib 6, on an inferior demifacet",
+    "The tubercle of rib 5, on its transverse costal facet"
+   ],
+   "note": "Mid-thoracic spinous processes slope so steeply downward that the tip of one overlies the vertebra below \u2014 they overlap like roof shingles. So the spinous process you palpate does not mark the body of the same-numbered vertebra. The osteopathic \"rule of threes\" is the classic rough correction for this, but its accuracy has been questioned and it should be treated as an approximation only."
+  },
+  "t6": {
+   "group": "Thoracic vertebrae",
+   "function": "Typical thoracic vertebra; body and costal facets transfer thoracic wall load into the column while the long spinous process levers the erector spinae.",
+   "articulates_with": [
+    "T5 above, via the T5\u2013T6 disc and facet joints",
+    "T7 below, via the T6\u2013T7 disc and facet joints",
+    "The head of rib 6, on a superior demifacet, and the head of rib 7, on an inferior demifacet",
+    "The tubercle of rib 6, on its transverse costal facet"
+   ],
+   "note": "Thoracic facet joints lie close to the coronal (frontal) plane, arced as if on a circle centred in the vertebral body \u2014 geometry that favours rotation and lateral flexion while limiting flexion and extension. That is the mirror image of the lumbar spine, whose near-sagittal facets allow flexion/extension and block rotation."
+  },
+  "t7": {
+   "group": "Thoracic vertebrae",
+   "function": "Typical thoracic vertebra; carries load, anchors ribs 7 and 8, and lies at the transition toward the more mobile lower thorax.",
+   "articulates_with": [
+    "T6 above, via the T6\u2013T7 disc and facet joints",
+    "T8 below, via the T7\u2013T8 disc and facet joints",
+    "The head of rib 7, on a superior demifacet, and the head of rib 8, on an inferior demifacet",
+    "The tubercle of rib 7, on its transverse costal facet"
+   ],
+   "note": "The inferior angle of the scapula is traditionally taught as the T7 landmark, but this is one of the shakiest numbers in surface anatomy: in upright subjects a systematic review and meta-analysis places it nearer the T8 spinous process or upper T9 body, spread across T7\u2013T10. Use it to get close, not to name a level."
+  },
+  "t8": {
+   "group": "Thoracic vertebrae",
+   "function": "Typical thoracic vertebra whose body and rib facets carry load; it lies at the level where the inferior vena cava pierces the diaphragm.",
+   "articulates_with": [
+    "T7 above, via the T7\u2013T8 disc and facet joints",
+    "T9 below, via the T8\u2013T9 disc and facet joints",
+    "The head of rib 8, on a superior demifacet, and the head of rib 9, on an inferior demifacet",
+    "The tubercle of rib 8, on its transverse costal facet"
+   ],
+   "note": "The caval hiatus \u2014 where the inferior vena cava passes through the central tendon of the diaphragm \u2014 is at T8. Diaphragm mnemonic: \"I ate (T8) ten (T10) eggs at twelve (T12).\" Roughly 75% of thoracic disc herniations occur between T8 and T12, with T11\u2013T12 the single most commonly affected level."
+  },
+  "t9": {
+   "group": "Thoracic vertebrae",
+   "function": "Lower thoracic vertebra; carries the increasing axial load of the enlarging caudal bodies and anchors rib 9 and, in most people, rib 10.",
+   "articulates_with": [
+    "T8 above, via the T8\u2013T9 disc and facet joints",
+    "T10 below, via the T9\u2013T10 disc and facet joints",
+    "The head of rib 9, on a superior demifacet, and, in most people, the head of rib 10, on an inferior demifacet",
+    "The tubercle of rib 9, on its transverse costal facet"
+   ],
+   "note": "T9 is a well-known variant vertebra: in some people it has no inferior demifacet at all, and rib 10 then articulates with T10 alone. From about this level down the spinous processes become progressively shorter and less steeply angled as the column shifts toward lumbar form."
+  },
+  "t10": {
+   "group": "Thoracic vertebrae",
+   "function": "Atypical lower thoracic vertebra that usually receives the whole head of rib 10 on a single complete facet; it carries load at the level where the oesophagus leaves the thorax.",
+   "articulates_with": [
+    "T9 above, via the T9\u2013T10 disc and facet joints",
+    "T11 below, via the T10\u2013T11 disc and facet joints",
+    "The head of rib 10 \u2014 typically a single complete costal facet, though a demifacet shared with T9 occurs in some people",
+    "The tubercle of rib 10, on its transverse costal facet"
+   ],
+   "note": "The oesophageal hiatus is at T10: the oesophagus and the anterior and posterior vagal trunks pass through the muscular part of the diaphragm (formed mainly by the right crus), whose fibres act as a physiological sphincter \u2014 which is why hiatus hernia and reflux belong to this level. Below it, T11 and T12 lose their transverse costal facets entirely and take whole costal facets for their floating ribs."
+  },
+  "l_rib1": {
+   "group": "True ribs (atypical) \u2014 thoracic cage",
+   "function": "The shortest, broadest, flattest and most sharply curved rib; it forms the lateral boundary of the superior thoracic aperture, carries the subclavian vessels and the brachial plexus across the top of the chest in the grooves on its upper surface, and anchors the scalene muscles that elevate the whole cage in forced inspiration.",
+   "articulates_with": [
+    "Body of T1 vertebra only (single facet on the head)",
+    "Transverse process of T1 (costotransverse joint)",
+    "1st costal cartilage, which joins the manubrium of the sternum"
+   ],
+   "note": "The 1st sternocostal joint is the only one that is a synchondrosis (primary cartilaginous, essentially immobile); joints 2\u20137 are synovial plane joints. On the rib's upper surface the subclavian vein grooves in front of the scalene tubercle and the subclavian artery and lower trunk of the brachial plexus groove behind it \u2014 the anatomy that a cervical rib (present in roughly 0.5\u20131% of people, and asymptomatic in about 90% of them) can compromise to produce thoracic outlet syndrome."
+  },
+  "r_rib1": {
+   "group": "True ribs (atypical) \u2014 thoracic cage",
+   "function": "The shortest, broadest, flattest and most sharply curved rib; it forms the lateral boundary of the superior thoracic aperture, carries the subclavian vessels and the brachial plexus across the top of the chest in the grooves on its upper surface, and anchors the scalene muscles that elevate the whole cage in forced inspiration.",
+   "articulates_with": [
+    "Body of T1 vertebra only (single facet on the head)",
+    "Transverse process of T1 (costotransverse joint)",
+    "1st costal cartilage, which joins the manubrium of the sternum"
+   ],
+   "note": "The 1st sternocostal joint is the only one that is a synchondrosis (primary cartilaginous, essentially immobile); joints 2\u20137 are synovial plane joints. On the rib's upper surface the subclavian vein grooves in front of the scalene tubercle and the subclavian artery and lower trunk of the brachial plexus groove behind it \u2014 the anatomy that a cervical rib (present in roughly 0.5\u20131% of people, and asymptomatic in about 90% of them) can compromise to produce thoracic outlet syndrome."
+  },
+  "l_rib2": {
+   "group": "True ribs (atypical) \u2014 thoracic cage",
+   "function": "About twice the length of rib 1 but still atypically thin and flat, it walls the upper thorax beside the lung apex and carries a roughened tuberosity on its superior surface that gives origin to the upper digitations of serratus anterior, the muscle that draws the scapula around the chest wall.",
+   "articulates_with": [
+    "Bodies of T1 and T2 vertebrae plus the T1/T2 intervertebral disc (two facets on the head)",
+    "Transverse process of T2 (costotransverse joint)",
+    "2nd costal cartilage, which meets the sternum at the manubriosternal joint (demifacets on both manubrium and body)"
+   ],
+   "note": "The 2nd costal cartilage meets the sternum exactly at the sternal angle (angle of Louis), the palpable transverse ridge that lies at the level of the T4/T5 intervertebral disc \u2014 so clinicians find rib 2 by feeling that ridge and count intercostal spaces downward from it, because rib 1 is not palpable beneath the clavicle."
+  },
+  "r_rib2": {
+   "group": "True ribs (atypical) \u2014 thoracic cage",
+   "function": "About twice the length of rib 1 but still atypically thin and flat, it walls the upper thorax beside the lung apex and carries a roughened tuberosity on its superior surface that gives origin to the upper digitations of serratus anterior, the muscle that draws the scapula around the chest wall.",
+   "articulates_with": [
+    "Bodies of T1 and T2 vertebrae plus the T1/T2 intervertebral disc (two facets on the head)",
+    "Transverse process of T2 (costotransverse joint)",
+    "2nd costal cartilage, which meets the sternum at the manubriosternal joint (demifacets on both manubrium and body)"
+   ],
+   "note": "The 2nd costal cartilage meets the sternum exactly at the sternal angle (angle of Louis), the palpable transverse ridge that lies at the level of the T4/T5 intervertebral disc \u2014 so clinicians find rib 2 by feeling that ridge and count intercostal spaces downward from it, because rib 1 is not palpable beneath the clavicle."
+  },
+  "l_rib3": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "The first of the seven typical ribs (3\u20139), it encloses the upper thorax and, through its double posterior hinge, rotates in pump-handle fashion to drive the sternum forward and deepen the chest during inspiration.",
+   "articulates_with": [
+    "Bodies of T2 and T3 plus the T2/T3 intervertebral disc (two facets on the head, meeting demifacets on the vertebral bodies)",
+    "Transverse process of T3 (costotransverse joint)",
+    "3rd costal cartilage, then the body of the sternum"
+   ],
+   "note": "Ribs 1\u20133 are short, thick and shielded by the clavicle and scapula, so fracturing them takes considerable force; their fracture is therefore treated as a marker of high-energy trauma and prompts a careful search for injury to the lung apex, brachial plexus or great vessels \u2014 though on current evidence an isolated upper-rib fracture with no other signs does not by itself mandate vascular imaging."
+  },
+  "r_rib3": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "The first of the seven typical ribs (3\u20139), it encloses the upper thorax and, through its double posterior hinge, rotates in pump-handle fashion to drive the sternum forward and deepen the chest during inspiration.",
+   "articulates_with": [
+    "Bodies of T2 and T3 plus the T2/T3 intervertebral disc (two facets on the head, meeting demifacets on the vertebral bodies)",
+    "Transverse process of T3 (costotransverse joint)",
+    "3rd costal cartilage, then the body of the sternum"
+   ],
+   "note": "Ribs 1\u20133 are short, thick and shielded by the clavicle and scapula, so fracturing them takes considerable force; their fracture is therefore treated as a marker of high-energy trauma and prompts a careful search for injury to the lung apex, brachial plexus or great vessels \u2014 though on current evidence an isolated upper-rib fracture with no other signs does not by itself mandate vascular imaging."
+  },
+  "l_rib4": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "A textbook typical rib \u2014 head, neck, tubercle, angle, shaft and costal groove \u2014 it walls in the mid-thorax, gives purchase to the intercostal muscles that stiffen the chest wall against collapse, and swings on its vertebral hinge to enlarge the thoracic cavity.",
+   "articulates_with": [
+    "Bodies of T3 and T4 plus the T3/T4 intervertebral disc (two facets on the head)",
+    "Transverse process of T4 (costotransverse joint)",
+    "4th costal cartilage, then the body of the sternum"
+   ],
+   "note": "Run a finger along the inner aspect of the lower border and you find the costal groove, which shelters the intercostal vein, artery and nerve in that order from top to bottom (VAN) \u2014 the reason a chest drain or aspirating needle is passed above the rib below rather than under the rib above. Note the caveat: a collateral branch runs along the superior border of the lower rib, so the safest track is the middle-to-upper part of the intercostal space, not hard against either rib."
+  },
+  "r_rib4": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "A textbook typical rib \u2014 head, neck, tubercle, angle, shaft and costal groove \u2014 it walls in the mid-thorax, gives purchase to the intercostal muscles that stiffen the chest wall against collapse, and swings on its vertebral hinge to enlarge the thoracic cavity.",
+   "articulates_with": [
+    "Bodies of T3 and T4 plus the T3/T4 intervertebral disc (two facets on the head)",
+    "Transverse process of T4 (costotransverse joint)",
+    "4th costal cartilage, then the body of the sternum"
+   ],
+   "note": "Run a finger along the inner aspect of the lower border and you find the costal groove, which shelters the intercostal vein, artery and nerve in that order from top to bottom (VAN) \u2014 the reason a chest drain or aspirating needle is passed above the rib below rather than under the rib above. Note the caveat: a collateral branch runs along the superior border of the lower rib, so the safest track is the middle-to-upper part of the intercostal space, not hard against either rib."
+  },
+  "l_rib5": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "A typical mid-cage rib that overlies the heart and lower lung, transmits the pull of the intercostal muscles, and rotates to expand the thorax in both pump- and bucket-handle directions; its costal cartilage is the uppermost of the three (5, 6, 7) that receive the insertion of rectus abdominis.",
+   "articulates_with": [
+    "Bodies of T4 and T5 plus the T4/T5 intervertebral disc (two facets on the head)",
+    "Transverse process of T5 (costotransverse joint)",
+    "5th costal cartilage, then the body of the sternum"
+   ],
+   "note": "On the left this is the cardiac rib: the apex beat is normally felt in the 5th intercostal space (immediately below rib 5) in the midclavicular line, and the 5th intercostal space marks the inferior border of the 'triangle of safety' \u2014 bounded in front by the lateral edge of pectoralis major and behind by the anterior edge of latissimus dorsi \u2014 into which chest drains are inserted (guidelines commonly cite the 4th or 5th space)."
+  },
+  "r_rib5": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "A typical mid-cage rib that protects the lower right lung and, in expiration, the dome of the liver \u2014 which rises to about this level in the midclavicular line \u2014 while transmitting intercostal muscle tension and rotating to expand the thorax during inspiration.",
+   "articulates_with": [
+    "Bodies of T4 and T5 plus the T4/T5 intervertebral disc (two facets on the head)",
+    "Transverse process of T5 (costotransverse joint)",
+    "5th costal cartilage, then the body of the sternum"
+   ],
+   "note": "The middle ribs (roughly 4\u20139) are the longest, thinnest and least shielded by bone or muscle, and are the ones most commonly fractured. Because the liver reaches this high on the right, right-sided middle and lower rib fractures should prompt evaluation for liver injury \u2014 in one trauma series about 68% of patients with liver injury had fractures of ribs 5\u20138 \u2014 so a right-sided rib fracture is never assumed to be 'just a rib'."
+  },
+  "l_rib6": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "A typical rib of the lower true group; it completes the bony protection of the heart and lung base, participates in both pump- and bucket-handle rotation, and provides the platform on which the abdominal wall begins to grip the thorax.",
+   "articulates_with": [
+    "Bodies of T5 and T6 plus the T5/T6 intervertebral disc (two facets on the head)",
+    "Transverse process of T6 (costotransverse joint)",
+    "6th costal cartilage, then the body of the sternum",
+    "7th costal cartilage, via an interchondral joint"
+   ],
+   "note": "Rectus abdominis does not end at the ribs by accident: it inserts onto the 5th, 6th and 7th costal cartilages and the xiphoid process, so every sit-up pulls directly on the lower true ribs \u2014 this is where abdominal and thoracic mechanics are mechanically coupled."
+  },
+  "r_rib6": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "A typical rib of the lower true group; it completes the bony protection of the heart and lung base, participates in both pump- and bucket-handle rotation, and provides the platform on which the abdominal wall begins to grip the thorax.",
+   "articulates_with": [
+    "Bodies of T5 and T6 plus the T5/T6 intervertebral disc (two facets on the head)",
+    "Transverse process of T6 (costotransverse joint)",
+    "6th costal cartilage, then the body of the sternum",
+    "7th costal cartilage, via an interchondral joint"
+   ],
+   "note": "Rectus abdominis does not end at the ribs by accident: it inserts onto the 5th, 6th and 7th costal cartilages and the xiphoid process, so every sit-up pulls directly on the lower true ribs \u2014 this is where abdominal and thoracic mechanics are mechanically coupled."
+  },
+  "l_rib7": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "The longest rib and the lowest one to reach the sternum directly; it is the structural keystone of the lower chest, since the chain of false-rib cartilages (10 to 9, 9 to 8, 8 to 7) ultimately delivers the whole costal margin onto its cartilage, and the costal part of the diaphragm arises from the internal surfaces of the lower six ribs and their cartilages, beginning here.",
+   "articulates_with": [
+    "Bodies of T6 and T7 plus the T6/T7 intervertebral disc (two facets on the head)",
+    "Transverse process of T7 (costotransverse joint)",
+    "7th costal cartilage, which meets the sternum low on the body at the xiphisternal junction (and in some people also contacts the xiphoid process)",
+    "6th costal cartilage, via an interchondral joint",
+    "8th costal cartilage, via an interchondral joint"
+   ],
+   "note": "Ribs increase in length from 1 to 7 and then diminish again to 12, so rib 7 is the longest. Beware the common mis-statement that ribs 8, 9 and 10 all attach to the 7th cartilage: only cartilage 8 articulates with cartilage 7 directly \u2014 9 joins 8 and 10 joins 9 \u2014 but because the chain terminates on it, the 7th costal cartilage is still the anchor from which the entire costal margin ultimately hangs."
+  },
+  "r_rib7": {
+   "group": "True ribs (typical) \u2014 thoracic cage",
+   "function": "The longest rib and the lowest one to reach the sternum directly; it is the structural keystone of the lower chest, since the chain of false-rib cartilages (10 to 9, 9 to 8, 8 to 7) ultimately delivers the whole costal margin onto its cartilage, and the costal part of the diaphragm arises from the internal surfaces of the lower six ribs and their cartilages, beginning here.",
+   "articulates_with": [
+    "Bodies of T6 and T7 plus the T6/T7 intervertebral disc (two facets on the head)",
+    "Transverse process of T7 (costotransverse joint)",
+    "7th costal cartilage, which meets the sternum low on the body at the xiphisternal junction (and in some people also contacts the xiphoid process)",
+    "6th costal cartilage, via an interchondral joint",
+    "8th costal cartilage, via an interchondral joint"
+   ],
+   "note": "Ribs increase in length from 1 to 7 and then diminish again to 12, so rib 7 is the longest. Beware the common mis-statement that ribs 8, 9 and 10 all attach to the 7th cartilage: only cartilage 8 articulates with cartilage 7 directly \u2014 9 joins 8 and 10 joins 9 \u2014 but because the chain terminates on it, the 7th costal cartilage is still the anchor from which the entire costal margin ultimately hangs."
+  },
+  "frontal": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Forms the forehead and the roof of both orbits, shielding the frontal lobes and receiving the masticatory loads that travel up the nasomaxillary and zygomaticomaxillary buttresses from the teeth.",
+   "articulates_with": [
+    "Both parietal bones (coronal suture)",
+    "Sphenoid",
+    "Ethmoid",
+    "Both nasal bones",
+    "Both maxillae",
+    "Both lacrimal bones",
+    "Both zygomatic bones",
+    "(12 bones in total)"
+   ],
+   "note": "You are born with TWO frontal bones separated by the metopic (frontal) suture. Fusion usually begins around 9-12 months and is normally complete by about 6-8 years, but the suture persists into adult life in a minority of people (reported prevalence ranges roughly 1-12% depending on population) \u2014 a classic radiology mimic of a skull fracture."
+  },
+  "occipital": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Carries the weight of the head onto the vertebral column through its two occipital condyles and frames the foramen magnum, the doorway through which the brainstem becomes the spinal cord.",
+   "articulates_with": [
+    "Both parietal bones (lambdoid suture)",
+    "Both temporal bones",
+    "Sphenoid",
+    "Atlas (C1) at the atlanto-occipital joints",
+    "(6 bones in total)"
+   ],
+   "note": "It is the only skull bone that articulates with the vertebral column. The atlanto-occipital joint is the \"yes\" joint \u2014 nodding happens here \u2014 while most head-shaking \"no\" rotation happens one level lower at the atlanto-axial joint."
+  },
+  "sphenoid": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Acts as the keystone of the cranial base \u2014 a butterfly-shaped central wedge that locks the front and back of the skull together, floors the middle cranial fossa, and cradles the pituitary gland in the sella turcica.",
+   "articulates_with": [
+    "Frontal",
+    "Both parietal bones",
+    "Both temporal bones",
+    "Occipital",
+    "Ethmoid",
+    "Vomer",
+    "Both zygomatic bones",
+    "Both palatine bones",
+    "(12 bones in total)"
+   ],
+   "note": "The sphenoid contacts every other cranial bone \u2014 hence \"keystone.\" Its name is from Greek sphenoeides, \"wedge-shaped,\" and surgeons reach the pituitary by passing through the nose and the air-filled sphenoid sinus (the trans-sphenoidal approach)."
+  },
+  "l_ethmoid": {
+   "group": "Cranial bones (neurocranium) \u2014 left half of the single, unpaired ethmoid",
+   "function": "The left half of the ethmoid forms the left ethmoidal labyrinth: it separates the medial orbit from the nasal cavity via the paper-thin lamina papyracea, carries the left superior and middle nasal conchae that warm and humidify inhaled air, and its cribriform plate transmits the left olfactory nerve fibres into the skull.",
+   "articulates_with": [
+    "Frontal",
+    "Sphenoid",
+    "Both nasal bones",
+    "Both maxillae",
+    "Both lacrimal bones",
+    "Both palatine bones",
+    "Both inferior nasal conchae",
+    "Vomer",
+    "(the whole ethmoid articulates with 13 bones)"
+   ],
+   "note": "Anatomically the ethmoid is ONE unpaired midline bone \u2014 the model splits it into left/right halves for display, so do not count it twice. Its orbital wall, the lamina papyracea (\"sheet of paper\"), is so thin that a medial-wall fracture lets air pass from the nose into the orbit and eyelid when the patient blows their nose (orbital emphysema)."
+  },
+  "r_ethmoid": {
+   "group": "Cranial bones (neurocranium) \u2014 right half of the single, unpaired ethmoid",
+   "function": "The right half of the ethmoid forms the right ethmoidal labyrinth: it separates the right orbit from the nasal cavity, carries the right superior and middle conchae, and is perforated by the cribriform plate for the right olfactory nerve fibres.",
+   "articulates_with": [
+    "Frontal",
+    "Sphenoid",
+    "Both nasal bones",
+    "Both maxillae",
+    "Both lacrimal bones",
+    "Both palatine bones",
+    "Both inferior nasal conchae",
+    "Vomer",
+    "(the whole ethmoid articulates with 13 bones)"
+   ],
+   "note": "A fracture of the cribriform plate can tear the meninges and leak cerebrospinal fluid out of the nose (CSF rhinorrhoea) and shear the olfactory nerve fibres, producing anosmia \u2014 one reason head-injury patients lose their sense of smell."
+  },
+  "l_parietal": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Forms the left side and roof of the braincase, spreading impact load through its curved shell into the frontal, occipital and temporal bones the way a dome distributes force.",
+   "articulates_with": [
+    "Right parietal (sagittal suture)",
+    "Frontal (coronal suture)",
+    "Occipital (lambdoid suture)",
+    "Left temporal (squamosal suture)",
+    "Sphenoid",
+    "(5 bones in total)"
+   ],
+   "note": "Its inner surface is grooved by the middle meningeal artery. At the pterion \u2014 where frontal, parietal, temporal and sphenoid meet \u2014 the vault is at its thinnest, and a blow there can rupture the artery beneath and cause an extradural (epidural) haematoma, the classic \"lucid interval\" head injury."
+  },
+  "r_parietal": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Forms the right side and roof of the braincase, sharing the load-bearing dome of the calvaria with its partner and protecting the parietal lobe beneath.",
+   "articulates_with": [
+    "Left parietal (sagittal suture)",
+    "Frontal (coronal suture)",
+    "Occipital (lambdoid suture)",
+    "Right temporal (squamosal suture)",
+    "Sphenoid",
+    "(5 bones in total)"
+   ],
+   "note": "The parietals meet at the sagittal suture; its front end (bregma, where it meets the coronal suture) and back end (lambda, where it meets the lambdoid suture) are the adult remnants of the infant's anterior and posterior fontanelles \u2014 the \"soft spots\" that let the skull deform during birth and expand as the brain grows."
+  },
+  "l_temporal": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Houses and armours the left middle and inner ear inside its dense petrous part, provides the socket (mandibular fossa) for the left temporomandibular joint, and anchors sternocleidomastoid to its mastoid process while its squamous part contributes to the temporal fossa from which temporalis arises.",
+   "articulates_with": [
+    "Left parietal (squamosal suture)",
+    "Occipital",
+    "Sphenoid",
+    "Left zygomatic (zygomatic arch)",
+    "Mandible (temporomandibular joint)",
+    "(5 bones in total)"
+   ],
+   "note": "\"Petrous\" is from Latin petrosus, \"stony.\" The petrous part is the densest, most mineralised bone in the body, which is why the inner ear survives in ancient skeletons and why petrous bone is a prime source of ancient DNA. Its mastoid air cells can be seeded by middle-ear infection, causing mastoiditis."
+  },
+  "r_temporal": {
+   "group": "Cranial bones (neurocranium)",
+   "function": "Encases the right hearing and balance apparatus, forms the right jaw socket, and gives passage to the internal carotid artery (carotid canal) and the facial nerve (which exits at the stylomastoid foramen).",
+   "articulates_with": [
+    "Right parietal (squamosal suture)",
+    "Occipital",
+    "Sphenoid",
+    "Right zygomatic (zygomatic arch)",
+    "Mandible (temporomandibular joint)",
+    "(5 bones in total)"
+   ],
+   "note": "The facial nerve runs a long, tight bony canal through the temporal bone \u2014 which is why temporal bone fractures, and sometimes middle-ear infection, can produce a facial palsy on that side."
+  },
+  "mandible": {
+   "group": "Facial skeleton (viscerocranium) \u2014 unpaired",
+   "function": "The jaw lever: it carries the lower teeth and converts the pull of masseter, temporalis and the pterygoids into biting and grinding force.",
+   "articulates_with": [
+    "Both temporal bones at the temporomandibular joints"
+   ],
+   "note": "The largest and strongest bone of the face, yet it starts life as two halves that fuse at the mandibular symphysis in roughly the first year or two. It is the only large mobile bone of the skull (the three tiny auditory ossicles in each ear also move). The TMJ is unusual: a synovial joint with an articular disc whose surfaces are fibrocartilage rather than hyaline cartilage, and it both hinges and slides."
+  },
+  "vomer": {
+   "group": "Facial skeleton (viscerocranium) \u2014 unpaired",
+   "function": "Forms the posterior-inferior bony nasal septum, bracing the midline partition that splits the nasal airway into two channels.",
+   "articulates_with": [
+    "Sphenoid",
+    "Ethmoid (perpendicular plate)",
+    "Both maxillae",
+    "Both palatine bones",
+    "(6 bones in total, plus the septal cartilage anteriorly)"
+   ],
+   "note": "Its name is Latin for \"ploughshare,\" after its blade-like shape. With the ethmoid's perpendicular plate it forms the bony septum; a deviated septum can involve the vomer, the perpendicular plate, the septal cartilage, or any combination of them."
+  },
+  "l_maxilla": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "The left upper jaw: it carries the upper teeth in its alveolar process, floors the orbit, walls the nose, and transmits chewing loads from the teeth up through the facial buttresses into the cranial base.",
+   "articulates_with": [
+    "Frontal",
+    "Ethmoid",
+    "Left nasal",
+    "Left zygomatic",
+    "Left lacrimal",
+    "Left palatine",
+    "Vomer",
+    "Left inferior nasal concha",
+    "Right maxilla (intermaxillary suture)",
+    "(9 bones in total)"
+   ],
+   "note": "Each maxilla articulates with nine bones \u2014 more than any other facial bone \u2014 and is hollowed out by the maxillary sinus, the largest paranasal sinus. Because upper molar and premolar roots often project toward that sinus floor, a dental infection can present as sinusitis."
+  },
+  "r_maxilla": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "The right upper jaw: it holds the right upper teeth, forms the floor of the right orbit and, with its palatine process, the anterior roughly three-quarters of the hard palate, channelling bite force into the zygomatic and nasomaxillary buttresses.",
+   "articulates_with": [
+    "Frontal",
+    "Ethmoid",
+    "Right nasal",
+    "Right zygomatic",
+    "Right lacrimal",
+    "Right palatine",
+    "Vomer",
+    "Right inferior nasal concha",
+    "Left maxilla (intermaxillary suture)",
+    "(9 bones in total)"
+   ],
+   "note": "Cleft palate results from failure of the embryonic palatal shelves (which become the palatine processes of the maxillae and the palatine bones) to fuse; cleft lip arises earlier, when the maxillary and medial nasal prominences fail to merge. Mid-face fractures are graded by the Le Fort classification, which describes three planes along which the maxilla separates from the skull."
+  },
+  "l_zygomatic": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "The left cheekbone: a lateral buttress tying the maxilla to the cranium, forming the lateral wall and part of the floor of the orbit, and bridging backwards to the temporal bone to make the zygomatic arch, beneath which the temporalis tendon passes to the mandible.",
+   "articulates_with": [
+    "Frontal",
+    "Sphenoid",
+    "Left temporal",
+    "Left maxilla",
+    "(4 bones in total)"
+   ],
+   "note": "From Greek zygon, \"yoke\" \u2014 it yokes the face to the skull. Its four attachments give it the injury pattern known as a zygomaticomaxillary complex (older term: \"tripod\") fracture, which flattens the cheek and, when the orbital floor is involved, can entrap orbital tissue and cause double vision on upward gaze."
+  },
+  "r_zygomatic": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "The right cheekbone: it braces the right orbit laterally and inferiorly and forms the anterior half of the zygomatic arch, giving origin to masseter and passage to the temporalis tendon on its way to the coronoid process.",
+   "articulates_with": [
+    "Frontal",
+    "Sphenoid",
+    "Right temporal",
+    "Right maxilla",
+    "(4 bones in total)"
+   ],
+   "note": "Put your fingers on your cheekbone and clench: you can feel the masseter, which originates from the zygomatic arch's lower border and medial surface. Despite feeling solid, the arch is a slender horizontal strut \u2014 the zygomatic complex is the second most commonly fractured part of the facial skeleton after the nasal bones."
+  },
+  "l_nasal": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "Forms the left half of the bony bridge of the nose, supporting the upper third of the nasal dorsum and anchoring the nasal cartilages that keep the airway open.",
+   "articulates_with": [
+    "Frontal",
+    "Ethmoid (perpendicular plate)",
+    "Right nasal (internasal suture)",
+    "Left maxilla",
+    "(4 bones in total)"
+   ],
+   "note": "The nasal bones are the most commonly fractured bones of the facial skeleton \u2014 most series put nasal fractures at roughly 40-50% of all facial fractures \u2014 because they project forward and are thin."
+  },
+  "r_nasal": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "Forms the right half of the bony nasal bridge, giving rigid support to the upper nose and a stable base for the cartilaginous framework below it.",
+   "articulates_with": [
+    "Frontal",
+    "Ethmoid (perpendicular plate)",
+    "Left nasal (internasal suture)",
+    "Right maxilla",
+    "(4 bones in total)"
+   ],
+   "note": "Only the upper third of the nose is bone; the rest \u2014 the part you can wiggle \u2014 is cartilage. A significant nasal-bone fracture is often accompanied by injury to the septum, which is why the septum should always be examined after a broken nose."
+  },
+  "l_lacrimal": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "Forms part of the medial wall of the left orbit and, with the frontal process of the maxilla, hollows out the fossa for the lacrimal sac leading into the bony nasolacrimal canal that drains tears toward the nose.",
+   "articulates_with": [
+    "Frontal",
+    "Ethmoid",
+    "Left maxilla",
+    "Left inferior nasal concha",
+    "(4 bones in total)"
+   ],
+   "note": "The smallest and most fragile bone of the face \u2014 roughly the size of a little fingernail. Its drainage route is why crying gives you a runny nose: tears pass through the nasolacrimal duct into the nasal cavity."
+  },
+  "r_lacrimal": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "Forms part of the medial wall of the right orbit and helps build the lacrimal sac fossa and nasolacrimal canal, the plumbing that carries tears from the eye down into the inferior nasal meatus.",
+   "articulates_with": [
+    "Frontal",
+    "Ethmoid",
+    "Right maxilla",
+    "Right inferior nasal concha",
+    "(4 bones in total)"
+   ],
+   "note": "From Latin lacrima, \"tear.\" When the duct is blocked in infants the tear sac stagnates and the eye waters constantly \u2014 congenital nasolacrimal duct obstruction, a common paediatric presentation that usually resolves on its own in the first year."
+  },
+  "l_palatine": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "An L-shaped bone: its horizontal plate completes the posterior part of the hard palate on the left (separating mouth from nose so you can chew and breathe at the same time), while its perpendicular plate forms part of the lateral nasal wall and contributes to the pterygopalatine fossa.",
+   "articulates_with": [
+    "Sphenoid",
+    "Ethmoid",
+    "Left maxilla",
+    "Left inferior nasal concha",
+    "Vomer",
+    "Right palatine (median palatine suture)",
+    "(6 bones in total)"
+   ],
+   "note": "The maxillae form the anterior roughly three-quarters of the hard palate and the two palatine horizontal plates form the posterior part; the join between them is the transverse palatine suture. The greater palatine foramen, at the back of the palatine bone, is the target for the dental block that anaesthetises the posterior hard palate."
+  },
+  "l_clavicle": {
+   "group": "Pectoral (shoulder) girdle",
+   "function": "Acts as a strut that holds the shoulder out away from the ribcage, transmitting force from the arm to the sternum and shielding the brachial plexus and subclavian vessels that pass beneath it.",
+   "articulates_with": [
+    "Manubrium of the sternum (sternoclavicular joint)",
+    "Acromion of the scapula (acromioclavicular joint)"
+   ],
+   "note": "The clavicle is the first bone in the body to begin ossifying (around the 5th week in utero) and one of the last to finish: the medial epiphysis fuses only in the early-to-mid twenties, which is exactly why forensic examiners use CT of the medial clavicle to estimate the age of adolescents and young adults."
+  },
+  "r_clavicle": {
+   "group": "Pectoral (shoulder) girdle",
+   "function": "Acts as a strut that holds the shoulder out away from the ribcage, transmitting force from the arm to the sternum and shielding the brachial plexus and subclavian vessels that pass beneath it.",
+   "articulates_with": [
+    "Manubrium of the sternum (sternoclavicular joint)",
+    "Acromion of the scapula (acromioclavicular joint)"
+   ],
+   "note": "'Clavicle' is from Latin clavicula, 'little key'; it does rotate on its long axis as the arm is raised, like a key turning. It is conventionally described as the only long bone lying horizontally, and it fractures readily \u2014 most often in the middle third after a fall onto the shoulder. (Careful with the common claim that it is 'the most broken bone in the body': that holds for children and newborns, whereas in adults clavicle fractures are only about 2.6\u20135% of all fractures.)"
+  },
+  "l_scapula": {
+   "group": "Pectoral (shoulder) girdle",
+   "function": "A flat triangular plate that provides the socket (glenoid cavity) for the humeral head and acts as a mobile, muscle-controlled platform that repositions that socket in space as the arm moves.",
+   "articulates_with": [
+    "Head of the humerus (glenohumeral / shoulder joint)",
+    "Acromial (lateral) end of the clavicle (acromioclavicular joint)",
+    "Posterior ribcage \u2014 by muscle only, not a true joint (scapulothoracic)"
+   ],
+   "note": "Around seventeen muscles attach to the scapula, and it has no bony joint with the ribcage at all \u2014 it glides on the thorax held there by muscle. Because it is so well cushioned, an isolated scapular fracture is uncommon and usually signals high-energy trauma with associated injuries."
+  },
+  "r_scapula": {
+   "group": "Pectoral (shoulder) girdle",
+   "function": "A flat triangular plate that provides the socket (glenoid cavity) for the humeral head and acts as a mobile, muscle-controlled platform that repositions that socket in space as the arm moves.",
+   "articulates_with": [
+    "Head of the humerus (glenohumeral / shoulder joint)",
+    "Acromial (lateral) end of the clavicle (acromioclavicular joint)",
+    "Posterior ribcage \u2014 by muscle only, not a true joint (scapulothoracic)"
+   ],
+   "note": "The glenoid cavity is a shallow saucer far smaller than the humeral head it holds \u2014 which is why the glenohumeral joint is the body's most mobile and also its most frequently dislocated joint. The hook-like coracoid process (Greek korakoeides, 'like a crow's beak') anchors pectoralis minor, coracobrachialis and the short head of biceps brachii."
+  },
+  "l_humerus": {
+   "group": "Arm (brachium)",
+   "function": "The single long lever of the arm: it transmits load between shoulder and forearm and provides the moment arms (deltoid tuberosity, greater and lesser tubercles) that muscles pull on to swing, lift and rotate the limb.",
+   "articulates_with": [
+    "Glenoid cavity of the scapula (glenohumeral joint)",
+    "Head of the radius, via the capitulum (elbow)",
+    "Trochlear notch of the ulna, via the trochlea (elbow)"
+   ],
+   "note": "The axillary nerve wraps around the surgical neck, so a fracture there \u2014 classic in an older patient who falls \u2014 can denervate the deltoid and weaken shoulder abduction, with numbness over the 'regimental badge' patch of skin."
+  },
+  "r_humerus": {
+   "group": "Arm (brachium)",
+   "function": "The single long lever of the arm: it transmits load between shoulder and forearm and provides the moment arms (deltoid tuberosity, greater and lesser tubercles) that muscles pull on to swing, lift and rotate the limb.",
+   "articulates_with": [
+    "Glenoid cavity of the scapula (glenohumeral joint)",
+    "Head of the radius, via the capitulum (elbow)",
+    "Trochlear notch of the ulna, via the trochlea (elbow)"
+   ],
+   "note": "The humerus is a nerve trap: the radial nerve runs in the spiral (radial) groove on the shaft, so a mid-shaft fracture classically causes wrist drop, and the ulnar nerve runs in a groove behind the medial epicondyle \u2014 that groove is the 'funny bone', and the tingling you feel is the nerve, not the bone."
+  },
+  "l_radius": {
+   "group": "Forearm (antebrachium)",
+   "function": "The lateral (thumb-side) forearm bone: it takes most of the axial load from the hand into the forearm and pivots around the ulna to turn the hand palm-up and palm-down.",
+   "articulates_with": [
+    "Capitulum of the humerus (elbow)",
+    "Radial notch of the ulna (proximal radioulnar joint)",
+    "Head of the ulna, at the ulnar notch of the radius (distal radioulnar joint)",
+    "Scaphoid and lunate (radiocarpal / wrist joint)"
+   ],
+   "note": "A fall on an outstretched hand most often breaks the distal radius: a Colles' fracture displaces the distal fragment dorsally and gives the classic 'dinner-fork' deformity, while a Smith's fracture (typically a fall onto a flexed wrist) displaces it volarly \u2014 the reverse."
+  },
+  "r_radius": {
+   "group": "Forearm (antebrachium)",
+   "function": "The lateral (thumb-side) forearm bone: it takes most of the axial load from the hand into the forearm and pivots around the ulna to turn the hand palm-up and palm-down.",
+   "articulates_with": [
+    "Capitulum of the humerus (elbow)",
+    "Radial notch of the ulna (proximal radioulnar joint)",
+    "Head of the ulna, at the ulnar notch of the radius (distal radioulnar joint)",
+    "Scaphoid and lunate (radiocarpal / wrist joint)"
+   ],
+   "note": "'Radius' is Latin for the spoke of a wheel, and that is close to what it does: in pronation the radius sweeps across the ulna, crossing over it and carrying the hand with it. Note the division of labour \u2014 the ulna forms the true hinge of the elbow; the radius is the rotator."
+  },
+  "l_ulna": {
+   "group": "Forearm (antebrachium)",
+   "function": "The medial (little-finger-side) forearm bone: the stabiliser, forming the hinge of the elbow with the humeral trochlea and providing the fixed axis about which the radius rotates.",
+   "articulates_with": [
+    "Trochlea of the humerus (elbow joint, via the trochlear notch)",
+    "Head of the radius (proximal radioulnar joint, via the radial notch)",
+    "Ulnar notch of the radius (distal radioulnar joint)",
+    "No direct contact with the carpal bones \u2014 it is separated from them by the triangular fibrocartilage complex"
+   ],
+   "note": "The olecranon is the bony point you lean on, and it is the insertion of triceps brachii \u2014 which is why triceps pull can distract the fragments in an olecranon fracture. A good exam point: the ulna is a forearm bone that does not touch the carpus."
+  },
+  "r_ulna": {
+   "group": "Forearm (antebrachium)",
+   "function": "The medial (little-finger-side) forearm bone: the stabiliser, forming the hinge of the elbow with the humeral trochlea and providing the fixed axis about which the radius rotates.",
+   "articulates_with": [
+    "Trochlea of the humerus (elbow joint, via the trochlear notch)",
+    "Head of the radius (proximal radioulnar joint, via the radial notch)",
+    "Ulnar notch of the radius (distal radioulnar joint)",
+    "No direct contact with the carpal bones \u2014 it is separated from them by the triangular fibrocartilage complex"
+   ],
+   "note": "The two forearm bones are coupled by the interosseous membrane and form a closed ring with the two radioulnar joints, so a displaced fracture of one is often paired with a dislocation of the other: a Monteggia injury is a proximal ulnar shaft fracture with radial head dislocation, and a Galeazzi injury is the mirror \u2014 a distal radius fracture with disruption of the distal radioulnar joint. Latin ulna means 'elbow/forearm' and is cognate with the old English 'ell' unit of length."
+  },
+  "l_scaphoid": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "Spans both carpal rows on the thumb side, acting as the mechanical link that couples the proximal and distal rows and channels load from the thumb column into the radius.",
+   "articulates_with": [
+    "Radius",
+    "Lunate",
+    "Capitate",
+    "Trapezium",
+    "Trapezoid"
+   ],
+   "note": "The scaphoid's blood supply is largely retrograde \u2014 the main vessels enter distally \u2014 so a fracture at the waist can devascularise the proximal fragment and cause avascular necrosis. Tenderness in the anatomical snuffbox after a fall on an outstretched hand is managed as a scaphoid fracture even when the first X-ray is normal."
+  },
+  "r_scaphoid": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "Spans both carpal rows on the thumb side, acting as the mechanical link that couples the proximal and distal rows and channels load from the thumb column into the radius.",
+   "articulates_with": [
+    "Radius",
+    "Lunate",
+    "Capitate",
+    "Trapezium",
+    "Trapezoid"
+   ],
+   "note": "It is the most commonly fractured of the eight carpal bones. Its name is from Greek skaphos, 'boat'; it was formerly called the navicular of the hand, a term now reserved for the boat-shaped tarsal bone of the foot."
+  },
+  "l_lunate": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "Sits at the centre of the proximal row beneath the radius, forming the keystone of the carpal arch through which a large share of axial load passes from hand to forearm.",
+   "articulates_with": [
+    "Radius",
+    "Scaphoid",
+    "Triquetrum",
+    "Capitate",
+    "Hamate \u2014 only in a 'type II' lunate, which bears an extra medial facet; this is a common but not universal variant",
+    "Triangular fibrocartilage (medially, separating it from the ulna)"
+   ],
+   "note": "Kienb\u00f6ck's disease is avascular necrosis of the lunate: the bone gradually collapses, producing a painful, stiffening wrist in a young adult \u2014 a reminder that the carpus lives on a precarious blood supply."
+  },
+  "r_lunate": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "Sits at the centre of the proximal row beneath the radius, forming the keystone of the carpal arch through which a large share of axial load passes from hand to forearm.",
+   "articulates_with": [
+    "Radius",
+    "Scaphoid",
+    "Triquetrum",
+    "Capitate",
+    "Hamate \u2014 only in a 'type II' lunate, which bears an extra medial facet; this is a common but not universal variant",
+    "Triangular fibrocartilage (medially, separating it from the ulna)"
+   ],
+   "note": "Named from Latin luna for its crescent-moon profile, it is the most commonly dislocated carpal bone. On a lateral X-ray a volar lunate dislocation tips forward into the classic 'spilled teacup' sign."
+  },
+  "l_triquetral": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "Forms the ulnar corner of the proximal row, taking load from the little-finger side of the wrist across to the triangular fibrocartilage, and providing the surface on which the pisiform rides.",
+   "articulates_with": [
+    "Lunate",
+    "Hamate",
+    "Pisiform (on its palmar surface)",
+    "No direct contact with the ulna \u2014 the triangular fibrocartilage disc lies between them"
+   ],
+   "note": "Triangular in shape (Latin triquetrus, 'three-cornered'), it is the second or third most commonly fractured carpal bone, usually as a dorsal cortical chip avulsed in a fall onto an extended, ulnarly deviated wrist."
+  },
+  "r_triquetral": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "Forms the ulnar corner of the proximal row, taking load from the little-finger side of the wrist across to the triangular fibrocartilage, and providing the surface on which the pisiform rides.",
+   "articulates_with": [
+    "Lunate",
+    "Hamate",
+    "Pisiform (on its palmar surface)",
+    "No direct contact with the ulna \u2014 the triangular fibrocartilage disc lies between them"
+   ],
+   "note": "The pisiform, which sits on the palmar face of the triquetrum, is really a sesamoid bone embedded in the tendon of flexor carpi ulnaris \u2014 it articulates with nothing but the triquetrum and takes no part in the wrist joint proper."
+  },
+  "l_hip_bone": {
+   "group": "Pelvic girdle",
+   "function": "Transfers the weight of the upper body from the sacrum to the left femur, anchors the gluteal, hamstring and adductor muscle masses, and takes the body's weight through the ischial tuberosity when sitting.",
+   "articulates_with": [
+    "Sacrum (left sacroiliac joint)",
+    "Head of the left femur (hip joint)",
+    "Right hip bone (at the pubic symphysis)"
+   ],
+   "note": "It is really three bones \u2014 ilium, ischium and pubis \u2014 meeting at the Y-shaped triradiate cartilage in the floor of the acetabulum. The triradiate cartilage closes in mid-adolescence (roughly 13-14 years in girls, 15-16 in boys), and the hip bone is not fully ossified until about 20-25 years, when the secondary centres at the iliac crest and ischial tuberosity fuse \u2014 so a child's hip bone genuinely shows three separate bones on X-ray. 'Acetabulum' is Latin for 'vinegar cup'."
+  },
+  "r_hip_bone": {
+   "group": "Pelvic girdle",
+   "function": "Transfers the weight of the upper body from the sacrum to the right femur, anchors the gluteal, hamstring and adductor muscle masses, and takes the body's weight through the ischial tuberosity when sitting.",
+   "articulates_with": [
+    "Sacrum (right sacroiliac joint)",
+    "Head of the right femur (hip joint)",
+    "Left hip bone (at the pubic symphysis)"
+   ],
+   "note": "It is really three bones \u2014 ilium, ischium and pubis \u2014 meeting at the Y-shaped triradiate cartilage in the floor of the acetabulum. The triradiate cartilage closes in mid-adolescence (roughly 13-14 years in girls, 15-16 in boys), and the hip bone is not fully ossified until about 20-25 years, when the secondary centres at the iliac crest and ischial tuberosity fuse \u2014 so a child's hip bone genuinely shows three separate bones on X-ray. 'Acetabulum' is Latin for 'vinegar cup'."
+  },
+  "pubic_symphysis": {
+   "group": "Pelvic girdle (joint, not a bone)",
+   "function": "Locks the two hip bones together at the front, closing the pelvic ring so load can arch across it, while absorbing shock and allowing a small amount of give during walking.",
+   "articulates_with": [
+    "Left pubic bone",
+    "Right pubic bone (joined by an interpubic fibrocartilaginous disc)"
+   ],
+   "note": "A secondary cartilaginous joint (a symphysis), not a fusion, and normally very stiff \u2014 on the order of 2 mm of shift and about 1 degree of rotation. Its radiographic gap is normally 4-5 mm; under relaxin in pregnancy it widens physiologically by about 2-3 mm (roughly 4 mm early to ~7 mm at term), and a gap beyond 10 mm is pathological diastasis, not normal loosening. Forensic anthropologists also read the changing face of the symphysis to estimate age at death."
+  },
+  "l_femur": {
+   "group": "Thigh (free lower limb)",
+   "function": "Acts as the main lever of the left lower limb, carrying body weight from the hip to the knee and giving origin and insertion to the large muscles that drive locomotion.",
+   "articulates_with": [
+    "Left hip bone at the acetabulum (hip joint)",
+    "Left patella (patellofemoral joint)",
+    "Left tibia (knee joint)"
+   ],
+   "note": "The longest and strongest bone in the body \u2014 and note it does NOT touch the fibula; the fibula stops short of the knee joint. Its head is supplied largely by retrograde branches of the medial circumflex femoral artery running back up the neck, so an intracapsular neck-of-femur fracture can cut off the head's blood supply and cause avascular necrosis."
+  },
+  "r_femur": {
+   "group": "Thigh (free lower limb)",
+   "function": "Acts as the main lever of the right lower limb, carrying body weight from the hip to the knee and giving origin and insertion to the large muscles that drive locomotion.",
+   "articulates_with": [
+    "Right hip bone at the acetabulum (hip joint)",
+    "Right patella (patellofemoral joint)",
+    "Right tibia (knee joint)"
+   ],
+   "note": "The longest and strongest bone in the body \u2014 and note it does NOT touch the fibula; the fibula stops short of the knee joint. Its head is supplied largely by retrograde branches of the medial circumflex femoral artery running back up the neck, so an intracapsular neck-of-femur fracture can cut off the head's blood supply and cause avascular necrosis."
+  },
+  "l_patella": {
+   "group": "Knee (sesamoid bone)",
+   "function": "Sits inside the quadriceps tendon and acts as a pulley, holding the tendon away from the knee's axis so the quadriceps gains a longer moment arm on the left leg, while shielding the front of the joint from direct trauma.",
+   "articulates_with": [
+    "Left femur only \u2014 medial and lateral facets against the femoral condyles in the trochlear (patellofemoral) groove"
+   ],
+   "note": "The largest sesamoid bone in the body, and a classic exam trap: it does NOT articulate with the tibia. It is tethered to the tibial tuberosity by the patellar ligament, but its only joint surface is with the femur. Remove it and extensor power drops substantially (reported losses range from about 30% up to 50%), because the quadriceps loses its moment arm."
+  },
+  "r_patella": {
+   "group": "Knee (sesamoid bone)",
+   "function": "Sits inside the quadriceps tendon and acts as a pulley, holding the tendon away from the knee's axis so the quadriceps gains a longer moment arm on the right leg, while shielding the front of the joint from direct trauma.",
+   "articulates_with": [
+    "Right femur only \u2014 medial and lateral facets against the femoral condyles in the trochlear (patellofemoral) groove"
+   ],
+   "note": "The largest sesamoid bone in the body, and a classic exam trap: it does NOT articulate with the tibia. It is tethered to the tibial tuberosity by the patellar ligament, but its only joint surface is with the femur. Remove it and extensor power drops substantially (reported losses range from about 30% up to 50%), because the quadriceps loses its moment arm."
+  },
+  "l_tibia": {
+   "group": "Leg (crus)",
+   "function": "The main weight-bearing bone of the left leg: it receives the load of the femoral condyles on its tibial plateau and delivers most of it down to the talus, and its medial malleolus forms the medial wall of the ankle mortise.",
+   "articulates_with": [
+    "Left femur (knee joint)",
+    "Left fibula (proximal tibiofibular joint and distal tibiofibular syndesmosis)",
+    "Left talus (ankle / talocrural joint)"
+   ],
+   "note": "The second-longest bone in the body and the dominant load-bearer of the leg, carrying roughly 85-93% of the axial load transmitted through the leg. Its name is Latin for 'flute' or 'pipe' \u2014 ancient pipes were carved from animal shin bones. Its subcutaneous anteromedial surface, the shin, is why tibial shaft fractures so often become open fractures."
+  },
+  "r_tibia": {
+   "group": "Leg (crus)",
+   "function": "The main weight-bearing bone of the right leg: it receives the load of the femoral condyles on its tibial plateau and delivers most of it down to the talus, and its medial malleolus forms the medial wall of the ankle mortise.",
+   "articulates_with": [
+    "Right femur (knee joint)",
+    "Right fibula (proximal tibiofibular joint and distal tibiofibular syndesmosis)",
+    "Right talus (ankle / talocrural joint)"
+   ],
+   "note": "The second-longest bone in the body and the dominant load-bearer of the leg, carrying roughly 85-93% of the axial load transmitted through the leg. Its name is Latin for 'flute' or 'pipe' \u2014 ancient pipes were carved from animal shin bones. Its subcutaneous anteromedial surface, the shin, is why tibial shaft fractures so often become open fractures."
+  },
+  "l_fibula": {
+   "group": "Leg (crus)",
+   "function": "Serves mainly as an attachment strut for muscle and as the lateral buttress of the ankle: its lateral malleolus forms the lateral wall of the ankle mortise, gripping the talus and limiting eversion. It is not load-free \u2014 it transmits on the order of 7% of the axial load with the ankle neutral, rising toward 17% under heavy load.",
+   "articulates_with": [
+    "Left tibia (proximal tibiofibular joint and distal tibiofibular syndesmosis)",
+    "Left talus (lateral malleolus, at the ankle joint)"
+   ],
+   "note": "Its name is Latin for a 'brooch' or 'clasp pin' \u2014 tibia and fibula together resemble an ancient safety pin. Clinically, the common fibular nerve winds around the subcutaneous fibular neck, the most common site of compressive nerve injury in the lower limb; damage there produces foot drop. Note it does not reach the knee joint \u2014 it never touches the femur."
+  },
+  "r_fibula": {
+   "group": "Leg (crus)",
+   "function": "Serves mainly as an attachment strut for muscle and as the lateral buttress of the ankle: its lateral malleolus forms the lateral wall of the ankle mortise, gripping the talus and limiting eversion. It is not load-free \u2014 it transmits on the order of 7% of the axial load with the ankle neutral, rising toward 17% under heavy load.",
+   "articulates_with": [
+    "Right tibia (proximal tibiofibular joint and distal tibiofibular syndesmosis)",
+    "Right talus (lateral malleolus, at the ankle joint)"
+   ],
+   "note": "Its name is Latin for a 'brooch' or 'clasp pin' \u2014 tibia and fibula together resemble an ancient safety pin. Clinically, the common fibular nerve winds around the subcutaneous fibular neck, the most common site of compressive nerve injury in the lower limb; damage there produces foot drop. Note it does not reach the knee joint \u2014 it never touches the femur."
+  },
+  "l_calcaneus": {
+   "group": "Tarsals \u2014 hindfoot",
+   "function": "The heel bone: it absorbs the impact of heel-strike, transmits body weight from the talus to the ground, and acts as the lever arm for the calf, which pulls on its tuberosity through the Achilles tendon to lift the body at push-off.",
+   "articulates_with": [
+    "Left talus (subtalar / talocalcaneal joint)",
+    "Left cuboid (calcaneocuboid joint)"
+   ],
+   "note": "The largest tarsal bone and the most commonly fractured, accounting for about 60% of tarsal fractures. The classic mechanism is a fall from height driving the talus down into it, and because the same axial force travels on up the skeleton, roughly 10-20% of these patients also have a thoracolumbar compression fracture (typically T12-L2). Always image the spine."
+  },
+  "r_calcaneus": {
+   "group": "Tarsals \u2014 hindfoot",
+   "function": "The heel bone: it absorbs the impact of heel-strike, transmits body weight from the talus to the ground, and acts as the lever arm for the calf, which pulls on its tuberosity through the Achilles tendon to lift the body at push-off.",
+   "articulates_with": [
+    "Right talus (subtalar / talocalcaneal joint)",
+    "Right cuboid (calcaneocuboid joint)"
+   ],
+   "note": "The largest tarsal bone and the most commonly fractured, accounting for about 60% of tarsal fractures. The classic mechanism is a fall from height driving the talus down into it, and because the same axial force travels on up the skeleton, roughly 10-20% of these patients also have a thoracolumbar compression fracture (typically T12-L2). Always image the spine."
+  },
+  "l_talus": {
+   "group": "Tarsals \u2014 hindfoot",
+   "function": "The keystone of the left ankle: the only bone linking leg to foot, it takes the body's weight from the tibia and splits it backwards into the calcaneus and forwards into the arch.",
+   "articulates_with": [
+    "Left tibia and left fibula above (ankle / talocrural joint)",
+    "Left calcaneus below (subtalar joint)",
+    "Left navicular in front (talonavicular joint)"
+   ],
+   "note": "No muscle or tendon attaches to the talus \u2014 it is moved entirely by the bones and ligaments around it \u2014 and about 60% of its surface is articular cartilage, leaving very little non-articular surface for vessels to enter. Its blood supply is largely retrograde, running from distal to proximal, so a talar neck fracture is notorious for causing avascular necrosis of the body. 'Talus' is Latin for the ankle bone and also for a die: knucklebones were the original dice."
+  },
+  "r_talus": {
+   "group": "Tarsals \u2014 hindfoot",
+   "function": "The keystone of the right ankle: the only bone linking leg to foot, it takes the body's weight from the tibia and splits it backwards into the calcaneus and forwards into the arch.",
+   "articulates_with": [
+    "Right tibia and right fibula above (ankle / talocrural joint)",
+    "Right calcaneus below (subtalar joint)",
+    "Right navicular in front (talonavicular joint)"
+   ],
+   "note": "No muscle or tendon attaches to the talus \u2014 it is moved entirely by the bones and ligaments around it \u2014 and about 60% of its surface is articular cartilage, leaving very little non-articular surface for vessels to enter. Its blood supply is largely retrograde, running from distal to proximal, so a talar neck fracture is notorious for causing avascular necrosis of the body. 'Talus' is Latin for the ankle bone and also for a die: knucklebones were the original dice."
+  },
+  "l_navicular": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The pivot of the left medial longitudinal arch: it passes load forward from the head of the talus into the cuneiforms and provides the principal bony anchor for tibialis posterior, the tendon that actively supports the arch.",
+   "articulates_with": [
+    "Left talus (behind, at the talonavicular joint)",
+    "Left medial, intermediate and lateral cuneiforms (in front, at the cuneonavicular joint)",
+    "Left cuboid (laterally \u2014 a frequent but variable facet, not present in everyone)"
+   ],
+   "note": "Named from Latin navis, 'ship', for the boat-like hollow of its rear surface, which cups the head of the talus. Its tuberosity is the principal insertion of tibialis posterior, and failure of that tendon is the classic cause of adult-acquired flatfoot, with the arch collapsing around this bone."
+  },
+  "r_navicular": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The pivot of the right medial longitudinal arch: it passes load forward from the head of the talus into the cuneiforms and provides the principal bony anchor for tibialis posterior, the tendon that actively supports the arch.",
+   "articulates_with": [
+    "Right talus (behind, at the talonavicular joint)",
+    "Right medial, intermediate and lateral cuneiforms (in front, at the cuneonavicular joint)",
+    "Right cuboid (laterally \u2014 a frequent but variable facet, not present in everyone)"
+   ],
+   "note": "Named from Latin navis, 'ship', for the boat-like hollow of its rear surface, which cups the head of the talus. Its tuberosity is the principal insertion of tibialis posterior, and failure of that tendon is the classic cause of adult-acquired flatfoot, with the arch collapsing around this bone. Do not confuse it with the scaphoid of the wrist \u2014 the old name for the wrist scaphoid was also 'navicular', which is why some legacy texts use one word for two different bones."
+  }
+ },
+ "groups": [
+  {
+   "title": "The Vertebral Column: Cervical, Thoracic, Lumbar, Sacrum, Coccyx and the Intervertebral Discs",
+   "teaching": "The vertebral column typically contains 33 vertebrae \u2014 7 cervical, 12 thoracic, 5 lumbar, 5 sacral and usually 4 coccygeal (coccygeal number varies from 3 to 5) \u2014 and does three jobs at once: it carries axial load down to the pelvis, it houses the spinal cord in a continuous vertebral canal, and, because it is segmented, it still bends. The 24 presacral vertebrae stay mobile; the sacral and coccygeal vertebrae fuse into the sacrum and coccyx. The adult has 23 intervertebral discs: the topmost is C2\u2013C3 and the lowest is L5\u2013S1. Count them carefully \u2014 there is no disc between the occiput and C1, and none between C1 and C2, because the atlas has no body of its own (its centrum contributes to the dens of the axis); so the 24 presacral vertebrae do NOT simply have 23 discs between them. Regional shape follows regional job: cervical vertebrae are small and mobile with transverse foramina transmitting the vertebral arteries; thoracic vertebrae carry costal facets and are splinted by the ribs into the stiffest region; lumbar vertebrae are massive with near-sagittal facets that permit flexion and extension while limiting axial rotation; and the sacrum is a fused wedge that transmits load into the two ilia at the sacroiliac joints. Four curves develop in sequence: the thoracic and sacral kyphoses are primary (present in the fetus), while the cervical lordosis emerges as an infant lifts its head and the lumbar lordosis as it stands and walks. Latin os sacrum, traditionally rendered \"sacred bone\" (a calque of the Greek hieron osteon), names the sacrum; coccyx comes from Greek kokkyx, \"cuckoo,\" whose beak it is said to resemble in profile.",
+   "key_counts": [
+    {
+     "label": "Total vertebrae",
+     "value": "33 (typical)",
+     "note": "7 cervical + 12 thoracic + 5 lumbar + 5 sacral + 3\u20135 coccygeal (usually 4). Because the sacral and coccygeal elements fuse, the adult articulated column is often counted as 26 separate bones."
+    },
+    {
+     "label": "Mobile presacral vertebrae",
+     "value": "24",
+     "note": "7 + 12 + 5 \u2014 the vertebrae that move relative to one another."
+    },
+    {
+     "label": "Intervertebral discs",
+     "value": "23",
+     "note": "6 cervical, 12 thoracic, 5 lumbar. First disc = C2\u2013C3, last = L5\u2013S1. No disc occiput\u2013C1 or C1\u2013C2, because the atlas has no body."
+    },
+    {
+     "label": "Sacral vertebrae",
+     "value": "5, fused",
+     "note": "Fusion is normally complete by the mid-20s to early 30s."
+    },
+    {
+     "label": "Coccygeal vertebrae",
+     "value": "usually 4 (range 3\u20135)",
+     "note": "The commonest source of disagreement over the 'total vertebrae' figure \u2014 32, 33 and 34 are all normal."
+    },
+    {
+     "label": "Rib-bearing vertebrae",
+     "value": "12 (T1\u2013T12)",
+     "note": "T1 and T10\u2013T12 typically take whole costal facets; T2\u2013T9 use paired demifacets so each rib head straddles a disc and grips two vertebrae."
+    }
+   ]
+  },
+  {
+   "title": "The Thoracic Cage: Ribs, Sternum and Costal Cartilages",
+   "teaching": "The thoracic cage is the part of the skeleton built to change shape with every breath: twelve pairs of ribs sweep back from the thoracic vertebrae toward the front of the chest, and the seven upper pairs reach the sternum through hyaline costal cartilage \u2014 the cartilage is what turns a rigid box into a spring. Posteriorly, a typical rib (3\u20139) is hinged twice: the head to the bodies of its own vertebra and the one above plus the disc between them (costovertebral joint), and the tubercle to the transverse process of its own vertebra (costotransverse joint). That double hinge fixes an axis of rotation, so ribs do not flap freely \u2014 they swing about a set line. The axis lies nearer the transverse plane in the upper ribs, whose \"pump-handle\" rise lifts the sternum forward and deepens the chest front-to-back, and nearer the sagittal plane in the lower ribs, whose \"bucket-handle\" swing widens it side-to-side; together they enlarge the thorax in every dimension while the diaphragm descends. Two details worth fixing in memory. First, ribs 1\u20137 reach the sternum through their own cartilage (true ribs), but ribs 8\u201310 do not: each joins the cartilage immediately above it by an interchondral joint \u2014 8 to 7, 9 to 8, 10 to 9 \u2014 forming the chain of the costal margin (false ribs), while ribs 11\u201312 end free in the abdominal wall musculature (floating). Second, the intercostal vein, artery and nerve (VAN, top to bottom) run in the costal groove on the internal aspect of the *inferior* border of a rib, best sheltered posteriorly, while a collateral branch runs along the *superior* border of the rib below \u2014 which is why needles and chest drains are passed above the rib below rather than hard against the rib above, and why the safest track is the middle-to-upper part of the space, not either rib edge.",
+   "key_counts": [
+    {
+     "label": "Rib pairs",
+     "value": "12 pairs (24 ribs)",
+     "note": "Standard in most people, but supernumerary cervical ribs (~0.5\u20131%) and lumbar ribs do occur, so '12' is the norm, not an invariant."
+    },
+    {
+     "label": "True ribs",
+     "value": "7 pairs (1\u20137)",
+     "note": "Each reaches the sternum through its own costal cartilage. Only the 1st sternocostal joint is a synchondrosis; joints 2\u20137 are synovial."
+    },
+    {
+     "label": "False ribs",
+     "value": "3 pairs (8\u201310)",
+     "note": "None reaches the sternum. Cartilage 8 joins 7, 9 joins 8, 10 joins 9 \u2014 a chain of interchondral joints forming the costal margin."
+    },
+    {
+     "label": "Floating ribs",
+     "value": "2 pairs (11\u201312)",
+     "note": "No anterior attachment; their short cartilages end in abdominal wall muscle. They also lack a costotransverse joint (no articular tubercle)."
+    },
+    {
+     "label": "Typical ribs",
+     "value": "7 pairs (3\u20139)",
+     "note": "Head with two facets, neck, tubercle, angle, shaft and costal groove. Ribs 1, 2, 10, 11 and 12 are atypical; 1, 10, 11 and 12 have single-facet heads."
+    },
+    {
+     "label": "Longest rib",
+     "value": "Rib 7",
+     "note": "Ribs lengthen from 1 to 7 and shorten again from 7 to 12."
+    },
+    {
+     "label": "Sternal angle level",
+     "value": "T4/T5 intervertebral disc",
+     "note": "Anteriorly it is the manubriosternal joint and the level of the 2nd costal cartilage \u2014 the starting point for counting ribs, since rib 1 is impalpable under the clavicle."
+    },
+    {
+     "label": "Costal groove contents",
+     "value": "3 (vein, artery, nerve)",
+     "note": "VAN from superior to inferior, on the internal aspect of the inferior border; a collateral branch runs along the superior border of the rib below."
+    }
+   ]
+  },
+  {
+   "title": "The Skull: Neurocranium and Facial Skeleton",
+   "teaching": "The adult skull is conventionally counted as 22 bones: 8 cranial bones enclosing the brain (frontal, occipital, sphenoid, ethmoid, and paired parietals and temporals) and 14 facial bones (paired maxillae, zygomatics, nasals, lacrimals, palatines and inferior nasal conchae, plus the unpaired vomer and mandible). That count excludes the six auditory ossicles and the hyoid, which are usually tallied separately, so you will also see the figures 28 or 29 \u2014 the number depends on the convention, not on the anatomy. Almost all of these bones are locked together by sutures, immobile fibrous joints; the mandible is the only large bone of the skull that moves, hinging and sliding at the paired temporomandibular joints, and the occipital is the only skull bone that meets the vertebral column, at the atlanto-occipital joints. Note that the ethmoid is a single unpaired midline bone even though this model displays it as left and right halves, and that its cribriform plate and paper-thin lamina papyracea make the region between nose, orbit and anterior cranial fossa the most surgically and traumatically hazardous part of the skull.",
+   "key_counts": [
+    {
+     "label": "Bones in the adult skull",
+     "value": "22",
+     "note": "8 cranial + 14 facial, the standard convention. Add the 6 auditory ossicles and the hyoid and you get 29; different textbooks state 22, 28 or 29, so always say which convention you are using."
+    },
+    {
+     "label": "Cranial bones (neurocranium)",
+     "value": "8",
+     "note": "Frontal, occipital, sphenoid, ethmoid (all unpaired) plus paired parietals and temporals. The ethmoid is ONE bone despite being modelled here as left/right halves."
+    },
+    {
+     "label": "Facial bones (viscerocranium)",
+     "value": "14",
+     "note": "Paired: maxillae, zygomatics, nasals, lacrimals, palatines, inferior nasal conchae (12). Unpaired: vomer and mandible (2). The superior and middle conchae are parts of the ethmoid, not separate bones \u2014 only the inferior concha is."
+    },
+    {
+     "label": "Bones the sphenoid articulates with",
+     "value": "12",
+     "note": "Frontal, 2 parietals, 2 temporals, occipital, ethmoid, vomer, 2 zygomatics, 2 palatines. It touches every other cranial bone \u2014 the basis of the \"keystone\" description."
+    },
+    {
+     "label": "Bones the ethmoid articulates with",
+     "value": "13",
+     "note": "Frontal, sphenoid, 2 nasals, 2 maxillae, 2 lacrimals, 2 palatines, 2 inferior conchae, vomer \u2014 the highest count in the skull."
+    },
+    {
+     "label": "Bones each maxilla articulates with",
+     "value": "9",
+     "note": "More than any other facial bone: frontal, ethmoid, nasal, zygomatic, lacrimal, palatine, vomer, inferior nasal concha and the opposite maxilla."
+    },
+    {
+     "label": "Permanent teeth",
+     "value": "32",
+     "note": "Per quadrant: 2 incisors, 1 canine, 2 premolars, 3 molars. The count assumes all four third molars are present and erupted, which is often not the case \u2014 agenesis of at least one third molar is common."
+    },
+    {
+     "label": "Deciduous (baby) teeth",
+     "value": "20",
+     "note": "Per quadrant: 2 incisors, 1 canine, 2 molars \u2014 there are no deciduous premolars; the permanent premolars replace the deciduous molars."
+    },
+    {
+     "label": "Hyoid bones",
+     "value": "1",
+     "note": "Usually taught as the only bone that forms no true joint with any other bone: it is slung from the skull, mandible, larynx and sternum by muscles and ligaments. State it as \"no bony articulation,\" not \"no attachments\" \u2014 and note the patella and other sesamoids DO articulate, so they are not counterexamples."
+    },
+    {
+     "label": "Auditory ossicles",
+     "value": "6",
+     "note": "Malleus, incus and stapes in each middle ear. They are the smallest bones in the body and they do move \u2014 which is why the mandible should be called the only LARGE mobile bone of the skull."
+    },
+    {
+     "label": "Bones in the adult body",
+     "value": "~206",
+     "note": "A convention, not a fact of nature: it counts the two patellae but excludes other sesamoid bones and any sutural (wormian) bones, which vary between individuals. Real skeletons vary above and below 206."
+    }
+   ]
+  },
+  {
+   "title": "Shoulder Girdle, Arm, Wrist and Hand (Upper Limb)",
+   "teaching": "The upper limb is built for reach and manipulation rather than weight-bearing, and its skeleton reflects that trade-off at every level. The whole limb is attached to the axial skeleton by a single bony joint \u2014 the sternoclavicular joint \u2014 while the scapula glides on the back of the ribcage held there by muscle rather than by any true articulation, which is what buys the shoulder its enormous range of motion at the cost of stability. In the forearm, the radius pivots around the relatively fixed ulna to turn the hand palm-up and palm-down (supination/pronation), and the eight carpal bones form an arched mosaic in two rows: an intercalated proximal row (scaphoid, lunate, triquetrum, with the pisiform riding on the triquetrum as a sesamoid) and a distal row rigidly bound to the metacarpals. Motion is shared between the radiocarpal and midcarpal joints, letting the wrist flex, extend and deviate while the arch still transmits grip forces \u2014 about 80% of axial load crosses the radiocarpal joint, the rest passing through the triangular fibrocartilage to the ulna. Everything converges on the thumb: a saddle-shaped carpometacarpal joint with the trapezium, plus a first metacarpal that is rotated roughly 90\u00b0 relative to the others and unattached to its neighbour at its base, is what makes opposition \u2014 and a precision grip \u2014 possible.",
+   "key_counts": [
+    {
+     "label": "Bones per upper limb",
+     "value": "32",
+     "note": "1 clavicle + 1 scapula + 1 humerus + 1 radius + 1 ulna + 8 carpals + 5 metacarpals + 14 phalanges. Texts that say 30 are counting only the 'free' limb and excluding the two pectoral girdle bones. Sesamoids other than the pisiform are not counted."
+    },
+    {
+     "label": "Bones per hand (wrist to fingertips)",
+     "value": "27",
+     "note": "8 carpals + 5 metacarpals + 14 phalanges. The (usually two) sesamoid bones at the thumb MCP joint are variable and are not part of the 27 \u2014 though the pisiform, itself a sesamoid in the flexor carpi ulnaris tendon, is counted among the carpals by convention."
+    },
+    {
+     "label": "Carpal bones",
+     "value": "8 per wrist, in two rows of 4",
+     "note": "Proximal row lateral\u2192medial: scaphoid, lunate, triquetrum, pisiform. Distal row lateral\u2192medial: trapezium, trapezoid, capitate, hamate. Mnemonic: 'Some Lovers Try Positions That They Can't Handle.'"
+    },
+    {
+     "label": "Phalanges per hand",
+     "value": "14",
+     "note": "Three each in fingers 2\u20135 (proximal, middle, distal) and only two in the thumb \u2014 the thumb has no middle phalanx."
+    },
+    {
+     "label": "Metacarpals per hand",
+     "value": "5",
+     "note": "Numbered I\u2013V from thumb to little finger. The bases of metacarpals II\u2013V articulate with one another; metacarpal I does not articulate with metacarpal II, which is part of why the thumb column moves independently."
+    },
+    {
+     "label": "Bony joints between the upper limb and the axial skeleton",
+     "value": "1 per side",
+     "note": "The sternoclavicular joint. There is no true joint between scapula and ribcage \u2014 the 'scapulothoracic joint' is a physiological/muscular articulation only."
+    },
+    {
+     "label": "Muscles attaching to the scapula",
+     "value": "17",
+     "note": "The standard teaching count (e.g. TeachMeAnatomy). The scapula is essentially a mobile muscle-attachment plate suspended in soft tissue; exact counts differ slightly between texts depending on how heads and bellies are tallied."
+    },
+    {
+     "label": "Share of axial wrist load crossing the radius",
+     "value": "~80%",
+     "note": "In an ulnar-neutral wrist roughly 80% of axial load passes through the radiocarpal joint and ~20% through the ulnocarpal joint via the triangular fibrocartilage complex."
+    }
+   ]
+  },
+  {
+   "title": "Pelvic girdle and lower limb (hip, thigh, leg, ankle, foot)",
+   "teaching": "Everything in this region solves one problem: delivering the mass of the upper body down onto two small, mobile platforms without the structure buckling. Load leaves the sacrum, crosses the sacroiliac joints into the hip bones, funnels through the acetabula into the femoral heads, runs down the femur and then overwhelmingly down the tibia \u2014 the fibula is primarily a muscle anchor and the lateral buttress of the ankle mortise, though it is not load-free: cadaver studies put its share of axial load at roughly 7% with the ankle neutral, rising toward 17% under heavy or dorsiflexed loading. Below the tibia the load reaches the talus, a bone with no muscle or tendon attached to it, which splits it backwards into the calcaneus and forwards into the arch. Compare this with the upper limb and the trade-off is clear: the shoulder girdle is built for reach and gives up stability, while the pelvic girdle is a closed, load-arching ring that gives up mobility. Two bones here share a dangerous design feature \u2014 the femoral head and the talus are both supplied largely by retrograde vessels entering from the far end \u2014 which is why an intracapsular femoral neck fracture and a talar neck fracture each threaten avascular necrosis, and why they are treated with more urgency than the break alone would suggest.",
+   "key_counts": [
+    {
+     "label": "Bones in the pelvic girdle proper",
+     "value": "2",
+     "note": "The two hip bones. The sacrum and coccyx complete the bony pelvis but are counted as axial skeleton, not girdle."
+    },
+    {
+     "label": "Bones fused into each hip bone",
+     "value": "3",
+     "note": "Ilium, ischium, pubis \u2014 separate in childhood, meeting at the triradiate cartilage, which closes in mid-adolescence."
+    },
+    {
+     "label": "Bones in each free lower limb",
+     "value": "30",
+     "note": "Femur, patella, tibia, fibula, 7 tarsals, 5 metatarsals, 14 phalanges. Both limbs together = 60 of the conventional 206."
+    },
+    {
+     "label": "Bones in each foot",
+     "value": "26",
+     "note": "7 tarsals + 5 metatarsals + 14 phalanges. The two hallucal sesamoids under the first metatarsal head are constant but are NOT included in the standard count."
+    },
+    {
+     "label": "Tarsal bones",
+     "value": "7",
+     "note": "Talus, calcaneus, navicular, cuboid, and three cuneiforms. The foot has 7 tarsals; the wrist has 8 carpals \u2014 a common mix-up."
+    },
+    {
+     "label": "Bones the talus articulates with",
+     "value": "4",
+     "note": "Tibia, fibula, calcaneus, navicular. It is the only bone connecting leg to foot, and no muscle attaches to it."
+    },
+    {
+     "label": "Share of leg axial load carried by the fibula",
+     "value": "~7% (up to ~17%)",
+     "note": "About 7% with the ankle neutral, rising with heavier loads, dorsiflexion, and laterally shifted load lines. 'The fibula bears no weight' is an overstatement."
+    }
+   ]
+  }
+ ],
+ "tours": [
+  {
+   "id": "why-257",
+   "title": "Why 257, not 206?",
+   "subtitle": "An honest audit of a number you were told to memorise",
+   "steps": [
+    {
+     "title": "206 is a convention, not a law",
+     "text": "You were taught that an adult skeleton has 206 bones. That is a good number, but it is a count someone agreed on, not a fact of nature. You were not born with it \u2014 a newborn has closer to 270 separate bony elements, and many later fuse \u2014 and plenty of adults never arrive at it.",
+     "bones": [
+      "l_femur",
+      "r_femur",
+      "l_humerus",
+      "r_humerus",
+      "sternum",
+      "frontal"
+     ],
+     "view": "VP_Body",
+     "isolate": false
+    },
+    {
+     "title": "First, subtract what is not bone: the teeth",
+     "text": "Thirty-two of the parts you can click here are teeth. Enamel is the hardest tissue in your body \u2014 harder than bone \u2014 but it is not bone, it does not remodel, and it has never been counted in the 206. A skull that has lost its teeth looks like a skull; a skull that never had them could not eat.",
+     "bones": [
+      "tooth_molar_1_18",
+      "tooth_molar_2_17",
+      "tooth_molar_3_16",
+      "tooth_premolar_4_15",
+      "tooth_premolar_5_14",
+      "tooth_canine_6_13",
+      "tooth_incisor_7_12",
+      "tooth_incisor_8_11",
+      "tooth_incisor_9_21",
+      "tooth_incisor_10_22",
+      "tooth_canine_11_23",
+      "tooth_premolar_12_24",
+      "tooth_premolar_13_25",
+      "tooth_molar_14_26",
+      "tooth_molar_15_27",
+      "tooth_molar_16_28",
+      "tooth_molar_17_38",
+      "tooth_molar_18_37",
+      "tooth_molar_19_36",
+      "tooth_premolar_20_35",
+      "tooth_premolar_21_34",
+      "tooth_canine_22_33",
+      "tooth_incisor_23_32",
+      "tooth_incisor_24_31",
+      "tooth_incisor_25_41",
+      "tooth_incisor_26_42",
+      "tooth_canine_27_43",
+      "tooth_premolar_28_44",
+      "tooth_premolar_29_45",
+      "tooth_molar_30_46",
+      "tooth_molar_31_47",
+      "tooth_molar_32_48",
+      "mandible",
+      "l_maxilla",
+      "r_maxilla"
+     ],
+     "view": "VP_Skull",
+     "isolate": true
+    },
+    {
+     "title": "Then the discs \u2014 23 of them",
+     "text": "Between the vertebrae sit 23 fibrocartilage discs, from C2\u2013C3 at the top to L5\u2013S1 at the bottom. Count them carefully: there is no disc above C2, because the atlas has no body of its own. A dry classroom skeleton has lost every one of these, which is exactly why it cannot bend.",
+     "bones": [
+      "c2disc",
+      "c3disc",
+      "c4disc",
+      "c5disc",
+      "c6disc",
+      "c7disc",
+      "t1disc",
+      "t2disc",
+      "t3disc",
+      "t4disc",
+      "t5disc",
+      "t6disc",
+      "t7disc",
+      "t8disc",
+      "t9disc",
+      "t10disc",
+      "t11disc",
+      "t12disc",
+      "l1disc",
+      "l2disc",
+      "l3disc",
+      "l4disc",
+      "l5disc"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "Cartilage that does a bone's job",
+     "text": "The costal cartilages carry the upper ribs to the sternum, and the pubic symphysis locks the two hip bones together in front. Neither is bone. The cartilage is the whole point: it is what turns the rib cage from a rigid box into a spring that can change shape with every breath.",
+     "bones": [
+      "l_costal_cartilage",
+      "r_costal_cartilage",
+      "pubic_symphysis"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": false
+    },
+    {
+     "title": "Now subtract seven bones you cannot click",
+     "text": "Six of the 206 are the auditory ossicles \u2014 malleus, incus and stapes in each middle ear, sealed inside the dense petrous part of the temporal bone, each smaller than a grain of rice. The seventh is the hyoid, slung in the muscles of the throat, the one bone in the body that articulates with no other bone. None of the seven is modelled here.",
+     "bones": [
+      "l_temporal",
+      "r_temporal",
+      "mandible"
+     ],
+     "view": "VP_Skull",
+     "isolate": false
+    },
+    {
+     "title": "A bone cut in half",
+     "text": "The ethmoid is a single bone \u2014 the delicate honeycomb between your eye sockets that roofs the nasal cavity. This model builds it as a left and a right half, so it costs you two clicks instead of one. That is a modelling decision, not anatomy, and it quietly adds one to the total.",
+     "bones": [
+      "l_ethmoid",
+      "r_ethmoid"
+     ],
+     "view": "VP_Skull",
+     "isolate": false
+    },
+    {
+     "title": "And a bone that is simply missing",
+     "text": "The left little toe here has only two phalanges; the right has three. Its distal phalanx exists in the skeleton's hierarchy but has no geometry, so you cannot click it. That error subtracts one, the split ethmoid adds one, and they cancel \u2014 which is exactly why nobody caught either. The ledger closes: 206 \u2212 6 \u2212 1 \u2212 1 + 1 = 199 bones, plus 58 parts that are not bones, is 257.",
+     "bones": [
+      "l_tarsal_proximal_phalanx_5",
+      "l_tarsal_middle_phalanx_5",
+      "r_tarsal_distal_phalanx_5"
+     ],
+     "view": "VP_Foot",
+     "isolate": false
+    }
+   ]
+  },
+  {
+   "id": "axial",
+   "title": "The Axial Skeleton",
+   "subtitle": "The 80 bones along the midline \u2014 the body's mast and its armour",
+   "steps": [
+    {
+     "title": "The line down the middle",
+     "text": "Split the skeleton in two and the axial half is everything on the central axis: skull, ossicles, hyoid, vertebral column and rib cage \u2014 80 bones. Its job is not movement but protection and support. Every soft thing you cannot survive without lives inside it.",
+     "bones": [
+      "frontal",
+      "l_parietal",
+      "r_parietal",
+      "occipital",
+      "l_temporal",
+      "r_temporal",
+      "sphenoid",
+      "l_ethmoid",
+      "r_ethmoid",
+      "vomer",
+      "mandible",
+      "l_maxilla",
+      "r_maxilla",
+      "l_zygomatic",
+      "r_zygomatic",
+      "l_nasal",
+      "r_nasal",
+      "l_lacrimal",
+      "r_lacrimal",
+      "l_palatine",
+      "r_palatine",
+      "l_inferior_nasal_conchae",
+      "r_inferior_nasal_conchae",
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "t9",
+      "t10",
+      "t11",
+      "t12",
+      "l1",
+      "l2",
+      "l3",
+      "l4",
+      "l5",
+      "sacrum_bone",
+      "coccyx",
+      "l_rib1",
+      "l_rib2",
+      "l_rib3",
+      "l_rib4",
+      "l_rib5",
+      "l_rib6",
+      "l_rib7",
+      "l_rib8",
+      "l_rib9",
+      "l_rib10",
+      "l_rib11",
+      "l_rib12",
+      "r_rib1",
+      "r_rib2",
+      "r_rib3",
+      "r_rib4",
+      "r_rib5",
+      "r_rib6",
+      "r_rib7",
+      "r_rib8",
+      "r_rib9",
+      "r_rib10",
+      "r_rib11",
+      "r_rib12",
+      "sternum"
+     ],
+     "view": "VP_Body",
+     "isolate": true
+    },
+    {
+     "title": "Eight bones make the braincase",
+     "text": "Frontal, two parietals, two temporals, occipital, sphenoid and ethmoid \u2014 eight bones fused into one vault by sutures. A suture is a joint that exists to grow, not to move: it lets the skull expand around an enlarging brain in infancy, then locks. Note the ethmoid appears twice here, as left and right halves; that is this model's convention, not anatomy.",
+     "bones": [
+      "frontal",
+      "l_parietal",
+      "r_parietal",
+      "occipital",
+      "l_temporal",
+      "r_temporal",
+      "sphenoid",
+      "l_ethmoid",
+      "r_ethmoid"
+     ],
+     "view": "VP_Skull",
+     "isolate": true
+    },
+    {
+     "title": "Fourteen bones hang off the front",
+     "text": "The face is a scaffold for the special senses and the beginning of the gut: maxillae, zygomatics, nasals, lacrimals, palatines, inferior conchae, vomer and mandible. Every one is locked by sutures except the mandible, the single moving bone of the skull. 8 cranial + 14 facial = 22.",
+     "bones": [
+      "l_maxilla",
+      "r_maxilla",
+      "l_zygomatic",
+      "r_zygomatic",
+      "l_nasal",
+      "r_nasal",
+      "l_lacrimal",
+      "r_lacrimal",
+      "l_palatine",
+      "r_palatine",
+      "l_inferior_nasal_conchae",
+      "r_inferior_nasal_conchae",
+      "vomer",
+      "mandible"
+     ],
+     "view": "VP_Skull",
+     "isolate": true
+    },
+    {
+     "title": "Seven bones you will never click",
+     "text": "Inside each temporal bone, walled in dense petrous bone, sit the malleus, incus and stapes \u2014 six bones that exist to lever sound from air into fluid. Below the mandible hangs the hyoid, held only by muscles, touching no other bone. All seven belong to the 80. None is modelled here.",
+     "bones": [
+      "l_temporal",
+      "r_temporal"
+     ],
+     "view": "VP_Skull",
+     "isolate": false
+    },
+    {
+     "title": "The column: 26 bones in the adult",
+     "text": "Twenty-four mobile vertebrae, the sacrum, the coccyx. It does three jobs at once \u2014 carries load to the pelvis, sheathes the spinal cord in a continuous canal, and, because it is segmented rather than solid, still bends.",
+     "bones": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "t9",
+      "t10",
+      "t11",
+      "t12",
+      "l1",
+      "l2",
+      "l3",
+      "l4",
+      "l5",
+      "sacrum_bone",
+      "coccyx"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "The cage: 25 bones",
+     "text": "Twelve pairs of ribs plus the sternum. It is the only part of the skeleton designed to change shape rhythmically for as long as you are alive, and it does so around the heart and lungs without ever letting them be crushed.",
+     "bones": [
+      "l_rib1",
+      "l_rib2",
+      "l_rib3",
+      "l_rib4",
+      "l_rib5",
+      "l_rib6",
+      "l_rib7",
+      "l_rib8",
+      "l_rib9",
+      "l_rib10",
+      "l_rib11",
+      "l_rib12",
+      "r_rib1",
+      "r_rib2",
+      "r_rib3",
+      "r_rib4",
+      "r_rib5",
+      "r_rib6",
+      "r_rib7",
+      "r_rib8",
+      "r_rib9",
+      "r_rib10",
+      "r_rib11",
+      "r_rib12",
+      "sternum"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": true
+    },
+    {
+     "title": "The sum, and why it is worth knowing",
+     "text": "22 skull + 6 ossicles + 1 hyoid + 26 column + 25 cage = 80. The other 126 bones are appendicular \u2014 the limbs and the girdles that sling them on. The axial skeleton is what you are; the appendicular skeleton is what you do with it.",
+     "bones": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "t9",
+      "t10",
+      "t11",
+      "t12",
+      "l1",
+      "l2",
+      "l3",
+      "l4",
+      "l5",
+      "sacrum_bone",
+      "coccyx",
+      "sternum",
+      "frontal"
+     ],
+     "view": "VP_Body",
+     "isolate": false
+    }
+   ]
+  },
+  {
+   "id": "spine",
+   "title": "The Vertebral Column",
+   "subtitle": "Thirty-three become twenty-six: a stack that carries, shields and still bends",
+   "steps": [
+    {
+     "title": "One column, three impossible jobs",
+     "text": "The column must carry your whole upper body into the pelvis, wrap the spinal cord in an unbroken bony canal, and still let you tie your shoes. A solid pillar would do the first two and fail the third. Segmenting it \u2014 33 vertebrae, stacked \u2014 is the compromise that buys all three.",
+     "bones": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7",
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "t9",
+      "t10",
+      "t11",
+      "t12",
+      "l1",
+      "l2",
+      "l3",
+      "l4",
+      "l5",
+      "sacrum_bone",
+      "coccyx"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "Cervical: small bones, maximum freedom",
+     "text": "Seven small vertebrae carry the least load and move the most. Each has a transverse foramen \u2014 a hole in the side process \u2014 through which the vertebral artery climbs to the brain. No other region has these, and they are why a violent neck rotation can tear an artery.",
+     "bones": [
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "c7"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "Atlas and axis: yes and no",
+     "text": "C1 is a ring with no body: it cradles the skull on two lateral masses and rocks, which is your \"yes\". Its missing centrum became the dens of C2 \u2014 a vertical peg the atlas and the entire head spin around, which is your \"no\", and about half of all cervical rotation. Two vertebrae, two axes, two gestures.",
+     "bones": [
+      "c1",
+      "c2"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "Thoracic: bought stiffness",
+     "text": "Twelve vertebrae, each with facets to grip the ribs. Because a typical rib head straddles a disc and grabs two vertebrae at once, the ribs splint the region into the stiffest part of the column. You cannot bend much here \u2014 and that is exactly what the heart and lungs need.",
+     "bones": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "t9",
+      "t10",
+      "t11",
+      "t12"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "Lumbar: massive bodies, chosen constraints",
+     "text": "Five big vertebrae carrying everything above them. Their facet joints sit nearly in the sagittal plane, which permits generous flexion and extension while blocking axial rotation \u2014 the mirror image of the thoracic spine. That is why you bend forward from the lower back but twist from the chest.",
+     "bones": [
+      "l1",
+      "l2",
+      "l3",
+      "l4",
+      "l5"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    },
+    {
+     "title": "The fusions: 33 becomes 26",
+     "text": "Five sacral vertebrae fuse into one wedge that drives load out into the two hip bones; three to five coccygeal segments fuse into the coccyx. Fusion is normally complete by the mid-twenties to early thirties. Twenty-four mobile vertebrae plus these two fused blocks is the 26-bone adult column.",
+     "bones": [
+      "sacrum_bone",
+      "coccyx",
+      "l5"
+     ],
+     "view": "VP_Spine",
+     "isolate": false
+    },
+    {
+     "title": "Twenty-three discs \u2014 and why not twenty-four",
+     "text": "Twenty-four mobile vertebrae ought to have 23 discs between them, and they do \u2014 but not where you would guess. The top disc is C2\u2013C3, not C1\u2013C2: the atlas has no body to press against, so there is no disc above C2 and none between skull and atlas. And a disc is not a bone. It is fibrocartilage, and it is a third of the reason this model has 257 parts.",
+     "bones": [
+      "c2disc",
+      "c3disc",
+      "c4disc",
+      "c5disc",
+      "c6disc",
+      "c7disc",
+      "t1disc",
+      "t2disc",
+      "t3disc",
+      "t4disc",
+      "t5disc",
+      "t6disc",
+      "t7disc",
+      "t8disc",
+      "t9disc",
+      "t10disc",
+      "t11disc",
+      "t12disc",
+      "l1disc",
+      "l2disc",
+      "l3disc",
+      "l4disc",
+      "l5disc"
+     ],
+     "view": "VP_Spine",
+     "isolate": true
+    }
+   ]
+  },
+  {
+   "id": "hand",
+   "title": "The Hand",
+   "subtitle": "Twenty-seven bones, and why the thumb is not a finger",
+   "steps": [
+    {
+     "title": "A quarter of your skeleton is in your hands",
+     "text": "Twenty-seven bones per hand \u2014 54 for the pair, better than a quarter of all 206. Evolution does not spend bone counts on things that do not matter. The hand is expensive because precision is expensive: many small bones mean many small joints, and many joints mean control.",
+     "bones": [
+      "l_scaphoid",
+      "l_lunate",
+      "l_triquetral",
+      "l_pisiform",
+      "l_trapezium",
+      "l_trapezoid",
+      "l_capitate",
+      "l_hamate",
+      "l_metacarpal_1",
+      "l_metacarpal_2",
+      "l_metacarpal_3",
+      "l_metacarpal_4",
+      "l_metacarpal_5",
+      "l_carpal_proximal_phalanx_1",
+      "l_carpal_proximal_phalanx_2",
+      "l_carpal_proximal_phalanx_3",
+      "l_carpal_proximal_phalanx_4",
+      "l_carpal_proximal_phalanx_5",
+      "l_carpal_middle_phalanx_2",
+      "l_carpal_middle_phalanx_3",
+      "l_carpal_middle_phalanx_4",
+      "l_carpal_middle_phalanx_5",
+      "l_carpal_distal_phalanx_1",
+      "l_carpal_distal_phalanx_2",
+      "l_carpal_distal_phalanx_3",
+      "l_carpal_distal_phalanx_4",
+      "l_carpal_distal_phalanx_5"
+     ],
+     "view": "VP_Hand",
+     "isolate": true
+    },
+    {
+     "title": "The carpus: two rows of four",
+     "text": "Eight carpals in two rows \u2014 scaphoid, lunate, triquetral, pisiform, then trapezium, trapezoid, capitate, hamate. The wrist is not one hinge but a shifting mosaic: bending happens a little at every joint between and within the rows, which is why the wrist has such range and yet so rarely dislocates.",
+     "bones": [
+      "l_scaphoid",
+      "l_lunate",
+      "l_triquetral",
+      "l_pisiform",
+      "l_trapezium",
+      "l_trapezoid",
+      "l_capitate",
+      "l_hamate"
+     ],
+     "view": "VP_Hand",
+     "isolate": true
+    },
+    {
+     "title": "The scaphoid pays for that mosaic",
+     "text": "The scaphoid lies across both rows, bridging them \u2014 so when you fall on an outstretched hand, it takes the shear. Its blood enters at the far end and runs backwards into it, so a break across its waist can starve the proximal half to death. Snuffbox tenderness with a normal X-ray is still treated as a fracture.",
+     "bones": [
+      "l_scaphoid"
+     ],
+     "view": "VP_Hand",
+     "isolate": false
+    },
+    {
+     "title": "The pisiform is a fraud",
+     "text": "It looks like a carpal and is counted as one, but it is a sesamoid \u2014 a bone grown inside the tendon of flexor carpi ulnaris \u2014 and it merely rests on the front of the triquetral. It touches no other bone and carries no load from hand to forearm. Its job is leverage, not structure.",
+     "bones": [
+      "l_pisiform",
+      "l_triquetral"
+     ],
+     "view": "VP_Hand",
+     "isolate": false
+    },
+    {
+     "title": "The thumb is a different machine",
+     "text": "Where the fingers meet flat, gliding joints, the first metacarpal sits on the trapezium in a saddle \u2014 concave one way, convex the other. That geometry, plus a 90-degree rotation of the whole thumb ray, is what lets it swing across the palm to meet the fingertips. Opposition is not strength; it is a joint shape.",
+     "bones": [
+      "l_trapezium",
+      "l_metacarpal_1",
+      "l_carpal_proximal_phalanx_1",
+      "l_carpal_distal_phalanx_1"
+     ],
+     "view": "VP_Hand",
+     "isolate": false
+    },
+    {
+     "title": "Count the phalanges and the thumb confesses",
+     "text": "Four fingers with three phalanges each, plus a thumb with only two: 4 \u00d7 3 + 2 = 14. The missing middle phalanx is not a defect. A shorter, stiffer thumb is a stronger thumb, and strength is what the opposing member of a pinch grip needs.",
+     "bones": [
+      "l_carpal_middle_phalanx_2",
+      "l_carpal_middle_phalanx_3",
+      "l_carpal_middle_phalanx_4",
+      "l_carpal_middle_phalanx_5",
+      "l_carpal_proximal_phalanx_1",
+      "l_carpal_distal_phalanx_1"
+     ],
+     "view": "VP_Hand",
+     "isolate": false
+    }
+   ]
+  },
+  {
+   "id": "foot",
+   "title": "The Foot",
+   "subtitle": "Twenty-six bones built from the same parts as the hand, for the opposite purpose",
+   "steps": [
+    {
+     "title": "Same kit, opposite job",
+     "text": "Tarsals, metatarsals, phalanges \u2014 the foot is built from the hand's parts list, one bone shorter at 26. But the hand must grasp, and the foot must take your entire body weight thousands of times a day and give some of it back. Everything different about the foot follows from that.",
+     "bones": [
+      "l_calcaneus",
+      "l_talus",
+      "l_navicular",
+      "l_cuboid",
+      "l_cuneiform_1",
+      "l_cuneiform_2",
+      "l_cuneiform_3",
+      "l_metatarsal_1",
+      "l_metatarsal_2",
+      "l_metatarsal_3",
+      "l_metatarsal_4",
+      "l_metatarsal_5",
+      "l_tarsal_proximal_phalanx_1",
+      "l_tarsal_proximal_phalanx_2",
+      "l_tarsal_proximal_phalanx_3",
+      "l_tarsal_proximal_phalanx_4",
+      "l_tarsal_proximal_phalanx_5",
+      "l_tarsal_middle_phalanx_2",
+      "l_tarsal_middle_phalanx_3",
+      "l_tarsal_middle_phalanx_4",
+      "l_tarsal_middle_phalanx_5",
+      "l_tarsal_distal_phalanx_1",
+      "l_tarsal_distal_phalanx_2",
+      "l_tarsal_distal_phalanx_3",
+      "l_tarsal_distal_phalanx_4"
+     ],
+     "view": "VP_Foot",
+     "isolate": true
+    },
+    {
+     "title": "The talus takes everything and asks for nothing",
+     "text": "Your whole body weight arrives from the tibia onto the talus. It is pure joint: not one muscle attaches to it. The price of being all cartilage and no muscle is a poor blood supply that runs backwards into the bone \u2014 break its neck and the body of the talus can die.",
+     "bones": [
+      "l_talus",
+      "l_tibia"
+     ],
+     "view": "VP_Foot",
+     "isolate": false
+    },
+    {
+     "title": "The calcaneus is both foundation and lever",
+     "text": "From the talus, load drops into the calcaneus and out to the ground. But it is also the lever the Achilles tendon hauls on to lift your heel. Fall from a height onto your heels and it shatters \u2014 and the same axial force runs straight up your spine, which is why that injury demands a look at the lumbar vertebrae too.",
+     "bones": [
+      "l_calcaneus",
+      "l_talus"
+     ],
+     "view": "VP_Foot",
+     "isolate": false
+    },
+    {
+     "title": "Seven tarsals, not eight",
+     "text": "Talus, calcaneus, navicular, cuboid and three cuneiforms. The hand's eight carpals sit in two tidy mobile rows; these seven are stacked and wedged into a vault. The foot traded a row of mobility for a shape that can hold weight.",
+     "bones": [
+      "l_talus",
+      "l_calcaneus",
+      "l_navicular",
+      "l_cuboid",
+      "l_cuneiform_1",
+      "l_cuneiform_2",
+      "l_cuneiform_3"
+     ],
+     "view": "VP_Foot",
+     "isolate": true
+    },
+    {
+     "title": "The arch is a spring, not a vault",
+     "text": "Follow the medial longitudinal arch: calcaneus, talus, navicular, medial cuneiform, first metatarsal. It flattens as you land, storing energy in ligament and fascia, and recoils to help launch the next step. A stone arch is designed never to move. This one is designed to move and come back.",
+     "bones": [
+      "l_calcaneus",
+      "l_talus",
+      "l_navicular",
+      "l_cuneiform_1",
+      "l_metatarsal_1",
+      "l_cuboid",
+      "l_metatarsal_5"
+     ],
+     "view": "VP_Foot",
+     "isolate": false
+    },
+    {
+     "title": "The great toe is the thumb that gave up",
+     "text": "Like the thumb, the hallux has just two phalanges. But its joint with the first metatarsal is a hinge, not a saddle, and the whole ray is locked into line with the others. It cannot oppose \u2014 and in exchange, it is the rigid lever every step pushes off from.",
+     "bones": [
+      "l_metatarsal_1",
+      "l_tarsal_proximal_phalanx_1",
+      "l_tarsal_distal_phalanx_1"
+     ],
+     "view": "VP_Foot",
+     "isolate": false
+    },
+    {
+     "title": "And one bone that isn't here",
+     "text": "Count the left little toe: two phalanges, not three. Its distal phalanx is missing from this model \u2014 the right foot has one. There is a true fact hiding behind the error: in a large share of real people the fifth toe's middle and distal phalanges genuinely fuse into a single segment. But not on one side only. This is the model being wrong, and it is worth knowing where your instruments lie to you.",
+     "bones": [
+      "l_tarsal_proximal_phalanx_5",
+      "l_tarsal_middle_phalanx_5",
+      "l_metatarsal_5"
+     ],
+     "view": "VP_Foot",
+     "isolate": false
+    }
+   ]
+  },
+  {
+   "id": "ribcage",
+   "title": "The Thoracic Cage",
+   "subtitle": "True, false and floating \u2014 a box that must never stop moving",
+   "steps": [
+    {
+     "title": "A cage that has to breathe",
+     "text": "Twelve pairs of ribs and a sternum: 25 bones wrapped around the heart and lungs. Armour is easy; armour that changes volume twelve to twenty times a minute for eighty years is not. Every peculiarity of the ribs is an answer to that problem.",
+     "bones": [
+      "l_rib1",
+      "l_rib2",
+      "l_rib3",
+      "l_rib4",
+      "l_rib5",
+      "l_rib6",
+      "l_rib7",
+      "l_rib8",
+      "l_rib9",
+      "l_rib10",
+      "l_rib11",
+      "l_rib12",
+      "r_rib1",
+      "r_rib2",
+      "r_rib3",
+      "r_rib4",
+      "r_rib5",
+      "r_rib6",
+      "r_rib7",
+      "r_rib8",
+      "r_rib9",
+      "r_rib10",
+      "r_rib11",
+      "r_rib12",
+      "sternum",
+      "l_costal_cartilage",
+      "r_costal_cartilage"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": true
+    },
+    {
+     "title": "Two hinges make an axis",
+     "text": "A typical rib is hinged twice at the back: its head grips the vertebral bodies and the disc between them, and its tubercle grips the transverse process. Two fixed points define a line \u2014 so a rib cannot flap. It must swing about that axis, and the axis is what makes breathing geometric rather than chaotic.",
+     "bones": [
+      "l_rib5",
+      "t4",
+      "t5",
+      "t4disc"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": false
+    },
+    {
+     "title": "True ribs: 1 to 7",
+     "text": "Each of the first seven reaches the sternum through its own costal cartilage. Their axis lies near the horizontal, so they rise like a pump handle, driving the sternum forward and deepening the chest front to back. The cartilage is what lets a bony ring behave like a spring.",
+     "bones": [
+      "l_rib1",
+      "l_rib2",
+      "l_rib3",
+      "l_rib4",
+      "l_rib5",
+      "l_rib6",
+      "l_rib7",
+      "r_rib1",
+      "r_rib2",
+      "r_rib3",
+      "r_rib4",
+      "r_rib5",
+      "r_rib6",
+      "r_rib7",
+      "sternum",
+      "l_costal_cartilage",
+      "r_costal_cartilage"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": true
+    },
+    {
+     "title": "False ribs: 8 to 10",
+     "text": "These never touch the sternum. Rib 8 joins the cartilage of rib 7, rib 9 joins 8, rib 10 joins 9 \u2014 a chain that forms the costal margin you can feel under your ribs. Their axis lies nearer the vertical, so they swing out like a bucket handle and widen the chest side to side.",
+     "bones": [
+      "l_rib8",
+      "l_rib9",
+      "l_rib10",
+      "r_rib8",
+      "r_rib9",
+      "r_rib10",
+      "l_costal_cartilage",
+      "r_costal_cartilage"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": true
+    },
+    {
+     "title": "Floating ribs: 11 and 12",
+     "text": "No cartilage forward, no sternum, not even a costotransverse joint at the back \u2014 they end free in the muscle of the abdominal wall. Freed from the cage, they stop being armour for the lungs and become a shield lying over the kidneys.",
+     "bones": [
+      "l_rib11",
+      "l_rib12",
+      "r_rib11",
+      "r_rib12",
+      "t11",
+      "t12"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": false
+    },
+    {
+     "title": "Rib 1 is nothing like the others",
+     "text": "Shortest, broadest, flattest, most sharply curved \u2014 it is a horizontal plate forming the rim of the thorax's top opening, and it is hidden under the clavicle so you cannot feel it. Across its upper surface run the subclavian vein, the subclavian artery and the lower trunk of the brachial plexus, everything the arm depends on, crossing a single rib.",
+     "bones": [
+      "l_rib1",
+      "r_rib1",
+      "l_clavicle",
+      "r_clavicle"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": false
+    },
+    {
+     "title": "Counting, and the groove that keeps you safe",
+     "text": "Rib 1 is unfindable, so clinicians feel for the sternal angle \u2014 the ridge where rib 2's cartilage meets the sternum \u2014 and count down. And under each rib's lower border runs a groove sheltering the vein, artery and nerve, top to bottom. That is why a chest drain goes in over the top of the rib below, and why the safest track is the middle of the space: a collateral branch runs along the lower rib's upper edge too.",
+     "bones": [
+      "sternum",
+      "l_rib2",
+      "r_rib2",
+      "l_rib4",
+      "l_rib5",
+      "l_rib6"
+     ],
+     "view": "VP_Ribcage",
+     "isolate": false
+    }
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "prompt": "Find the bone that carries your body weight from the knee down to the ankle \u2014 the one that would snap if you landed badly, not the thin one beside it.",
+   "answer": "l_tibia",
+   "accept": [
+    "r_tibia"
+   ],
+   "level": 1,
+   "teach": "The tibia is the load path; the fibula carries almost none of your weight. The fibula is a muscle anchor and a strut that forms the outer ankle (the lateral malleolus) \u2014 which is why a surgeon can harvest a length of fibula for a bone graft and you can still walk."
+  },
+  {
+   "prompt": "Find the only bone in the skull that moves.",
+   "answer": "mandible",
+   "level": 1,
+   "teach": "Every other skull bone is locked to its neighbours by sutures \u2014 joints that exist to grow, not to move. The mandible alone has a mobile synovial joint, the TMJ. (Strictly, the three ossicles in each middle ear also move, but they are too small to be modelled here.)",
+   "accept": []
+  },
+  {
+   "prompt": "Find the bone embedded in the quadriceps tendon in front of the knee \u2014 the largest sesamoid in the body.",
+   "answer": "l_patella",
+   "accept": [
+    "r_patella"
+   ],
+   "level": 1,
+   "teach": "A sesamoid is a bone grown inside a tendon. The patella holds the quadriceps tendon away from the knee's axis, lengthening the muscle's lever arm so you can straighten the leg against load. It is the only sesamoid the standard 206 count includes."
+  },
+  {
+   "prompt": "Find the single strut of bone that connects your entire arm to the rest of your skeleton \u2014 break it and the shoulder drops.",
+   "answer": "l_clavicle",
+   "accept": [
+    "r_clavicle"
+   ],
+   "level": 1,
+   "teach": "The clavicle is the only bony link between the upper limb and the axial skeleton; everything else is muscle. It props the shoulder out from the chest, and because it is the sole strut it takes the force of any fall onto the shoulder \u2014 hence its reputation as one of the most commonly broken bones, especially in children."
+  },
+  {
+   "prompt": "Find the skull bone pierced by the foramen magnum, the opening through which the spinal cord leaves the head.",
+   "answer": "occipital",
+   "level": 1,
+   "teach": "The occipital bone forms the back and base of the braincase. Its two condyles sit either side of the foramen magnum and rock on the atlas (C1) \u2014 the joint that lets you nod. Load from the whole skull passes through those two small condyles into the neck.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the flat bone in the midline of the chest that the upper seven ribs reach through their cartilage.",
+   "answer": "sternum",
+   "level": 1,
+   "teach": "Three parts: manubrium, body and xiphoid process. The ridge where the manubrium meets the body is the sternal angle (angle of Louis) \u2014 the 2nd costal cartilage joins there, which is why clinicians find rib 2 by feel and count spaces downward from it.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the vertebra that is a ring with no body of its own \u2014 the one the skull sits on.",
+   "answer": "c1",
+   "level": 2,
+   "teach": "The atlas has neither a body nor a true spinous process; its centrum separated in development and became the dens of C2. It is a bony washer that carries the entire skull on two lateral masses. Drive the occipital condyles down into that ring \u2014 classically by diving into shallow water \u2014 and it bursts: a Jefferson fracture.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the vertebra that supplies the vertical peg the head pivots around when you shake it \"no\".",
+   "answer": "c2",
+   "level": 2,
+   "teach": "The dens (odontoid process) of the axis is the pivot; the atlantoaxial joints supply roughly half of all cervical rotation. The transverse ligament pins the dens forward, away from the cord. If that ligament is lax \u2014 Down syndrome, rheumatoid arthritis \u2014 the dens can encroach on the spinal cord.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the bone that finally hands your body weight to the ground when you stand.",
+   "answer": "l_calcaneus",
+   "accept": [
+    "r_calcaneus"
+   ],
+   "level": 2,
+   "teach": "The load path is tibia \u2192 talus \u2192 calcaneus \u2192 ground. The calcaneus is the largest tarsal and doubles as the lever the Achilles tendon pulls on to lift you onto your toes. Land on your heels from a height and it is the calcaneus that shatters \u2014 which is why such falls also demand a look at the spine, which took the same axial force."
+  },
+  {
+   "prompt": "Find the bone that receives the entire weight of the body from the tibia \u2014 and has not one muscle attached to it.",
+   "answer": "l_talus",
+   "accept": [
+    "r_talus"
+   ],
+   "level": 2,
+   "teach": "The talus is pure joint: it is a weight transfer block wedged in the ankle mortise, and no muscle pulls on it. Its blood supply runs backwards into it from distal to proximal, so a fracture through its neck can cut off the proximal body and kill it \u2014 avascular necrosis."
+  },
+  {
+   "prompt": "Find the forearm bone whose lower end meets the wrist bones directly \u2014 the one broken in a Colles' fracture.",
+   "answer": "l_radius",
+   "accept": [
+    "r_radius"
+   ],
+   "level": 2,
+   "teach": "The radius meets the scaphoid and lunate at the radiocarpal joint; the ulna does not touch the carpus at all, being held off by an articular disc. So the radius takes the force of a fall on an outstretched hand, and the distal radius is the most commonly fractured bone in adults."
+  },
+  {
+   "prompt": "Find the rib that the subclavian artery and the lower trunk of the brachial plexus cross on their way to the arm \u2014 a rib you cannot feel, because the collarbone hides it.",
+   "answer": "l_rib1",
+   "accept": [
+    "r_rib1"
+   ],
+   "level": 2,
+   "teach": "Rib 1 is the shortest, broadest, flattest and most sharply curved rib, and it forms the rim of the thorax's top opening. The subclavian vein grooves in front of the scalene tubercle, the artery and lower trunk behind it. An extra rib growing from C7 (about 1% of people) crowds this same gap \u2014 thoracic outlet syndrome."
+  },
+  {
+   "prompt": "Find the wrist bone that is not a load-bearing carpal at all, but a sesamoid sitting on the surface of another carpal.",
+   "answer": "l_pisiform",
+   "accept": [
+    "r_pisiform"
+   ],
+   "level": 2,
+   "teach": "The pisiform is grown inside the tendon of flexor carpi ulnaris and rests on the front of the triquetral \u2014 it articulates with nothing else. Remove it and the wrist still works, because it was never in the path that carries force from hand to forearm."
+  },
+  {
+   "prompt": "Find the bone most commonly fractured in a fall onto an outstretched hand \u2014 tender in the anatomical snuffbox, and often invisible on the first X-ray.",
+   "answer": "l_scaphoid",
+   "accept": [
+    "r_scaphoid"
+   ],
+   "level": 3,
+   "teach": "The scaphoid bridges the two carpal rows, so it takes the shear when the wrist is forced back. Its blood enters at the far end and runs backwards, so a fracture across the waist starves the proximal fragment: avascular necrosis and non-union. A negative first film does not clear it \u2014 snuffbox tenderness is treated as a fracture until proven otherwise."
+  },
+  {
+   "prompt": "Find the carpal bone whose hook forms one wall of the tunnel carrying the ulnar nerve into the hand \u2014 commonly broken by the butt of a golf club or bat.",
+   "answer": "l_hamate",
+   "accept": [
+    "r_hamate"
+   ],
+   "level": 3,
+   "teach": "The hook of the hamate projects into the palm and roofs Guyon's canal, where the ulnar nerve and artery pass. A gripped handle drives straight into it, so hook fractures belong to golf, racquet sports and baseball \u2014 and can present as ulnar nerve symptoms rather than pain."
+  },
+  {
+   "prompt": "Find the carpal bone that gives the thumb its saddle joint \u2014 the joint that makes opposition, and human tool use, possible.",
+   "answer": "l_trapezium",
+   "accept": [
+    "r_trapezium"
+   ],
+   "level": 3,
+   "teach": "The first metacarpal meets the trapezium at a saddle joint, concave in one axis and convex in the other. That geometry allows the two rotations that let the thumb swing across the palm and meet the fingertips. The freedom costs stability, which is why the thumb base is a classic site of osteoarthritis."
+  },
+  {
+   "prompt": "Find the skull bone that articulates with every other bone of the braincase and cradles the pituitary gland in its saddle.",
+   "answer": "sphenoid",
+   "level": 3,
+   "teach": "The sphenoid is the keystone of the cranial base \u2014 it touches all the other cranial bones and forms much of the middle cranial fossa. The pituitary sits in its sella turcica, which is why surgeons reach the gland through the nose and sphenoid sinus rather than opening the skull.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the vertebra whose transverse process may grow an extra rib and crowd the nerves and artery heading for the arm.",
+   "answer": "c7",
+   "level": 3,
+   "teach": "A cervical rib arises from C7 in about 1% of people and can compress the brachial plexus and subclavian artery. C7 is also the vertebra prominens \u2014 the bump at the base of the neck \u2014 and unlike the cervical vertebrae above it, its transverse foramen usually carries only small veins, not the vertebral artery.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the vertebra at the level where the oesophagus passes through the diaphragm to reach the stomach.",
+   "answer": "t10",
+   "level": 3,
+   "teach": "\"I ate (T8) ten (T10) eggs at twelve (T12)\" \u2014 the inferior vena cava pierces the diaphragm at T8, the oesophagus at T10, the aorta at T12. The muscular fibres around the T10 hiatus act as a physiological sphincter, which is why hiatus hernia and reflux are diseases of this level.",
+   "accept": []
+  },
+  {
+   "prompt": "Find the structure between the last lumbar vertebra and the sacrum that everyone calls part of the spine \u2014 but which is not a bone at all.",
+   "answer": "l5disc",
+   "level": 3,
+   "teach": "The L5\u2013S1 disc is fibrocartilage: a tough anulus around a gel nucleus, built to be squeezed. It is the lowest of the adult's 23 discs (the first is C2\u2013C3 \u2014 there is none above C2, because the atlas has no body). Together with L4\u2013L5 it is the disc most often herniated. Discs are a large part of why this model has 257 parts and not 206 bones.",
+   "accept": []
+  }
+ ],
+ "reconciliation": {
+  "headline": "257 clickable parts, 199 of them bones",
+  "kinds": {
+   "bone": 199,
+   "cartilage": 3,
+   "disc": 23,
+   "tooth": 32
+  },
+  "canonical_bones": 206,
+  "model_bones": 199,
+  "rows": [
+   {
+    "group": "Cranium",
+    "model": 9,
+    "canonical": 8,
+    "delta": 1
+   },
+   {
+    "group": "Facial skeleton",
+    "model": 14,
+    "canonical": 14,
+    "delta": 0
+   },
+   {
+    "group": "Auditory ossicles",
+    "model": 0,
+    "canonical": 6,
+    "delta": -6
+   },
+   {
+    "group": "Hyoid",
+    "model": 0,
+    "canonical": 1,
+    "delta": -1
+   },
+   {
+    "group": "Cervical vertebrae",
+    "model": 7,
+    "canonical": 7,
+    "delta": 0
+   },
+   {
+    "group": "Thoracic vertebrae",
+    "model": 12,
+    "canonical": 12,
+    "delta": 0
+   },
+   {
+    "group": "Lumbar vertebrae",
+    "model": 5,
+    "canonical": 5,
+    "delta": 0
+   },
+   {
+    "group": "Sacrum & coccyx",
+    "model": 2,
+    "canonical": 2,
+    "delta": 0
+   },
+   {
+    "group": "Ribs",
+    "model": 24,
+    "canonical": 24,
+    "delta": 0
+   },
+   {
+    "group": "Sternum",
+    "model": 1,
+    "canonical": 1,
+    "delta": 0
+   },
+   {
+    "group": "Shoulder girdle",
+    "model": 4,
+    "canonical": 4,
+    "delta": 0
+   },
+   {
+    "group": "Arm",
+    "model": 6,
+    "canonical": 6,
+    "delta": 0
+   },
+   {
+    "group": "Carpals",
+    "model": 16,
+    "canonical": 16,
+    "delta": 0
+   },
+   {
+    "group": "Metacarpals",
+    "model": 10,
+    "canonical": 10,
+    "delta": 0
+   },
+   {
+    "group": "Hand phalanges",
+    "model": 28,
+    "canonical": 28,
+    "delta": 0
+   },
+   {
+    "group": "Pelvic girdle",
+    "model": 2,
+    "canonical": 2,
+    "delta": 0
+   },
+   {
+    "group": "Leg",
+    "model": 8,
+    "canonical": 8,
+    "delta": 0
+   },
+   {
+    "group": "Tarsals",
+    "model": 14,
+    "canonical": 14,
+    "delta": 0
+   },
+   {
+    "group": "Metatarsals",
+    "model": 10,
+    "canonical": 10,
+    "delta": 0
+   },
+   {
+    "group": "Foot phalanges",
+    "model": 27,
+    "canonical": 28,
+    "delta": -1
+   }
+  ]
+ }
+}

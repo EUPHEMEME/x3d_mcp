@@ -1,0 +1,2095 @@
+{
+ "bones": [
+  {
+   "name": "l_calcaneus",
+   "display": "L. Calcaneus",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "bone of tarsus of the foot which constitutes the heel"
+  },
+  {
+   "name": "l_capitate",
+   "display": "L. Capitate",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "l_carpal_distal_phalanx_1",
+   "display": "L. Carpal Distal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "l_carpal_distal_phalanx_2",
+   "display": "L. Carpal Distal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "l_carpal_distal_phalanx_3",
+   "display": "L. Carpal Distal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "l_carpal_distal_phalanx_4",
+   "display": "L. Carpal Distal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "l_carpal_distal_phalanx_5",
+   "display": "L. Carpal Distal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "l_carpal_middle_phalanx_2",
+   "display": "L. Carpal Middle Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_middle_phalanx_3",
+   "display": "L. Carpal Middle Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_middle_phalanx_4",
+   "display": "L. Carpal Middle Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_middle_phalanx_5",
+   "display": "L. Carpal Middle Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_proximal_phalanx_1",
+   "display": "L. Carpal Proximal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_proximal_phalanx_2",
+   "display": "L. Carpal Proximal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_proximal_phalanx_3",
+   "display": "L. Carpal Proximal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_proximal_phalanx_4",
+   "display": "L. Carpal Proximal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_carpal_proximal_phalanx_5",
+   "display": "L. Carpal Proximal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_clavicle",
+   "display": "L. Clavicle",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Shoulder girdle",
+   "description": "clavicle, collarbone, or keybone is a slender, S-shaped long bone that serves as a strut between shoulder blade and sternum (breastbone)"
+  },
+  {
+   "name": "l_cuboid",
+   "display": "L. Cuboid",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "cuboid bone is most lateral of bones in distal row of tarsus"
+  },
+  {
+   "name": "l_cuneiform_1",
+   "display": "L. Cuneiform 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "Also known as first or medial cuneiform, l_cuneiform_1 is a medial wedge-shaped bone in foot"
+  },
+  {
+   "name": "l_cuneiform_2",
+   "display": "L. Cuneiform 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "Also known as second, intermediate or middle cuneiform, l_cuneiform_2 is an intermediate wedge-shaped bone in foot"
+  },
+  {
+   "name": "l_cuneiform_3",
+   "display": "L. Cuneiform 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "Also known as third or lateral cuneiform, l_cuneiform_3 is a lateral wedge-shaped bone in foot"
+  },
+  {
+   "name": "l_femur",
+   "display": "L. Femur",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "femur or thigh bone is only bone in thigh, the region of lower limb between hip and knee"
+  },
+  {
+   "name": "l_fibula",
+   "display": "L. Fibula",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "leg bone on lateral side of tibia, to which it is connected above and below"
+  },
+  {
+   "name": "l_hamate",
+   "display": "L. Hamate",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "l_hip_bone",
+   "display": "L. Hip Bone",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Pelvic girdle",
+   "description": "hip bone (os coxae, innominate bone, or coxal bone) is a large flat bone, constricted in center and expanded above and below. name l_hip_bone matches medical naming convention while avoiding naming collision with joint l_hip."
+  },
+  {
+   "name": "l_humerus",
+   "display": "L. Humerus",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Arm",
+   "description": "l_upperarm, long bone in arm that runs from shoulder to elbow, LOA-1"
+  },
+  {
+   "name": "l_lunate",
+   "display": "L. Lunate",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in l_carpal LOA-1"
+  },
+  {
+   "name": "l_metacarpal_1",
+   "display": "L. Metacarpal 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_metacarpal_2",
+   "display": "L. Metacarpal 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_metacarpal_3",
+   "display": "L. Metacarpal 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_metacarpal_4",
+   "display": "L. Metacarpal 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_metacarpal_5",
+   "display": "L. Metacarpal 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "l_metatarsal_1",
+   "display": "L. Metatarsal 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_metatarsal_2",
+   "display": "L. Metatarsal 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_metatarsal_3",
+   "display": "L. Metatarsal 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_metatarsal_4",
+   "display": "L. Metatarsal 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_metatarsal_5",
+   "display": "L. Metatarsal 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_navicular",
+   "display": "L. Navicular",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_patella",
+   "display": "L. Patella",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "Segmentation of a human patella (kneecap) based on a CT scan of a full leg, used with permission from NIH 3D Print Exchange. Translated to left side."
+  },
+  {
+   "name": "l_pisiform",
+   "display": "L. Pisiform",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in l_carpal LOA-1"
+  },
+  {
+   "name": "l_radius",
+   "display": "L. Radius",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Arm",
+   "description": "one of two large bones of forearm, extending from lateral side of elbow to thumb side of wrist and running parallel to ulna"
+  },
+  {
+   "name": "l_scaphoid",
+   "display": "L. Scaphoid",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in l_carpal LOA-1"
+  },
+  {
+   "name": "l_scapula",
+   "display": "L. Scapula",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Shoulder girdle",
+   "description": "scapula, also known as shoulder blade, connects humerus (upper arm bone) with clavicle (collar bone)"
+  },
+  {
+   "name": "l_talus",
+   "display": "L. Talus",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "talus or ankle bone is one of foot bones known as the tarsus, which forms lower part of ankle joint"
+  },
+  {
+   "name": "l_tarsal_distal_phalanx_1",
+   "display": "L. Tarsal Distal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_distal_phalanx_2",
+   "display": "L. Tarsal Distal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_distal_phalanx_3",
+   "display": "L. Tarsal Distal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_distal_phalanx_4",
+   "display": "L. Tarsal Distal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_middle_phalanx_2",
+   "display": "L. Tarsal Middle Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_middle_phalanx_3",
+   "display": "L. Tarsal Middle Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_middle_phalanx_4",
+   "display": "L. Tarsal Middle Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_middle_phalanx_5",
+   "display": "L. Tarsal Middle Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_proximal_phalanx_1",
+   "display": "L. Tarsal Proximal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_proximal_phalanx_2",
+   "display": "L. Tarsal Proximal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot, LOA-1"
+  },
+  {
+   "name": "l_tarsal_proximal_phalanx_3",
+   "display": "L. Tarsal Proximal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_proximal_phalanx_4",
+   "display": "L. Tarsal Proximal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tarsal_proximal_phalanx_5",
+   "display": "L. Tarsal Proximal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "l_tibia",
+   "display": "L. Tibia",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "tibia, also known as the shinbone, shankbone or simply shin, is the larger, stronger, and anterior (frontal) of two bones in leg below knee"
+  },
+  {
+   "name": "l_trapezium",
+   "display": "L. Trapezium",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "l_trapezoid",
+   "display": "L. Trapezoid",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "l_triquetral",
+   "display": "L. Triquetral",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in l_carpal LOA-1"
+  },
+  {
+   "name": "l_ulna",
+   "display": "L. Ulna",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Arm",
+   "description": "long bone in forearm stretching from elbow to wrist, on same side of forearm as little finger, running parallel to radius which is other long bone in forearm"
+  },
+  {
+   "name": "pubic_symphysis",
+   "display": "Pubic Symphysis",
+   "region": "appendicular",
+   "kind": "cartilage",
+   "groupFallback": "Pelvic girdle",
+   "description": "pubic symphysis is a secondary cartilaginous joint between left and right hip bones"
+  },
+  {
+   "name": "r_calcaneus",
+   "display": "R. Calcaneus",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "bone of the tarsus of the foot which constitutes the heel"
+  },
+  {
+   "name": "r_capitate",
+   "display": "R. Capitate",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "r_carpal_distal_phalanx_1",
+   "display": "R. Carpal Distal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "r_carpal_distal_phalanx_2",
+   "display": "R. Carpal Distal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "r_carpal_distal_phalanx_3",
+   "display": "R. Carpal Distal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "r_carpal_distal_phalanx_4",
+   "display": "R. Carpal Distal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "r_carpal_distal_phalanx_5",
+   "display": "R. Carpal Distal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "fingertip"
+  },
+  {
+   "name": "r_carpal_middle_phalanx_2",
+   "display": "R. Carpal Middle Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_middle_phalanx_3",
+   "display": "R. Carpal Middle Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_middle_phalanx_4",
+   "display": "R. Carpal Middle Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_middle_phalanx_5",
+   "display": "R. Carpal Middle Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_proximal_phalanx_1",
+   "display": "R. Carpal Proximal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_proximal_phalanx_2",
+   "display": "R. Carpal Proximal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_proximal_phalanx_3",
+   "display": "R. Carpal Proximal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_proximal_phalanx_4",
+   "display": "R. Carpal Proximal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_carpal_proximal_phalanx_5",
+   "display": "R. Carpal Proximal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Hand phalanges",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_clavicle",
+   "display": "R. Clavicle",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Shoulder girdle",
+   "description": "clavicle, collarbone, or keybone is a slender, S-shaped long bone that serves as a strut between shoulder blade and sternum (breastbone)"
+  },
+  {
+   "name": "r_cuboid",
+   "display": "R. Cuboid",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "cuboid bone is most lateral of bones in distal row of tarsus"
+  },
+  {
+   "name": "r_cuneiform_1",
+   "display": "R. Cuneiform 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "Also known as first or medial cuneiform, r_cuneiform_1 is a medial wedge-shaped bone in foot"
+  },
+  {
+   "name": "r_cuneiform_2",
+   "display": "R. Cuneiform 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "Also known as second, intermediate or middle cuneiform, r_cuneiform_2 is an intermediate wedge-shaped bone in foot"
+  },
+  {
+   "name": "r_cuneiform_3",
+   "display": "R. Cuneiform 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "Also known as third or lateral cuneiform, l_cuneiform_3 is a lateral wedge-shaped bone in foot"
+  },
+  {
+   "name": "r_femur",
+   "display": "R. Femur",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "femur or thigh bone is only bone in thigh, the region of lower limb between hip and knee"
+  },
+  {
+   "name": "r_fibula",
+   "display": "R. Fibula",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "leg bone on lateral side of tibia, to which it is connected above and below"
+  },
+  {
+   "name": "r_hamate",
+   "display": "R. Hamate",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "r_hip_bone",
+   "display": "R. Hip Bone",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Pelvic girdle",
+   "description": "hip bone (os coxae, innominate bone, or coxal bone) is a large flat bone, constricted in center and expanded above and below. name r_hip_bone matches medical naming convention while avoiding naming collision with joint r_hip."
+  },
+  {
+   "name": "r_humerus",
+   "display": "R. Humerus",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Arm",
+   "description": "r_upperarm, long bone in arm that runs from shoulder to elbow, LOA-1"
+  },
+  {
+   "name": "r_lunate",
+   "display": "R. Lunate",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in r_carpal LOA-1"
+  },
+  {
+   "name": "r_metacarpal_1",
+   "display": "R. Metacarpal 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_metacarpal_2",
+   "display": "R. Metacarpal 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_metacarpal_3",
+   "display": "R. Metacarpal 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_metacarpal_4",
+   "display": "R. Metacarpal 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_metacarpal_5",
+   "display": "R. Metacarpal 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metacarpals",
+   "description": "bone in finger"
+  },
+  {
+   "name": "r_metatarsal_1",
+   "display": "R. Metatarsal 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_metatarsal_2",
+   "display": "R. Metatarsal 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_metatarsal_3",
+   "display": "R. Metatarsal 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_metatarsal_4",
+   "display": "R. Metatarsal 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_metatarsal_5",
+   "display": "R. Metatarsal 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Metatarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_navicular",
+   "display": "R. Navicular",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_patella",
+   "display": "R. Patella",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "Segmentation of a human patella (kneecap) based on a CT scan of a full leg, used with permission from NIH 3D Print Exchange. Translated to right side."
+  },
+  {
+   "name": "r_pisiform",
+   "display": "R. Pisiform",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in r_carpal LOA-1"
+  },
+  {
+   "name": "r_radius",
+   "display": "R. Radius",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Arm",
+   "description": "one of two large bones of forearm, extending from lateral side of elbow to thumb side of wrist and running parallel to ulna"
+  },
+  {
+   "name": "r_scaphoid",
+   "display": "R. Scaphoid",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in r_carpal LOA-1"
+  },
+  {
+   "name": "r_scapula",
+   "display": "R. Scapula",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Shoulder girdle",
+   "description": "scapula, also known as shoulder blade, connects humerus (upper arm bone) with clavicle (collar bone)"
+  },
+  {
+   "name": "r_talus",
+   "display": "R. Talus",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Tarsals",
+   "description": "talus or ankle bone is one of foot bones known as the tarsus, which forms lower part of ankle joint"
+  },
+  {
+   "name": "r_tarsal_distal_phalanx_1",
+   "display": "R. Tarsal Distal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_distal_phalanx_2",
+   "display": "R. Tarsal Distal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_distal_phalanx_3",
+   "display": "R. Tarsal Distal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_distal_phalanx_4",
+   "display": "R. Tarsal Distal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_distal_phalanx_5",
+   "display": "R. Tarsal Distal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_middle_phalanx_2",
+   "display": "R. Tarsal Middle Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_middle_phalanx_3",
+   "display": "R. Tarsal Middle Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_middle_phalanx_4",
+   "display": "R. Tarsal Middle Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_middle_phalanx_5",
+   "display": "R. Tarsal Middle Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_proximal_phalanx_1",
+   "display": "R. Tarsal Proximal Phalanx 1",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_proximal_phalanx_2",
+   "display": "R. Tarsal Proximal Phalanx 2",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot, LOA-1"
+  },
+  {
+   "name": "r_tarsal_proximal_phalanx_3",
+   "display": "R. Tarsal Proximal Phalanx 3",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_proximal_phalanx_4",
+   "display": "R. Tarsal Proximal Phalanx 4",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tarsal_proximal_phalanx_5",
+   "display": "R. Tarsal Proximal Phalanx 5",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Foot phalanges",
+   "description": "bone in foot"
+  },
+  {
+   "name": "r_tibia",
+   "display": "R. Tibia",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Leg",
+   "description": "tibia, also known as the shinbone, shankbone or simply shin, is the larger, stronger, and anterior (frontal) of two bones in leg below knee"
+  },
+  {
+   "name": "r_trapezium",
+   "display": "R. Trapezium",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "r_trapezoid",
+   "display": "R. Trapezoid",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "bone in wrist"
+  },
+  {
+   "name": "r_triquetral",
+   "display": "R. Triquetral",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Carpals",
+   "description": "LOA-5 bone in wrist, contained in r_carpal LOA-1"
+  },
+  {
+   "name": "r_ulna",
+   "display": "R. Ulna",
+   "region": "appendicular",
+   "kind": "bone",
+   "groupFallback": "Arm",
+   "description": "long bone in forearm stretching from elbow to wrist, on same side of forearm as little finger, running parallel to radius which is other long bone in forearm"
+  },
+  {
+   "name": "c1",
+   "display": "C1",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c1 (also known as Atlas) is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c2",
+   "display": "C2",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c2 (also known as Axis) is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c2disc",
+   "display": "C2 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "c3",
+   "display": "C3",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c3 is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c3disc",
+   "display": "C3 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "c4",
+   "display": "C4",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c4 is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c4disc",
+   "display": "C4 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "c5",
+   "display": "C5",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c5 is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c5disc",
+   "display": "C5 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "c6",
+   "display": "C6",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c6 is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c6disc",
+   "display": "C6 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "c7",
+   "display": "C7",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cervical vertebrae",
+   "description": "c7 is one of cervical vertebrae in the neck, immediately below the skull"
+  },
+  {
+   "name": "c7disc",
+   "display": "C7 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "coccyx",
+   "display": "Coccyx",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Sacrum & coccyx",
+   "description": "single bone at base of spine"
+  },
+  {
+   "name": "frontal",
+   "display": "Frontal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "forehead: frontal bone or sincipital bone is unpaired bone which consists of two portions, the vertically oriented squamous part, and the horizontally oriented orbital part, making up the bony part of the forehead, part of the bony orbital cavity holding the eye, and part of the bony part of the nose respectively, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l1",
+   "display": "L1",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Lumbar vertebrae",
+   "description": "l1 is among lumbar vertebrae located between thoracic vertebrae and pelvis, forming lower part of the back"
+  },
+  {
+   "name": "l1disc",
+   "display": "L1 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "l2",
+   "display": "L2",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Lumbar vertebrae",
+   "description": "l2 is among lumbar vertebrae located between thoracic vertebrae and pelvis, forming lower part of the back"
+  },
+  {
+   "name": "l2disc",
+   "display": "L2 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "l3",
+   "display": "L3",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Lumbar vertebrae",
+   "description": "l3 is among lumbar vertebrae located between thoracic vertebrae and pelvis, forming lower part of the back"
+  },
+  {
+   "name": "l3disc",
+   "display": "L3 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "l4",
+   "display": "L4",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Lumbar vertebrae",
+   "description": "l4 is among lumbar vertebrae located between thoracic vertebrae and pelvis, forming lower part of the back"
+  },
+  {
+   "name": "l4disc",
+   "display": "L4 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "l5",
+   "display": "L5",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Lumbar vertebrae",
+   "description": "l5 is among lumbar vertebrae located between thoracic vertebrae and pelvis, forming lower part of the back"
+  },
+  {
+   "name": "l5disc",
+   "display": "L5 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "l_costal_cartilage",
+   "display": "L. Costal Cartilage",
+   "region": "axial",
+   "kind": "cartilage",
+   "groupFallback": "Costal cartilage",
+   "description": "costal cartilage, also known as rib cartilage, are bars of hyaline cartilage that serve to prolong the ribs forward and contribute to elasticity of walls of thorax"
+  },
+  {
+   "name": "l_ethmoid",
+   "display": "L. Ethmoid",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "paired complex bone/cartilage structure in skull that separates nasal cavity from brain, located at roof of nose, between the two orbits, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_inferior_nasal_conchae",
+   "display": "L. Inferior Nasal Conchae",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "inferior nasal concha (inferior turbinated bone or inferior turbinal/turbinate) is one of the three paired nasal conchae in the nose, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_lacrimal",
+   "display": "L. Lacrimal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "lacrimal bones are two small and fragile bones of the facial skeleton, they are roughly the size of the little fingernail and situated at the front part of the medial wall of the orbit, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_maxilla",
+   "display": "L. Maxilla",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "upper fixed bone of jaw formed from fusion of two maxillary bones, including hard palate in front of mouth, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_nasal",
+   "display": "L. Nasal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "two small oblong bones, varying in size and form in different individuals, side by side to form bridge of upper third of nose, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_palatine",
+   "display": "L. Palatine",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "irregular bone of facial skeleton, located above uvula in throat, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_parietal",
+   "display": "L. Parietal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "parietal bones are two bones in skull which form sides and roof of neurocranium, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_rib1",
+   "display": "L. Rib1",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib10",
+   "display": "L. Rib10",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib11",
+   "display": "L. Rib11",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib12",
+   "display": "L. Rib12",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib2",
+   "display": "L. Rib2",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib3",
+   "display": "L. Rib3",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib4",
+   "display": "L. Rib4",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib5",
+   "display": "L. Rib5",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib6",
+   "display": "L. Rib6",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib7",
+   "display": "L. Rib7",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib8",
+   "display": "L. Rib8",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_rib9",
+   "display": "L. Rib9",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "l_temporal",
+   "display": "L. Temporal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "paired bone situated at sides and base of skull, lateral to temporal lobe of cerebral cortex, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "l_zygomatic",
+   "display": "L. Zygomatic",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "zygomatic bone (also called cheekbone or malar bone) is situated at upper and lateral part of face, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "mandible",
+   "display": "Mandible",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "mandible, lower jaw, or jawbone is bone that makes up lower and more mobile component of mouth"
+  },
+  {
+   "name": "occipital",
+   "display": "Occipital",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "occipital bone is a cranial dermal bone and main bone of occiput (back and lower part of the skull), LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_costal_cartilage",
+   "display": "R. Costal Cartilage",
+   "region": "axial",
+   "kind": "cartilage",
+   "groupFallback": "Costal cartilage",
+   "description": "costal cartilage, also known as rib cartilage, are bars of hyaline cartilage that serve to prolong the ribs forward and contribute to elasticity of walls of thorax"
+  },
+  {
+   "name": "r_ethmoid",
+   "display": "R. Ethmoid",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "paired complex bone/cartilage structure in skull that separates nasal cavity from brain, located at roof of nose, between the two orbits, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_inferior_nasal_conchae",
+   "display": "R. Inferior Nasal Conchae",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "inferior nasal concha (inferior turbinated bone or inferior turbinal/turbinate) is one of the three paired nasal conchae in the nose, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_lacrimal",
+   "display": "R. Lacrimal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "lacrimal bones are two small and fragile bones of the facial skeleton, they are roughly the size of the little fingernail and situated at the front part of the medial wall of the orbit, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_maxilla",
+   "display": "R. Maxilla",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "upper fixed bone of jaw formed from fusion of two maxillary bones, including hard palate in front of mouth, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_nasal",
+   "display": "R. Nasal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "two small oblong bones, varying in size and form in different individuals, side by side to form bridge of upper third of nose, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_palatine",
+   "display": "R. Palatine",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "irregular bone of facial skeleton, located above uvula in throat, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_parietal",
+   "display": "R. Parietal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "parietal bones are two bones in skull which form sides and roof of neurocranium, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_rib1",
+   "display": "R. Rib1",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib10",
+   "display": "R. Rib10",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib11",
+   "display": "R. Rib11",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib12",
+   "display": "R. Rib12",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib2",
+   "display": "R. Rib2",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib3",
+   "display": "R. Rib3",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib4",
+   "display": "R. Rib4",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib5",
+   "display": "R. Rib5",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib6",
+   "display": "R. Rib6",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib7",
+   "display": "R. Rib7",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib8",
+   "display": "R. Rib8",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_rib9",
+   "display": "R. Rib9",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Ribs",
+   "description": "rib cage or thoracic cage is endoskeletal enclosure in thorax that comprises the ribs, vertebral column and sternum, which protect vital organs of thoracic cavity"
+  },
+  {
+   "name": "r_temporal",
+   "display": "R. Temporal",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "paired bone situated at sides and base of skull, lateral to temporal lobe of cerebral cortex, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "r_zygomatic",
+   "display": "R. Zygomatic",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "zygomatic bone (also called cheekbone or malar bone) is situated at upper and lateral part of face, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "sacrum_bone",
+   "display": "Sacrum Bone",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Sacrum & coccyx",
+   "description": "triangular bone at base of spine that forms by fusing of sacral vertebrae (s1-s5) between ages 18 and 30, situated at upper, back part of pelvic cavity, between two wings of pelvis"
+  },
+  {
+   "name": "sphenoid",
+   "display": "Sphenoid",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Cranium",
+   "description": "unpaired bone of neurocranium, situated in middle of skull towards front, in front of basilar part of occipital bone, LOA-5 part of skull LOA-1"
+  },
+  {
+   "name": "sternum",
+   "display": "Sternum",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Sternum",
+   "description": "sternum or breastbone is long flat bone located in central part of chest that connects to ribs via cartilage and forms front of rib cage, thus helping to protect heart, lungs, and major blood vessels from injury"
+  },
+  {
+   "name": "t1",
+   "display": "T1",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t1 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t10",
+   "display": "T10",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t10 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t10disc",
+   "display": "T10 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t11",
+   "display": "T11",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t11 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t11disc",
+   "display": "T11 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t12",
+   "display": "T12",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t12 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t12disc",
+   "display": "T12 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t1disc",
+   "display": "T1 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t2",
+   "display": "T2",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t2 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t2disc",
+   "display": "T2 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t3",
+   "display": "T3",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t3 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t3disc",
+   "display": "T3 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t4",
+   "display": "T4",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t4 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t4disc",
+   "display": "T4 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t5",
+   "display": "T5",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t5 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t5disc",
+   "display": "T5 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t6",
+   "display": "T6",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t6 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t6disc",
+   "display": "T6 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t7",
+   "display": "T7",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t7 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t7disc",
+   "display": "T7 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t8",
+   "display": "T8",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t8 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t8disc",
+   "display": "T8 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "t9",
+   "display": "T9",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Thoracic vertebrae",
+   "description": "t9 is among the thoracic vertebrae that compose middle segment of vertebral column, between cervical and lumbar vertebrae"
+  },
+  {
+   "name": "t9disc",
+   "display": "T9 Disc",
+   "region": "axial",
+   "kind": "disc",
+   "groupFallback": "Intervertebral discs",
+   "description": "intervertebral disc"
+  },
+  {
+   "name": "tooth_canine_11_23",
+   "display": "Tooth Canine 11 23",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_canine_11_23, lower left Universal Numbering System (UNS) #11, ISO 3950 standard designation #23"
+  },
+  {
+   "name": "tooth_canine_22_33",
+   "display": "Tooth Canine 22 33",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_canine_22_33, lower left Universal Numbering System (UNS) #22, ISO 3950 standard designation #33"
+  },
+  {
+   "name": "tooth_canine_27_43",
+   "display": "Tooth Canine 27 43",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_27_43, lower left Universal Numbering System (UNS) #27, ISO 3950 standard designation #43"
+  },
+  {
+   "name": "tooth_canine_6_13",
+   "display": "Tooth Canine 6 13",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_canine_6_13, lower left Universal Numbering System (UNS) #6, ISO 3950 standard designation #13"
+  },
+  {
+   "name": "tooth_incisor_10_22",
+   "display": "Tooth Incisor 10 22",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_10_22, lower left Universal Numbering System (UNS) #10, ISO 3950 standard designation #22"
+  },
+  {
+   "name": "tooth_incisor_23_32",
+   "display": "Tooth Incisor 23 32",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_23_32, lower left Universal Numbering System (UNS) #23, ISO 3950 standard designation #32"
+  },
+  {
+   "name": "tooth_incisor_24_31",
+   "display": "Tooth Incisor 24 31",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_24_31, lower left Universal Numbering System (UNS) #24, ISO 3950 standard designation #31"
+  },
+  {
+   "name": "tooth_incisor_25_41",
+   "display": "Tooth Incisor 25 41",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_25_41, lower left Universal Numbering System (UNS) #25, ISO 3950 standard designation #41"
+  },
+  {
+   "name": "tooth_incisor_26_42",
+   "display": "Tooth Incisor 26 42",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_26_42, lower left Universal Numbering System (UNS) #26, ISO 3950 standard designation #42"
+  },
+  {
+   "name": "tooth_incisor_7_12",
+   "display": "Tooth Incisor 7 12",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_7_12, lower left Universal Numbering System (UNS) #7, ISO 3950 standard designation #12"
+  },
+  {
+   "name": "tooth_incisor_8_11",
+   "display": "Tooth Incisor 8 11",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_8_11, lower left Universal Numbering System (UNS) #8, ISO 3950 standard designation #11"
+  },
+  {
+   "name": "tooth_incisor_9_21",
+   "display": "Tooth Incisor 9 21",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_incisor_9_21, lower left Universal Numbering System (UNS) #9, ISO 3950 standard designation #21"
+  },
+  {
+   "name": "tooth_molar_14_26",
+   "display": "Tooth Molar 14 26",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_14_26, lower left Universal Numbering System (UNS) #14, ISO 3950 standard designation #26"
+  },
+  {
+   "name": "tooth_molar_15_27",
+   "display": "Tooth Molar 15 27",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_15_27, lower left Universal Numbering System (UNS) #15, ISO 3950 standard designation #27"
+  },
+  {
+   "name": "tooth_molar_16_28",
+   "display": "Tooth Molar 16 28",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_16_28, lower left Universal Numbering System (UNS) #16, ISO 3950 standard designation #28"
+  },
+  {
+   "name": "tooth_molar_17_38",
+   "display": "Tooth Molar 17 38",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_17_38, lower left Universal Numbering System (UNS) #17, ISO 3950 standard designation #38"
+  },
+  {
+   "name": "tooth_molar_18_37",
+   "display": "Tooth Molar 18 37",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_18_37, lower left Universal Numbering System (UNS) #18, ISO 3950 standard designation #37"
+  },
+  {
+   "name": "tooth_molar_19_36",
+   "display": "Tooth Molar 19 36",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_19_36, lower left Universal Numbering System (UNS) #19, ISO 3950 standard designation #36"
+  },
+  {
+   "name": "tooth_molar_1_18",
+   "display": "Tooth Molar 1 18",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_1_18, lower left Universal Numbering System (UNS) #1, ISO 3950 standard designation #18"
+  },
+  {
+   "name": "tooth_molar_2_17",
+   "display": "Tooth Molar 2 17",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_2_17, lower left Universal Numbering System (UNS) #2, ISO 3950 standard designation #17"
+  },
+  {
+   "name": "tooth_molar_30_46",
+   "display": "Tooth Molar 30 46",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_30_46, lower left Universal Numbering System (UNS) #30, ISO 3950 standard designation #46"
+  },
+  {
+   "name": "tooth_molar_31_47",
+   "display": "Tooth Molar 31 47",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_31_47, lower left Universal Numbering System (UNS) #31, ISO 3950 standard designation #47"
+  },
+  {
+   "name": "tooth_molar_32_48",
+   "display": "Tooth Molar 32 48",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_32_48, lower left Universal Numbering System (UNS) #32, ISO 3950 standard designation #48"
+  },
+  {
+   "name": "tooth_molar_3_16",
+   "display": "Tooth Molar 3 16",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_molar_3_16, lower left Universal Numbering System (UNS) #3, ISO 3950 standard designation #16"
+  },
+  {
+   "name": "tooth_premolar_12_24",
+   "display": "Tooth Premolar 12 24",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_12_24, lower left Universal Numbering System (UNS) #12, ISO 3950 standard designation #24"
+  },
+  {
+   "name": "tooth_premolar_13_25",
+   "display": "Tooth Premolar 13 25",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_13_25, lower left Universal Numbering System (UNS) #13, ISO 3950 standard designation #25"
+  },
+  {
+   "name": "tooth_premolar_20_35",
+   "display": "Tooth Premolar 20 35",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_20_35, lower left Universal Numbering System (UNS) #20, ISO 3950 standard designation #35"
+  },
+  {
+   "name": "tooth_premolar_21_34",
+   "display": "Tooth Premolar 21 34",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_21_34, lower left Universal Numbering System (UNS) #21, ISO 3950 standard designation #34"
+  },
+  {
+   "name": "tooth_premolar_28_44",
+   "display": "Tooth Premolar 28 44",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_28_44, lower left Universal Numbering System (UNS) #28, ISO 3950 standard designation #44"
+  },
+  {
+   "name": "tooth_premolar_29_45",
+   "display": "Tooth Premolar 29 45",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_29_45, lower left Universal Numbering System (UNS) #29, ISO 3950 standard designation #45"
+  },
+  {
+   "name": "tooth_premolar_4_15",
+   "display": "Tooth Premolar 4 15",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_4_15, lower left Universal Numbering System (UNS) #4, ISO 3950 standard designation #15"
+  },
+  {
+   "name": "tooth_premolar_5_14",
+   "display": "Tooth Premolar 5 14",
+   "region": "axial",
+   "kind": "tooth",
+   "groupFallback": "Teeth",
+   "description": "tooth_premolar_5_14, lower left Universal Numbering System (UNS) #5, ISO 3950 standard designation #14"
+  },
+  {
+   "name": "vomer",
+   "display": "Vomer",
+   "region": "axial",
+   "kind": "bone",
+   "groupFallback": "Facial skeleton",
+   "description": "unpaired facial bone in the skull forming part of nasal septum, LOA-5 part of skull LOA-1. includes visualization axis for skull.x3d collection."
+  }
+ ],
+ "counts": {
+  "total": 257,
+  "axial": 131,
+  "appendicular": 126,
+  "with_prose": 257
+ },
+ "kinds": {
+  "bone": 199,
+  "cartilage": 3,
+  "disc": 23,
+  "tooth": 32
+ },
+ "groups": {
+  "Teeth": 32,
+  "Hand phalanges": 28,
+  "Foot phalanges": 27,
+  "Ribs": 24,
+  "Intervertebral discs": 23,
+  "Carpals": 16,
+  "Tarsals": 14,
+  "Facial skeleton": 14,
+  "Thoracic vertebrae": 12,
+  "Metacarpals": 10,
+  "Metatarsals": 10,
+  "Cranium": 9,
+  "Leg": 8,
+  "Cervical vertebrae": 7,
+  "Arm": 6,
+  "Lumbar vertebrae": 5,
+  "Shoulder girdle": 4,
+  "Pelvic girdle": 3,
+  "Sacrum & coccyx": 2,
+  "Costal cartilage": 2,
+  "Sternum": 1
+ }
+}
