@@ -1,0 +1,325 @@
+% ===== DOUBLE-BLIND SUBMISSION build (Web3D 2026). =====
+% For the CAMERA-READY, drop 'anonymous' below and re-enable \shortauthors.
+\documentclass[sigconf,nonacm,screen,anonymous]{acmart}
+\settopmatter{printacmref=false}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage{booktabs}
+\usepackage{balance}
+
+\begin{document}
+
+\title{Technē: A Deterministic Craft Layer for Model Context Protocol Servers, Grounded in LLM-Authored X3D}
+
+\author{Alexander Hoffman}
+\affiliation{%
+  \institution{Independent Researcher}
+  \country{USA}}
+\email{alex@euphe.me}
+
+% \renewcommand{\shortauthors}{Hoffman}   % LEAKS author in page headers under anonymous; re-enable for camera-ready
+
+\begin{abstract}
+A Model Context Protocol (MCP) server advertises its tools through a JSON Schema, so a language model can drive them by emitting typed tool calls. The schema is decidable and closed, yet it is the wrong success criterion: a model can emit calls that pass the schema in full and still produce a scene that renders mis-lit, mis-animated, or entirely blank. We name this the gap between epistēmē, the necessary formal structure a schema encodes, and technē, the contingent craft of making the artifact come out right that it does not. We present Technē, a deterministic craft layer that closes the gap for LLM-authored X3D over the Web3D x3d\_mcp server. Technē is a man-in-the-middle MCP proxy and makes three contributions. First, it redirects Schema-Aligned-Parsing-style repair plus craft validation onto the tool-call arguments a model emits into a server, intercepted in transport — inverting the app-to-model seam that productised tools occupy. Second, it compiles a written catalogue of X3D silent-failure modes into named, prescriptive corrections where the error message is the fix, so the craft holds mechanically whether or not the model comprehended it. Third, its occupation gate executes a renderer and inspects the pixels — verify-by-render — graduated by irreversibility, something no assertion language can do. The system is built on BAML, carries 43 passing unit tests, and is verified live end-to-end against the production server.
+\end{abstract}
+
+\ccsdesc[500]{Computing methodologies~Intelligent agents}
+\ccsdesc[500]{Software and its engineering~Software verification and validation}
+\ccsdesc[300]{Computing methodologies~Computer graphics}
+\ccsdesc[300]{Information systems~Web services}
+\ccsdesc[300]{Human-centered computing~Human computer interaction (HCI)}
+\keywords{Model Context Protocol, LLM tool use, agentic systems, Schema-Aligned Parsing, BAML, X3D, HAnim, Web3D, deterministic validation, prescriptive correction, render-based verification, verify-by-render, occupation gate, craft, epistēmē, technē, man-in-the-middle proxy}
+
+\maketitle
+
+
+\begin{figure}[t]\centering
+\begin{tikzpicture}[font=\footnotesize, >=Stealth, node distance=10mm,
+  box/.style={draw, rounded corners, align=center, inner sep=4pt, minimum height=8mm}]
+  \node[box] (model) {Model\\(draftsman)};
+  \node[box, right=14mm of model, fill=black!5, align=left] (techne)
+    {\textbf{Techn\=e proxy}\\[1pt]
+     1.\ SAP repair\\
+     2.\ craft \texttt{@@assert}/\texttt{@@check}\\
+     3.\ occupation gate};
+  \node[box, right=14mm of techne] (mcp) {x3d-mcp\\(real server)};
+  \draw[->] (model.12) -- node[above,font=\scriptsize]{call(args)} (techne.168);
+  \draw[->] (techne.12) -- node[above,font=\scriptsize]{repaired} (mcp.168);
+  \draw[<-] (model.348) -- node[below,font=\scriptsize]{result / correction} (techne.192);
+  \draw[<-] (techne.348) -- node[below,font=\scriptsize]{result} (mcp.192);
+\end{tikzpicture}
+\caption{Techn\=e as an MCP man-in-the-middle. Each \texttt{tools/call} is
+repaired (Postel-style), validated against the craft rules, and either forwarded
+with rewritten arguments or blocked with a prescriptive correction; the
+occupation gate renders and inspects the result. Opt-in per tool.}
+\label{fig:arch}
+\end{figure}
+
+\section{Introduction}\label{sec:intro}
+
+The Model Context Protocol (MCP) gives a language model reach into external systems: a server advertises a set of named tools with JSON-Schema-typed arguments, and the model drives them by emitting structured tool calls~\cite{mcp,jsonschema}. The contract a tool advertises, however, is purely structural. A schema constrains the \emph{shape} of a call --- field names, value types, enumerations --- and a conforming validator will certify any call that fits. What it cannot certify is whether the operation the call requests is \emph{conventionally correct}: whether the edit it makes to a domain artifact will produce the thing the author intended. The protocol gives the agent reach; it does not give it craft.
+
+The consequence is a failure mode that is easy to miss precisely because every checkable thing checks out. In our grounding domain --- X3D~4.0 scenes authored through the Web3D \texttt{x3d\_mcp} server~\cite{x3d4,x3dpy} --- a model can emit a sequence of tool calls that passes the X3D XSD in full and yet renders wrong, mis-lit, mis-animated, or entirely blank. A dropped \texttt{containerField} routes a humanoid's skeleton into the wrong parent slot and the figure renders invisible; a texture lands in a slot a physically based material does not define and a textured surface comes out flat. The validator reports success; the pixels report failure; nothing in between throws. The output is structurally valid but semantically dead.
+
+We frame this as the gap between two kinds of knowledge that the philosophy of craft keeps distinct, and that a schema collapses. \emph{Epistēmē} is the necessary, decidable, closed formal structure --- the XSD and its object model, complete on its own terms and silent about everything it does not encode. \emph{Technē} is the contingent craft of making the thing come out right: which \texttt{containerField} routes which node into which parent slot, which defaults must be stated rather than assumed, which lengths must agree, which order operations must occur in. A digital-content-creation application supplies that technē implicitly, through enforced verbs and a fixed order of operations. X3D-the-format carries only epistēmē and assumes the technē lives in the authoring tool. When the author is a language model emitting raw tool-call arguments, that assumption fails, and the craft has nowhere to live.
+
+This paper gives it somewhere to live. We present \emph{Technē}, a deterministic craft layer that sits as a man-in-the-middle on the MCP transport (Fig.~\ref{fig:arch}): the model connects to Technē, Technē launches the real server as a subprocess, and every tool call passes through a decision layer that repairs, validates, and --- at completion --- renders before the upstream server ever runs it. Built on BAML, the system makes three contributions:
+
+\begin{itemize}
+  \item \textbf{In-transport redirection.} We point Schema-Aligned-Parsing-style argument repair and craft validation at the tool-call arguments a model emits \emph{into} an MCP server, intercepted in transit. Productised SAP applies this where application code calls a model (app$\rightarrow$model); Technē inverts the seam and applies it where a model calls a tool (model$\rightarrow$tool). No prior work points this discipline at tool-call arguments mid-flight in an MCP proxy.
+  \item \textbf{Documented craft as mechanism.} We compile a written catalogue of X3D silent-failure modes --- output that passes the XSD yet renders wrong or blank --- into deterministic, named corrections where the error message \emph{is} the fix. The diagnostic a violation produces is a \emph{prescriptive correction} (``use \texttt{containerField=\textquotesingle{}baseTexture\textquotesingle{}}'') rather than a bare ``invalid,'' and the craft holds mechanically whether or not the model comprehended it.
+  \item \textbf{The occupation gate.} We add an occupation gate that executes a renderer and inspects the pixels --- \emph{verify-by-render} --- something a schema validator or an assertion language, which only predicate over an already-parsed value, cannot do. The gate is graduated by irreversibility: a soft, automatic ``looks non-blank?'' check before cheap reversible work, and a hard human sign-off before expensive irreversible offline rendering.
+\end{itemize}
+
+The remainder of the paper proceeds as follows. Section~\ref{sec:related} positions Technē against MCP tool use, the closed X3D and HAnim standards, Schema-Aligned Parsing and BAML, and prior LLM-driven Web3D authoring. Section~\ref{sec:gap} develops the epistēmē/technē gap through a catalogue of four documented X3D silent-failure modes. Section~\ref{sec:arch} presents the man-in-the-middle architecture and its governing commitment to determinism. Sections~\ref{sec:point2} and~\ref{sec:point3} detail the two built mechanisms: in-transport argument repair with prescriptive correction, and the occupation gate. Section~\ref{sec:eval} reports the implementation, 43 passing unit tests, and a live end-to-end smoke verification against the production server. Section~\ref{sec:discussion} discusses generalization beyond X3D and limitations, and Section~\ref{sec:conclusion} concludes.
+
+
+\begin{figure}[t]\centering
+\includegraphics[width=\columnwidth]{../figures/x3dom_vs_xite.png}
+\caption{The renderer is a correctness property, not an aesthetic one. The same
+scene under headless software WebGL: X3DOM (left) draws nothing for HAnim and X3D
+4.0 \texttt{PhysicalMaterial}; \mbox{X\_ITE} (right) renders both. An X3DOM-based
+occupation gate would inspect a blank and pass it.}
+\label{fig:renderer}
+\end{figure}
+
+\section{Background and related work}\label{sec:related}
+
+Technē sits at the confluence of four established lines of work: agentic tool use over the Model Context Protocol, the closed declarative standards of X3D and HAnim, deterministic schema-aligned parsing, and the small but growing literature on LLM-authored Web3D. We position the system against each, then state precisely what is new.
+
+\subsection{MCP and LLM tool use}
+The Model Context Protocol standardises how an LLM agent discovers and invokes external \emph{tools}: a server advertises a set of named operations with JSON-Schema-typed arguments, and the model drives those operations by emitting structured tool calls~\cite{mcp}. In our grounding domain the \texttt{x3d\_mcp} server exposes an editing surface over an X3D scene---verbs such as \texttt{create\_node}, \texttt{set\_field}, \texttt{add\_child}, and \texttt{add\_route}---so the agent programmatically operates a scene-graph editor rather than emitting a document in one shot~\cite{x3dpy}. This indirection is what makes the format's craft tractable to intercept: every mutation the model intends passes through a typed call on the wire. The contract a tool advertises, however, is purely structural. A JSON-Schema argument type~\cite{jsonschema} constrains the \emph{shape} of a call---field names, value types, enumerations---but says nothing about whether the resulting scene-graph edit is conventionally correct. The protocol gives the agent reach; it does not give it craft.
+
+\subsection{X3D 4.0 and HAnim as closed declarative standards}
+X3D 4.0 is an ISO declarative scene-graph standard with a formally specified, closed schema---an XSD and an accompanying object model~\cite{x3d4,x3duom}. Its 4.0 revision adds the feature surface most exposed to silent failure: \texttt{PhysicalMaterial} physically based rendering aligned with glTF~\cite{gltf}, \texttt{EnvironmentLight} image-based lighting, and the articulated humanoids of the HAnim standard---\texttt{HAnimJoint}, \texttt{HAnimSegment}, and skinned coordinates~\cite{hanim}. Animation rides on interpolator nodes driven through \texttt{ROUTE}s, and node sharing rides on \texttt{DEF}/\texttt{USE}. The schema is \emph{epistēmē} in the sense developed in Sec.~\ref{sec:gap}: decidable, closed, silent about what it does not encode. Crucially, the same node type legally appears in several parent fields, distinguished only by \texttt{containerField}---a \texttt{HAnimJoint} as a \texttt{skeleton} root versus an ordinary \texttt{children} member; an \texttt{ImageTexture} as \texttt{baseTexture} versus the default \texttt{texture} slot. Which \texttt{containerField} belongs in which slot is contingent craft knowledge the XSD does not express, and getting it wrong yields output that validates yet renders blank. The \texttt{x3d.py} bug report documents exactly this class: a dropped \texttt{containerField} makes an HAnim humanoid invisible, and a non-spec \texttt{EnvironmentLight.global} default silently kills image-based lighting~\cite{x3dpy}. Conformant players---\texttt{X\_ITE}~\cite{xite}, \texttt{X3DOM}~\cite{x3dom}, and Castle Model Viewer~\cite{castle}---faithfully render the wrong thing, because the document is, by the schema's lights, correct. The canonical X3D Examples Archive embodies this craft by convention rather than by enforcement~\cite{x3dexamples}.
+
+\subsection{Schema-Aligned Parsing and BAML}
+BAML productises Schema-Aligned Parsing (SAP): deterministic, edit-distance repair of a model's loosely structured output into a target schema, following Postel-style liberal acceptance~\cite{baml,postel}. It pairs this with validation as first-class language constructs, \texttt{@@assert} (blocking) and \texttt{@@check} (non-blocking advisory), letting craft predicates live in the schema rather than in scattered procedural checks. Technē builds \emph{on} BAML and adopts both its repair engine and its assertion semantics. The decisive difference is topology. BAML sits where application code calls a model---the \emph{app$\rightarrow$model} seam---repairing the model's reply before code consumes it. The MCP problem is the inverse: a model calls a tool---the \emph{model$\rightarrow$tool} seam---and the arguments needing repair are the ones the model emits \emph{into} the server, intercepted in-transport (Fig.~\ref{fig:arch}). No prior work points SAP-style repair and craft validation at tool-call arguments mid-flight in an MCP proxy. We also inherit BAML's constraints honestly: only block-level \texttt{@@} assertions fire at runtime, and a raised validation error blurs \emph{which} assertion failed---so every rule is named and mapped back to a prescriptive correction, preserving the identity the catalogue depends on.
+
+\subsection{LLM-driven X3D authoring and AI for Web3D}
+Prompt engineering for LLM-authored X3D has been studied directly: careful prompts measurably improve the rate at which a model emits usable scenes~\cite{prompteng}. That work operates on the \emph{advisory} side of the determinism boundary---it shapes what the model probably does, and the gains reset when a fresh model connects. Adjacent AI-for-Web3D work pursues accessibility and quality, such as automated audio captioning of scenes~\cite{audiocaption}. Technē is complementary and orthogonal: rather than improving the prompt, it makes the craft hold mechanically downstream of whatever the model emitted, so comprehension is no longer load-bearing.
+
+\subsection{Blackboard architectures and guardrails}
+The blackboard architecture is a useful prior frame for staged cooperation among heterogeneous agents writing to a shared evolving solution under a control regime~\cite{blackboard}; Technē's human-architect / model-draftsman / deterministic-discipline split is a narrow, modern instance, with the scene as the shared structure and the gate as the control. More broadly, validation and guardrail layers and JSON-Schema tool contracts~\cite{jsonschema} predicate over an \emph{already-parsed value}: they answer ``is this argument well-formed?'' They cannot answer ``did the moose render as a moose,'' because that is side-effecting computation outside assertion scope.
+
+\subsection{What is new in Technē}
+Against this background, three contributions are original: the \emph{in-transport redirection} of SAP-style repair and craft validation onto the tool-call arguments a model emits into an MCP server, a man-in-the-middle inversion of BAML's app$\rightarrow$model seam~\cite{baml,mcp}; \emph{documented-craft-as-mechanism}, a written catalogue of X3D silent-failure modes~\cite{x3dpy} compiled into named, prescriptive corrections where the error message \emph{is} the fix; and the \emph{occupation gate}, which executes a renderer and inspects the pixels, graduated by irreversibility. Sec.~\ref{sec:point2} and Sec.~\ref{sec:point3} build the latter two; the full contribution list is enumerated in Sec.~\ref{sec:intro}. The renderer choice is itself a correctness property---X3DOM draws blank headless what X\_ITE renders fully (Fig.~\ref{fig:renderer}; see Sec.~\ref{sec:point3}).
+
+\section{The craft gap: structurally valid, semantically dead}\label{sec:gap}
+
+An MCP server~\cite{mcp} exposes a domain as a flat surface of tools and node types. For X3D~\cite{x3d4} authored through the Web3D \texttt{x3d-mcp} server, that surface is faithful to the format: every verb maps to a legal operation, and every produced document can be checked against the X3D~4.0 XSD via the X3D Unified Object Model~\cite{x3duom}. The trouble is that schema conformance is the wrong success criterion. A model emitting tool calls into this surface can produce a document that passes the XSD in full and yet renders wrong, mis-lit, mis-animated, or entirely blank. The validator reports success; the pixels report failure; nothing in between throws.
+
+We name this the gap between \emph{epistēmē} and \emph{technē}. The schema is epistēmē: the necessary, decidable, closed formal structure of what counts as a well-formed X3D document. It is complete on its own terms and says nothing false. But the contingent craft of making the scene \emph{come out right} --- which \texttt{containerField} routes a node into which parent slot, which defaults must be stated rather than assumed, which lengths must agree, which order operations must occur in --- is technē, and the XSD does not encode it. A digital-content-creation application supplies that technē implicitly, through its enforced verbs and its fixed order of operations: ZBrush or Cinema~4D will not let the artist attach a texture to a slot that does not exist. X3D-the-format carries only epistēmē and assumes the technē lives in the authoring tool. When the author is a language model emitting raw tool-call arguments, that assumption fails, and the craft has nowhere to live.
+
+The concrete content of this gap is a small, documented catalogue of \emph{silent-failure modes}: outputs that pass the schema yet break rendering. We draw four from the \texttt{x3d.py} bug report (\texttt{docs/x3dpy-bug-report.md})~\cite{x3dpy} while building HAnim humanoids and PBR scenes programmatically, serializing with \texttt{X3D(...).XML()}, and rendering in a conformant viewer. They share one signature, developed below: none throw, all validate, all fail only when a renderer runs and a human looks.
+
+\subsection{Dropped \texttt{containerField}}
+Every X3D node has a default \texttt{containerField} --- the parent slot it lands in when none is stated. An \texttt{HAnimJoint} defaults to \texttt{children}; an \texttt{ImageTexture} defaults to \texttt{texture}. But many nodes legally appear in more than one parent field, and when a node is placed in a non-default slot, the slot must be named explicitly or a conformant reader files the child into the node's default field instead. \texttt{x3d.py} serializes such a node with no \texttt{containerField} attribute at all: a skeleton root joint supplied through \texttt{HAnimHumanoid.skeleton} is emitted without \texttt{containerField='skeleton'}, so the player routes it into \texttt{children} and the entire humanoid~\cite{hanim} renders invisible, with no warning. The same defect drops PBR textures: an \texttt{ImageTexture} placed in \texttt{baseTexture} of a \texttt{PhysicalMaterial}~\cite{gltf} keeps its default \texttt{texture} container, which the material does not define as a field, so the texture is ignored and a textured surface renders as flat base color --- a textured chalkboard comes out solid white. The package exposes no \texttt{containerField} setter, so the only workaround is to post-process the serialized string. This single mode covers the largest share of documented pain; Technē's rule catalogue enumerates the legal slots per material and per humanoid so that a missing or wrong container is rejected with the exact slot to use.
+
+\subsection{\texttt{EnvironmentLight.global}}
+The X3D~4.0 Lighting field table specifies \texttt{SFBool global FALSE} for \texttt{EnvironmentLight}. \texttt{x3d.py} defaults the field to \texttt{True}, matching the convention of the point and spot lights, and --- because serializers omit fields equal to their internal default --- drops \texttt{global} from the output entirely even when the author set it true. A spec-default reader then parses the absent attribute as \texttt{false}, so the light is not global, and image-based ambient lighting silently dies: the scene is lit only by whatever direct lights remain. This is a spec divergence rather than a contradiction, but its practical effect is a silent one, and it cannot be repaired in the tool arguments because the divergent default never reaches the wire; the correction must inject \texttt{global='true'} at the serialization layer.
+
+\subsection{Interpolator \texttt{key}/\texttt{keyValue} length mismatch}
+An interpolator's \texttt{keyValue} array must hold exactly \texttt{len(key)} entries times the node's per-key component count --- four for \texttt{OrientationInterpolator}, three for \texttt{PositionInterpolator}, one for \texttt{ScalarInterpolator}. The XSD types both fields as float arrays and checks neither their relative length nor the multiple. A mismatch passes validation and silently corrupts the animation, shifting or truncating keyframes with no error.
+
+\subsection{USE-before-DEF ordering}
+A \texttt{USE} reference must follow the \texttt{DEF} it names. Emit the \texttt{USE} first and the document is still well-formed XML and schema-valid, but the reference resolves to nothing and the reused geometry vanishes. This is an order-of-operations constraint --- pure technē --- that no per-element schema check can see.
+
+The four modes share their defining property: each produces output that \emph{passes XSD schema validation} yet renders incorrectly, because the defect lives in container routing, a non-spec default, a cross-field length relation, or an ordering constraint --- none of which the schema predicates over. This is precisely the craft a DCC application supplies through enforced verbs and order of operations, and which X3D-the-format leaves to live elsewhere. The remainder of this paper is about giving it somewhere to live: a deterministic layer that holds the technē mechanically, in transport, whether or not the model comprehended it.
+
+\section{Technē: architecture}
+\label{sec:arch}
+
+Technē is a man-in-the-middle for the Model Context Protocol~\cite{mcp}. The model does not connect to the x3d-mcp server directly; it connects to Technē, and Technē launches the real server as a subprocess and connects to it as a client (Fig.~\ref{fig:arch}). Every \texttt{tools/call} the model emits passes through a decision layer before the upstream server ever runs it, and every upstream result passes back through before the model sees it. To the model the surface is unchanged --- the same tool names, the same arguments --- except that the descriptions of guarded tools carry a one-line hint that their arguments are repaired and validated in transit. This transport position is the architecture's load-bearing choice. BAML~\cite{baml} applies Schema-Aligned Parsing where \emph{code calls a model} (app$\rightarrow$model); Technē inverts the seam and points the same discipline at the arguments \emph{a model emits into a tool} (model$\rightarrow$tool), intercepted in transit. Nothing about the decision logic depends on the wire format, so the same core would front any MCP server; X3D via the Web3D \texttt{x3d\_mcp} server~\cite{x3dpy} is the grounding domain, not a dependency.
+
+\subsection{The governing commitment: determinism}
+
+The design exists to answer a single failure of advice. Craft-rules written into a server's prose \texttt{instructions} --- ``set \texttt{containerField} explicitly when you place a node off its default slot'' --- are advisory: the model \emph{probably} reads them and \emph{probably} applies them, and the dice reset the moment a fresh session connects. Hindsight encoded as text must be re-read and re-honored every time, by a reader free to route around it. Technē instead makes the craft hold \emph{mechanically}. The model's arguments pass \emph{through} a layer that repairs and validates them deterministically before the real server runs them, so a correction discovered once becomes mechanism the next model cannot ignore, rather than text it must re-comprehend. This is Postel-style liberal acceptance~\cite{postel} relocated: transform what the model emits to conform before it acts. The corollary, deliberate, is that the runtime path performs no per-call LLM round-trip --- the validation is a deterministic Python mirror of the canonical BAML rule declarations in \texttt{baml\_src/}, so a layer whose whole claim is determinism does not reintroduce a model into its own enforcement.
+
+\subsection{The per-call pipeline}
+
+For each call, \texttt{decide()} (in \texttt{proxy.py}) runs three steps. \emph{First}, deterministic SAP-style repair (\texttt{repair.py}) coerces and normalizes the raw arguments into conforming shape --- the man-in-the-middle is configured with \texttt{validate\_input=False} precisely so Technē sees the model's raw, possibly sloppy arguments before any upstream schema check can reject them. \emph{Second}, routing: if the tool has a registered craft adapter, the repaired arguments run through it; if not, the call forwards unchanged. This opt-in stance is a claim about the catalogue, not an omission --- the absence of a rule for a tool means no silent-failure mode is documented there, so Technē does not interpose. \emph{Third}, the decision. An adapter returns a \texttt{CraftResult} carrying corrections (hard), notes (soft), and a possibly-rewritten argument set. A hard violation \emph{blocks} the forward: the call never reaches the real server, and Technē returns the prescriptive correction in its place as an \texttt{isError} result --- the error message \emph{is} the fix (``Use \texttt{containerField=\textquotesingle{}skeleton\textquotesingle{}}''), not a bare ``invalid'' (Sec.~\ref{sec:point2}). A repair instead rewrites the arguments and forwards the conforming version; soft notes ride along beside a forwarded call as advisory warnings. The asymmetry is the point: a violation whose correct value is determinable is repaired silently and forwarded; one that is not is blocked and handed back to the architect's draftsman to redo.
+
+This is Point 2 of the specification --- in-call argument repair plus structural validation --- and it is built. It is sequence-agnostic: it inspects one call's arguments (in concert with minimal scene memory, below) and needs no model of the whole authoring session.
+
+\subsection{Minimal scene state}
+
+Some craft-rules are structural but not local. Checking that a child's \texttt{containerField} fits its parent requires the \emph{types} of both nodes, yet the granular \texttt{add\_child} verb references nodes by opaque \emph{id}. Technē therefore keeps a small \texttt{SceneState} --- an \texttt{id}$\rightarrow$type map learned by parsing \texttt{create\_node} responses, plus the \texttt{DEF} names seen and the per-node field values set --- the least memory the stateful checks need, committed only on confirmed upstream success through the deferred \texttt{decide()}/\texttt{observe\_result()} split detailed in Sec.~\ref{sec:point2}. The state is a ledger of confirmed facts about the scene, never of attempts.
+
+\subsection{The occupation gate}
+
+Point 3, also built, is the occupation gate (Sec.~\ref{sec:point3}). Repair and validation predicate over arguments; the gate \emph{executes a renderer and inspects the pixels} --- something no schema validator~\cite{jsonschema} and no assertion language can do, since both reason only over an already-parsed value (Sec.~\ref{sec:point3}). The gate is graduated by irreversibility (Fig.~\ref{fig:gate}): a cheap, soft, automatic ``looks non-blank?'' check fires on render verbs and appends a warning when the returned image carries no visible geometry, while a hard human sign-off guards the expensive, irreversible offline render. Its teeth depend on the renderer that can actually draw the scene: X3DOM~\cite{x3dom} draws blank headless what X\_ITE~\cite{xite} renders fully for an HAnim~\cite{hanim} humanoid (Fig.~\ref{fig:renderer}; see Sec.~\ref{sec:point3}), so the backend is itself a correctness property.
+
+\subsection{What is deliberately not built}
+
+Point 1 --- a cross-call automaton enforcing order-of-operations over the whole session --- is intentionally absent. Open-ended authoring should resist a straitjacket: which scene to build, and where, is the human architect's free field, not a defect to regiment. The likely truth is a partial order, a few hard edges in a large open space, so Technē instruments first (logging the verb order of clean renders) and lets usage vote before any automaton is committed. The framing throughout is the draftsman's: the human architect holds intent and signs off; the model is the fast draftsman who knows the conventions but does not originate intent; Technē is the draftsman's discipline plus the commitment gate --- it makes the draft conform and holds the boundary before irreversible work, and reaches into neither the intent nor the sign-off.
+
+\section{Repairing and validating tool-call arguments}\label{sec:point2}
+
+Point~2 is the layer that sits between the model's emitted \texttt{tools/call} and the real x3d-mcp server~\cite{mcp}, and decides, per call, whether the arguments may be forwarded as written, rewritten and forwarded, or refused with a correction (Figure~\ref{fig:arch}). It runs in two stages: a deterministic \emph{repair} of argument shape (\texttt{repair.py}), followed by a catalogue of \emph{craft} rules over the cleaned arguments (\texttt{craft.py}, \texttt{rules.py}). Both stages are LLM-free Python, honouring the determinism commitment (Sec.~\ref{sec:arch}); the canonical BAML declaration in \texttt{baml\_src/craft.baml} mirrors them and is the path to BAML's Schema-Aligned Parsing (SAP) when wired.
+
+\subsection{SAP-style argument repair}
+The first stage applies Postel's robustness principle---``be liberal in what you accept''~\cite{postel}---to the tool-call arguments, the move BAML productises as SAP for model \emph{output}~\cite{baml}, here redirected onto the arguments a model emits \emph{into} a tool. \texttt{sap\_repair} is deliberately conservative: it unwraps and coerces shape but never invents content. It strips markdown fences and any chain-of-thought preceding the first JSON object; un-stringifies values under structured keys (\texttt{fields}, \texttt{value}, \texttt{arguments}, \texttt{args}) that arrived as embedded JSON text; and coerces obvious scalar leaves---\texttt{"true"}/\texttt{"false"} to bool, numeric strings to numbers---only where a boolean or numeric field is expected (e.g.\ a \texttt{global} leaf inside \texttt{fields}). It never raises: worst case it returns the original dict or \texttt{\{\}}, so the caller can still forward. This is the conformance-shaping layer; the semantic rules run only on the result. When the generated BAML client is present, \texttt{b.parse.<Function>(json)} substitutes the full edit-distance engine for this dependency-free baseline.
+
+\subsection{The rule-to-fix catalogue}
+The second stage is the documented craft. We reread the catalogue of X3D silent-failure modes---constructs that pass the XSD yet render wrong or blank---as a table \texttt{\{rule: (severity, prescriptive-correction, source)\}} in \texttt{rules.py}. Each entry names a single assertion and maps it to a \emph{prescriptive} correction string, not a bare ``invalid.'' The whole point is the difference between ``rejected'' and ``rejected: use \texttt{containerField='baseTexture'}''. A thrown XSD or assertion error reports only that \emph{some} predicate over the parsed value failed; it blurs which assertion it was and says nothing about the fix. By naming every rule (\texttt{container\_field\_present}, \texttt{container\_field\_correct}, \texttt{container\_field\_required}, \texttt{container\_field\_invalid\_slot}, \texttt{interp\_lengths\_match}, \texttt{use\_after\_def}, \texttt{envlight\_global\_set}, \ldots) and binding it to a templated correction carrying the offending node type, field, and the legal alternatives, the error message \emph{is} the fix. Each entry cites its source---most to the \texttt{x3d.py} bug report (\texttt{docs/x3dpy-bug-report.md})~\cite{x3dpy}, the rest to the Technē specification---so the craft is traceable, not folklore. Severity is binary: \texttt{HARD} rules block (mirrored as BAML \texttt{@@assert}); \texttt{SOFT} rules advise (\texttt{@@check}).
+
+\subsection{Two outcomes: repair, or block-and-correct}
+A craft rule resolves to one of two outcomes, and the discriminator is whether the correct value is \emph{determinable} without guessing intent. \emph{Repair} fires when exactly one legal value exists: a \texttt{containerField} must equal the field the node is placed in, and a placement with a single legal slot has one answer. Here Technē rewrites the argument, records a note, and forwards the corrected call, so the craft holds mechanically whether or not the model comprehended it. \emph{Block-and-correct} fires when the fix needs a choice the layer cannot make: which of \texttt{baseTexture}/\texttt{normalTexture}/\texttt{occlusionTexture} a texture was meant for; which \texttt{DEF} a dangling \texttt{USE} intended; or which of \texttt{key} and \texttt{keyValue} is the wrong length when their parity fails. In these cases Technē refuses to forward and returns the prescriptive correction listing the legal slots, leaving the intent decision to the model on retry. Filling it in would be inventing content---the very thing the repair stage forbids. The outcomes compose: \texttt{CraftResult} carries \texttt{repaired} arguments, a \texttt{corrections} list (any non-empty list blocks the forward), \texttt{notes}, and the \texttt{applied} rule names, and \texttt{merge} folds several single-rule results into one.
+
+\subsection{A worked example: the texture containerField}
+Consider a model that has created a \texttt{PhysicalMaterial} and an \texttt{ImageTexture} and calls \texttt{add\_child} to place the texture under the material with no \texttt{containerField}. The XSD is satisfied---\texttt{ImageTexture} is a legal child---so a schema validator passes it. But \texttt{ImageTexture}'s default container is \texttt{texture}, a slot a PBR material~\cite{gltf} does not define, so a conformant player files the texture into the default field and the surface renders untextured. Technē looks up the parent and child types in its scene state, finds \texttt{(PhysicalMaterial, ImageTexture)} in \texttt{MATERIAL\_TEXTURE\_SLOTS}, and sees five legal slots. Because more than one slot is legal, it does not guess: it blocks and returns \texttt{container\_field\_required}, naming the child, the parent, the silently-dropped default, and the five legal slots. Had the parent instead been an \texttt{HAnimHumanoid}~\cite{hanim} with a child \texttt{HAnimSegment}, whose only non-default slot is \texttt{segments}, the same machinery would repair---set \texttt{containerField='segments'} and forward---because the answer is unique. One mechanism, two outcomes, decided by slot cardinality.
+
+\subsection{The stateful proxy}
+The containerField rule needs the child and parent node \emph{types}, but the real \texttt{add\_child} references nodes by \emph{id}~\cite{x3duom}, learned only from \texttt{create\_node} responses. \texttt{TechneProxy} therefore keeps a minimal \texttt{SceneState} (\texttt{id\_to\_type}, \texttt{node\_fields}, \texttt{defined\_defs}, \texttt{def\_name\_to\_type}). Correctness of the state hinges on \emph{deferred commit}: \texttt{decide()} only reads state and records what it \emph{would} commit on the \texttt{Decision.pending} slot; \texttt{observe\_result()} commits the id$\rightarrow$type, \texttt{DEF}, and field updates only after the upstream response is confirmed successful. This is essential---a failed \texttt{create\_node} must not register a type, and a premature \texttt{DEF} from a failed \texttt{def\_node} must not satisfy a later \texttt{USE}. When the proxy cannot resolve a type (a node created before Technē, or via an unguarded tool), it degrades to a non-blocking note rather than a false correction. Routing is opt-in per tool (Sec.~\ref{sec:arch}): a tool with no adapter passes through.
+
+\subsection{The canonical BAML mirror}
+\texttt{baml\_src/craft.baml} declares the same modes as block-level \texttt{@@assert}/\texttt{@@check} over classes (\texttt{TextureAttachment}, \texttt{EnvironmentLightArgs}, \texttt{InterpolatorArgs}, \texttt{UseRef}). It is the source of truth and the SAP path; the Python engine is its deterministic, runnable mirror. One trap is load-bearing: only the \emph{double}-\texttt{@} block form fires---field-level single-\texttt{@} assertions are silently ignored at runtime, the same class of silent failure the layer exists to catch. The \texttt{global} case shows the layer's honesty about its own boundary. Because the \texttt{EnvironmentLight.global} divergence lives below the wire (Sec.~\ref{sec:gap}), the args layer \emph{cannot} repair it; Technē therefore demotes it to a \texttt{SOFT} advisory here and pushes the hard fix into the serialization step at the gate (Figure~\ref{fig:gate}), which injects \texttt{global='true'} into the XML directly.
+
+\section{The occupation gate: render and look}\label{sec:point3}
+
+The two preceding mechanisms operate on values: schema-aligned repair rewrites the arguments a model emits, and the craft rules predicate over an already-parsed scene to assert that the conventions the XSD does not encode are nonetheless satisfied. Both are, in the end, functions from a structure to a verdict. This is also the ceiling of an assertion language. A BAML \texttt{@@assert} or \texttt{@@check}~\cite{baml}, like a JSON Schema keyword~\cite{jsonschema} or an XSD facet, can only quantify over the parsed term in front of it; it cannot leave the term, \emph{execute a renderer}, get pixels back, and assert that those pixels are non-blank. Yet that is precisely the test the X3D silent-failure modes demand: a dropped \texttt{containerField} or a wrong \texttt{EnvironmentLight.global} produces a document that satisfies every predicate one can write over the document and still renders to an empty frame. The verdict that matters is not a property of the term but of its image. The occupation gate is the layer that crosses that boundary --- it executes a renderer and inspects the pixels, the principle we name \emph{verify-by-render} --- the genuinely original piece, the part for which there is no assertion-language analogue, because it is side-effecting by construction.
+
+\subsection{The gate's logic}
+
+The gate fires on a completion signal --- the moment a model declares the artifact done --- and runs three stages in dependency order (\texttt{techne/gate.py}, \texttt{OccupationGate.check}). First, it runs the semantic validator; if the output is not clean, it blocks and returns the validator's errors verbatim as prescriptive corrections, so a scene that is structurally dead never reaches the renderer. ``Clean'' is read leniently --- an empty validator string or any of the upstream server's all-clear markers --- so the gate stays faithful to the real \texttt{validate\_semantic} surface. Second, it renders the scene and inspects the returned image for blankness. We reduce the PNG to a single grayscale luminance figure --- the standard deviation across pixels --- and treat anything below a small threshold (\texttt{BLANK\_STDDEV}, three grayscale levels) as effectively blank: a flat, all-background frame with no geometry. This is the silent failure that \emph{only} the render catches, so when it fires the correction is specific --- check that geometry is present, lit, on-camera, and that the HAnim and PBR \texttt{containerField}s are correct --- rather than a bare ``invalid.'' Third, and only once the frame is non-blank, the gate applies a sign-off proportional to what is downstream.
+
+A design commitment runs through the blank check: \emph{fail safe}. The inspector decodes the PNG with Pillow when present and falls back to reading the IHDR dimensions and sampling the decompressed scanlines (skipping the per-row filter byte so it does not inject false variance) when it is not; but if it cannot decode the image at all, it returns \texttt{non\_blank = False}. An image we cannot inspect is treated exactly as a blank one --- it blocks. The gate never passes a render it could not see. The asymmetry is deliberate: a false block costs a retry, a false pass ships a blank artifact, and the whole point of the gate is that the second failure is the one nothing else catches.
+
+\subsection{The renderer is a correctness property}
+
+The gate is only as honest as its eyes, and here the choice of renderer stops being an implementation detail and becomes a correctness property (Fig.~\ref{fig:renderer}). Under headless software WebGL, X3DOM renders \emph{blank} for exactly the content this project exists to showcase --- HAnim humanoids and X3D~4.0 \texttt{PhysicalMaterial} surfaces --- while X\_ITE renders both~\cite{xite,x3dom,gltf,playwright}. An occupation gate wired to X3DOM would therefore render a perfectly correct HAnim scene to an empty frame, read the luminance variance as zero, and --- because it cannot distinguish a blank caused by an authoring error from a blank caused by the renderer's own incapacity --- block every valid skeleton, or, worse, were the polarity flipped, certify blanks as fine. The gate's verdict would be a property of the renderer, not the scene. So the gate's hard prerequisite is that it render through X\_ITE. This inverts the usual framing in which renderer choice is an aesthetic or convenience question: for a gate that adjudicates correctness by looking, the renderer that can actually display the content is the only renderer that tells the truth, and selecting it is part of getting the answer right.
+
+\subsection{Graduation by irreversibility}
+
+The sign-off is not uniform; it is graduated by how irreversible the work it guards is (Fig.~\ref{fig:gate}). The classical frame is the architect and the draftsman (Sec.~\ref{sec:arch}): the human signs off; the model never pours concrete on its own authority. A cheap, fast preview render is reversible work, so the gate before it is soft and automatic --- a ``looks non-blank?'' check that warns and advises but does not stop the world. This cheap gate is wired directly into the transport (\texttt{techne/server.py}): on the render verbs (\texttt{render\_image}, \texttt{render\_current\_scene}) the proxy inspects the returned image and, if it is blank, appends an occupation-gate warning to the relayed result --- the silent failure surfaced in-band, on every render, at no extra round-trip. The expensive, hours-long offline photoreal render is the irreversible moment --- the pour-concrete moment --- and the gate before it is \emph{hard}: the model may not trigger it. When the cost is marked expensive and the human sign-off callback has not returned approval, the gate surfaces the validated, non-blank preview and \emph{stops}, returning \texttt{awaiting\_architect} rather than a pass. Its default sign-off returns false, so expensive work always waits by construction. The hard gate is host-driven: the upstream server exposes no offline-render verb to attach it to yet, so it lives in the \texttt{OccupationGate} library awaiting that verb, while the cheap gate already runs in transport. The discipline scales with the stakes --- a glance before reversible drafting, a human signature before irreversible building.
+
+\section{Implementation and evaluation}\label{sec:eval}
+
+Techn\=e is a small Python package that sits in front of the Web3D \texttt{x3d\_mcp} server~\cite{x3dpy} as a man-in-the-middle MCP proxy (Figure~\ref{fig:arch}). The implementation is deliberately modest in size and dependencies, because its claim is mechanistic rather than statistical: the craft must hold deterministically on every call, so the runtime that enforces it is the artifact under test.
+
+\subsection{Implementation}
+
+The package decomposes along the three insertion points of Section~\ref{sec:arch}. \texttt{rules.py} is the rule-to-fix catalogue --- the documented X3D silent-failure modes reread as a table mapping each rule name to a \emph{(severity, prescriptive correction, source)} triple, so the diagnostic a violation produces is the repair, not a bare ``invalid.'' \texttt{craft.py} is the deterministic craft engine implementing the four documented modes of Sec.~\ref{sec:gap} through the repair / block-and-correct outcomes of Sec.~\ref{sec:point2}. \texttt{repair.py} is the Schema-Aligned-Parsing-style argument repair --- a dependency-free baseline mirroring BAML's \texttt{b.parse}~\cite{baml} that unwraps stringified field dicts, strips markdown fences and conversational preamble, and coerces scalars, in the spirit of Postel-style liberal acceptance~\cite{postel}. \texttt{proxy.py} is the stateful decision core: it builds scene state by reading \texttt{create\_node} results, maps node ids to types, and exposes a \texttt{decide()}/\texttt{observe\_result()} split so that state is committed only on confirmed upstream success. \texttt{gate.py} is the occupation gate, graduated by irreversibility (Figure~\ref{fig:gate}). \texttt{server.py} is the MCP transport itself, and \texttt{baml\_src/} holds the canonical BAML declaration of the same rules as block-level \texttt{@@assert}/\texttt{@@check}, each named back to the catalogue.
+
+The runtime depends only on the \texttt{mcp} SDK for the stdio transport, Pillow for the gate's pixel inspection (its ``eyes''), and the Python standard library; the craft and repair engines are dependency-free so Techn\=e runs without a per-call LLM round-trip, faithful to the determinism commitment (Sec.~\ref{sec:arch}). Because \texttt{x3d\_mcp} is itself a Python MCP server, the proxy and the upstream can be co-located: \texttt{python -m techne.server -{}- python .../src/server.py} launches the real server as a subprocess and connects to it as a client, so the entire man-in-the-middle is one process tree. The model connects to Techn\=e; everything after \texttt{-{}-} is the upstream. \texttt{list\_tools} forwards the upstream surface, tagging Techn\=e-guarded tools in their descriptions; \texttt{call\_tool} runs the decision core, answering a hard violation with the prescriptive correction (the call never reaches the real server), forwarding repaired arguments otherwise, and appending the cheap blank-render warning on render verbs.
+
+\subsection{Unit evaluation}
+
+The package carries 43 unit tests, all passing, partitioned across the four modules. The craft tests exercise each of the four documented modes (Sec.~\ref{sec:gap}) in both directions: a missing or wrong containerField is repaired to the correct slot while a node sitting in its default slot is left alone; an interpolator whose \texttt{keyValue} length contradicts its \texttt{key} count blocks with a correction naming the expected and actual lengths (and \texttt{CoordinateInterpolator} correctly multiplies by the coordinate count); a USE with no prior DEF blocks; and the non-image texture URL is a soft advisory that warns without blocking. The proxy tests cover the stateful surface that a stateless validator cannot: the \texttt{create\_node}$\rightarrow$\texttt{observe\_result}$\rightarrow$\texttt{add\_child} flow where placement is checked against the registered node type; the single-legal-slot case (an \texttt{HAnimSegment} under an \texttt{HAnimHumanoid}) that is repaired versus the multi-slot case (a texture under a \texttt{PhysicalMaterial}, where \texttt{baseTexture} and \texttt{normalTexture} are both legal) that must block because the right answer cannot be guessed; USE-reference type inheritance, so a placed \texttt{USE} of a texture is still checked; overlapping concurrent creates that must each carry their own pending state; and failed-create / failed-DEF results that must \emph{not} register, so a later USE still blocks. The SAP-repair tests confirm the unwrapping, markdown-stripping, and never-raises contract. The gate tests verify blank-versus-non-blank discrimination, the cheap/expensive graduation (a non-blank cheap render passes; an expensive render awaits architect sign-off until a human callback returns true), the refusal to render a scene that fails semantic validation first, and --- importantly --- that the gate recognizes the \emph{actual} \texttt{validate\_semantic} ``All Clear'' string the real server emits, not a mock's. The transport tests drive \texttt{handle\_call\_tool} against a fake upstream to confirm guarded-tool tagging, that a blocked call never forwards while still returning the prescriptive correction, that the \texttt{EnvironmentLight} advisory is relayed without injecting a breaking argument, and that the blank-render warning is appended.
+
+\subsection{Live end-to-end smoke}
+
+The decisive evaluation is a live smoke test (\texttt{smoke\_live.py}) in which a real MCP client drives \texttt{create\_node(PhysicalMaterial)}, \texttt{create\_node(ImageTexture)}, an \texttt{add\_child} with a missing containerField, \texttt{create\_node(EnvironmentLight)}, and a render, through Techn\=e fronting the genuine \texttt{x3d\_mcp}. It confirmed the system end to end: guarded-tool tagging over the real tool surface, the \texttt{add\_child} block carrying the \texttt{baseTexture} correction, and the blank-gate firing on the render.
+
+Crucially, the live integration caught three faults the fake-upstream unit tests could not, because each lived in the seam between Techn\=e and the real server. First, the proxy initially dropped the upstream's \texttt{structuredContent}; real FastMCP tools declare an \texttt{outputSchema}~\cite{jsonschema}, so content-only relays failed validation. The fix was to return a \texttt{CallToolResult} directly, relaying \texttt{structuredContent} and \texttt{isError} untouched. Second, the proxy had to \emph{disable} the SDK's own input validation (\texttt{validate\_input=False}) so that Techn\=e's SAP repair sees the model's raw arguments rather than pre-rejected ones --- the repair layer cannot fix what the transport has already refused. Third, the \texttt{EnvironmentLight.global} repair was mis-targeted: this divergence (Sec.~\ref{sec:gap}) is a \emph{serialization-layer} problem the argument layer cannot reach, since \texttt{x3d.py} rejects a \texttt{global} keyword argument (it uses \texttt{global\_}) and omits its true default. The correction was downgraded from an injected argument to an accurate advisory note, and the unit tests were rewritten to assert that \texttt{global} is \emph{not} injected.
+
+The lesson is itself an instance of the paper's thesis: integration against the real server surfaced craft --- the output-schema contract, the validation ordering, the serializer's true argument surface --- that the unit harness had mocked away. The contingent know-how of making the thing come out right is not deducible from the schema; it is discovered at the seam. We are explicit about scope. This is a working system, 43 green unit tests, and one live end-to-end smoke against the production server; it is not a user study, nor a corpus benchmark over a body of LLM-authored scenes~\cite{prompteng,x3dexamples}. Establishing that the craft layer measurably reduces silent failures across a population of models and prompts is future work; what we demonstrate here is that the mechanism exists, runs, and holds.
+
+\section{Discussion, generalization, and limitations}\label{sec:discussion}
+
+\subsection{Documented craft as mechanism}
+The contribution of Technē is not the discovery of X3D craft but its conversion into enforced mechanism. For a known craft with a written bug catalogue, the canon already exists: the silent-failure modes this layer guards against are documented in the \texttt{x3d.py} bug report (\texttt{docs/x3dpy-bug-report.md}), earmarked for the Web3D Consortium. Technē does not learn the conventions by watching usage; it transcribes the catalogue's stated workarounds into the rule-to-fix map and lets the proxy enforce them. The crucial property is that the craft then holds \emph{mechanically}, whether or not the model comprehended it. Prose \texttt{instructions} are advisory --- the model probably reads them, probably applies them, and the dice reset when a fresh session connects. Re-reading craft as predicate inverts that: the dropped \texttt{containerField}, the unset \texttt{EnvironmentLight.global}, the mismatched interpolator \texttt{key}/\texttt{keyValue} parity become executable corrections that a draft cannot route around \cite{baml}. This is the epistēmē/technē split of Sec.~\ref{sec:gap}, operationalized --- the XSD encodes the decidable, closed structure \cite{x3d4,x3duom}; the layer encodes the contingent know-how the schema leaves to the author. With the catalogue fixed, the layer's only open-ended job is to surface the \emph{next} undocumented silent-failure mode for promotion into the catalogue. That is what the Point-1 instrumentation is for: it logs the verb order that produced a clean, non-blank render and lets accumulated usage vote. Variance-with-convergence --- different scenes, same verb sequence --- means the craft sequences and a cross-call automaton is real and worth building. Variance-without-convergence --- successful scenes in genuinely different orders --- means the craft resists sequencing, and a straitjacket would be the wrong move, reaching into the architect's free field rather than guarding a hard edge. We let the data decide rather than legislate a total order in advance.
+
+\subsection{Generalization beyond X3D}
+Nothing in the pattern is specific to X3D. The three moves of Sec.~\ref{sec:intro} --- in-transport repair of tool-call arguments \cite{postel,baml}, prescriptive corrections from a rule catalogue, and the occupation gate --- compose for any format that exposes a flat MCP tool surface \cite{mcp} over a craft the schema under-specifies. The precondition is a documented gap between a closed validator and the conventions a producer must honour: glTF PBR material slots and accessor bounds \cite{gltf}, HAnim joint hierarchies \cite{hanim}, or any JSON-Schema-validated payload whose structural validity does not imply semantic correctness \cite{jsonschema}. Where such a catalogue exists, the rule-to-fix map is the only domain-specific asset, and it is small. The occupation gate generalizes wherever ``correct'' is a property of an artifact's \emph{rendered output} rather than its parsed value (Figure~\ref{fig:renderer}): a renderer, a layout engine, or a compiler can stand in for X\nobreakdash-ITE, and the graduation by irreversibility (Figure~\ref{fig:gate}) holds whenever cheap reversible drafting precedes an expensive committing step. The man-in-the-middle topology (Figure~\ref{fig:arch}) is itself format-agnostic; only the registered adapters change.
+
+\subsection{Limitations}
+Coverage is opt-in per tool (Sec.~\ref{sec:arch}): the layer's reach is exactly as wide as the catalogue of registered adapters, so an undocumented mode passes silently until instrumentation surfaces it. The hard, expensive gate is specified and wired in \texttt{gate.py}, but the offline photoreal-render verb it gates on awaits an upstream addition; today the soft ``looks non-blank?'' gate runs against the X\nobreakdash-ITE backend \cite{xite}, while the X3DOM path returns blank for exactly the HAnim humanoids this project showcases \cite{x3dom}. The BAML code-generation path --- calling \texttt{b.parse} for the Schema-Aligned-Parsing repair engine --- is deferred in favour of a deterministic Python mirror (the determinism commitment, Sec.~\ref{sec:arch}); \texttt{baml\_src/} remains the canonical declaration to wire in. We report 43 passing unit tests and a live end-to-end smoke verification, but no user study and no large-corpus benchmark yet establish how often the layer catches real model errors in the wild, and the cross-call automaton is deliberately unbuilt pending that evidence.
+
+\subsection{Ethics}
+A note on roles, consistent with the architect/draftsman framing of Sec.~\ref{sec:arch}. The human is the author and the decision-maker --- the architect who holds intent, signs off, and is never automated; the model is a tool, used under direction, that originates no intent and authorizes no irreversible build. Technē's dignity is exactly that of a faithful codec or a loom that does not drop threads: it carries what the architect composed without silently corrupting it, and it holds the sign-off gate so that the decisive moment --- and the act of occupying the result --- stays human. The layer makes the tool safer to wield; it does not make the tool an author.
+
+
+\begin{figure}[t]\centering
+\begin{tikzpicture}[font=\footnotesize, >=Stealth,
+  box/.style={draw, rounded corners, align=left, inner sep=5pt, text width=0.84\columnwidth}]
+  \node[box] (cheap) {\textbf{Cheap gate} — automatic, soft.\\
+     Fast preview render $\rightarrow$ ``looks non-blank?'' Advisory warning.};
+  \node[box, below=7mm of cheap, fill=black!5] (exp)
+    {\textbf{Expensive gate} — hard.\\
+     Before the irreversible offline photoreal render: surface the preview,
+     \emph{stop}, and await the human architect's sign-off. The draftsman never
+     pours concrete on its own authority.};
+  \draw[->] (cheap) -- node[right,font=\scriptsize]{irreversibility $\uparrow$} (exp);
+\end{tikzpicture}
+\caption{The occupation gate is graduated by irreversibility: a soft check before
+cheap reversible work, a hard human sign-off before expensive irreversible work.}
+\label{fig:gate}
+\end{figure}
+
+\section{Conclusion}\label{sec:conclusion}
+
+A schema is the wrong success criterion for an artifact a language model authors through a tool surface. The schema encodes epistēmē --- the necessary, decidable, closed structure of what counts as well-formed --- and certifies anything that fits it. But the craft of making the artifact come out right is technē, and a closed validator does not encode it. The two part company exactly where it matters: a model can emit tool calls that pass the X3D XSD in full and still render mis-lit, mis-animated, or blank, structurally valid yet semantically dead. Technē is a deterministic craft layer that closes that gap on the MCP transport, between the model and the real server.
+
+It does so through three moves that we have shown are built and that hold mechanically. It redirects Schema-Aligned-Parsing-style repair and craft validation onto the arguments a model emits \emph{into} a tool, inverting the app$\rightarrow$model seam into a model$\rightarrow$tool man-in-the-middle. It compiles a written catalogue of silent-failure modes into named, prescriptive corrections where the error message is the fix, so a correction discovered once becomes mechanism the next model cannot route around. And its occupation gate crosses the boundary no assertion language can cross --- it executes a renderer and inspects the pixels, verify-by-render, graduated so that a glance precedes reversible drafting and a human signature precedes irreversible building.
+
+The pattern is not specific to X3D. Wherever a flat MCP tool surface fronts a craft that a closed schema under-specifies, the same three moves compose; only the small rule-to-fix catalogue is domain-specific, and the gate generalizes wherever correctness is a property of rendered output rather than of a parsed value. What remains is evidence at scale --- a corpus benchmark and the usage data that would tell a real cross-call ordering constraint from the architect's free field --- and the discipline to keep the human as the author who holds intent and signs off, with the model as the fast, faithful draftsman and Technē as the draftsman's discipline plus the gate that keeps the decisive moment human.
+
+\section*{Use of generative AI}
+Anthropic's Claude (Claude Code) was used as a tool throughout this work---for
+software implementation, validation, render automation, and drafting---under the
+human author's direction. In keeping with the ACM Policy on Authorship, the
+generative AI is not credited as an author: the human author conceived the work,
+designed the system, made every substantive decision, and is solely responsible
+for the content. This statement discloses its use as required.
+
+\balance
+
+\bibliographystyle{ACM-Reference-Format}
+\begin{thebibliography}{00}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+\bibitem{mcp} Anthropic. 2024. \emph{Model Context Protocol Specification}.
+\url{https://modelcontextprotocol.io}
+
+\bibitem{baml} BoundaryML. 2024. \emph{BAML and Schema-Aligned Parsing}.
+\url{https://github.com/BoundaryML/baml}
+
+\bibitem{postel} J.~Postel. 1980. \emph{Transmission Control Protocol}. RFC~761.
+(The robustness principle: be conservative in what you do, liberal in what you
+accept.)
+
+\bibitem{x3d4} ISO/IEC 19775-1:2023. \emph{Extensible 3D (X3D) Part~1:
+Architecture and base components} (X3D~4.0). Web3D Consortium / ISO.
+
+\bibitem{hanim} ISO/IEC 19774:2019. \emph{Humanoid Animation (HAnim)}.
+
+\bibitem{x3duom} Web3D Consortium. \emph{X3D Unified Object Model (X3DUOM)}.
+\url{https://www.web3d.org/specifications/X3DUOM.html}
+
+\bibitem{xite} H.~Seelig. \emph{X\_ITE: An X3D Browser for the Web}.
+\url{https://create3000.github.io/x_ite/}
+
+\bibitem{x3dom} J.~Behr, P.~Eschler, Y.~Jung, and M.~Z\"ollner. 2009. X3DOM: a
+DOM-based HTML5/X3D integration model. In \emph{Proc.\ 14th Int.\ ACM Conf.\ on
+3D Web Technology (Web3D~'09)}. \doi{10.1145/1559764.1559784}
+
+\bibitem{gltf} Khronos Group. \emph{glTF 2.0 Specification} (metallic--roughness
+physically based rendering).
+
+\bibitem{x3dpy} Web3D Consortium. \emph{x3d.py: the X3D Python (SAI) package}.
+\url{https://pypi.org/project/x3d/}
+
+\bibitem{castle} M.~Kambur\-elis. \emph{Castle Game Engine / Castle Model Viewer}.
+\url{https://castle-engine.io/}
+
+\bibitem{playwright} Microsoft. \emph{Playwright}. \url{https://playwright.dev/}
+
+\bibitem{prompteng} N.~Polys, A.~Mohammed, and B.~Sandbrook. 2024. Prompt Engineering for X3D Object Creation with LLMs. In \emph{Proc.\ 29th Int.\ ACM Conf.\ on 3D Web Technology (Web3D~'24)}. \doi{10.1145/3665318.3677159}
+
+\bibitem{audiocaption} N.~Polys and S.~M.~Wasi. 2023. Increasing Web3D
+Accessibility with Audio Captioning. In \emph{Proc.\ 28th Int.\ ACM Conf.\ on 3D
+Web Technology (Web3D~'23)}, Article~6, 1--10. \doi{10.1145/3611314.3615902}
+
+\bibitem{blackboard} H.~P.~Nii. 1986. Blackboard Systems. \emph{AI Magazine}
+7,~2 (1986), 38--53.
+
+\bibitem{jsonschema} \emph{JSON Schema}. \url{https://json-schema.org/}
+
+\bibitem{x3dexamples} Web3D Consortium. \emph{X3D Examples Archives}.
+\url{https://www.web3d.org/x3d/content/examples/}
+
+\end{thebibliography}
+
+\end{document}
