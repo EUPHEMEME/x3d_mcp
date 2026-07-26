@@ -44,3 +44,25 @@ def test_proxy_core_only_silences_coherence_reminders():
 def test_proxy_coherence_profile_restores_reminders():
     p = TechneProxy(config=Config.from_env({"TECHNE_PROFILE": "core,coherence"}))
     assert p.decide("create_node", {"node_type": "Viewpoint"}).reminders
+
+
+def test_differential_is_off_by_default():
+    # N+1 renders per check — an opt-in for the pre-commitment moment, never ambient
+    c = Config.from_env({})
+    assert not c.differential and c.differential_max_nodes == 0
+
+
+def test_differential_flag_opts_in_even_alongside_a_profile():
+    assert Config.from_env({"TECHNE_DIFFERENTIAL": "1"}).differential
+    # both switches are pure opt-ins; a profile has no default-on to override
+    assert Config.from_env({"TECHNE_PROFILE": "core",
+                            "TECHNE_DIFFERENTIAL": "1"}).differential
+
+
+def test_differential_profile_group_opts_in_with_budget_knob():
+    c = Config.from_env({"TECHNE_PROFILE": "core,differential",
+                         "TECHNE_DIFFERENTIAL_MAX_NODES": "3"})
+    assert c.differential and c.differential_max_nodes == 3
+    # a garbage budget degrades to "module default", never to a crash
+    assert Config.from_env(
+        {"TECHNE_DIFFERENTIAL_MAX_NODES": "lots"}).differential_max_nodes == 0

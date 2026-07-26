@@ -16,6 +16,15 @@ The gate is graduated by irreversibility (the architect/draftsman frame, §0):
 A hard prerequisite, already satisfied in this repo: the renderer must be X_ITE,
 not X3DOM — X3DOM returns *blank* for HAnim, so an X3DOM gate would check a blank
 and pass it. `renderer` defaults to the x3d-mcp X_ITE backend when wired.
+
+One rung above blankness, OPT-IN (config.differential / TECHNE_DIFFERENTIAL):
+the differential-render check (differential.py) asks whether each significant
+node individually put pixels on screen — the humanoid-missing-from-a-populated-
+frame case blankness cannot see. It is ADVISORY by default: adversarial review
+established that zero pixel change does not imply an authoring defect (occlusion,
+out-of-frustum placement, coincident DEF/USE, and sub-threshold size all produce it
+for correct scenes), so a finding informs rather than refuses unless the operator
+opts in with TECHNE_DIFFERENTIAL=block. Off entirely by default: N+1 renders.
 """
 from __future__ import annotations
 
@@ -23,6 +32,9 @@ import struct
 import zlib
 from dataclasses import dataclass, field as dc_field
 from typing import Callable, Optional
+
+from . import differential
+from .config import Config
 
 CHEAP = "cheap"
 EXPENSIVE = "expensive"
@@ -65,6 +77,14 @@ class GateResult:
     receipt: Optional[RenderReceipt] = None
     needs_human_signoff: bool = False
     preview_path: str = ""
+    # The per-node differential findings, when the opt-in differential check ran —
+    # a structured DifferentialResult, so a caller can inspect exactly which nodes
+    # did (or did not) contribute pixels WITHOUT re-running any renders. Findings
+    # ride here as data; corrections carry only the prescriptive text.
+    differential: Optional[differential.DifferentialResult] = None
+    # SOFT advisories that ride along with a PASSING result (differential findings when
+    # the check is advisory). Corrections block; notes inform.
+    notes: list[str] = dc_field(default_factory=list)
 
     @property
     def awaiting_architect(self) -> bool:
@@ -138,25 +158,45 @@ class OccupationGate:
     human_signoff() -> bool: returns True only when the architect has approved
       the surfaced preview. Default returns False (so expensive work always stops
       and waits — the draftsman never pours concrete alone).
+    config: profile knobs (default: from the environment). When
+      config.differential is on (TECHNE_DIFFERENTIAL / profile "differential"),
+      the gate also runs verify-by-differential-render (differential.py) — a HARD
+      deterministic check that each significant node actually put pixels on
+      screen. OFF by default because it costs one render per candidate node
+      (N+1 total): it belongs before a commitment, not on every call.
     """
 
     def __init__(self, renderer: Callable[[str], bytes],
                  semantic_validator: Optional[Callable[[str], str]] = None,
-                 human_signoff: Optional[Callable[[], bool]] = None):
+                 human_signoff: Optional[Callable[[], bool]] = None,
+                 config: Optional[Config] = None):
         self.renderer = renderer
         self.validate = semantic_validator or (lambda scene: "")
         self.human_signoff = human_signoff or (lambda: False)
+        self.config = config or Config.from_env()
 
     def check(self, scene: str, cost: str = CHEAP,
               preview_path: str = "") -> GateResult:
         # 1. semantic validation — block with the errors as corrections
+        notes: list[str] = []
         errs = (self.validate(scene) or "").strip()
         if not looks_clean(errs):
             return GateResult(False, cost, "validate_semantic not clean",
                               corrections=[errs])
-        # 2. render and look
+        # 2. render and look.
+        #    When the differential check is enabled we render the ROUND-TRIPPED scene here rather
+        #    than the raw string, so this one frame can serve as both the blankness observation and
+        #    the differential's baseline (N+1 renders instead of N+2). The round-trip is a
+        #    semantics-preserving re-serialization of the same elements and attributes, so the
+        #    blank verdict is unaffected; what it buys is that the baseline and every variant are
+        #    serialized identically, which is exactly the confound differential.contributions()
+        #    warns about. If the scene will not parse, roundtrip() returns None and we fall back to
+        #    the original string — the differential will then decline to run for the same reason.
+        render_scene = scene
+        if self.config.differential:
+            render_scene = differential.roundtrip(scene) or scene
         try:
-            png = self.renderer(scene)
+            png = self.renderer(render_scene)
         except Exception as e:
             return GateResult(False, cost, "render failed: %s" % e)
         receipt = _png_dims_and_stddev(png or b"")
@@ -168,7 +208,45 @@ class OccupationGate:
                              "present, lit, on-camera, and that HAnim/PBR "
                              "containerFields are correct (render via X_ITE, not "
                              "X3DOM, which is blank for HAnim)."])
-        # 3. graduated sign-off proportional to irreversibility
+        # 3. differential render (OPT-IN — costs N+1 renders). The ORDER here is
+        #    load-bearing: semantic validation, then blank-frame, then this. A
+        #    scene that failed validation never rendered at all; a blank scene was
+        #    caught by a single render. Running the differential on either would
+        #    spend N more renders to restate a failure the cheap check already
+        #    found. The differential exists for the one case those checks CANNOT
+        #    see — a non-blank, validated frame from which a single node is
+        #    silently missing — so it runs only once that case is reachable. It
+        #    also runs BEFORE the sign-off boundary: never ask the architect to
+        #    approve a preview a deterministic check can prove incomplete.
+        dr: Optional[differential.DifferentialResult] = None
+        if self.config.differential:
+            dr = differential.contributions(
+                scene, self.renderer,
+                max_nodes=(self.config.differential_max_nodes
+                           or differential.MAX_NODES_DEFAULT),
+                # reuse the frame from step 2 — it was rendered from the round-tripped
+                # scene precisely so it satisfies this parameter's contract
+                base_png=(png if render_scene is not scene else None))
+            # SOFT BY DEFAULT — advisory, not blocking. This was wired HARD and demoted after
+            # adversarial review found that "zero pixel change" and "authoring defect" are NOT
+            # the same proposition for a correctly-authored scene. A node can legitimately move
+            # zero pixels when it is occluded, outside the bound viewpoint's frustum, duplicated
+            # by a coincident DEF/USE (removing either changes nothing, so BOTH get accused), or
+            # simply smaller on screen than the noise threshold. Those are routine in navigable
+            # X3D, and blocking on them would refuse correct work — the one cost this layer must
+            # not impose. The signal is real and worth surfacing; the inference is not sound
+            # enough to carry a refusal, so it advises unless the operator explicitly opts in to
+            # blocking via TECHNE_DIFFERENTIAL=block after judging it on their own scenes.
+            if dr.ran and dr.absent:
+                findings = [differential.correction_for(c) for c in dr.absent]
+                if self.config.differential_blocks:
+                    return GateResult(
+                        False, cost,
+                        "differential render: %d node(s) present in the document but "
+                        "absent from the image" % len(dr.absent),
+                        corrections=findings, receipt=receipt, differential=dr)
+                notes.extend(findings)
+        # 4. graduated sign-off proportional to irreversibility
         if cost == EXPENSIVE and not self.human_signoff():
             return GateResult(
                 False, EXPENSIVE, "awaiting architect sign-off", receipt=receipt,
@@ -177,5 +255,7 @@ class OccupationGate:
                              "offline render is irreversible — surfacing the "
                              "preview and stopping for the human architect to "
                              "sign off. The draftsman must not pour concrete "
-                             "alone."])
-        return GateResult(True, cost, receipt=receipt, preview_path=preview_path)
+                             "alone."], differential=dr)
+        return GateResult(True, cost, receipt=receipt, preview_path=preview_path,
+                          notes=notes,
+                          differential=dr)
