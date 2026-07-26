@@ -34,3 +34,18 @@ Shasta_X3D_Project/
 #   flatten_anatomy.py && build_anatomy_spine.py && generate_anatomy_explorer.py)
 /anatomy_explorer.x3d
 /build_anatomy/skeleton.x3dfrag
+
+# ---------------------------------------------------------------------------
+# Local-only scratch.
+#
+# This repo has a public upstream, so unrelated local work is kept out of it.
+# Anything placed under _private/ is ignored by convention — put local notes,
+# drafts, or material belonging to other projects there rather than at the repo
+# root, where an `add -A` can catch it.
+_private/
+
+# Vendored dependencies and large bundles that are duplicated by their unpacked
+# directories or are regenerable.
+node_modules/
+Shasta_X3D_Project.zip
+LOA5_HAnim_Project.zip
