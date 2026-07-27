@@ -1,0 +1,442 @@
+<TimeSensor DEF='WalkTimer' cycleInterval='2.5' loop='true' enabled='false'/>
+      <OrientationInterpolator DEF='Walk_r_midcarpal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_midcarpal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_interphalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_distal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt8_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsometatarsal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_distal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsometatarsal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_eyeball_joint_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_interphalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_eyebrow_joint_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_talocalcaneonavicular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metatarsophalangeal_2_RotationInterpolator' key='0 0.2 0.4 0.6 0.7 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_calcaneocuboid_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_proximal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_distal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_hip_RotationInterpolator' key='0 0.25 0.375 0.5 0.6667 0.7917 0.9167 1' keyValue='-0.873 0.0609 0.484 0.2865 0.9963 -0.0106 0.0848 0.2488 0.9965 0.0159 -0.0822 0.3836 -0.7018 -0.0322 -0.7117 0.1289 -1 0 0 0.5518 -0.9964 0.0223 0.0817 0.5351 -0.9809 0.0491 0.1881 0.5204 -0.873 0.0609 0.484 0.2865'/>
+      <OrientationInterpolator DEF='Walk_r_cuneonavicular_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metacarpophalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt6_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpometacarpal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_proximal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <PositionInterpolator DEF='Walk_humanoid_root_TranslationInterpolator' key='0 0.0416 0.125 0.1667 0.2083 0.25 0.2917 0.375 0.4583 0.5 0.5417 0.5833 0.625 0.7083 0.75 0.7917 0.875 0.9167 1' keyValue='0 -0.0093 0 0 -0.0038 0 0 -0.0088 0 0 -0.0149 0 0 -0.0264 0 0 -0.0393 0 0 -0.0502 0 0 -0.0747 0 0 -0.0273 0 0 -0.0161 0 0 -0.0113 0 0 -0.0058 0 0 -0.002 0 0 -0.003 0 0 -0.014 0 0 -0.038 0 0 -0.0565 0 0 -0.045 0 0 -0.0093 0'/>
+      <OrientationInterpolator DEF='Walk_vt7_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_interphalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt9_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_hip_RotationInterpolator' key='0 0.125 0.2083 0.2917 0.375 0.5 0.6667 0.7917 0.9167 1' keyValue='-0.5831 0.0351 0.8116 0.1481 -0.995 0.023 0.0967 0.4683 -1 0.002 0.008 0.4732 -0.998 -0.0158 -0.061 0.5079 -0.9911 -0.0354 -0.1286 0.5419 -0.9131 -0.0624 -0.403 0.336 -0.431 -0.0796 -0.899 0.0704 1 0 0 0.2571 0.9891 -0.0281 0.1444 0.3879 -0.5831 0.0351 0.8116 0.1481'/>
+      <OrientationInterpolator DEF='Walk_l_cuneonavicular_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_transversetarsal_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_sternoclavicular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_proximal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metatarsophalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metatarsophalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_radiocarpal_RotationInterpolator' key='0 0.375 0.9167 1' keyValue='0 -1 0 0.4611 -0.3302 -0.9275 0.1755 0.5389 0.0328 -0.9993 -0.0172 0.492 0 -1 0 0.4611'/>
+      <OrientationInterpolator DEF='Walk_vt3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_proximal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_humanoid_root_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metacarpophalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metatarsophalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsometatarsal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsometatarsal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metatarsophalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_knee_RotationInterpolator' key='0 0.2083 0.375 0.5 0.6667 0.7917 0.9167 1' keyValue='1 0 0 0.3226 1 0 0 0.1556 1 0 0 0.0868 1 0 0 0.8751 1 0 0 1.131 1 0 0 0.0996 1 0 0 0.3942 1 0 0 0.3226'/>
+      <OrientationInterpolator DEF='Walk_r_tarsometatarsal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_knee_RotationInterpolator' key='0 0.125 0.2083 0.2917 0.375 0.5 0.6667 0.7917 0.9167 1' keyValue='1 0 0 0.8573 1 0 0 0.8926 1 0 0 0.5351 1 0 0 0.1756 1 0 0 0.1194 1 0 0 0.3153 1 0 0 0.0935 1 0 0 0.0856 1 0 0 0.2475 1 0 0 0.8573'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_interphalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_proximal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metatarsophalangeal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metacarpophalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_proximal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_talocrural_RotationInterpolator' key='0 0.125 0.2083 0.375 0.4583 0.5 0.6667 0.75 0.7917 0.9167 1' keyValue='0 0 1 0 -1 0 0 0.3533 -1 0 0 0.1072 1 0 0 0.2612 1 0 0 0.1268 -1 0 0 0.0179 -1 0 0 0.0582 -1 0 0 0.2398 -1 0 0 0.35 -1 0 0 0.3322 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_distal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_proximal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc6_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vl3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_distal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_talocalcaneonavicular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_midcarpal_4_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metacarpophalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_distal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpometacarpal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_midcarpal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpometacarpal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_proximal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_midcarpal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpometacarpal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vl2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_transversetarsal_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_distal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_proximal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_skullbase_RotationInterpolator' key='0 0.375 0.4167 0.5 0.5833 0.6667 0.75 0.8333 0.9167 1' keyValue='0 -1 0 0.0864 0 1 0 0.1825 0 1 0 0.1505 0 1 0 0.1053 0 1 0 0.0439 0 -1 0 0.0312 0 -1 0 0.0794 0 -1 0 0.1616 0 -1 0 0.155 0 -1 0 0.0864'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_distal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_proximal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_shoulder_RotationInterpolator' key='0 0.375 0.9167 1' keyValue='-1 0 0 0.093 1 0 0 0.3197 -1 0 0 0.1564 -1 0 0 0.093'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_distal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_midcarpal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vl5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metacarpophalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpometacarpal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_acromioclavicular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metacarpophalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_eyelid_joint_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metacarpophalangeal_1_RotationInterpolator' key='0 0.2 0.4 0.6 0.8 1' keyValue='1 0 0 0 1 0 0 0.25 1 0 0 0.5 1 0 0 0.7 1 0 0 0.2 1 0 0 0'/>
+      <OrientationInterpolator DEF='Walk_l_sternoclavicular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_elbow_RotationInterpolator' key='0 0.375 0.9167 1' keyValue='-1 0 0 0.4115 -1 0 0 0.0925 -1 0 0 0.5726 -1 0 0 0.4115'/>
+      <OrientationInterpolator DEF='Walk_r_tarsometatarsal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vl1_RotationInterpolator' key='0 0.2083 0.375 0.75 0.8333 1' keyValue='0 1 0 0.0826 -0.0197 -0.5974 0.8017 0.0823 0.0093 -0.9648 0.2627 0.1734 -0.0124 0.9549 -0.2968 0.0873 -0.0081 0.9691 -0.2463 0.158 0 1 0 0.0826'/>
+      <OrientationInterpolator DEF='Walk_l_eyelid_joint_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_distal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_sacroiliac_RotationInterpolator' key='0 0.5 1' keyValue='0 0 -1 0.1056 0 0 1 0.0902 0 0 -1 0.1056'/>
+      <OrientationInterpolator DEF='Walk_r_eyebrow_joint_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_cuneonavicular_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_distal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsometatarsal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsal_proximal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_proximal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_eyeball_joint_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_proximal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_proximal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metacarpophalangeal_1_RotationInterpolator' key='0 0.2 0.4 0.6 0.8 1' keyValue='1 0 0 0 1 0 0 0.25 1 0 0 0.5 1 0 0 0.7 1 0 0 0.2 1 0 0 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_distal_interphalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vl4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_distal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpometacarpal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_calcaneocuboid_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpometacarpal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpometacarpal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metatarsophalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_shoulder_RotationInterpolator' key='0 0.375 0.9167 1' keyValue='1 0 0 0.1189 -1 0 0 0.1861 1 0 0 0.3357 1 0 0 0.1189'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_distal_interphalangeal_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_midcarpal_4_5_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsometatarsal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_cuneonavicular_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt11_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metatarsophalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsal_distal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt10_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_cuneonavicular_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_talocrural_RotationInterpolator' key='0 0.125 0.2083 0.375 0.6667 0.9167 1' keyValue='-1 0 0 0.0671 -1 0 0 0.2152 -1 0 0 0.3184 -1 0 0 0.4717 -1 0 0 0.2912 1 0 0 0.1222 -1 0 0 0.0671'/>
+      <OrientationInterpolator DEF='Walk_r_carpometacarpal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_tarsometatarsal_2_RotationInterpolator' key='0 0.2 0.4 0.6 0.7 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metatarsophalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_metatarsophalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_proximal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc7_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vc3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_carpal_proximal_interphalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_carpometacarpal_1_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_tarsometatarsal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt12_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metacarpophalangeal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_elbow_RotationInterpolator' key='0 0.375 0.9167 1' keyValue='-1 0 0 0.4115 -1 0 0 0.0925 -1 0 0 0.5726 -1 0 0 0.4115'/>
+      <OrientationInterpolator DEF='Walk_l_carpal_distal_interphalangeal_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_cuneonavicular_2_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_acromioclavicular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_temporomandibular_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_vt4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_midcarpal_3_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_l_metacarpophalangeal_4_RotationInterpolator' key='0 0.5 1' keyValue='0 0 1 0 0 0 1 0 0 0 1 0'/>
+      <OrientationInterpolator DEF='Walk_r_radiocarpal_RotationInterpolator' key='0 0.375 0.9167 1' keyValue='-0.8129 0.4759 -0.3357 0.1346 0.1533 -0.9878 0.0258 0.3902 -0.5701 0.7604 -0.311 0.366 -0.8129 0.4759 -0.3357 0.1346'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_humanoid_root_TranslationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_humanoid_root_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_sacroiliac_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_hip_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_knee_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_talocrural_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_talocalcaneonavicular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_cuneonavicular_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsometatarsal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metatarsophalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_interphalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_cuneonavicular_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsometatarsal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metatarsophalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_proximal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_distal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_cuneonavicular_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsometatarsal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metatarsophalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_proximal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_distal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_calcaneocuboid_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_transversetarsal_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsometatarsal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metatarsophalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_proximal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_distal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsometatarsal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metatarsophalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_proximal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_tarsal_distal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_hip_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_knee_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_talocrural_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_talocalcaneonavicular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_cuneonavicular_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsometatarsal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metatarsophalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_interphalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_cuneonavicular_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsometatarsal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metatarsophalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_proximal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_distal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_cuneonavicular_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsometatarsal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metatarsophalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_proximal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_distal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_calcaneocuboid_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_transversetarsal_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsometatarsal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metatarsophalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_proximal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_distal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsometatarsal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metatarsophalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_proximal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_tarsal_distal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vl5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vl4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vl3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vl2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vl1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt12_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt11_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt10_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt9_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt8_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt7_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt6_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vt1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc7_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc6_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_vc1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_skullbase_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_eyelid_joint_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_eyelid_joint_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_eyeball_joint_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_eyeball_joint_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_eyebrow_joint_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_eyebrow_joint_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_temporomandibular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_sternoclavicular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_acromioclavicular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_shoulder_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_elbow_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_radiocarpal_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_midcarpal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpometacarpal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metacarpophalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_interphalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_midcarpal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpometacarpal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metacarpophalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_proximal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_distal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_midcarpal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpometacarpal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metacarpophalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_proximal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_distal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_midcarpal_4_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpometacarpal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metacarpophalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_proximal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_distal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpometacarpal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_metacarpophalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_proximal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_l_carpal_distal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_sternoclavicular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_acromioclavicular_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_shoulder_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_elbow_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_radiocarpal_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_midcarpal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpometacarpal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metacarpophalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_interphalangeal_1_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_midcarpal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpometacarpal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metacarpophalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_proximal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_distal_interphalangeal_2_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_midcarpal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpometacarpal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metacarpophalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_proximal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_distal_interphalangeal_3_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_midcarpal_4_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpometacarpal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metacarpophalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_proximal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_distal_interphalangeal_4_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpometacarpal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_metacarpophalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_proximal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='fraction_changed' fromNode='WalkTimer' toField='set_fraction' toNode='Walk_r_carpal_distal_interphalangeal_5_RotationInterpolator'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_humanoid_root_TranslationInterpolator' toField='set_translation' toNode='hanim_humanoid_root'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_humanoid_root_RotationInterpolator' toField='set_rotation' toNode='hanim_humanoid_root'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_sacroiliac_RotationInterpolator' toField='set_rotation' toNode='hanim_sacroiliac'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_hip_RotationInterpolator' toField='set_rotation' toNode='hanim_l_hip'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_knee_RotationInterpolator' toField='set_rotation' toNode='hanim_l_knee'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_talocrural_RotationInterpolator' toField='set_rotation' toNode='hanim_l_talocrural'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_talocalcaneonavicular_RotationInterpolator' toField='set_rotation' toNode='hanim_l_talocalcaneonavicular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_cuneonavicular_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_cuneonavicular_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsometatarsal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsometatarsal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metatarsophalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metatarsophalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_interphalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_interphalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_cuneonavicular_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_cuneonavicular_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsometatarsal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsometatarsal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metatarsophalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metatarsophalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_proximal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_proximal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_distal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_distal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_cuneonavicular_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_cuneonavicular_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsometatarsal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsometatarsal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metatarsophalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metatarsophalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_proximal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_proximal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_distal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_distal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_calcaneocuboid_RotationInterpolator' toField='set_rotation' toNode='hanim_l_calcaneocuboid'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_transversetarsal_RotationInterpolator' toField='set_rotation' toNode='hanim_l_transversetarsal'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsometatarsal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsometatarsal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metatarsophalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metatarsophalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_proximal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_proximal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_distal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_distal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsometatarsal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsometatarsal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metatarsophalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metatarsophalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_proximal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_proximal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_tarsal_distal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_tarsal_distal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_hip_RotationInterpolator' toField='set_rotation' toNode='hanim_r_hip'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_knee_RotationInterpolator' toField='set_rotation' toNode='hanim_r_knee'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_talocrural_RotationInterpolator' toField='set_rotation' toNode='hanim_r_talocrural'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_talocalcaneonavicular_RotationInterpolator' toField='set_rotation' toNode='hanim_r_talocalcaneonavicular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_cuneonavicular_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_cuneonavicular_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsometatarsal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsometatarsal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metatarsophalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metatarsophalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_interphalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_interphalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_cuneonavicular_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_cuneonavicular_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsometatarsal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsometatarsal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metatarsophalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metatarsophalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_proximal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_proximal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_distal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_distal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_cuneonavicular_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_cuneonavicular_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsometatarsal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsometatarsal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metatarsophalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metatarsophalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_proximal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_proximal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_distal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_distal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_calcaneocuboid_RotationInterpolator' toField='set_rotation' toNode='hanim_r_calcaneocuboid'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_transversetarsal_RotationInterpolator' toField='set_rotation' toNode='hanim_r_transversetarsal'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsometatarsal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsometatarsal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metatarsophalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metatarsophalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_proximal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_proximal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_distal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_distal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsometatarsal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsometatarsal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metatarsophalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metatarsophalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_proximal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_proximal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_tarsal_distal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_tarsal_distal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vl5_RotationInterpolator' toField='set_rotation' toNode='hanim_vl5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vl4_RotationInterpolator' toField='set_rotation' toNode='hanim_vl4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vl3_RotationInterpolator' toField='set_rotation' toNode='hanim_vl3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vl2_RotationInterpolator' toField='set_rotation' toNode='hanim_vl2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vl1_RotationInterpolator' toField='set_rotation' toNode='hanim_vl1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt12_RotationInterpolator' toField='set_rotation' toNode='hanim_vt12'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt11_RotationInterpolator' toField='set_rotation' toNode='hanim_vt11'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt10_RotationInterpolator' toField='set_rotation' toNode='hanim_vt10'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt9_RotationInterpolator' toField='set_rotation' toNode='hanim_vt9'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt8_RotationInterpolator' toField='set_rotation' toNode='hanim_vt8'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt7_RotationInterpolator' toField='set_rotation' toNode='hanim_vt7'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt6_RotationInterpolator' toField='set_rotation' toNode='hanim_vt6'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt5_RotationInterpolator' toField='set_rotation' toNode='hanim_vt5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt4_RotationInterpolator' toField='set_rotation' toNode='hanim_vt4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt3_RotationInterpolator' toField='set_rotation' toNode='hanim_vt3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt2_RotationInterpolator' toField='set_rotation' toNode='hanim_vt2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vt1_RotationInterpolator' toField='set_rotation' toNode='hanim_vt1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc7_RotationInterpolator' toField='set_rotation' toNode='hanim_vc7'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc6_RotationInterpolator' toField='set_rotation' toNode='hanim_vc6'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc5_RotationInterpolator' toField='set_rotation' toNode='hanim_vc5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc4_RotationInterpolator' toField='set_rotation' toNode='hanim_vc4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc3_RotationInterpolator' toField='set_rotation' toNode='hanim_vc3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc2_RotationInterpolator' toField='set_rotation' toNode='hanim_vc2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_vc1_RotationInterpolator' toField='set_rotation' toNode='hanim_vc1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_skullbase_RotationInterpolator' toField='set_rotation' toNode='hanim_skullbase'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_eyelid_joint_RotationInterpolator' toField='set_rotation' toNode='hanim_l_eyelid_joint'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_eyelid_joint_RotationInterpolator' toField='set_rotation' toNode='hanim_r_eyelid_joint'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_eyeball_joint_RotationInterpolator' toField='set_rotation' toNode='hanim_l_eyeball_joint'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_eyeball_joint_RotationInterpolator' toField='set_rotation' toNode='hanim_r_eyeball_joint'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_eyebrow_joint_RotationInterpolator' toField='set_rotation' toNode='hanim_l_eyebrow_joint'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_eyebrow_joint_RotationInterpolator' toField='set_rotation' toNode='hanim_r_eyebrow_joint'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_temporomandibular_RotationInterpolator' toField='set_rotation' toNode='hanim_temporomandibular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_sternoclavicular_RotationInterpolator' toField='set_rotation' toNode='hanim_l_sternoclavicular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_acromioclavicular_RotationInterpolator' toField='set_rotation' toNode='hanim_l_acromioclavicular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_shoulder_RotationInterpolator' toField='set_rotation' toNode='hanim_l_shoulder'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_elbow_RotationInterpolator' toField='set_rotation' toNode='hanim_l_elbow'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_radiocarpal_RotationInterpolator' toField='set_rotation' toNode='hanim_l_radiocarpal'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_midcarpal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_midcarpal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpometacarpal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpometacarpal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metacarpophalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metacarpophalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_interphalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_interphalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_midcarpal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_midcarpal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpometacarpal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpometacarpal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metacarpophalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metacarpophalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_proximal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_proximal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_distal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_distal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_midcarpal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_midcarpal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpometacarpal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpometacarpal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metacarpophalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metacarpophalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_proximal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_proximal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_distal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_distal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_midcarpal_4_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_midcarpal_4_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpometacarpal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpometacarpal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metacarpophalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metacarpophalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_proximal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_proximal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_distal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_distal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpometacarpal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpometacarpal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_metacarpophalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_metacarpophalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_proximal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_proximal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_l_carpal_distal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_l_carpal_distal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_sternoclavicular_RotationInterpolator' toField='set_rotation' toNode='hanim_r_sternoclavicular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_acromioclavicular_RotationInterpolator' toField='set_rotation' toNode='hanim_r_acromioclavicular'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_shoulder_RotationInterpolator' toField='set_rotation' toNode='hanim_r_shoulder'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_elbow_RotationInterpolator' toField='set_rotation' toNode='hanim_r_elbow'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_radiocarpal_RotationInterpolator' toField='set_rotation' toNode='hanim_r_radiocarpal'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_midcarpal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_midcarpal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpometacarpal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpometacarpal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metacarpophalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metacarpophalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_interphalangeal_1_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_interphalangeal_1'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_midcarpal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_midcarpal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpometacarpal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpometacarpal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metacarpophalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metacarpophalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_proximal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_proximal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_distal_interphalangeal_2_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_distal_interphalangeal_2'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_midcarpal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_midcarpal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpometacarpal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpometacarpal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metacarpophalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metacarpophalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_proximal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_proximal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_distal_interphalangeal_3_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_distal_interphalangeal_3'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_midcarpal_4_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_midcarpal_4_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpometacarpal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpometacarpal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metacarpophalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metacarpophalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_proximal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_proximal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_distal_interphalangeal_4_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_distal_interphalangeal_4'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpometacarpal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpometacarpal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_metacarpophalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_metacarpophalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_proximal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_proximal_interphalangeal_5'/>
+      <ROUTE fromField='value_changed' fromNode='Walk_r_carpal_distal_interphalangeal_5_RotationInterpolator' toField='set_rotation' toNode='hanim_r_carpal_distal_interphalangeal_5'/>

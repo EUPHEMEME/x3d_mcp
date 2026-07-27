@@ -1,0 +1,1630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Immersive' version='4.0' xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <component level='1' name='HAnim'/>
+    <meta content='running_human.x3d' name='title'/>
+    <meta content='HAnim 2.0 LOA-5 humanoid (150 joints, centers from the Web3D AllBonesLOA5Skeletons draft) running a slalom course; gait cadence synchronized to ground speed. Built with x3d.py.' name='description'/>
+    <meta content='generate_runner.py (x3d.py canonical pipeline)' name='generator'/>
+  </head>
+  <Scene>
+    <WorldInfo title='HAnim LOA-4 Running Figure'/>
+    <Background groundColor='0.12 0.16 0.12' skyAngle='1.2' skyColor='0.5 0.65 0.85 0.15 0.22 0.35'/>
+    <NavigationInfo speed='3' type='"EXAMINE" "WALK" "ANY"'/>
+    <Viewpoint DEF='Overview' description='Course overview' orientation='0.2 0.95 0.2 2.5' position='9 7 -6'/>
+    <Viewpoint DEF='StartLine' description='Start line' orientation='0 1 0 0.7' position='3.5 1.5 -3'/>
+    <DirectionalLight ambientIntensity='0.4' direction='-0.4 -1 -0.5' intensity='0.9'/>
+    <DirectionalLight direction='0.6 -0.4 0.6' intensity='0.4'/>
+    <Transform translation='0 -0.01 13'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.2 0.34 0.22' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='14 0.02 34'/>
+      </Shape>
+    </Transform>
+    <Transform translation='0 0.001 13'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.85 0.82 0.5' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='0.18 0.02 32'/>
+      </Shape>
+    </Transform>
+    <Transform translation='0 0.2 9.0'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.95 0.45 0.1' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Cone bottomRadius='0.18' height='0.4'/>
+      </Shape>
+    </Transform>
+    <Transform translation='0 0.2 13.0'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.95 0.45 0.1' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Cone bottomRadius='0.18' height='0.4'/>
+      </Shape>
+    </Transform>
+    <Transform translation='0 0.2 17.0'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.95 0.45 0.1' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Cone bottomRadius='0.18' height='0.4'/>
+      </Shape>
+    </Transform>
+    <Transform translation='-1.6 0.6 0'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.8 0.8 0.85' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='0.12 1.2 0.12'/>
+      </Shape>
+    </Transform>
+    <Transform translation='1.6 0.6 0'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.8 0.8 0.85' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='0.12 1.2 0.12'/>
+      </Shape>
+    </Transform>
+    <Transform translation='0 1.9 28'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.85 0.15 0.15' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='3.4 0.45 0.08'/>
+      </Shape>
+    </Transform>
+    <Transform translation='-1.6 0.9 28'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.8 0.8 0.85' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='0.12 1.8 0.12'/>
+      </Shape>
+    </Transform>
+    <Transform translation='1.6 0.9 28'>
+      <Shape>
+        <Appearance>
+          <Material diffuseColor='0.8 0.8 0.85' shininess='0.3' specularColor='0.2 0.2 0.2'/>
+        </Appearance>
+        <Box size='0.12 1.8 0.12'/>
+      </Shape>
+    </Transform>
+    <Transform DEF='Traveler'>
+      <Viewpoint DEF='ChaseCam' description='Chase cam (runner)' orientation='0 1 0 3.14159' position='0 1.5 -3.2'/>
+      <HAnimHumanoid DEF='hanim_AllBonesSkeleton' loa='5' name='AllBonesSkeleton' version='2.0'>
+        <MetadataSet containerField='metadata' name='HAnimHumanoid.info' reference='https://www.web3d.org/documents/specifications/19774/V2.0/Architecture/ObjectInterfaces.html#Humanoid'>
+          <!-- TODO add HAnim metadata -->
+        </MetadataSet>
+        <!-- TODO where is humanoid_root center? seat of pants? relationship to sacroiliac and vl5? -->
+        <HAnimJoint DEF='hanim_humanoid_root' containerField='skeleton' center='0 0.826 -0.016' name='humanoid_root'>
+          <HAnimSegment DEF='hanim_sacrum' name='sacrum'>
+            <!-- virtual segment suitable for visualization -->
+            <!-- Mantis 1536: segment "sacrum" is name associated with humanoid_root joint, but anatomically sacrum_bone is considered part of pelvis -->
+          </HAnimSegment>
+          <HAnimJoint DEF='hanim_sacroiliac' center='0.0005 1.015 -0.0369' name='sacroiliac'>
+            <HAnimSegment DEF='hanim_pelvis' name='pelvis'>
+              <!-- pelvis includes sacrum_bone, l_hip_bone, r_hip_bone, pubic_symphysis, coccyx -->
+              <!-- pelvis/sacrum_bone offset to match joint socket: -->
+              <!-- pelvis/sacrum_bone.x3d + translation +0.0005 +0.9750 -0.0769 -->
+              <!-- pelvis/sacrum_bone.x3d adjusted axes +0.0000 +0.0400 +0.0400 -->
+              <!-- pelvis/sacrum_bone.x3d =joint center +0.0005 +1.0150 -0.0369 -->
+              <Transform DEF='YellowBoxAtJointCenter_pelvis' translation='0.0005 1.015 -0.0369'>
+                <Shape DEF='BoxShape'>
+                  <Appearance>
+                    <Material diffuseColor='0.9 0.9 0.4'/>
+                  </Appearance>
+                  <Box size='0.03 0.03 0.03'/>
+                </Shape>
+              </Transform>
+              <!-- Duplicative geometry: <Inline DEF='pelvis_Inline' url='"assets/loa5/meshes/pelvis.x3d"'/> -->
+              <Inline DEF='sacrum_bone_Inline' url='"assets/loa5/meshes/sacrum_bone.x3d"'/>
+            </HAnimSegment>
+            <HAnimSegment DEF='hanim_l_hip_bone' name='l_hip_bone'>
+              <Inline DEF='l_hip_bone_Inline' url='"assets/loa5/meshes/l_hip_bone.x3d"'/>
+            </HAnimSegment>
+            <HAnimSegment DEF='hanim_r_hip_bone' name='r_hip_bone'>
+              <Inline DEF='r_hip_bone_Inline' url='"assets/loa5/meshes/r_hip_bone.x3d"'/>
+            </HAnimSegment>
+            <HAnimSegment DEF='hanim_pubic_symphysis' name='pubic_symphysis'>
+              <Inline DEF='pubic_symphysis_Inline' url='"assets/loa5/meshes/pubic_symphysis.x3d"'/>
+            </HAnimSegment>
+            <HAnimSegment DEF='hanim_coccyx' name='coccyx'>
+              <Inline DEF='coccyx' url='"assets/loa5/meshes/coccyx.x3d"'/>
+            </HAnimSegment>
+            <HAnimJoint DEF='hanim_l_hip' center='0.0695 0.9238 -0.0254' name='l_hip'>
+              <HAnimSegment DEF='hanim_l_thigh' name='l_thigh'>
+                <!-- l_thigh includes l_femur -->
+                <!-- Duplicative geometry: <Inline DEF='l_thigh_Inline' url='"assets/loa5/meshes/l_thigh.x3d"'/> -->
+                <Transform DEF='YellowBoxAtJointCenter_l_thigh' translation='0.0695 0.9238 -0.0254'>
+                  <Shape USE='BoxShape'/>
+                </Transform>
+              </HAnimSegment>
+              <HAnimSegment DEF='hanim_l_femur' name='l_femur'>
+                <!-- l_femur offset to match joint socket: -->
+                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                <!-- bone l_femur.x3d + translation +0.0955 +0.6988 -0.0384 -->
+                <!-- bone l_femur.x3d adjusted axes -0.0260 +0.2250 +0.0130 -->
+                <!-- bone l_femur.x3d =joint center +0.0695 +0.9238 -0.0254 -->
+                <Inline DEF='l_femur' url='"assets/loa5/meshes/l_femur.x3d"'/>
+              </HAnimSegment>
+              <HAnimJoint DEF='hanim_l_knee' center='0.0858 0.4633 -0.0342' name='l_knee'>
+                <HAnimSegment DEF='hanim_l_calf' name='l_calf'>
+                  <!-- calf includes patella, tibia and fibula in loa5 -->
+                  <!-- Duplicative geometry: <Inline DEF='l_calf_Inline' url='"assets/loa5/meshes/l_calf.x3d"'/> -->
+                  <Transform DEF='YellowBoxAtJointCenter_l_knee' translation='0.0858 0.4633 -0.0342'>
+                    <Shape USE='BoxShape'/>
+                  </Transform>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_l_patella' name='l_patella'>
+                  <Inline DEF='l_patella' url='"assets/loa5/meshes/l_patella.x3d"'/>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_l_tibia' name='l_tibia'>
+                  <!-- l_tibia.x3d is knee bone used to adjust and match joint socket: -->
+                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                  <!-- bone l_tibia.x3d + translation +0.0858 +0.2663 -0.0542 -->
+                  <!-- bone l_tibia.x3d adjusted axes +0.0000 +0.1970 +0.0200 -->
+                  <!-- bone l_tibia.x3d =joint center +0.0858 +0.4633 -0.0342 -->
+                  <Inline DEF='l_tibia' url='"assets/loa5/meshes/l_tibia.x3d"'/>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_l_fibula' name='l_fibula'>
+                  <Inline DEF='l_fibula' url='"assets/loa5/meshes/l_fibula.x3d"'/>
+                </HAnimSegment>
+                <HAnimJoint DEF='hanim_l_talocrural' center='0.0741 0.0829 -0.0641' name='l_talocrural'>
+                  <!-- Duplicative geometry: <Inline DEF='l_foot_Inline' url='"assets/loa5/meshes/l_foot.x3d"'/> -->
+                  <HAnimSegment DEF='hanim_l_talus' name='l_talus'>
+                    <!-- ankle -->
+                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                    <!-- bone l_talus.x3d + translation +0.0741 +0.0629 -0.0641 -->
+                    <!-- bone l_talus.x3d adjusted axes +0.0000 +0.0200 +0.0000 -->
+                    <!-- bone l_talus.x3d =joint center +0.0741 +0.0829 -0.0641 -->
+                    <Inline DEF='l_talus' url='"assets/loa5/meshes/l_talus.x3d"'/>
+                    <Transform DEF='YellowBoxAtJointCenter_l_talocrural' scale='0.8 0.8 0.8' translation='0.0741 0.0829 -0.0641'>
+                      <Shape USE='BoxShape'/>
+                    </Transform>
+                  </HAnimSegment>
+                  <HAnimJoint DEF='hanim_l_talocalcaneonavicular' center='0.0606 0.0515 -0.0348' name='l_talocalcaneonavicular'>
+                    <HAnimSegment DEF='hanim_l_navicular' name='l_navicular'>
+                      <Inline DEF='l_navicular' url='"assets/loa5/meshes/l_navicular.x3d"'/>
+                    </HAnimSegment>
+                    <HAnimJoint DEF='hanim_l_cuneonavicular_1' center='0.0673 0.0499 -0.0161' name='l_cuneonavicular_1'>
+                      <HAnimSegment DEF='hanim_l_cuneiform_1' name='l_cuneiform_1'>
+                        <Inline DEF='l_cuneiform_1' url='"assets/loa5/meshes/l_cuneiform_1.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_l_tarsometatarsal_1' center='0.0622 0.0268 0.0273' name='l_tarsometatarsal_1'>
+                        <HAnimSegment DEF='hanim_l_metatarsal_1' name='l_metatarsal_1'>
+                          <Inline DEF='l_metatarsal_1' url='"assets/loa5/meshes/l_metatarsal_1.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_l_metatarsophalangeal_1' center='0.0662 0.0109 0.0729' name='l_metatarsophalangeal_1'>
+                          <HAnimSegment DEF='hanim_l_tarsal_proximal_phalanx_1' name='l_tarsal_proximal_phalanx_1'>
+                            <Inline DEF='l_tarsal_proximal_phalanx_1' url='"assets/loa5/meshes/l_tarsal_proximal_phalanx_1.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_l_tarsal_interphalangeal_1' center='0.0683 0.0052 0.0961' name='l_tarsal_interphalangeal_1'>
+                            <HAnimSegment DEF='hanim_l_tarsal_distal_phalanx_1' name='l_tarsal_distal_phalanx_1'>
+                              <Inline DEF='l_tarsal_distal_phalanx_1' url='"assets/loa5/meshes/l_tarsal_distal_phalanx_1.x3d"'/>
+                            </HAnimSegment>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                    <HAnimJoint DEF='hanim_l_cuneonavicular_2' center='0.0837 0.0478 -0.0212' name='l_cuneonavicular_2'>
+                      <HAnimSegment DEF='hanim_l_cuneiform_2' name='l_cuneiform_2'>
+                        <Inline DEF='l_cuneiform_2' url='"assets/loa5/meshes/l_cuneiform_2.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_l_tarsometatarsal_2' center='0.0775 0.0345 0.0239' name='l_tarsometatarsal_2'>
+                        <HAnimSegment DEF='hanim_l_metatarsal_2' name='l_metatarsal_2'>
+                          <Inline DEF='l_metatarsal_2' url='"assets/loa5/meshes/l_metatarsal_2.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_l_metatarsophalangeal_2' center='0.089 0.0164 0.0573' name='l_metatarsophalangeal_2'>
+                          <HAnimSegment DEF='hanim_l_tarsal_proximal_phalanx_2' name='l_tarsal_proximal_phalanx_2'>
+                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                            <!-- bone l_tarsal_proximal_phalanx_2.x3d + translation +0.0890 +0.0114 +0.0703 -->
+                            <!-- bone l_tarsal_proximal_phalanx_2.x3d adjusted axes +0.0000 +0.0050 -0.0130 -->
+                            <!-- bone l_tarsal_proximal_phalanx_2.x3d =joint center +0.0890 +0.0164 +0.0573 -->
+                            <Inline DEF='l_tarsal_proximal_phalanx_2' url='"assets/loa5/meshes/l_tarsal_proximal_phalanx_2.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_l_tarsal_proximal_interphalangeal_2' center='0.0945 0.0056 0.0925' name='l_tarsal_proximal_interphalangeal_2'>
+                            <HAnimSegment DEF='hanim_l_tarsal_middle_phalanx_2' name='l_tarsal_middle_phalanx_2'>
+                              <Inline DEF='l_tarsal_middle_phalanx_2' url='"assets/loa5/meshes/l_tarsal_middle_phalanx_2.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_l_tarsal_distal_interphalangeal_2' center='0.0969 0.0037 0.1046' name='l_tarsal_distal_interphalangeal_2'>
+                              <HAnimSegment DEF='hanim_l_tarsal_distal_phalanx_2' name='l_tarsal_distal_phalanx_2'>
+                                <Inline DEF='l_tarsal_distal_phalanx_2' url='"assets/loa5/meshes/l_tarsal_distal_phalanx_2.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                    <HAnimJoint DEF='hanim_l_cuneonavicular_3' center='0.0558 0.0427 -0.0109' name='l_cuneonavicular_3'>
+                      <HAnimSegment DEF='hanim_l_cuneiform_3' name='l_cuneiform_3'>
+                        <Inline DEF='l_cuneiform_3' url='"assets/loa5/meshes/l_cuneiform_3.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_l_tarsometatarsal_3' center='0.0924 0.033 0.0189' name='l_tarsometatarsal_3'>
+                        <HAnimSegment DEF='hanim_l_metatarsal_3' name='l_metatarsal_3'>
+                          <Inline DEF='l_metatarsal_3' url='"assets/loa5/meshes/l_metatarsal_3.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_l_metatarsophalangeal_3' center='0.1045 0.0111 0.0631' name='l_metatarsophalangeal_3'>
+                          <HAnimSegment DEF='hanim_l_tarsal_proximal_phalanx_3' name='l_tarsal_proximal_phalanx_3'>
+                            <Inline DEF='l_tarsal_proximal_phalanx_3' url='"assets/loa5/meshes/l_tarsal_proximal_phalanx_3.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_l_tarsal_proximal_interphalangeal_3' center='0.1094 0.0057 0.0825' name='l_tarsal_proximal_interphalangeal_3'>
+                            <HAnimSegment DEF='hanim_l_tarsal_middle_phalanx_3' name='l_tarsal_middle_phalanx_3'>
+                              <Inline DEF='l_tarsal_middle_phalanx_3' url='"assets/loa5/meshes/l_tarsal_middle_phalanx_3.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_l_tarsal_distal_interphalangeal_3' center='0.1109 0.0049 0.0921' name='l_tarsal_distal_interphalangeal_3'>
+                              <HAnimSegment DEF='hanim_l_tarsal_distal_phalanx_3' name='l_tarsal_distal_phalanx_3'>
+                                <Inline DEF='l_tarsal_distal_phalanx_3' url='"assets/loa5/meshes/l_tarsal_distal_phalanx_3.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                  <HAnimJoint DEF='hanim_l_calcaneocuboid' center='0.0751 0.0338 -0.0873' name='l_calcaneocuboid'>
+                    <HAnimSegment DEF='hanim_l_calcaneus' name='l_calcaneus'>
+                      <Inline DEF='l_calcaneus' url='"assets/loa5/meshes/l_calcaneus.x3d"'/>
+                    </HAnimSegment>
+                    <HAnimJoint DEF='hanim_l_transversetarsal' center='0.0862 0.042 -0.0367' name='l_transversetarsal'>
+                      <HAnimSegment DEF='hanim_l_cuboid' name='l_cuboid'>
+                        <Inline DEF='l_cuboid' url='"assets/loa5/meshes/l_cuboid.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_l_tarsometatarsal_4' center='0.1029 0.029 0.0063' name='l_tarsometatarsal_4'>
+                        <HAnimSegment DEF='hanim_l_metatarsal_4' name='l_metatarsal_4'>
+                          <Inline DEF='l_metatarsal_4' url='"assets/loa5/meshes/l_metatarsal_4.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_l_metatarsophalangeal_4' center='0.1161 0.0116 0.0465' name='l_metatarsophalangeal_4'>
+                          <HAnimSegment DEF='hanim_l_tarsal_proximal_phalanx_4' name='l_tarsal_proximal_phalanx_4'>
+                            <Inline DEF='l_tarsal_proximal_phalanx_4' url='"assets/loa5/meshes/l_tarsal_proximal_phalanx_4.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_l_tarsal_proximal_interphalangeal_4' center='0.1203 0.0082 0.0633' name='l_tarsal_proximal_interphalangeal_4'>
+                            <HAnimSegment DEF='hanim_l_tarsal_middle_phalanx_4' name='l_tarsal_middle_phalanx_4'>
+                              <Inline DEF='l_tarsal_middle_phalanx_4' url='"assets/loa5/meshes/l_tarsal_middle_phalanx_4.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_l_tarsal_distal_interphalangeal_4' center='0.1211 0.0073 0.0711' name='l_tarsal_distal_interphalangeal_4'>
+                              <HAnimSegment DEF='hanim_l_tarsal_distal_phalanx_4' name='l_tarsal_distal_phalanx_4'>
+                                <Inline DEF='l_tarsal_distal_phalanx_4' url='"assets/loa5/meshes/l_tarsal_distal_phalanx_4.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                      <HAnimJoint DEF='hanim_l_tarsometatarsal_5' center='0.1137 0.0255 -0.0106' name='l_tarsometatarsal_5'>
+                        <HAnimSegment DEF='hanim_l_metatarsal_5' name='l_metatarsal_5'>
+                          <Inline DEF='l_metatarsal_5' url='"assets/loa5/meshes/l_metatarsal_5.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_l_metatarsophalangeal_5' center='0.126 0.0138 0.034' name='l_metatarsophalangeal_5'>
+                          <HAnimSegment DEF='hanim_l_tarsal_proximal_phalanx_5' name='l_tarsal_proximal_phalanx_5'>
+                            <Inline DEF='l_tarsal_proximal_phalanx_5' url='"assets/loa5/meshes/l_tarsal_proximal_phalanx_5.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_l_tarsal_proximal_interphalangeal_5' center='0.1314 0.0099 0.0505' name='l_tarsal_proximal_interphalangeal_5'>
+                            <HAnimSegment DEF='hanim_l_tarsal_middle_phalanx_5' name='l_tarsal_middle_phalanx_5'>
+                              <Inline DEF='l_tarsal_middle_phalanx_5' url='"assets/loa5/meshes/l_tarsal_middle_phalanx_5.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_l_tarsal_distal_interphalangeal_5' center='0.1273 0.0086 0.1019' name='l_tarsal_distal_interphalangeal_5'>
+                              <HAnimSegment DEF='hanim_l_tarsal_distal_phalanx_5' name='l_tarsal_distal_phalanx_5'>
+                                <!-- l_tarsal_distal_phalanx_5.x3d file is missing but geometry appears to be included in l_tarsal_middle_phalanx_5.x3d and so it needs to be split out -->
+                                <!-- <Inline DEF='l_tarsal_distal_phalanx_5' url='"assets/loa5/meshes/l_tarsal_distal_phalanx_5.x3d"'/> -->
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                </HAnimJoint>
+              </HAnimJoint>
+            </HAnimJoint>
+            <HAnimJoint DEF='hanim_r_hip' center='-0.0695 0.9238 -0.0254' name='r_hip'>
+              <HAnimSegment DEF='hanim_r_thigh' name='r_thigh'>
+                <!-- r_thigh includes r_femur -->
+                <!-- Duplicative geometry: <Inline DEF='r_thigh_Inline' url='"assets/loa5/meshes/r_thigh.x3d"'/> -->
+                <Transform DEF='YellowBoxAtJointCenter_r_thigh' translation='-0.0695 0.9238 -0.0254'>
+                  <Shape USE='BoxShape'/>
+                </Transform>
+              </HAnimSegment>
+              <HAnimSegment DEF='hanim_r_femur' name='r_femur'>
+                <!-- r_femur offset to match joint socket: -->
+                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                <!-- bone r_femur.x3d + translation -0.0955 +0.6988 -0.0384 -->
+                <!-- bone r_femur.x3d adjusted axes +0.0260 +0.2250 +0.0130 -->
+                <!-- bone r_femur.x3d =joint center -0.0695 +0.9238 -0.0254 -->
+                <Inline DEF='r_femur' url='"assets/loa5/meshes/r_femur.x3d"'/>
+              </HAnimSegment>
+              <HAnimJoint DEF='hanim_r_knee' center='-0.0858 0.4633 -0.0342' name='r_knee'>
+                <HAnimSegment DEF='hanim_r_calf' name='r_calf'>
+                  <!-- calf includes patella, tibia and fibula in loa5 -->
+                  <!-- Duplicative geometry: <Inline DEF='r_calf_Inline' url='"assets/loa5/meshes/r_calf.x3d"'/> -->
+                  <Transform DEF='YellowBoxAtJointCenter_r_knee' translation='-0.0858 0.4633 -0.0342'>
+                    <Shape USE='BoxShape'/>
+                  </Transform>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_r_patella' name='r_patella'>
+                  <Inline DEF='r_patella' url='"assets/loa5/meshes/r_patella.x3d"'/>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_r_tibia' name='r_tibia'>
+                  <!-- r_tibia.x3d is knee bone used to adjust and match joint socket: -->
+                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                  <!-- bone r_tibia.x3d + translation -0.0858 +0.2663 -0.0542 -->
+                  <!-- bone r_tibia.x3d adjusted axes +0.0000 +0.1970 +0.0200 -->
+                  <!-- bone r_tibia.x3d =joint center -0.0858 +0.4633 -0.0342 -->
+                  <Inline DEF='r_tibia' url='"assets/loa5/meshes/r_tibia.x3d"'/>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_r_fibula' name='r_fibula'>
+                  <Inline DEF='r_fibula' url='"assets/loa5/meshes/r_fibula.x3d"'/>
+                </HAnimSegment>
+                <HAnimJoint DEF='hanim_r_talocrural' center='-0.0741 0.0829 -0.0641' name='r_talocrural'>
+                  <!-- Duplicative geometry: <Inline DEF='r_foot_Inline' url='"assets/loa5/meshes/r_foot.x3d"'/> -->
+                  <HAnimSegment DEF='hanim_r_talus' name='r_talus'>
+                    <!-- ankle -->
+                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                    <!-- bone r_talus.x3d + translation -0.0741 +0.0629 -0.0641 -->
+                    <!-- bone r_talus.x3d adjusted axes +0.0000 +0.0200 +0.0000 -->
+                    <!-- bone r_talus.x3d =joint center -0.0741 +0.0829 -0.0641 -->
+                    <Inline DEF='r_talus' url='"assets/loa5/meshes/r_talus.x3d"'/>
+                    <Transform DEF='YellowBoxAtJointCenter_r_talocrural' scale='0.8 0.8 0.8' translation='-0.0741 0.0829 -0.0641'>
+                      <Shape USE='BoxShape'/>
+                    </Transform>
+                  </HAnimSegment>
+                  <HAnimJoint DEF='hanim_r_talocalcaneonavicular' center='-0.0606 0.0515 -0.0348' name='r_talocalcaneonavicular'>
+                    <HAnimSegment DEF='hanim_r_navicular' name='r_navicular'>
+                      <Inline DEF='r_navicular' url='"assets/loa5/meshes/r_navicular.x3d"'/>
+                    </HAnimSegment>
+                    <HAnimJoint DEF='hanim_r_cuneonavicular_1' center='-0.0673 0.0499 -0.0161' name='r_cuneonavicular_1'>
+                      <HAnimSegment DEF='hanim_r_cuneiform_1' name='r_cuneiform_1'>
+                        <Inline DEF='r_cuneiform_1' url='"assets/loa5/meshes/r_cuneiform_1.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_r_tarsometatarsal_1' center='-0.0622 0.0268 0.0273' name='r_tarsometatarsal_1'>
+                        <HAnimSegment DEF='hanim_r_metatarsal_1' name='r_metatarsal_1'>
+                          <Inline DEF='r_metatarsal_1' url='"assets/loa5/meshes/r_metatarsal_1.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_r_metatarsophalangeal_1' center='-0.0662 0.0109 0.0729' name='r_metatarsophalangeal_1'>
+                          <HAnimSegment DEF='hanim_r_tarsal_proximal_phalanx_1' name='r_tarsal_proximal_phalanx_1'>
+                            <Inline DEF='r_tarsal_proximal_phalanx_1' url='"assets/loa5/meshes/r_tarsal_proximal_phalanx_1.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_r_tarsal_interphalangeal_1' center='-0.0683 0.0052 0.0961' name='r_tarsal_interphalangeal_1'>
+                            <HAnimSegment DEF='hanim_r_tarsal_distal_phalanx_1' name='r_tarsal_distal_phalanx_1'>
+                              <Inline DEF='r_tarsal_distal_phalanx_1' url='"assets/loa5/meshes/r_tarsal_distal_phalanx_1.x3d"'/>
+                            </HAnimSegment>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                    <HAnimJoint DEF='hanim_r_cuneonavicular_2' center='-0.0837 0.0478 -0.0212' name='r_cuneonavicular_2'>
+                      <HAnimSegment DEF='hanim_r_cuneiform_2' name='r_cuneiform_2'>
+                        <Inline DEF='r_cuneiform_2' url='"assets/loa5/meshes/r_cuneiform_2.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_r_tarsometatarsal_2' center='-0.0775 0.0345 0.0239' name='r_tarsometatarsal_2'>
+                        <HAnimSegment DEF='hanim_r_metatarsal_2' name='r_metatarsal_2'>
+                          <Inline DEF='r_metatarsal_2' url='"assets/loa5/meshes/r_metatarsal_2.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_r_metatarsophalangeal_2' center='-0.089 0.0164 0.0573' name='r_metatarsophalangeal_2'>
+                          <HAnimSegment DEF='hanim_r_tarsal_proximal_phalanx_2' name='r_tarsal_proximal_phalanx_2'>
+                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                            <!-- bone r_tarsal_proximal_phalanx_2.x3d + translation -0.0890 +0.0114 +0.0703 -->
+                            <!-- bone r_tarsal_proximal_phalanx_2.x3d adjusted axes +0.0000 +0.0050 -0.0130 -->
+                            <!-- bone r_tarsal_proximal_phalanx_2.x3d =joint center -0.0890 +0.0164 +0.0573 -->
+                            <Inline DEF='r_tarsal_proximal_phalanx_2' url='"assets/loa5/meshes/r_tarsal_proximal_phalanx_2.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_r_tarsal_proximal_interphalangeal_2' center='-0.0945 0.0056 0.0925' name='r_tarsal_proximal_interphalangeal_2'>
+                            <HAnimSegment DEF='hanim_r_tarsal_middle_phalanx_2' name='r_tarsal_middle_phalanx_2'>
+                              <Inline DEF='r_tarsal_middle_phalanx_2' url='"assets/loa5/meshes/r_tarsal_middle_phalanx_2.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_r_tarsal_distal_interphalangeal_2' center='-0.0969 0.0037 0.1046' name='r_tarsal_distal_interphalangeal_2'>
+                              <HAnimSegment DEF='hanim_r_tarsal_distal_phalanx_2' name='r_tarsal_distal_phalanx_2'>
+                                <Inline DEF='r_tarsal_distal_phalanx_2' url='"assets/loa5/meshes/r_tarsal_distal_phalanx_2.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                    <HAnimJoint DEF='hanim_r_cuneonavicular_3' center='-0.0558 0.0427 -0.0109' name='r_cuneonavicular_3'>
+                      <HAnimSegment DEF='hanim_r_cuneiform_3' name='r_cuneiform_3'>
+                        <Inline DEF='r_cuneiform_3' url='"assets/loa5/meshes/r_cuneiform_3.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_r_tarsometatarsal_3' center='-0.0924 0.033 0.0189' name='r_tarsometatarsal_3'>
+                        <HAnimSegment DEF='hanim_r_metatarsal_3' name='r_metatarsal_3'>
+                          <Inline DEF='r_metatarsal_3' url='"assets/loa5/meshes/r_metatarsal_3.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_r_metatarsophalangeal_3' center='-0.1045 0.0111 0.0631' name='r_metatarsophalangeal_3'>
+                          <HAnimSegment DEF='hanim_r_tarsal_proximal_phalanx_3' name='r_tarsal_proximal_phalanx_3'>
+                            <Inline DEF='r_tarsal_proximal_phalanx_3' url='"assets/loa5/meshes/r_tarsal_proximal_phalanx_3.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_r_tarsal_proximal_interphalangeal_3' center='-0.1094 0.0057 0.0825' name='r_tarsal_proximal_interphalangeal_3'>
+                            <HAnimSegment DEF='hanim_r_tarsal_middle_phalanx_3' name='r_tarsal_middle_phalanx_3'>
+                              <Inline DEF='r_tarsal_middle_phalanx_3' url='"assets/loa5/meshes/r_tarsal_middle_phalanx_3.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_r_tarsal_distal_interphalangeal_3' center='-0.1109 0.0049 0.0921' name='r_tarsal_distal_interphalangeal_3'>
+                              <HAnimSegment DEF='hanim_r_tarsal_distal_phalanx_3' name='r_tarsal_distal_phalanx_3'>
+                                <Inline DEF='r_tarsal_distal_phalanx_3' url='"assets/loa5/meshes/r_tarsal_distal_phalanx_3.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                  <HAnimJoint DEF='hanim_r_calcaneocuboid' center='-0.0751 0.0338 -0.0873' name='r_calcaneocuboid'>
+                    <HAnimSegment DEF='hanim_r_calcaneus' name='r_calcaneus'>
+                      <Inline DEF='r_calcaneus' url='"assets/loa5/meshes/r_calcaneus.x3d"'/>
+                    </HAnimSegment>
+                    <HAnimJoint DEF='hanim_r_transversetarsal' center='-0.0862 0.042 -0.0367' name='r_transversetarsal'>
+                      <HAnimSegment DEF='hanim_r_cuboid' name='r_cuboid'>
+                        <Inline DEF='r_cuboid' url='"assets/loa5/meshes/r_cuboid.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_r_tarsometatarsal_4' center='-0.1029 0.029 0.0063' name='r_tarsometatarsal_4'>
+                        <HAnimSegment DEF='hanim_r_metatarsal_4' name='r_metatarsal_4'>
+                          <Inline DEF='r_metatarsal_4' url='"assets/loa5/meshes/r_metatarsal_4.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_r_metatarsophalangeal_4' center='-0.1161 0.0116 0.0465' name='r_metatarsophalangeal_4'>
+                          <HAnimSegment DEF='hanim_r_tarsal_proximal_phalanx_4' name='r_tarsal_proximal_phalanx_4'>
+                            <Inline DEF='r_tarsal_proximal_phalanx_4' url='"assets/loa5/meshes/r_tarsal_proximal_phalanx_4.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_r_tarsal_proximal_interphalangeal_4' center='-0.1203 0.0082 0.0633' name='r_tarsal_proximal_interphalangeal_4'>
+                            <HAnimSegment DEF='hanim_r_tarsal_middle_phalanx_4' name='r_tarsal_middle_phalanx_4'>
+                              <Inline DEF='r_tarsal_middle_phalanx_4' url='"assets/loa5/meshes/r_tarsal_middle_phalanx_4.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_r_tarsal_distal_interphalangeal_4' center='-0.1211 0.0073 0.0711' name='r_tarsal_distal_interphalangeal_4'>
+                              <HAnimSegment DEF='hanim_r_tarsal_distal_phalanx_4' name='r_tarsal_distal_phalanx_4'>
+                                <Inline DEF='r_tarsal_distal_phalanx_4' url='"assets/loa5/meshes/r_tarsal_distal_phalanx_4.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                      <HAnimJoint DEF='hanim_r_tarsometatarsal_5' center='-0.1137 0.0255 -0.0106' name='r_tarsometatarsal_5'>
+                        <HAnimSegment DEF='hanim_r_metatarsal_5' name='r_metatarsal_5'>
+                          <Inline DEF='r_metatarsal_5' url='"assets/loa5/meshes/r_metatarsal_5.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_r_metatarsophalangeal_5' center='-0.126 0.0138 0.034' name='r_metatarsophalangeal_5'>
+                          <HAnimSegment DEF='hanim_r_tarsal_proximal_phalanx_5' name='r_tarsal_proximal_phalanx_5'>
+                            <Inline DEF='r_tarsal_proximal_phalanx_5' url='"assets/loa5/meshes/r_tarsal_proximal_phalanx_5.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_r_tarsal_proximal_interphalangeal_5' center='-0.1311 0.0101 0.048' name='r_tarsal_proximal_interphalangeal_5'>
+                            <HAnimSegment DEF='hanim_r_tarsal_middle_phalanx_5' name='r_tarsal_middle_phalanx_5'>
+                              <Inline DEF='r_tarsal_middle_phalanx_5' url='"assets/loa5/meshes/r_tarsal_middle_phalanx_5.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_r_tarsal_distal_interphalangeal_5' center='-0.1319 0.0087 0.0543' name='r_tarsal_distal_interphalangeal_5'>
+                              <HAnimSegment DEF='hanim_r_tarsal_distal_phalanx_5' name='r_tarsal_distal_phalanx_5'>
+                                <Inline DEF='r_tarsal_distal_phalanx_5' url='"assets/loa5/meshes/r_tarsal_distal_phalanx_5.x3d"'/>
+                              </HAnimSegment>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                </HAnimJoint>
+              </HAnimJoint>
+            </HAnimJoint>
+          </HAnimJoint>
+          <HAnimJoint DEF='hanim_vl5' center='0 1.0244 -0.0375' name='vl5'>
+            <HAnimSegment DEF='hanim_l5' name='l5'>
+              <!-- l5 offset to match joint socket: -->
+              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+              <!-- bone l5.x3d + translation +0.0000 +1.0444 -0.0525 -->
+              <!-- bone l5.x3d adjusted axes +0.0000 -0.0200 +0.0150 -->
+              <!-- bone l5.x3d =joint center +0.0000 +1.0244 -0.0375 -->
+              <Inline DEF='l5' url='"assets/loa5/meshes/l5.x3d"'/>
+              <Transform DEF='RedBoxAtJointCenter_l5' translation='0 1.0244 -0.0375'>
+                <Shape DEF='RedBoxShape'>
+                  <Appearance>
+                    <Material diffuseColor='0.9 0.4 0.4' transparency='0.5'/>
+                  </Appearance>
+                  <Box size='0.035 0.035 0.035'/>
+                </Shape>
+              </Transform>
+            </HAnimSegment>
+            <HAnimSegment DEF='hanim_l5disc' name='l5disc'>
+              <Inline DEF='l5disc' url='"assets/loa5/meshes/l5disc.x3d"'/>
+            </HAnimSegment>
+            <HAnimJoint DEF='hanim_vl4' center='0 1.0589 -0.0249' name='vl4'>
+              <HAnimSegment DEF='hanim_l4' name='l4'>
+                <!-- l4 offset to match joint socket: -->
+                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                <!-- bone l4.x3d + translation +0.0000 +1.0759 -0.0499 -->
+                <!-- bone l4.x3d adjusted axes +0.0000 -0.0170 +0.0250 -->
+                <!-- bone l4.x3d =joint center +0.0000 +1.0589 -0.0249 -->
+                <Inline DEF='l4' url='"assets/loa5/meshes/l4.x3d"'/>
+              </HAnimSegment>
+              <HAnimSegment DEF='hanim_l4disc' name='l4disc'>
+                <Inline DEF='l4disc' url='"assets/loa5/meshes/l4disc.x3d"'/>
+              </HAnimSegment>
+              <HAnimJoint DEF='hanim_vl3' center='0 1.0991 -0.0279' name='vl3'>
+                <HAnimSegment DEF='hanim_l3' name='l3'>
+                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                  <!-- bone l3.x3d + translation +0.0000 +1.1091 -0.0529 -->
+                  <!-- bone l3.x3d adjusted axes +0.0000 -0.0100 +0.0250 -->
+                  <!-- bone l3.x3d =joint center +0.0000 +1.0991 -0.0279 -->
+                  <Inline DEF='l3' url='"assets/loa5/meshes/l3.x3d"'/>
+                </HAnimSegment>
+                <HAnimSegment DEF='hanim_l3disc' name='l3disc'>
+                  <Inline DEF='l3disc' url='"assets/loa5/meshes/l3disc.x3d"'/>
+                </HAnimSegment>
+                <HAnimJoint DEF='hanim_vl2' center='0 1.1367 -0.0314' name='vl2'>
+                  <HAnimSegment DEF='hanim_l2' name='l2'>
+                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                    <!-- bone l2.x3d + translation +0.0000 +1.1447 -0.0564 -->
+                    <!-- bone l2.x3d adjusted axes +0.0000 -0.0080 +0.0250 -->
+                    <!-- bone l2.x3d =joint center +0.0000 +1.1367 -0.0314 -->
+                    <Inline DEF='l2' url='"assets/loa5/meshes/l2.x3d"'/>
+                  </HAnimSegment>
+                  <HAnimSegment DEF='hanim_l2disc' name='l2disc'>
+                    <Inline DEF='l2disc' url='"assets/loa5/meshes/l2disc.x3d"'/>
+                  </HAnimSegment>
+                  <HAnimJoint DEF='hanim_vl1' center='0 1.174 -0.038' name='vl1'>
+                    <HAnimSegment DEF='hanim_l1' name='l1'>
+                      <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                      <!-- bone l1.x3d + translation +0.0000 +1.1820 -0.0630 -->
+                      <!-- bone l1.x3d adjusted axes +0.0000 -0.0080 +0.0250 -->
+                      <!-- bone l1.x3d =joint center +0.0000 +1.1740 -0.0380 -->
+                      <Inline DEF='l1' url='"assets/loa5/meshes/l1.x3d"'/>
+                    </HAnimSegment>
+                    <HAnimSegment DEF='hanim_l1disc' name='l1disc'>
+                      <Inline DEF='l1disc' url='"assets/loa5/meshes/l1disc.x3d"'/>
+                    </HAnimSegment>
+                    <HAnimJoint DEF='hanim_vt12' center='0 1.2051 -0.0545' name='vt12'>
+                      <HAnimSegment DEF='hanim_t12' name='t12'>
+                        <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                        <!-- bone t12.x3d + translation +0.0000 +1.2201 -0.0725 -->
+                        <!-- bone t12.x3d adjusted axes +0.0000 -0.0150 +0.0180 -->
+                        <!-- bone t12.x3d =joint center +0.0000 +1.2051 -0.0545 -->
+                        <Inline DEF='t12' url='"assets/loa5/meshes/t12.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimSegment DEF='hanim_t12disc' name='t12disc'>
+                        <Inline DEF='t12disc' url='"assets/loa5/meshes/t12disc.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimSegment DEF='hanim_l_rib12' name='l_rib12'>
+                        <Inline DEF='l_rib12' url='"assets/loa5/meshes/l_rib12.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimSegment DEF='hanim_r_rib12' name='r_rib12'>
+                        <Inline DEF='r_rib12' url='"assets/loa5/meshes/r_rib12.x3d"'/>
+                      </HAnimSegment>
+                      <HAnimJoint DEF='hanim_vt11' center='0 1.2429 -0.0615' name='vt11'>
+                        <HAnimSegment DEF='hanim_t11' name='t11'>
+                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                          <!-- bone t11.x3d + translation +0.0000 +1.2559 -0.0785 -->
+                          <!-- bone t11.x3d adjusted axes +0.0000 -0.0130 +0.0170 -->
+                          <!-- bone t11.x3d =joint center +0.0000 +1.2429 -0.0615 -->
+                          <Inline DEF='t11' url='"assets/loa5/meshes/t11.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimSegment DEF='hanim_t11disc' name='t11disc'>
+                          <Inline DEF='t11disc' url='"assets/loa5/meshes/t11disc.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimSegment DEF='hanim_l_rib11' name='l_rib11'>
+                          <Inline DEF='l_rib11' url='"assets/loa5/meshes/l_rib11.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimSegment DEF='hanim_r_rib11' name='r_rib11'>
+                          <Inline DEF='r_rib11' url='"assets/loa5/meshes/r_rib11.x3d"'/>
+                        </HAnimSegment>
+                        <HAnimJoint DEF='hanim_vt10' center='0 1.2733 -0.0679' name='vt10'>
+                          <HAnimSegment DEF='hanim_t10' name='t10'>
+                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                            <!-- bone t10.x3d + translation +0.0000 +1.2813 -0.0859 -->
+                            <!-- bone t10.x3d adjusted axes +0.0000 -0.0080 +0.0180 -->
+                            <!-- bone t10.x3d =joint center +0.0000 +1.2733 -0.0679 -->
+                            <Inline DEF='t10' url='"assets/loa5/meshes/t10.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimSegment DEF='hanim_t10disc' name='t10disc'>
+                            <Inline DEF='t10disc' url='"assets/loa5/meshes/t10disc.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimSegment DEF='hanim_l_rib10' name='l_rib10'>
+                            <Inline DEF='l_rib10' url='"assets/loa5/meshes/l_rib10.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimSegment DEF='hanim_r_rib10' name='r_rib10'>
+                            <Inline DEF='r_rib10' url='"assets/loa5/meshes/r_rib10.x3d"'/>
+                          </HAnimSegment>
+                          <HAnimJoint DEF='hanim_vt9' center='0 1.3029 -0.076' name='vt9'>
+                            <HAnimSegment DEF='hanim_t9' name='t9'>
+                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                              <!-- bone t9.x3d + translation +0.0000 +1.3119 -0.0940 -->
+                              <!-- bone t9.x3d adjusted axes +0.0000 -0.0090 +0.0180 -->
+                              <!-- bone t9.x3d =joint center +0.0000 +1.3029 -0.0760 -->
+                              <Inline DEF='t9' url='"assets/loa5/meshes/t9.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimSegment DEF='hanim_t9disc' name='t9disc'>
+                              <Inline DEF='t9disc' url='"assets/loa5/meshes/t9disc.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimSegment DEF='hanim_l_rib9' name='l_rib9'>
+                              <Inline DEF='l_rib9' url='"assets/loa5/meshes/l_rib9.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimSegment DEF='hanim_r_rib9' name='r_rib9'>
+                              <Inline DEF='r_rib9' url='"assets/loa5/meshes/r_rib9.x3d"'/>
+                            </HAnimSegment>
+                            <HAnimJoint DEF='hanim_vt8' center='0 1.3299 -0.0781' name='vt8'>
+                              <HAnimSegment DEF='hanim_t8' name='t8'>
+                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                <!-- bone t8.x3d + translation +0.0000 +1.3399 -0.0961 -->
+                                <!-- bone t8.x3d adjusted axes +0.0000 -0.0100 +0.0180 -->
+                                <!-- bone t8.x3d =joint center +0.0000 +1.3299 -0.0781 -->
+                                <Inline DEF='t8' url='"assets/loa5/meshes/t8.x3d"'/>
+                              </HAnimSegment>
+                              <HAnimSegment DEF='hanim_t8disc' name='t8disc'>
+                                <Inline DEF='t8disc' url='"assets/loa5/meshes/t8disc.x3d"'/>
+                              </HAnimSegment>
+                              <HAnimSegment DEF='hanim_l_rib8' name='l_rib8'>
+                                <Inline DEF='l_rib8' url='"assets/loa5/meshes/l_rib8.x3d"'/>
+                              </HAnimSegment>
+                              <HAnimSegment DEF='hanim_r_rib8' name='r_rib8'>
+                                <Inline DEF='r_rib8' url='"assets/loa5/meshes/r_rib8.x3d"'/>
+                              </HAnimSegment>
+                              <HAnimJoint DEF='hanim_vt7' center='0 1.3574 -0.0788' name='vt7'>
+                                <HAnimSegment DEF='hanim_t7' name='t7'>
+                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                  <!-- bone t7.x3d + translation +0.0000 +1.3654 -0.0968 -->
+                                  <!-- bone t7.x3d adjusted axes +0.0000 -0.0080 +0.0180 -->
+                                  <!-- bone t7.x3d =joint center +0.0000 +1.3574 -0.0788 -->
+                                  <Inline DEF='t7' url='"assets/loa5/meshes/t7.x3d"'/>
+                                </HAnimSegment>
+                                <HAnimSegment DEF='hanim_t7disc' name='t7disc'>
+                                  <Inline DEF='t7disc' url='"assets/loa5/meshes/t7disc.x3d"'/>
+                                </HAnimSegment>
+                                <HAnimSegment DEF='hanim_l_rib7' name='l_rib7'>
+                                  <Inline DEF='l_rib7' url='"assets/loa5/meshes/l_rib7.x3d"'/>
+                                </HAnimSegment>
+                                <HAnimSegment DEF='hanim_r_rib7' name='r_rib7'>
+                                  <Inline DEF='r_rib7' url='"assets/loa5/meshes/r_rib7.x3d"'/>
+                                </HAnimSegment>
+                                <HAnimJoint DEF='hanim_vt6' center='0 1.3803 -0.0785' name='vt6'>
+                                  <HAnimSegment DEF='hanim_t6' name='t6'>
+                                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                    <!-- bone t6.x3d + translation +0.0000 +1.3933 -0.0955 -->
+                                    <!-- bone t6.x3d adjusted axes +0.0000 -0.0130 +0.0170 -->
+                                    <!-- bone t6.x3d =joint center +0.0000 +1.3803 -0.0785 -->
+                                    <Inline DEF='t6' url='"assets/loa5/meshes/t6.x3d"'/>
+                                  </HAnimSegment>
+                                  <HAnimSegment DEF='hanim_t6disc' name='t6disc'>
+                                    <Inline DEF='t6disc' url='"assets/loa5/meshes/t6disc.x3d"'/>
+                                  </HAnimSegment>
+                                  <HAnimSegment DEF='hanim_l_rib6' name='l_rib6'>
+                                    <Inline DEF='l_rib6' url='"assets/loa5/meshes/l_rib6.x3d"'/>
+                                  </HAnimSegment>
+                                  <HAnimSegment DEF='hanim_r_rib6' name='r_rib6'>
+                                    <Inline DEF='r_rib6' url='"assets/loa5/meshes/r_rib6.x3d"'/>
+                                  </HAnimSegment>
+                                  <HAnimJoint DEF='hanim_vt5' center='0 1.4076 -0.0755' name='vt5'>
+                                    <HAnimSegment DEF='hanim_t5' name='t5'>
+                                      <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                      <!-- bone t5.x3d + translation -0.0001 +1.4196 -0.0925 -->
+                                      <!-- bone t5.x3d adjusted axes +0.0000 -0.0120 +0.0170 -->
+                                      <!-- bone t5.x3d =joint center -0.0001 +1.4076 -0.0755 -->
+                                      <Inline DEF='t5' url='"assets/loa5/meshes/t5.x3d"'/>
+                                    </HAnimSegment>
+                                    <HAnimSegment DEF='hanim_t5disc' name='t5disc'>
+                                      <Inline DEF='t5disc' url='"assets/loa5/meshes/t5disc.x3d"'/>
+                                    </HAnimSegment>
+                                    <HAnimSegment DEF='hanim_l_rib5' name='l_rib5'>
+                                      <Inline DEF='l_rib5' url='"assets/loa5/meshes/l_rib5.x3d"'/>
+                                    </HAnimSegment>
+                                    <HAnimSegment DEF='hanim_r_rib5' name='r_rib5'>
+                                      <Inline DEF='r_rib5' url='"assets/loa5/meshes/r_rib5.x3d"'/>
+                                    </HAnimSegment>
+                                    <HAnimJoint DEF='hanim_vt4' center='0 1.4341 -0.0717' name='vt4'>
+                                      <HAnimSegment DEF='hanim_t4' name='t4'>
+                                        <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                        <!-- bone t4.x3d + translation +0.0000 +1.4451 -0.0847 -->
+                                        <!-- bone t4.x3d adjusted axes +0.0000 -0.0110 +0.0130 -->
+                                        <!-- bone t4.x3d =joint center +0.0000 +1.4341 -0.0717 -->
+                                        <Inline DEF='t4' url='"assets/loa5/meshes/t4.x3d"'/>
+                                      </HAnimSegment>
+                                      <HAnimSegment DEF='hanim_t4disc' name='t4disc'>
+                                        <Inline DEF='t4disc' url='"assets/loa5/meshes/t4disc.x3d"'/>
+                                      </HAnimSegment>
+                                      <HAnimSegment DEF='hanim_l_rib4' name='l_rib4'>
+                                        <Inline DEF='l_rib4' url='"assets/loa5/meshes/l_rib4.x3d"'/>
+                                      </HAnimSegment>
+                                      <HAnimSegment DEF='hanim_r_rib4' name='r_rib4'>
+                                        <Inline DEF='r_rib4' url='"assets/loa5/meshes/r_rib4.x3d"'/>
+                                      </HAnimSegment>
+                                      <HAnimJoint DEF='hanim_vt3' center='0 1.4529 -0.0631' name='vt3'>
+                                        <HAnimSegment DEF='hanim_t3' name='t3'>
+                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                          <!-- bone t3.x3d + translation +0.0000 +1.4679 -0.0791 -->
+                                          <!-- bone t3.x3d adjusted axes +0.0000 -0.0150 +0.0160 -->
+                                          <!-- bone t3.x3d =joint center +0.0000 +1.4529 -0.0631 -->
+                                          <Inline DEF='t3' url='"assets/loa5/meshes/t3.x3d"'/>
+                                        </HAnimSegment>
+                                        <HAnimSegment DEF='hanim_t3disc' name='t3disc'>
+                                          <Inline DEF='t3disc' url='"assets/loa5/meshes/t3disc.x3d"'/>
+                                        </HAnimSegment>
+                                        <HAnimSegment DEF='hanim_l_rib3' name='l_rib3'>
+                                          <Inline DEF='l_rib3' url='"assets/loa5/meshes/l_rib3.x3d"'/>
+                                        </HAnimSegment>
+                                        <HAnimSegment DEF='hanim_r_rib3' name='r_rib3'>
+                                          <Inline DEF='r_rib3' url='"assets/loa5/meshes/r_rib3.x3d"'/>
+                                        </HAnimSegment>
+                                        <HAnimJoint DEF='hanim_vt2' center='0 1.4738 -0.0548' name='vt2'>
+                                          <HAnimSegment DEF='hanim_t2' name='t2'>
+                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                            <!-- bone t2.x3d + translation +0.0000 +1.4878 -0.0718 -->
+                                            <!-- bone t2.x3d adjusted axes +0.0000 -0.0140 +0.0170 -->
+                                            <!-- bone t2.x3d =joint center +0.0000 +1.4738 -0.0548 -->
+                                            <Inline DEF='t2' url='"assets/loa5/meshes/t2.x3d"'/>
+                                          </HAnimSegment>
+                                          <HAnimSegment DEF='hanim_t2disc' name='t2disc'>
+                                            <Inline DEF='t2disc' url='"assets/loa5/meshes/t2disc.x3d"'/>
+                                          </HAnimSegment>
+                                          <HAnimSegment DEF='hanim_l_rib2' name='l_rib2'>
+                                            <Inline DEF='l_rib2' url='"assets/loa5/meshes/l_rib2.x3d"'/>
+                                          </HAnimSegment>
+                                          <HAnimSegment DEF='hanim_r_rib2' name='r_rib2'>
+                                            <Inline DEF='r_rib2' url='"assets/loa5/meshes/r_rib2.x3d"'/>
+                                          </HAnimSegment>
+                                          <HAnimJoint DEF='hanim_vt1' center='0 1.4942 -0.047' name='vt1'>
+                                            <HAnimSegment DEF='hanim_t1' name='t1'>
+                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                              <!-- bone t1.x3d + translation +0.0000 +1.5092 -0.0650 -->
+                                              <!-- bone t1.x3d adjusted axes +0.0000 -0.0150 +0.0180 -->
+                                              <!-- bone t1.x3d =joint center +0.0000 +1.4942 -0.0470 -->
+                                              <Inline DEF='t1' url='"assets/loa5/meshes/t1.x3d"'/>
+                                            </HAnimSegment>
+                                            <HAnimSegment DEF='hanim_t1disc' name='t1disc'>
+                                              <Inline DEF='t1disc' url='"assets/loa5/meshes/t1disc.x3d"'/>
+                                            </HAnimSegment>
+                                            <HAnimSegment DEF='hanim_l_rib1' name='l_rib1'>
+                                              <Inline DEF='l_rib1' url='"assets/loa5/meshes/l_rib1.x3d"'/>
+                                            </HAnimSegment>
+                                            <HAnimSegment DEF='hanim_r_rib1' name='r_rib1'>
+                                              <Inline DEF='r_rib1' url='"assets/loa5/meshes/r_rib1.x3d"'/>
+                                            </HAnimSegment>
+                                            <HAnimJoint DEF='hanim_vc7' center='0 1.5151 -0.0407' name='vc7'>
+                                              <HAnimSegment DEF='hanim_c7' name='c7'>
+                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                <!-- bone c7.x3d + translation +0.0000 +1.5251 -0.0547 -->
+                                                <!-- bone c7.x3d adjusted axes +0.0000 -0.0100 +0.0140 -->
+                                                <!-- bone c7.x3d =joint center +0.0000 +1.5151 -0.0407 -->
+                                                <Inline DEF='c7' url='"assets/loa5/meshes/c7.x3d"'/>
+                                              </HAnimSegment>
+                                              <HAnimSegment DEF='hanim_c7disc' name='c7disc'>
+                                                <Inline DEF='c7disc' url='"assets/loa5/meshes/c7disc.x3d"'/>
+                                              </HAnimSegment>
+                                              <HAnimSegment DEF='hanim_sternum' name='sternum'>
+                                                <Inline DEF='sternum' url='"assets/loa5/meshes/sternum.x3d"'/>
+                                              </HAnimSegment>
+                                              <!-- chest cartilage is LOA=5, kept with sternum rather than each vertebra -->
+                                              <HAnimSegment DEF='hanim_l_costal_cartilage' name='l_costal_cartilage'>
+                                                <Inline DEF='l_costal_cartilage' url='"assets/loa5/meshes/l_costal_cartilage.x3d"'/>
+                                              </HAnimSegment>
+                                              <HAnimSegment DEF='hanim_r_costal_cartilage' name='r_costal_cartilage'>
+                                                <Inline DEF='r_costal_cartilage' url='"assets/loa5/meshes/r_costal_cartilage.x3d"'/>
+                                              </HAnimSegment>
+                                              <HAnimJoint DEF='hanim_vc6' center='0 1.5308 -0.0346' name='vc6'>
+                                                <HAnimSegment DEF='hanim_c6' name='c6'>
+                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                  <!-- bone c6.x3d + translation +0.0000 +1.5408 -0.0486 -->
+                                                  <!-- bone c6.x3d adjusted axes +0.0000 -0.0100 +0.0140 -->
+                                                  <!-- bone c6.x3d =joint center +0.0000 +1.5308 -0.0346 -->
+                                                  <Inline DEF='c6' url='"assets/loa5/meshes/c6.x3d"'/>
+                                                </HAnimSegment>
+                                                <HAnimSegment DEF='hanim_c6disc' name='c6disc'>
+                                                  <Inline DEF='c6disc' url='"assets/loa5/meshes/c6disc.x3d"'/>
+                                                </HAnimSegment>
+                                                <HAnimJoint DEF='hanim_vc5' center='0 1.5429 -0.0319' name='vc5'>
+                                                  <HAnimSegment DEF='hanim_c5' name='c5'>
+                                                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                    <!-- bone c5.x3d + translation +0.0000 +1.5549 -0.0439 -->
+                                                    <!-- bone c5.x3d adjusted axes +0.0000 -0.0120 +0.0120 -->
+                                                    <!-- bone c5.x3d =joint center +0.0000 +1.5429 -0.0319 -->
+                                                    <Inline DEF='c5' url='"assets/loa5/meshes/c5.x3d"'/>
+                                                  </HAnimSegment>
+                                                  <HAnimSegment DEF='hanim_c5disc' name='c5disc'>
+                                                    <Inline DEF='c5disc' url='"assets/loa5/meshes/c5disc.x3d"'/>
+                                                  </HAnimSegment>
+                                                  <HAnimJoint DEF='hanim_vc4' center='0 1.5621 -0.029' name='vc4'>
+                                                    <HAnimSegment DEF='hanim_c4' name='c4'>
+                                                      <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                      <!-- bone c4.x3d + translation +0.0000 +1.5701 -0.0410 -->
+                                                      <!-- bone c4.x3d adjusted axes +0.0000 -0.0080 +0.0120 -->
+                                                      <!-- bone c4.x3d =joint center +0.0000 +1.5621 -0.0290 -->
+                                                      <Inline DEF='c4' url='"assets/loa5/meshes/c4.x3d"'/>
+                                                    </HAnimSegment>
+                                                    <HAnimSegment DEF='hanim_c4disc' name='c4disc'>
+                                                      <Inline DEF='c4disc' url='"assets/loa5/meshes/c4disc.x3d"'/>
+                                                    </HAnimSegment>
+                                                    <HAnimJoint DEF='hanim_vc3' center='0 1.5771 -0.0284' name='vc3'>
+                                                      <HAnimSegment DEF='hanim_c3' name='c3'>
+                                                        <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                        <!-- bone c3.x3d + translation +0.0000 +1.5851 -0.0394 -->
+                                                        <!-- bone c3.x3d adjusted axes +0.0000 -0.0080 +0.0110 -->
+                                                        <!-- bone c3.x3d =joint center +0.0000 +1.5771 -0.0284 -->
+                                                        <Inline DEF='c3' url='"assets/loa5/meshes/c3.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_c3disc' name='c3disc'>
+                                                        <Inline DEF='c3disc' url='"assets/loa5/meshes/c3disc.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimJoint DEF='hanim_vc2' center='0 1.5961 -0.0275' name='vc2'>
+                                                        <HAnimSegment DEF='hanim_c2' name='c2'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone c2.x3d + translation +0.0000 +1.6081 -0.0435 -->
+                                                          <!-- bone c2.x3d adjusted axes +0.0000 -0.0120 +0.0160 -->
+                                                          <!-- bone c2.x3d =joint center +0.0000 +1.5961 -0.0275 -->
+                                                          <Inline DEF='c2' url='"assets/loa5/meshes/c2.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimSegment DEF='hanim_c2disc' name='c2disc'>
+                                                          <Inline DEF='c2disc' url='"assets/loa5/meshes/c2disc.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_vc1' center='0 1.613 -0.0335' name='vc1'>
+                                                          <HAnimSegment DEF='hanim_c1' name='c1'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone c1.x3d + translation +0.0000 +1.6210 -0.0405 -->
+                                                            <!-- bone c1.x3d adjusted axes +0.0000 -0.0080 +0.0070 -->
+                                                            <!-- bone c1.x3d =joint center +0.0000 +1.6130 -0.0335 -->
+                                                            <Inline DEF='c1' url='"assets/loa5/meshes/c1.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimSegment DEF='hanim_c1disc' name='c1disc'>
+                                                            <!-- TODO missing <Inline DEF='c1disc' url='"assets/loa5/meshes/c1disc.x3d"'/> -->
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_skullbase' center='0 1.6111 -0.0416' name='skullbase'>
+                                                            <HAnimSegment DEF='hanim_skull' name='skull'>
+                                                              <!-- skull consists of 22 bones: eight cranial bones and fourteen facial skeleton bones -->
+                                                              <!-- skull includes upper teeth -->
+                                                              <!-- joint center of rotation computation by occipital.x3d below -->
+                                                              <!-- Duplicative geometry: <Inline DEF='skull_Inline' url='"assets/loa5/meshes/skull.x3d"'/> -->
+                                                              <Transform DEF='RedBoxAtJointCenter_skullbase' translation='0 1.6111 -0.0416'>
+                                                                <Shape USE='RedBoxShape'/>
+                                                              </Transform>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_ethmoid' name='ethmoid'>
+                                                              <!-- includes l_ethmoid and r_ethmoid -->
+                                                              <Inline DEF='ethmoid' url='"assets/loa5/meshes/ethmoid.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_frontal' name='frontal'>
+                                                              <Inline DEF='frontal' url='"assets/loa5/meshes/frontal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_inferior_nasal_conchae' name='l_inferior_nasal_conchae'>
+                                                              <Inline DEF='l_inferior_nasal_conchae' url='"assets/loa5/meshes/l_inferior_nasal_conchae.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_inferior_nasal_conchae' name='r_inferior_nasal_conchae'>
+                                                              <Inline DEF='r_inferior_nasal_conchae' url='"assets/loa5/meshes/r_inferior_nasal_conchae.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_lacrimal' name='l_lacrimal'>
+                                                              <Inline DEF='l_lacrimal' url='"assets/loa5/meshes/l_lacrimal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_lacrimal' name='r_lacrimal'>
+                                                              <Inline DEF='r_lacrimal' url='"assets/loa5/meshes/r_lacrimal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_maxilla' name='l_maxilla'>
+                                                              <Inline DEF='l_maxilla' url='"assets/loa5/meshes/l_maxilla.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_maxilla' name='r_maxilla'>
+                                                              <Inline DEF='r_maxilla' url='"assets/loa5/meshes/r_maxilla.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_nasal' name='l_nasal'>
+                                                              <Inline DEF='l_nasal' url='"assets/loa5/meshes/l_nasal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_nasal' name='r_nasal'>
+                                                              <Inline DEF='r_nasal' url='"assets/loa5/meshes/r_nasal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_occipital' name='occipital'>
+                                                              <!-- occipital.x3d is skull bone used to adjust and match joint socket for skull -->
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone occipital.x3d + translation +0.0000 +1.6580 -0.0530 -->
+                                                              <!-- bone occipital.x3d adjusted axes +0.0000 -0.0469 +0.0114 -->
+                                                              <!-- bone occipital.x3d =joint center +0.0000 +1.6111 -0.0416 -->
+                                                              <Inline DEF='occipital' url='"assets/loa5/meshes/occipital.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_parietal' name='l_parietal'>
+                                                              <Inline DEF='l_parietal' url='"assets/loa5/meshes/l_parietal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_parietal' name='r_parietal'>
+                                                              <Inline DEF='r_parietal' url='"assets/loa5/meshes/r_parietal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_palatine' name='l_palatine'>
+                                                              <Inline DEF='l_palatine' url='"assets/loa5/meshes/l_palatine.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_palatine' name='r_palatine'>
+                                                              <Inline DEF='r_palatine' url='"assets/loa5/meshes/r_palatine.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_sphenoid' name='sphenoid'>
+                                                              <Inline DEF='sphenoid' url='"assets/loa5/meshes/sphenoid.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_temporal' name='l_temporal'>
+                                                              <Inline DEF='l_temporal' url='"assets/loa5/meshes/l_temporal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_temporal' name='r_temporal'>
+                                                              <Inline DEF='r_temporal' url='"assets/loa5/meshes/r_temporal.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_vomer' name='vomer'>
+                                                              <!-- vomer.x3d is alternate for skull bone and can also be used to adjust and match joint socket -->
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone vomer.x3d + translation +0.0000 +1.6311 +0.0634 -->
+                                                              <!-- bone vomer.x3d adjusted axes +0.0000 -0.0200 -0.1050 -->
+                                                              <!-- bone vomer.x3d =joint center +0.0000 +1.6111 -0.0416 -->
+                                                              <Inline DEF='vomer' url='"assets/loa5/meshes/vomer.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_l_zygomatic' name='l_zygomatic'>
+                                                              <Inline DEF='l_zygomatic' url='"assets/loa5/meshes/l_zygomatic.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_r_zygomatic' name='r_zygomatic'>
+                                                              <Inline DEF='r_zygomatic' url='"assets/loa5/meshes/r_zygomatic.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimSegment DEF='hanim_upperTeeth' name='upperTeeth'>
+                                                              <Inline DEF='upperTeeth' url='"assets/loa5/meshes/upperTeeth.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_l_eyelid_joint' center='0.0505 1.4243 0.0329' name='l_eyelid_joint'>
+                                                              <HAnimSegment DEF='hanim_l_eyelid' name='l_eyelid'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_r_eyelid_joint' center='-0.0505 1.4243 0.0329' name='r_eyelid_joint'>
+                                                              <HAnimSegment DEF='hanim_r_eyelid' name='r_eyelid'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_l_eyeball_joint' center='0.0481 1.4049 0.083' name='l_eyeball_joint'>
+                                                              <HAnimSegment DEF='hanim_l_eyeball' name='l_eyeball'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_r_eyeball_joint' center='-0.0481 1.4049 0.083' name='r_eyeball_joint'>
+                                                              <HAnimSegment DEF='hanim_r_eyeball' name='r_eyeball'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_l_eyebrow_joint' center='0.0217 1.4139 0.1069' name='l_eyebrow_joint'>
+                                                              <HAnimSegment DEF='hanim_l_eyebrow' name='l_eyebrow'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_r_eyebrow_joint' center='-0.0217 1.4139 0.1069' name='r_eyebrow_joint'>
+                                                              <HAnimSegment DEF='hanim_r_eyebrow' name='r_eyebrow'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_l_ear_joint' center='-0.05 1.4139 0' name='l_ear_joint'>
+                                                              <HAnimSegment DEF='hanim_l_ear' name='l_ear'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_r_ear_joint' center='-0.05 1.4139 0' name='r_ear_joint'>
+                                                              <HAnimSegment DEF='hanim_r_ear' name='r_ear'/>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_tongue_base_joint' center='0 1.4139 0' name='tongue_base_joint'>
+                                                              <HAnimSegment DEF='hanim_tongue_base' name='tongue_base'/>
+                                                              <HAnimJoint DEF='hanim_tongue_middle_joint' center='0 1.4139 0.2' name='tongue_middle_joint'>
+                                                                <HAnimSegment DEF='hanim_tongue_middle' name='tongue_middle'/>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                            <HAnimJoint DEF='hanim_temporomandibular' center='0 1.6354 -0.0228' name='temporomandibular'>
+                                                              <HAnimSegment DEF='hanim_jaw' name='jaw'>
+                                                                <!-- jaw includes mandible and lower teeth in loa5 -->
+                                                                <!-- Duplicative geometry: <Inline DEF='jaw' url='"assets/loa5/meshes/jaw.x3d"'/> -->
+                                                              </HAnimSegment>
+                                                              <HAnimSegment DEF='hanim_mandible' name='mandible'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone mandible.x3d + translation +0.0000 +1.5954 +0.0448 -->
+                                                                <!-- bone mandible.x3d adjusted axes +0.0000 +0.0400 -0.0220 -->
+                                                                <!-- bone mandible.x3d =joint center +0.0000 +1.6354 +0.0228 -->
+                                                                <Inline DEF='mandible' url='"assets/loa5/meshes/mandible.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimSegment DEF='hanim_lowerTeeth' name='lowerTeeth'>
+                                                                <Inline DEF='lowerTeeth' url='"assets/loa5/meshes/lowerTeeth.x3d"'/>
+                                                              </HAnimSegment>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                    </HAnimJoint>
+                                                  </HAnimJoint>
+                                                </HAnimJoint>
+                                              </HAnimJoint>
+                                            </HAnimJoint>
+                                            <HAnimJoint DEF='hanim_l_sternoclavicular' center='0.0385 1.2087 -0.0138' name='l_sternoclavicular'>
+                                              <HAnimSegment DEF='hanim_l_clavicle' name='l_clavicle'>
+                                                <Inline DEF='l_clavicle' url='"assets/loa5/meshes/l_clavicle.x3d"'/>
+                                              </HAnimSegment>
+                                              <HAnimJoint DEF='hanim_l_acromioclavicular' center='0.1229 1.1918 -0.0129' name='l_acromioclavicular'>
+                                                <HAnimSegment DEF='hanim_l_scapula' name='l_scapula'>
+                                                  <Inline DEF='l_scapula' url='"assets/loa5/meshes/l_scapula.x3d"'/>
+                                                </HAnimSegment>
+                                                <HAnimJoint DEF='hanim_l_shoulder' center='0.1829 1.4238 -0.0306' name='l_shoulder'>
+                                                  <HAnimSegment DEF='hanim_l_upperarm' name='l_upperarm'>
+                                                    <Transform DEF='YellowBoxAtJointCenter_l_shoulder' translation='0.1829 1.4238 -0.0306'>
+                                                      <Shape USE='BoxShape'/>
+                                                    </Transform>
+                                                    <!-- upperarm bone is humerus -->
+                                                    <!-- Duplicative geometry: <Inline DEF='l_upperarm' url='"assets/loa5/meshes/l_upperarm.x3d"'/> -->
+                                                  </HAnimSegment>
+                                                  <HAnimSegment DEF='hanim_l_humerus' name='l_humerus'>
+                                                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                    <!-- bone l_humerus.x3d + translation +0.2029 +1.2538 -0.0306 -->
+                                                    <!-- bone l_humerus.x3d adjusted axes -0.0200 +0.1700 +0.0000 -->
+                                                    <!-- bone l_humerus.x3d =joint center +0.1829 +1.4238 -0.0306 -->
+                                                    <Inline DEF='l_humerus' url='"assets/loa5/meshes/l_humerus.x3d"'/>
+                                                  </HAnimSegment>
+                                                  <HAnimJoint DEF='hanim_l_elbow' center='0.2067 1.0805 -0.0359' name='l_elbow'>
+                                                    <!-- l_ulna.x3d is forearm bone used to adjust and match joint socket -->
+                                                    <HAnimSegment DEF='hanim_l_forearm' name='l_forearm'>
+                                                      <!-- forearm includes radius and ulna in loa5 -->
+                                                      <!-- Duplicative geometry: <Inline DEF='l_forearm' url='"assets/loa5/meshes/l_forearm.x3d"'/> -->
+                                                      <Transform DEF='YellowBoxAtJointCenter_l_forearm' scale='0.4 0.4 0.4' translation='0.2067 1.0805 -0.0359'>
+                                                        <Shape USE='BoxShape'/>
+                                                      </Transform>
+                                                    </HAnimSegment>
+                                                    <HAnimSegment DEF='hanim_l_radius' name='l_radius'>
+                                                      <Inline DEF='l_radius' url='"assets/loa5/meshes/l_radius.x3d"'/>
+                                                    </HAnimSegment>
+                                                    <HAnimSegment DEF='hanim_l_ulna' name='l_ulna'>
+                                                      <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                      <!-- bone l_ulna.x3d + translation +0.2087 +0.9605 -0.0009 -->
+                                                      <!-- bone l_ulna.x3d adjusted axes -0.0020 +0.1200 -0.0350 -->
+                                                      <!-- bone l_ulna.x3d =joint center +0.2067 +1.0805 -0.0359 -->
+                                                      <Inline DEF='l_ulna' url='"assets/loa5/meshes/l_ulna.x3d"'/>
+                                                    </HAnimSegment>
+                                                    <HAnimJoint DEF='hanim_l_radiocarpal' center='0.2144 0.852 0.068' name='l_radiocarpal'>
+                                                      <HAnimSegment DEF='hanim_l_carpal' name='l_carpal'>
+                                                        <!-- l_carpal (wrist) includes l_scaphoid, l_lunate, l_triquetral, l_pisiform in loa5 -->
+                                                        <!-- Duplicative geometry: <Inline DEF='l_carpal' url='"assets/loa5/meshes/l_carpal.x3d"'/> -->
+                                                        <Transform DEF='YellowBoxAtJointCenter_l_radiocarpal' scale='0.5 0.5 0.5' translation='0.2144 0.852 0.068'>
+                                                          <Shape USE='BoxShape'/>
+                                                        </Transform>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_l_scaphoid' name='l_scaphoid'>
+                                                        <Inline DEF='l_scaphoid' url='"assets/loa5/meshes/l_scaphoid.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_l_lunate' name='l_lunate'>
+                                                        <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                        <!-- bone l_lunate.x3d + translation +0.2144 +0.8470 +0.0680 -->
+                                                        <!-- bone l_lunate.x3d adjusted axes +0.0000 +0.0050 +0.0000 -->
+                                                        <!-- bone l_lunate.x3d =joint center +0.2144 +0.8520 +0.0680 -->
+                                                        <Inline DEF='l_lunate' url='"assets/loa5/meshes/l_lunate.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_l_triquetral' name='l_triquetral'>
+                                                        <Inline DEF='l_triquetral' url='"assets/loa5/meshes/l_triquetral.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_l_pisiform' name='l_pisiform'>
+                                                        <Inline DEF='l_pisiform' url='"assets/loa5/meshes/l_pisiform.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimJoint DEF='hanim_l_midcarpal_1' center='0.1878 0.8272 0.0865' name='l_midcarpal_1'>
+                                                        <HAnimSegment DEF='hanim_l_trapezium' name='l_trapezium'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone l_trapezium.x3d + translation +0.1908 +0.8312 +0.0855 -->
+                                                          <!-- bone l_trapezium.x3d adjusted axes -0.0030 -0.0040 +0.0010 -->
+                                                          <!-- bone l_trapezium.x3d =joint center +0.1878 +0.8272 +0.0865 -->
+                                                          <Inline DEF='l_trapezium' url='"assets/loa5/meshes/l_trapezium.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_l_carpometacarpal_1' center='0.1889 0.8294 0.0855' name='l_carpometacarpal_1'>
+                                                          <HAnimSegment DEF='hanim_l_metacarpal_1' name='l_metacarpal_1'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone l_metacarpal_1.x3d + translation +0.1769 +0.8094 +0.0955 -->
+                                                            <!-- bone l_metacarpal_1.x3d adjusted axes +0.0120 +0.0200 -0.0100 -->
+                                                            <!-- bone l_metacarpal_1.x3d =joint center +0.1889 +0.8294 +0.0855 -->
+                                                            <Inline DEF='l_metacarpal_1' url='"assets/loa5/meshes/l_metacarpal_1.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_l_metacarpophalangeal_1' center='0.1694 0.7892 0.103' name='l_metacarpophalangeal_1'>
+                                                            <HAnimSegment DEF='hanim_l_carpal_proximal_phalanx_1' name='l_carpal_proximal_phalanx_1'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone l_carpal_proximal_phalanx_1.x3d + translation +0.1634 +0.7772 +0.1070 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_1.x3d adjusted axes +0.0060 +0.0120 -0.0040 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_1.x3d =joint center +0.1694 +0.7892 +0.1030 -->
+                                                              <Inline DEF='l_carpal_proximal_phalanx_1' url='"assets/loa5/meshes/l_carpal_proximal_phalanx_1.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_l_carpal_interphalangeal_1' center='0.1584 0.7677 0.1126' name='l_carpal_interphalangeal_1'>
+                                                              <HAnimSegment DEF='hanim_l_carpal_distal_phalanx_1' name='l_carpal_distal_phalanx_1'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone l_carpal_distal_phalanx_1.x3d + translation +0.1574 +0.7597 +0.1151 -->
+                                                                <!-- bone l_carpal_distal_phalanx_1.x3d adjusted axes +0.0010 +0.0080 -0.0025 -->
+                                                                <!-- bone l_carpal_distal_phalanx_1.x3d =joint center +0.1584 +0.7677 +0.1126 -->
+                                                                <Inline DEF='l_carpal_distal_phalanx_1' url='"assets/loa5/meshes/l_carpal_distal_phalanx_1.x3d"'/>
+                                                              </HAnimSegment>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                      <HAnimJoint DEF='hanim_l_midcarpal_2' center='0.2065 0.8251 0.0879' name='l_midcarpal_2'>
+                                                        <HAnimSegment DEF='hanim_l_trapezoid' name='l_trapezoid'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone l_trapezoid.x3d + translation +0.2045 +0.8281 +0.0869 -->
+                                                          <!-- bone l_trapezoid.x3d adjusted axes +0.0020 -0.0030 +0.0010 -->
+                                                          <!-- bone l_trapezoid.x3d =joint center +0.2065 +0.8251 +0.0879 -->
+                                                          <Inline DEF='l_trapezoid' url='"assets/loa5/meshes/l_trapezoid.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_l_carpometacarpal_2' center='0.2055 0.8265 0.0908' name='l_carpometacarpal_2'>
+                                                          <HAnimSegment DEF='hanim_l_metacarpal_2' name='l_metacarpal_2'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone l_metacarpal_2.x3d + translation +0.2025 +0.7975 +0.1008 -->
+                                                            <!-- bone l_metacarpal_2.x3d adjusted axes +0.0030 +0.0290 -0.0100 -->
+                                                            <!-- bone l_metacarpal_2.x3d =joint center +0.2055 +0.8265 +0.0908 -->
+                                                            <Inline DEF='l_metacarpal_2' url='"assets/loa5/meshes/l_metacarpal_2.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_l_metacarpophalangeal_2' center='0.199 0.7707 0.1154' name='l_metacarpophalangeal_2'>
+                                                            <HAnimSegment DEF='hanim_l_carpal_proximal_phalanx_2' name='l_carpal_proximal_phalanx_2'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone l_carpal_proximal_phalanx_2.x3d + translation +0.1940 +0.7527 +0.1204 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_2.x3d adjusted axes +0.0050 +0.0180 -0.0050 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_2.x3d =joint center +0.1990 +0.7707 +0.1154 -->
+                                                              <Inline DEF='l_carpal_proximal_phalanx_2' url='"assets/loa5/meshes/l_carpal_proximal_phalanx_2.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_l_carpal_proximal_interphalangeal_2' center='0.1906 0.7379 0.128' name='l_carpal_proximal_interphalangeal_2'>
+                                                              <HAnimSegment DEF='hanim_l_carpal_middle_phalanx_2' name='l_carpal_middle_phalanx_2'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone l_carpal_middle_phalanx_2.x3d + translation +0.1806 +0.7314 +0.1255 -->
+                                                                <!-- bone l_carpal_middle_phalanx_2.x3d adjusted axes +0.0100 +0.0065 +0.0025 -->
+                                                                <!-- bone l_carpal_middle_phalanx_2.x3d =joint center +0.1906 +0.7379 +0.1280 -->
+                                                                <Inline DEF='l_carpal_middle_phalanx_2' url='"assets/loa5/meshes/l_carpal_middle_phalanx_2.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_l_carpal_distal_interphalangeal_2' center='0.1726 0.7253 0.1218' name='l_carpal_distal_interphalangeal_2'>
+                                                                <HAnimSegment DEF='hanim_l_carpal_distal_phalanx_2' name='l_carpal_distal_phalanx_2'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone l_carpal_distal_phalanx_2.x3d + translation +0.1676 +0.7248 +0.1188 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_2.x3d adjusted axes +0.0050 +0.0005 +0.0030 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_2.x3d =joint center +0.1726 +0.7253 +0.1218 -->
+                                                                  <Inline DEF='l_carpal_distal_phalanx_2' url='"assets/loa5/meshes/l_carpal_distal_phalanx_2.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                      <HAnimJoint DEF='hanim_l_midcarpal_3' center='0.214 0.8221 0.0792' name='l_midcarpal_3'>
+                                                        <HAnimSegment DEF='hanim_l_capitate' name='l_capitate'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone l_capitate.x3d + translation +0.2120 +0.8341 +0.0772 -->
+                                                          <!-- bone l_capitate.x3d adjusted axes +0.0020 -0.0120 +0.0020 -->
+                                                          <!-- bone l_capitate.x3d =joint center +0.2140 +0.8221 +0.0792 -->
+                                                          <Inline DEF='l_capitate' url='"assets/loa5/meshes/l_capitate.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_l_carpometacarpal_3' center='0.2147 0.825 0.0775' name='l_carpometacarpal_3'>
+                                                          <HAnimSegment DEF='hanim_l_metacarpal_3' name='l_metacarpal_3'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone l_metacarpal_3.x3d + translation +0.2137 +0.7960 +0.0875 -->
+                                                            <!-- bone l_metacarpal_3.x3d adjusted axes +0.0010 +0.0290 -0.0100 -->
+                                                            <!-- bone l_metacarpal_3.x3d =joint center +0.2147 +0.8250 +0.0775 -->
+                                                            <Inline DEF='l_metacarpal_3' url='"assets/loa5/meshes/l_metacarpal_3.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_l_metacarpophalangeal_3' center='0.2132 0.7627 0.0978' name='l_metacarpophalangeal_3'>
+                                                            <HAnimSegment DEF='hanim_l_carpal_proximal_phalanx_3' name='l_carpal_proximal_phalanx_3'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone l_carpal_proximal_phalanx_3.x3d + translation +0.2012 +0.7447 +0.0978 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_3.x3d adjusted axes +0.0120 +0.0180 +0.0000 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_3.x3d =joint center +0.2132 +0.7627 +0.0978 -->
+                                                              <Inline DEF='l_carpal_proximal_phalanx_3' url='"assets/loa5/meshes/l_carpal_proximal_phalanx_3.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_l_carpal_proximal_interphalangeal_3' center='0.189 0.7267 0.0972' name='l_carpal_proximal_interphalangeal_3'>
+                                                              <HAnimSegment DEF='hanim_l_carpal_middle_phalanx_3' name='l_carpal_middle_phalanx_3'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone l_carpal_middle_phalanx_3.x3d + translation +0.1750 +0.7237 +0.0947 -->
+                                                                <!-- bone l_carpal_middle_phalanx_3.x3d adjusted axes +0.0140 +0.0030 +0.0025 -->
+                                                                <!-- bone l_carpal_middle_phalanx_3.x3d =joint center +0.1890 +0.7267 +0.0972 -->
+                                                                <Inline DEF='l_carpal_middle_phalanx_3' url='"assets/loa5/meshes/l_carpal_middle_phalanx_3.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_l_carpal_distal_interphalangeal_3' center='0.1627 0.7207 0.0912' name='l_carpal_distal_interphalangeal_3'>
+                                                                <HAnimSegment DEF='hanim_l_carpal_distal_phalanx_3' name='l_carpal_distal_phalanx_3'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone l_carpal_distal_phalanx_3.x3d + translation +0.1567 +0.7207 +0.0892 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_3.x3d adjusted axes +0.0060 +0.0000 +0.0020 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_3.x3d =joint center +0.1627 +0.7207 +0.0912 -->
+                                                                  <Inline DEF='l_carpal_distal_phalanx_3' url='"assets/loa5/meshes/l_carpal_distal_phalanx_3.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                      <HAnimJoint DEF='hanim_l_midcarpal_4_5' center='0.2129 0.8423 0.064' name='l_midcarpal_4_5'>
+                                                        <HAnimSegment DEF='hanim_l_hamate' name='l_hamate'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone l_hamate.x3d + translation +0.2129 +0.8293 +0.0660 -->
+                                                          <!-- bone l_hamate.x3d adjusted axes +0.0000 +0.0130 -0.0020 -->
+                                                          <!-- bone l_hamate.x3d =joint center +0.2129 +0.8423 +0.0640 -->
+                                                          <Inline DEF='l_hamate' url='"assets/loa5/meshes/l_hamate.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_l_carpometacarpal_4' center='0.2191 0.8268 0.0673' name='l_carpometacarpal_4'>
+                                                          <HAnimSegment DEF='hanim_l_metacarpal_4' name='l_metacarpal_4'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone l_metacarpal_4.x3d + translation +0.2191 +0.7928 +0.0733 -->
+                                                            <!-- bone l_metacarpal_4.x3d adjusted axes +0.0000 +0.0340 -0.0060 -->
+                                                            <!-- bone l_metacarpal_4.x3d =joint center +0.2191 +0.8268 +0.0673 -->
+                                                            <Inline DEF='l_metacarpal_4' url='"assets/loa5/meshes/l_metacarpal_4.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_l_metacarpophalangeal_4' center='0.2206 0.7646 0.0759' name='l_metacarpophalangeal_4'>
+                                                            <HAnimSegment DEF='hanim_l_carpal_proximal_phalanx_4' name='l_carpal_proximal_phalanx_4'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone l_carpal_proximal_phalanx_4.x3d + translation +0.2086 +0.7466 +0.0759 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_4.x3d adjusted axes +0.0120 +0.0180 +0.0000 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_4.x3d =joint center +0.2206 +0.7646 +0.0759 -->
+                                                              <Inline DEF='l_carpal_proximal_phalanx_4' url='"assets/loa5/meshes/l_carpal_proximal_phalanx_4.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_l_carpal_proximal_interphalangeal_4' center='0.1949 0.73 0.0736' name='l_carpal_proximal_interphalangeal_4'>
+                                                              <HAnimSegment DEF='hanim_l_carpal_middle_phalanx_4' name='l_carpal_middle_phalanx_4'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone l_carpal_middle_phalanx_4.x3d + translation +0.1799 +0.7275 +0.0726 -->
+                                                                <!-- bone l_carpal_middle_phalanx_4.x3d adjusted axes +0.0150 +0.0025 +0.0010 -->
+                                                                <!-- bone l_carpal_middle_phalanx_4.x3d =joint center +0.1949 +0.7300 +0.0736 -->
+                                                                <Inline DEF='l_carpal_middle_phalanx_4' url='"assets/loa5/meshes/l_carpal_middle_phalanx_4.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_l_carpal_distal_interphalangeal_4' center='0.1668 0.7241 0.0703' name='l_carpal_distal_interphalangeal_4'>
+                                                                <HAnimSegment DEF='hanim_l_carpal_distal_phalanx_4' name='l_carpal_distal_phalanx_4'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone l_carpal_distal_phalanx_4.x3d + translation +0.1603 +0.7261 +0.0698 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_4.x3d adjusted axes +0.0065 -0.0020 +0.0005 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_4.x3d =joint center +0.1668 +0.7241 +0.0703 -->
+                                                                  <Inline DEF='l_carpal_distal_phalanx_4' url='"assets/loa5/meshes/l_carpal_distal_phalanx_4.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                        <HAnimJoint DEF='hanim_l_carpometacarpal_5' center='0.2216 0.8282 0.0605' name='l_carpometacarpal_5'>
+                                                          <HAnimSegment DEF='hanim_l_metacarpal_5' name='l_metacarpal_5'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone l_metacarpal_5.x3d + translation +0.2186 +0.7952 +0.0555 -->
+                                                            <!-- bone l_metacarpal_5.x3d adjusted axes +0.0030 +0.0330 +0.0050 -->
+                                                            <!-- bone l_metacarpal_5.x3d =joint center +0.2216 +0.8282 +0.0605 -->
+                                                            <Inline DEF='l_metacarpal_5' url='"assets/loa5/meshes/l_metacarpal_5.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_l_metacarpophalangeal_5' center='0.2227 0.7633 0.0553' name='l_metacarpophalangeal_5'>
+                                                            <HAnimSegment DEF='hanim_l_carpal_proximal_phalanx_5' name='l_carpal_proximal_phalanx_5'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone l_carpal_proximal_phalanx_5.x3d + translation +0.2107 +0.7483 +0.0533 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_5.x3d adjusted axes +0.0120 +0.0150 +0.0020 -->
+                                                              <!-- bone l_carpal_proximal_phalanx_5.x3d =joint center +0.2227 +0.7633 +0.0553 -->
+                                                              <Inline DEF='l_carpal_proximal_phalanx_5' url='"assets/loa5/meshes/l_carpal_proximal_phalanx_5.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_l_carpal_proximal_interphalangeal_5' center='0.1995 0.7337 0.0517' name='l_carpal_proximal_interphalangeal_5'>
+                                                              <HAnimSegment DEF='hanim_l_carpal_middle_phalanx_5' name='l_carpal_middle_phalanx_5'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone l_carpal_middle_phalanx_5.x3d + translation +0.1925 +0.7287 +0.0507 -->
+                                                                <!-- bone l_carpal_middle_phalanx_5.x3d adjusted axes +0.0070 +0.0050 +0.0010 -->
+                                                                <!-- bone l_carpal_middle_phalanx_5.x3d =joint center +0.1995 +0.7337 +0.0517 -->
+                                                                <Inline DEF='l_carpal_middle_phalanx_5' url='"assets/loa5/meshes/l_carpal_middle_phalanx_5.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_l_carpal_distal_interphalangeal_5' center='0.1847 0.7247 0.0494' name='l_carpal_distal_interphalangeal_5'>
+                                                                <HAnimSegment DEF='hanim_l_carpal_distal_phalanx_5' name='l_carpal_distal_phalanx_5'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone l_carpal_distal_phalanx_5.x3d + translation +0.1787 +0.7247 +0.0489 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_5.x3d adjusted axes +0.0060 +0.0000 +0.0005 -->
+                                                                  <!-- bone l_carpal_distal_phalanx_5.x3d =joint center +0.1847 +0.7247 +0.0494 -->
+                                                                  <Inline DEF='l_carpal_distal_phalanx_5' url='"assets/loa5/meshes/l_carpal_distal_phalanx_5.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                    </HAnimJoint>
+                                                  </HAnimJoint>
+                                                </HAnimJoint>
+                                              </HAnimJoint>
+                                            </HAnimJoint>
+                                            <HAnimJoint DEF='hanim_r_sternoclavicular' center='-0.0385 1.2087 -0.0138' name='r_sternoclavicular'>
+                                              <HAnimSegment DEF='hanim_r_clavicle' name='r_clavicle'>
+                                                <Inline DEF='r_clavicle' url='"assets/loa5/meshes/r_clavicle.x3d"'/>
+                                              </HAnimSegment>
+                                              <HAnimJoint DEF='hanim_r_acromioclavicular' center='-0.1229 1.1918 -0.0129' name='r_acromioclavicular'>
+                                                <HAnimSegment DEF='hanim_r_scapula' name='r_scapula'>
+                                                  <Inline DEF='r_scapula' url='"assets/loa5/meshes/r_scapula.x3d"'/>
+                                                </HAnimSegment>
+                                                <HAnimJoint DEF='hanim_r_shoulder' center='-0.1829 1.4238 -0.0306' name='r_shoulder'>
+                                                  <HAnimSegment DEF='hanim_r_upperarm' name='r_upperarm'>
+                                                    <Transform DEF='YellowBoxAtJointCenter_r_upperarm' translation='-0.1829 1.4238 -0.0306'>
+                                                      <Shape USE='BoxShape'/>
+                                                    </Transform>
+                                                    <!-- upperarm bone is humerus -->
+                                                    <!-- Duplicative geometry: <Inline DEF='r_upperarm' url='"assets/loa5/meshes/r_upperarm.x3d"'/> -->
+                                                  </HAnimSegment>
+                                                  <HAnimSegment DEF='hanim_r_humerus' name='r_humerus'>
+                                                    <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                    <!-- bone r_humerus.x3d + translation -0.2029 +1.2538 -0.0306 -->
+                                                    <!-- bone r_humerus.x3d adjusted axes +0.0200 +0.1700 +0.0000 -->
+                                                    <!-- bone r_humerus.x3d =joint center -0.1829 +1.4238 -0.0306 -->
+                                                    <Inline DEF='r_humerus' url='"assets/loa5/meshes/r_humerus.x3d"'/>
+                                                  </HAnimSegment>
+                                                  <HAnimJoint DEF='hanim_r_elbow' center='-0.2067 1.0805 -0.0359' name='r_elbow'>
+                                                    <HAnimSegment DEF='hanim_r_forearm' name='r_forearm'>
+                                                      <!-- r_ulna.x3d is forearm bone used to adjust and match joint socket -->
+                                                      <!-- forearm includes radius and ulna in loa5 -->
+                                                      <!-- Duplicative geometry: <Inline DEF='r_forearm' url='"assets/loa5/meshes/r_forearm.x3d"'/> -->
+                                                      <Transform DEF='YellowBoxAtJointCenter_r_forearm' scale='0.4 0.4 0.4' translation='-0.2067 1.0805 -0.0359'>
+                                                        <Shape USE='BoxShape'/>
+                                                      </Transform>
+                                                    </HAnimSegment>
+                                                    <HAnimSegment DEF='hanim_r_ulna' name='r_ulna'>
+                                                      <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                      <!-- bone r_ulna.x3d + translation -0.2087 +0.9605 -0.0009 -->
+                                                      <!-- bone r_ulna.x3d adjusted axes +0.0020 +0.1200 -0.0350 -->
+                                                      <!-- bone r_ulna.x3d =joint center -0.2067 +1.0805 -0.0359 -->
+                                                      <Inline DEF='r_ulna' url='"assets/loa5/meshes/r_ulna.x3d"'/>
+                                                    </HAnimSegment>
+                                                    <HAnimSegment DEF='hanim_r_radius' name='r_radius'>
+                                                      <Inline DEF='r_radius' url='"assets/loa5/meshes/r_radius.x3d"'/>
+                                                    </HAnimSegment>
+                                                    <HAnimJoint DEF='hanim_r_radiocarpal' center='-0.2144 0.852 0.068' name='r_radiocarpal'>
+                                                      <HAnimSegment DEF='hanim_r_carpal' name='r_carpal'>
+                                                        <!-- l_carpal (wrist) includes l_scaphoid, l_lunate, l_triquetral, l_pisiform in loa5 -->
+                                                        <!-- Duplicative geometry: <Inline DEF='l_carpal' url='"assets/loa5/meshes/l_carpal.x3d"'/> -->
+                                                        <Transform DEF='YellowBoxAtJointCenter_r_radiocarpal' scale='0.5 0.5 0.5' translation='-0.2144 0.852 0.068'>
+                                                          <Shape USE='BoxShape'/>
+                                                        </Transform>
+                                                        <!-- r_carpal (wrist) includes r_scaphoid, r_lunate, r_triquetral, r_pisiform in loa5 -->
+                                                        <!-- Duplicative geometry: <Inline DEF='r_carpal' url='"assets/loa5/meshes/r_carpal.x3d"'/> -->
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_r_scaphoid' name='r_scaphoid'>
+                                                        <Inline DEF='r_scaphoid' url='"assets/loa5/meshes/r_scaphoid.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_r_lunate' name='r_lunate'>
+                                                        <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                        <!-- bone r_lunate.x3d + translation -0.2144 +0.8470 +0.0680 -->
+                                                        <!-- bone r_lunate.x3d adjusted axes +0.0000 +0.0050 +0.0000 -->
+                                                        <!-- bone r_lunate.x3d =joint center -0.2144 +0.8520 +0.0680 -->
+                                                        <Inline DEF='r_lunate' url='"assets/loa5/meshes/r_lunate.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_r_triquetral' name='r_triquetral'>
+                                                        <Inline DEF='r_triquetral' url='"assets/loa5/meshes/r_triquetral.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimSegment DEF='hanim_r_pisiform' name='r_pisiform'>
+                                                        <Inline DEF='r_pisiform' url='"assets/loa5/meshes/r_pisiform.x3d"'/>
+                                                      </HAnimSegment>
+                                                      <HAnimJoint DEF='hanim_r_midcarpal_1' center='-0.1878 0.8292 0.0905' name='r_midcarpal_1'>
+                                                        <HAnimSegment DEF='hanim_r_trapezium' name='r_trapezium'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone r_trapezium.x3d + translation -0.1908 +0.8312 +0.0855 -->
+                                                          <!-- bone r_trapezium.x3d adjusted axes +0.0030 -0.0020 +0.0050 -->
+                                                          <!-- bone r_trapezium.x3d =joint center -0.1878 +0.8292 +0.0905 -->
+                                                          <Inline DEF='r_trapezium' url='"assets/loa5/meshes/r_trapezium.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_r_carpometacarpal_1' center='-0.1889 0.8294 0.0855' name='r_carpometacarpal_1'>
+                                                          <HAnimSegment DEF='hanim_r_metacarpal_1' name='r_metacarpal_1'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone r_metacarpal_1.x3d + translation -0.1769 +0.8094 +0.0955 -->
+                                                            <!-- bone r_metacarpal_1.x3d adjusted axes -0.0120 +0.0200 -0.0100 -->
+                                                            <!-- bone r_metacarpal_1.x3d =joint center -0.1889 +0.8294 +0.0855 -->
+                                                            <Inline DEF='r_metacarpal_1' url='"assets/loa5/meshes/r_metacarpal_1.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_r_metacarpophalangeal_1' center='-0.1694 0.7892 0.103' name='r_metacarpophalangeal_1'>
+                                                            <HAnimSegment DEF='hanim_r_carpal_proximal_phalanx_1' name='r_carpal_proximal_phalanx_1'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone r_carpal_proximal_phalanx_1.x3d + translation -0.1634 +0.7772 +0.1070 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_1.x3d adjusted axes -0.0060 +0.0120 -0.0040 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_1.x3d =joint center -0.1694 +0.7892 +0.1030 -->
+                                                              <Inline DEF='r_carpal_proximal_phalanx_1' url='"assets/loa5/meshes/r_carpal_proximal_phalanx_1.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_r_carpal_interphalangeal_1' center='-0.1584 0.7677 0.1126' name='r_carpal_interphalangeal_1'>
+                                                              <HAnimSegment DEF='hanim_r_carpal_distal_phalanx_1' name='r_carpal_distal_phalanx_1'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone r_carpal_distal_phalanx_1.x3d + translation -0.1574 +0.7597 +0.1151 -->
+                                                                <!-- bone r_carpal_distal_phalanx_1.x3d adjusted axes -0.0010 +0.0080 -0.0025 -->
+                                                                <!-- bone r_carpal_distal_phalanx_1.x3d =joint center -0.1584 +0.7677 +0.1126 -->
+                                                                <Inline DEF='r_carpal_distal_phalanx_1' url='"assets/loa5/meshes/r_carpal_distal_phalanx_1.x3d"'/>
+                                                              </HAnimSegment>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                      <HAnimJoint DEF='hanim_r_midcarpal_2' center='-0.2065 0.8241 0.0889' name='r_midcarpal_2'>
+                                                        <HAnimSegment DEF='hanim_r_trapezoid' name='r_trapezoid'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone r_trapezoid.x3d + translation -0.2045 +0.8281 +0.0869 -->
+                                                          <!-- bone r_trapezoid.x3d adjusted axes -0.0020 -0.0040 +0.0020 -->
+                                                          <!-- bone r_trapezoid.x3d =joint center -0.2065 +0.8241 +0.0889 -->
+                                                          <Inline DEF='r_trapezoid' url='"assets/loa5/meshes/r_trapezoid.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_r_carpometacarpal_2' center='-0.1995 0.8265 0.0908' name='r_carpometacarpal_2'>
+                                                          <HAnimSegment DEF='hanim_r_metacarpal_2' name='r_metacarpal_2'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone r_metacarpal_2.x3d + translation -0.2025 +0.7975 +0.1008 -->
+                                                            <!-- bone r_metacarpal_2.x3d adjusted axes +0.0030 +0.0290 -0.0100 -->
+                                                            <!-- bone r_metacarpal_2.x3d =joint center -0.1995 +0.8265 +0.0908 -->
+                                                            <Inline DEF='r_metacarpal_2' url='"assets/loa5/meshes/r_metacarpal_2.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_r_metacarpophalangeal_2' center='-0.199 0.7707 0.1154' name='r_metacarpophalangeal_2'>
+                                                            <HAnimSegment DEF='hanim_r_carpal_proximal_phalanx_2' name='r_carpal_proximal_phalanx_2'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone r_carpal_proximal_phalanx_2.x3d + translation -0.1940 +0.7527 +0.1204 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_2.x3d adjusted axes -0.0050 +0.0180 -0.0050 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_2.x3d =joint center -0.1990 +0.7707 +0.1154 -->
+                                                              <Inline DEF='r_carpal_proximal_phalanx_2' url='"assets/loa5/meshes/r_carpal_proximal_phalanx_2.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_r_carpal_proximal_interphalangeal_2' center='-0.1906 0.7379 0.128' name='r_carpal_proximal_interphalangeal_2'>
+                                                              <HAnimSegment DEF='hanim_r_carpal_middle_phalanx_2' name='r_carpal_middle_phalanx_2'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone r_carpal_middle_phalanx_2.x3d + translation -0.1806 +0.7314 +0.1255 -->
+                                                                <!-- bone r_carpal_middle_phalanx_2.x3d adjusted axes -0.0100 +0.0065 +0.0025 -->
+                                                                <!-- bone r_carpal_middle_phalanx_2.x3d =joint center -0.1906 +0.7379 +0.1280 -->
+                                                                <Inline DEF='r_carpal_middle_phalanx_2' url='"assets/loa5/meshes/r_carpal_middle_phalanx_2.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_r_carpal_distal_interphalangeal_2' center='-0.1726 0.7253 0.1218' name='r_carpal_distal_interphalangeal_2'>
+                                                                <HAnimSegment DEF='hanim_r_carpal_distal_phalanx_2' name='r_carpal_distal_phalanx_2'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone r_carpal_distal_phalanx_2.x3d + translation -0.1676 +0.7248 +0.1188 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_2.x3d adjusted axes -0.0050 +0.0005 +0.0030 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_2.x3d =joint center -0.1726 +0.7253 +0.1218 -->
+                                                                  <Inline DEF='r_carpal_distal_phalanx_2' url='"assets/loa5/meshes/r_carpal_distal_phalanx_2.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                      <HAnimJoint DEF='hanim_r_midcarpal_3' center='-0.214 0.8221 0.0792' name='r_midcarpal_3'>
+                                                        <HAnimSegment DEF='hanim_r_capitate' name='r_capitate'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone r_capitate.x3d + translation -0.2120 +0.8341 +0.0772 -->
+                                                          <!-- bone r_capitate.x3d adjusted axes -0.0020 -0.0120 +0.0020 -->
+                                                          <!-- bone r_capitate.x3d =joint center -0.2140 +0.8221 +0.0792 -->
+                                                          <Inline DEF='r_capitate' url='"assets/loa5/meshes/r_capitate.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_r_carpometacarpal_3' center='-0.2127 0.825 0.0775' name='r_carpometacarpal_3'>
+                                                          <HAnimSegment DEF='hanim_r_metacarpal_3' name='r_metacarpal_3'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone r_metacarpal_3.x3d + translation -0.2137 +0.7960 +0.0875 -->
+                                                            <!-- bone r_metacarpal_3.x3d adjusted axes +0.0010 +0.0290 -0.0100 -->
+                                                            <!-- bone r_metacarpal_3.x3d =joint center -0.2127 +0.8250 +0.0775 -->
+                                                            <Inline DEF='r_metacarpal_3' url='"assets/loa5/meshes/r_metacarpal_3.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_r_metacarpophalangeal_3' center='-0.2132 0.7627 0.0978' name='r_metacarpophalangeal_3'>
+                                                            <HAnimSegment DEF='hanim_r_carpal_proximal_phalanx_3' name='r_carpal_proximal_phalanx_3'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone r_carpal_proximal_phalanx_3.x3d + translation -0.2012 +0.7447 +0.0978 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_3.x3d adjusted axes -0.0120 +0.0180 +0.0000 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_3.x3d =joint center -0.2132 +0.7627 +0.0978 -->
+                                                              <Inline DEF='r_carpal_proximal_phalanx_3' url='"assets/loa5/meshes/r_carpal_proximal_phalanx_3.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_r_carpal_proximal_interphalangeal_3' center='-0.189 0.7267 0.0972' name='r_carpal_proximal_interphalangeal_3'>
+                                                              <HAnimSegment DEF='hanim_r_carpal_middle_phalanx_3' name='r_carpal_middle_phalanx_3'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone r_carpal_middle_phalanx_3.x3d + translation -0.1750 +0.7237 +0.0947 -->
+                                                                <!-- bone r_carpal_middle_phalanx_3.x3d adjusted axes -0.0140 +0.0030 +0.0025 -->
+                                                                <!-- bone r_carpal_middle_phalanx_3.x3d =joint center -0.1890 +0.7267 +0.0972 -->
+                                                                <Inline DEF='r_carpal_middle_phalanx_3' url='"assets/loa5/meshes/r_carpal_middle_phalanx_3.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_r_carpal_distal_interphalangeal_3' center='-0.1627 0.7207 0.0912' name='r_carpal_distal_interphalangeal_3'>
+                                                                <HAnimSegment DEF='hanim_r_carpal_distal_phalanx_3' name='r_carpal_distal_phalanx_3'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone r_carpal_distal_phalanx_3.x3d + translation -0.1567 +0.7207 +0.0892 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_3.x3d adjusted axes -0.0060 +0.0000 +0.0020 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_3.x3d =joint center -0.1627 +0.7207 +0.0912 -->
+                                                                  <Inline DEF='r_carpal_distal_phalanx_3' url='"assets/loa5/meshes/r_carpal_distal_phalanx_3.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                      <HAnimJoint DEF='hanim_r_midcarpal_4_5' center='-0.2129 0.8423 0.068' name='r_midcarpal_4_5'>
+                                                        <HAnimSegment DEF='hanim_r_hamate' name='r_hamate'>
+                                                          <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                          <!-- bone r_hamate.x3d + translation -0.2129 +0.8293 +0.0660 -->
+                                                          <!-- bone r_hamate.x3d adjusted axes +0.0000 +0.0130 +0.0020 -->
+                                                          <!-- bone r_hamate.x3d =joint center -0.2129 +0.8423 +0.0680 -->
+                                                          <Inline DEF='r_hamate' url='"assets/loa5/meshes/r_hamate.x3d"'/>
+                                                        </HAnimSegment>
+                                                        <HAnimJoint DEF='hanim_r_carpometacarpal_4' center='-0.2211 0.8268 0.0683' name='r_carpometacarpal_4'>
+                                                          <HAnimSegment DEF='hanim_r_metacarpal_4' name='r_metacarpal_4'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone r_metacarpal_4.x3d + translation -0.2191 +0.7928 +0.0733 -->
+                                                            <!-- bone r_metacarpal_4.x3d adjusted axes -0.0020 +0.0340 -0.0050 -->
+                                                            <!-- bone r_metacarpal_4.x3d =joint center -0.2211 +0.8268 +0.0683 -->
+                                                            <Inline DEF='r_metacarpal_4' url='"assets/loa5/meshes/r_metacarpal_4.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_r_metacarpophalangeal_4' center='-0.2206 0.7646 0.0759' name='r_metacarpophalangeal_4'>
+                                                            <HAnimSegment DEF='hanim_r_carpal_proximal_phalanx_4' name='r_carpal_proximal_phalanx_4'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone r_carpal_proximal_phalanx_4.x3d + translation -0.2086 +0.7466 +0.0759 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_4.x3d adjusted axes -0.0120 +0.0180 +0.0000 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_4.x3d =joint center -0.2206 +0.7646 +0.0759 -->
+                                                              <Inline DEF='r_carpal_proximal_phalanx_4' url='"assets/loa5/meshes/r_carpal_proximal_phalanx_4.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_r_carpal_proximal_interphalangeal_4' center='-0.1949 0.73 0.0736' name='r_carpal_proximal_interphalangeal_4'>
+                                                              <HAnimSegment DEF='hanim_r_carpal_middle_phalanx_4' name='r_carpal_middle_phalanx_4'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone r_carpal_middle_phalanx_4.x3d + translation -0.1799 +0.7275 +0.0726 -->
+                                                                <!-- bone r_carpal_middle_phalanx_4.x3d adjusted axes -0.0150 +0.0025 +0.0010 -->
+                                                                <!-- bone r_carpal_middle_phalanx_4.x3d =joint center -0.1949 +0.7300 +0.0736 -->
+                                                                <Inline DEF='r_carpal_middle_phalanx_4' url='"assets/loa5/meshes/r_carpal_middle_phalanx_4.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_r_carpal_distal_interphalangeal_4' center='-0.1668 0.7241 0.0703' name='r_carpal_distal_interphalangeal_4'>
+                                                                <HAnimSegment DEF='hanim_r_carpal_distal_phalanx_4' name='r_carpal_distal_phalanx_4'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone r_carpal_distal_phalanx_4.x3d + translation -0.1603 +0.7261 +0.0698 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_4.x3d adjusted axes -0.0065 -0.0020 +0.0005 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_4.x3d =joint center -0.1668 +0.7241 +0.0703 -->
+                                                                  <Inline DEF='r_carpal_distal_phalanx_4' url='"assets/loa5/meshes/r_carpal_distal_phalanx_4.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                        <HAnimJoint DEF='hanim_r_carpometacarpal_5' center='-0.2216 0.8292 0.0615' name='r_carpometacarpal_5'>
+                                                          <HAnimSegment DEF='hanim_r_metacarpal_5' name='r_metacarpal_5'>
+                                                            <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                            <!-- bone r_metacarpal_5.x3d + translation -0.2186 +0.7952 +0.0555 -->
+                                                            <!-- bone r_metacarpal_5.x3d adjusted axes -0.0030 +0.0340 +0.0060 -->
+                                                            <!-- bone r_metacarpal_5.x3d =joint center -0.2216 +0.8292 +0.0615 -->
+                                                            <Inline DEF='r_metacarpal_5' url='"assets/loa5/meshes/r_metacarpal_5.x3d"'/>
+                                                          </HAnimSegment>
+                                                          <HAnimJoint DEF='hanim_r_metacarpophalangeal_5' center='-0.2227 0.7633 0.0553' name='r_metacarpophalangeal_5'>
+                                                            <HAnimSegment DEF='hanim_r_carpal_proximal_phalanx_5' name='r_carpal_proximal_phalanx_5'>
+                                                              <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                              <!-- bone r_carpal_proximal_phalanx_5.x3d + translation -0.2107 +0.7483 +0.0533 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_5.x3d adjusted axes -0.0120 +0.0150 +0.0020 -->
+                                                              <!-- bone r_carpal_proximal_phalanx_5.x3d =joint center -0.2227 +0.7633 +0.0553 -->
+                                                              <Inline DEF='r_carpal_proximal_phalanx_5' url='"assets/loa5/meshes/r_carpal_proximal_phalanx_5.x3d"'/>
+                                                            </HAnimSegment>
+                                                            <HAnimJoint DEF='hanim_r_carpal_proximal_interphalangeal_5' center='-0.1995 0.7337 0.0517' name='r_carpal_proximal_interphalangeal_5'>
+                                                              <HAnimSegment DEF='hanim_r_carpal_middle_phalanx_5' name='r_carpal_middle_phalanx_5'>
+                                                                <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                <!-- bone r_carpal_middle_phalanx_5.x3d + translation -0.1925 +0.7287 +0.0507 -->
+                                                                <!-- bone r_carpal_middle_phalanx_5.x3d adjusted axes -0.0070 +0.0050 +0.0010 -->
+                                                                <!-- bone r_carpal_middle_phalanx_5.x3d =joint center -0.1995 +0.7337 +0.0517 -->
+                                                                <Inline DEF='r_carpal_middle_phalanx_5' url='"assets/loa5/meshes/r_carpal_middle_phalanx_5.x3d"'/>
+                                                              </HAnimSegment>
+                                                              <HAnimJoint DEF='hanim_r_carpal_distal_interphalangeal_5' center='-0.1847 0.7247 0.0494' name='r_carpal_distal_interphalangeal_5'>
+                                                                <HAnimSegment DEF='hanim_r_carpal_distal_phalanx_5' name='r_carpal_distal_phalanx_5'>
+                                                                  <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+                                                                  <!-- bone r_carpal_distal_phalanx_5.x3d + translation -0.1787 +0.7247 +0.0489 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_5.x3d adjusted axes -0.0060 +0.0000 +0.0005 -->
+                                                                  <!-- bone r_carpal_distal_phalanx_5.x3d =joint center -0.1847 +0.7247 +0.0494 -->
+                                                                  <Inline DEF='r_carpal_distal_phalanx_5' url='"assets/loa5/meshes/r_carpal_distal_phalanx_5.x3d"'/>
+                                                                </HAnimSegment>
+                                                              </HAnimJoint>
+                                                            </HAnimJoint>
+                                                          </HAnimJoint>
+                                                        </HAnimJoint>
+                                                      </HAnimJoint>
+                                                    </HAnimJoint>
+                                                  </HAnimJoint>
+                                                </HAnimJoint>
+                                              </HAnimJoint>
+                                            </HAnimJoint>
+                                          </HAnimJoint>
+                                        </HAnimJoint>
+                                      </HAnimJoint>
+                                    </HAnimJoint>
+                                  </HAnimJoint>
+                                </HAnimJoint>
+                              </HAnimJoint>
+                            </HAnimJoint>
+                          </HAnimJoint>
+                        </HAnimJoint>
+                      </HAnimJoint>
+                    </HAnimJoint>
+                  </HAnimJoint>
+                </HAnimJoint>
+              </HAnimJoint>
+            </HAnimJoint>
+          </HAnimJoint>
+        </HAnimJoint>
+      </HAnimHumanoid>
+    </Transform>
+    <TimeSensor DEF='GaitClock' cycleInterval='0.7' loop='true'/>
+    <TimeSensor DEF='CourseClock' cycleInterval='12.13' loop='true'/>
+    <OrientationInterpolator DEF='l_hip_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 -0.55 1 0 0 0.15 1 0 0 0.48 1 0 0 -0.1 1 0 0 -0.55'/>
+    <OrientationInterpolator DEF='r_hip_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 0.48 1 0 0 -0.1 1 0 0 -0.55 1 0 0 0.15 1 0 0 0.48'/>
+    <OrientationInterpolator DEF='l_knee_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 0.1 1 0 0 0.85 1 0 0 1.5 1 0 0 0.3 1 0 0 0.1'/>
+    <OrientationInterpolator DEF='r_knee_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 1.5 1 0 0 0.3 1 0 0 0.1 1 0 0 0.85 1 0 0 1.5'/>
+    <OrientationInterpolator DEF='l_talocrural_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 -0.2 1 0 0 0.1 1 0 0 0.4 1 0 0 -0.15 1 0 0 -0.2'/>
+    <OrientationInterpolator DEF='r_talocrural_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 0.4 1 0 0 -0.15 1 0 0 -0.2 1 0 0 0.1 1 0 0 0.4'/>
+    <OrientationInterpolator DEF='l_shoulder_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 0.4 1 0 0 -0.1 1 0 0 -0.35 1 0 0 0.1 1 0 0 0.4'/>
+    <OrientationInterpolator DEF='r_shoulder_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 -0.35 1 0 0 0.1 1 0 0 0.4 1 0 0 -0.1 1 0 0 -0.35'/>
+    <OrientationInterpolator DEF='l_elbow_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 -0.85 1 0 0 -1.1 1 0 0 -0.85 1 0 0 -0.65 1 0 0 -0.85'/>
+    <OrientationInterpolator DEF='r_elbow_int' key='0 0.25 0.5 0.75 1' keyValue='1 0 0 -0.85 1 0 0 -0.65 1 0 0 -0.85 1 0 0 -1.1 1 0 0 -0.85'/>
+    <OrientationInterpolator DEF='sacroiliac_int' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 -0.1 0 1 0 0.0 0 1 0 0.1 0 1 0 0.0 0 1 0 -0.1'/>
+    <OrientationInterpolator DEF='vt6_int' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0.1 0 1 0 0.0 0 1 0 -0.1 0 1 0 0.0 0 1 0 0.1'/>
+    <PositionInterpolator DEF='bounce_int' key='0 0.25 0.5 0.75 1' keyValue='0 0 0 0 0.045 0 0 0 0 0 0.045 0 0 0 0'/>
+    <PositionInterpolator DEF='path_int' key='0.0 0.14424825686171794 0.2818825631476118 0.4711503486276564 0.660418134107701 0.7980524403935949 1.0' keyValue='0.0 0 0.0 0.0 0 5.0 2.6 0 9.0 -2.6 0 13.0 2.6 0 17.0 0.0 0 21.0 0.0 0 28.0'/>
+    <OrientationInterpolator DEF='heading_int' key='0.0 0.14424825686171794 0.2818825631476118 0.4711503486276564 0.660418134107701 0.7980524403935949 1.0' keyValue='0 1 0 0.0 0 1 0 0.5763752205911837 0 1 0 -0.9151007005533605 0 1 0 0.9151007005533605 0 1 0 -0.5763752205911837 0 1 0 0.0 0 1 0 0.0'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='l_hip_int'/>
+    <ROUTE fromField='value_changed' fromNode='l_hip_int' toField='set_rotation' toNode='hanim_l_hip'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='r_hip_int'/>
+    <ROUTE fromField='value_changed' fromNode='r_hip_int' toField='set_rotation' toNode='hanim_r_hip'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='l_knee_int'/>
+    <ROUTE fromField='value_changed' fromNode='l_knee_int' toField='set_rotation' toNode='hanim_l_knee'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='r_knee_int'/>
+    <ROUTE fromField='value_changed' fromNode='r_knee_int' toField='set_rotation' toNode='hanim_r_knee'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='l_talocrural_int'/>
+    <ROUTE fromField='value_changed' fromNode='l_talocrural_int' toField='set_rotation' toNode='hanim_l_talocrural'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='r_talocrural_int'/>
+    <ROUTE fromField='value_changed' fromNode='r_talocrural_int' toField='set_rotation' toNode='hanim_r_talocrural'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='l_shoulder_int'/>
+    <ROUTE fromField='value_changed' fromNode='l_shoulder_int' toField='set_rotation' toNode='hanim_l_shoulder'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='r_shoulder_int'/>
+    <ROUTE fromField='value_changed' fromNode='r_shoulder_int' toField='set_rotation' toNode='hanim_r_shoulder'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='l_elbow_int'/>
+    <ROUTE fromField='value_changed' fromNode='l_elbow_int' toField='set_rotation' toNode='hanim_l_elbow'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='r_elbow_int'/>
+    <ROUTE fromField='value_changed' fromNode='r_elbow_int' toField='set_rotation' toNode='hanim_r_elbow'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='sacroiliac_int'/>
+    <ROUTE fromField='value_changed' fromNode='sacroiliac_int' toField='set_rotation' toNode='hanim_sacroiliac'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='vt6_int'/>
+    <ROUTE fromField='value_changed' fromNode='vt6_int' toField='set_rotation' toNode='hanim_vt6'/>
+    <ROUTE fromField='fraction_changed' fromNode='GaitClock' toField='set_fraction' toNode='bounce_int'/>
+    <ROUTE fromField='value_changed' fromNode='bounce_int' toField='set_translation' toNode='hanim_humanoid_root'/>
+    <ROUTE fromField='fraction_changed' fromNode='CourseClock' toField='set_fraction' toNode='path_int'/>
+    <ROUTE fromField='fraction_changed' fromNode='CourseClock' toField='set_fraction' toNode='heading_int'/>
+    <ROUTE fromField='value_changed' fromNode='path_int' toField='set_translation' toNode='Traveler'/>
+    <ROUTE fromField='value_changed' fromNode='heading_int' toField='set_rotation' toNode='Traveler'/>
+  </Scene>
+</X3D>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN"
+  "https://www.web3d.org/specifications/x3d-4.0.dtd">
+<X3D profile="Interchange" version="4.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="https://www.web3d.org/specifications/x3d-4.0.xsd">
+  <head>
+    <meta name="title" content="hub.x3d"/>
+    <meta name="description" content="Hub-and-spoke bootstrap: proximity-loaded satellites + cross-world ROUTE"/>
+  </head>
+  <Scene>
+
+    <!-- Entry viewpoint -->
+    <Viewpoint DEF="Entry" description="Hub Entry"
+               position="0 1.6 12" orientation="0 1 0 0"/>
+
+    <!-- Persistent hub geometry: a central marker pillar -->
+    <Transform translation="0 0 0">
+      <Shape>
+        <Appearance>
+          <Material DEF="HubMat" diffuseColor="0.2 0.5 0.9" emissiveColor="0.05 0.1 0.2"/>
+        </Appearance>
+        <Cylinder height="2" radius="0.4"/>
+      </Shape>
+    </Transform>
+
+    <!-- Ground plane for spatial reference -->
+    <Transform translation="0 -0.05 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0.15 0.15 0.18"/></Appearance>
+        <Box size="40 0.1 40"/>
+      </Shape>
+    </Transform>
+
+    <!-- ============================================================= -->
+    <!-- SATELLITE A : west. Loads when avatar enters its proximity.    -->
+    <!-- ============================================================= -->
+    <Transform translation="-10 0 0">
+      <!-- ProximitySensor fires enterTime/exitTime within its box -->
+      <ProximitySensor DEF="ProxA" size="12 12 12" center="0 0 0"/>
+      <Inline DEF="SatA" load="false"
+              url='"satelliteA.x3d"'
+              bboxCenter="0 1 0" bboxSize="4 4 4"/>
+    </Transform>
+
+    <!-- ProxA.enterTime -> SatA.load(TRUE)  via a BooleanFilter pattern.
+         In X3D 4.0 we can ROUTE the SFTime enter/exit through
+         time-triggered Boolean toggles. -->
+    <BooleanFilter DEF="FilterA_on"/>
+    <BooleanFilter DEF="FilterA_off"/>
+    <!-- enterTime present -> emit TRUE ; exitTime present -> emit FALSE -->
+    <TimeTrigger DEF="TrigA_on"/>
+    <TimeTrigger DEF="TrigA_off"/>
+
+    <!-- ============================================================= -->
+    <!-- SATELLITE B : east. Also proximity-gated. EXPORTs a node we    -->
+    <!-- drive from the hub clock (cross-world animation wiring).       -->
+    <!-- ============================================================= -->
+    <Transform translation="10 0 0">
+      <ProximitySensor DEF="ProxB" size="12 12 12" center="0 0 0"/>
+      <Inline DEF="SatB" load="false"
+              url='"satelliteB.x3d"'
+              bboxCenter="0 1 0" bboxSize="4 4 4"/>
+    </Transform>
+
+    <TimeTrigger DEF="TrigB_on"/>
+    <TimeTrigger DEF="TrigB_off"/>
+
+    <!-- Hub master clock: drives a satellite's spinner remotely -->
+    <TimeSensor DEF="HubClock" cycleInterval="6" loop="true"/>
+    <OrientationInterpolator DEF="SpinPath"
+        key="0 0.5 1"
+        keyValue="0 1 0 0  0 1 0 3.14159  0 1 0 6.28318"/>
+
+    <!-- Anchor portal: an explicit clickable jump to a standalone world,
+         landing at its named viewpoint -->
+    <Transform translation="0 1 -6">
+      <Anchor description="Portal to Deep World"
+              url='"deepworld.x3d#Arrival"'>
+        <Shape>
+          <Appearance><Material diffuseColor="0.9 0.4 0.1" emissiveColor="0.3 0.1 0"/></Appearance>
+          <Sphere radius="0.8"/>
+        </Shape>
+      </Anchor>
+    </Transform>
+
+    <!-- ===================== ROUTES ===================== -->
+
+    <!-- Satellite A paging -->
+    <ROUTE fromNode="ProxA" fromField="enterTime" toNode="TrigA_on"  toField="set_triggerTime"/>
+    <ROUTE fromNode="TrigA_on" fromField="triggerTrue" toNode="SatA" toField="load"/>
+    <ROUTE fromNode="ProxA" fromField="exitTime"  toNode="FilterA_off" toField="set_boolean"/>
+    <!-- exit emits FALSE directly into load -->
+    <ROUTE fromNode="ProxA" fromField="isActive" toNode="FilterA_off" toField="set_boolean"/>
+    <ROUTE fromNode="FilterA_off" fromField="inputFalse" toNode="SatA" toField="load"/>
+
+    <!-- Satellite B paging (same pattern) -->
+    <ROUTE fromNode="ProxB" fromField="enterTime" toNode="TrigB_on" toField="set_triggerTime"/>
+    <ROUTE fromNode="TrigB_on" fromField="triggerTrue" toNode="SatB" toField="load"/>
+    <ROUTE fromNode="ProxB" fromField="isActive" toNode="SatB" toField="load"/>
+
+    <!-- CROSS-WORLD WIRING: import SatB's exported spinner and drive it
+         from the hub clock. satelliteB.x3d must EXPORT 'RemoteSpin'. -->
+    <IMPORT inlineDEF="SatB" exportedDEF="RemoteSpin" AS="SatB_Spin"/>
+    <ROUTE fromNode="HubClock" fromField="fraction_changed"
+           toNode="SpinPath" toField="set_fraction"/>
+    <ROUTE fromNode="SpinPath" fromField="value_changed"
+           toNode="SatB_Spin" toField="set_rotation"/>
+
+  </Scene>
+</X3D>

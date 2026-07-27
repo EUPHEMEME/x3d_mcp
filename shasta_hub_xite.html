@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Shasta Caves &mdash; Hub</title>
+<script>
+if (location.protocol === 'file:') {
+  window.addEventListener('DOMContentLoaded', function () {
+    document.body.style.cssText = 'margin:0;height:100vh;display:flex;align-items:'
+      + 'center;justify-content:center;background:#0a0a0c;color:#cdbfa6;'
+      + 'font-family:Georgia,serif;text-align:center';
+    document.body.innerHTML = '<div style="max-width:540px;padding:24px;line-height:1.6">'
+      + '<h2 style="color:#e9d9b8">Start the local viewer</h2>'
+      + '<p>This 3-D viewer loads its data over <b>http</b>. Browsers block the '
+      + 'renderer from reading 3-D files over <code>file://</code>, so opening this '
+      + 'page by double-click shows nothing.</p>'
+      + '<p>In Terminal, from the project folder, run:</p>'
+      + '<p style="background:#1d1a14;padding:10px 16px;border-radius:6px;'
+      + 'display:inline-block;font-family:monospace">./start_caves.sh</p>'
+      + '<p>It serves the folder and opens '
+      + '<b>http://127.0.0.1:8099/caves.html</b> for you.</p></div>';
+  });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/x_ite@15.1.4/dist/x_ite.min.js"></script>
+<style>
+ html,body{margin:0;background:#08080a;color:#cdbfa6;font-family:Georgia,serif}
+ x3d-canvas,canvas{width:100vw;height:100vh;display:block}
+ .cap{position:fixed;left:18px;bottom:14px;max-width:560px;font-size:13px;
+   line-height:1.45;text-shadow:0 1px 3px #000;z-index:10}
+ .cap b{color:#e9d9b8}
+ .home{position:fixed;left:18px;top:14px;font-size:13px;z-index:10}
+ .home a{color:#cdbfa6;opacity:.75;text-decoration:none}
+</style></head>
+<body>
+<x3d-canvas src="shasta_hub.x3d"></x3d-canvas>
+<div class="home"><a href="caves.html">&larr; all caves</a></div>
+<div class="cap"><b>Shasta Caves &mdash; Hub.</b> Walk between the worlds: click a cairn to
+descend into <b>Potter&nbsp;Creek</b> or <b>Samwel</b>, click the column for the
+<b>strata</b>, or approach the pedestal to stream in the <b>fauna</b> exhibit. Every
+world carries a portal back here. <span style="opacity:.8">An X3D <i>Inline</i> +
+<i>Anchor</i> interconnection &mdash; hub-and-spoke, with proximity-paged loading.</span>
+Drag to orbit; click a glowing marker to travel.</div>
+</body></html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='l_calf.x3d' name='title'/>
+    <meta content='l_calf includes l_patella, l_tibia and l_fibula' name='description'/>
+    <meta content='Don Brutzman, Joe Williams' name='creator'/>
+    <meta content='15 March 2026' name='created'/>
+    <meta content='322 April 2026' name='modified'/>
+    <meta content='https://en.wikipedia.org/wiki/Calf_(leg)' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Human_leg' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Human_leg#/media/File:Human_leg_bones_labeled.svg' name='reference'/>
+    <meta content='X3D 4.0 Architecture, ISO/IEC 19775-1:202x draft version 4.1, clause 4 Concepts, section 4.11.6.6 LOA‑5 hierarchy' name='specificationSection'/>
+    <meta content='https://www.web3d.org/specifications/X3Dv4Draft/ISO-IEC19774/ISO-IEC19774-1/ISO-IEC19774-1v2.1/ISO-IEC19774-1v2.1-WD/Architecture/concepts.html#Hierarchy5' name='specificationUrl'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_calf.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='l_calf.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <!-- vertical offset to max height of l_hip_bone -->
+    <Transform DEF='l_calf' translation='0.0858 0.2663 -0.0542'>
+      <ViewpointGroup DEF='ViewpointGroup_l_calf' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) from front' nearDistance='0.001' position='0 0 0.6' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.6 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.6' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.6 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.6 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='l_calf LOA-1 (l_patella, l_tibia and l_fibula bones) from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.6 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+    </Transform>
+    <Inline DEF='l_tibia' url='"l_tibia.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tibia.x3d" "l_tibia.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_tibia.wrl"'/>
+    <Inline DEF='l_fibula' url='"l_fibula.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_fibula.x3d" "l_fibula.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_fibula.wrl"'/>
+    <Inline DEF='l_patella' url='"l_patella.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_patella.x3d" "l_patella.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/l_patella.wrl"'/>
+  </Scene>
+</X3D>

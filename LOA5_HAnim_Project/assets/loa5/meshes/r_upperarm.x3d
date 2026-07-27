@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='r_upperarm.x3d' name='title'/>
+    <meta content='r_upperarm includes r_humerus, LOA-1' name='description'/>
+    <meta content='Don Brutzman, Joe Williams' name='creator'/>
+    <meta content='15 March 2026' name='created'/>
+    <meta content='23 April 2026' name='modified'/>
+    <meta content='https://en.wikipedia.org/wiki/Humerus' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Arm' name='reference'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_upperarm.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='r_upperarm.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <Transform DEF='r_upperarm' translation='-0.2029 1.2538 -0.0306'>
+      <ViewpointGroup DEF='ViewpointGroup_r_upperarm' description='r_upperarm model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='r_upperarm (r_humerus) LOA-1 from front' nearDistance='0.001' position='0 0 0.6' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='r_upperarm (r_humerus) LOA-1 from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.6 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='r_upperarm (r_humerus) LOA-1 from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.6' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='r_upperarm (r_humerus) LOA-1 from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.6 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='r_upperarm (r_humerus) LOA-1 from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.6 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='r_upperarm (r_humerus) LOA-1 from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.6 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+    </Transform>
+    <Inline DEF='r_humerus' url='"r_humerus.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_humerus.x3d" "r_humerus.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_humerus.wrl"'/>
+  </Scene>
+</X3D>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='r_forearm.x3d' name='title'/>
+    <meta content='r_forearm includes r_radius and r_ulna, LOA-1' name='description'/>
+    <meta content='Don Brutzman, Joe Williams' name='creator'/>
+    <meta content='15 March 2026' name='created'/>
+    <meta content='25 April 2026' name='modified'/>
+    <meta content='r_radius.x3d' name='reference'/>
+    <meta content='r_ulna.x3d' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Elbow' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Forearm' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Arm' name='reference'/>
+    <meta content='X3D 4.0 Architecture, ISO/IEC 19775-1:202x draft version 4.1, clause 4 Concepts, section 4.11.6.6 LOA‑5 hierarchy' name='specificationSection'/>
+    <meta content='https://www.web3d.org/specifications/X3Dv4Draft/ISO-IEC19774/ISO-IEC19774-1/ISO-IEC19774-1v2.1/ISO-IEC19774-1v2.1-WD/Architecture/concepts.html#Hierarchy5' name='specificationUrl'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_forearm.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='r_forearm.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <Transform DEF='r_forearm' translation='-0.2212 0.9579 0.0194'>
+      <ViewpointGroup DEF='ViewpointGroup_r_forearm' description='r_forearm model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='r_forearm (r_radius, r_ulna) LOA-1 from front' nearDistance='0.001' position='0 0 0.5' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='r_forearm (r_radius, r_ulna) LOA-1 from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.5 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='r_forearm (r_radius, r_ulna) LOA-1 from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.5' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='r_forearm (r_radius, r_ulna) LOA-1 from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.5 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='r_forearm (r_radius, r_ulna) LOA-1 from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.5 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='r_forearm (r_radius, r_ulna) LOA-1 from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.5 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+    </Transform>
+    <Inline DEF='r_radius' url='"r_radius.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_radius.x3d" "r_radius.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_radius.wrl"'/>
+    <Inline DEF='r_ulna' url='"r_ulna.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_ulna.x3d" "r_ulna.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_ulna.wrl"'/>
+  </Scene>
+</X3D>

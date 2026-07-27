@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN"
+  "https://www.web3d.org/specifications/x3d-4.0.dtd">
+<X3D profile="Interchange" version="4.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="https://www.web3d.org/specifications/x3d-4.0.xsd">
+  <head>
+    <meta name="title" content="satelliteA.x3d"/>
+  </head>
+  <Scene>
+    <!-- A green tetrahedral cluster. Self-animating so you can see it
+         "wake up" when the hub pages it in. -->
+    <Transform DEF="ClusterA">
+      <Shape>
+        <Appearance><Material diffuseColor="0.2 0.8 0.3" emissiveColor="0 0.15 0.05"/></Appearance>
+        <Cone bottomRadius="1" height="2"/>
+      </Shape>
+    </Transform>
+
+    <!-- Local bob animation, independent of the hub -->
+    <TimeSensor DEF="BobClockA" cycleInterval="3" loop="true"/>
+    <PositionInterpolator DEF="BobPathA"
+        key="0 0.5 1" keyValue="0 0 0  0 0.6 0  0 0 0"/>
+    <ROUTE fromNode="BobClockA" fromField="fraction_changed" toNode="BobPathA" toField="set_fraction"/>
+    <ROUTE fromNode="BobPathA" fromField="value_changed" toNode="ClusterA" toField="set_translation"/>
+  </Scene>
+</X3D>

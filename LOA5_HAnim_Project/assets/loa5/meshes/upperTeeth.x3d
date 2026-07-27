@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='upperTeeth.x3d' name='title'/>
+    <meta content='upperTeeth includes all upper teeth' name='description'/>
+    <meta content='Don Brutzman' name='creator'/>
+    <meta content='4 April 2026' name='created'/>
+    <meta content='23 April 2026' name='modified'/>
+    <meta content='skull.x3d' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Skull#Humans' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Human_tooth' name='reference'/>
+    <meta content='United States, https://en.wikipedia.org/wiki/Universal_Numbering_System' name='reference'/>
+    <meta content='ISO 3950, https://en.wikipedia.org/wiki/FDI_World_Dental_Federation_notation' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/FDI_World_Dental_Federation_notation#/media/File:Comparison_of_dental_notations.svg' name='reference'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/upperTeeth.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='upperTeeth.x3d'/>
+    <Background skyColor='0.858824 1 0.94902'/>
+    <!-- user hover lights bone and reveals description, user selection/deselection temporarily binds/unbinds close-up hidden viewpoint -->
+    <TouchSensor DEF='UserTouchSensor' description='upper teeth'/>
+    <Transform DEF='SkullLocalOffset' translation='0 1.6 0.1'>
+      <ViewpointGroup DEF='ViewpointGroup_upperTeeth' description='upper teeth model' retainUserOffsets='true'>
+        <Viewpoint DEF='ViewFromFront' description='upperTeeth face' nearDistance='0.001' position='0 0 0.2' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBehind' description='upperTeeth from left side' nearDistance='0.001' orientation='0 1 0 1.5708' position='0.2 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromLeft' description='upperTeeth from behind' nearDistance='0.001' orientation='0 1 0 3.1416' position='0 0 -0.2' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromRight' description='upperTeeth from right side' nearDistance='0.001' orientation='0 1 0 -1.5708' position='-0.2 0 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromAbove' description='upperTeeth from above' nearDistance='0.001' orientation='1 0 0 -1.5708' position='0 0.2 0' retainUserOffsets='true'/>
+        <Viewpoint DEF='ViewFromBelow' description='upperTeeth from below' nearDistance='0.001' orientation='1 0 0 1.5708' position='0 -0.2 0' retainUserOffsets='true'/>
+      </ViewpointGroup>
+      <!-- nevertheless, TouchSensor interfaces from each of the Inline models are closer, taking priority and overriding this interface -->
+      <BooleanToggle DEF='UserTouchState'/>
+      <ROUTE fromField='isActive' fromNode='UserTouchSensor' toField='set_boolean' toNode='UserTouchState'/>
+      <Viewpoint DEF='HiddenViewpoint' nearDistance='0.001' position='0 0 0.3' retainUserOffsets='true'>
+        <NavigationInfo containerField='navigationInfo' transitionType='"ANIMATE"' type='"EXAMINE"'/>
+      </Viewpoint>
+      <ROUTE fromField='toggle' fromNode='UserTouchState' toField='set_bind' toNode='HiddenViewpoint'/>
+      <DirectionalLight DEF='HiddenLight' ambientIntensity='1' color='0.1 0.1 1' on='false'/>
+      <ROUTE fromField='toggle' fromNode='UserTouchState' toField='on' toNode='HiddenLight'/>
+      <Transform DEF='CenterOfRotationForJoint' visible='false'>
+        <!-- insert computations for joint center of rotation here -->
+        <Inline DEF='AxesDisplay' description='RGB display axes showing XYZ direction in local coordinate system' url='"AxesDisplay.x3d"' visible='false'/>
+      </Transform>
+      <ROUTE fromField='toggle' fromNode='UserTouchState' toField='visible' toNode='CenterOfRotationForJoint'/>
+    </Transform>
+    <Inline DEF='tooth_molar_1_18' url='"tooth_molar_1_18.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_1_18.x3d" "tooth_molar_1_18.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_1_18.wrl"'/>
+    <!-- r_molar3c.x3d r_molar3r.x3d -->
+    <Inline DEF='tooth_molar_2_17' url='"tooth_molar_2_17.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_2_17.x3d" "tooth_molar_2_17.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_2_17.wrl"'/>
+    <!-- r_molar2c.3xd r_molar2r.3xd -->
+    <Inline DEF='tooth_molar_3_16' url='"tooth_molar_3_16.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_3_16.x3d" "tooth_molar_3_16.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_3_16.wrl"'/>
+    <!-- r_molar1c.3xd r_molar1r.3xd -->
+    <Inline DEF='tooth_premolar_4_15' url='"tooth_premolar_4_15.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_4_15.x3d" "tooth_premolar_4_15.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_4_15.wrl"'/>
+    <!-- rpreol2c.x3d rpreol2r.x3d -->
+    <Inline DEF='tooth_premolar_5_14' url='"tooth_premolar_5_14.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_5_14.x3d" "tooth_premolar_5_14.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_5_14.wrl"'/>
+    <!-- rpreol1c.x3d rpreol1r.x3d -->
+    <Inline DEF='tooth_canine_6_13' url='"tooth_canine_6_13.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_6_13.x3d" "tooth_canine_6_13.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_6_13.wrl"'/>
+    <!-- r_caninec.x3d r_caniner.x3d -->
+    <Inline DEF='tooth_incisor_7_12' url='"tooth_incisor_7_12.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_7_12.x3d" "tooth_incisor_7_12.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_7_12.wrl"'/>
+    <!-- rlatincc.x3d rlatincr.x3d -->
+    <Inline DEF='tooth_incisor_8_11' url='"tooth_incisor_8_11.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_8_11.x3d" "tooth_incisor_8_11.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_8_11.wrl"'/>
+    <!-- rcenincc.x3d rcenincr.x3d -->
+    <Inline DEF='tooth_incisor_9_21' url='"tooth_incisor_9_21.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_9_21.x3d" "tooth_incisor_9_21.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_9_21.wrl"'/>
+    <!-- lcenincc.x3d lcenincr.x3d -->
+    <Inline DEF='tooth_incisor_10_22' url='"tooth_incisor_10_22.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_10_22.x3d" "tooth_incisor_10_22.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_incisor_10_22.wrl"'/>
+    <!-- llatincc.x3d llatincr.x3d -->
+    <Inline DEF='tooth_canine_11_23' url='"tooth_canine_11_23.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_11_23.x3d" "tooth_canine_11_23.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_canine_11_23.wrl"'/>
+    <!-- l_caninec.x3d l_caniner.x3d -->
+    <Inline DEF='tooth_premolar_12_24' url='"tooth_premolar_12_24.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_12_24.x3d" "tooth_premolar_12_24.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_12_24.wrl"'/>
+    <!-- lpreol1c.x3d lpreol1r.x3d -->
+    <Inline DEF='tooth_premolar_13_25' url='"tooth_premolar_13_25.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_13_25.x3d" "tooth_premolar_13_25.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_premolar_13_25.wrl"'/>
+    <!-- lpreol2c.x3d lpreol2r.x3d -->
+    <Inline DEF='tooth_molar_14_26' url='"tooth_molar_14_26.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_14_26.x3d" "tooth_molar_14_26.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_14_26.wrl"'/>
+    <!-- l_molar1c.3xd l_molar1r.3xd -->
+    <Inline DEF='tooth_molar_15_27' url='"tooth_molar_15_27.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_15_27.x3d" "tooth_molar_15_27.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_15_27.wrl"'/>
+    <!-- l_molar2c.3xd l_molar2r.3xd -->
+    <Inline DEF='tooth_molar_16_28' url='"tooth_molar_16_28.x3d" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_16_28.x3d" "tooth_molar_16_28.wrl" "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/tooth_molar_16_28.wrl"'/>
+    <!-- l_molar3c.x3d l_molar3r.x3d -->
+  </Scene>
+</X3D>

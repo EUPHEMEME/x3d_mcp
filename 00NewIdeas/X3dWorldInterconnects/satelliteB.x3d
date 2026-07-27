@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN"
+  "https://www.web3d.org/specifications/x3d-4.0.dtd">
+<X3D profile="Interchange" version="4.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="https://www.web3d.org/specifications/x3d-4.0.xsd">
+  <head>
+    <meta name="title" content="satelliteB.x3d"/>
+    <meta name="description" content="Exports RemoteSpin for hub-driven rotation"/>
+  </head>
+  <Scene>
+    <!-- This Transform is the cross-world hook. The hub IMPORTs it as
+         'SatB_Spin' and ROUTEs an OrientationInterpolator into its
+         set_rotation. No local clock needed - the hub owns the timing. -->
+    <Transform DEF="RemoteSpin">
+      <Shape>
+        <Appearance><Material diffuseColor="0.8 0.3 0.7" emissiveColor="0.15 0 0.1"/></Appearance>
+        <Box size="1.4 1.4 1.4"/>
+      </Shape>
+      <!-- A satellite ornament so the rotation is legible -->
+      <Transform translation="0 1.2 0">
+        <Shape>
+          <Appearance><Material diffuseColor="1 1 0.4" emissiveColor="0.2 0.2 0"/></Appearance>
+          <Sphere radius="0.25"/>
+        </Shape>
+      </Transform>
+    </Transform>
+
+    <!-- EXPORT exposes the DEF to any parent Inline namespace -->
+    <EXPORT localDEF="RemoteSpin" AS="RemoteSpin"/>
+  </Scene>
+</X3D>

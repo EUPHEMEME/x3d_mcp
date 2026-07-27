@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile='Interactive' version='4.0' xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
+  <head>
+    <meta content='vomer.x3d' name='title'/>
+    <meta content='unpaired facial bone in the skull forming part of nasal septum, LOA-5 part of skull LOA-1. includes visualization axis for skull.x3d collection.' name='description'/>
+    <meta content='Don Brutzman, Joe Williams, John Carlson, Damon Hernandez' name='creator'/>
+    <meta content='Don Brutzman' name='translator'/>
+    <meta content='5 December 2013' name='created'/>
+    <meta content='5 March 2026' name='translated'/>
+    <meta content='30 May 2026' name='modified'/>
+    <meta content='originals/vom.x3d' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Vomer' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/Nasal_septum' name='reference'/>
+    <meta content='https://en.wikipedia.org/wiki/List_of_bones_of_the_human_skeleton' name='reference'/>
+    <meta content='usage examples https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Medical' name='reference'/>
+    <meta content='X3D-Edit 4.0, https://www.web3d.org/x3d/tools/X3D-Edit' name='generator'/>
+    <meta content='X3D Tidy, https://www.web3d.org/x3d/stylesheets/X3dTidy.html' name='generator'/>
+    <meta content='X3DJSAIL https://www.web3d.org/specifications/java/X3DJSAIL.html' name='generator'/>
+    <meta content='https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/vomer.x3d' name='identifier'/>
+    <meta content='../license.html' name='license'/>
+  </head>
+  <Scene>
+    <WorldInfo title='vomer.x3d'/>
+    <Background skyColor='0.8588 1 0.949'/>
+    <!-- user hover lights bone and reveals description, user selection/deselection temporarily binds/unbinds close-up hidden viewpoint -->
+    <TouchSensor DEF='UserTouchSensor' description='bone vomer LOA-5 part of skull LOA-1'/>
+    <Transform DEF='vomer' translation='0 1.6311 0.0634'>
+      <BooleanToggle DEF='UserTouchState'/>
+      <ROUTE fromField='isActive' fromNode='UserTouchSensor' toField='set_boolean' toNode='UserTouchState'/>
+      <Viewpoint DEF='HiddenViewpoint' nearDistance='0.001' position='0 0 0.2' retainUserOffsets='true'>
+        <NavigationInfo containerField='navigationInfo' transitionType='"ANIMATE"' type='"EXAMINE"'/>
+      </Viewpoint>
+      <ROUTE fromField='toggle' fromNode='UserTouchState' toField='set_bind' toNode='HiddenViewpoint'/>
+      <DirectionalLight DEF='HiddenLight' ambientIntensity='1' color='0.1 0.1 1' on='false'/>
+      <ROUTE fromField='toggle' fromNode='UserTouchState' toField='on' toNode='HiddenLight'/>
+      <Transform DEF='CenterOfRotationForJoint' translation='0 -0.02 -0.105' visible='false'>
+        <Inline DEF='AxesDisplay' description='RGB display axes showing XYZ direction in local coordinate system' url='"AxesDisplay.x3d"'/>
+        <!-- computations follow from ComputeBoneOffsetsForJointCenters for parent joint center of rotation -->
+        <!-- bone vomer.x3d + translation +0.0000 +1.6311 +0.0634 -->
+        <!-- bone vomer.x3d adjusted axes +0.0000 -0.0200 -0.1050 -->
+        <!-- bone vomer.x3d =joint center +0.0000 +1.6111 -0.0416 -->
+      </Transform>
+      <ROUTE fromField='toggle' fromNode='UserTouchState' toField='visible' toNode='CenterOfRotationForJoint'/>
+      <Shape>
+        <Appearance>
+          <PhysicalMaterial DEF='BoneMaterial' baseColor='1 0.9765 0.8667' metallic='0' roughness='0.6'/>
+        </Appearance>
+        <IndexedFaceSet DEF='vomer_geometry' coordIndex='0 1 2 -1 3 4 5 -1 6 7 8 -1 9 10 11 -1 12 13 14 -1 15 16 17 -1 0 18 19 -1 2 20 21 -1 22 23 2 -1 22 24 25 -1 25 26 27 -1 28 29 30 -1 5 4 29 -1 31 32 26 -1 26 33 31 -1 34 35 36 -1 37 16 38 -1 39 40 41 -1 42 19 39 -1 20 43 44 -1 33 25 24 -1 45 38 34 -1 46 35 34 -1 25 33 26 -1 14 5 31 -1 4 30 29 -1 47 28 30 -1 27 26 48 -1 43 49 50 -1 51 45 36 -1 52 35 46 -1 7 11 25 -1 6 5 14 -1 3 30 4 -1 53 47 54 -1 55 7 27 -1 1 56 2 -1 17 56 57 -1 55 8 7 -1 54 30 53 -1 14 9 6 -1 52 51 36 -1 17 16 58 -1 24 22 21 -1 40 49 37 -1 48 55 27 -1 30 54 47 -1 5 32 31 -1 36 45 34 -1 58 16 37 -1 21 44 24 -1 24 44 33 -1 20 44 21 -1 43 59 44 -1 19 60 39 -1 37 38 61 -1 14 62 12 -1 33 63 31 -1 48 26 32 -1 29 32 5 -1 43 50 39 -1 25 11 22 -1 2 21 22 -1 0 19 42 -1 64 57 0 -1 15 51 16 -1 36 35 52 -1 9 11 7 -1 7 6 9 -1 3 5 6 -1 30 3 53 -1 27 7 25 -1 55 53 8 -1 47 53 55 -1 52 16 51 -1 16 52 46 -1 2 65 20 -1 2 56 65 -1 40 61 41 -1 61 40 37 -1 41 66 67 -1 66 41 61 -1 19 62 60 -1 19 12 62 -1 33 59 63 -1 33 44 59 -1 59 39 60 -1 39 59 43 -1 50 40 39 -1 50 49 40 -1 61 45 66 -1 61 38 45 -1 23 11 10 -1 23 22 11 -1 0 23 18 -1 2 23 0 -1 57 1 0 -1 57 56 1 -1 45 15 66 -1 45 51 15 -1 53 6 8 -1 6 53 3 -1 9 13 10 -1 14 13 9 -1 56 58 65 -1 56 17 58 -1 67 0 42 -1 0 67 64 -1 18 10 13 -1 10 18 23 -1 32 28 48 -1 29 28 32 -1 62 31 63 -1 31 62 14 -1 58 49 65 -1 58 37 49 -1 39 67 42 -1 41 67 39 -1 63 60 62 -1 59 60 63 -1 65 43 20 -1 65 49 43 -1 16 34 38 -1 46 34 16 -1 28 55 48 -1 55 28 47 -1 13 19 18 -1 13 12 19 -1 66 64 67 -1 15 64 66 -1 15 57 64 -1 17 57 15 -1' creaseAngle='1.571'>
+          <Coordinate DEF='vomer_coordinate' point='0.0013 -0.0018 0.0014 0.0012 -0.0041 0.0024 0.0013 -0.0073 -0.0001 0.0011 0.0044 -0.0259 0 0.007 -0.025 0 0.0082 -0.0213 0.0014 0.0034 -0.0227 0.0016 -0.0061 -0.0178 0.0031 -0.0019 -0.0237 0.0009 0.0022 -0.0165 0.0011 -0.0002 -0.0127 0.0013 -0.007 -0.0147 0 0.0116 -0.0097 0.0011 0.0073 -0.011 0 0.0121 -0.0144 0.0006 -0.0034 0.0155 0 -0.0069 0.0197 0.0007 -0.0056 0.0142 0.0014 0.0013 -0.0052 0 0.009 -0.0034 0 -0.0105 -0.0007 0 -0.0113 -0.0057 0.0014 -0.01 -0.0078 0.0017 -0.0058 -0.0064 0 -0.012 -0.0087 0 -0.0121 -0.0156 -0.0016 -0.0061 -0.0178 0 -0.0069 -0.0175 -0.0021 0.0017 -0.0269 -0.0011 0.0044 -0.0259 0 0.0058 -0.0289 -0.0009 0.0022 -0.0165 -0.0014 0.0034 -0.0227 -0.0013 -0.007 -0.0147 -0.0006 -0.0061 0.0242 0 -0.0076 0.0295 0 -0.005 0.0246 -0.0007 -0.0056 0.0142 -0.0006 -0.0047 0.0202 -0.0013 -0.0018 0.0013 -0.001 -0.0046 0.0087 -0.0009 -0.0021 0.0094 0 0.0018 0.0018 -0.0013 -0.0073 -0.0001 -0.0014 -0.01 -0.0078 0 -0.0027 0.0203 0 -0.0077 0.0235 0 0.0026 -0.0264 -0.0031 -0.0019 -0.0237 -0.001 -0.0057 0.0079 -0.0012 -0.0041 0.0024 0.0006 -0.0047 0.0202 0.0006 -0.0061 0.0243 0.0021 0.0017 -0.0269 0 0.0059 -0.0295 0 0.0003 -0.0233 0.001 -0.0057 0.0079 0.001 -0.0046 0.0087 0 -0.0075 0.0143 -0.0017 -0.0058 -0.0064 -0.0014 0.0013 -0.0052 -0.0006 -0.0034 0.0154 -0.0011 0.0073 -0.0111 -0.0011 -0.0002 -0.0127 0.0009 -0.0021 0.0095 0 -0.0089 0.0073 0 -0.0009 0.0158 0 0.0005 0.0099'/>
+        </IndexedFaceSet>
+      </Shape>
+    </Transform>
+  </Scene>
+</X3D>

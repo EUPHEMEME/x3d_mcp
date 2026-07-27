@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN"
+  "https://www.web3d.org/specifications/x3d-4.0.dtd">
+<X3D profile="Interchange" version="4.0"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+     xsd:noNamespaceSchemaLocation="https://www.web3d.org/specifications/x3d-4.0.xsd">
+  <head>
+    <meta name="title" content="deepworld.x3d"/>
+  </head>
+  <Scene>
+    <!-- Named viewpoint the Anchor's #Arrival fragment binds to on load.
+         The avatar lands here, correctly oriented. -->
+    <Viewpoint DEF="Arrival" description="Arrival"
+               position="0 1.6 8" orientation="0 1 0 0"/>
+
+    <Transform translation="0 1 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0.5 0.2 0.9" emissiveColor="0.1 0 0.2"/></Appearance>
+        <Box size="2 2 2"/>
+      </Shape>
+    </Transform>
+
+    <!-- Return portal back to the hub's Entry viewpoint -->
+    <Transform translation="0 1 6">
+      <Anchor description="Back to Hub" url='"hub.x3d#Entry"'>
+        <Shape>
+          <Appearance><Material diffuseColor="0.2 0.9 0.9" emissiveColor="0 0.2 0.2"/></Appearance>
+          <Cone bottomRadius="0.7" height="1.4"/>
+        </Shape>
+      </Anchor>
+    </Transform>
+  </Scene>
+</X3D>
