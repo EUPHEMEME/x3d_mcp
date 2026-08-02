@@ -1,82 +1,87 @@
 # Draft replies — ready to paste
 
-Two threads. Both attach the matching test from this directory.
+Attach the matching test from this directory to each thread.
 
 ---
 
 ## 1 → Python-SAI issue #3 (EnvironmentLight.global)
 
-Thank you — and no apology needed for the reopen.
+Thank you — and you are right about `global`.
 
-I think the beta is still affected, and the reason is that the defect is not in
-the emit logic itself but in **which schema version that logic is keyed to**.
+**Withdrawing the original argument.** The issue as I filed it reasoned from a
+commented-out `FALSE` in the 4.0 stub, and that reasoning does not hold:
+`EnvironmentLight` is a 4.1 node, its `global` default is `TRUE` in 4.1, and the
+code you quoted implements that correctly. Nothing to fix there.
 
-From the two schemas as published:
+What remains is a different and I think more checkable problem, in two parts.
+`X3DSerializationValidityTest.py` (attached) covers both, isolating each from
+the other. It needs `xmllint` and a local `x3d-4.0.xsd`.
 
-| schema | `EnvironmentLight` `global` default |
-|---|---|
-| `x3d-4.0.xsd` | **`false`** |
-| `x3d-4.1.xsd` | **`true`** |
+### A. `xmlns:xsd` is `https://` and needs to be `http://`
 
-For contrast, `PointLight` is `true` and `DirectionalLight` is `false` in *both*.
-`EnvironmentLight` appears to be the only light whose default moved between the
-two — which I suspect is the substance of Mantis 1539.
-
-The line you quoted:
-
-```python
-if self.USE=="" and not self.global_:   # default=true
-    result += " global='" + SFBool(self.global_).XML() + "'"
-```
-
-is exactly right **for a document that declares X3D 4.1**. It omits the
-attribute when the value equals the assumed default of `true`. But x3d.py emits
-a 4.0 header by default:
+This one affects **every** document x3d.py writes, not just lighting. Current
+output:
 
 ```xml
-<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 4.0//EN" ...>
 <X3D profile='Immersive' version='4.0'
+     xmlns:xsd='https://www.w3.org/2001/XMLSchema-instance'
      xsd:noNamespaceSchemaLocation='https://www.web3d.org/specifications/x3d-4.0.xsd'>
-  <Scene>
-    <EnvironmentLight DEF='ibl'/>
-  </Scene>
-</X3D>
 ```
 
-That is the output for `EnvironmentLight(DEF='ibl', global_=True)`. The document
-declares 4.0 and cites `x3d-4.0.xsd`, where the default is `false` — so a
-conforming 4.0 reader scopes the light to its parent and image-based lighting
-disappears. No error is raised at any stage, because an absent attribute is
-valid under either schema.
+The canonical namespace name is `http://www.w3.org/2001/XMLSchema-instance`.
+Namespace names are matched by literal string comparison rather than resolved as
+URLs, so the `https` form is a different namespace and
+`xsd:noNamespaceSchemaLocation` stops being the schema-instance attribute:
 
-What makes it easy to miss: **round-tripping through x3d.py hides it**, since
-the reader applies the same assumed default the writer used. It only shows up in
-a different conforming reader.
+```
+element X3D: Schemas validity error : Element 'X3D', attribute
+'{https://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation':
+The attribute ... is not allowed.
+```
 
-So the fix is conditional on the declared version rather than absolute — emit
-`global` whenever it is `True` for a 4.0 document, or keep the current rule and
-emit a 4.1 header.
+A document containing nothing but a `DirectionalLight` fails this way. Changing
+that one character, and nothing else, makes the same bytes validate — the test
+does exactly that substitution as its isolation step, so the diagnosis does not
+rest on my reading.
 
-**Test program:** `EnvironmentLightGlobalTest.py` (attached). Stdlib + x3d.py,
-self-asserting, exits non-zero. It prints the in-memory default, both schema
-defaults, and the emitted document, then fails on the two conditions that
-matter. It should simply pass once this is resolved either way.
+(The `schemaLocation` *value* pointing at `https://www.web3d.org/...` is fine —
+that one really is a URL and is fetched. It is only the namespace name that must
+stay `http`.)
 
-**How I was rendering:** X_ITE (`create3000.github.io/x_ite/`) in a headless
-Chromium via Playwright, comparing rendered frames with and without the node. I
-first noticed it because a scene lit only by an `EnvironmentLight` came back
-visually unlit while the document validated clean.
+### B. A 4.1-only node is emitted into a document declared 4.0
 
-Happy to supply a full exemplar scene if the minimal case above is not enough —
-I kept the test to six lines of construction so it is cheap to run in CI.
+`EnvironmentLight(DEF='ibl', global_=True)` inside an `X3D(version='4.0')`
+produces a document whose header declares `version='4.0'`, whose DOCTYPE is
+`ISO//Web3D//DTD X3D 4.0//EN`, and which cites `x3d-4.0.xsd` — while containing a
+node that is commented out of that schema under `deferred until X3D 4.1`. With
+defect A neutralised, the remaining error is:
+
+```
+element EnvironmentLight: Schemas validity error :
+Element 'EnvironmentLight': This element is not expected.
+```
+
+No warning is issued at construction or serialization.
+
+I would not describe the default-dropping as a bug: dropping a field whose value
+equals the default is correct canonicalisation. It is just that here it removes
+the one attribute that would have made the version mismatch visible, so the
+author gets a 4.0 file, a 4.0 validator, and no signal. A version check at
+serialization would surface it cheaply.
+
+**How I was rendering:** X_ITE (`create3000.github.io/x_ite/`) in headless
+Chromium via Playwright, comparing rendered frames with and without the node. The
+scene came back visually unlit while validating clean, which is what sent me
+looking.
 
 ---
 
 ## 2 → SourceForge ticket #117 (HAnim XML output)
 
 Attached is `HAnimContainerFieldTest.py` — a six-node reduction of the JinLOA1.py
-failure, written so it runs in CI without the full model. It reproduces all three
-problems you noted, plus one more.
+failure, small enough to run in CI without the full model. It reproduces all
+three problems you noted, plus one more, asserting each separately so a partial
+fix reports precisely what remains.
 
 Output on x3d.py 4.0.65.3:
 
@@ -89,7 +94,7 @@ Output on x3d.py 4.0.65.3:
 </HAnimHumanoid>
 ```
 
-built from:
+from:
 
 ```python
 X.HAnimHumanoid(DEF="hanim_Test", name="Test", version="2.0",
@@ -99,20 +104,16 @@ X.HAnimHumanoid(DEF="hanim_Test", name="Test", version="2.0",
 ```
 
 1. **`containerField` omitted on non-default slots.** The joint was placed in
-   `skeleton` and the segment in `segments`; neither is serialized with a
+   `skeleton`, the segment in `segments`; neither is serialized with a
    `containerField`, so on reparse both land in `children`. `HAnimHumanoid` has
-   six node fields and only one is the default, so this is the common case
-   rather than an edge case. It is silent: the nodes are all still present and
-   the document is still schema-valid — the skeleton just is not a skeleton.
+   six node fields and only one is the default, so this is the common case. It is
+   silent — every node is still present and the document still validates; the
+   skeleton just is not a skeleton.
 
-2. **`USE` precedes its `DEF`.** `USE='hanim_sacrum'` is emitted at offset 61,
+2. **`USE` precedes its `DEF`.** `USE='hanim_sacrum'` at offset 61,
    `DEF='hanim_sacrum'` at 162 — a forward reference in a format read in
    document order.
 
 3. **`version='2.0'` dropped.** Set on the object and retained there
-   (`obj.version == '2.0'`), absent from the XML. This one is not in the ticket
-   text but is visible in your own "expected output" excerpt, which carries
-   `version='2.0'`.
-
-The test asserts each separately so a partial fix still reports precisely what
-remains.
+   (`obj.version == '2.0'`), absent from the XML. Not in the ticket text, but
+   your own "expected output" excerpt carries `version='2.0'`.
