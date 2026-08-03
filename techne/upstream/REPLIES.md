@@ -1,4 +1,38 @@
-# Draft replies — ready to paste
+# Upstream threads — POSTED, with one correction
+
+| thread | comment |
+|---|---|
+| Python-SAI #3 (EnvironmentLight / serialization validity) | [5169351732](https://github.com/Web3DConsortium/Python-SAI/issues/3#issuecomment-5169351732) — **stands, all findings reproduce on 4.0.65.5** |
+| Python-SAI #2 (HAnim containerField) | [5169354573](https://github.com/Web3DConsortium/Python-SAI/issues/2#issuecomment-5169354573) — **superseded** |
+| Python-SAI #2 correction + `PhysicallyBasedMaterialTest.py` | [5169531565](https://github.com/Web3DConsortium/Python-SAI/issues/2#issuecomment-5169531565) |
+
+## The correction, and how it happened
+
+The repo venv pins **x3d.py 4.0.65.4**. Don had announced the containerField fix
+in **4.0.65.5** on 2026-06-30, in ticket #117 — which I had read. I built the
+reproducer against what was installed and did not re-test against the release he
+named before posting. Three of four findings were already fixed.
+
+Verified across both versions:
+
+| check | 4.0.65.3 | 4.0.65.5 |
+|---|---|---|
+| `skeleton` containerField | FAIL | **PASS** |
+| `segments` containerField | FAIL | **PASS** |
+| DEF before USE | FAIL | **PASS** |
+| `baseTexture` containerField | FAIL | **PASS** |
+| `HAnimHumanoid.version` serialized | FAIL | FAIL |
+| xmlns:xsd is `http://` (issue #3) | FAIL | FAIL |
+| 4.1-only node in a 4.0 document (issue #3) | FAIL | FAIL |
+
+**Rule going forward: test against the newest release, not the pinned one, before
+reporting anything upstream.** Cheap to do, and the cost of not doing it is a
+public correction.
+
+`PhysicallyBasedMaterialTest.py` is now a regression LOCK on Don's fix rather
+than a bug report — 5 failures on .3, 1 on .5 — which is what he wanted it for.
+
+---
 
 Attach the matching test from this directory to each thread.
 
