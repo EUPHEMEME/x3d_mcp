@@ -28,7 +28,7 @@ Tested with the construction from `ballx_ite.py` (`backTexture` / `bottomTexture
 
 Don's 4.0.65.5 fix already covers it, and it is **slot-aware rather than blanket** — a texture in the *default* `texture` slot still correctly emits no `containerField`. The test asserts that as an explicit control so a later change cannot regress into emitting it everywhere.
 
-Field-name note for anyone testing against older material: these are the X3D **4.0** names (`frontTexture`), not the 3.x ones (`front`). Passing `front=` to 4.0.65.5 raises `TypeError` — correct behaviour, but easy to misread as the bug.
+Field-name note, corrected by @coderextreme: these are the X3D **4.0** names (`frontTexture`), not the 3.x ones (`front`), and that is a **deliberate clean break** rather than a missing alias — x3d.py "started at version 4, to be compatible with X3DUOM version 4, X3D architecture 4.0 and SAI version 4", and is "definitely incompatible with X3DUOM 3.X, unless aliases have been added ... a full version upgrade", the same break as C++ 3.3 → 4.0. So the `TypeError` you get from `front=` is the library working correctly. I mention it only because a test written against 3.x field names is testing the wrong standard, which is an easy way to manufacture a phantom bug.
 
 ---
 

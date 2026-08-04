@@ -43,6 +43,15 @@ WHAT IT COVERS
      indistinguishable. Case contributed by John Carlson (ballx_ite.py in
      coderextreme/X3DJSONLD).
 
+     FIELD NAMES ARE X3D 4.0, NOT 3.x -- frontTexture, not front. Passing
+     front= raises TypeError. Per John Carlson: this is deliberate, not an
+     alias gap. x3d.py "started at version 4, to be compatible with X3DUOM
+     version 4, X3D architecture 4.0 and SAI version 4", and is "definitely
+     incompatible with X3DUOM 3.X, unless aliases have been added ... a full
+     version upgrade" -- the same clean break as C++ 3.3 to 4.0. So a
+     TypeError here is the library working correctly, and a test written
+     against 3.x field names is testing the wrong standard.
+
   4. HAnimHumanoid.version -- STILL FAILING as of 4.0.65.5. Set on the object,
      absent from the XML. Kept in this file as an open item rather than split
      into its own, so one run reports the whole picture.
