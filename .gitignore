@@ -51,3 +51,10 @@ Shasta_X3D_Project.zip
 LOA5_HAnim_Project.zip
 uv.lock
 techne/uv.lock
+
+# Local-filesystem index tools: these embed absolute ~/ paths and a recursive
+# map of the PRIVATE ~/E monorepo. file_browser.html carried 1,314 /Users/alexander
+# references, 248 MagicSquares, 104 moonbeam, 7 MTA and the Eupheme_Provisional
+# patent folder. This repo is a PUBLIC fork. Never track these.
+file_browser.html
+*_browser.html
