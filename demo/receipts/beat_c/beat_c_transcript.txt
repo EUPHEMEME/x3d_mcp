@@ -1,0 +1,28 @@
+$ .venv/bin/python demo/beat_c_probe.py
+==================================================================
+BEAT C — the bone that isn't there (differential probe)
+==================================================================
+defect under test: hanim_l_tarsal_distal_phalanx_5 (zero-geometry asset, loa5-asset-findings #2)
+healthy twin     : hanim_r_tarsal_distal_phalanx_5 (complete mesh)
+renderer         : src/tools/render.py::_render_xite_async (X_ITE + headless Chromium), 512x384, wait 6000 ms
+canned sub-scene : /Users/alexander/x3d_mcp/demo/foot_probe.x3d  (9591 bytes — both little-toe joint subtrees, verbatim from build_anatomy/skeleton.x3dfrag)
+
+baseline frame   : non_blank=True  stddev=26.45  (512x384)
+
+removing each HAnimSegment in turn and re-rendering...
+
+  segment                                changed px       of   verdict
+  hanim_l_tarsal_distal_phalanx_5                 0   196608   ABSENT
+  hanim_r_tarsal_distal_phalanx_5              9243   196608   CONTRIBUTES
+  (threshold: >= 98 changed px of 196608 to count as contributing)
+
+==================================================================
+BEAT C SELF-ASSERTION
+==================================================================
+  hanim_l_tarsal_distal_phalanx_5: 0 px in a NON-blank frame — in the document,
+  never on screen. hanim_r_tarsal_distal_phalanx_5: 9243 px.
+  The blank gate passes this frame; only the differential sees the
+  missing bone. (The left segment is empty in the ASSET, so it draws
+  nothing from any camera — camera choice cannot fake this result.)
+  wall-time: 36.3s for 3 renders (12.1s per render)
+  receipts -> /Users/alexander/x3d_mcp/demo/receipts/beat_c

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# build_anatomy_spine.py v1.1 2026-08-31 — spine authoring + full audit transcript (HEADER/CALL/BLOCK/REPAIR)
 """Author the LOA5 Anatomy Explorer's studio spine THROUGH the Technē proxy.
 
 The 257-bone payload is bulk transcription of Web3D's own canonical meshes --
@@ -14,9 +15,11 @@ Out:  build_anatomy/studio_spine.x3d   + a transcript of what Technē did
 from __future__ import annotations
 
 import asyncio
+import datetime
 import json
 import os
 import re
+import subprocess
 import sys
 
 from mcp import ClientSession, StdioServerParameters
@@ -45,6 +48,7 @@ class Techne:
 
     async def call(self, tool: str, **args):
         self.calls += 1
+        note("CALL", tool=tool, args=_brief(args))
         res = await self.s.call_tool(tool, args)
         text = "\n".join(c.text for c in res.content if getattr(c, "type", "") == "text")
 
@@ -75,7 +79,24 @@ class Techne:
 
 
 def _brief(args: dict) -> str:
-    return ", ".join(f"{k}={str(v)[:26]}" for k, v in args.items() if k != "fields")
+    parts = []
+    for k, v in args.items():
+        if k == "fields" and isinstance(v, dict):
+            parts.append(f"fields[{','.join(v)}]")
+        else:
+            parts.append(f"{k}={str(v)[:26]}")
+    return ", ".join(parts)
+
+
+def _git_sha() -> str:
+    for path in (f"{REPO}/techne", REPO):
+        try:
+            return subprocess.check_output(
+                ["git", "-C", path, "rev-parse", "--short", "HEAD"],
+                text=True, stderr=subprocess.DEVNULL).strip()
+        except (subprocess.CalledProcessError, OSError):
+            continue
+    return "unknown"
 
 
 def _extract_id(text: str) -> str | None:
@@ -224,15 +245,23 @@ async def build(t: Techne) -> str:
 
 async def main():
     os.makedirs(OUT, exist_ok=True)
+    # coherence must be named explicitly or the standing reminders silently
+    # switch off (techne/config.py). instrumentation likewise: an explicit
+    # profile WINS over TECHNE_TRACE, so the server-side per-call JSONL
+    # (techne/trace.py -> TECHNE_TRACE_DIR) only flushes if named here. It is
+    # record-only, never behavioral, and corroborates this client transcript.
+    profile = os.environ.get("TECHNE_PROFILE", "core,coherence,instrumentation")
+    note("HEADER",
+         timestamp=datetime.datetime.now().isoformat(timespec="seconds"),
+         techne_sha=_git_sha(),
+         techne_profile=profile)
     params = StdioServerParameters(
         command=PY,
         args=["-m", "techne.server", "--", PY, "-m", "src.server", "--cwd", REPO],
         env={
             **os.environ,
             "PYTHONPATH": f"{REPO}/techne",
-            # coherence must be named explicitly or the standing reminders
-            # silently switch off (techne/config.py).
-            "TECHNE_PROFILE": "core,coherence",
+            "TECHNE_PROFILE": profile,
             "TECHNE_TRACE_DIR": f"{REPO}/techne_traces",
         },
         cwd=REPO,
@@ -247,11 +276,19 @@ async def main():
     open(f"{OUT}/studio_spine.x3d", "w").write(body)
     json.dump(TRANSCRIPT, open(f"{OUT}/techne_transcript.json", "w"), indent=1)
 
+    # scoreboard is COUNTED FROM THE TRANSCRIPT so the printed numbers and the
+    # audit log can never disagree; the live counters are cross-checked.
+    n = {k: sum(1 for e in TRANSCRIPT if e["kind"] == k)
+         for k in ("CALL", "BLOCK", "REPAIR")}
+    assert (n["CALL"], n["BLOCK"], n["REPAIR"]) == (t.calls, t.blocks, t.repairs), \
+        f"transcript/counter mismatch: {n} vs ({t.calls},{t.blocks},{t.repairs})"
+
     print(f"\n── Technē scoreboard ──")
-    print(f"  tool calls  : {t.calls}")
-    print(f"  blocked     : {t.blocks}")
-    print(f"  repaired    : {t.repairs}")
+    print(f"  tool calls  : {n['CALL']}")
+    print(f"  blocked     : {n['BLOCK']}")
+    print(f"  repaired    : {n['REPAIR']}")
     print(f"  → {OUT}/studio_spine.x3d  ({len(body)} bytes)")
+    print(f"  → {OUT}/techne_transcript.json  ({len(TRANSCRIPT)} entries)")
 
 
 if __name__ == "__main__":

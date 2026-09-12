@@ -1,0 +1,441 @@
+{
+ "regions": [
+  {
+   "group_title": "",
+   "group_teaching": "",
+   "bones": [
+    {
+     "name": "l_tarsal_distal_phalanx_1",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the great toe. Its broad base articulates directly with the proximal phalanx (the great toe has no middle phalanx), and its expanded distal extremity supports the nail and the end of the toe.",
+     "articulates_with": [
+      "l_tarsal_proximal_phalanx_1"
+     ],
+     "note": "The great toe has no middle phalanx: Gray counts two phalanges in the great toe and three in each of the other toes.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "l_tarsal_distal_phalanx_2",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the second toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "l_tarsal_middle_phalanx_2"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "l_tarsal_distal_phalanx_3",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the third toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "l_tarsal_middle_phalanx_3"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "l_tarsal_distal_phalanx_4",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the fourth toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "l_tarsal_middle_phalanx_4"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "l_tarsal_middle_phalanx_2",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the second toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "l_tarsal_proximal_phalanx_2",
+      "l_tarsal_distal_phalanx_2"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the second toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "l_tarsal_middle_phalanx_3",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the third toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "l_tarsal_proximal_phalanx_3",
+      "l_tarsal_distal_phalanx_3"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the third toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "l_tarsal_middle_phalanx_4",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the fourth toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "l_tarsal_proximal_phalanx_4",
+      "l_tarsal_distal_phalanx_4"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the fourth toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "l_tarsal_middle_phalanx_5",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the fifth (little) toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "l_tarsal_proximal_phalanx_5"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year. (In this model the fifth toe's distal phalanx is not present as a separate left-side part.)",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the fifth (little) toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "l_tarsal_proximal_phalanx_1",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal phalanx of the great toe. Its concave base receives the head of the first metatarsal, and its head presents a trochlear surface for the distal phalanx — the great toe has only two phalanges, so this row articulates directly with the ungual phalanx.",
+     "articulates_with": [
+      "l_metatarsal_1",
+      "l_tarsal_distal_phalanx_1"
+     ],
+     "note": "Gray: there are two phalanges in the great toe and three in each of the other toes; two sesamoid bones, of which the medial is the larger, are always present on the plantar aspect of the great toe's metatarsophalangeal joint.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the great toe (hallux)",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:two in the great toe, and three in each"
+    },
+    {
+     "name": "l_tarsal_proximal_phalanx_2",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the second toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "l_metatarsal_2",
+      "l_tarsal_middle_phalanx_2"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the second toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "l_tarsal_proximal_phalanx_3",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the third toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "l_metatarsal_3",
+      "l_tarsal_middle_phalanx_3"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the third toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "l_tarsal_proximal_phalanx_4",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the fourth toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "l_metatarsal_4",
+      "l_tarsal_middle_phalanx_4"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the fourth toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "l_tarsal_proximal_phalanx_5",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the fifth (little) toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "l_metatarsal_5",
+      "l_tarsal_middle_phalanx_5"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the fifth (little) toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "r_tarsal_distal_phalanx_1",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the great toe. Its broad base articulates directly with the proximal phalanx (the great toe has no middle phalanx), and its expanded distal extremity supports the nail and the end of the toe.",
+     "articulates_with": [
+      "r_tarsal_proximal_phalanx_1"
+     ],
+     "note": "The great toe has no middle phalanx: Gray counts two phalanges in the great toe and three in each of the other toes.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "r_tarsal_distal_phalanx_2",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the second toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "r_tarsal_middle_phalanx_2"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "r_tarsal_distal_phalanx_3",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the third toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "r_tarsal_middle_phalanx_3"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "r_tarsal_distal_phalanx_4",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the fourth toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "r_tarsal_middle_phalanx_4"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "r_tarsal_distal_phalanx_5",
+     "group": "Toe phalanges — distal row",
+     "function": "Distal (ungual) phalanx of the fifth (little) toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+     "articulates_with": [
+      "r_tarsal_middle_phalanx_5"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "distal phalanx of the foot",
+      "ungual phalanx",
+      "terminal phalanx",
+      "phalanx distalis pedis"
+     ],
+     "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+    },
+    {
+     "name": "r_tarsal_middle_phalanx_2",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the second toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "r_tarsal_proximal_phalanx_2",
+      "r_tarsal_distal_phalanx_2"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the second toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "r_tarsal_middle_phalanx_3",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the third toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "r_tarsal_proximal_phalanx_3",
+      "r_tarsal_distal_phalanx_3"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the third toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "r_tarsal_middle_phalanx_4",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the fourth toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "r_tarsal_proximal_phalanx_4",
+      "r_tarsal_distal_phalanx_4"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the fourth toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "r_tarsal_middle_phalanx_5",
+     "group": "Toe phalanges — middle row",
+     "function": "Middle (second-row) phalanx of the fifth (little) toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+     "articulates_with": [
+      "r_tarsal_proximal_phalanx_5",
+      "r_tarsal_distal_phalanx_5"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "middle phalanx of the foot",
+      "second phalanx of the fifth (little) toe",
+      "phalanx media pedis"
+     ],
+     "source": "grays1918:second row are remarkably small and short"
+    },
+    {
+     "name": "r_tarsal_proximal_phalanx_1",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal phalanx of the great toe. Its concave base receives the head of the first metatarsal, and its head presents a trochlear surface for the distal phalanx — the great toe has only two phalanges, so this row articulates directly with the ungual phalanx.",
+     "articulates_with": [
+      "r_metatarsal_1",
+      "r_tarsal_distal_phalanx_1"
+     ],
+     "note": "Gray: there are two phalanges in the great toe and three in each of the other toes; two sesamoid bones, of which the medial is the larger, are always present on the plantar aspect of the great toe's metatarsophalangeal joint.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the great toe (hallux)",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:two in the great toe, and three in each"
+    },
+    {
+     "name": "r_tarsal_proximal_phalanx_2",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the second toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "r_metatarsal_2",
+      "r_tarsal_middle_phalanx_2"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the second toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "r_tarsal_proximal_phalanx_3",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the third toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "r_metatarsal_3",
+      "r_tarsal_middle_phalanx_3"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the third toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "r_tarsal_proximal_phalanx_4",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the fourth toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "r_metatarsal_4",
+      "r_tarsal_middle_phalanx_4"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the fourth toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    },
+    {
+     "name": "r_tarsal_proximal_phalanx_5",
+     "group": "Toe phalanges — proximal row",
+     "function": "Proximal (first-row) phalanx of the fifth (little) toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+     "articulates_with": [
+      "r_metatarsal_5",
+      "r_tarsal_middle_phalanx_5"
+     ],
+     "note": "Gray notes each phalanx of the foot ossifies from two centers — one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+     "synonyms": [
+      "proximal phalanx of the foot",
+      "first phalanx of the fifth (little) toe",
+      "phalanx proximalis pedis"
+     ],
+     "source": "grays1918:base is concave; and the head presents a trochlear surface"
+    }
+   ]
+  }
+ ]
+}

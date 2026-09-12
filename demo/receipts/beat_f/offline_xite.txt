@@ -1,0 +1,5 @@
+$ node demo/beat_f_shot.js http://localhost:8099/LOA5_HAnim_Project/running_human.html demo/receipts/beat_f/xite_running_human.png 15000
+wrote demo/receipts/beat_f/xite_running_human.png
+requests served same-host: 539
+external requests attempted: 0  -> OFFLINE-CLEAN
+(519 local-404 log lines elided — the documented AxesDisplay.x3d missing-asset defect, docs/loa5-asset-findings.md #1; all 404s are same-host)

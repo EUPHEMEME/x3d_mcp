@@ -1,0 +1,15 @@
+<X3D profile='Immersive' version='4.0'>
+  <Scene>
+    <Viewpoint position='0 0 0.018' nearDistance='0.001'
+               description='bone close-up (mesh is ~8 mm long)'/>
+    <Background skyColor='0.12 0.12 0.14'/>
+    <Transform DEF='SubjectAsset'>
+      <MetadataSet containerField='metadata' name='provenance'
+                   reference='https://www.web3d.org/specifications/provenance/1.0'>
+        <MetadataString name='provenance' value='"documented"'/>
+        <MetadataString name='catalogId'  value='"SLOP-1"'/>
+      </MetadataSet>
+      <Shape><Appearance><Material diffuseColor='0.8 0.7 0.5'/></Appearance><Box size='0.006 0.006 0.006'/></Shape>
+    </Transform>
+  </Scene>
+</X3D>

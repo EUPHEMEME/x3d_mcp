@@ -1,0 +1,30 @@
+$ PYTHONPATH=techne .venv/bin/python techne/eval/run_scripted.py --json demo/receipts/beat_d/scoreboard.json
+(server-subprocess stderr log lines omitted; wall-clock: 4.65 s, 2026-08-31)
+
+task                  stack    calls   caught   leaked   loud    render 
+--------------------  -------  ------  -------  -------  ------  -------
+control-clean         raw      4       0/0      0/0      0/0     -      
+control-clean         techne   4       0/0      0/0      0/0     -      
+duplicate-def         raw      5       0/1      0/1      1/1     -      
+duplicate-def         techne   6       1/1      0/1      0/1     -      
+interpolator-parity   raw      2       0/1      1/1      0/1     -      
+interpolator-parity   techne   3       1/1      0/1      0/1     -      
+route-no-def          raw      4       0/1      0/1      1/1     -      
+route-no-def          techne   7       1/1      0/1      0/1     -      
+textured-material     raw      4       0/1      1/1      0/1     -      
+textured-material     techne   5       1/1      0/1      0/1     -      
+use-before-def        raw      3       0/1      0/1      1/1     -      
+use-before-def        techne   6       1/1      0/1      0/1     -      
+
+summary
+  documented mistakes planned              : 5
+  raw — passed SILENTLY into the scene     : 2/5
+  raw — rejected loudly, no fix offered    : 3/5
+  Technē — passed silently into the scene  : 0/5
+  Technē — caught (block or repair)        : 5/5
+  Technē blocks whose text named the fix   : 5/5
+  extra round-trips to a CORRECT scene     : +9 over 6 tasks
+    (incl. authoring the missing DEF; raw used fewer calls but shipped
+     2 silently-wrong + 3 loudly-rejected/broken scenes)
+
+wrote demo/receipts/beat_d/scoreboard.json

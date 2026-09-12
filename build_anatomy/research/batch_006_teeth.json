@@ -1,0 +1,578 @@
+{
+ "regions": [
+  {
+   "group_title": "",
+   "group_teaching": "",
+   "bones": [
+    {
+     "name": "tooth_canine_11_23",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The upper canines are larger and longer than the lower and usually present a distinct basal ridge.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left canine",
+      "cuspid",
+      "eye tooth",
+      "dens caninus",
+      "UNS #11",
+      "ISO 23"
+     ],
+     "source": "grays1918:larger and longer than the lower, and usually present a distinct basal ridge",
+     "note": "Popularly called an eye tooth; in occlusion it rests partly on the lower canine and partly on the first premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_canine_22_33",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The lower canines stand nearer the midline than the upper, their summits meeting the intervals between the upper canines and lateral incisors.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left canine",
+      "cuspid",
+      "stomach tooth",
+      "dens caninus",
+      "UNS #22",
+      "ISO 33"
+     ],
+     "source": "grays1918:placed nearer the middle line than the upper",
+     "note": "Popularly called a stomach tooth (the upper canines are the eye teeth). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_canine_27_43",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The lower canines stand nearer the midline than the upper, their summits meeting the intervals between the upper canines and lateral incisors.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right canine",
+      "cuspid",
+      "stomach tooth",
+      "dens caninus",
+      "UNS #27",
+      "ISO 43"
+     ],
+     "source": "grays1918:placed nearer the middle line than the upper",
+     "note": "Popularly called a stomach tooth (the upper canines are the eye teeth). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_canine_6_13",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The upper canines are larger and longer than the lower and usually present a distinct basal ridge.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right canine",
+      "cuspid",
+      "eye tooth",
+      "dens caninus",
+      "UNS #6",
+      "ISO 13"
+     ],
+     "source": "grays1918:larger and longer than the lower, and usually present a distinct basal ridge",
+     "note": "Popularly called an eye tooth; in occlusion it rests partly on the lower canine and partly on the first premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_10_22",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left lateral incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #10",
+      "ISO 22"
+     ],
+     "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+     "note": "On upper incisors the lingual surface often bears an inverted V-shaped eminence near the gum, the basal ridge or cingulum; the cingulum is absent on the lowers. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_23_32",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left lateral incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #23",
+      "ISO 32"
+     ],
+     "source": "grays1918:placed vertically and are somewhat bevelled in front",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_24_31",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left central incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #24",
+      "ISO 31"
+     ],
+     "source": "grays1918:placed vertically and are somewhat bevelled in front",
+     "note": "Gray's notes the lower central incisors are the smallest of all the incisors. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_25_41",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right central incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #25",
+      "ISO 41"
+     ],
+     "source": "grays1918:placed vertically and are somewhat bevelled in front",
+     "note": "Gray's notes the lower central incisors are the smallest of all the incisors. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_26_42",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right lateral incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #26",
+      "ISO 42"
+     ],
+     "source": "grays1918:placed vertically and are somewhat bevelled in front",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_7_12",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right lateral incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #7",
+      "ISO 12"
+     ],
+     "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+     "note": "On upper incisors the lingual surface often bears an inverted V-shaped eminence near the gum, the basal ridge or cingulum; the cingulum is absent on the lowers. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_8_11",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right central incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #8",
+      "ISO 11"
+     ],
+     "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+     "note": "Because the upper central incisors are wider than the lower, the two dental arches do not correspond tooth-for-tooth when the mouth is closed. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_incisor_9_21",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left central incisor",
+      "incisor",
+      "dens incisivus",
+      "cutting tooth",
+      "UNS #9",
+      "ISO 21"
+     ],
+     "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+     "note": "Because the upper central incisors are wider than the lower, the two dental arches do not correspond tooth-for-tooth when the mouth is closed. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_14_26",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left first molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #14",
+      "ISO 26"
+     ],
+     "source": "grays1918:Each upper molar has three roots",
+     "note": "As a rule the first upper molar is the largest of the upper molars, its crown usually bearing four tubercles. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_15_27",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left second molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #15",
+      "ISO 27"
+     ],
+     "source": "grays1918:Each upper molar has three roots",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_16_28",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left third molar",
+      "wisdom tooth",
+      "dens serotinus",
+      "dens molaris",
+      "UNS #16",
+      "ISO 28"
+     ],
+     "source": "grays1918:Each upper molar has three roots",
+     "note": "The third molar is the wisdom tooth (dens serotinus); its roots are more or less fused together. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_17_38",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left third molar",
+      "wisdom tooth",
+      "dens serotinus",
+      "dens molaris",
+      "UNS #17",
+      "ISO 38"
+     ],
+     "source": "grays1918:Each lower molar has two roots",
+     "note": "The third molar is the wisdom tooth (dens serotinus); its two roots are more or less united. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_18_37",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left second molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #18",
+      "ISO 37"
+     ],
+     "source": "grays1918:Each lower molar has two roots",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_19_36",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left first molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #19",
+      "ISO 36"
+     ],
+     "source": "grays1918:Each lower molar has two roots",
+     "note": "The crown of the first lower molar usually bears five tubercles (cusps). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_1_18",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right third molar",
+      "wisdom tooth",
+      "dens serotinus",
+      "dens molaris",
+      "UNS #1",
+      "ISO 18"
+     ],
+     "source": "grays1918:Each upper molar has three roots",
+     "note": "The third molar is the wisdom tooth (dens serotinus); its roots are more or less fused together. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_2_17",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right second molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #2",
+      "ISO 17"
+     ],
+     "source": "grays1918:Each upper molar has three roots",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_30_46",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right first molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #30",
+      "ISO 46"
+     ],
+     "source": "grays1918:Each lower molar has two roots",
+     "note": "The crown of the first lower molar usually bears five tubercles (cusps). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_31_47",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right second molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #31",
+      "ISO 47"
+     ],
+     "source": "grays1918:Each lower molar has two roots",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_32_48",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right third molar",
+      "wisdom tooth",
+      "dens serotinus",
+      "dens molaris",
+      "UNS #32",
+      "ISO 48"
+     ],
+     "source": "grays1918:Each lower molar has two roots",
+     "note": "The third molar is the wisdom tooth (dens serotinus); its two roots are more or less united. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_molar_3_16",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right first molar",
+      "grinding tooth",
+      "dens molaris",
+      "multicuspid",
+      "UNS #3",
+      "ISO 16"
+     ],
+     "source": "grays1918:Each upper molar has three roots",
+     "note": "As a rule the first upper molar is the largest of the upper molars, its crown usually bearing four tubercles. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_12_24",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left first premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #12",
+      "ISO 24"
+     ],
+     "source": "grays1918:present a greater tendency to the division of their roots",
+     "note": "The tendency of the premolar root to divide is especially marked in the first upper premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_13_25",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+     "articulates_with": [
+      "l_maxilla"
+     ],
+     "synonyms": [
+      "upper left second premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #13",
+      "ISO 25"
+     ],
+     "source": "grays1918:present a greater tendency to the division of their roots",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_20_35",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left second premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #20",
+      "ISO 35"
+     ],
+     "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+     "note": "The mental foramen of the mandible opens beneath the second premolar tooth — a landmark for the mental nerve. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_21_34",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower left first premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #21",
+      "ISO 34"
+     ],
+     "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_28_44",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right first premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #28",
+      "ISO 44"
+     ],
+     "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_29_45",
+     "group": "Teeth — mandibular (lower) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+     "articulates_with": [
+      "mandible"
+     ],
+     "synonyms": [
+      "lower right second premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #29",
+      "ISO 45"
+     ],
+     "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+     "note": "The mental foramen of the mandible opens beneath the second premolar tooth — a landmark for the mental nerve. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_4_15",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right second premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #4",
+      "ISO 15"
+     ],
+     "source": "grays1918:present a greater tendency to the division of their roots",
+     "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    },
+    {
+     "name": "tooth_premolar_5_14",
+     "group": "Teeth — maxillary (upper) arch",
+     "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove — hence the name bicuspid — of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+     "articulates_with": [
+      "r_maxilla"
+     ],
+     "synonyms": [
+      "upper right first premolar",
+      "bicuspid",
+      "dens premolaris",
+      "UNS #5",
+      "ISO 14"
+     ],
+     "source": "grays1918:present a greater tendency to the division of their roots",
+     "note": "The tendency of the premolar root to divide is especially marked in the first upper premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+    }
+   ]
+  }
+ ]
+}

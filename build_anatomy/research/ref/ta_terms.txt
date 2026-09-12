@@ -1,0 +1,132 @@
+# ta_terms.txt v1.0 2026-08-31 — Terminologia Anatomica-style English|Latin skeletal term pairs
+# Format: english_term | latin_term | synonym1; synonym2; ...
+# Pattern entries use {n} for a numeric index (vertebrae C1-C7, T1-T12, L1-L5; ribs 1-12;
+# phalanges 1-5; teeth by universal number). Manifest side prefixes "L." / "R." mean
+# left/right (sinister/dexter) and are stripped before lookup.
+
+# ---- Skull (cranium) ----
+frontal bone | os frontale | frontal
+parietal bone | os parietale | parietal
+temporal bone | os temporale | temporal
+occipital bone | os occipitale | occipital
+sphenoid bone | os sphenoidale | sphenoid; sphenoidal
+ethmoid bone | os ethmoidale | ethmoid; ethmoidal
+nasal bone | os nasale | nasal
+lacrimal bone | os lacrimale | lacrimal
+zygomatic bone | os zygomaticum | zygomatic; malar; cheekbone
+maxilla | maxilla | upper jaw; maxillary
+mandible | mandibula | lower jaw; jawbone
+palatine bone | os palatinum | palate bone; palatine
+vomer | vomer | vomer
+inferior nasal concha | concha nasalis inferior | inferior nasal conchae; inferior turbinate
+hyoid bone | os hyoideum | hyoid
+
+# ---- Vertebral column ----
+cervical vertebra {n} | vertebra cervicalis {n} | C{n}; neck vertebra
+atlas | atlas | C1; first cervical vertebra
+axis | axis | C2; epistropheus; second cervical vertebra
+thoracic vertebra {n} | vertebra thoracica {n} | T{n}; dorsal vertebra
+lumbar vertebra {n} | vertebra lumbalis {n} | L{n}
+sacrum | os sacrum | sacral bone; sacrum bone
+coccyx | os coccygis | tailbone; coccygeal
+intervertebral disc {n} | discus intervertebralis | {n} disc; intervertebral fibrocartilage
+
+# ---- Thorax ----
+sternum | sternum | breastbone
+rib {n} | costa {n} | rib{n}; costal
+costal cartilage | cartilago costalis | rib cartilage
+
+# ---- Shoulder girdle & upper limb ----
+clavicle | clavicula | collarbone; collar bone
+scapula | scapula | shoulder blade; shoulder-blade
+humerus | humerus | upper arm bone; arm bone
+radius | radius | radial
+ulna | ulna | elbow bone; ulnar
+
+# ---- Carpals (wrist) ----
+scaphoid | os scaphoideum | navicular of the hand; os naviculare manus
+lunate | os lunatum | semilunar bone
+triquetral | os triquetrum | triquetrum; triangular bone; cuneiform bone of the hand
+pisiform | os pisiforme | pisiform
+trapezium | os trapezium | greater multangular
+trapezoid | os trapezoideum | lesser multangular
+capitate | os capitatum | os magnum
+hamate | os hamatum | unciform bone
+
+# ---- Hand ----
+metacarpal {n} | os metacarpale {n} | metacarpal bone {n}
+proximal phalanx of the hand {n} | phalanx proximalis manus | carpal proximal phalanx {n}; first phalanx
+middle phalanx of the hand {n} | phalanx media manus | carpal middle phalanx {n}; second phalanx; phalanges of the second row
+distal phalanx of the hand {n} | phalanx distalis manus | carpal distal phalanx {n}; ungual phalanx
+
+# ---- Pelvic girdle & lower limb ----
+hip bone | os coxae | innominate bone; coxal bone; pelvic bone (ilium + ischium + pubis)
+ilium | os ilium | iliac
+ischium | os ischii | ischial
+pubis | os pubis | pubic bone
+pubic symphysis | symphysis pubica | symphysis pubis
+femur | femur | thigh bone; thighbone
+patella | patella | kneecap; knee-cap; knee pan
+tibia | tibia | shin bone; shinbone
+fibula | fibula | calf bone; peroneal
+
+# ---- Tarsals (ankle/foot) ----
+talus | talus | astragalus; ankle bone
+calcaneus | calcaneus | heel bone; os calcis; calcaneum
+navicular | os naviculare | navicular of the foot; scaphoid of the foot
+cuboid | os cuboideum | cuboid
+medial cuneiform | os cuneiforme mediale | first cuneiform; internal cuneiform
+intermediate cuneiform | os cuneiforme intermedium | second cuneiform; middle cuneiform
+lateral cuneiform | os cuneiforme laterale | third cuneiform; external cuneiform
+
+# ---- Foot ----
+metatarsal {n} | os metatarsale {n} | metatarsal bone {n}
+proximal phalanx of the foot {n} | phalanx proximalis pedis | tarsal proximal phalanx {n}; first phalanx; phalanges digitorum pedis
+middle phalanx of the foot {n} | phalanx media pedis | tarsal middle phalanx {n}; second phalanx; phalanges digitorum pedis
+distal phalanx of the foot {n} | phalanx distalis pedis | tarsal distal phalanx {n}; ungual phalanx; terminal phalanx; phalanges digitorum pedis
+
+# ---- Dentition (universal numbering 1-32) ----
+incisor | dens incisivus | tooth incisor {n}; central incisor; lateral incisor
+canine | dens caninus | tooth canine {n}; cuspid; eye tooth
+premolar | dens premolaris | tooth premolar {n}; bicuspid
+molar | dens molaris | tooth molar {n}; wisdom tooth (third molar)
+
+# ---- Intervertebral discs (manifest displays 'C2 Disc' ... 'L5 Disc'; each named for the vertebra ABOVE the disc) ----
+c2 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+c3 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+c4 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+c5 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+c6 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+c7 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t1 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t2 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t3 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t4 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t5 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t6 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t7 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t8 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t9 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t10 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t11 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+t12 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+l1 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+l2 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+l3 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+l4 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+l5 disc | discus intervertebralis | intervertebral disc; intervertebral fibrocartilage; intervertebral disk
+# explicit per-index rows (added 2026-08-31 for the axial_misc batch): the {n} pattern
+# rows cannot produce usable vicinity terms for short names like l1/t11/rib8, because
+# the checker only expands the pool of the row that literally matches the base name.
+lumbar vertebra 1 | vertebra lumbalis I | l1; first lumbar vertebra; lumbar vertebrae
+lumbar vertebra 2 | vertebra lumbalis II | l2; second lumbar vertebra; lumbar vertebrae
+lumbar vertebra 3 | vertebra lumbalis III | l3; third lumbar vertebra; lumbar vertebrae
+lumbar vertebra 4 | vertebra lumbalis IV | l4; fourth lumbar vertebra; lumbar vertebrae
+lumbar vertebra 5 | vertebra lumbalis V | l5; fifth lumbar vertebra; lumbar vertebrae
+thoracic vertebra 11 | vertebra thoracica XI | t11; eleventh thoracic vertebra; thoracic vertebrae
+thoracic vertebra 12 | vertebra thoracica XII | t12; twelfth thoracic vertebra; thoracic vertebrae
+rib 8 | costa VIII | rib8; eighth rib; costal
+rib 9 | costa IX | rib9; ninth rib; costal
+rib 10 | costa X | rib10; tenth rib; costal
+rib 11 | costa XI | rib11; eleventh rib; costal
+rib 12 | costa XII | rib12; twelfth rib; costal

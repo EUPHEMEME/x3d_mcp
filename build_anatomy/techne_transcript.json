@@ -1,1 +1,248 @@
-[]
+[
+ {
+  "kind": "HEADER",
+  "timestamp": "2026-08-31T01:21:57",
+  "techne_sha": "de315a9",
+  "techne_profile": "core,coherence,instrumentation"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_scene",
+  "args": "description=LOA5 Anatomy Explorer \u2014 st, profile=Interactive"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Viewpoint, fields[description,position,centerOfRotation,orientation,fieldOfView,nearDistance,farDistance]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=7e350735-fdd4-4160-93ee-85, name=VP_Body"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=7e350735-fdd4-4160-93ee-85"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Viewpoint, fields[description,position,centerOfRotation,orientation,fieldOfView,nearDistance,farDistance]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=3cd9308e-c175-4a14-8453-e3, name=VP_Skull"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=3cd9308e-c175-4a14-8453-e3"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Viewpoint, fields[description,position,centerOfRotation,orientation,fieldOfView,nearDistance,farDistance]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=ed5912a7-6b40-42c6-a3e7-83, name=VP_Ribcage"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=ed5912a7-6b40-42c6-a3e7-83"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Viewpoint, fields[description,position,centerOfRotation,orientation,fieldOfView,nearDistance,farDistance]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=4ed1fcb3-21e6-4ab1-885a-77, name=VP_Spine"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=4ed1fcb3-21e6-4ab1-885a-77"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Viewpoint, fields[description,position,centerOfRotation,orientation,fieldOfView,nearDistance,farDistance]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=c9c4a8cd-33bc-4f98-bb25-6c, name=VP_Hand"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=c9c4a8cd-33bc-4f98-bb25-6c"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Viewpoint, fields[description,position,centerOfRotation,orientation,fieldOfView,nearDistance,farDistance]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=bc1939ec-4f74-4cfa-8035-f6, name=VP_Foot"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=bc1939ec-4f74-4cfa-8035-f6"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=NavigationInfo, fields[type,headlight,speed]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=8f10a52c-e6d0-4e9b-b284-8a, name=Nav"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=8f10a52c-e6d0-4e9b-b284-8a"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=DirectionalLight, fields[direction,color,intensity,ambientIntensity,shadows,shadowIntensity,global_,on]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=4cf4e66f-6088-448a-96c8-b8, name=KeyLight"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=4cf4e66f-6088-448a-96c8-b8"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=DirectionalLight, fields[direction,color,intensity,ambientIntensity,global_,on]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=226af4a8-7f8a-4b11-bf8c-61, name=FillLight"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=226af4a8-7f8a-4b11-bf8c-61"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=DirectionalLight, fields[direction,color,intensity,ambientIntensity,global_,on]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=3585728b-788f-4ab2-a903-cb, name=RimLight"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=3585728b-788f-4ab2-a903-cb"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=EnvironmentLight, fields[color,intensity,ambientIntensity,global_,on]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=8de3d998-d5db-43c9-a3ee-61, name=Ambient"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=8de3d998-d5db-43c9-a3ee-61"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=Background, fields[skyAngle,skyColor,groundAngle,groundColor]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=dcfa3540-4fa5-4774-89e8-1b, name=Sky"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=dcfa3540-4fa5-4774-89e8-1b"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=TimeSensor, fields[cycleInterval,loop,enabled]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=a94a7be1-d1de-4a8f-9656-ed, name=WalkTimer"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=a94a7be1-d1de-4a8f-9656-ed"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=TimeSensor, fields[cycleInterval,loop,enabled]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=4eeaf292-0983-4719-9298-81, name=RunTimer"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=4eeaf292-0983-4719-9298-81"
+ },
+ {
+  "kind": "CALL",
+  "tool": "create_node",
+  "args": "node_type=TimeSensor, fields[cycleInterval,loop,enabled]"
+ },
+ {
+  "kind": "CALL",
+  "tool": "def_node",
+  "args": "node_id=9a36fe06-23f6-4c53-81ec-f9, name=JumpTimer"
+ },
+ {
+  "kind": "CALL",
+  "tool": "add_child",
+  "args": "parent_id=scene, child_id=9a36fe06-23f6-4c53-81ec-f9"
+ },
+ {
+  "kind": "CALL",
+  "tool": "validate_current_scene",
+  "args": ""
+ },
+ {
+  "kind": "CALL",
+  "tool": "get_scene",
+  "args": "encoding=xml"
+ }
+]

@@ -1,0 +1,194 @@
+{
+  "_provenance": {
+    "origin": "Draft batch for the carpals_metacarpals parts (20 bones: capitate, hamate, pisiform, trapezium, trapezoid, metacarpals 1-5, both sides). Every entry sourced against ref/grays1918.txt (Gray's Anatomy, 20th ed., 1918) via grep-located passages; anchors verbatim from the OCR text.",
+    "bones": 20
+  },
+  "regions": [
+    {
+      "group_title": "",
+      "group_teaching": "",
+      "bones": [
+        {
+          "name": "l_capitate",
+          "group": "Carpal bones — distal row",
+          "function": "The largest of the carpal bones, occupying the center of the left wrist. Its rounded head is received into the concavity formed by the scaphoid and lunate, and its lower surface carries three facets for the second, third, and fourth metacarpals, making it the central pillar through which load passes from the finger rays to the forearm.",
+          "articulates_with": ["l_scaphoid", "l_lunate", "l_trapezoid", "l_hamate", "l_metacarpal_2", "l_metacarpal_3", "l_metacarpal_4"],
+          "note": "It articulates with seven bones — more than any other carpal — and is the first carpal to ossify, its center appearing during the first year of life.",
+          "synonyms": ["capitate", "os capitatum", "os magnum"],
+          "source": "grays1918:The capitate articulates with seven bones"
+        },
+        {
+          "name": "l_hamate",
+          "group": "Carpal bones — distal row",
+          "function": "A wedge-shaped bone at the medial and lower angle of the left carpus, resting on the fourth and fifth metacarpals and supporting the mobile ulnar border of the hand. A curved hook-like process, the hamulus, projects from its volar surface and gives attachment to the transverse carpal ligament and to muscles of the little finger.",
+          "articulates_with": ["l_lunate", "l_triquetral", "l_capitate", "l_metacarpal_4", "l_metacarpal_5"],
+          "note": "The hamulus is one of the four eminences on the front of the carpus to which the transverse carpal ligament attaches, so the hook of the hamate forms part of the wall of the carpal tunnel.",
+          "synonyms": ["hamate", "os hamatum", "unciform bone"],
+          "source": "grays1918:The hamate articulates with five bones"
+        },
+        {
+          "name": "l_pisiform",
+          "group": "Carpal bones — proximal row",
+          "function": "A spheroidal carpal of the left wrist, known by its small size and set on a plane anterior to the other carpals. It bears a single articular facet, for the triquetrum, and its rough volar surface gives attachment to the transverse carpal ligament, the flexor carpi ulnaris, and the abductor digiti quinti.",
+          "articulates_with": ["l_triquetral"],
+          "note": "It is the last carpal bone to ossify, its center appearing only around the twelfth year — long after every other carpal.",
+          "synonyms": ["pisiform", "os pisiforme"],
+          "source": "grays1918:The pisiform articulates with one bone, the triangular"
+        },
+        {
+          "name": "l_trapezium",
+          "group": "Carpal bones — distal row",
+          "function": "Sits at the radial side of the left carpus, between the scaphoid and the first metacarpal. Its inferior surface is oval, concave from side to side and convex from before backward, forming the saddle-shaped joint on which the thumb's metacarpal swings — the basis of opposition.",
+          "articulates_with": ["l_scaphoid", "l_trapezoid", "l_metacarpal_1", "l_metacarpal_2"],
+          "note": "A deep groove on its volar surface transmits the tendon of the flexor carpi radialis, and its oblique ridge is one of the attachments of the transverse carpal ligament.",
+          "synonyms": ["trapezium", "os trapezium", "greater multangular"],
+          "source": "grays1918:The greater multangular articulates with four bones"
+        },
+        {
+          "name": "l_trapezoid",
+          "group": "Carpal bones — distal row",
+          "function": "The smallest bone in the distal carpal row of the left wrist, wedge-shaped with the broad end of the wedge dorsal. It is keyed between scaphoid, trapezium, and capitate and carries the base of the second metacarpal, anchoring the relatively immobile index-finger ray.",
+          "articulates_with": ["l_scaphoid", "l_trapezium", "l_capitate", "l_metacarpal_2"],
+          "note": "It may be known by its four articular facets touching each other, separated by sharp edges — a tightly packed keystone rather than a mobile joint surface.",
+          "synonyms": ["trapezoid", "os trapezoideum", "lesser multangular"],
+          "source": "grays1918:The lesser multangular articulates with four bones"
+        },
+        {
+          "name": "l_metacarpal_1",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal bone of the left thumb: shorter and stouter than the others, it diverges from the carpus with its volar surface directed toward the palm. Its base forms a concavo-convex saddle joint with the trapezium, giving the thumb the freedom of movement that underlies grip and opposition.",
+          "articulates_with": ["l_trapezium", "l_carpal_proximal_phalanx_1"],
+          "note": "It ossifies from a center for the body and one for the base — the same pattern as a phalanx — which led some anatomists to regard the thumb as three phalanges rather than a metacarpal and two phalanges.",
+          "synonyms": ["first metacarpal", "os metacarpale I", "thumb metacarpal"],
+          "source": "grays1918:is shorter and stouter than the others"
+        },
+        {
+          "name": "l_metacarpal_2",
+          "group": "Metacarpal bones",
+          "function": "The longest metacarpal of the left hand, with the largest base of the finger metacarpals. Its base is prolonged upward and medialward into a prominent ridge bearing facets for the trapezium, trapezoid, and capitate, wedging the index-finger ray firmly into the carpus as a stable column for pinch and grip.",
+          "articulates_with": ["l_trapezium", "l_trapezoid", "l_capitate", "l_metacarpal_3", "l_carpal_proximal_phalanx_2"],
+          "note": "Its base receives the insertions of both the extensor carpi radialis longus (dorsally) and the flexor carpi radialis (volarly), making it a principal lever for wrist movement.",
+          "synonyms": ["second metacarpal", "os metacarpale II", "index finger metacarpal"],
+          "source": "grays1918:is the longest, and its base the largest"
+        },
+        {
+          "name": "l_metacarpal_3",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal of the left middle finger, a little smaller than the second. Its base articulates with the capitate and with the metacarpals on either side, aligning the middle-finger ray with the central pillar of the carpus so that axial load runs straight from finger to forearm.",
+          "articulates_with": ["l_capitate", "l_metacarpal_2", "l_metacarpal_4", "l_carpal_proximal_phalanx_3"],
+          "note": "A pyramidal eminence on the radial side of its base, the styloid process, extends upward behind the capitate; sometimes it is detached and forms an additional ossicle.",
+          "synonyms": ["third metacarpal", "os metacarpale III", "middle finger metacarpal"],
+          "source": "grays1918:a pyramidal eminence, the styloid process"
+        },
+        {
+          "name": "l_metacarpal_4",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal of the left ring finger, shorter and smaller than the third, with a small quadrilateral base. That base carries a large medial facet for the hamate and a small lateral one for the capitate, seating the ring-finger ray on the mobile ulnar side of the carpus.",
+          "articulates_with": ["l_capitate", "l_hamate", "l_metacarpal_3", "l_metacarpal_5", "l_carpal_proximal_phalanx_4"],
+          "note": "Its base articulates with two carpals and two neighboring metacarpals — four bony contacts before the finger even begins.",
+          "synonyms": ["fourth metacarpal", "os metacarpale IV", "ring finger metacarpal"],
+          "source": "grays1918:is shorter and smaller than the third"
+        },
+        {
+          "name": "l_metacarpal_5",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal of the left little finger. Its base presents a single concavo-convex facet for the hamate and one facet on the radial side for the fourth metacarpal, and this relatively free seating on the hamate lets the ulnar border of the hand cup toward the thumb in grasp.",
+          "articulates_with": ["l_hamate", "l_metacarpal_4", "l_carpal_proximal_phalanx_5"],
+          "note": "A prominent tubercle on the ulnar side of its base receives the tendon of the extensor carpi ulnaris.",
+          "synonyms": ["fifth metacarpal", "os metacarpale V", "little finger metacarpal"],
+          "source": "grays1918:On its ulnar side is a prominent tubercle"
+        },
+        {
+          "name": "r_capitate",
+          "group": "Carpal bones — distal row",
+          "function": "The largest of the carpal bones, occupying the center of the right wrist. Its rounded head is received into the concavity formed by the scaphoid and lunate, and its lower surface carries three facets for the second, third, and fourth metacarpals, making it the central pillar through which load passes from the finger rays to the forearm.",
+          "articulates_with": ["r_scaphoid", "r_lunate", "r_trapezoid", "r_hamate", "r_metacarpal_2", "r_metacarpal_3", "r_metacarpal_4"],
+          "note": "It articulates with seven bones — more than any other carpal — and is the first carpal to ossify, its center appearing during the first year of life.",
+          "synonyms": ["capitate", "os capitatum", "os magnum"],
+          "source": "grays1918:The capitate articulates with seven bones"
+        },
+        {
+          "name": "r_hamate",
+          "group": "Carpal bones — distal row",
+          "function": "A wedge-shaped bone at the medial and lower angle of the right carpus, resting on the fourth and fifth metacarpals and supporting the mobile ulnar border of the hand. A curved hook-like process, the hamulus, projects from its volar surface and gives attachment to the transverse carpal ligament and to muscles of the little finger.",
+          "articulates_with": ["r_lunate", "r_triquetral", "r_capitate", "r_metacarpal_4", "r_metacarpal_5"],
+          "note": "The hamulus is one of the four eminences on the front of the carpus to which the transverse carpal ligament attaches, so the hook of the hamate forms part of the wall of the carpal tunnel.",
+          "synonyms": ["hamate", "os hamatum", "unciform bone"],
+          "source": "grays1918:The hamate articulates with five bones"
+        },
+        {
+          "name": "r_pisiform",
+          "group": "Carpal bones — proximal row",
+          "function": "A spheroidal carpal of the right wrist, known by its small size and set on a plane anterior to the other carpals. It bears a single articular facet, for the triquetrum, and its rough volar surface gives attachment to the transverse carpal ligament, the flexor carpi ulnaris, and the abductor digiti quinti.",
+          "articulates_with": ["r_triquetral"],
+          "note": "It is the last carpal bone to ossify, its center appearing only around the twelfth year — long after every other carpal.",
+          "synonyms": ["pisiform", "os pisiforme"],
+          "source": "grays1918:The pisiform articulates with one bone, the triangular"
+        },
+        {
+          "name": "r_trapezium",
+          "group": "Carpal bones — distal row",
+          "function": "Sits at the radial side of the right carpus, between the scaphoid and the first metacarpal. Its inferior surface is oval, concave from side to side and convex from before backward, forming the saddle-shaped joint on which the thumb's metacarpal swings — the basis of opposition.",
+          "articulates_with": ["r_scaphoid", "r_trapezoid", "r_metacarpal_1", "r_metacarpal_2"],
+          "note": "A deep groove on its volar surface transmits the tendon of the flexor carpi radialis, and its oblique ridge is one of the attachments of the transverse carpal ligament.",
+          "synonyms": ["trapezium", "os trapezium", "greater multangular"],
+          "source": "grays1918:The greater multangular articulates with four bones"
+        },
+        {
+          "name": "r_trapezoid",
+          "group": "Carpal bones — distal row",
+          "function": "The smallest bone in the distal carpal row of the right wrist, wedge-shaped with the broad end of the wedge dorsal. It is keyed between scaphoid, trapezium, and capitate and carries the base of the second metacarpal, anchoring the relatively immobile index-finger ray.",
+          "articulates_with": ["r_scaphoid", "r_trapezium", "r_capitate", "r_metacarpal_2"],
+          "note": "It may be known by its four articular facets touching each other, separated by sharp edges — a tightly packed keystone rather than a mobile joint surface.",
+          "synonyms": ["trapezoid", "os trapezoideum", "lesser multangular"],
+          "source": "grays1918:The lesser multangular articulates with four bones"
+        },
+        {
+          "name": "r_metacarpal_1",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal bone of the right thumb: shorter and stouter than the others, it diverges from the carpus with its volar surface directed toward the palm. Its base forms a concavo-convex saddle joint with the trapezium, giving the thumb the freedom of movement that underlies grip and opposition.",
+          "articulates_with": ["r_trapezium", "r_carpal_proximal_phalanx_1"],
+          "note": "It ossifies from a center for the body and one for the base — the same pattern as a phalanx — which led some anatomists to regard the thumb as three phalanges rather than a metacarpal and two phalanges.",
+          "synonyms": ["first metacarpal", "os metacarpale I", "thumb metacarpal"],
+          "source": "grays1918:is shorter and stouter than the others"
+        },
+        {
+          "name": "r_metacarpal_2",
+          "group": "Metacarpal bones",
+          "function": "The longest metacarpal of the right hand, with the largest base of the finger metacarpals. Its base is prolonged upward and medialward into a prominent ridge bearing facets for the trapezium, trapezoid, and capitate, wedging the index-finger ray firmly into the carpus as a stable column for pinch and grip.",
+          "articulates_with": ["r_trapezium", "r_trapezoid", "r_capitate", "r_metacarpal_3", "r_carpal_proximal_phalanx_2"],
+          "note": "Its base receives the insertions of both the extensor carpi radialis longus (dorsally) and the flexor carpi radialis (volarly), making it a principal lever for wrist movement.",
+          "synonyms": ["second metacarpal", "os metacarpale II", "index finger metacarpal"],
+          "source": "grays1918:is the longest, and its base the largest"
+        },
+        {
+          "name": "r_metacarpal_3",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal of the right middle finger, a little smaller than the second. Its base articulates with the capitate and with the metacarpals on either side, aligning the middle-finger ray with the central pillar of the carpus so that axial load runs straight from finger to forearm.",
+          "articulates_with": ["r_capitate", "r_metacarpal_2", "r_metacarpal_4", "r_carpal_proximal_phalanx_3"],
+          "note": "A pyramidal eminence on the radial side of its base, the styloid process, extends upward behind the capitate; sometimes it is detached and forms an additional ossicle.",
+          "synonyms": ["third metacarpal", "os metacarpale III", "middle finger metacarpal"],
+          "source": "grays1918:a pyramidal eminence, the styloid process"
+        },
+        {
+          "name": "r_metacarpal_4",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal of the right ring finger, shorter and smaller than the third, with a small quadrilateral base. That base carries a large medial facet for the hamate and a small lateral one for the capitate, seating the ring-finger ray on the mobile ulnar side of the carpus.",
+          "articulates_with": ["r_capitate", "r_hamate", "r_metacarpal_3", "r_metacarpal_5", "r_carpal_proximal_phalanx_4"],
+          "note": "Its base articulates with two carpals and two neighboring metacarpals — four bony contacts before the finger even begins.",
+          "synonyms": ["fourth metacarpal", "os metacarpale IV", "ring finger metacarpal"],
+          "source": "grays1918:is shorter and smaller than the third"
+        },
+        {
+          "name": "r_metacarpal_5",
+          "group": "Metacarpal bones",
+          "function": "The metacarpal of the right little finger. Its base presents a single concavo-convex facet for the hamate and one facet on the radial side for the fourth metacarpal, and this relatively free seating on the hamate lets the ulnar border of the hand cup toward the thumb in grasp.",
+          "articulates_with": ["r_hamate", "r_metacarpal_4", "r_carpal_proximal_phalanx_5"],
+          "note": "A prominent tubercle on the ulnar side of its base receives the tendon of the extensor carpi ulnaris.",
+          "synonyms": ["fifth metacarpal", "os metacarpale V", "little finger metacarpal"],
+          "source": "grays1918:On its ulnar side is a prominent tubercle"
+        }
+      ]
+    }
+  ]
+}

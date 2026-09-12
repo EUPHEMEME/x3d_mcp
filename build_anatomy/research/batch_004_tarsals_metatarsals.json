@@ -1,0 +1,332 @@
+{
+ "regions": [
+  {
+   "group_title": "",
+   "group_teaching": "",
+   "bones": [
+    {
+     "name": "l_cuboid",
+     "group": "Tarsals — midfoot",
+     "function": "The left cuboid occupies the lateral column of the midfoot, seated in front of the calcaneus and behind the fourth and fifth metatarsals; it relays load from the heel into the two lateral rays and completes the lateral arch of the foot, which Gray composes of the calcaneus, the cuboid, and the fourth and fifth metatarsals. Its plantar surface carries the peroneal sulcus, the groove that redirects the tendon of the peroneus longus across the sole toward the medial side of the foot.",
+     "articulates_with": [
+      "l_calcaneus",
+      "l_cuneiform_3",
+      "l_metatarsal_4",
+      "l_metatarsal_5"
+     ],
+     "note": "Gray describes the bone as pyramidal with its base directed medialward, and notes that a sesamoid bone or cartilage frequently found in the peroneus longus tendon glides on the oval facet of its tuberosity. An occasional extra facet articulates with the navicular.",
+     "synonyms": [
+      "cuboid bone",
+      "os cuboideum"
+     ],
+     "source": "grays1918:The cuboid bone is placed on the lateral side of the foot, in front of the calcaneus"
+    },
+    {
+     "name": "l_cuneiform_1",
+     "group": "Tarsals — midfoot",
+     "function": "The left first (medial) cuneiform is the largest of the three cuneiforms, sitting at the medial side of the foot between the navicular behind and the base of the first metatarsal in front. It carries the great-toe column of the medial longitudinal arch and receives parts of the tendons of tibialis anterior and tibialis posterior, the muscles that sling up that arch.",
+     "articulates_with": [
+      "l_navicular",
+      "l_cuneiform_2",
+      "l_metatarsal_1",
+      "l_metatarsal_2"
+     ],
+     "note": "Unlike the other two cuneiforms its wedge is inverted: the plantar surface forms the base of the wedge and the dorsal surface the narrow edge. Its medial surface is subcutaneous — you can feel it on the inner border of the midfoot.",
+     "synonyms": [
+      "medial cuneiform",
+      "first cuneiform",
+      "internal cuneiform",
+      "os cuneiforme primum"
+     ],
+     "source": "grays1918:first cuneiform bone is the largest of the three cuneiforms"
+    },
+    {
+     "name": "l_cuneiform_2",
+     "group": "Tarsals — midfoot",
+     "function": "The left second (intermediate) cuneiform is the smallest of the three cuneiforms, a very regular wedge with its thin end directed downward, seated between the other two cuneiforms. It bridges the navicular behind to the second metatarsal in front, and its shortness recesses the base of that metatarsal between its neighbours.",
+     "articulates_with": [
+      "l_navicular",
+      "l_cuneiform_1",
+      "l_cuneiform_3",
+      "l_metatarsal_2"
+     ],
+     "note": "Gray records a slip from the tendon of tibialis posterior inserting on its plantar surface — that tendon fans out to grip much of the midfoot.",
+     "synonyms": [
+      "intermediate cuneiform",
+      "middle cuneiform",
+      "second cuneiform",
+      "os cuneiforme secundum"
+     ],
+     "source": "grays1918:The second cuneiform bone, the smallest of the three"
+    },
+    {
+     "name": "l_cuneiform_3",
+     "group": "Tarsals — midfoot",
+     "function": "The left third (lateral) cuneiform, intermediate in size between the other two, occupies the center of the front row of the tarsus, between the second cuneiform medially, the cuboid laterally, the navicular behind, and the third metatarsal in front. It is the busiest of the cuneiforms, articulating with six bones and passing load into three metatarsal bases.",
+     "articulates_with": [
+      "l_navicular",
+      "l_cuneiform_2",
+      "l_cuboid",
+      "l_metatarsal_2",
+      "l_metatarsal_3",
+      "l_metatarsal_4"
+     ],
+     "note": "Its plantar margin gives attachment to part of the tendon of tibialis posterior and part of flexor hallucis brevis.",
+     "synonyms": [
+      "lateral cuneiform",
+      "third cuneiform",
+      "external cuneiform",
+      "os cuneiforme tertium"
+     ],
+     "source": "grays1918:The third cuneiform articulates with six bones"
+    },
+    {
+     "name": "l_metatarsal_1",
+     "group": "Metatarsals",
+     "function": "The left first metatarsal is the shortest of the metatarsals and remarkable for its great thickness, carrying the great-toe ray from the first cuneiform to the proximal phalanx of the big toe. Gray singles it out among the metatarsals as assisting in supporting the weight of the body and constructed with great solidity, its large head meeting the ground through the sesamoids beneath it.",
+     "articulates_with": [
+      "l_cuneiform_1",
+      "l_tarsal_proximal_phalanx_1"
+     ],
+     "note": "Two sesamoid bones glide in grooved facets on the plantar surface of its head, and the tendon of peroneus longus — after crossing the sole in the cuboid's groove — inserts on the plantar angle of its base. Its base usually has no facet for the second metatarsal.",
+     "synonyms": [
+      "first metatarsal",
+      "os metatarsale I",
+      "metatarsal bone of the great toe"
+     ],
+     "source": "grays1918:remarkable for its great thickness"
+    },
+    {
+     "name": "l_metatarsal_2",
+     "group": "Metatarsals",
+     "function": "The left second metatarsal is the longest of the metatarsal bones, its base prolonged backward into the recess formed by the three cuneiform bones. Deeply wedged in between the first and third cuneiforms, it is the most rigidly fixed ray of the forefoot.",
+     "articulates_with": [
+      "l_cuneiform_1",
+      "l_cuneiform_2",
+      "l_cuneiform_3",
+      "l_metatarsal_3",
+      "l_tarsal_proximal_phalanx_2"
+     ],
+     "note": "Gray gives it four constant articular surfaces at the base — second cuneiform behind, first cuneiform medially, and paired facets laterally for the third metatarsal and third cuneiform — with an occasional fifth facet for the first metatarsal.",
+     "synonyms": [
+      "second metatarsal",
+      "os metatarsale II"
+     ],
+     "source": "grays1918:is the longest of the metatarsal bones"
+    },
+    {
+     "name": "l_metatarsal_3",
+     "group": "Metatarsals",
+     "function": "The left third metatarsal carries the middle ray of the forefoot from the third cuneiform to the proximal phalanx of the third toe. Its base articulates proximally by a triangular surface with the third cuneiform, medially by two facets with the second metatarsal, and laterally by a single facet with the fourth.",
+     "articulates_with": [
+      "l_cuneiform_3",
+      "l_metatarsal_2",
+      "l_metatarsal_4",
+      "l_tarsal_proximal_phalanx_3"
+     ],
+     "note": "The single facet for the fourth metatarsal sits at the dorsal angle of the base.",
+     "synonyms": [
+      "third metatarsal",
+      "os metatarsale III"
+     ],
+     "source": "grays1918:articulates proximally, by means of a triangular smooth surface"
+    },
+    {
+     "name": "l_metatarsal_4",
+     "group": "Metatarsals",
+     "function": "The left fourth metatarsal, smaller than the third, spans from the tarsus to the proximal phalanx of the fourth toe. Its base meets the cuboid through an oblique quadrilateral surface and also touches the third cuneiform, so this ray straddles the boundary between the lateral and middle columns of the foot.",
+     "articulates_with": [
+      "l_cuboid",
+      "l_cuneiform_3",
+      "l_metatarsal_3",
+      "l_metatarsal_5",
+      "l_tarsal_proximal_phalanx_4"
+     ],
+     "note": "A single ridge divides the medial facet of its base into an anterior portion for the third metatarsal and a posterior portion for the third cuneiform.",
+     "synonyms": [
+      "fourth metatarsal",
+      "os metatarsale IV"
+     ],
+     "source": "grays1918:presents an oblique quadrilateral surface for articulation with the cuboid"
+    },
+    {
+     "name": "l_metatarsal_5",
+     "group": "Metatarsals",
+     "function": "The left fifth metatarsal forms the lateral border of the forefoot, running from the cuboid to the proximal phalanx of the little toe. It is recognized at once by the rough tuberosity on the lateral side of its base, the palpable knob on the outer edge of the midfoot where the peroneus brevis tendon inserts.",
+     "articulates_with": [
+      "l_cuboid",
+      "l_metatarsal_4",
+      "l_tarsal_proximal_phalanx_5"
+     ],
+     "note": "Gray records the peroneus tertius inserting on the medial part of the dorsal surface of the base and peroneus brevis on the tuberosity, with a strong band of the plantar aponeurosis tying the tuberosity back to the calcaneus.",
+     "synonyms": [
+      "fifth metatarsal",
+      "os metatarsale V"
+     ],
+     "source": "grays1918:recognized by a rough eminence, the tuberosity, on the lateral side of its base"
+    },
+    {
+     "name": "r_cuboid",
+     "group": "Tarsals — midfoot",
+     "function": "The right cuboid occupies the lateral column of the midfoot, seated in front of the calcaneus and behind the fourth and fifth metatarsals; it relays load from the heel into the two lateral rays and completes the lateral arch of the foot, which Gray composes of the calcaneus, the cuboid, and the fourth and fifth metatarsals. Its plantar surface carries the peroneal sulcus, the groove that redirects the tendon of the peroneus longus across the sole toward the medial side of the foot.",
+     "articulates_with": [
+      "r_calcaneus",
+      "r_cuneiform_3",
+      "r_metatarsal_4",
+      "r_metatarsal_5"
+     ],
+     "note": "Gray describes the bone as pyramidal with its base directed medialward, and notes that a sesamoid bone or cartilage frequently found in the peroneus longus tendon glides on the oval facet of its tuberosity. An occasional extra facet articulates with the navicular.",
+     "synonyms": [
+      "cuboid bone",
+      "os cuboideum"
+     ],
+     "source": "grays1918:The cuboid bone is placed on the lateral side of the foot, in front of the calcaneus"
+    },
+    {
+     "name": "r_cuneiform_1",
+     "group": "Tarsals — midfoot",
+     "function": "The right first (medial) cuneiform is the largest of the three cuneiforms, sitting at the medial side of the foot between the navicular behind and the base of the first metatarsal in front. It carries the great-toe column of the medial longitudinal arch and receives parts of the tendons of tibialis anterior and tibialis posterior, the muscles that sling up that arch.",
+     "articulates_with": [
+      "r_navicular",
+      "r_cuneiform_2",
+      "r_metatarsal_1",
+      "r_metatarsal_2"
+     ],
+     "note": "Unlike the other two cuneiforms its wedge is inverted: the plantar surface forms the base of the wedge and the dorsal surface the narrow edge. Its medial surface is subcutaneous — you can feel it on the inner border of the midfoot.",
+     "synonyms": [
+      "medial cuneiform",
+      "first cuneiform",
+      "internal cuneiform",
+      "os cuneiforme primum"
+     ],
+     "source": "grays1918:first cuneiform bone is the largest of the three cuneiforms"
+    },
+    {
+     "name": "r_cuneiform_2",
+     "group": "Tarsals — midfoot",
+     "function": "The right second (intermediate) cuneiform is the smallest of the three cuneiforms, a very regular wedge with its thin end directed downward, seated between the other two cuneiforms. It bridges the navicular behind to the second metatarsal in front, and its shortness recesses the base of that metatarsal between its neighbours.",
+     "articulates_with": [
+      "r_navicular",
+      "r_cuneiform_1",
+      "r_cuneiform_3",
+      "r_metatarsal_2"
+     ],
+     "note": "Gray records a slip from the tendon of tibialis posterior inserting on its plantar surface — that tendon fans out to grip much of the midfoot.",
+     "synonyms": [
+      "intermediate cuneiform",
+      "middle cuneiform",
+      "second cuneiform",
+      "os cuneiforme secundum"
+     ],
+     "source": "grays1918:The second cuneiform bone, the smallest of the three"
+    },
+    {
+     "name": "r_cuneiform_3",
+     "group": "Tarsals — midfoot",
+     "function": "The right third (lateral) cuneiform, intermediate in size between the other two, occupies the center of the front row of the tarsus, between the second cuneiform medially, the cuboid laterally, the navicular behind, and the third metatarsal in front. It is the busiest of the cuneiforms, articulating with six bones and passing load into three metatarsal bases.",
+     "articulates_with": [
+      "r_navicular",
+      "r_cuneiform_2",
+      "r_cuboid",
+      "r_metatarsal_2",
+      "r_metatarsal_3",
+      "r_metatarsal_4"
+     ],
+     "note": "Its plantar margin gives attachment to part of the tendon of tibialis posterior and part of flexor hallucis brevis.",
+     "synonyms": [
+      "lateral cuneiform",
+      "third cuneiform",
+      "external cuneiform",
+      "os cuneiforme tertium"
+     ],
+     "source": "grays1918:The third cuneiform articulates with six bones"
+    },
+    {
+     "name": "r_metatarsal_1",
+     "group": "Metatarsals",
+     "function": "The right first metatarsal is the shortest of the metatarsals and remarkable for its great thickness, carrying the great-toe ray from the first cuneiform to the proximal phalanx of the big toe. Gray singles it out among the metatarsals as assisting in supporting the weight of the body and constructed with great solidity, its large head meeting the ground through the sesamoids beneath it.",
+     "articulates_with": [
+      "r_cuneiform_1",
+      "r_tarsal_proximal_phalanx_1"
+     ],
+     "note": "Two sesamoid bones glide in grooved facets on the plantar surface of its head, and the tendon of peroneus longus — after crossing the sole in the cuboid's groove — inserts on the plantar angle of its base. Its base usually has no facet for the second metatarsal.",
+     "synonyms": [
+      "first metatarsal",
+      "os metatarsale I",
+      "metatarsal bone of the great toe"
+     ],
+     "source": "grays1918:remarkable for its great thickness"
+    },
+    {
+     "name": "r_metatarsal_2",
+     "group": "Metatarsals",
+     "function": "The right second metatarsal is the longest of the metatarsal bones, its base prolonged backward into the recess formed by the three cuneiform bones. Deeply wedged in between the first and third cuneiforms, it is the most rigidly fixed ray of the forefoot.",
+     "articulates_with": [
+      "r_cuneiform_1",
+      "r_cuneiform_2",
+      "r_cuneiform_3",
+      "r_metatarsal_3",
+      "r_tarsal_proximal_phalanx_2"
+     ],
+     "note": "Gray gives it four constant articular surfaces at the base — second cuneiform behind, first cuneiform medially, and paired facets laterally for the third metatarsal and third cuneiform — with an occasional fifth facet for the first metatarsal.",
+     "synonyms": [
+      "second metatarsal",
+      "os metatarsale II"
+     ],
+     "source": "grays1918:is the longest of the metatarsal bones"
+    },
+    {
+     "name": "r_metatarsal_3",
+     "group": "Metatarsals",
+     "function": "The right third metatarsal carries the middle ray of the forefoot from the third cuneiform to the proximal phalanx of the third toe. Its base articulates proximally by a triangular surface with the third cuneiform, medially by two facets with the second metatarsal, and laterally by a single facet with the fourth.",
+     "articulates_with": [
+      "r_cuneiform_3",
+      "r_metatarsal_2",
+      "r_metatarsal_4",
+      "r_tarsal_proximal_phalanx_3"
+     ],
+     "note": "The single facet for the fourth metatarsal sits at the dorsal angle of the base.",
+     "synonyms": [
+      "third metatarsal",
+      "os metatarsale III"
+     ],
+     "source": "grays1918:articulates proximally, by means of a triangular smooth surface"
+    },
+    {
+     "name": "r_metatarsal_4",
+     "group": "Metatarsals",
+     "function": "The right fourth metatarsal, smaller than the third, spans from the tarsus to the proximal phalanx of the fourth toe. Its base meets the cuboid through an oblique quadrilateral surface and also touches the third cuneiform, so this ray straddles the boundary between the lateral and middle columns of the foot.",
+     "articulates_with": [
+      "r_cuboid",
+      "r_cuneiform_3",
+      "r_metatarsal_3",
+      "r_metatarsal_5",
+      "r_tarsal_proximal_phalanx_4"
+     ],
+     "note": "A single ridge divides the medial facet of its base into an anterior portion for the third metatarsal and a posterior portion for the third cuneiform.",
+     "synonyms": [
+      "fourth metatarsal",
+      "os metatarsale IV"
+     ],
+     "source": "grays1918:presents an oblique quadrilateral surface for articulation with the cuboid"
+    },
+    {
+     "name": "r_metatarsal_5",
+     "group": "Metatarsals",
+     "function": "The right fifth metatarsal forms the lateral border of the forefoot, running from the cuboid to the proximal phalanx of the little toe. It is recognized at once by the rough tuberosity on the lateral side of its base, the palpable knob on the outer edge of the midfoot where the peroneus brevis tendon inserts.",
+     "articulates_with": [
+      "r_cuboid",
+      "r_metatarsal_4",
+      "r_tarsal_proximal_phalanx_5"
+     ],
+     "note": "Gray records the peroneus tertius inserting on the medial part of the dorsal surface of the base and peroneus brevis on the tuberosity, with a strong band of the plantar aponeurosis tying the tuberosity back to the calcaneus.",
+     "synonyms": [
+      "fifth metatarsal",
+      "os metatarsale V"
+     ],
+     "source": "grays1918:recognized by a rough eminence, the tuberosity, on the lateral side of its base"
+    }
+   ]
+  }
+ ]
+}

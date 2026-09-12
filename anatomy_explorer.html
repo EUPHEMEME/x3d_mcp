@@ -1,10 +1,15 @@
 <!doctype html>
+<!-- anatomy_explorer.html v1.2 2026-08-31 — touch picking (synthetic pointermove),
+     keyboard + a11y ('/' search, arrows/Enter/Escape, aria-live detail,
+     focus-visible), always-visible credits, gaits unified through the scene's
+     ModeSwitch script, synonym search, #deep-links + frame-selected camera.
+     Shading choice is measured by tools_x3d/perf_probe.js — see its header. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LOA5 Anatomy Explorer — HAnim / X3D</title>
-<script src="https://cdn.jsdelivr.net/npm/x_ite@11.6.6/dist/x_ite.min.js"></script>
+<script src="vendor/x_ite/x_ite.min.js"></script>
 <style>
   :root {
     --bg:#0a0b0e; --panel:rgba(19,21,27,.86); --line:rgba(255,255,255,.10);
@@ -136,6 +141,10 @@
   button:disabled { opacity:.35; cursor:default; }
   .sep { width:1px; height:24px; background:var(--line); }
 
+  /* keyboard visibility — outline only for keyboard focus, not mouse clicks */
+  :focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  #q:focus-visible { outline-offset:-2px; border-radius:14px; }
+
   /* ---------- search ---------- */
   #search { top:20px; left:50%; transform:translateX(-50%); width:300px; padding:0; }
   #q { width:100%; background:transparent; border:0; outline:0; color:var(--ink);
@@ -147,7 +156,9 @@
   #hits li { padding:8px 14px; font-size:12.5px; cursor:pointer; display:flex;
              justify-content:space-between; gap:10px; }
   #hits li:hover { background:rgba(255,255,255,.09); }
+  #hits li.act { background:rgba(255,185,46,.16); color:var(--gold); }
   #hits li .r { font-size:9.5px; text-transform:uppercase; color:var(--dim); }
+  #hits li .syn { font-size:10.5px; color:var(--dim); font-style:italic; }
 
   #tip { position:fixed; z-index:20; pointer-events:none; padding:5px 9px; border-radius:7px;
          background:rgba(10,11,14,.92); border:1px solid var(--line); font-size:11.5px;
@@ -157,22 +168,41 @@
   #load { position:fixed; inset:0; z-index:50; display:grid; place-items:center;
           background:var(--bg); transition:opacity .5s; }
   #load.gone { opacity:0; pointer-events:none; }
-  #load p { color:var(--dim); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
-            margin:16px 0 0; text-align:center; }
-  .spin { width:26px; height:26px; margin:0 auto; border:2px solid rgba(255,255,255,.14);
-          border-top-color:var(--gold); border-radius:50%; animation:s .8s linear infinite; }
-  @keyframes s { to { transform:rotate(360deg); } }
+  #pprog { width:290px; text-align:center; }
+  #pwrap { height:6px; border-radius:3px; background:rgba(255,255,255,.12); overflow:hidden; }
+  #pbar { height:100%; width:0%; background:var(--gold); border-radius:3px; transition:width .15s; }
+  #pmsg { color:var(--dim); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+          margin:16px 0 0; }
+  #pbytes { color:var(--dim); font-family:var(--mono); font-size:11px; margin:7px 0 0;
+            min-height:14px; }
+  #perr { display:none; width:340px; padding:18px 20px; text-align:left; }
+  #perr h2 { margin:0 0 8px; font-size:15px; font-weight:650; color:var(--bad); }
+  #perrmsg { margin:0 0 14px; font-size:12.5px; line-height:1.6; color:var(--dim2);
+             font-family:var(--mono); word-break:break-word; }
 
   #credit { bottom:92px; right:22px; padding:9px 12px; font-size:10px; color:var(--dim);
             line-height:1.5; max-width:300px; }
   #credit b { color:#aeb4c2; font-weight:600; }
-  @media (max-width:1200px) { #credit { display:none; } }
+  /* attribution must ALWAYS be visible — below 1200px it shrinks, never hides */
+  @media (max-width:1200px) { #credit { max-width:210px; font-size:9px; padding:7px 9px; } }
+  @media (max-width:860px)  { #credit { bottom:150px; right:12px; max-width:180px; } }
 </style>
 </head>
 <body>
 
-<x3d-canvas id="cv" src="anatomy_explorer.x3d" update="auto"></x3d-canvas>
-<div id="load"><div><div class="spin"></div><p>Loading the skeleton</p></div></div>
+<x3d-canvas id="cv" update="auto"></x3d-canvas>
+<div id="load"><div>
+  <div id="pprog">
+    <div id="pwrap"><div id="pbar"></div></div>
+    <p id="pmsg">Loading the skeleton</p>
+    <p id="pbytes"></p>
+  </div>
+  <div id="perr" class="glass">
+    <h2>Couldn&rsquo;t load the skeleton</h2>
+    <p id="perrmsg"></p>
+    <button id="retry" class="on">Retry</button>
+  </div>
+</div></div>
 
 <div id="title" class="hud glass">
   <h1>LOA5 Anatomy Explorer</h1>
@@ -232,11 +262,13 @@
 </div>
 
 <div id="search" class="hud glass">
-  <input id="q" type="text" placeholder="Search — femur, C4, scaphoid…" autocomplete="off">
-  <ul id="hits"></ul>
+  <input id="q" type="text" placeholder="Search — femur, C4, kneecap…" autocomplete="off"
+         role="combobox" aria-expanded="false" aria-controls="hits" aria-autocomplete="list"
+         aria-label="Search bones (press / to focus)">
+  <ul id="hits" role="listbox" aria-label="Search results"></ul>
 </div>
 
-<div id="detail" class="hud glass empty">
+<div id="detail" class="hud glass empty" role="region" aria-label="Bone detail" aria-live="polite">
   <p class="hint">Click any bone to identify it.<br>Hover to preview.</p>
   <div class="filled">
     <h2 id="bname"></h2>
@@ -245,34 +277,35 @@
   </div>
 </div>
 
-<div id="controls" class="hud glass">
-  <div class="grp" id="gait">
-    <label>Gait</label>
-    <button data-t="" class="on">Stand</button>
-    <button data-t="WalkTimer">Walk</button>
-    <button data-t="RunTimer">Run</button>
-    <button data-t="JumpTimer">Jump</button>
+<div id="controls" class="hud glass" role="toolbar" aria-label="Scene controls">
+  <div class="grp" id="gait" role="group" aria-label="Gait">
+    <label aria-hidden="true">Gait</label>
+    <button data-t="" class="on" aria-label="Gait: stand still" aria-pressed="true">Stand</button>
+    <button data-t="WalkTimer" aria-label="Gait: walk cycle" aria-pressed="false">Walk</button>
+    <button data-t="RunTimer" aria-label="Gait: run cycle" aria-pressed="false">Run</button>
+    <button data-t="JumpTimer" aria-label="Gait: jump cycle" aria-pressed="false">Jump</button>
   </div>
   <div class="sep"></div>
-  <div class="grp" id="views">
-    <label>View</label>
-    <button data-v="VP_Body" class="on">Body</button>
-    <button data-v="VP_Skull">Skull</button>
-    <button data-v="VP_Ribcage">Ribs</button>
-    <button data-v="VP_Spine">Spine</button>
-    <button data-v="VP_Hand">Hand</button>
-    <button data-v="VP_Foot">Foot</button>
+  <div class="grp" id="views" role="group" aria-label="Viewpoint">
+    <label aria-hidden="true">View</label>
+    <button data-v="VP_Body" class="on" aria-label="View: full body" aria-pressed="true">Body</button>
+    <button data-v="VP_Skull" aria-label="View: skull" aria-pressed="false">Skull</button>
+    <button data-v="VP_Ribcage" aria-label="View: rib cage" aria-pressed="false">Ribs</button>
+    <button data-v="VP_Spine" aria-label="View: vertebral column" aria-pressed="false">Spine</button>
+    <button data-v="VP_Hand" aria-label="View: left hand" aria-pressed="false">Hand</button>
+    <button data-v="VP_Foot" aria-label="View: left foot" aria-pressed="false">Foot</button>
   </div>
   <div class="sep"></div>
-  <div class="grp" id="regions">
-    <label>Region</label>
-    <button data-r="all" class="on">All</button>
-    <button data-r="axial">Axial</button>
-    <button data-r="appendicular">Appendicular</button>
+  <div class="grp" id="regions" role="group" aria-label="Region filter">
+    <label aria-hidden="true">Region</label>
+    <button data-r="all" class="on" aria-label="Show all regions" aria-pressed="true">All</button>
+    <button data-r="axial" aria-label="Show axial skeleton only" aria-pressed="false">Axial</button>
+    <button data-r="appendicular" aria-label="Show appendicular skeleton only" aria-pressed="false">Appendicular</button>
   </div>
   <div class="sep"></div>
-  <button id="isolate">Isolate</button>
-  <button id="reset">Reset</button>
+  <button id="frame" aria-label="Frame the camera on the selected bone">Frame</button>
+  <button id="isolate" aria-label="Isolate the selected bone" aria-pressed="false">Isolate</button>
+  <button id="reset" aria-label="Reset view, gait, region and selection">Reset</button>
 </div>
 
 <div id="credit" class="hud glass">
@@ -329,7 +362,7 @@ function showAll() { BONES.forEach(b => setVisible(b.name, true)); }
 function select(bone, opts = {}) {
   if (selected && selected !== bone && !painted.has(selected)) restore(selected);
   selected = bone;
-  if (!bone) { $('#detail').classList.add('empty'); return; }
+  if (!bone) { $('#detail').classList.add('empty'); if (!opts.noHash) setHash(''); return; }
   if (!opts.noPaint) paint(bone, GOLD, GLOW);
 
   const b = byName[bone] || { display: bone, region: '', description: '' };
@@ -361,7 +394,52 @@ function select(bone, opts = {}) {
     r.classList.toggle('sel', r.dataset.n === bone));
 
   if (isolated) applyIsolate();
+  if (!opts.noHash) setHash(bone);
 }
+
+/* ---------- deep links (#l_femur) + frame-selected camera ---------- */
+function setHash(bone) {
+  const h = bone ? '#' + bone : '';
+  if (location.hash === h) return;
+  try { history.replaceState(null, '', h || location.pathname + location.search); } catch (e) {}
+}
+// One runtime Viewpoint, created on first use and re-aimed on every frame call.
+// Binding it animates there (NavigationInfo transitionType defaults to LINEAR).
+let frameVP = null;
+const FRAME_K = 3.2;                 // camera distance = FRAME_K * bone radius
+function frameSelected(bone) {
+  const b = byName[bone];
+  const ok = b && Array.isArray(b.center) && b.center.length === 3
+               && typeof b.radius === 'number' && b.radius > 0;
+  if (!ok) {                          // manifest without center/radius: degrade
+    try { scene.getNamedNode('VP_Body').set_bind = true; } catch (e) {}
+    return;
+  }
+  try {
+    if (!frameVP) {
+      frameVP = scene.createNode('Viewpoint');
+      frameVP.description = 'Framed bone';
+      frameVP.fieldOfView = 0.72;
+      frameVP.nearDistance = 0.005;
+      frameVP.farDistance = 80.0;
+      if (typeof scene.addRootNode === 'function') scene.addRootNode(frameVP);
+      else scene.rootNodes.push(frameVP);
+    }
+    const c = b.center, d = Math.max(FRAME_K * b.radius, 0.16);
+    frameVP.position = new X3D.SFVec3f(c[0], c[1], c[2] + d);
+    frameVP.centerOfRotation = new X3D.SFVec3f(c[0], c[1], c[2]);
+    frameVP.orientation = new X3D.SFRotation(0, 0, 1, 0);
+    frameVP.set_bind = true;
+    document.querySelectorAll('#views button').forEach(x => {
+      x.classList.remove('on'); x.setAttribute('aria-pressed', 'false');
+    });
+  } catch (e) {}
+}
+function applyHash() {
+  const h = decodeURIComponent(location.hash.replace(/^#/, ''));
+  if (h && M[h]) { select(h, { noHash: true }); frameSelected(h); }
+}
+addEventListener('hashchange', applyHash);
 
 /* ---------- region / isolate ---------- */
 function applyRegion() {
@@ -381,6 +459,12 @@ function hookScene() {
   // TouchSensor.description as a native tooltip. Both fight the HTML chrome.
   try { browser.setBrowserOption('Notifications', false); } catch (e) {}
   try { browser.setBrowserOption('Shading', 'PHONG'); } catch (e) {}
+  // MEASURED (tools_x3d/perf_probe.js 2026-08-31, 2x2 shading x shadows):
+  // shadow mapping costs ~24% of the frame; PHONG vs GOURAUD costs nothing.
+  // So PHONG stays (better-looking, free) and the KeyLight's shadows go.
+  // The authored default lives in studio_spine.x3d (shadows='true'); turning
+  // it off there is build_anatomy_spine.py's call — this is the runtime win.
+  try { scene.getNamedNode('KeyLight').shadows = false; } catch (e) {}
 
   let hooked = 0;
   for (const b of BONES) {
@@ -409,9 +493,11 @@ function hookScene() {
     } catch (e) {}
   }
   $('#nbones').textContent = hooked;
+  hookModeSwitch();                   // DOM gait highlight follows the scene
   buildTree();
   buildRecon();
   $('#load').classList.add('gone');
+  applyHash();                        // #l_femur deep link: select + frame
 }
 
 addEventListener('pointermove', e => {
@@ -419,10 +505,33 @@ addEventListener('pointermove', e => {
   t.style.left = (e.clientX + 14) + 'px';
   t.style.top  = (e.clientY + 16) + 'px';
 });
-cv.addEventListener('pointerdown', () => {
+function pickSelect(bone) {
+  if (mode === 'quiz' && quiz.live) return answer(bone);
+  select(bone);
+}
+cv.addEventListener('pointerdown', e => {
+  // TOUCH: there is no hover, so isOver has never fired and lastOver is stale
+  // or null. Additive fix: synthesize a pointermove at the touch point so
+  // X_ITE's picking runs, wait one rAF for the isOver callbacks to update
+  // lastOver, then take the exact same selection path. Mouse path untouched.
+  if (e.pointerType === 'touch') {
+    try {
+      cv.dispatchEvent(new PointerEvent('pointermove', {
+        bubbles: true, composed: true,
+        clientX: e.clientX, clientY: e.clientY,
+        screenX: e.screenX, screenY: e.screenY,
+        pointerId: e.pointerId, pointerType: 'touch', isPrimary: true,
+      }));
+    } catch (err) {}
+    requestAnimationFrame(() => {
+      if (lastOver) return pickSelect(lastOver);
+      // picking can land one frame later under load — one defensive retry
+      requestAnimationFrame(() => { if (lastOver) pickSelect(lastOver); });
+    });
+    return;
+  }
   if (!lastOver) return;
-  if (mode === 'quiz' && quiz.live) return answer(lastOver);
-  select(lastOver);
+  pickSelect(lastOver);
 });
 
 /* ---------- group tree (grouped by the model's own classification) ---------- */
@@ -597,13 +706,52 @@ $('#qskip').addEventListener('click', () => { if (quiz.live) { quiz.streak = 0; 
 $('#qreveal').addEventListener('click', () => { if (quiz.live) quiz.judge('__none__'); });
 
 /* ---------- controls ---------- */
-const only = (g, el) => g.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === el));
+const only = (g, el) => g.querySelectorAll('button').forEach(b => {
+  b.classList.toggle('on', b === el);
+  if (b.hasAttribute('aria-pressed')) b.setAttribute('aria-pressed', String(b === el));
+});
+
+/* Gaits are UNIFIED through the scene's ModeSwitch Script: the DOM buttons
+   fire the same inputs the in-scene BtnWalk/BtnRun/BtnJump/BtnStand route
+   into, and the DOM highlight is driven from ModeSwitch's outputs (wired in
+   hookScene) — so the two control surfaces cannot disagree. */
+const GAIT_INPUT = { '': 'stand', WalkTimer: 'walk', RunTimer: 'run', JumpTimer: 'jump' };
+function setGait(timer) {
+  let sent = false;
+  try {
+    scene.getNamedNode('ModeSwitch').getField(GAIT_INPUT[timer]).setValue(Date.now() / 1000);
+    sent = true;
+    reflectGait(timer);               // optimistic; the output callback confirms
+  } catch (e) {}
+  if (!sent) {                        // scene without ModeSwitch: legacy path
+    ['WalkTimer','RunTimer','JumpTimer'].forEach(t => {
+      try { scene.getNamedNode(t).enabled = (t === timer); } catch (err) {}
+    });
+    reflectGait(timer);
+  }
+}
+function reflectGait(timer) {
+  const b = $('#gait').querySelector(`button[data-t="${timer}"]`);
+  if (b) only($('#gait'), b);
+}
+function hookModeSwitch() {
+  // DOM highlight follows the scene's own state, whichever surface changed it
+  try {
+    const ms = scene.getNamedNode('ModeSwitch');
+    const st = { walkOn: false, runOn: false, jumpOn: false };
+    for (const f of Object.keys(st)) {
+      ms.getField(f).addFieldCallback('ax', v => {
+        st[f] = v;
+        reflectGait(st.walkOn ? 'WalkTimer' : st.runOn ? 'RunTimer'
+                  : st.jumpOn ? 'JumpTimer' : '');
+      });
+    }
+    return true;
+  } catch (e) { return false; }
+}
 $('#gait').addEventListener('click', e => {
   const b = e.target.closest('button[data-t]'); if (!b) return;
-  only($('#gait'), b);
-  ['WalkTimer','RunTimer','JumpTimer'].forEach(t => {
-    try { scene.getNamedNode(t).enabled = (t === b.dataset.t); } catch (err) {}
-  });
+  setGait(b.dataset.t);
 });
 $('#views').addEventListener('click', e => {
   const b = e.target.closest('button[data-v]'); if (!b) return;
@@ -616,45 +764,217 @@ $('#regions').addEventListener('click', e => {
   region = b.dataset.r; isolated = false; $('#isolate').classList.remove('on');
   applyRegion();
 });
+$('#frame').addEventListener('click', () => { if (selected) frameSelected(selected); });
 $('#isolate').addEventListener('click', e => {
   if (!selected) return;
-  isolated = !isolated; e.target.classList.toggle('on', isolated); applyIsolate();
+  isolated = !isolated;
+  e.target.classList.toggle('on', isolated);
+  e.target.setAttribute('aria-pressed', String(isolated));
+  applyIsolate();
 });
 $('#reset').addEventListener('click', () => {
   clearPainted();
   if (selected) restore(selected);
   selected = null; isolated = false; region = 'all';
   $('#isolate').classList.remove('on');
+  $('#isolate').setAttribute('aria-pressed', 'false');
   only($('#regions'), $('#regions').querySelector('[data-r=all]'));
   only($('#views'),   $('#views').querySelector('[data-v=VP_Body]'));
-  only($('#gait'),    $('#gait').querySelector('[data-t=""]'));
-  ['WalkTimer','RunTimer','JumpTimer'].forEach(t => {
-    try { scene.getNamedNode(t).enabled = false; } catch (e) {}
-  });
+  setGait('');
   showAll();
   try { scene.getNamedNode('VP_Body').set_bind = true; } catch (e) {}
   $('#detail').classList.add('empty');
+  setHash('');
 });
 
-/* ---------- search ---------- */
+/* ---------- search: display + name + synonyms ---------- */
+// Common names for the majors, ta_terms.txt style (build_anatomy/research/ref/),
+// keyed by manifest name with the l_/r_ side prefix stripped. The KB's own
+// per-entry synonyms merge in when present (entry.synonyms is absent until the
+// KB regenerates — coded defensively below).
+const COMMON_SYNONYMS = {
+  femur: ['thigh bone', 'thighbone'],
+  tibia: ['shin bone', 'shinbone'],
+  fibula: ['calf bone'],
+  patella: ['kneecap', 'knee cap'],
+  calcaneus: ['heel bone', 'calcaneum'],
+  talus: ['ankle bone', 'astragalus'],
+  clavicle: ['collarbone', 'collar bone'],
+  scapula: ['shoulder blade', 'shoulderblade'],
+  humerus: ['upper arm bone', 'funny bone'],
+  radius: ['forearm bone lateral'],
+  ulna: ['forearm bone medial', 'elbow bone'],
+  sternum: ['breastbone', 'breast bone'],
+  sacrum: ['sacral bone'],
+  coccyx: ['tailbone', 'tail bone'],
+  mandible: ['lower jaw', 'jawbone', 'jaw bone'],
+  maxilla: ['upper jaw'],
+  zygomatic: ['cheekbone', 'cheek bone', 'malar'],
+  frontal: ['forehead bone'],
+  pelvis: ['hip bone', 'os coxae', 'innominate'],
+  skull: ['cranium'],
+};
+let SEARCH_INDEX = null;              // built lazily once BONES + KB are in
+function buildSearchIndex() {
+  SEARCH_INDEX = BONES.map(b => {
+    const kb = (KB && KB.bones && KB.bones[b.name]) || {};
+    const syn = [];
+    if (Array.isArray(kb.synonyms)) syn.push(...kb.synonyms);
+    const base = b.name.replace(/^[lr]_/, '');
+    for (const key of Object.keys(COMMON_SYNONYMS))
+      if (base === key || base.startsWith(key + '_') || base.includes(key))
+        syn.push(...COMMON_SYNONYMS[key]);
+    return { b, hay: [b.name, b.display, ...syn].join(' | ').toLowerCase(), syn };
+  });
+}
 const q = $('#q'), hits = $('#hits');
+let hitIdx = -1;
+function closeHits() {
+  hits.classList.remove('show'); hits.innerHTML = ''; hitIdx = -1;
+  q.setAttribute('aria-expanded', 'false');
+}
+function pickHit(li) {
+  select(li.dataset.n); closeHits(); q.value = ''; q.blur();
+}
 q.addEventListener('input', () => {
   const s = q.value.trim().toLowerCase();
-  if (!s) { hits.classList.remove('show'); hits.innerHTML = ''; return; }
-  const found = BONES.filter(b => b.name.toLowerCase().includes(s) ||
-                                  b.display.toLowerCase().includes(s)).slice(0, 40);
-  hits.innerHTML = found.map(b =>
-    `<li data-n="${b.name}">${b.display}<span class="r">${b.region}</span></li>`).join('');
+  hitIdx = -1;
+  if (!s) { closeHits(); return; }
+  if (!SEARCH_INDEX) buildSearchIndex();
+  const found = SEARCH_INDEX.filter(x => x.hay.includes(s)).slice(0, 40);
+  hits.innerHTML = found.map(x => {
+    const via = x.syn.find(y => y.toLowerCase().includes(s));
+    const showVia = via && !x.b.display.toLowerCase().includes(s)
+                        && !x.b.name.toLowerCase().includes(s);
+    return `<li role="option" data-n="${x.b.name}">${x.b.display}` +
+           (showVia ? `<span class="syn">${via}</span>` : '') +
+           `<span class="r">${x.b.region}</span></li>`;
+  }).join('');
   hits.classList.toggle('show', found.length > 0);
+  q.setAttribute('aria-expanded', String(found.length > 0));
 });
 hits.addEventListener('click', e => {
-  const li = e.target.closest('li'); if (!li) return;
-  select(li.dataset.n); hits.classList.remove('show'); q.value = '';
+  const li = e.target.closest('li'); if (li) pickHit(li);
+});
+
+/* ---------- keyboard ---------- */
+q.addEventListener('keydown', e => {
+  const items = [...hits.querySelectorAll('li')];
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (!items.length) return;
+    e.preventDefault();
+    hitIdx = (hitIdx + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+    items.forEach((li, i) => li.classList.toggle('act', i === hitIdx));
+    items[hitIdx].scrollIntoView({ block: 'nearest' });
+  } else if (e.key === 'Enter') {
+    const li = items[hitIdx] || items[0];
+    if (li) { e.preventDefault(); pickHit(li); }
+  } else if (e.key === 'Escape') {
+    e.stopPropagation();
+    if (q.value) { q.value = ''; closeHits(); } else q.blur();
+  }
+});
+addEventListener('keydown', e => {
+  if (e.defaultPrevented) return;
+  const tag = (e.target && e.target.tagName) || '';
+  if (/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+  if (e.key === '/') { e.preventDefault(); q.focus(); q.select(); return; }
+  if (e.key === 'Escape') {
+    if (isolated) {
+      isolated = false;
+      $('#isolate').classList.remove('on');
+      $('#isolate').setAttribute('aria-pressed', 'false');
+      applyIsolate();
+    } else if (tour.t) {
+      tour.stop();
+    } else if (selected) {
+      restore(selected); selected = null;
+      $('#detail').classList.add('empty');
+      document.querySelectorAll('.bone-row.sel').forEach(r => r.classList.remove('sel'));
+      setHash('');
+    }
+  }
 });
 
 /* ---------- boot ---------- */
+// The scene is fetched by hand (streamed, with real byte progress) and handed to
+// X_ITE as a string — no src attribute, no polling. Content-Length is the size on
+// the wire, which is the .gz size when the server compresses, while the stream
+// yields decoded bytes — so the bar is labelled by bytes received, never "x of y".
+const LD = {
+  setBytes(got, total) {
+    const mb = (got / 1048576).toFixed(1);
+    if (total > 0) $('#pbar').style.width = Math.min(100, got / total * 100).toFixed(1) + '%';
+    else $('#pbar').style.width = '100%';
+    $('#pbytes').textContent = mb + ' MB received';
+  },
+  phase(t) { $('#pmsg').textContent = t; },
+  fail(msg) {
+    $('#load').classList.remove('gone');
+    $('#pprog').style.display = 'none';
+    $('#perr').style.display = 'block';
+    $('#perrmsg').textContent = msg;
+  },
+  reset() {
+    $('#load').classList.remove('gone');
+    $('#perr').style.display = 'none';
+    $('#pprog').style.display = '';
+    $('#pbar').style.width = '0%';
+    $('#pbytes').textContent = '';
+    this.phase('Loading the skeleton');
+  },
+};
+
+const STALL_MS = 45000;
+async function loadWorld() {
+  LD.reset();
+  const ctrl = new AbortController();
+  let lastByte = Date.now();
+  const stall = setInterval(() => {
+    if (Date.now() - lastByte > STALL_MS)
+      ctrl.abort(new Error('Stalled — no data received for 45 s.'));
+  }, 1000);
+  try {
+    const res = await fetch('anatomy_explorer.x3d', { signal: ctrl.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText} — anatomy_explorer.x3d`);
+    const total = +(res.headers.get('Content-Length') || 0);
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let text = '', got = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      lastByte = Date.now();
+      got += value.length;
+      text += dec.decode(value, { stream: true });
+      LD.setBytes(got, total);
+    }
+    text += dec.decode();
+    clearInterval(stall);
+    LD.phase('Building the scene');
+    const browser = cv.browser;
+    const world = await browser.createX3DFromString(text);
+    await browser.replaceWorld(world);
+    // sanity assert (once, post-load): the named-node surface the whole UI
+    // drives must exist — getNamedNode throws if the scene came up wrong.
+    browser.currentScene.getNamedNode('TS_l_femur');
+    hookScene();
+  } catch (e) {
+    clearInterval(stall);
+    LD.fail((e && e.message) ? e.message : String(e));
+  }
+}
+// If the failure was before the manifest arrived, a bare loadWorld() would hook
+// zero bones — a full reload is the honest retry there.
+$('#retry').addEventListener('click', () => BONES.length ? loadWorld() : location.reload());
+
 (async () => {
-  const man = await (await fetch('build_anatomy/bone_manifest.json')).json();
+  let man;
+  try {
+    const r = await fetch('build_anatomy/bone_manifest.json');
+    if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText} — bone_manifest.json`);
+    man = await r.json();
+  } catch (e) { LD.fail((e && e.message) ? e.message : String(e)); return; }
   BONES = man.bones;
   byName = Object.fromEntries(BONES.map(b => [b.name, b]));
 
@@ -675,12 +995,7 @@ hits.addEventListener('click', e => {
     $('#qintro').innerHTML = '<p style="font-size:12px;color:var(--dim)">Knowledge base not built.</p>';
   }
 
-  const wait = setInterval(() => {
-    if (!cv.browser || !cv.browser.currentScene) return;
-    try { cv.browser.currentScene.getNamedNode('TS_l_femur'); } catch (e) { return; }
-    clearInterval(wait);
-    if (!scene) hookScene();
-  }, 400);
+  loadWorld();
 })();
 </script>
 </body>

@@ -1,0 +1,458 @@
+{
+ "regions": [
+  {
+   "group_title": "",
+   "group_teaching": "",
+   "bones": [
+    {
+     "name": "l_carpal_distal_phalanx_1",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the thumb — convex on its dorsal and flat on its volar surface. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the thumb tip. It articulates only with the thumb's proximal phalanx, the thumb having no middle phalanx.",
+     "articulates_with": [
+      "l_carpal_proximal_phalanx_1"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:by its distal with the ungual phalanx"
+    },
+    {
+     "name": "l_carpal_distal_phalanx_2",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the index finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "l_carpal_middle_phalanx_2"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "l_carpal_distal_phalanx_3",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the middle finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "l_carpal_middle_phalanx_3"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "l_carpal_distal_phalanx_4",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the ring finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "l_carpal_middle_phalanx_4"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "l_carpal_distal_phalanx_5",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the little finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "l_carpal_middle_phalanx_5"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "l_carpal_middle_phalanx_2",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the index finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_carpal_proximal_phalanx_2",
+      "l_carpal_distal_phalanx_2"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "l_carpal_middle_phalanx_3",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the middle finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_carpal_proximal_phalanx_3",
+      "l_carpal_distal_phalanx_3"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "l_carpal_middle_phalanx_4",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the ring finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_carpal_proximal_phalanx_4",
+      "l_carpal_distal_phalanx_4"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "l_carpal_middle_phalanx_5",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the little finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_carpal_proximal_phalanx_5",
+      "l_carpal_distal_phalanx_5"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "l_carpal_proximal_phalanx_1",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the thumb, which has only two phalanges. Its oval, concave proximal surface receives the head of the first metacarpal at the metacarpophalangeal joint, and its distal end bears two condyles separated by a shallow groove that hinge directly with the thumb's ungual (distal) phalanx. Rough ridges along its sides give attachment to the fibrous sheath of the flexor tendon.",
+     "articulates_with": [
+      "l_metacarpal_1",
+      "l_carpal_distal_phalanx_1"
+     ],
+     "note": "The thumb has only two phalanges. Its metacarpal ossifies in the same manner as a phalanx (from a center for the body and one at its base), which led some anatomists to regard the thumb as being made up of three phalanges and no metacarpal bone.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:In the thumb, which has only two phalanges, the first phalanx articulates by its proximal extremity"
+    },
+    {
+     "name": "l_carpal_proximal_phalanx_2",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the index finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_metacarpal_2",
+      "l_carpal_middle_phalanx_2"
+     ],
+     "note": "The hand's phalanges are fourteen in number: three for each finger and two for the thumb.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "l_carpal_proximal_phalanx_3",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the middle finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_metacarpal_3",
+      "l_carpal_middle_phalanx_3"
+     ],
+     "note": "Each phalanx is ossified from two centers — one for the body and one for the proximal extremity — which unite between the eighteenth and twentieth years.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "l_carpal_proximal_phalanx_4",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the ring finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_metacarpal_4",
+      "l_carpal_middle_phalanx_4"
+     ],
+     "note": "Each phalanx is ossified from two centers — one for the body and one for the proximal extremity — which unite between the eighteenth and twentieth years.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "l_carpal_proximal_phalanx_5",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the little finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "l_metacarpal_5",
+      "l_carpal_middle_phalanx_5"
+     ],
+     "note": "Each phalanx is ossified from two centers — one for the body and one for the proximal extremity — which unite between the eighteenth and twentieth years.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "r_carpal_distal_phalanx_1",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the thumb — convex on its dorsal and flat on its volar surface. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the thumb tip. It articulates only with the thumb's proximal phalanx, the thumb having no middle phalanx.",
+     "articulates_with": [
+      "r_carpal_proximal_phalanx_1"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:by its distal with the ungual phalanx"
+    },
+    {
+     "name": "r_carpal_distal_phalanx_2",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the index finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "r_carpal_middle_phalanx_2"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "r_carpal_distal_phalanx_3",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the middle finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "r_carpal_middle_phalanx_3"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "r_carpal_distal_phalanx_4",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the ring finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "r_carpal_middle_phalanx_4"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "r_carpal_distal_phalanx_5",
+     "group": "Hand phalanges — distal row",
+     "function": "Terminal (ungual) phalanx of the little finger — convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+     "articulates_with": [
+      "r_carpal_middle_phalanx_5"
+     ],
+     "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify — and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+     "synonyms": [
+      "ungual phalanx",
+      "distal phalanx of the hand",
+      "phalanx distalis",
+      "fingertip bone"
+     ],
+     "source": "grays1918:the ungual phalanges with those of the second row"
+    },
+    {
+     "name": "r_carpal_middle_phalanx_2",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the index finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_carpal_proximal_phalanx_2",
+      "r_carpal_distal_phalanx_2"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "r_carpal_middle_phalanx_3",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the middle finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_carpal_proximal_phalanx_3",
+      "r_carpal_distal_phalanx_3"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "r_carpal_middle_phalanx_4",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the ring finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_carpal_proximal_phalanx_4",
+      "r_carpal_distal_phalanx_4"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "r_carpal_middle_phalanx_5",
+     "group": "Hand phalanges — middle row",
+     "function": "Second-row (middle) phalanx of the little finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_carpal_proximal_phalanx_5",
+      "r_carpal_distal_phalanx_5"
+     ],
+     "note": "The thumb skips this row entirely — in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+     "synonyms": [
+      "second phalanx",
+      "phalanx media",
+      "middle phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+    },
+    {
+     "name": "r_carpal_proximal_phalanx_1",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the thumb, which has only two phalanges. Its oval, concave proximal surface receives the head of the first metacarpal at the metacarpophalangeal joint, and its distal end bears two condyles separated by a shallow groove that hinge directly with the thumb's ungual (distal) phalanx. Rough ridges along its sides give attachment to the fibrous sheath of the flexor tendon.",
+     "articulates_with": [
+      "r_metacarpal_1",
+      "r_carpal_distal_phalanx_1"
+     ],
+     "note": "The thumb has only two phalanges. Its metacarpal ossifies in the same manner as a phalanx (from a center for the body and one at its base), which led some anatomists to regard the thumb as being made up of three phalanges and no metacarpal bone.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:In the thumb, which has only two phalanges, the first phalanx articulates by its proximal extremity"
+    },
+    {
+     "name": "r_carpal_proximal_phalanx_2",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the index finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_metacarpal_2",
+      "r_carpal_middle_phalanx_2"
+     ],
+     "note": "The hand's phalanges are fourteen in number: three for each finger and two for the thumb.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "r_carpal_proximal_phalanx_3",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the middle finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_metacarpal_3",
+      "r_carpal_middle_phalanx_3"
+     ],
+     "note": "Each phalanx is ossified from two centers — one for the body and one for the proximal extremity — which unite between the eighteenth and twentieth years.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "r_carpal_proximal_phalanx_4",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the ring finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_metacarpal_4",
+      "r_carpal_middle_phalanx_4"
+     ],
+     "note": "Each phalanx is ossified from two centers — one for the body and one for the proximal extremity — which unite between the eighteenth and twentieth years.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    },
+    {
+     "name": "r_carpal_proximal_phalanx_5",
+     "group": "Hand phalanges — proximal row",
+     "function": "First-row (proximal) phalanx of the little finger. Its oval, concave proximal articular surface — broader from side to side than from before backward — receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+     "articulates_with": [
+      "r_metacarpal_5",
+      "r_carpal_middle_phalanx_5"
+     ],
+     "note": "Each phalanx is ossified from two centers — one for the body and one for the proximal extremity — which unite between the eighteenth and twentieth years.",
+     "synonyms": [
+      "first phalanx",
+      "phalanx proximalis",
+      "proximal phalanx of the hand"
+     ],
+     "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+    }
+   ]
+  }
+ ]
+}

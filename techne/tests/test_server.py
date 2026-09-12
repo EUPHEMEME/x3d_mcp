@@ -113,3 +113,58 @@ def test_non_blank_render_no_warning():
     up.render = _png(solid=False)                           # has geometry
     out = _run(handle_call_tool(p, up, "render_image", {"path": "s.x3d"}))
     assert not any("BLANK" in getattr(b, "text", "") for b in out.content)
+
+
+# --- opt-in provenance policy on render_image content ------------------------
+
+_PROV_SCENE = """<X3D profile='Interactive' version='4.0'><Scene>
+<Transform DEF='Bone'>
+  <MetadataSet containerField='metadata' name='provenance'>
+    <MetadataString name='provenance' value='"documented"'/>
+    <MetadataString name='catalogId' value='"%s"'/>
+  </MetadataSet>
+  <Shape><Box/></Shape>
+</Transform>
+</Scene></X3D>"""
+
+_LEDGER = {"BONE-R5": {"id": "BONE-R5", "citation": "Brutzman et al.",
+                       "public_domain": True}}
+
+
+def _prov_proxy(strict: bool):
+    from techne.config import Config
+    p = TechneProxy(config=Config(provenance=True, provenance_level=2,
+                                  strict=strict))
+    p._ledger = dict(_LEDGER)                 # pre-seed the lazy ledger cache
+    return p
+
+
+def test_strict_provenance_blocks_render_before_forward():
+    p, up = _prov_proxy(strict=True), FakeUpstream()
+    up.render = _png(solid=False)
+    out = _run(handle_call_tool(p, up, "render_image",
+                                {"content": _PROV_SCENE % "NO-SUCH-ID"}))
+    assert out.isError                                       # hard stop
+    assert not up.calls                                      # never forwarded
+    text = " ".join(getattr(b, "text", "") for b in out.content)
+    assert "blocked" in text.lower() and "NO-SUCH-ID" in text
+
+
+def test_soft_provenance_notes_but_forwards():
+    p, up = _prov_proxy(strict=False), FakeUpstream()
+    up.render = _png(solid=False)
+    out = _run(handle_call_tool(p, up, "render_image",
+                                {"content": _PROV_SCENE % "NO-SUCH-ID"}))
+    assert not out.isError and up.calls                      # forwarded
+    assert any("Technē provenance" in getattr(b, "text", "")
+               for b in out.content)
+
+
+def test_strict_provenance_passes_properly_sourced_content():
+    p, up = _prov_proxy(strict=True), FakeUpstream()
+    up.render = _png(solid=False)
+    out = _run(handle_call_tool(p, up, "render_image",
+                                {"content": _PROV_SCENE % "BONE-R5"}))
+    assert not out.isError and up.calls                      # rendered
+    assert not any("provenance" in getattr(b, "text", "").lower()
+                   for b in out.content)

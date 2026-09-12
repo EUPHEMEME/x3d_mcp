@@ -1,0 +1,68 @@
+==================================================================
+STEP 1 — generate the demo original + its broken twin
+==================================================================
+wrote /Users/alexander/x3d_mcp/demo/original_skeleton.x3d
+  (= anatomy_explorer.x3d with <component> before <meta> in <head>,
+   the order the XSD requires; scene content untouched)
+wrote /Users/alexander/x3d_mcp/demo/broken_skeleton_children.x3d
+  the ONLY further difference: containerField="skeleton"  ->  containerField="children"
+  (the skeleton root joint now lands in HAnimHumanoid's default
+   'children' slot — a field HAnimHumanoid does not define)
+
+==================================================================
+STEP 2 — XSD schema validation (episteme)
+==================================================================
+  original  ->  valid: True
+  broken    ->  valid: True
+  => the XSD CANNOT tell them apart. Both are schema-valid.
+
+==================================================================
+STEP 3 — techne_gate.py on the ORIGINAL (expect PASS)
+==================================================================
+================================================================== 
+GATE 1 — SEMANTIC VALIDATION
+==================================================================
+Found 0 error(s), 3 warning(s), 2239 info(s).
+## Warnings
+- **[empty-group]** Transform has no children. Empty grouping nodes have no effect.
+- **[empty-group]** Transform (DEF='SkullLocalOffset') has no children. Empty grouping nodes have no effect.
+- **[empty-group]** Transform (DEF='lowerTeeth') has no children. Empty grouping nodes have no effect.
+gate 1    : clean
+================================================================== 
+GATE 2 — OCCUPATION GATE (render under X_ITE + look)
+==================================================================
+rendered  -> /Users/alexander/x3d_mcp/demo/receipts/beat_a/original.png  (120 KB)
+non_blank : True   dims 1200x860   stddev 33.96
+VERDICT: PASS — validation clean, render non-blank
+
+[exit code: 0]  [wall-time: 9.8s]
+
+==================================================================
+STEP 4 — techne_gate.py on the BROKEN file (expect FAIL)
+==================================================================
+================================================================== 
+GATE 1 — SEMANTIC VALIDATION
+==================================================================
+Found 1 error(s), 3 warning(s), 2239 info(s).
+## Errors
+- **[containerfield-type-mismatch]** HAnimHumanoid.children does not accept a HAnimJoint (accepts: HAnimPose). Use containerField='joints'.
+## Warnings
+- **[empty-group]** Transform has no children. Empty grouping nodes have no effect.
+- **[empty-group]** Transform (DEF='SkullLocalOffset') has no children. Empty grouping nodes have no effect.
+- **[empty-group]** Transform (DEF='lowerTeeth') has no children. Empty grouping nodes have no effect.
+gate 1    : 1 error(s) — see corrections above
+================================================================== 
+GATE 2 — OCCUPATION GATE (render under X_ITE + look)
+==================================================================
+rendered  -> /Users/alexander/x3d_mcp/demo/receipts/beat_a/broken.png  (10 KB)
+non_blank : True   dims 1200x860   stddev 3.89
+VERDICT: FAIL — semantic validation reported 1 error(s)
+
+[exit code: 1]  [wall-time: 10.1s]
+
+==================================================================
+BEAT A SELF-ASSERTION
+==================================================================
+  XSD passes both; techne_gate PASSES the original and FAILS the broken
+  twin, naming the exact fix. One attribute, invisible to the schema,
+  kills the whole figure. receipts -> /Users/alexander/x3d_mcp/demo/receipts/beat_a

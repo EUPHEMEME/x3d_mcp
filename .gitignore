@@ -58,3 +58,13 @@ techne/uv.lock
 # patent folder. This repo is a PUBLIC fork. Never track these.
 file_browser.html
 *_browser.html
+
+# Session traces + regenerable build outputs (bundle gzips via make bundle)
+techne_traces/
+build_anatomy/research/drafts/
+build_anatomy/gate_receipt.png
+*.x3d.gz
+*.html.gz
+build_anatomy/anatomy_kb.json.gz
+competitions/footage/
+competitions/footage_capture.log

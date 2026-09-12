@@ -1,0 +1,428 @@
+{
+ "regions": [
+  {
+   "group_title": "",
+   "group_teaching": "",
+   "bones": [
+    {
+     "name": "c2disc",
+     "group": "Intervertebral discs — cervical",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C2 and C3, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+     "articulates_with": [
+      "c2",
+      "c3"
+     ],
+     "note": "The uppermost disc of the whole column: the series of intervertebral fibrocartilages extends only from the axis to the sacrum, so there is no disc between the skull and atlas or between atlas and axis.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "C2–C3 disc"
+     ],
+     "source": "grays1918:from the axis to the sacrum"
+    },
+    {
+     "name": "c3disc",
+     "group": "Intervertebral discs — cervical",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C3 and C4, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+     "articulates_with": [
+      "c3",
+      "c4"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "C3–C4 disc"
+     ],
+     "source": "grays1918:thicker in front than behind in the cervical"
+    },
+    {
+     "name": "c4disc",
+     "group": "Intervertebral discs — cervical",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C4 and C5, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+     "articulates_with": [
+      "c4",
+      "c5"
+     ],
+     "note": "Cervical discs are slightly smaller from side to side than the vertebral bodies they separate — the one region where disc and body outlines do not correspond.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "C4–C5 disc"
+     ],
+     "source": "grays1918:thicker in front than behind in the cervical"
+    },
+    {
+     "name": "c5disc",
+     "group": "Intervertebral discs — cervical",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C5 and C6, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+     "articulates_with": [
+      "c5",
+      "c6"
+     ],
+     "note": "In the lower cervical spine, small joints lined by synovial membrane are occasionally present between the upper surfaces of the vertebral bodies and the margins of the disc on either side.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "C5–C6 disc"
+     ],
+     "source": "grays1918:small joints lined by synovial membrane are occasionally present"
+    },
+    {
+     "name": "c6disc",
+     "group": "Intervertebral discs — cervical",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C6 and C7, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+     "articulates_with": [
+      "c6",
+      "c7"
+     ],
+     "note": "In the lower cervical spine, small joints lined by synovial membrane are occasionally present between the upper surfaces of the vertebral bodies and the margins of the disc on either side.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "C6–C7 disc"
+     ],
+     "source": "grays1918:small joints lined by synovial membrane are occasionally present"
+    },
+    {
+     "name": "c7disc",
+     "group": "Intervertebral discs — cervical",
+     "function": "Fibrocartilaginous pad between the bodies of C7 and T1 at the cervicothoracic junction, one of the chief bonds of connection between the vertebrae: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, bound in front and behind to the anterior and posterior longitudinal ligaments and acting as a shock absorber between neck and trunk.",
+     "articulates_with": [
+      "c7",
+      "t1"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "C7–T1 disc"
+     ],
+     "source": "grays1918:are interposed between the adjacent"
+    },
+    {
+     "name": "t1disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T1 and T2: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 2) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t1",
+      "t2",
+      "l_rib2",
+      "r_rib2"
+     ],
+     "note": "The heads of the typical ribs articulate with the discs as well as the vertebrae; the first, tenth, eleventh, and twelfth ribs are the exceptions, each articulating with a single vertebra only — so rib 1 does not reach this disc, but rib 2 does.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T1–T2 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t2disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T2 and T3: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 3) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t2",
+      "t3",
+      "l_rib3",
+      "r_rib3"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T2–T3 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t3disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T3 and T4: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 4) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t3",
+      "t4",
+      "l_rib4",
+      "r_rib4"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T3–T4 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t4disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T4 and T5: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 5) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t4",
+      "t5",
+      "l_rib5",
+      "r_rib5"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T4–T5 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t5disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T5 and T6: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 6) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t5",
+      "t6",
+      "l_rib6",
+      "r_rib6"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T5–T6 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t6disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T6 and T7: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 7) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t6",
+      "t7",
+      "l_rib7",
+      "r_rib7"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T6–T7 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t7disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T7 and T8: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 8) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t7",
+      "t8",
+      "l_rib8",
+      "r_rib8"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T7–T8 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t8disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T8 and T9: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 9) that articulate with the margins of both vertebral bodies and with the disc between them.",
+     "articulates_with": [
+      "t8",
+      "t9",
+      "l_rib9",
+      "r_rib9"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T8–T9 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t9disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T9 and T10: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+     "articulates_with": [
+      "t9",
+      "t10"
+     ],
+     "note": "Below this level the rib heads no longer reach the discs: the tenth, eleventh, and twelfth ribs each articulate with a single vertebra only.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T9–T10 disc"
+     ],
+     "source": "grays1918:with the intervertebral fibrocartilages between them"
+    },
+    {
+     "name": "t10disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T10 and T11: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+     "articulates_with": [
+      "t10",
+      "t11"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T10–T11 disc"
+     ],
+     "source": "grays1918:of nearly uniform thickness in the thoracic region"
+    },
+    {
+     "name": "t11disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T11 and T12: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+     "articulates_with": [
+      "t11",
+      "t12"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T11–T12 disc"
+     ],
+     "source": "grays1918:of nearly uniform thickness in the thoracic region"
+    },
+    {
+     "name": "t12disc",
+     "group": "Intervertebral discs — thoracic",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T12 and L1: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+     "articulates_with": [
+      "t12",
+      "l1"
+     ],
+     "note": "The thoracolumbar transition disc, between the last thoracic and first lumbar vertebrae.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "T12–L1 disc"
+     ],
+     "source": "grays1918:of nearly uniform thickness in the thoracic region"
+    },
+    {
+     "name": "l1disc",
+     "group": "Intervertebral discs — lumbar",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L1 and L2: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae — the column's principal shock absorbers.",
+     "articulates_with": [
+      "l1",
+      "l2"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "L1–L2 disc"
+     ],
+     "source": "grays1918:especially well-developed in the lumbar region"
+    },
+    {
+     "name": "l2disc",
+     "group": "Intervertebral discs — lumbar",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L2 and L3: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae — the column's principal shock absorbers.",
+     "articulates_with": [
+      "l2",
+      "l3"
+     ],
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "L2–L3 disc"
+     ],
+     "source": "grays1918:especially well-developed in the lumbar region"
+    },
+    {
+     "name": "l3disc",
+     "group": "Intervertebral discs — lumbar",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L3 and L4: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae — the column's principal shock absorbers.",
+     "articulates_with": [
+      "l3",
+      "l4"
+     ],
+     "note": "Taken together the intervertebral fibrocartilages constitute about one-fourth of the length of the vertebral column (excluding the first two vertebrae), the cervical and lumbar regions holding proportionally the greatest share — hence their greater pliancy.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "L3–L4 disc"
+     ],
+     "source": "grays1918:constitute about one-fourth of the length"
+    },
+    {
+     "name": "l4disc",
+     "group": "Intervertebral discs — lumbar",
+     "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L4 and L5: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae — the column's principal shock absorbers.",
+     "articulates_with": [
+      "l4",
+      "l5"
+     ],
+     "note": "The nucleus pulposus is the remains of the notochord — a persistent trace of the embryonic axial rod at every disc level.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "L4–L5 disc"
+     ],
+     "source": "grays1918:especially well-developed in the lumbar region"
+    },
+    {
+     "name": "l5disc",
+     "group": "Intervertebral discs — lumbosacral",
+     "function": "Fibrocartilaginous pad between the body of the last lumbar vertebra (L5) and the upper surface of the body of the first sacral vertebra — the lumbosacral disc, the lowest of the series that extends from the axis to the sacrum. Like its fellows it is an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, thicker in front than behind, and it carries the whole weight of the trunk into the sacrum and pelvis.",
+     "articulates_with": [
+      "l5",
+      "sacrum_bone"
+     ],
+     "note": "Sits at the lumbosacral junction, where the base of the sacrum projects forward and forms the prominent sacrovertebral angle with the last lumbar vertebra.",
+     "synonyms": [
+      "intervertebral disc",
+      "intervertebral disk",
+      "intervertebral fibrocartilage",
+      "discus intervertebralis",
+      "L5–S1 disc",
+      "lumbosacral disc"
+     ],
+     "source": "grays1918:from the axis to the sacrum"
+    }
+   ]
+  }
+ ]
+}

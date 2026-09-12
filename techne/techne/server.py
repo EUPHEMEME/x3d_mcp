@@ -128,8 +128,12 @@ def _vs_errors(vs: str) -> str:
 
 def _provenance_note(proxy: TechneProxy, xml: str) -> "types.TextContent | None":
     """Opt-in provenance gate (only when the profile enables it). Soft by default —
-    appends a 'Technē provenance:' WARN note, never blocks (don't wall artistic
-    workflows that don't opt in; even when on, nudge unless TECHNE_STRICT)."""
+    appends a 'Technē provenance:' WARN note (don't wall artistic workflows that
+    don't opt in; even when on, nudge unless TECHNE_STRICT). Under TECHNE_STRICT=1
+    the render path upgrades a violation to a hard stop BEFORE forwarding — see
+    handle_call_tool (PROFILES.md: 'strict turns policy violations into hard
+    stops'); edit-tool output keeps the riding 'violation' note, since the edit
+    has already been applied upstream by the time its document can be checked."""
     if not getattr(proxy, "config", None) or not proxy.config.provenance:
         return None
     from . import provenance
@@ -191,6 +195,18 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
             content=[types.TextContent(
                 type="text", text=proxy.correction_message(decision))],
             isError=True)
+    # opt-in provenance policy on renderable content, checked BEFORE the forward:
+    # strict mode turns a violation into a hard stop (the render never happens);
+    # otherwise the note rides back on the result below, advisory-only.
+    prov_note = None
+    if name == "render_image" and (decision.args or {}).get("content"):
+        prov_note = _provenance_note(proxy, decision.args["content"])
+        if prov_note is not None and proxy.config.strict:
+            return types.CallToolResult(
+                content=[types.TextContent(type="text", text=(
+                    "Technē blocked this render (provenance policy, "
+                    "TECHNE_STRICT=1). " + prov_note.text))],
+                isError=True)
     result = await upstream.call_tool(name, decision.args)
     proxy.observe_result(decision, _text_of(result))
     content = list(getattr(result, "content", None) or [])
@@ -235,10 +251,8 @@ async def handle_call_tool(proxy: TechneProxy, upstream: Any, name: str,
             content.append(types.TextContent(type="text", text=warn))
         if receipt:
             proxy.record_render(receipt.stddev, receipt.non_blank)
-    if name == "render_image" and (arguments or {}).get("content"):
-        pnote = _provenance_note(proxy, arguments["content"])   # opt-in policy
-        if pnote:
-            content.append(pnote)
+    if prov_note is not None:                      # opt-in policy (soft: not strict)
+        content.append(prov_note)
     if name in _EDIT_VERBS and not getattr(result, "isError", False):
         doc = _text_of(result)
         if _looks_like_doc(doc):

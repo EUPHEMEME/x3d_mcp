@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# flatten_anatomy.py v1.1 2026-08-31 — adds per-bone camera-framing data
+# ("center":[x,y,z] + "radius":r, humanoid space) to bone_manifest.json.
 """Flatten the canonical LOA5 HAnim skeleton into one addressable scene graph.
 
 The Web3D bone meshes (assets/loa5/meshes/*.x3d) already carry everything an
@@ -20,8 +22,8 @@ each segment, and not each file; the teeth and the ethmoid each need their own r
     TS_<bone>     the TouchSensor          -> isOver / touchTime  (picking)
     MAT_<bone>    the PhysicalMaterial     -> baseColor      (gold highlight)
 
-and writes bone_manifest.json (name, display name, anatomical prose, region) as
-the label corpus for the overlay.
+and writes bone_manifest.json (name, display name, anatomical prose, region,
+and the camera-framing pair center/radius) as the label corpus for the overlay.
 
     ./flatten_anatomy.py assets/loa5/loa5_humanoid.x3dfrag out/skeleton.x3d
 """
@@ -260,6 +262,59 @@ def split_bones() -> dict[str, str]:
     return out
 
 
+# --- camera framing --------------------------------------------------------
+def measure_frames(root: etree._Element, bone_names: set[str]) -> dict[str, dict]:
+    """Per-bone bounding center + radius in HUMANOID space, from raw Coordinate
+    points, for the host page to animate the camera onto a selected bone.
+
+    Placement in this corpus is translation-only — audited: of 327 Transforms
+    in the flattened graph, 292 carry translation and ZERO carry rotation,
+    scale, center or scaleOrientation, and the HAnimJoints carry no rest-pose
+    rotation. So the cumulative frame is the sum of ancestor translations, and
+    the bbox radius is translation-invariant. If a rotated/scaled asset ever
+    lands, this assert trips rather than silently mis-framing.
+    """
+    boxes: dict[str, list[float]] = {}
+
+    def walk(el: etree._Element, off: tuple[float, float, float],
+             bone: str | None) -> None:
+        if not isinstance(el.tag, str):
+            return
+        if el.tag == "Transform":
+            assert not (el.get("rotation") or el.get("scale")), \
+                f"measure_frames: non-translation Transform under {bone or 'root'}"
+            t = el.get("translation")
+            if t:
+                v = [float(x) for x in t.split()]
+                off = (off[0] + v[0], off[1] + v[1], off[2] + v[2])
+        d = el.get("DEF")
+        if d in bone_names:
+            bone = d
+        if bone and el.tag == "Coordinate" and el.get("point"):
+            vals = [float(x) for x in el.get("point").replace(",", " ").split()]
+            bb = boxes.setdefault(bone, [float("inf")] * 3 + [float("-inf")] * 3)
+            for i in range(0, len(vals) - 2, 3):
+                for a in range(3):
+                    p = vals[i + a] + off[a]
+                    if p < bb[a]:
+                        bb[a] = p
+                    if p > bb[a + 3]:
+                        bb[a + 3] = p
+        for ch in el:
+            walk(ch, off, bone)
+
+    walk(root, (0.0, 0.0, 0.0), None)
+    out = {}
+    for bone, (x0, y0, z0, x1, y1, z1) in boxes.items():
+        r = 0.5 * ((x1 - x0) ** 2 + (y1 - y0) ** 2 + (z1 - z0) ** 2) ** 0.5
+        out[bone] = {
+            "center": [round((x0 + x1) / 2, 4), round((y0 + y1) / 2, 4),
+                       round((z0 + z1) / 2, 4)],
+            "radius": round(max(r, 0.001), 4),
+        }
+    return out
+
+
 def main() -> None:
     src, dst = sys.argv[1], sys.argv[2]
     outdir = os.path.dirname(os.path.abspath(dst))
@@ -431,6 +486,17 @@ def main() -> None:
 
     claim(root)
 
+    # --- camera framing: bounding center + radius per bone -----------------
+    frames = measure_frames(root, seen)
+    unframed = []
+    for b in bones:
+        fr = frames.get(b["name"])
+        if fr is None:                       # geometry-less bone: should not happen
+            unframed.append(b["name"])
+            fr = {"center": [0.0, 0.9, 0.0], "radius": 0.25}
+        b["center"] = fr["center"]
+        b["radius"] = fr["radius"]
+
     # --- integrity: DEF collisions and coordIndex bounds -------------------
     defs = collections.Counter(e.get("DEF") for e in root.iter() if e.get("DEF"))
     collisions = {k: v for k, v in defs.items() if v > 1}
@@ -476,6 +542,7 @@ def main() -> None:
         "phong_converted": phong,
         "def_collisions": collisions,
         "coordIndex_out_of_range": bad_index,
+        "bones_without_framing": unframed,
         "MB": round(os.path.getsize(dst) / 1e6, 2),
         **manifest["counts"],
     }, indent=1))

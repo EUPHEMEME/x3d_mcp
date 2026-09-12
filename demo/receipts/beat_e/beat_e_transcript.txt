@@ -1,0 +1,33 @@
+$ .venv/bin/python demo/beat_e.py
+==================================================================
+CASE A — provenance='documented' catalogId='SLOP-1' (not in ledger), STRICT profile  ->  expect BLOCK before any render
+==================================================================
+isError=True   wall=0.5s
+Technē blocked this render (provenance policy, TECHNE_STRICT=1). Technē provenance (L2, violation): Transform (DEF=SubjectAsset): catalogId='SLOP-1' does not resolve to any asset-ledger entry (have: BONE-R5). Register the asset with its citation/source/public-domain status, or correct the id.
+
+  verdict: BLOCKED; names the bogus id: True; lists what the ledger DOES hold: True
+==================================================================
+CASE A' CONTROL — the SAME scene, default profile (no provenance group)  ->  expect a silent, ordinary render
+==================================================================
+isError=False   image=yes (2453 bytes)   wall=11.1s
+
+  verdict: rendered, zero provenance text -- provenance is opt-in policy, not core correctness.
+==================================================================
+CASE B — the real Web3D bone mesh, catalogId='BONE-R5' resolving in the ledger, SAME strict profile  ->  expect render + no note
+==================================================================
+asset: /Users/alexander/x3d_mcp/assets/loa5/meshes/r_tarsal_distal_phalanx_5.x3d
+attribution (from the asset's own header): Don Brutzman, Joe Williams, John Carlson, Damon Hernandez
+isError=False   image=yes (28798 bytes)   wall=10.5s
+
+  verdict: PASSED; provenance silent: True; render non-blank: True
+==================================================================
+BEAT E SCOREBOARD
+==================================================================
+  case_a_block_s            : 0.5s
+  case_a_control_render_s   : 11.1s
+  case_b_pass_render_s      : 10.5s
+
+  BEAT E SELF-ASSERTION: strict blocked the unsourced 'documented'
+  claim before Chromium ever launched; the default profile proved the
+  gate is opt-in; the properly-attributed Web3D bone rendered clean.
+  Receipts -> /Users/alexander/x3d_mcp/demo/receipts/beat_e

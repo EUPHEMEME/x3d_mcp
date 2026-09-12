@@ -1,0 +1,20 @@
+$ .venv/bin/python techne_gate.py demo/broken_skeleton_children.x3d demo/receipts/beat_a/broken.png
+================================================================== 
+GATE 1 — SEMANTIC VALIDATION
+==================================================================
+Found 1 error(s), 3 warning(s), 2239 info(s).
+## Errors
+- **[containerfield-type-mismatch]** HAnimHumanoid.children does not accept a HAnimJoint (accepts: HAnimPose). Use containerField='joints'.
+## Warnings
+- **[empty-group]** Transform has no children. Empty grouping nodes have no effect.
+- **[empty-group]** Transform (DEF='SkullLocalOffset') has no children. Empty grouping nodes have no effect.
+- **[empty-group]** Transform (DEF='lowerTeeth') has no children. Empty grouping nodes have no effect.
+gate 1    : 1 error(s) — see corrections above
+================================================================== 
+GATE 2 — OCCUPATION GATE (render under X_ITE + look)
+==================================================================
+rendered  -> /Users/alexander/x3d_mcp/demo/receipts/beat_a/broken.png  (10 KB)
+non_blank : True   dims 1200x860   stddev 3.89
+VERDICT: FAIL — semantic validation reported 1 error(s)
+
+[exit code: 1]  [wall-time: 10.1s]

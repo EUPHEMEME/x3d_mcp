@@ -1,0 +1,68 @@
+$ .venv/bin/python demo/beat_b.py
+==================================================================
+CASE B CONTROL — same sloppy call, straight at the RAW x3d-mcp server
+==================================================================
+
+>>> RAW REQUEST (raw server, no Technē)
+{
+  "tool": "create_node",
+  "arguments": {
+    "node_type": "Viewpoint",
+    "fields": "```json\n{\"description\": \"SAP repair demo\", \"position\": [0, 1.6, 3.0]}\n```"
+  }
+}
+<<< RESPONSE  (isError=True)
+Error executing tool create_node: 1 validation error for create_nodeArguments
+fields
+  Input should be a valid dictionary [type=dict_type, input_value='```json\n{"description":...n": [0, 1.6, 3.0]}\n```', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/dict_type
+
+  control verdict: raw server ERRORS -- `fields` must be an object, and no one unwrapped the string.
+==================================================================
+CASE A — ImageTexture into PhysicalMaterial, containerField left to default  ->  expect BLOCK naming every legal slot
+==================================================================
+
+>>> RAW REQUEST (through Technē)
+{
+  "tool": "add_child",
+  "arguments": {
+    "parent_id": "65fc7729-aa28-4a9a-87ee-9da07b82f6a2",
+    "child_id": "5195a130-69dd-47da-9f1c-c93760f59156"
+  }
+}
+<<< RESPONSE  (isError=True)
+Technē blocked this call (it would pass the schema but render wrong). Apply the correction and retry:
+- Adding 'ImageTexture' to 'PhysicalMaterial' needs an explicit containerField, but none was given — it would default to 'texture', which 'PhysicalMaterial' does not define as a field, so the child is silently dropped. Specify containerField as one of: baseTexture, emissiveTexture, normalTexture, occlusionTexture, metallicRoughnessTexture. (x3d.py Bug 1.)
+
+  verdict: BLOCKED; legal slots named in the correction: 5/5 (baseTexture, emissiveTexture, normalTexture, occlusionTexture, metallicRoughnessTexture)
+  the defaulted containerField would have been 'texture' — a field
+  PhysicalMaterial does not define; the texture would silently vanish.
+==================================================================
+CASE B — the SAME sloppy call, through Technē  ->  expect silent SAP repair + forward
+==================================================================
+
+>>> RAW REQUEST (through Technē)
+{
+  "tool": "create_node",
+  "arguments": {
+    "node_type": "Viewpoint",
+    "fields": "```json\n{\"description\": \"SAP repair demo\", \"position\": [0, 1.6, 3.0]}\n```"
+  }
+}
+<<< RESPONSE  (isError=False)
+Created Viewpoint with ID: b1a20eba-b2d1-489e-8b21-5dc0940503f4
+Technē reminder: X3D is right-handed: +X right, +Y up, +Z toward viewer; default view looks down -Z at origin. Default Viewpoint position 0 0 10, orientation 0 0 1 0. Angles in radians, lengths in meters.
+
+  verdict: FORWARDED — node created
+  Technē unwrapped the fenced JSON string into the object the schema
+  wants and forwarded; the model never saw an error. Same bytes, raw
+  server: error (see control above). That delta IS the SAP layer.
+==================================================================
+TECHNĒ SCOREBOARD
+==================================================================
+  calls             : 5
+  blocked           : 1
+  repaired_forwards : 1
+
+  BEAT B SELF-ASSERTION: block named all 5 legal slots; the SAP repair
+  forwarded a call the raw server rejects. Receipts -> /Users/alexander/x3d_mcp/demo/receipts/beat_b

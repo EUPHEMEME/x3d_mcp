@@ -904,6 +904,2818 @@
     "Right cuboid (laterally \u2014 a frequent but variable facet, not present in everyone)"
    ],
    "note": "Named from Latin navis, 'ship', for the boat-like hollow of its rear surface, which cups the head of the talus. Its tuberosity is the principal insertion of tibialis posterior, and failure of that tendon is the classic cause of adult-acquired flatfoot, with the arch collapsing around this bone. Do not confuse it with the scaphoid of the wrist \u2014 the old name for the wrist scaphoid was also 'navicular', which is why some legacy texts use one word for two different bones."
+  },
+  "l_carpal_distal_phalanx_1": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the thumb \u2014 convex on its dorsal and flat on its volar surface. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the thumb tip. It articulates only with the thumb's proximal phalanx, the thumb having no middle phalanx.",
+   "articulates_with": [
+    "l_carpal_proximal_phalanx_1"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:by its distal with the ungual phalanx"
+  },
+  "l_carpal_distal_phalanx_2": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the index finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "l_carpal_middle_phalanx_2"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "l_carpal_distal_phalanx_3": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the middle finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "l_carpal_middle_phalanx_3"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "l_carpal_distal_phalanx_4": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the ring finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "l_carpal_middle_phalanx_4"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "l_carpal_distal_phalanx_5": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the little finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "l_carpal_middle_phalanx_5"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "l_carpal_middle_phalanx_2": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the index finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_carpal_proximal_phalanx_2",
+    "l_carpal_distal_phalanx_2"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "l_carpal_middle_phalanx_3": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the middle finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_carpal_proximal_phalanx_3",
+    "l_carpal_distal_phalanx_3"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "l_carpal_middle_phalanx_4": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the ring finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_carpal_proximal_phalanx_4",
+    "l_carpal_distal_phalanx_4"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "l_carpal_middle_phalanx_5": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the little finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_carpal_proximal_phalanx_5",
+    "l_carpal_distal_phalanx_5"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "l_carpal_proximal_phalanx_1": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the thumb, which has only two phalanges. Its oval, concave proximal surface receives the head of the first metacarpal at the metacarpophalangeal joint, and its distal end bears two condyles separated by a shallow groove that hinge directly with the thumb's ungual (distal) phalanx. Rough ridges along its sides give attachment to the fibrous sheath of the flexor tendon.",
+   "articulates_with": [
+    "l_metacarpal_1",
+    "l_carpal_distal_phalanx_1"
+   ],
+   "note": "The thumb has only two phalanges. Its metacarpal ossifies in the same manner as a phalanx (from a center for the body and one at its base), which led some anatomists to regard the thumb as being made up of three phalanges and no metacarpal bone.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:In the thumb, which has only two phalanges, the first phalanx articulates by its proximal extremity"
+  },
+  "l_carpal_proximal_phalanx_2": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the index finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_metacarpal_2",
+    "l_carpal_middle_phalanx_2"
+   ],
+   "note": "The hand's phalanges are fourteen in number: three for each finger and two for the thumb.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "l_carpal_proximal_phalanx_3": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the middle finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_metacarpal_3",
+    "l_carpal_middle_phalanx_3"
+   ],
+   "note": "Each phalanx is ossified from two centers \u2014 one for the body and one for the proximal extremity \u2014 which unite between the eighteenth and twentieth years.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "l_carpal_proximal_phalanx_4": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the ring finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_metacarpal_4",
+    "l_carpal_middle_phalanx_4"
+   ],
+   "note": "Each phalanx is ossified from two centers \u2014 one for the body and one for the proximal extremity \u2014 which unite between the eighteenth and twentieth years.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "l_carpal_proximal_phalanx_5": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the little finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "l_metacarpal_5",
+    "l_carpal_middle_phalanx_5"
+   ],
+   "note": "Each phalanx is ossified from two centers \u2014 one for the body and one for the proximal extremity \u2014 which unite between the eighteenth and twentieth years.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "r_carpal_distal_phalanx_1": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the thumb \u2014 convex on its dorsal and flat on its volar surface. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the thumb tip. It articulates only with the thumb's proximal phalanx, the thumb having no middle phalanx.",
+   "articulates_with": [
+    "r_carpal_proximal_phalanx_1"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:by its distal with the ungual phalanx"
+  },
+  "r_carpal_distal_phalanx_2": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the index finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "r_carpal_middle_phalanx_2"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "r_carpal_distal_phalanx_3": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the middle finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "r_carpal_middle_phalanx_3"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "r_carpal_distal_phalanx_4": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the ring finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "r_carpal_middle_phalanx_4"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "r_carpal_distal_phalanx_5": {
+   "group": "Hand phalanges \u2014 distal row",
+   "function": "Terminal (ungual) phalanx of the little finger \u2014 convex on its dorsal and flat on its volar surface, and recognized by its small size. A roughened, elevated horseshoe-shaped surface on the volar side of its distal extremity supports the sensitive pulp of the fingertip. Its double-concave proximal surface hinges on the condyles of the middle phalanx.",
+   "articulates_with": [
+    "r_carpal_middle_phalanx_5"
+   ],
+   "note": "Of all the bones of the hand, the ungual phalanges are the first to ossify \u2014 and uniquely, the centers for their bodies appear at the distal extremities of the bones instead of at the middle.",
+   "synonyms": [
+    "ungual phalanx",
+    "distal phalanx of the hand",
+    "phalanx distalis",
+    "fingertip bone"
+   ],
+   "source": "grays1918:the ungual phalanges with those of the second row"
+  },
+  "r_carpal_middle_phalanx_2": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the index finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_carpal_proximal_phalanx_2",
+    "r_carpal_distal_phalanx_2"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "r_carpal_middle_phalanx_3": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the middle finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_carpal_proximal_phalanx_3",
+    "r_carpal_distal_phalanx_3"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "r_carpal_middle_phalanx_4": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the ring finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_carpal_proximal_phalanx_4",
+    "r_carpal_distal_phalanx_4"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "r_carpal_middle_phalanx_5": {
+   "group": "Hand phalanges \u2014 middle row",
+   "function": "Second-row (middle) phalanx of the little finger. Its proximal end presents a double concavity separated by a median ridge that locks onto the two condyles of the proximal phalanx, and its own distal condyles hinge with the ungual (distal) phalanx. The body tapers from above downward, and its rough lateral ridges anchor the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_carpal_proximal_phalanx_5",
+    "r_carpal_distal_phalanx_5"
+   ],
+   "note": "The thumb skips this row entirely \u2014 in the four fingers the phalanges of the second row articulate with those of the first and third rows.",
+   "synonyms": [
+    "second phalanx",
+    "phalanx media",
+    "middle phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the second row with those of the first and third rows"
+  },
+  "r_carpal_proximal_phalanx_1": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the thumb, which has only two phalanges. Its oval, concave proximal surface receives the head of the first metacarpal at the metacarpophalangeal joint, and its distal end bears two condyles separated by a shallow groove that hinge directly with the thumb's ungual (distal) phalanx. Rough ridges along its sides give attachment to the fibrous sheath of the flexor tendon.",
+   "articulates_with": [
+    "r_metacarpal_1",
+    "r_carpal_distal_phalanx_1"
+   ],
+   "note": "The thumb has only two phalanges. Its metacarpal ossifies in the same manner as a phalanx (from a center for the body and one at its base), which led some anatomists to regard the thumb as being made up of three phalanges and no metacarpal bone.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:In the thumb, which has only two phalanges, the first phalanx articulates by its proximal extremity"
+  },
+  "r_carpal_proximal_phalanx_2": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the index finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_metacarpal_2",
+    "r_carpal_middle_phalanx_2"
+   ],
+   "note": "The hand's phalanges are fourteen in number: three for each finger and two for the thumb.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "r_carpal_proximal_phalanx_3": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the middle finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_metacarpal_3",
+    "r_carpal_middle_phalanx_3"
+   ],
+   "note": "Each phalanx is ossified from two centers \u2014 one for the body and one for the proximal extremity \u2014 which unite between the eighteenth and twentieth years.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "r_carpal_proximal_phalanx_4": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the ring finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_metacarpal_4",
+    "r_carpal_middle_phalanx_4"
+   ],
+   "note": "Each phalanx is ossified from two centers \u2014 one for the body and one for the proximal extremity \u2014 which unite between the eighteenth and twentieth years.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "r_carpal_proximal_phalanx_5": {
+   "group": "Hand phalanges \u2014 proximal row",
+   "function": "First-row (proximal) phalanx of the little finger. Its oval, concave proximal articular surface \u2014 broader from side to side than from before backward \u2014 receives the head of its metacarpal at the knuckle (metacarpophalangeal joint), and its distal end bears two condyles separated by a shallow groove that hinge with the middle phalanx. Rough ridges along its sides give attachment to the fibrous sheaths of the flexor tendons.",
+   "articulates_with": [
+    "r_metacarpal_5",
+    "r_carpal_middle_phalanx_5"
+   ],
+   "note": "Each phalanx is ossified from two centers \u2014 one for the body and one for the proximal extremity \u2014 which unite between the eighteenth and twentieth years.",
+   "synonyms": [
+    "first phalanx",
+    "phalanx proximalis",
+    "proximal phalanx of the hand"
+   ],
+   "source": "grays1918:the phalanges of the first row articulate with those of the second row and with the metacarpals"
+  },
+  "l_tarsal_distal_phalanx_1": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the great toe. Its broad base articulates directly with the proximal phalanx (the great toe has no middle phalanx), and its expanded distal extremity supports the nail and the end of the toe.",
+   "articulates_with": [
+    "l_tarsal_proximal_phalanx_1"
+   ],
+   "note": "The great toe has no middle phalanx: Gray counts two phalanges in the great toe and three in each of the other toes.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "l_tarsal_distal_phalanx_2": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the second toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "l_tarsal_middle_phalanx_2"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "l_tarsal_distal_phalanx_3": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the third toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "l_tarsal_middle_phalanx_3"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "l_tarsal_distal_phalanx_4": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the fourth toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "l_tarsal_middle_phalanx_4"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "l_tarsal_middle_phalanx_2": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the second toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "l_tarsal_proximal_phalanx_2",
+    "l_tarsal_distal_phalanx_2"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the second toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "l_tarsal_middle_phalanx_3": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the third toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "l_tarsal_proximal_phalanx_3",
+    "l_tarsal_distal_phalanx_3"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the third toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "l_tarsal_middle_phalanx_4": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the fourth toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "l_tarsal_proximal_phalanx_4",
+    "l_tarsal_distal_phalanx_4"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the fourth toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "l_tarsal_middle_phalanx_5": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the fifth (little) toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "l_tarsal_proximal_phalanx_5"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year. (In this model the fifth toe's distal phalanx is not present as a separate left-side part.)",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the fifth (little) toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "l_tarsal_proximal_phalanx_1": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal phalanx of the great toe. Its concave base receives the head of the first metatarsal, and its head presents a trochlear surface for the distal phalanx \u2014 the great toe has only two phalanges, so this row articulates directly with the ungual phalanx.",
+   "articulates_with": [
+    "l_metatarsal_1",
+    "l_tarsal_distal_phalanx_1"
+   ],
+   "note": "Gray: there are two phalanges in the great toe and three in each of the other toes; two sesamoid bones, of which the medial is the larger, are always present on the plantar aspect of the great toe's metatarsophalangeal joint.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the great toe (hallux)",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:two in the great toe, and three in each"
+  },
+  "l_tarsal_proximal_phalanx_2": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the second toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "l_metatarsal_2",
+    "l_tarsal_middle_phalanx_2"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the second toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "l_tarsal_proximal_phalanx_3": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the third toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "l_metatarsal_3",
+    "l_tarsal_middle_phalanx_3"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the third toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "l_tarsal_proximal_phalanx_4": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the fourth toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "l_metatarsal_4",
+    "l_tarsal_middle_phalanx_4"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the fourth toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "l_tarsal_proximal_phalanx_5": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the fifth (little) toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "l_metatarsal_5",
+    "l_tarsal_middle_phalanx_5"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the fifth (little) toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "r_tarsal_distal_phalanx_1": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the great toe. Its broad base articulates directly with the proximal phalanx (the great toe has no middle phalanx), and its expanded distal extremity supports the nail and the end of the toe.",
+   "articulates_with": [
+    "r_tarsal_proximal_phalanx_1"
+   ],
+   "note": "The great toe has no middle phalanx: Gray counts two phalanges in the great toe and three in each of the other toes.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "r_tarsal_distal_phalanx_2": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the second toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "r_tarsal_middle_phalanx_2"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "r_tarsal_distal_phalanx_3": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the third toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "r_tarsal_middle_phalanx_3"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "r_tarsal_distal_phalanx_4": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the fourth toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "r_tarsal_middle_phalanx_4"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "r_tarsal_distal_phalanx_5": {
+   "group": "Toe phalanges \u2014 distal row",
+   "function": "Distal (ungual) phalanx of the fifth (little) toe. Gray notes the ungual phalanges of the foot resemble those of the fingers in form, but are smaller and flattened from above downward; each presents a broad base for articulation with the corresponding bone of the second row, and an expanded distal extremity for the support of the nail and end of the toe.",
+   "articulates_with": [
+    "r_tarsal_middle_phalanx_5"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "distal phalanx of the foot",
+    "ungual phalanx",
+    "terminal phalanx",
+    "phalanx distalis pedis"
+   ],
+   "source": "grays1918:ungual phalanges, in form, resemble those of the fingers"
+  },
+  "r_tarsal_middle_phalanx_2": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the second toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "r_tarsal_proximal_phalanx_2",
+    "r_tarsal_distal_phalanx_2"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the second toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "r_tarsal_middle_phalanx_3": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the third toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "r_tarsal_proximal_phalanx_3",
+    "r_tarsal_distal_phalanx_3"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the third toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "r_tarsal_middle_phalanx_4": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the fourth toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "r_tarsal_proximal_phalanx_4",
+    "r_tarsal_distal_phalanx_4"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the fourth toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "r_tarsal_middle_phalanx_5": {
+   "group": "Toe phalanges \u2014 middle row",
+   "function": "Middle (second-row) phalanx of the fifth (little) toe. Gray describes the phalanges of the second row as remarkably small and short, but rather broader than those of the first row; it articulates behind with the proximal phalanx and in front with the ungual (distal) phalanx.",
+   "articulates_with": [
+    "r_tarsal_proximal_phalanx_5",
+    "r_tarsal_distal_phalanx_5"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "middle phalanx of the foot",
+    "second phalanx of the fifth (little) toe",
+    "phalanx media pedis"
+   ],
+   "source": "grays1918:second row are remarkably small and short"
+  },
+  "r_tarsal_proximal_phalanx_1": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal phalanx of the great toe. Its concave base receives the head of the first metatarsal, and its head presents a trochlear surface for the distal phalanx \u2014 the great toe has only two phalanges, so this row articulates directly with the ungual phalanx.",
+   "articulates_with": [
+    "r_metatarsal_1",
+    "r_tarsal_distal_phalanx_1"
+   ],
+   "note": "Gray: there are two phalanges in the great toe and three in each of the other toes; two sesamoid bones, of which the medial is the larger, are always present on the plantar aspect of the great toe's metatarsophalangeal joint.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the great toe (hallux)",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:two in the great toe, and three in each"
+  },
+  "r_tarsal_proximal_phalanx_2": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the second toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "r_metatarsal_2",
+    "r_tarsal_middle_phalanx_2"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the second toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "r_tarsal_proximal_phalanx_3": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the third toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "r_metatarsal_3",
+    "r_tarsal_middle_phalanx_3"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the third toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "r_tarsal_proximal_phalanx_4": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the fourth toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "r_metatarsal_4",
+    "r_tarsal_middle_phalanx_4"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the fourth toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "r_tarsal_proximal_phalanx_5": {
+   "group": "Toe phalanges \u2014 proximal row",
+   "function": "Proximal (first-row) phalanx of the fifth (little) toe. Its body is compressed from side to side, convex above and concave below; the concave base articulates behind with the metatarsal head, and the head presents a trochlear surface for articulation with the second (middle) phalanx.",
+   "articulates_with": [
+    "r_metatarsal_5",
+    "r_tarsal_middle_phalanx_5"
+   ],
+   "note": "Gray notes each phalanx of the foot ossifies from two centers \u2014 one for the body (appearing about the tenth week) and one for the base (fourth to tenth year), which joins the body about the eighteenth year.",
+   "synonyms": [
+    "proximal phalanx of the foot",
+    "first phalanx of the fifth (little) toe",
+    "phalanx proximalis pedis"
+   ],
+   "source": "grays1918:base is concave; and the head presents a trochlear surface"
+  },
+  "l_capitate": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "The largest of the carpal bones, occupying the center of the left wrist. Its rounded head is received into the concavity formed by the scaphoid and lunate, and its lower surface carries three facets for the second, third, and fourth metacarpals, making it the central pillar through which load passes from the finger rays to the forearm.",
+   "articulates_with": [
+    "l_scaphoid",
+    "l_lunate",
+    "l_trapezoid",
+    "l_hamate",
+    "l_metacarpal_2",
+    "l_metacarpal_3",
+    "l_metacarpal_4"
+   ],
+   "note": "It articulates with seven bones \u2014 more than any other carpal \u2014 and is the first carpal to ossify, its center appearing during the first year of life.",
+   "synonyms": [
+    "capitate",
+    "os capitatum",
+    "os magnum"
+   ],
+   "source": "grays1918:The capitate articulates with seven bones"
+  },
+  "l_hamate": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "A wedge-shaped bone at the medial and lower angle of the left carpus, resting on the fourth and fifth metacarpals and supporting the mobile ulnar border of the hand. A curved hook-like process, the hamulus, projects from its volar surface and gives attachment to the transverse carpal ligament and to muscles of the little finger.",
+   "articulates_with": [
+    "l_lunate",
+    "l_triquetral",
+    "l_capitate",
+    "l_metacarpal_4",
+    "l_metacarpal_5"
+   ],
+   "note": "The hamulus is one of the four eminences on the front of the carpus to which the transverse carpal ligament attaches, so the hook of the hamate forms part of the wall of the carpal tunnel.",
+   "synonyms": [
+    "hamate",
+    "os hamatum",
+    "unciform bone"
+   ],
+   "source": "grays1918:The hamate articulates with five bones"
+  },
+  "l_pisiform": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "A spheroidal carpal of the left wrist, known by its small size and set on a plane anterior to the other carpals. It bears a single articular facet, for the triquetrum, and its rough volar surface gives attachment to the transverse carpal ligament, the flexor carpi ulnaris, and the abductor digiti quinti.",
+   "articulates_with": [
+    "l_triquetral"
+   ],
+   "note": "It is the last carpal bone to ossify, its center appearing only around the twelfth year \u2014 long after every other carpal.",
+   "synonyms": [
+    "pisiform",
+    "os pisiforme"
+   ],
+   "source": "grays1918:The pisiform articulates with one bone, the triangular"
+  },
+  "l_trapezium": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "Sits at the radial side of the left carpus, between the scaphoid and the first metacarpal. Its inferior surface is oval, concave from side to side and convex from before backward, forming the saddle-shaped joint on which the thumb's metacarpal swings \u2014 the basis of opposition.",
+   "articulates_with": [
+    "l_scaphoid",
+    "l_trapezoid",
+    "l_metacarpal_1",
+    "l_metacarpal_2"
+   ],
+   "note": "A deep groove on its volar surface transmits the tendon of the flexor carpi radialis, and its oblique ridge is one of the attachments of the transverse carpal ligament.",
+   "synonyms": [
+    "trapezium",
+    "os trapezium",
+    "greater multangular"
+   ],
+   "source": "grays1918:The greater multangular articulates with four bones"
+  },
+  "l_trapezoid": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "The smallest bone in the distal carpal row of the left wrist, wedge-shaped with the broad end of the wedge dorsal. It is keyed between scaphoid, trapezium, and capitate and carries the base of the second metacarpal, anchoring the relatively immobile index-finger ray.",
+   "articulates_with": [
+    "l_scaphoid",
+    "l_trapezium",
+    "l_capitate",
+    "l_metacarpal_2"
+   ],
+   "note": "It may be known by its four articular facets touching each other, separated by sharp edges \u2014 a tightly packed keystone rather than a mobile joint surface.",
+   "synonyms": [
+    "trapezoid",
+    "os trapezoideum",
+    "lesser multangular"
+   ],
+   "source": "grays1918:The lesser multangular articulates with four bones"
+  },
+  "l_metacarpal_1": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal bone of the left thumb: shorter and stouter than the others, it diverges from the carpus with its volar surface directed toward the palm. Its base forms a concavo-convex saddle joint with the trapezium, giving the thumb the freedom of movement that underlies grip and opposition.",
+   "articulates_with": [
+    "l_trapezium",
+    "l_carpal_proximal_phalanx_1"
+   ],
+   "note": "It ossifies from a center for the body and one for the base \u2014 the same pattern as a phalanx \u2014 which led some anatomists to regard the thumb as three phalanges rather than a metacarpal and two phalanges.",
+   "synonyms": [
+    "first metacarpal",
+    "os metacarpale I",
+    "thumb metacarpal"
+   ],
+   "source": "grays1918:is shorter and stouter than the others"
+  },
+  "l_metacarpal_2": {
+   "group": "Metacarpal bones",
+   "function": "The longest metacarpal of the left hand, with the largest base of the finger metacarpals. Its base is prolonged upward and medialward into a prominent ridge bearing facets for the trapezium, trapezoid, and capitate, wedging the index-finger ray firmly into the carpus as a stable column for pinch and grip.",
+   "articulates_with": [
+    "l_trapezium",
+    "l_trapezoid",
+    "l_capitate",
+    "l_metacarpal_3",
+    "l_carpal_proximal_phalanx_2"
+   ],
+   "note": "Its base receives the insertions of both the extensor carpi radialis longus (dorsally) and the flexor carpi radialis (volarly), making it a principal lever for wrist movement.",
+   "synonyms": [
+    "second metacarpal",
+    "os metacarpale II",
+    "index finger metacarpal"
+   ],
+   "source": "grays1918:is the longest, and its base the largest"
+  },
+  "l_metacarpal_3": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal of the left middle finger, a little smaller than the second. Its base articulates with the capitate and with the metacarpals on either side, aligning the middle-finger ray with the central pillar of the carpus so that axial load runs straight from finger to forearm.",
+   "articulates_with": [
+    "l_capitate",
+    "l_metacarpal_2",
+    "l_metacarpal_4",
+    "l_carpal_proximal_phalanx_3"
+   ],
+   "note": "A pyramidal eminence on the radial side of its base, the styloid process, extends upward behind the capitate; sometimes it is detached and forms an additional ossicle.",
+   "synonyms": [
+    "third metacarpal",
+    "os metacarpale III",
+    "middle finger metacarpal"
+   ],
+   "source": "grays1918:a pyramidal eminence, the styloid process"
+  },
+  "l_metacarpal_4": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal of the left ring finger, shorter and smaller than the third, with a small quadrilateral base. That base carries a large medial facet for the hamate and a small lateral one for the capitate, seating the ring-finger ray on the mobile ulnar side of the carpus.",
+   "articulates_with": [
+    "l_capitate",
+    "l_hamate",
+    "l_metacarpal_3",
+    "l_metacarpal_5",
+    "l_carpal_proximal_phalanx_4"
+   ],
+   "note": "Its base articulates with two carpals and two neighboring metacarpals \u2014 four bony contacts before the finger even begins.",
+   "synonyms": [
+    "fourth metacarpal",
+    "os metacarpale IV",
+    "ring finger metacarpal"
+   ],
+   "source": "grays1918:is shorter and smaller than the third"
+  },
+  "l_metacarpal_5": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal of the left little finger. Its base presents a single concavo-convex facet for the hamate and one facet on the radial side for the fourth metacarpal, and this relatively free seating on the hamate lets the ulnar border of the hand cup toward the thumb in grasp.",
+   "articulates_with": [
+    "l_hamate",
+    "l_metacarpal_4",
+    "l_carpal_proximal_phalanx_5"
+   ],
+   "note": "A prominent tubercle on the ulnar side of its base receives the tendon of the extensor carpi ulnaris.",
+   "synonyms": [
+    "fifth metacarpal",
+    "os metacarpale V",
+    "little finger metacarpal"
+   ],
+   "source": "grays1918:On its ulnar side is a prominent tubercle"
+  },
+  "r_capitate": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "The largest of the carpal bones, occupying the center of the right wrist. Its rounded head is received into the concavity formed by the scaphoid and lunate, and its lower surface carries three facets for the second, third, and fourth metacarpals, making it the central pillar through which load passes from the finger rays to the forearm.",
+   "articulates_with": [
+    "r_scaphoid",
+    "r_lunate",
+    "r_trapezoid",
+    "r_hamate",
+    "r_metacarpal_2",
+    "r_metacarpal_3",
+    "r_metacarpal_4"
+   ],
+   "note": "It articulates with seven bones \u2014 more than any other carpal \u2014 and is the first carpal to ossify, its center appearing during the first year of life.",
+   "synonyms": [
+    "capitate",
+    "os capitatum",
+    "os magnum"
+   ],
+   "source": "grays1918:The capitate articulates with seven bones"
+  },
+  "r_hamate": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "A wedge-shaped bone at the medial and lower angle of the right carpus, resting on the fourth and fifth metacarpals and supporting the mobile ulnar border of the hand. A curved hook-like process, the hamulus, projects from its volar surface and gives attachment to the transverse carpal ligament and to muscles of the little finger.",
+   "articulates_with": [
+    "r_lunate",
+    "r_triquetral",
+    "r_capitate",
+    "r_metacarpal_4",
+    "r_metacarpal_5"
+   ],
+   "note": "The hamulus is one of the four eminences on the front of the carpus to which the transverse carpal ligament attaches, so the hook of the hamate forms part of the wall of the carpal tunnel.",
+   "synonyms": [
+    "hamate",
+    "os hamatum",
+    "unciform bone"
+   ],
+   "source": "grays1918:The hamate articulates with five bones"
+  },
+  "r_pisiform": {
+   "group": "Carpal bones \u2014 proximal row",
+   "function": "A spheroidal carpal of the right wrist, known by its small size and set on a plane anterior to the other carpals. It bears a single articular facet, for the triquetrum, and its rough volar surface gives attachment to the transverse carpal ligament, the flexor carpi ulnaris, and the abductor digiti quinti.",
+   "articulates_with": [
+    "r_triquetral"
+   ],
+   "note": "It is the last carpal bone to ossify, its center appearing only around the twelfth year \u2014 long after every other carpal.",
+   "synonyms": [
+    "pisiform",
+    "os pisiforme"
+   ],
+   "source": "grays1918:The pisiform articulates with one bone, the triangular"
+  },
+  "r_trapezium": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "Sits at the radial side of the right carpus, between the scaphoid and the first metacarpal. Its inferior surface is oval, concave from side to side and convex from before backward, forming the saddle-shaped joint on which the thumb's metacarpal swings \u2014 the basis of opposition.",
+   "articulates_with": [
+    "r_scaphoid",
+    "r_trapezoid",
+    "r_metacarpal_1",
+    "r_metacarpal_2"
+   ],
+   "note": "A deep groove on its volar surface transmits the tendon of the flexor carpi radialis, and its oblique ridge is one of the attachments of the transverse carpal ligament.",
+   "synonyms": [
+    "trapezium",
+    "os trapezium",
+    "greater multangular"
+   ],
+   "source": "grays1918:The greater multangular articulates with four bones"
+  },
+  "r_trapezoid": {
+   "group": "Carpal bones \u2014 distal row",
+   "function": "The smallest bone in the distal carpal row of the right wrist, wedge-shaped with the broad end of the wedge dorsal. It is keyed between scaphoid, trapezium, and capitate and carries the base of the second metacarpal, anchoring the relatively immobile index-finger ray.",
+   "articulates_with": [
+    "r_scaphoid",
+    "r_trapezium",
+    "r_capitate",
+    "r_metacarpal_2"
+   ],
+   "note": "It may be known by its four articular facets touching each other, separated by sharp edges \u2014 a tightly packed keystone rather than a mobile joint surface.",
+   "synonyms": [
+    "trapezoid",
+    "os trapezoideum",
+    "lesser multangular"
+   ],
+   "source": "grays1918:The lesser multangular articulates with four bones"
+  },
+  "r_metacarpal_1": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal bone of the right thumb: shorter and stouter than the others, it diverges from the carpus with its volar surface directed toward the palm. Its base forms a concavo-convex saddle joint with the trapezium, giving the thumb the freedom of movement that underlies grip and opposition.",
+   "articulates_with": [
+    "r_trapezium",
+    "r_carpal_proximal_phalanx_1"
+   ],
+   "note": "It ossifies from a center for the body and one for the base \u2014 the same pattern as a phalanx \u2014 which led some anatomists to regard the thumb as three phalanges rather than a metacarpal and two phalanges.",
+   "synonyms": [
+    "first metacarpal",
+    "os metacarpale I",
+    "thumb metacarpal"
+   ],
+   "source": "grays1918:is shorter and stouter than the others"
+  },
+  "r_metacarpal_2": {
+   "group": "Metacarpal bones",
+   "function": "The longest metacarpal of the right hand, with the largest base of the finger metacarpals. Its base is prolonged upward and medialward into a prominent ridge bearing facets for the trapezium, trapezoid, and capitate, wedging the index-finger ray firmly into the carpus as a stable column for pinch and grip.",
+   "articulates_with": [
+    "r_trapezium",
+    "r_trapezoid",
+    "r_capitate",
+    "r_metacarpal_3",
+    "r_carpal_proximal_phalanx_2"
+   ],
+   "note": "Its base receives the insertions of both the extensor carpi radialis longus (dorsally) and the flexor carpi radialis (volarly), making it a principal lever for wrist movement.",
+   "synonyms": [
+    "second metacarpal",
+    "os metacarpale II",
+    "index finger metacarpal"
+   ],
+   "source": "grays1918:is the longest, and its base the largest"
+  },
+  "r_metacarpal_3": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal of the right middle finger, a little smaller than the second. Its base articulates with the capitate and with the metacarpals on either side, aligning the middle-finger ray with the central pillar of the carpus so that axial load runs straight from finger to forearm.",
+   "articulates_with": [
+    "r_capitate",
+    "r_metacarpal_2",
+    "r_metacarpal_4",
+    "r_carpal_proximal_phalanx_3"
+   ],
+   "note": "A pyramidal eminence on the radial side of its base, the styloid process, extends upward behind the capitate; sometimes it is detached and forms an additional ossicle.",
+   "synonyms": [
+    "third metacarpal",
+    "os metacarpale III",
+    "middle finger metacarpal"
+   ],
+   "source": "grays1918:a pyramidal eminence, the styloid process"
+  },
+  "r_metacarpal_4": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal of the right ring finger, shorter and smaller than the third, with a small quadrilateral base. That base carries a large medial facet for the hamate and a small lateral one for the capitate, seating the ring-finger ray on the mobile ulnar side of the carpus.",
+   "articulates_with": [
+    "r_capitate",
+    "r_hamate",
+    "r_metacarpal_3",
+    "r_metacarpal_5",
+    "r_carpal_proximal_phalanx_4"
+   ],
+   "note": "Its base articulates with two carpals and two neighboring metacarpals \u2014 four bony contacts before the finger even begins.",
+   "synonyms": [
+    "fourth metacarpal",
+    "os metacarpale IV",
+    "ring finger metacarpal"
+   ],
+   "source": "grays1918:is shorter and smaller than the third"
+  },
+  "r_metacarpal_5": {
+   "group": "Metacarpal bones",
+   "function": "The metacarpal of the right little finger. Its base presents a single concavo-convex facet for the hamate and one facet on the radial side for the fourth metacarpal, and this relatively free seating on the hamate lets the ulnar border of the hand cup toward the thumb in grasp.",
+   "articulates_with": [
+    "r_hamate",
+    "r_metacarpal_4",
+    "r_carpal_proximal_phalanx_5"
+   ],
+   "note": "A prominent tubercle on the ulnar side of its base receives the tendon of the extensor carpi ulnaris.",
+   "synonyms": [
+    "fifth metacarpal",
+    "os metacarpale V",
+    "little finger metacarpal"
+   ],
+   "source": "grays1918:On its ulnar side is a prominent tubercle"
+  },
+  "l_cuboid": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The left cuboid occupies the lateral column of the midfoot, seated in front of the calcaneus and behind the fourth and fifth metatarsals; it relays load from the heel into the two lateral rays and completes the lateral arch of the foot, which Gray composes of the calcaneus, the cuboid, and the fourth and fifth metatarsals. Its plantar surface carries the peroneal sulcus, the groove that redirects the tendon of the peroneus longus across the sole toward the medial side of the foot.",
+   "articulates_with": [
+    "l_calcaneus",
+    "l_cuneiform_3",
+    "l_metatarsal_4",
+    "l_metatarsal_5"
+   ],
+   "note": "Gray describes the bone as pyramidal with its base directed medialward, and notes that a sesamoid bone or cartilage frequently found in the peroneus longus tendon glides on the oval facet of its tuberosity. An occasional extra facet articulates with the navicular.",
+   "synonyms": [
+    "cuboid bone",
+    "os cuboideum"
+   ],
+   "source": "grays1918:The cuboid bone is placed on the lateral side of the foot, in front of the calcaneus"
+  },
+  "l_cuneiform_1": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The left first (medial) cuneiform is the largest of the three cuneiforms, sitting at the medial side of the foot between the navicular behind and the base of the first metatarsal in front. It carries the great-toe column of the medial longitudinal arch and receives parts of the tendons of tibialis anterior and tibialis posterior, the muscles that sling up that arch.",
+   "articulates_with": [
+    "l_navicular",
+    "l_cuneiform_2",
+    "l_metatarsal_1",
+    "l_metatarsal_2"
+   ],
+   "note": "Unlike the other two cuneiforms its wedge is inverted: the plantar surface forms the base of the wedge and the dorsal surface the narrow edge. Its medial surface is subcutaneous \u2014 you can feel it on the inner border of the midfoot.",
+   "synonyms": [
+    "medial cuneiform",
+    "first cuneiform",
+    "internal cuneiform",
+    "os cuneiforme primum"
+   ],
+   "source": "grays1918:first cuneiform bone is the largest of the three cuneiforms"
+  },
+  "l_cuneiform_2": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The left second (intermediate) cuneiform is the smallest of the three cuneiforms, a very regular wedge with its thin end directed downward, seated between the other two cuneiforms. It bridges the navicular behind to the second metatarsal in front, and its shortness recesses the base of that metatarsal between its neighbours.",
+   "articulates_with": [
+    "l_navicular",
+    "l_cuneiform_1",
+    "l_cuneiform_3",
+    "l_metatarsal_2"
+   ],
+   "note": "Gray records a slip from the tendon of tibialis posterior inserting on its plantar surface \u2014 that tendon fans out to grip much of the midfoot.",
+   "synonyms": [
+    "intermediate cuneiform",
+    "middle cuneiform",
+    "second cuneiform",
+    "os cuneiforme secundum"
+   ],
+   "source": "grays1918:The second cuneiform bone, the smallest of the three"
+  },
+  "l_cuneiform_3": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The left third (lateral) cuneiform, intermediate in size between the other two, occupies the center of the front row of the tarsus, between the second cuneiform medially, the cuboid laterally, the navicular behind, and the third metatarsal in front. It is the busiest of the cuneiforms, articulating with six bones and passing load into three metatarsal bases.",
+   "articulates_with": [
+    "l_navicular",
+    "l_cuneiform_2",
+    "l_cuboid",
+    "l_metatarsal_2",
+    "l_metatarsal_3",
+    "l_metatarsal_4"
+   ],
+   "note": "Its plantar margin gives attachment to part of the tendon of tibialis posterior and part of flexor hallucis brevis.",
+   "synonyms": [
+    "lateral cuneiform",
+    "third cuneiform",
+    "external cuneiform",
+    "os cuneiforme tertium"
+   ],
+   "source": "grays1918:The third cuneiform articulates with six bones"
+  },
+  "l_metatarsal_1": {
+   "group": "Metatarsals",
+   "function": "The left first metatarsal is the shortest of the metatarsals and remarkable for its great thickness, carrying the great-toe ray from the first cuneiform to the proximal phalanx of the big toe. Gray singles it out among the metatarsals as assisting in supporting the weight of the body and constructed with great solidity, its large head meeting the ground through the sesamoids beneath it.",
+   "articulates_with": [
+    "l_cuneiform_1",
+    "l_tarsal_proximal_phalanx_1"
+   ],
+   "note": "Two sesamoid bones glide in grooved facets on the plantar surface of its head, and the tendon of peroneus longus \u2014 after crossing the sole in the cuboid's groove \u2014 inserts on the plantar angle of its base. Its base usually has no facet for the second metatarsal.",
+   "synonyms": [
+    "first metatarsal",
+    "os metatarsale I",
+    "metatarsal bone of the great toe"
+   ],
+   "source": "grays1918:remarkable for its great thickness"
+  },
+  "l_metatarsal_2": {
+   "group": "Metatarsals",
+   "function": "The left second metatarsal is the longest of the metatarsal bones, its base prolonged backward into the recess formed by the three cuneiform bones. Deeply wedged in between the first and third cuneiforms, it is the most rigidly fixed ray of the forefoot.",
+   "articulates_with": [
+    "l_cuneiform_1",
+    "l_cuneiform_2",
+    "l_cuneiform_3",
+    "l_metatarsal_3",
+    "l_tarsal_proximal_phalanx_2"
+   ],
+   "note": "Gray gives it four constant articular surfaces at the base \u2014 second cuneiform behind, first cuneiform medially, and paired facets laterally for the third metatarsal and third cuneiform \u2014 with an occasional fifth facet for the first metatarsal.",
+   "synonyms": [
+    "second metatarsal",
+    "os metatarsale II"
+   ],
+   "source": "grays1918:is the longest of the metatarsal bones"
+  },
+  "l_metatarsal_3": {
+   "group": "Metatarsals",
+   "function": "The left third metatarsal carries the middle ray of the forefoot from the third cuneiform to the proximal phalanx of the third toe. Its base articulates proximally by a triangular surface with the third cuneiform, medially by two facets with the second metatarsal, and laterally by a single facet with the fourth.",
+   "articulates_with": [
+    "l_cuneiform_3",
+    "l_metatarsal_2",
+    "l_metatarsal_4",
+    "l_tarsal_proximal_phalanx_3"
+   ],
+   "note": "The single facet for the fourth metatarsal sits at the dorsal angle of the base.",
+   "synonyms": [
+    "third metatarsal",
+    "os metatarsale III"
+   ],
+   "source": "grays1918:articulates proximally, by means of a triangular smooth surface"
+  },
+  "l_metatarsal_4": {
+   "group": "Metatarsals",
+   "function": "The left fourth metatarsal, smaller than the third, spans from the tarsus to the proximal phalanx of the fourth toe. Its base meets the cuboid through an oblique quadrilateral surface and also touches the third cuneiform, so this ray straddles the boundary between the lateral and middle columns of the foot.",
+   "articulates_with": [
+    "l_cuboid",
+    "l_cuneiform_3",
+    "l_metatarsal_3",
+    "l_metatarsal_5",
+    "l_tarsal_proximal_phalanx_4"
+   ],
+   "note": "A single ridge divides the medial facet of its base into an anterior portion for the third metatarsal and a posterior portion for the third cuneiform.",
+   "synonyms": [
+    "fourth metatarsal",
+    "os metatarsale IV"
+   ],
+   "source": "grays1918:presents an oblique quadrilateral surface for articulation with the cuboid"
+  },
+  "l_metatarsal_5": {
+   "group": "Metatarsals",
+   "function": "The left fifth metatarsal forms the lateral border of the forefoot, running from the cuboid to the proximal phalanx of the little toe. It is recognized at once by the rough tuberosity on the lateral side of its base, the palpable knob on the outer edge of the midfoot where the peroneus brevis tendon inserts.",
+   "articulates_with": [
+    "l_cuboid",
+    "l_metatarsal_4",
+    "l_tarsal_proximal_phalanx_5"
+   ],
+   "note": "Gray records the peroneus tertius inserting on the medial part of the dorsal surface of the base and peroneus brevis on the tuberosity, with a strong band of the plantar aponeurosis tying the tuberosity back to the calcaneus.",
+   "synonyms": [
+    "fifth metatarsal",
+    "os metatarsale V"
+   ],
+   "source": "grays1918:recognized by a rough eminence, the tuberosity, on the lateral side of its base"
+  },
+  "r_cuboid": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The right cuboid occupies the lateral column of the midfoot, seated in front of the calcaneus and behind the fourth and fifth metatarsals; it relays load from the heel into the two lateral rays and completes the lateral arch of the foot, which Gray composes of the calcaneus, the cuboid, and the fourth and fifth metatarsals. Its plantar surface carries the peroneal sulcus, the groove that redirects the tendon of the peroneus longus across the sole toward the medial side of the foot.",
+   "articulates_with": [
+    "r_calcaneus",
+    "r_cuneiform_3",
+    "r_metatarsal_4",
+    "r_metatarsal_5"
+   ],
+   "note": "Gray describes the bone as pyramidal with its base directed medialward, and notes that a sesamoid bone or cartilage frequently found in the peroneus longus tendon glides on the oval facet of its tuberosity. An occasional extra facet articulates with the navicular.",
+   "synonyms": [
+    "cuboid bone",
+    "os cuboideum"
+   ],
+   "source": "grays1918:The cuboid bone is placed on the lateral side of the foot, in front of the calcaneus"
+  },
+  "r_cuneiform_1": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The right first (medial) cuneiform is the largest of the three cuneiforms, sitting at the medial side of the foot between the navicular behind and the base of the first metatarsal in front. It carries the great-toe column of the medial longitudinal arch and receives parts of the tendons of tibialis anterior and tibialis posterior, the muscles that sling up that arch.",
+   "articulates_with": [
+    "r_navicular",
+    "r_cuneiform_2",
+    "r_metatarsal_1",
+    "r_metatarsal_2"
+   ],
+   "note": "Unlike the other two cuneiforms its wedge is inverted: the plantar surface forms the base of the wedge and the dorsal surface the narrow edge. Its medial surface is subcutaneous \u2014 you can feel it on the inner border of the midfoot.",
+   "synonyms": [
+    "medial cuneiform",
+    "first cuneiform",
+    "internal cuneiform",
+    "os cuneiforme primum"
+   ],
+   "source": "grays1918:first cuneiform bone is the largest of the three cuneiforms"
+  },
+  "r_cuneiform_2": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The right second (intermediate) cuneiform is the smallest of the three cuneiforms, a very regular wedge with its thin end directed downward, seated between the other two cuneiforms. It bridges the navicular behind to the second metatarsal in front, and its shortness recesses the base of that metatarsal between its neighbours.",
+   "articulates_with": [
+    "r_navicular",
+    "r_cuneiform_1",
+    "r_cuneiform_3",
+    "r_metatarsal_2"
+   ],
+   "note": "Gray records a slip from the tendon of tibialis posterior inserting on its plantar surface \u2014 that tendon fans out to grip much of the midfoot.",
+   "synonyms": [
+    "intermediate cuneiform",
+    "middle cuneiform",
+    "second cuneiform",
+    "os cuneiforme secundum"
+   ],
+   "source": "grays1918:The second cuneiform bone, the smallest of the three"
+  },
+  "r_cuneiform_3": {
+   "group": "Tarsals \u2014 midfoot",
+   "function": "The right third (lateral) cuneiform, intermediate in size between the other two, occupies the center of the front row of the tarsus, between the second cuneiform medially, the cuboid laterally, the navicular behind, and the third metatarsal in front. It is the busiest of the cuneiforms, articulating with six bones and passing load into three metatarsal bases.",
+   "articulates_with": [
+    "r_navicular",
+    "r_cuneiform_2",
+    "r_cuboid",
+    "r_metatarsal_2",
+    "r_metatarsal_3",
+    "r_metatarsal_4"
+   ],
+   "note": "Its plantar margin gives attachment to part of the tendon of tibialis posterior and part of flexor hallucis brevis.",
+   "synonyms": [
+    "lateral cuneiform",
+    "third cuneiform",
+    "external cuneiform",
+    "os cuneiforme tertium"
+   ],
+   "source": "grays1918:The third cuneiform articulates with six bones"
+  },
+  "r_metatarsal_1": {
+   "group": "Metatarsals",
+   "function": "The right first metatarsal is the shortest of the metatarsals and remarkable for its great thickness, carrying the great-toe ray from the first cuneiform to the proximal phalanx of the big toe. Gray singles it out among the metatarsals as assisting in supporting the weight of the body and constructed with great solidity, its large head meeting the ground through the sesamoids beneath it.",
+   "articulates_with": [
+    "r_cuneiform_1",
+    "r_tarsal_proximal_phalanx_1"
+   ],
+   "note": "Two sesamoid bones glide in grooved facets on the plantar surface of its head, and the tendon of peroneus longus \u2014 after crossing the sole in the cuboid's groove \u2014 inserts on the plantar angle of its base. Its base usually has no facet for the second metatarsal.",
+   "synonyms": [
+    "first metatarsal",
+    "os metatarsale I",
+    "metatarsal bone of the great toe"
+   ],
+   "source": "grays1918:remarkable for its great thickness"
+  },
+  "r_metatarsal_2": {
+   "group": "Metatarsals",
+   "function": "The right second metatarsal is the longest of the metatarsal bones, its base prolonged backward into the recess formed by the three cuneiform bones. Deeply wedged in between the first and third cuneiforms, it is the most rigidly fixed ray of the forefoot.",
+   "articulates_with": [
+    "r_cuneiform_1",
+    "r_cuneiform_2",
+    "r_cuneiform_3",
+    "r_metatarsal_3",
+    "r_tarsal_proximal_phalanx_2"
+   ],
+   "note": "Gray gives it four constant articular surfaces at the base \u2014 second cuneiform behind, first cuneiform medially, and paired facets laterally for the third metatarsal and third cuneiform \u2014 with an occasional fifth facet for the first metatarsal.",
+   "synonyms": [
+    "second metatarsal",
+    "os metatarsale II"
+   ],
+   "source": "grays1918:is the longest of the metatarsal bones"
+  },
+  "r_metatarsal_3": {
+   "group": "Metatarsals",
+   "function": "The right third metatarsal carries the middle ray of the forefoot from the third cuneiform to the proximal phalanx of the third toe. Its base articulates proximally by a triangular surface with the third cuneiform, medially by two facets with the second metatarsal, and laterally by a single facet with the fourth.",
+   "articulates_with": [
+    "r_cuneiform_3",
+    "r_metatarsal_2",
+    "r_metatarsal_4",
+    "r_tarsal_proximal_phalanx_3"
+   ],
+   "note": "The single facet for the fourth metatarsal sits at the dorsal angle of the base.",
+   "synonyms": [
+    "third metatarsal",
+    "os metatarsale III"
+   ],
+   "source": "grays1918:articulates proximally, by means of a triangular smooth surface"
+  },
+  "r_metatarsal_4": {
+   "group": "Metatarsals",
+   "function": "The right fourth metatarsal, smaller than the third, spans from the tarsus to the proximal phalanx of the fourth toe. Its base meets the cuboid through an oblique quadrilateral surface and also touches the third cuneiform, so this ray straddles the boundary between the lateral and middle columns of the foot.",
+   "articulates_with": [
+    "r_cuboid",
+    "r_cuneiform_3",
+    "r_metatarsal_3",
+    "r_metatarsal_5",
+    "r_tarsal_proximal_phalanx_4"
+   ],
+   "note": "A single ridge divides the medial facet of its base into an anterior portion for the third metatarsal and a posterior portion for the third cuneiform.",
+   "synonyms": [
+    "fourth metatarsal",
+    "os metatarsale IV"
+   ],
+   "source": "grays1918:presents an oblique quadrilateral surface for articulation with the cuboid"
+  },
+  "r_metatarsal_5": {
+   "group": "Metatarsals",
+   "function": "The right fifth metatarsal forms the lateral border of the forefoot, running from the cuboid to the proximal phalanx of the little toe. It is recognized at once by the rough tuberosity on the lateral side of its base, the palpable knob on the outer edge of the midfoot where the peroneus brevis tendon inserts.",
+   "articulates_with": [
+    "r_cuboid",
+    "r_metatarsal_4",
+    "r_tarsal_proximal_phalanx_5"
+   ],
+   "note": "Gray records the peroneus tertius inserting on the medial part of the dorsal surface of the base and peroneus brevis on the tuberosity, with a strong band of the plantar aponeurosis tying the tuberosity back to the calcaneus.",
+   "synonyms": [
+    "fifth metatarsal",
+    "os metatarsale V"
+   ],
+   "source": "grays1918:recognized by a rough eminence, the tuberosity, on the lateral side of its base"
+  },
+  "l1": {
+   "group": "Lumbar vertebrae",
+   "function": "The first lumbar vertebra, uppermost of the largest segments of the movable part of the vertebral column. Like all lumbar vertebrae it is distinguished by the absence of a foramen in the transverse process and the absence of costal facets on the sides of the body; its large body, wider from side to side than from before backward, carries the load of the trunk down toward the pelvis.",
+   "articulates_with": [
+    "t12",
+    "t12disc",
+    "l1disc",
+    "l2"
+   ],
+   "note": "The rib count may be increased by the development of a cervical or lumbar rib: Gray records that the transverse process of the first lumbar is sometimes developed as a separate piece, forming a lumbar rib \u2014 a peculiarity rarely met with.",
+   "synonyms": [
+    "first lumbar vertebra",
+    "vertebra lumbalis I",
+    "L1"
+   ],
+   "source": "grays1918:are the largest segments of the movable part of the vertebral column"
+  },
+  "l2": {
+   "group": "Lumbar vertebrae",
+   "function": "The second lumbar vertebra, one of the largest segments of the movable part of the vertebral column. It shows the standard lumbar pattern \u2014 a massive body, no transverse-process foramen, and no costal facets \u2014 and transmits trunk load from L1 to L3 through its body and paired articular processes.",
+   "articulates_with": [
+    "l1",
+    "l1disc",
+    "l2disc",
+    "l3"
+   ],
+   "synonyms": [
+    "second lumbar vertebra",
+    "vertebra lumbalis II",
+    "L2"
+   ],
+   "source": "grays1918:are the largest segments of the movable part of the vertebral column"
+  },
+  "l3": {
+   "group": "Lumbar vertebrae",
+   "function": "The third lumbar vertebra, the middle of the five largest movable segments of the vertebral column. Its large body, flattened or slightly concave above and below, bears trunk load between L2 and L4, and its transverse processes give attachment to muscles of the loin.",
+   "articulates_with": [
+    "l2",
+    "l2disc",
+    "l3disc",
+    "l4"
+   ],
+   "note": "Lumbar transverse processes are homologous with the ribs \u2014 Gray notes they are situated in front of the articular processes, instead of behind them as in the thoracic vertebrae.",
+   "synonyms": [
+    "third lumbar vertebra",
+    "vertebra lumbalis III",
+    "L3"
+   ],
+   "source": "grays1918:are the largest segments of the movable part of the vertebral column"
+  },
+  "l4": {
+   "group": "Lumbar vertebrae",
+   "function": "The fourth lumbar vertebra, one of the largest segments of the movable part of the vertebral column, carrying load between L3 and L5. Like its neighbours it lacks a transverse-process foramen and costal facets, and its body, like its neighbours', is large, wider from side to side than from before backward, and a little thicker in front than behind.",
+   "articulates_with": [
+    "l3",
+    "l3disc",
+    "l4disc",
+    "l5"
+   ],
+   "synonyms": [
+    "fourth lumbar vertebra",
+    "vertebra lumbalis IV",
+    "L4"
+   ],
+   "source": "grays1918:are the largest segments of the movable part of the vertebral column"
+  },
+  "l5": {
+   "group": "Lumbar vertebrae",
+   "function": "The fifth and lowest lumbar vertebra, characterized by its body being much deeper in front than behind, which accords with the prominence of the sacrovertebral articulation. It is further marked by a smaller spinous process, a wide interval between the inferior articular processes, and thick transverse processes that spring from the body as well as from the pedicles.",
+   "articulates_with": [
+    "l4",
+    "l4disc",
+    "l5disc",
+    "sacrum_bone"
+   ],
+   "note": "Its wedge-shaped body creates the prominent sacrovertebral angle where the mobile spine hands its load to the fixed sacrum.",
+   "synonyms": [
+    "fifth lumbar vertebra",
+    "vertebra lumbalis V",
+    "L5"
+   ],
+   "source": "grays1918:characterized by its body being much deeper in front than behind"
+  },
+  "t11": {
+   "group": "Thoracic vertebrae",
+   "function": "An atypical lower thoracic vertebra whose body approaches in its form and size that of the lumbar vertebrae. The articular facets for the heads of the ribs are of large size and placed chiefly on the pedicles, which are thicker and stronger here than elsewhere in the thoracic region; the spinous process is short and nearly horizontal, and the very short transverse processes carry no articular facets, so rib 11 meets it only at its head.",
+   "articulates_with": [
+    "t10",
+    "t10disc",
+    "t11disc",
+    "t12",
+    "l_rib11",
+    "r_rib11"
+   ],
+   "note": "Because its transverse processes have no facets for rib tubercles, the eleventh rib articulates with the column by its head alone \u2014 one reason the last two ribs float.",
+   "synonyms": [
+    "eleventh thoracic vertebra",
+    "vertebra thoracica XI",
+    "T11"
+   ],
+   "source": "grays1918:the body approaches in its form and size to that of the lumbar vertebrae"
+  },
+  "t12": {
+   "group": "Thoracic vertebrae",
+   "function": "The last thoracic vertebra, with the same general characteristics as the eleventh, but distinguished by inferior articular surfaces that are convex and directed lateralward like those of the lumbar vertebrae. In the general form of its body, laminae, and spinous process it resembles a lumbar vertebra, making it the true transition bone between the rib-bearing and lumbar spine.",
+   "articulates_with": [
+    "t11",
+    "t11disc",
+    "t12disc",
+    "l1",
+    "l_rib12",
+    "r_rib12"
+   ],
+   "note": "Each transverse process is subdivided into three elevations \u2014 superior, inferior, and lateral tubercles \u2014 the superior and inferior corresponding to the mammillary and accessory processes of the lumbar vertebrae.",
+   "synonyms": [
+    "twelfth thoracic vertebra",
+    "vertebra thoracica XII",
+    "T12"
+   ],
+   "source": "grays1918:has the same general characteristics as the eleventh"
+  },
+  "sacrum_bone": {
+   "group": "Sacrum & coccyx",
+   "function": "A large, triangular bone formed of five fused vertebrae, situated in the lower part of the vertebral column at the upper and back part of the pelvic cavity, where it is inserted like a wedge between the two hip bones. Its base articulates with the last lumbar vertebra and its apex with the coccyx, so every load carried by the spine passes through it into the pelvis.",
+   "articulates_with": [
+    "l5",
+    "l5disc",
+    "coccyx",
+    "l_hip_bone",
+    "r_hip_bone"
+   ],
+   "note": "Gray counts its articulations plainly: the sacrum articulates with four bones \u2014 the last lumbar vertebra above, the coccyx below, and the hip bone on either side. In the female it is shorter and wider than in the male, enlarging the pelvic cavity.",
+   "synonyms": [
+    "sacrum",
+    "os sacrum",
+    "sacral bone"
+   ],
+   "source": "grays1918:inserted like a wedge between the two hip bones"
+  },
+  "coccyx": {
+   "group": "Sacrum & coccyx",
+   "function": "The terminal bone of the vertebral column, usually formed of four rudimentary vertebrae (the number may be increased to five or diminished to three), all destitute of pedicles, laminae, and spinous processes. Its base presents an oval surface for articulation with the sacrum, its coccygeal cornua project upward to meet the cornua of the sacrum, and its apex gives attachment to the tendon of the external anal sphincter.",
+   "articulates_with": [
+    "sacrum_bone"
+   ],
+   "note": "The first coccygeal segment is the largest and often exists as a separate piece; at a late period of life, especially in females, the coccyx often fuses to the sacrum.",
+   "synonyms": [
+    "tailbone",
+    "os coccygis"
+   ],
+   "source": "grays1918:is usually formed of four rudimentary vertebrae"
+  },
+  "sternum": {
+   "group": "Sternum \u2014 thoracic cage",
+   "function": "An elongated, flattened bone forming the middle portion of the anterior wall of the thorax, built of three pieces \u2014 manubrium, body, and xiphoid process. Its upper end supports the clavicles, and its margins articulate with the cartilages of the first seven pairs of ribs.",
+   "articulates_with": [
+    "l_clavicle",
+    "r_clavicle",
+    "l_costal_cartilage",
+    "r_costal_cartilage"
+   ],
+   "note": "At the junction of manubrium and body \u2014 the sternal angle (angulus Ludovici) \u2014 a facet on each piece combines to form the notch that receives the costal cartilage of the second rib; at the junction of the third and fourth pieces of the body a sternal foramen is occasionally seen.",
+   "synonyms": [
+    "breastbone"
+   ],
+   "source": "grays1918:elongated flattened bone forming the middle portion"
+  },
+  "l_costal_cartilage": {
+   "group": "Costal cartilages \u2014 thoracic cage",
+   "function": "The left set of costal cartilages: bars of hyaline cartilage which serve to prolong the ribs forward and contribute very materially to the elasticity of the walls of the thorax. The first seven pairs are connected with the sternum, the next three each articulate with the lower border of the cartilage of the preceding rib, and the last two have pointed extremities that end free in the wall of the abdomen.",
+   "articulates_with": [
+    "sternum",
+    "l_rib1",
+    "l_rib2",
+    "l_rib3",
+    "l_rib4",
+    "l_rib5",
+    "l_rib6",
+    "l_rib7",
+    "l_rib8",
+    "l_rib9",
+    "l_rib10"
+   ],
+   "note": "The cartilages increase in length from the first to the seventh, then gradually decrease to the twelfth; in old age they are prone to undergo superficial ossification.",
+   "synonyms": [
+    "rib cartilage",
+    "cartilagines costales",
+    "cartilago costalis"
+   ],
+   "source": "grays1918:bars of hyaline cartilage which serve to prolong the ribs forward"
+  },
+  "r_costal_cartilage": {
+   "group": "Costal cartilages \u2014 thoracic cage",
+   "function": "The right set of costal cartilages: bars of hyaline cartilage which serve to prolong the ribs forward and contribute very materially to the elasticity of the walls of the thorax. The first seven pairs are connected with the sternum, the next three each articulate with the lower border of the cartilage of the preceding rib, and the last two have pointed extremities that end free in the wall of the abdomen.",
+   "articulates_with": [
+    "sternum",
+    "r_rib1",
+    "r_rib2",
+    "r_rib3",
+    "r_rib4",
+    "r_rib5",
+    "r_rib6",
+    "r_rib7",
+    "r_rib8",
+    "r_rib9",
+    "r_rib10"
+   ],
+   "note": "The inferior borders of the sixth to ninth cartilages carry heel-like projections with smooth facets that articulate with the cartilage below \u2014 the interchondral joints that stitch the costal margin together.",
+   "synonyms": [
+    "rib cartilage",
+    "cartilagines costales",
+    "cartilago costalis"
+   ],
+   "source": "grays1918:bars of hyaline cartilage which serve to prolong the ribs forward"
+  },
+  "l_rib8": {
+   "group": "False ribs (vertebrochondral) \u2014 thoracic cage",
+   "function": "The left eighth rib, the first of the false (vertebrochondral) ribs: its cartilage reaches not the sternum but the lower border of the seventh costal cartilage above. Its head carries two facets that articulate with the bodies of two adjacent thoracic vertebrae (T7 and T8), and its tubercle meets the transverse process of T8.",
+   "articulates_with": [
+    "t7",
+    "t7disc",
+    "t8",
+    "l_costal_cartilage"
+   ],
+   "note": "Sometimes the eighth rib cartilage articulates directly with the sternum; Gray records that this condition occurs more frequently on the right side than the left.",
+   "synonyms": [
+    "eighth rib",
+    "costa VIII"
+   ],
+   "source": "grays1918:Sometimes the eighth rib cartilage articulates with the sternum"
+  },
+  "r_rib8": {
+   "group": "False ribs (vertebrochondral) \u2014 thoracic cage",
+   "function": "The right eighth rib, the first of the false (vertebrochondral) ribs: its cartilage reaches not the sternum but the lower border of the seventh costal cartilage above. Its head carries two facets that articulate with the bodies of two adjacent thoracic vertebrae (T7 and T8), and its tubercle meets the transverse process of T8.",
+   "articulates_with": [
+    "t7",
+    "t7disc",
+    "t8",
+    "r_costal_cartilage"
+   ],
+   "note": "Sometimes the eighth rib cartilage articulates directly with the sternum; Gray records that this condition occurs more frequently on the right side \u2014 this side \u2014 than the left.",
+   "synonyms": [
+    "eighth rib",
+    "costa VIII"
+   ],
+   "source": "grays1918:Sometimes the eighth rib cartilage articulates with the sternum"
+  },
+  "l_rib9": {
+   "group": "False ribs (vertebrochondral) \u2014 thoracic cage",
+   "function": "The left ninth rib, a false (vertebrochondral) rib whose cartilage joins the cartilage of the eighth rib above rather than the sternum. Its head articulates by two facets with the bodies of T8 and T9, and its tubercle with the transverse process of T9.",
+   "articulates_with": [
+    "t8",
+    "t8disc",
+    "t9",
+    "l_costal_cartilage"
+   ],
+   "note": "The ribs vary in their direction, and the obliquity reaches its maximum at the ninth rib, gradually decreasing from there to the twelfth.",
+   "synonyms": [
+    "ninth rib",
+    "costa IX"
+   ],
+   "source": "grays1918:the obliquity reaches its maximum at the ninth rib"
+  },
+  "r_rib9": {
+   "group": "False ribs (vertebrochondral) \u2014 thoracic cage",
+   "function": "The right ninth rib, a false (vertebrochondral) rib whose cartilage joins the cartilage of the eighth rib above rather than the sternum. Its head articulates by two facets with the bodies of T8 and T9, and its tubercle with the transverse process of T9.",
+   "articulates_with": [
+    "t8",
+    "t8disc",
+    "t9",
+    "r_costal_cartilage"
+   ],
+   "note": "The ribs vary in their direction, and the obliquity reaches its maximum at the ninth rib, gradually decreasing from there to the twelfth.",
+   "synonyms": [
+    "ninth rib",
+    "costa IX"
+   ],
+   "source": "grays1918:the obliquity reaches its maximum at the ninth rib"
+  },
+  "l_rib10": {
+   "group": "False ribs (vertebrochondral) \u2014 thoracic cage",
+   "function": "The left tenth rib, the lowest rib whose cartilage still joins the costal margin: it is a false (vertebrochondral) rib attached to the cartilage of the ninth rib above. Unlike the typical ribs it has only a single articular facet on its head, meeting the body of T10 alone.",
+   "articulates_with": [
+    "t10",
+    "l_costal_cartilage"
+   ],
+   "note": "Gray lists the first, second, tenth, eleventh, and twelfth as the peculiar ribs \u2014 the ones whose features depart from the common pattern of the series.",
+   "synonyms": [
+    "tenth rib",
+    "costa X"
+   ],
+   "source": "grays1918:has only a single articular facet on its head"
+  },
+  "r_rib10": {
+   "group": "False ribs (vertebrochondral) \u2014 thoracic cage",
+   "function": "The right tenth rib, the lowest rib whose cartilage still joins the costal margin: it is a false (vertebrochondral) rib attached to the cartilage of the ninth rib above. Unlike the typical ribs it has only a single articular facet on its head, meeting the body of T10 alone.",
+   "articulates_with": [
+    "t10",
+    "r_costal_cartilage"
+   ],
+   "note": "Gray lists the first, second, tenth, eleventh, and twelfth as the peculiar ribs \u2014 the ones whose features depart from the common pattern of the series.",
+   "synonyms": [
+    "tenth rib",
+    "costa X"
+   ],
+   "source": "grays1918:has only a single articular facet on its head"
+  },
+  "l_rib11": {
+   "group": "Floating ribs \u2014 thoracic cage",
+   "function": "The left eleventh rib, a floating (vertebral) rib: free at its anterior extremity, it has a single articular facet of rather large size on its head, no neck or tubercle, and a pointed anterior end tipped with cartilage that ends in the wall of the abdomen. It articulates with the vertebral column only, at the body of T11.",
+   "articulates_with": [
+    "t11"
+   ],
+   "note": "The eleventh rib retains a slight angle and a shallow costal groove, both of which the twelfth has lost.",
+   "synonyms": [
+    "eleventh rib",
+    "costa XI",
+    "floating rib"
+   ],
+   "source": "grays1918:have each a single articular facet on the head"
+  },
+  "r_rib11": {
+   "group": "Floating ribs \u2014 thoracic cage",
+   "function": "The right eleventh rib, a floating (vertebral) rib: free at its anterior extremity, it has a single articular facet of rather large size on its head, no neck or tubercle, and a pointed anterior end tipped with cartilage that ends in the wall of the abdomen. It articulates with the vertebral column only, at the body of T11.",
+   "articulates_with": [
+    "t11"
+   ],
+   "note": "The eleventh and twelfth ribs are each ossified from only two centers, the centers for the tubercles being wanting.",
+   "synonyms": [
+    "eleventh rib",
+    "costa XI",
+    "floating rib"
+   ],
+   "source": "grays1918:have each a single articular facet on the head"
+  },
+  "l_rib12": {
+   "group": "Floating ribs \u2014 thoracic cage",
+   "function": "The left twelfth rib, the last and lowest floating rib: much shorter than the eleventh, with its head inclined slightly downward, a single articular facet meeting the body of T12, and neither neck, tubercle, angle, nor costal groove. Its anterior end is free and pointed, tipped with cartilage that ends in the wall of the abdomen.",
+   "articulates_with": [
+    "t12"
+   ],
+   "note": "Sometimes the twelfth rib is even shorter than the first \u2014 the shortest rib in the body.",
+   "synonyms": [
+    "twelfth rib",
+    "costa XII",
+    "floating rib"
+   ],
+   "source": "grays1918:much shorter than the eleventh and its head is inclined slightly downward"
+  },
+  "r_rib12": {
+   "group": "Floating ribs \u2014 thoracic cage",
+   "function": "The right twelfth rib, the last and lowest floating rib: much shorter than the eleventh, with its head inclined slightly downward, a single articular facet meeting the body of T12, and neither neck, tubercle, angle, nor costal groove. Its anterior end is free and pointed, tipped with cartilage that ends in the wall of the abdomen.",
+   "articulates_with": [
+    "t12"
+   ],
+   "note": "Sometimes the twelfth rib is even shorter than the first \u2014 the shortest rib in the body.",
+   "synonyms": [
+    "twelfth rib",
+    "costa XII",
+    "floating rib"
+   ],
+   "source": "grays1918:much shorter than the eleventh and its head is inclined slightly downward"
+  },
+  "l_inferior_nasal_conchae": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "The left inferior nasal concha extends horizontally along the lateral wall of the nasal cavity and consists of a lamina of spongy bone, curled upon itself like a scroll. Its lateral surface is concave and forms part of the inferior meatus, into which the nasolacrimal canal \u2014 completed by the lacrimal bone and this concha \u2014 opens to transmit the nasolacrimal duct.",
+   "articulates_with": [
+    "ethmoid",
+    "l_maxilla",
+    "l_lacrimal",
+    "l_palatine"
+   ],
+   "note": "It articulates with four bones \u2014 ethmoid, maxilla, lacrimal, and palatine \u2014 the descending process of the lacrimal meeting its lacrimal process to assist in forming the canal for the nasolacrimal duct.",
+   "synonyms": [
+    "inferior turbinate",
+    "inferior turbinated bone",
+    "concha nasalis inferior"
+   ],
+   "source": "grays1918:consists of a lamina of spongy bone curled upon itself like a scroll"
+  },
+  "r_inferior_nasal_conchae": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "The right inferior nasal concha extends horizontally along the lateral wall of the nasal cavity and consists of a lamina of spongy bone, curled upon itself like a scroll. Its lateral surface is concave and forms part of the inferior meatus, into which the nasolacrimal canal \u2014 completed by the lacrimal bone and this concha \u2014 opens to transmit the nasolacrimal duct.",
+   "articulates_with": [
+    "ethmoid",
+    "r_maxilla",
+    "r_lacrimal",
+    "r_palatine"
+   ],
+   "note": "Unlike the superior and middle conchae, which are parts of the ethmoid, the inferior concha is a separate bone in its own right, ossified from a single center in the wall of the cartilaginous nasal capsule.",
+   "synonyms": [
+    "inferior turbinate",
+    "inferior turbinated bone",
+    "concha nasalis inferior"
+   ],
+   "source": "grays1918:consists of a lamina of spongy bone curled upon itself like a scroll"
+  },
+  "r_palatine": {
+   "group": "Facial skeleton (viscerocranium)",
+   "function": "An L-shaped bone situated at the back part of the nasal cavity between the maxilla and the pterygoid process of the sphenoid. It contributes to the walls of three cavities \u2014 the floor and lateral wall of the nose, the roof of the mouth, and the floor of the orbit \u2014 its horizontal plate completing the posterior part of the hard palate on the right.",
+   "articulates_with": [
+    "sphenoid",
+    "ethmoid",
+    "r_maxilla",
+    "r_inferior_nasal_conchae",
+    "vomer",
+    "l_palatine"
+   ],
+   "note": "The palatine articulates with six bones: the sphenoid, ethmoid, maxilla, inferior nasal concha, vomer, and the opposite palatine across the median palatine suture.",
+   "synonyms": [
+    "palate bone",
+    "os palatinum"
+   ],
+   "source": "grays1918:situated at the back part of the nasal cavity between the maxilla and the pterygoid process"
+  },
+  "tooth_canine_11_23": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The upper canines are larger and longer than the lower and usually present a distinct basal ridge.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left canine",
+    "cuspid",
+    "eye tooth",
+    "dens caninus",
+    "UNS #11",
+    "ISO 23"
+   ],
+   "source": "grays1918:larger and longer than the lower, and usually present a distinct basal ridge",
+   "note": "Popularly called an eye tooth; in occlusion it rests partly on the lower canine and partly on the first premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_canine_22_33": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The lower canines stand nearer the midline than the upper, their summits meeting the intervals between the upper canines and lateral incisors.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left canine",
+    "cuspid",
+    "stomach tooth",
+    "dens caninus",
+    "UNS #22",
+    "ISO 33"
+   ],
+   "source": "grays1918:placed nearer the middle line than the upper",
+   "note": "Popularly called a stomach tooth (the upper canines are the eye teeth). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_canine_27_43": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The lower canines stand nearer the midline than the upper, their summits meeting the intervals between the upper canines and lateral incisors.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right canine",
+    "cuspid",
+    "stomach tooth",
+    "dens caninus",
+    "UNS #27",
+    "ISO 43"
+   ],
+   "source": "grays1918:placed nearer the middle line than the upper",
+   "note": "Popularly called a stomach tooth (the upper canines are the eye teeth). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_canine_6_13": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the four canine teeth (dentes canini), placed laterally to each lateral incisor. Larger and stronger than the incisors, its large conical crown tapers to a blunted point or cusp that projects beyond the level of the other teeth, and its long single root sinks deeply into the bone, causing a well-marked prominence upon the surface of the jaw. The upper canines are larger and longer than the lower and usually present a distinct basal ridge.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right canine",
+    "cuspid",
+    "eye tooth",
+    "dens caninus",
+    "UNS #6",
+    "ISO 13"
+   ],
+   "source": "grays1918:larger and longer than the lower, and usually present a distinct basal ridge",
+   "note": "Popularly called an eye tooth; in occlusion it rests partly on the lower canine and partly on the first premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_10_22": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left lateral incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #10",
+    "ISO 22"
+   ],
+   "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+   "note": "On upper incisors the lingual surface often bears an inverted V-shaped eminence near the gum, the basal ridge or cingulum; the cingulum is absent on the lowers. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_23_32": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left lateral incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #23",
+    "ISO 32"
+   ],
+   "source": "grays1918:placed vertically and are somewhat bevelled in front",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_24_31": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left central incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #24",
+    "ISO 31"
+   ],
+   "source": "grays1918:placed vertically and are somewhat bevelled in front",
+   "note": "Gray's notes the lower central incisors are the smallest of all the incisors. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_25_41": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right central incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #25",
+    "ISO 41"
+   ],
+   "source": "grays1918:placed vertically and are somewhat bevelled in front",
+   "note": "Gray's notes the lower central incisors are the smallest of all the incisors. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_26_42": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The lower incisors are smaller than the upper, placed vertically, and become bevelled in front where they are worn by contact with the overlapping upper teeth.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right lateral incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #26",
+    "ISO 42"
+   ],
+   "source": "grays1918:placed vertically and are somewhat bevelled in front",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_7_12": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right lateral incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #7",
+    "ISO 12"
+   ],
+   "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+   "note": "On upper incisors the lingual surface often bears an inverted V-shaped eminence near the gum, the basal ridge or cingulum; the cingulum is absent on the lowers. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_8_11": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right central incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #8",
+    "ISO 11"
+   ],
+   "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+   "note": "Because the upper central incisors are wider than the lower, the two dental arches do not correspond tooth-for-tooth when the mouth is closed. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_incisor_9_21": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight incisors (dentes incisivi), the four front teeth of each dental arch, named for their sharp chisel-shaped cutting edge adapted for biting food. The crown is convex and polished on its labial surface, concave on its lingual surface, and the single conical root is transversely flattened and anchored in its alveolar socket. The upper incisors are larger and stronger than the lower and are directed obliquely downward and forward; the central ones are larger than the lateral.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left central incisor",
+    "incisor",
+    "dens incisivus",
+    "cutting tooth",
+    "UNS #9",
+    "ISO 21"
+   ],
+   "source": "grays1918:larger and stronger than the lower, and are directed obliquely downward and forward",
+   "note": "Because the upper central incisors are wider than the lower, the two dental arches do not correspond tooth-for-tooth when the mouth is closed. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_14_26": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left first molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #14",
+    "ISO 26"
+   ],
+   "source": "grays1918:Each upper molar has three roots",
+   "note": "As a rule the first upper molar is the largest of the upper molars, its crown usually bearing four tubercles. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_15_27": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left second molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #15",
+    "ISO 27"
+   ],
+   "source": "grays1918:Each upper molar has three roots",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_16_28": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left third molar",
+    "wisdom tooth",
+    "dens serotinus",
+    "dens molaris",
+    "UNS #16",
+    "ISO 28"
+   ],
+   "source": "grays1918:Each upper molar has three roots",
+   "note": "The third molar is the wisdom tooth (dens serotinus); its roots are more or less fused together. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_17_38": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left third molar",
+    "wisdom tooth",
+    "dens serotinus",
+    "dens molaris",
+    "UNS #17",
+    "ISO 38"
+   ],
+   "source": "grays1918:Each lower molar has two roots",
+   "note": "The third molar is the wisdom tooth (dens serotinus); its two roots are more or less united. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_18_37": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left second molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #18",
+    "ISO 37"
+   ],
+   "source": "grays1918:Each lower molar has two roots",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_19_36": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left first molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #19",
+    "ISO 36"
+   ],
+   "source": "grays1918:Each lower molar has two roots",
+   "note": "The crown of the first lower molar usually bears five tubercles (cusps). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_1_18": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right third molar",
+    "wisdom tooth",
+    "dens serotinus",
+    "dens molaris",
+    "UNS #1",
+    "ISO 18"
+   ],
+   "source": "grays1918:Each upper molar has three roots",
+   "note": "The third molar is the wisdom tooth (dens serotinus); its roots are more or less fused together. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_2_17": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right second molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #2",
+    "ISO 17"
+   ],
+   "source": "grays1918:Each upper molar has three roots",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_30_46": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right first molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #30",
+    "ISO 46"
+   ],
+   "source": "grays1918:Each lower molar has two roots",
+   "note": "The crown of the first lower molar usually bears five tubercles (cusps). Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_31_47": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right second molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #31",
+    "ISO 47"
+   ],
+   "source": "grays1918:Each lower molar has two roots",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_32_48": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. The lower molars are larger than the upper; each has two grooved roots, a nearly vertical anterior and an obliquely backward-directed posterior.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right third molar",
+    "wisdom tooth",
+    "dens serotinus",
+    "dens molaris",
+    "UNS #32",
+    "ISO 48"
+   ],
+   "source": "grays1918:Each lower molar has two roots",
+   "note": "The third molar is the wisdom tooth (dens serotinus); its two roots are more or less united. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_molar_3_16": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the twelve molar teeth (dentes molares), the largest of the permanent set, whose broad, nearly cubical crowns surmounted by four or five cusps are adapted for grinding and pounding food. Three molars stand posterior to each second premolar in each half-arch. Each upper molar has three roots, two buccal and one diverging lingual; as a rule the first is the largest and the third the smallest of the upper molars.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right first molar",
+    "grinding tooth",
+    "dens molaris",
+    "multicuspid",
+    "UNS #3",
+    "ISO 16"
+   ],
+   "source": "grays1918:Each upper molar has three roots",
+   "note": "As a rule the first upper molar is the largest of the upper molars, its crown usually bearing four tubercles. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_12_24": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left first premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #12",
+    "ISO 24"
+   ],
+   "source": "grays1918:present a greater tendency to the division of their roots",
+   "note": "The tendency of the premolar root to divide is especially marked in the first upper premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_13_25": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+   "articulates_with": [
+    "l_maxilla"
+   ],
+   "synonyms": [
+    "upper left second premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #13",
+    "ISO 25"
+   ],
+   "source": "grays1918:present a greater tendency to the division of their roots",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_20_35": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left second premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #20",
+    "ISO 35"
+   ],
+   "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+   "note": "The mental foramen of the mandible opens beneath the second premolar tooth \u2014 a landmark for the mental nerve. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_21_34": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower left first premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #21",
+    "ISO 34"
+   ],
+   "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_28_44": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right first premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #28",
+    "ISO 44"
+   ],
+   "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_29_45": {
+   "group": "Teeth \u2014 mandibular (lower) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The root is generally single and compressed, with a usually bifid apex.",
+   "articulates_with": [
+    "mandible"
+   ],
+   "synonyms": [
+    "lower right second premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #29",
+    "ISO 45"
+   ],
+   "source": "grays1918:surmounted by two pyramidal eminences or cusps, a labial and a lingual",
+   "note": "The mental foramen of the mandible opens beneath the second premolar tooth \u2014 a landmark for the mental nerve. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_4_15": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right second premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #4",
+    "ISO 15"
+   ],
+   "source": "grays1918:present a greater tendency to the division of their roots",
+   "note": "Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "tooth_premolar_5_14": {
+   "group": "Teeth \u2014 maxillary (upper) arch",
+   "function": "One of the eight premolar or bicuspid teeth (dentes premolares), situated lateral to and behind the canine teeth and smaller and shorter than they. The antero-posteriorly compressed crown carries two pyramidal cusps, a labial and a lingual, separated by a groove \u2014 hence the name bicuspid \u2014 of which the labial cusp is the larger and more prominent. The upper premolars are larger than the lower and show a greater tendency to division of their roots, especially the first.",
+   "articulates_with": [
+    "r_maxilla"
+   ],
+   "synonyms": [
+    "upper right first premolar",
+    "bicuspid",
+    "dens premolaris",
+    "UNS #5",
+    "ISO 14"
+   ],
+   "source": "grays1918:present a greater tendency to the division of their roots",
+   "note": "The tendency of the premolar root to divide is especially marked in the first upper premolar. Each tooth consists of a crown projecting above the gum, a root imbedded in the alveolus, and a constricted neck between them."
+  },
+  "c2disc": {
+   "group": "Intervertebral discs \u2014 cervical",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C2 and C3, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+   "articulates_with": [
+    "c2",
+    "c3"
+   ],
+   "note": "The uppermost disc of the whole column: the series of intervertebral fibrocartilages extends only from the axis to the sacrum, so there is no disc between the skull and atlas or between atlas and axis.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "C2\u2013C3 disc"
+   ],
+   "source": "grays1918:from the axis to the sacrum"
+  },
+  "c3disc": {
+   "group": "Intervertebral discs \u2014 cervical",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C3 and C4, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+   "articulates_with": [
+    "c3",
+    "c4"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "C3\u2013C4 disc"
+   ],
+   "source": "grays1918:thicker in front than behind in the cervical"
+  },
+  "c4disc": {
+   "group": "Intervertebral discs \u2014 cervical",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C4 and C5, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+   "articulates_with": [
+    "c4",
+    "c5"
+   ],
+   "note": "Cervical discs are slightly smaller from side to side than the vertebral bodies they separate \u2014 the one region where disc and body outlines do not correspond.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "C4\u2013C5 disc"
+   ],
+   "source": "grays1918:thicker in front than behind in the cervical"
+  },
+  "c5disc": {
+   "group": "Intervertebral discs \u2014 cervical",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C5 and C6, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+   "articulates_with": [
+    "c5",
+    "c6"
+   ],
+   "note": "In the lower cervical spine, small joints lined by synovial membrane are occasionally present between the upper surfaces of the vertebral bodies and the margins of the disc on either side.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "C5\u2013C6 disc"
+   ],
+   "source": "grays1918:small joints lined by synovial membrane are occasionally present"
+  },
+  "c6disc": {
+   "group": "Intervertebral discs \u2014 cervical",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of C6 and C7, forming one of the chief bonds of connection between the vertebrae. Like all discs it is built of concentric laminae of fibrous tissue and fibrocartilage (the annulus fibrosus) around a soft, highly elastic nucleus pulposus, and acts as an important shock absorber. In the cervical region the discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the neck.",
+   "articulates_with": [
+    "c6",
+    "c7"
+   ],
+   "note": "In the lower cervical spine, small joints lined by synovial membrane are occasionally present between the upper surfaces of the vertebral bodies and the margins of the disc on either side.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "C6\u2013C7 disc"
+   ],
+   "source": "grays1918:small joints lined by synovial membrane are occasionally present"
+  },
+  "c7disc": {
+   "group": "Intervertebral discs \u2014 cervical",
+   "function": "Fibrocartilaginous pad between the bodies of C7 and T1 at the cervicothoracic junction, one of the chief bonds of connection between the vertebrae: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, bound in front and behind to the anterior and posterior longitudinal ligaments and acting as a shock absorber between neck and trunk.",
+   "articulates_with": [
+    "c7",
+    "t1"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "C7\u2013T1 disc"
+   ],
+   "source": "grays1918:are interposed between the adjacent"
+  },
+  "t1disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T1 and T2: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 2) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t1",
+    "t2",
+    "l_rib2",
+    "r_rib2"
+   ],
+   "note": "The heads of the typical ribs articulate with the discs as well as the vertebrae; the first, tenth, eleventh, and twelfth ribs are the exceptions, each articulating with a single vertebra only \u2014 so rib 1 does not reach this disc, but rib 2 does.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T1\u2013T2 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t2disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T2 and T3: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 3) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t2",
+    "t3",
+    "l_rib3",
+    "r_rib3"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T2\u2013T3 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t3disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T3 and T4: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 4) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t3",
+    "t4",
+    "l_rib4",
+    "r_rib4"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T3\u2013T4 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t4disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T4 and T5: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 5) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t4",
+    "t5",
+    "l_rib5",
+    "r_rib5"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T4\u2013T5 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t5disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T5 and T6: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 6) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t5",
+    "t6",
+    "l_rib6",
+    "r_rib6"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T5\u2013T6 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t6disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T6 and T7: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 7) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t6",
+    "t7",
+    "l_rib7",
+    "r_rib7"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T6\u2013T7 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t7disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T7 and T8: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 8) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t7",
+    "t8",
+    "l_rib8",
+    "r_rib8"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T7\u2013T8 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t8disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T8 and T9: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement. Laterally it is joined, by the interarticular ligaments, to the heads of the pair of ribs (rib 9) that articulate with the margins of both vertebral bodies and with the disc between them.",
+   "articulates_with": [
+    "t8",
+    "t9",
+    "l_rib9",
+    "r_rib9"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T8\u2013T9 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t9disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T9 and T10: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+   "articulates_with": [
+    "t9",
+    "t10"
+   ],
+   "note": "Below this level the rib heads no longer reach the discs: the tenth, eleventh, and twelfth ribs each articulate with a single vertebra only.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T9\u2013T10 disc"
+   ],
+   "source": "grays1918:with the intervertebral fibrocartilages between them"
+  },
+  "t10disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T10 and T11: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+   "articulates_with": [
+    "t10",
+    "t11"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T10\u2013T11 disc"
+   ],
+   "source": "grays1918:of nearly uniform thickness in the thoracic region"
+  },
+  "t11disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T11 and T12: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+   "articulates_with": [
+    "t11",
+    "t12"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T11\u2013T12 disc"
+   ],
+   "source": "grays1918:of nearly uniform thickness in the thoracic region"
+  },
+  "t12disc": {
+   "group": "Intervertebral discs \u2014 thoracic",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of T12 and L1: an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, serving as a shock absorber and bond of connection. Thoracic discs are of nearly uniform thickness (the anterior concavity of this part of the column is owing to the shape of the vertebral bodies, not the discs) and are proportionally thinner than cervical or lumbar discs, so this region has less pliancy and freedom of movement.",
+   "articulates_with": [
+    "t12",
+    "l1"
+   ],
+   "note": "The thoracolumbar transition disc, between the last thoracic and first lumbar vertebrae.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "T12\u2013L1 disc"
+   ],
+   "source": "grays1918:of nearly uniform thickness in the thoracic region"
+  },
+  "l1disc": {
+   "group": "Intervertebral discs \u2014 lumbar",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L1 and L2: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae \u2014 the column's principal shock absorbers.",
+   "articulates_with": [
+    "l1",
+    "l2"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "L1\u2013L2 disc"
+   ],
+   "source": "grays1918:especially well-developed in the lumbar region"
+  },
+  "l2disc": {
+   "group": "Intervertebral discs \u2014 lumbar",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L2 and L3: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae \u2014 the column's principal shock absorbers.",
+   "articulates_with": [
+    "l2",
+    "l3"
+   ],
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "L2\u2013L3 disc"
+   ],
+   "source": "grays1918:especially well-developed in the lumbar region"
+  },
+  "l3disc": {
+   "group": "Intervertebral discs \u2014 lumbar",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L3 and L4: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae \u2014 the column's principal shock absorbers.",
+   "articulates_with": [
+    "l3",
+    "l4"
+   ],
+   "note": "Taken together the intervertebral fibrocartilages constitute about one-fourth of the length of the vertebral column (excluding the first two vertebrae), the cervical and lumbar regions holding proportionally the greatest share \u2014 hence their greater pliancy.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "L3\u2013L4 disc"
+   ],
+   "source": "grays1918:constitute about one-fourth of the length"
+  },
+  "l4disc": {
+   "group": "Intervertebral discs \u2014 lumbar",
+   "function": "Fibrocartilaginous pad interposed between the adjacent surfaces of the bodies of L4 and L5: an annulus fibrosus of concentric fibrous laminae around a soft, highly elastic nucleus pulposus which is especially well-developed in the lumbar region. Lumbar discs are thicker in front than behind, contributing to the anterior convexity (lordosis) of the loins, and under pressure the nucleus flattens and broadens against the fibrous laminae \u2014 the column's principal shock absorbers.",
+   "articulates_with": [
+    "l4",
+    "l5"
+   ],
+   "note": "The nucleus pulposus is the remains of the notochord \u2014 a persistent trace of the embryonic axial rod at every disc level.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "L4\u2013L5 disc"
+   ],
+   "source": "grays1918:especially well-developed in the lumbar region"
+  },
+  "l5disc": {
+   "group": "Intervertebral discs \u2014 lumbosacral",
+   "function": "Fibrocartilaginous pad between the body of the last lumbar vertebra (L5) and the upper surface of the body of the first sacral vertebra \u2014 the lumbosacral disc, the lowest of the series that extends from the axis to the sacrum. Like its fellows it is an annulus fibrosus of concentric fibrous laminae around an elastic nucleus pulposus, thicker in front than behind, and it carries the whole weight of the trunk into the sacrum and pelvis.",
+   "articulates_with": [
+    "l5",
+    "sacrum_bone"
+   ],
+   "note": "Sits at the lumbosacral junction, where the base of the sacrum projects forward and forms the prominent sacrovertebral angle with the last lumbar vertebra.",
+   "synonyms": [
+    "intervertebral disc",
+    "intervertebral disk",
+    "intervertebral fibrocartilage",
+    "discus intervertebralis",
+    "L5\u2013S1 disc",
+    "lumbosacral disc"
+   ],
+   "source": "grays1918:from the axis to the sacrum"
   }
  },
  "groups": [

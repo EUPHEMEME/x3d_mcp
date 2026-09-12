@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+# =============================================================================
+# SUPERSEDED — DO NOT RUN (quarantined 2026-08-31)
+#
+# Destructive in-place rewrite of SHARED CANONICAL assets. Its Material regex
+# (`<Material\b[^>]*/>`) also matches <Material USE='...'/> references and
+# rewrites them into definitions, severing the USE link (bug documented in
+# flatten_anatomy.py, phong_to_physical docstring, ~lines 186-199).
+#
+# Superseded by flatten_anatomy.phong_to_physical, which converts in memory
+# (references retagged, never redefined). Never referenced by the Makefile.
+# =============================================================================
 """
 Look-dev pass for the rendered demo: convert the canonical AllBonesLOA5 bone
 meshes from old-style Phong `Material` to metallic-roughness `PhysicalMaterial`.

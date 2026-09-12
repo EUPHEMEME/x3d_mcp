@@ -377,6 +377,21 @@ def _check_route_validity(scene: etree._Element) -> list[Diagnostic]:
 
 _NODE_FIELD_TYPES = {"SFNode", "MFNode"}
 
+# Interfaces the X3DUOM does not record in the single-parent baseType chain.
+# ISO 19775-1 gives every Metadata* node a SECOND supertype, X3DMetadataObject
+# ("MetadataSet : X3DNode, X3DMetadataObject"), but X3dUnifiedObjectModel-4.1.xml
+# lists only baseType='X3DNode' for them — so without this, a spec-correct
+# <MetadataSet containerField='metadata'/> was flagged containerfield-type-mismatch
+# (e.g. under HAnimHumanoid, whose metadata field accepts X3DMetadataObject).
+_EXTRA_INTERFACES = {
+    "MetadataBoolean": {"X3DMetadataObject"},
+    "MetadataDouble": {"X3DMetadataObject"},
+    "MetadataFloat": {"X3DMetadataObject"},
+    "MetadataInteger": {"X3DMetadataObject"},
+    "MetadataSet": {"X3DMetadataObject"},
+    "MetadataString": {"X3DMetadataObject"},
+}
+
 
 def _type_ancestry(typename: str, nodes: dict, abstracts: dict) -> set[str]:
     """Return {typename} plus every abstract base it inherits from."""
@@ -388,6 +403,7 @@ def _type_ancestry(typename: str, nodes: dict, abstracts: dict) -> set[str]:
             break
         chain.add(base)
         cur = nodes.get(base) or abstracts.get(base)
+    chain |= _EXTRA_INTERFACES.get(typename, set())
     return chain
 
 

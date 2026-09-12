@@ -1,0 +1,141 @@
+% wg-findings.tex v1.0 2026-08-31 — HAnim WG contribution packet: AllBonesLOA5Skeletons findings + differential-probe rediscovery (Web3D 2026 Doha)
+\documentclass[10pt]{article}
+\usepackage[margin=1.9cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.1ex plus 0.4ex}{0.6ex}
+\setlist{nosep,leftmargin=1.4em}
+\newcommand{\code}[1]{\texttt{#1}}
+\setlength{\parskip}{0.35ex}
+\setlength{\parindent}{1.2em}
+
+\title{\vspace{-1.4em}\textbf{Findings in \code{AllBonesLOA5Skeletons}, with a mechanical rediscovery}\vspace{-0.4em}}
+\author{Alexander H. Hoffman\\\normalsize \href{mailto:alex@euphe.me}{alex@euphe.me} \,\textperiodcentered\, EUPHEME Technologies LLC}
+\date{\normalsize Prepared for the HAnim Working Group, Web3D 2026, Doha \,\textperiodcentered\, August 2026}
+
+\begin{document}
+\maketitle
+\vspace{-1.6em}
+
+\noindent\textbf{Spirit of this note.} The \code{AllBonesLOA5Skeletons} set is a gift: 277
+mesh files in which every one of the 256 leaf parts already carries a \code{TouchSensor},
+a DEF'd material, a hidden close-up \code{Viewpoint}, and hand-written anatomical prose in
+\code{<meta name='description'>} (275 of 277). The interactivity for a full anatomy explorer
+was authored into these assets years ago. While building such an explorer --- making every
+bone individually addressable --- we surfaced a small number of file-level defects and two
+tooling traps. Everything below is reproducible from the published meshes; concrete fixes
+are proposed for each item. \textit{[TODO: insert upstream GitHub issue numbers once filed.]}
+
+\section{\code{AxesDisplay.x3d}: referenced by 260 meshes, shipped with none}
+260 of the 277 mesh files contain
+\code{<Inline DEF='AxesDisplay' url='"AxesDisplay.x3d"'/>}, and the file does not exist in
+the set. Unlike every other \code{Inline} in these files, this \code{url} carries
+\emph{no fallback list} --- the others all pair a local path with a
+\code{https://www.web3d.org/...} mirror. Loading the assembled skeleton therefore fires
+\textbf{260 hard 404s} before the scene is usable.
+
+\emph{Proposed fix:} ship \code{AxesDisplay.x3d} alongside the meshes, or give this
+\code{Inline} the same web fallback URL the other inlines already have.
+
+\section{\code{l\_tarsal\_distal\_phalanx\_5.x3d} contains no geometry}
+The file exists (7{,}630 bytes) but holds zero \code{IndexedFaceSet} and zero
+\code{Coordinate} nodes --- header, \code{TouchSensor}, and \code{Transform} boilerplate
+around nothing. Its right-side twin is a complete mesh:
+
+\begin{center}\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+file & bytes & \code{IndexedFaceSet} & \code{Coordinate}\\
+\midrule
+\code{l\_tarsal\_distal\_phalanx\_5.x3d} & 7{,}630 & 0 & 0\\
+\code{r\_tarsal\_distal\_phalanx\_5.x3d} & 11{,}001 & 2 & 1\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The left foot renders with 13 phalanges to the right foot's 14; the assembled skeleton has
+198 bones where it should have 199, and the left little toe visibly lacks its tip. (A
+bilateral fusion of the fifth toe's middle and distal phalanges is a real anatomical
+variant --- but it is bilateral. A one-sided absence is an asset defect, not a variant.)
+
+\emph{Proposed fix:} regenerate the mesh, or mirror \code{r\_tarsal\_distal\_phalanx\_5.x3d}.
+
+\section{Not a bug: the ethmoid --- a trap for tooling, recorded because we fell in}
+The set contains \code{ethmoid.x3d}, \code{l\_ethmoid.x3d}, and \code{r\_ethmoid.x3d}. The
+ethmoid is one unpaired midline bone, so three files look like a double-count --- and any
+tool that decides \emph{what a bone is} from filenames will count a cranium of 9 against
+the canonical 8. The assets are in fact \textbf{correct}: \code{loa5\_humanoid.x3dfrag}
+inlines \code{ethmoid.x3d} exactly once, and that file is a geometry-free container
+inlining the two lateral labyrinths. The trap is that this container is structurally
+identical to the LOA-1 \emph{region} containers (\code{skull.x3d} inlines 22 bones;
+\code{l\_carpal.x3d} inlines 4) yet means something different: a region's children are
+separate bones, the ethmoid's children are pieces of one bone. A usable discriminator: a
+container is a split \emph{bone} when every child's name reduces to the container's own
+name once the \code{l\_}/\code{r\_} prefix is stripped. Across all 277 meshes the ethmoid
+is the only such case.
+
+\emph{No fix needed;} a short comment inside \code{ethmoid.x3d} saying so would spare the
+next tool author.
+
+\section{The auditory ossicles and the hyoid are absent}
+No \code{malleus}, \code{incus}, \code{stapes}, or \code{hyoid} mesh exists under any name:
+the string ``hyoid'' appears nowhere in the 277 mesh files nor in
+\code{loa5\_humanoid.x3dfrag}. That is 7 of the 206 bones of the adult skeleton. The
+ossicles are arguably out of scope for a surface skeleton --- they live inside the temporal
+bone. The \textbf{hyoid is not}: it is a visible, palpable, freestanding bone of the neck,
+anatomically notable precisely because it articulates with no other bone, and its absence
+is conspicuous in any scene showing the mandible and cervical spine.
+
+\emph{Proposed fix:} add \code{hyoid.x3d}; consider documenting the ossicles as a
+deliberate omission.
+
+\section{A processing trap: rewriting \code{<Material USE=.../>} whitens the teeth}
+Not an asset bug, but a hazard for anyone modernizing the set. A regex such as
+\begin{center}
+\code{re.sub(r"<Material\textbackslash b[\textasciicircum>]*/>", ...)}
+\end{center}
+also matches
+\code{<Material USE='ToothMaterial'/>}; rewriting a \code{USE} reference as a definition
+severs it from its \code{DEF}, and all 32 teeth (which share one \code{ToothMaterial} via
+\code{USE}) lose their material and render pure white. 34 meshes still carry legacy Phong
+\code{<Material>} (the 32 \code{tooth\_*} plus \code{l\_/r\_ethmoid}); converting them to
+\code{PhysicalMaterial} is worthwhile --- they blow out under PBR studio lighting --- but
+the conversion must retag \code{USE} references without touching their attributes, never
+rewrite them as definitions.
+
+\section{The zero-geometry defect class is mechanically detectable}
+Finding 2 was first noticed by eye. It need not be. A \emph{differential object-presence
+probe} --- render the scene with a node, render it with that node removed, and count the
+changed pixels --- attributes to every node its per-node pixel contribution. Run against a
+real renderer (X\_ITE 15.1.12 under headless Chromium, 512$\times$384 frames, recorded run
+of 2026-08-01), a correct \code{HAnimHumanoid} contributes \textbf{7{,}744 px} to the frame;
+a defective one contributes \textbf{0 px} --- inside a frame that is \emph{not} blank
+(the pedestal still contributes 7{,}068 px, so a whole-frame blankness gate passes it).
+The probe's control run is clean: rendering an identical scene twice differs by 0 px, and
+the contribution threshold (98 px) sits far above that noise floor.
+
+This is exactly the signature of the empty phalanx: a node present in the document,
+absent from the image, in a scene that otherwise renders. The same probe therefore
+rediscovers Finding 2 mechanically, with no anatomical knowledge required:
+\code{l\_tarsal\_distal\_phalanx\_5} shows a 0 px contribution while its right-side
+twin contributes normally. The practical point for the working group: \textbf{this defect class
+is CI-detectable}. A per-mesh presence probe over the asset set (each mesh rendered with
+and without its geometry payload) would have flagged the empty file at publication time,
+and would guard every future regeneration of the set. We are glad to contribute the probe
+and the runbook.
+
+\vspace{0.5ex}
+\noindent\textbf{Closing.} None of this diminishes the set --- the craft was already
+authored in; these are finishing touches. We offer the findings, the proposed fixes, and
+the probe in the same spirit the assets were offered: as a contribution to the commons.
+\textit{[TODO: GitHub issue numbers here once filed.]}
+
+\end{document}

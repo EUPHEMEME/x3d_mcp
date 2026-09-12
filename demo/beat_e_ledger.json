@@ -1,0 +1,17 @@
+{
+  "title": "Techne demo beat E — minimal asset ledger (one real bone mesh)",
+  "principle": "Every 'documented' claim must resolve to a cited, cleared asset. Ledger format mirrors drawings/archive.json ({entries:[{id, citation, source_url, public_domain, ...}]}).",
+  "entries": [
+    {
+      "id": "BONE-R5",
+      "subject": "Right fifth distal foot phalanx (r_tarsal_distal_phalanx_5) — HAnim LOA5 bone mesh",
+      "citation": "Brutzman, D., Williams, J., Carlson, J. & Hernandez, D. — r_tarsal_distal_phalanx_5.x3d, HAnim AllBonesLOA5Skeletons bone-mesh set, Web3D Consortium HumanoidAnimation examples (created 5 Dec 2013; translated to X3D4 5 Mar 2026; per the file's own <meta creator/translator> header).",
+      "source_url": "https://www.web3d.org/x3d/content/examples/HumanoidAnimation/Bones/r_tarsal_distal_phalanx_5.x3d",
+      "public_domain": true,
+      "license_note": "Web3D Consortium open-source license (../license.html in the asset set) — cleared for reuse with attribution; recorded under the ledger's public_domain/cleared flag.",
+      "x3d": [
+        "assets/loa5/meshes/r_tarsal_distal_phalanx_5.x3d"
+      ]
+    }
+  ]
+}

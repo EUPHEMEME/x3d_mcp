@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
+# build_kb.py v1.2 2026-08-31 — assemble anatomy_kb.json from committed research batches
 """Assemble build_anatomy/anatomy_kb.json — the explorer's teaching layer.
+
+v1.2: per-bone kept-keys filter also passes through 'synonyms' and 'source'.
+v1.1: default input is now the committed build_anatomy/research/batch_*.json
+files (merged in filename order), replacing the deleted /private/tmp task
+output; adds a per-groupFallback coverage report + optional KB_REQUIRE_FULL=1
+gate. argv[1] still overrides with a single file (plain JSON, or embedded-JSON
+task output).
 
 Inputs:
   * the researched + fact-checked region data (from the anatomy-knowledge-base
-    workflow), read out of its task output file
+    workflow), committed as build_anatomy/research/batch_*.json
   * bone_manifest.json, for the model's own measured composition
 
 The reconciliation ("why 257 parts, not 206 bones?") is NOT taken from the
@@ -14,6 +22,7 @@ plausibly wrong.
 """
 from __future__ import annotations
 
+import glob
 import json
 import os
 import re
@@ -113,6 +122,29 @@ def load_research(path: str) -> dict:
     return obj
 
 
+def load_research_file(path: str) -> dict:
+    """A single research file: plain JSON first, embedded-JSON fallback."""
+    try:
+        return json.load(open(path, encoding="utf-8"))
+    except json.JSONDecodeError:
+        return load_research(path)
+
+
+def load_research_batches() -> dict:
+    """Merge every committed research/batch_*.json, in filename order."""
+    paths = sorted(glob.glob(f"{BUILD}/research/batch_*.json"))
+    if not paths:
+        sys.exit(f"no research batches found in {BUILD}/research/")
+    merged = {"regions": [], "teaching": {"tours": [], "quiz": []}}
+    for p in paths:
+        batch = json.load(open(p, encoding="utf-8"))   # "_provenance" ignored
+        merged["regions"] += batch.get("regions", [])
+        teaching = batch.get("teaching") or {}
+        merged["teaching"]["tours"] += teaching.get("tours", [])
+        merged["teaching"]["quiz"] += teaching.get("quiz", [])
+    return merged
+
+
 def reconcile(bones: list[dict]) -> dict:
     """Compute the 206-vs-model difference from the model itself."""
     have = Counter(b["groupFallback"] for b in bones if b["kind"] == "bone")
@@ -131,11 +163,10 @@ def reconcile(bones: list[dict]) -> dict:
 
 
 def main() -> None:
-    out_file = sys.argv[1] if len(sys.argv) > 1 else (
-        "/private/tmp/claude-501/-Users-alexander/"
-        "0f276d3e-096d-4fcb-b61e-7acdcdee2394/tasks/wff8gq4f1.output")
-
-    research = load_research(out_file)
+    if len(sys.argv) > 1:
+        research = load_research_file(sys.argv[1])
+    else:
+        research = load_research_batches()
     manifest = json.load(open(f"{BUILD}/bone_manifest.json"))
     bones = manifest["bones"]
     known = {b["name"] for b in bones}
@@ -147,18 +178,20 @@ def main() -> None:
     for region in research.get("regions", []):
         if not region:
             continue
-        groups.append({
-            "title": region.get("group_title", ""),
-            "teaching": region.get("group_teaching", ""),
-            "key_counts": region.get("key_counts", []),
-        })
+        if region.get("group_title"):    # a bones-only carrier adds no essay
+            groups.append({
+                "title": region.get("group_title", ""),
+                "teaching": region.get("group_teaching", ""),
+                "key_counts": region.get("key_counts", []),
+            })
         for b in region.get("bones", []):
             n = KEY_REMAP.get(b.get("name"), b.get("name"))
             if n not in known:          # researcher invented / mis-keyed a name
                 dropped.append(n)
                 continue
             kb_bones[n] = {k: v for k, v in b.items()
-                           if k in ("group", "function", "articulates_with", "note") and v}
+                           if k in ("group", "function", "articulates_with", "note",
+                                    "synonyms", "source") and v}
 
     teaching = apply_corrections(research.get("teaching") or {})
 
@@ -217,6 +250,19 @@ def main() -> None:
     print(f"    canonical adult skeleton: {rec['canonical_bones']} bones")
     for g, d in rec["deltas"]:
         print(f"      {d:+d}  {g}")
+
+    # ---- enrichment coverage, per groupFallback -----------------------------
+    total_by_group = Counter(b["groupFallback"] for b in bones)
+    enriched_by_group = Counter(b["groupFallback"] for b in bones
+                                if b["name"] in kb_bones)
+    print(f"\n  COVERAGE (enriched / total parts, by groupFallback)")
+    for g in total_by_group:
+        e, t = enriched_by_group.get(g, 0), total_by_group[g]
+        print(f"    {'FULL' if e == t else '....'}  {e:3d} / {t:3d}  {g}")
+    print(f"    {'----':>4}  {len(kb_bones):3d} / {len(bones):3d}  TOTAL")
+    if os.environ.get("KB_REQUIRE_FULL") == "1" and len(kb_bones) < len(bones):
+        sys.exit(f"KB_REQUIRE_FULL=1: enrichment incomplete "
+                 f"({len(kb_bones)}/{len(bones)} parts)")
 
 
 if __name__ == "__main__":
