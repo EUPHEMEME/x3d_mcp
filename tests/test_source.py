@@ -46,3 +46,16 @@ def test_validate_x3d_accepts_path(tmp_path):
         '</Scene></X3D>', encoding="utf-8")
     report = validate_semantic(load_x3d_source(path=str(f)))
     assert "containerfield-unknown" in report
+
+
+def test_path_rejected_over_http_transport(monkeypatch, tmp_path):
+    scene = tmp_path / "s.x3d"
+    scene.write_text("<X3D/>")
+    monkeypatch.setenv("MCP_TRANSPORT", "streamable-http")
+    with pytest.raises(ValueError, match="disabled over the HTTP transport"):
+        load_x3d_source(path=str(scene))
+
+
+def test_inline_content_allowed_over_http_transport(monkeypatch):
+    monkeypatch.setenv("MCP_TRANSPORT", "streamable-http")
+    assert load_x3d_source(content="<X3D/>") == "<X3D/>"

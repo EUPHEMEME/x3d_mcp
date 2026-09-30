@@ -6,7 +6,19 @@ Every tool that consumes a scene should accept a `path` as an alternative to
 `content`; this is the single shared resolver they call.
 """
 
+import os
 from pathlib import Path
+
+
+def _http_transport_active() -> bool:
+    """Whether the server is running over the Streamable HTTP transport.
+
+    Path input is a local-use affordance; over HTTP it would let remote
+    callers read files from the server's filesystem (same policy as
+    tools.scene_ops).
+    """
+    transport = os.environ.get("MCP_TRANSPORT", "stdio").lower()
+    return transport in ("http", "streamable-http")
 
 
 def load_x3d_source(content: str | None = None, path: str | None = None) -> str:
@@ -26,6 +38,11 @@ def load_x3d_source(content: str | None = None, path: str | None = None) -> str:
         raise ValueError("Provide either `content` (inline X3D) or `path` (a file).")
 
     if has_path:
+        if _http_transport_active():
+            raise ValueError(
+                "Path input is disabled over the HTTP transport. "
+                "Provide inline X3D content instead."
+            )
         p = Path(path).expanduser()
         if not p.is_file():
             raise ValueError(f"X3D file not found: {p}")

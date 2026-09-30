@@ -206,98 +206,10 @@ def test_invalid_xml_source():
     assert "Parse Error" in report
 
 
-# ---- containerField correctness (X3DUOM-driven) ----
-
-def test_containerfield_texture_in_physicalmaterial():
-    # ImageTexture's default containerField 'texture' does not fit PhysicalMaterial
-    xml = _wrap("<Shape><Appearance><PhysicalMaterial>"
-                "<ImageTexture url='&quot;t.png&quot;'/>"
-                "</PhysicalMaterial></Appearance><Box/></Shape>")
-    report = validate_semantic(xml)
-    assert "containerfield-unknown" in report
-    assert "baseTexture" in report  # suggests a valid slot
-
-
-def test_containerfield_explicit_texture_ok():
-    xml = _wrap("<Shape><Appearance><PhysicalMaterial>"
-                "<ImageTexture containerField='baseTexture' url='&quot;t.png&quot;'/>"
-                "</PhysicalMaterial></Appearance><Box/></Shape>")
-    report = validate_semantic(xml)
-    assert "containerfield" not in report
-
-
-def test_containerfield_texture_in_appearance_ok():
-    # Appearance HAS a 'texture' field, so the default placement is correct
-    xml = _wrap("<Shape><Appearance>"
-                "<ImageTexture url='&quot;t.png&quot;'/>"
-                "</Appearance><Box/></Shape>")
-    report = validate_semantic(xml)
-    assert "containerfield" not in report
-
-
-def test_containerfield_hanim_joint_default_in_humanoid():
-    xml = _wrap("<HAnimHumanoid name='h'><HAnimJoint name='root'/></HAnimHumanoid>")
-    report = validate_semantic(xml)
-    assert "containerfield" in report
-    assert "joints" in report or "skeleton" in report
-
-
-def test_containerfield_clean_scene_no_flag():
-    xml = _wrap("<Transform><Shape><Appearance><Material/></Appearance>"
-                "<Box/></Shape></Transform>")
-    report = validate_semantic(xml)
-    assert "containerfield" not in report
-
-
-# ---- USE-before-DEF ordering ----
-
-def test_use_before_def_flagged():
-    xml = _wrap('<Group><Shape USE="S"/></Group>'
-                '<Shape DEF="S"><Appearance><Material/></Appearance><Box/></Shape>')
-    report = validate_semantic(xml)
-    assert "use-before-def" in report
-
-
-def test_def_before_use_ok():
-    xml = _wrap('<Shape DEF="S"><Appearance><Material/></Appearance><Box/></Shape>'
-                '<Group><Shape USE="S"/></Group>')
-    report = validate_semantic(xml)
-    assert "use-before-def" not in report
-
-
-# ---- interpolator key / keyValue length ----
-
-def test_orientation_interpolator_wrong_arity():
-    xml = _wrap('<OrientationInterpolator key="0 0.5 1" keyValue="0 1 0 0  0 1 0 1.5"/>')
-    report = validate_semantic(xml)
-    assert "interpolator-key-length" in report  # 3 keys need 12 floats, got 8
-
-
-def test_orientation_interpolator_ok():
-    xml = _wrap('<OrientationInterpolator key="0 0.5 1" '
-                'keyValue="0 1 0 0  0 1 0 1.5  0 1 0 3"/>')
-    report = validate_semantic(xml)
-    assert "interpolator-key-length" not in report
-
-
-def test_coordinate_interpolator_variable_ok():
-    # 2 keys, 2 coords each -> 12 floats, a multiple of 3 per key (6)
-    xml = _wrap('<CoordinateInterpolator key="0 1" '
-                'keyValue="0 0 0 1 1 1  0 0 0 2 2 2"/>')
-    report = validate_semantic(xml)
-    assert "interpolator-key-length" not in report
-
-
-def test_scalar_interpolator_not_divisible():
-    xml = _wrap('<ScalarInterpolator key="0 0.5 1" keyValue="0 1"/>')
-    report = validate_semantic(xml)
-    assert "interpolator-key-length" in report
-
-
 # ---- ROUTEs into dynamic interfaces (Script <field> + ProtoInstance) ----
-# Regression: validate_semantic must read a Script's user-declared fields and a
-# ProtoInstance's interface, which X3DUOM does not know -- else it false-flags
-# valid ROUTEs (surfaced by Len Bullard's MCCF holodeck scene, 2026-06).
+# A Script's user-declared fields and a ProtoInstance's interface are not in
+# X3DUOM, so the route-validity check must read them from the scene -- otherwise
+# every valid ROUTE into a Script/proto field is false-flagged route-invalid.
 
 def test_route_to_script_declared_field_is_valid():
     xml = _wrap(
@@ -312,14 +224,139 @@ def test_route_to_script_declared_field_is_valid():
 def test_route_to_protoinstance_interface_field_is_valid():
     xml = _wrap(
         '<ProtoDeclare name="Mover"><ProtoInterface>'
-        '<field name="set_pos" type="SFVec3f" accessType="inputOnly"/>'
+        '<field name="set_time" type="SFTime" accessType="inputOnly"/>'
         '</ProtoInterface><ProtoBody><Transform/></ProtoBody></ProtoDeclare>'
-        '<PositionInterpolator DEF="PI" key="0 1" keyValue="0 0 0 1 1 1"/>'
+        '<TimeSensor DEF="T" cycleInterval="2"/>'
         '<Mover DEF="M"/>'
-        '<ROUTE fromNode="PI" fromField="value_changed" toNode="M" toField="set_pos"/>')
+        '<ROUTE fromNode="T" fromField="cycleTime" toNode="M" toField="set_time"/>')
     report = validate_semantic(xml)
-    assert "route-invalid-to-field" not in report   # 'set_pos' is in the interface
+    assert "route-invalid-to-field" not in report   # 'set_time' is in the interface
 
+
+def test_route_to_truly_missing_script_field_still_flagged():
+    xml = _wrap(
+        '<TimeSensor DEF="T" cycleInterval="2"/>'
+        '<Script DEF="S"><field name="arrived" type="SFTime" accessType="inputOnly"/></Script>'
+        '<ROUTE fromNode="T" fromField="cycleTime" toNode="S" toField="nonexistent"/>')
+    report = validate_semantic(xml)
+    assert "route-invalid-to-field" in report        # a real typo is still caught
+
+
+# ---- Naming conventions (X3D Scene Authoring Hints) ----
+# Periods break ClassicVRML ROUTE syntax; hyphens become subtraction
+# operators in generated identifiers. x3d.py's NMTOKEN check catches
+# periods on the construction path only and accepts hyphens everywhere,
+# so this Level-4 check is the sole guard covering raw-XML editing.
+
+def test_def_with_period_warned():
+    report = validate_semantic(_wrap('<Transform DEF="my.name"><Shape/></Transform>'))
+    assert "naming-convention" in report
+    assert "ClassicVRML ROUTE" in report
+
+
+def test_def_with_hyphen_warned():
+    report = validate_semantic(_wrap('<Transform DEF="my-name"><Shape/></Transform>'))
+    assert "naming-convention" in report
+    assert "subtraction" in report
+
+
+def test_use_and_name_attrs_also_checked():
+    report = validate_semantic(_wrap(
+        '<Transform DEF="Ok"><Shape/></Transform>'
+        '<Transform USE="bad-ref"/>'))
+    assert "naming-convention" in report
+
+    report2 = validate_semantic(_wrap(
+        '<HAnimHumanoid name="humanoid.1" containerField="children"/>'))
+    assert "naming-convention" in report2
+
+
+def test_leading_digit_is_error():
+    report = validate_semantic(_wrap('<Transform DEF="3start"><Shape/></Transform>'))
+    assert "naming-convention" in report
+    assert "starts with a digit" in report
+
+
+def test_clean_names_not_flagged():
+    report = validate_semantic(_wrap(
+        '<Transform DEF="CamelCaseName"><Shape>'
+        '<Appearance><Material/></Appearance><Box/></Shape></Transform>'
+        '<Viewpoint description="v"/>'))
+    assert "naming-convention" not in report
+
+
+# ---- fork additions: component-not-in-profile + interface-table tests ----
+
+def test_containerfield_texture_in_physicalmaterial():
+    # ImageTexture's default containerField 'texture' does not fit PhysicalMaterial
+    xml = _wrap("<Shape><Appearance><PhysicalMaterial>"
+                "<ImageTexture url='&quot;t.png&quot;'/>"
+                "</PhysicalMaterial></Appearance><Box/></Shape>")
+    report = validate_semantic(xml)
+    assert "containerfield-unknown" in report
+    assert "baseTexture" in report  # suggests a valid slot
+
+def test_containerfield_explicit_texture_ok():
+    xml = _wrap("<Shape><Appearance><PhysicalMaterial>"
+                "<ImageTexture containerField='baseTexture' url='&quot;t.png&quot;'/>"
+                "</PhysicalMaterial></Appearance><Box/></Shape>")
+    report = validate_semantic(xml)
+    assert "containerfield" not in report
+
+def test_containerfield_texture_in_appearance_ok():
+    # Appearance HAS a 'texture' field, so the default placement is correct
+    xml = _wrap("<Shape><Appearance>"
+                "<ImageTexture url='&quot;t.png&quot;'/>"
+                "</Appearance><Box/></Shape>")
+    report = validate_semantic(xml)
+    assert "containerfield" not in report
+
+def test_containerfield_hanim_joint_default_in_humanoid():
+    xml = _wrap("<HAnimHumanoid name='h'><HAnimJoint name='root'/></HAnimHumanoid>")
+    report = validate_semantic(xml)
+    assert "containerfield" in report
+    assert "joints" in report or "skeleton" in report
+
+def test_containerfield_clean_scene_no_flag():
+    xml = _wrap("<Transform><Shape><Appearance><Material/></Appearance>"
+                "<Box/></Shape></Transform>")
+    report = validate_semantic(xml)
+    assert "containerfield" not in report
+
+def test_use_before_def_flagged():
+    xml = _wrap('<Group><Shape USE="S"/></Group>'
+                '<Shape DEF="S"><Appearance><Material/></Appearance><Box/></Shape>')
+    report = validate_semantic(xml)
+    assert "use-before-def" in report
+
+def test_def_before_use_ok():
+    xml = _wrap('<Shape DEF="S"><Appearance><Material/></Appearance><Box/></Shape>'
+                '<Group><Shape USE="S"/></Group>')
+    report = validate_semantic(xml)
+    assert "use-before-def" not in report
+
+def test_orientation_interpolator_wrong_arity():
+    xml = _wrap('<OrientationInterpolator key="0 0.5 1" keyValue="0 1 0 0  0 1 0 1.5"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" in report  # 3 keys need 12 floats, got 8
+
+def test_orientation_interpolator_ok():
+    xml = _wrap('<OrientationInterpolator key="0 0.5 1" '
+                'keyValue="0 1 0 0  0 1 0 1.5  0 1 0 3"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" not in report
+
+def test_coordinate_interpolator_variable_ok():
+    # 2 keys, 2 coords each -> 12 floats, a multiple of 3 per key (6)
+    xml = _wrap('<CoordinateInterpolator key="0 1" '
+                'keyValue="0 0 0 1 1 1  0 0 0 2 2 2"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" not in report
+
+def test_scalar_interpolator_not_divisible():
+    xml = _wrap('<ScalarInterpolator key="0 0.5 1" keyValue="0 1"/>')
+    report = validate_semantic(xml)
+    assert "interpolator-key-length" in report
 
 def test_route_to_truly_missing_field_still_flagged():
     xml = _wrap(
@@ -328,9 +365,6 @@ def test_route_to_truly_missing_field_still_flagged():
         '<ROUTE fromNode="T" fromField="cycleTime" toNode="S" toField="nonexistent"/>')
     report = validate_semantic(xml)
     assert "route-invalid-to-field" in report        # still catches a real typo
-
-
-# ---- Profile/component availability (the dj_skeleton Rectangle2D incident) ----
 
 def test_component_not_in_profile_flagged():
     # The incident, reproduced: Rectangle2D under profile='Interactive' with only
@@ -351,7 +385,6 @@ def test_component_not_in_profile_flagged():
     assert "not included in profile 'Interactive'" in report
     assert "add <component name='Geometry2D' level='1'/> to <head>" in report
 
-
 def test_component_declared_in_head_is_silent():
     # Same scene + the component declaration: silence.
     xml = (
@@ -366,7 +399,6 @@ def test_component_declared_in_head_is_silent():
     )
     report = validate_semantic(xml)
     assert "component-not-in-profile" not in report
-
 
 def test_full_profile_admits_everything_silently():
     # Full admits every component implicitly (ISO/IEC 19775-1 Annex F).
@@ -384,7 +416,6 @@ def test_full_profile_admits_everything_silently():
     report = validate_semantic(xml)
     assert "component-not-in-profile" not in report
 
-
 def test_hanim_under_interactive_needs_component():
     # The trap generalizes: NO profile below Full admits HAnim.
     xml = (
@@ -398,7 +429,6 @@ def test_hanim_under_interactive_needs_component():
     report = validate_semantic(xml)
     assert "component-not-in-profile" in report
     assert "HAnimHumanoid requires component HAnim level 1" in report
-
 
 def test_declared_level_too_low_still_flagged():
     # A declared component at an insufficient level does not admit higher-level
