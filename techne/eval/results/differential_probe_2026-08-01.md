@@ -9,7 +9,7 @@ works against the REAL renderer, not a fake one. Cited by the Web3D 2026 paper.
 differential_probe v1.0 (2026-07-25)
 renderer: src/tools/render.py::_render_xite_async  (X_ITE + Playwright headless Chromium — the same function behind the render_image MCP tool)
 frame: 512x384, wait 6000 ms, repo /Users/alexander/x3d_mcp
-artifacts: /private/tmp/claude-501/-Users-alexander-E/2ce9322f-e55e-4e9e-b999-ba6ea63ad542/scratchpad/diffprobe
+artifacts: (local scratchpad)
 
 sanity: control renders non-blank (stddev 60.7); identical scene rendered twice differs by 0/196608 px (renderer noise floor; the contribution threshold is 98 px)
 

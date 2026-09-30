@@ -167,6 +167,11 @@ CATALOG = {
         "profile does NOT fix this: only 'Full' admits {component} implicitly "
         "(verified against X_ITE 11.6.6). Technē injects the declaration at "
         "serialization.",
+        # Absorbed upstream (the dj_skeleton Rectangle2D incident): the server's
+        # whole-scene validator now enforces this authoritatively; Technē keeps
+        # the per-call advisory + serialization repair and defers the whole-scene
+        # verdict to the validate_semantic pass it fronts.
+        "src/validation/semantic.py (component-not-in-profile); "
         "verified by render: techne/tests/test_profiles.py",
     ),
     "profile_dropped": (

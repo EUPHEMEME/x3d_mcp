@@ -328,3 +328,92 @@ def test_route_to_truly_missing_field_still_flagged():
         '<ROUTE fromNode="T" fromField="cycleTime" toNode="S" toField="nonexistent"/>')
     report = validate_semantic(xml)
     assert "route-invalid-to-field" in report        # still catches a real typo
+
+
+# ---- Profile/component availability (the dj_skeleton Rectangle2D incident) ----
+
+def test_component_not_in_profile_flagged():
+    # The incident, reproduced: Rectangle2D under profile='Interactive' with only
+    # an HAnim component declared. Geometry2D is not in Interactive, so a
+    # conforming browser silently drops both screens; the XSD says valid.
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<X3D profile="Interactive" version="4.1">\n'
+        '  <head><component name="HAnim" level="1"/></head>\n'
+        '  <Scene><Viewpoint position="0 0 10"/>'
+        '<Shape><Appearance><Material/></Appearance>'
+        '<Rectangle2D size="2 1"/></Shape></Scene>\n'
+        '</X3D>'
+    )
+    report = validate_semantic(xml)
+    assert "component-not-in-profile" in report
+    assert "Rectangle2D requires component Geometry2D level 1" in report
+    assert "not included in profile 'Interactive'" in report
+    assert "add <component name='Geometry2D' level='1'/> to <head>" in report
+
+
+def test_component_declared_in_head_is_silent():
+    # Same scene + the component declaration: silence.
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<X3D profile="Interactive" version="4.1">\n'
+        '  <head><component name="HAnim" level="1"/>'
+        '<component name="Geometry2D" level="1"/></head>\n'
+        '  <Scene><Viewpoint position="0 0 10"/>'
+        '<Shape><Appearance><Material/></Appearance>'
+        '<Rectangle2D size="2 1"/></Shape></Scene>\n'
+        '</X3D>'
+    )
+    report = validate_semantic(xml)
+    assert "component-not-in-profile" not in report
+
+
+def test_full_profile_admits_everything_silently():
+    # Full admits every component implicitly (ISO/IEC 19775-1 Annex F).
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<X3D profile="Full" version="4.1">\n'
+        '  <Scene><Viewpoint position="0 0 10"/>'
+        '<Shape><Appearance><Material/></Appearance>'
+        '<Rectangle2D size="2 1"/></Shape>'
+        '<HAnimHumanoid name="h" version="2.0">'
+        '<HAnimJoint containerField="skeleton" name="humanoid_root"/>'
+        '</HAnimHumanoid></Scene>\n'
+        '</X3D>'
+    )
+    report = validate_semantic(xml)
+    assert "component-not-in-profile" not in report
+
+
+def test_hanim_under_interactive_needs_component():
+    # The trap generalizes: NO profile below Full admits HAnim.
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<X3D profile="Interactive" version="4.1">\n'
+        '  <Scene><HAnimHumanoid name="h" version="2.0">'
+        '<HAnimJoint containerField="skeleton" name="humanoid_root"/>'
+        '</HAnimHumanoid></Scene>\n'
+        '</X3D>'
+    )
+    report = validate_semantic(xml)
+    assert "component-not-in-profile" in report
+    assert "HAnimHumanoid requires component HAnim level 1" in report
+
+
+def test_declared_level_too_low_still_flagged():
+    # A declared component at an insufficient level does not admit higher-level
+    # nodes: HAnimMotion is HAnim level 2.
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<X3D profile="Interactive" version="4.1">\n'
+        '  <head><component name="HAnim" level="1"/></head>\n'
+        '  <Scene><HAnimHumanoid name="h" version="2.0">'
+        '<HAnimJoint containerField="skeleton" name="humanoid_root"/>'
+        '<HAnimMotion containerField="motions"/>'
+        '</HAnimHumanoid></Scene>\n'
+        '</X3D>'
+    )
+    report = validate_semantic(xml)
+    assert "HAnimMotion requires component HAnim level 2" in report
+    assert "only up to level 1" in report
+    assert "HAnimHumanoid requires" not in report   # level 1 nodes are admitted

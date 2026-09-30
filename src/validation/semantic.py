@@ -569,6 +569,119 @@ def _check_interpolator_keys(scene: etree._Element) -> list[Diagnostic]:
     return diagnostics
 
 
+# --- profile/component availability -----------------------------------------
+#
+# The widest silent-failure class: a node whose COMPONENT the declared profile
+# does not admit is discarded on load -- the whole subtree goes with it -- while
+# the XSD still reports valid (profile conformance is not what schema validation
+# checks). Incident: dj_skeleton.x3d used <Rectangle2D> under profile='Interactive'
+# with only an HAnim <component> declared; Geometry2D is not in Interactive, so a
+# conforming browser silently dropped both screens and rendered a plausible scene.
+#
+# Per-profile component/level tables, hand-encoded from ISO/IEC 19775-1:2023
+# (X3D 4.0): Annex A Table A.1 (Core), Annex B Table B.1 (Interchange), Annex C
+# Table C.1 (Interactive), Annex E Table E.1 (Immersive), Annex F (Full = every
+# component at its highest support level). Profiles not encoded here
+# (CADInterchange, MedicalInterchange, MPEG4Interactive) are skipped rather than
+# guessed. Node -> (component, level) comes from the X3DUOM, never hand-tabled.
+_PROFILE_COMPONENTS: dict[str, dict[str, int]] = {
+    "Core": {"Core": 1},
+    "Interchange": {
+        "Core": 1, "Time": 1, "Networking": 1, "Grouping": 1, "Rendering": 3,
+        "Shape": 1, "Geometry3D": 2, "Lighting": 1, "Texturing": 2,
+        "Interpolation": 2, "Navigation": 1, "EnvironmentalEffects": 1,
+    },
+    "Interactive": {
+        "Core": 1, "Time": 1, "Networking": 2, "Grouping": 2, "Rendering": 3,
+        "Shape": 1, "Geometry3D": 3, "Lighting": 2, "Texturing": 2,
+        "Interpolation": 2, "PointingDeviceSensor": 1, "KeyDeviceSensor": 2,
+        "EnvironmentalSensor": 2, "Navigation": 1, "EnvironmentalEffects": 1,
+        "EventUtilities": 1,
+    },
+    "Immersive": {
+        "Core": 2, "Time": 1, "Networking": 3, "Grouping": 2, "Rendering": 3,
+        "Shape": 2, "Geometry3D": 4, "Geometry2D": 1, "Text": 1, "Sound": 1,
+        "Lighting": 2, "Texturing": 3, "Interpolation": 2,
+        "PointingDeviceSensor": 1, "KeyDeviceSensor": 2, "EnvironmentalSensor": 2,
+        "Navigation": 2, "EnvironmentalEffects": 2, "Scripting": 1,
+        "EventUtilities": 1,
+    },
+    # Full admits every component (Annex F); represented as None and
+    # special-cased below.
+    "Full": None,
+}
+
+
+def _declared_components(root: etree._Element) -> dict[str, int]:
+    """{component name: declared level} from <component> elements in <head>."""
+    declared: dict[str, int] = {}
+    for el in root.iter():
+        if _local_tag(el) != "component":
+            continue
+        name = el.get("name")
+        if not name:
+            continue
+        try:
+            level = int(el.get("level", "1"))
+        except ValueError:
+            level = 1
+        declared[name] = max(declared.get(name, 0), level)
+    return declared
+
+
+def _check_profile_components(root: etree._Element,
+                              scene: etree._Element) -> list[Diagnostic]:
+    """Every node's component must be admitted by the declared profile or an
+    explicit <component> declaration in <head> -- otherwise a conforming browser
+    may silently drop the node (and its subtree) while the XSD says valid.
+    """
+    diagnostics: list[Diagnostic] = []
+    if _local_tag(root) != "X3D":
+        return diagnostics                      # scene fragment: nothing declared
+    profile = root.get("profile")
+    if not profile or profile not in _PROFILE_COMPONENTS:
+        return diagnostics                      # unknown/unencoded profile: skip
+    profile_table = _PROFILE_COMPONENTS[profile]
+    if profile_table is None:                   # Full admits everything
+        return diagnostics
+
+    declared = _declared_components(root)
+    uom = get_x3duom()
+    nodes = uom.get_concrete_nodes()
+
+    reported: set[str] = set()
+    for el in scene.iter():
+        tag = _local_tag(el)
+        if tag in reported or tag not in nodes:
+            continue
+        component = nodes[tag].get("component")
+        level = nodes[tag].get("level") or 1
+        if not component:
+            continue
+        available = max(profile_table.get(component, 0),
+                        declared.get(component, 0))
+        if level <= available:
+            continue
+        reported.add(tag)
+        if profile_table.get(component, 0) == 0 and component not in declared:
+            situation = f"not included in profile '{profile}'"
+        else:
+            situation = (f"included in profile '{profile}' only up to level "
+                         f"{available}")
+        diagnostics.append(Diagnostic(
+            level="error",
+            check="component-not-in-profile",
+            message=f"{tag} requires component {component} level {level}, "
+                    f"{situation} -- add <component name='{component}' "
+                    f"level='{level}'/> to <head>. A conforming browser may "
+                    f"silently drop the node (and everything under it) while "
+                    f"the XSD still reports valid.",
+            node_tag=tag,
+            def_name=el.get("DEF", ""),
+        ))
+    return diagnostics
+
+
 def _check_missing_viewpoint(scene: etree._Element) -> list[Diagnostic]:
     if list(scene.iter("Viewpoint")):
         return []
@@ -615,6 +728,9 @@ def validate_semantic(xml_string: str) -> str:
         return "# Semantic Check: No Scene\n\nNo Scene element found in the X3D document."
 
     all_diagnostics: list[Diagnostic] = []
+    # Root-level check: profile/component availability needs the X3D element
+    # (profile attribute + <head> component declarations), not just the Scene.
+    all_diagnostics.extend(_check_profile_components(root, scene))
     for check_fn in _ALL_CHECKS:
         all_diagnostics.extend(check_fn(scene))
 

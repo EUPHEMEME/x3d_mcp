@@ -19,6 +19,16 @@ def test_every_catalog_rule_is_scoped():
     assert not (rules.PER_CALL & rules.WHOLE_SCENE)
 
 
+def test_component_not_in_profile_absorbed_upstream():
+    # the dj_skeleton Rectangle2D incident: the rule Technē discovered by render
+    # is now enforced authoritatively by the server's whole-scene validator; the
+    # catalog entry must cite it so the two layers stay reconciled.
+    assert "src/validation/semantic.py (component-not-in-profile)" \
+        in rules.source("component_not_in_profile")
+    # Technē still repairs it at serialization (the model cannot comply per-call)
+    assert "component_not_in_profile" in rules.SERIALIZATION_REPAIRED
+
+
 def test_interp_tables_match_semantic_py():
     # the arity table is the server's, verbatim (fixed-arity + variable base)
     assert rules.INTERP_ARITY["OrientationInterpolator"] == 4
